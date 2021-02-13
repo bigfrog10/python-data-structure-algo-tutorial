@@ -1,5 +1,32 @@
 # Data Structures and Algorithms
 
+*Big O notation* is discussed in 
+[Introduction to Algorithms](docs/Introduction_to_Algorithms-3E-Comen.pdf)
+and [Wiki](https://en.wikipedia.org/wiki/Sorting_algorithm).
+This book will be known to us as *ItA*. The major big O dividers are log time,
+polynomial time, and exponential time. We use ```logN``` for both base 2 and 
+base 10 with clear context, ```lgN``` for base 10, and ```lnN``` for base e.
+Sometimes, the constant hiding in the big O is very large.
+
+There is a Python data structure library: http://www.grantjenks.com/docs/sortedcontainers/
+
+Here is an overview
+http://cooervo.github.io/Algorithms-DataStructures-BigONotation/index.html
+![overview](docs/cooervo.github.io-Algorithms-DataStructures-BigONotation.png)
+
+Visualization:
+- https://www.cs.usfca.edu/~galles/visualization/about.html  
+- https://visualgo.net/en  
+- https://algorithm-visualizer.org/ 
+
+https://web.stanford.edu/class/cs97si/
+https://opendsa-server.cs.vt.edu/ODSA/Books/Everything/html/index.html
+
+- [Arrays](docs/data_strcuture/3.array/arrays.md)
+
+
+← q
+
 http://cooervo.github.io/Algorithms-DataStructures-BigONotation/index.html
 
 Visualization:
@@ -53,3 +80,20 @@ back-tracking
 DP
 
 Greedy
+
+python collections lib
+
+https://pypi.org/project/binarytree/
+
+
+## LeetCode
+https://zxi.mytechroad.com/blog/category/leetcode/
+
+https://cstheory.stackexchange.com/
+
+
+http://www.grantjenks.com/docs/sortedcontainers/sorteddict.html
+http://www.grantjenks.com/docs/sortedcontainers/performance.html
+
+
+https://codereview.stackexchange.com/questions/197040/min-max-heap-implementation-in-python

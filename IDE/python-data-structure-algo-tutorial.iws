@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="29b13a08-5760-41f7-8cea-fc198b3bbcb2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../docs/alogrithims/algorithms.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/alogrithims/backtrack/backtrack.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/alogrithims/combinatorics.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/alogrithims/dfs_bfs/bfs.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/alogrithims/dynamic_programming/dp.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/alogrithims/greedy/04-greedy.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/alogrithims/greedy/04greed.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/alogrithims/sorting_partition/partition.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/data_strcuture/1.bit/bits.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/data_strcuture/2.string/strings.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/data_strcuture/3.array/array2d.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/data_strcuture/3.array/arrays.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/data_strcuture/4.dict_set/hashing.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/data_strcuture/5.stack_queue/heap.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/data_strcuture/5.stack_queue/parser.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/data_strcuture/5.stack_queue/stack_queue.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/data_strcuture/6.linked_list/linked_list.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/data_strcuture/7.binary_tree/Tree-Me.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/data_strcuture/7.binary_tree/binary_index_tree/Community - Competitive Programming - Competitive Programming Tutorials - Binary Indexed Trees (2021-01-11 1_22_13 AM).html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/data_strcuture/7.binary_tree/binary_index_tree/bit.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/data_strcuture/7.binary_tree/binary_tree.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/data_strcuture/7.binary_tree/segment_tree/Efficient and easy segment trees - Codeforces.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/data_strcuture/7.binary_tree/segment_tree/segment_tree.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/data_strcuture/7.binary_tree/tree.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/data_strcuture/8.graph/graph.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/find_median_of_2_sorted_arrays.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/runtime.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docs/花花酱 LeetCode 4. Median of Two Sorted Arrays.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/algorithms/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/algorithms/dp/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/algorithms/dp/backpack.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/data_structure/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/data_structure/array/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/data_structure/array/heap_sort.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/data_structure/array/kth_largest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/data_structure/array/max_sum_k_apart.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree/bit.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree/bst.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree/segment_tree.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree/segment_tree_recursive.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree/segment_tree_recursive1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree/self_balanced_tree.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree/trie.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/data_structure/dict_set/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/data_structure/dict_set/rh_hashtable.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/data_structure/graphs/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/data_structure/graphs/disjoint_sets.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/data_structure/string/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/data_structure/string/encoding.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/data_structure/string/encoding1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/data_structure/string/kmp.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/fsm.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0001_array_pair_sum.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0002_add_two_numbs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0003_longest_substring_norepeat_chars.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0004_median_of_2_sorted_arrays.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0004_median_of_2_sorted_arrays1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0005_longest_palindromic_substring.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0006_zigzag_conversion.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0007_reverse_integer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0008_string_to_int.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0009_palindrome_number.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0010_reg_exp_match.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0010_reg_exp_match1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0010_reg_exp_match2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0011_container_most_water.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0012_int_2_roman.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0013_roman_2_int.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0014_longest_common_prefix.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0020_valid_parentheses.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0021_merge_2_sorted_lists.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0021_merge_2_sorted_lists2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0026_remove_duplicates_from_sorted_array.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0028_implment_strstr.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0038_count_and_say.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0053_maximum_subarray.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0056.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0066_plus_one.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0069_sqrt_of_x.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0070_climbing_stairs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0076.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0088_merge_sorted_array.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0091.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0101_symetric_tree.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0104_max_depth_binary_tree.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0108_convert_sorted_array_to_binary_search_tree.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0118_pascal_triangle.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0121_best_time_to_buy_and_sell_stock.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0122_best_time_to_buy_and_sell_stocks2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0125_valid_palindrome.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0136_single_number.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0139_word_break.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0140_word_break_2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0141_link_list_cycle.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0155_min_stack.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0160_intersaction_of_2_linked_lists.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0163_missing_ranges.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0169_majority_element.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0171_excel_sheet_column_number.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0172.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0200.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0204_count_primes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0217.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0279.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0295.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0326.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0815.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0829.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q0980.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q1091.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/leet_code/q1192.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/point72/fsm/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/point72/fsm/fsm.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/point72/price_percentile/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/dsa/point72/price_percentile/price_percentile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Users\Wonderland\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\202.7319.50\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1ltDlgX5nh40iQ9gblp1MUg6vZZ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../src/dsa/code_ranker/dtf_rtn" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.33448276" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="PyCoverageOptionsProvider">
+    <option name="myUseBundledCoveragePy" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\src\dsa\code_ranker\dtf_rtn" />
+      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\src\dsa\code_ranker\max_streak" />
+      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\docs\data_strcuture\7.binary_tree\segment_tree" />
+      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\docs\alogrithims\greedy" />
+      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\docs" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\docs\data_strcuture\5.stack_queue" />
+      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\docs\data_strcuture\8.binary_tree" />
+      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\docs\data_strcuture\6.stack" />
+      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\docs\alogrithims\greedy" />
+      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\docs\alogrithims" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.price_percentile">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+      <method />
+    </configuration>
+    <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="backpack" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="python-data-structure-algo-tutorial" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../src/dsa/algorithms/dp" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../src/dsa/algorithms/dp/backpack.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="fsm" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="python-data-structure-algo-tutorial" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../src/dsa/point72/fsm" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../src/dsa/point72/fsm/fsm.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="max_streak" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="python-data-structure-algo-tutorial" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../src/dsa/code_ranker/max_streak" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../src/dsa/code_ranker/max_streak/max_streak.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="price_percentile" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="python-data-structure-algo-tutorial" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../src/dsa/point72/price_percentile" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../src/dsa/point72/price_percentile/price_percentile.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="segment_tree" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="python-data-structure-algo-tutorial" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree/segment_tree.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.price_percentile" />
+        <item itemvalue="Python.fsm" />
+        <item itemvalue="Python.max_streak" />
+        <item itemvalue="Python.backpack" />
+        <item itemvalue="Python.segment_tree" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="29b13a08-5760-41f7-8cea-fc198b3bbcb2" name="Default Changelist" comment="" />
+      <created>1608407648603</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1608407648603</updated>
+      <workItem from="1608407649929" duration="14877000" />
+      <workItem from="1608434109171" duration="25945000" />
+      <workItem from="1608536792699" duration="75209000" />
+      <workItem from="1608745279306" duration="33531000" />
+      <workItem from="1608854275111" duration="20334000" />
+      <workItem from="1608895529567" duration="34038000" />
+      <workItem from="1609227821039" duration="218217000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0008_string_to_int.py</url>
+          <line>35</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0012_int_2_roman.py</url>
+          <line>68</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0002_add_two_numbs.py</url>
+          <line>117</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0002_add_two_numbs.py</url>
+          <line>109</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0140_word_break_2.py</url>
+          <line>44</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0121_best_time_to_buy_and_sell_stock.py</url>
+          <line>41</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0013_roman_2_int.py</url>
+          <line>65</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0021_merge_2_sorted_lists.py</url>
+          <line>71</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0066_plus_one.py</url>
+          <line>31</line>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0088_merge_sorted_array.py</url>
+          <line>19</line>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0108_convert_sorted_array_to_binary_search_tree.py</url>
+          <line>45</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0005_longest_palindromic_substring.py</url>
+          <line>33</line>
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0163_missing_ranges.py</url>
+          <line>38</line>
+          <option name="timeStamp" value="67" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0200.py</url>
+          <line>7</line>
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0200.py</url>
+          <line>93</line>
+          <option name="timeStamp" value="84" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0829.py</url>
+          <line>56</line>
+          <option name="timeStamp" value="103" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0056.py</url>
+          <line>26</line>
+          <option name="timeStamp" value="108" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../src/dsa/data_structure/string/kmp.py</url>
+          <line>57</line>
+          <option name="timeStamp" value="148" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q1091.py</url>
+          <line>31</line>
+          <option name="timeStamp" value="152" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0815.py</url>
+          <line>25</line>
+          <option name="timeStamp" value="153" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../src/dsa/algorithms/dp/backpack.py</url>
+          <line>88</line>
+          <option name="timeStamp" value="165" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$max_streak.coverage" NAME="max_streak Coverage Results" MODIFIED="1612999733930" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/code_ranker/max_streak" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0200.coverage" NAME="q0200 Coverage Results" MODIFIED="1609183716225" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0070_climbing_stairs.coverage" NAME="q0070_climbing_stairs Coverage Results" MODIFIED="1608795548762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0108_convert_sorted_array_to_binary_search_tree.coverage" NAME="q0108_convert_sorted_array_to_binary_search_tree Coverage Results" MODIFIED="1608829832256" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0139_word_break.coverage" NAME="q0139_word_break Coverage Results" MODIFIED="1608677219823" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$segment_tree_recursive.coverage" NAME="segment_tree_recursive Coverage Results" MODIFIED="1612056100712" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0011_container_most_water.coverage" NAME="q0011_container_most_water Coverage Results" MODIFIED="1608630636749" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0056.coverage" NAME="q0056 Coverage Results" MODIFIED="1609214647194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0013_roman_2_int.coverage" NAME="q0013_roman_2_int Coverage Results" MODIFIED="1608697479926" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0104_max_depth_binary_tree.coverage" NAME="q0104_max_depth_binary_tree Coverage Results" MODIFIED="1608803186387" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0010_reg_exp_match2.coverage" NAME="q0010_reg_exp_match2 Coverage Results" MODIFIED="1608627744810" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0204_count_primes.coverage" NAME="q0204_count_primes Coverage Results" MODIFIED="1608896523905" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$encoding1.coverage" NAME="encoding1 Coverage Results" MODIFIED="1611024369334" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/string" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0125_valid_palindrome.coverage" NAME="q0125_valid_palindrome Coverage Results" MODIFIED="1608861904133" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0815.coverage" NAME="q0815 Coverage Results" MODIFIED="1611461541497" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0009_palindrome_number.coverage" NAME="q0009_palindrome_number Coverage Results" MODIFIED="1608593795884" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0010_reg_exp_match1.coverage" NAME="q0010_reg_exp_match1 Coverage Results" MODIFIED="1608625969716" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0118_pascal_triangle.coverage" NAME="q0118_pascal_triangle Coverage Results" MODIFIED="1608830804317" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0004_median_of_2_sorted_arrays1.coverage" NAME="q0004_median_of_2_sorted_arrays1 Coverage Results" MODIFIED="1608525480903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0088_merge_sorted_array.coverage" NAME="q0088_merge_sorted_array Coverage Results" MODIFIED="1608797592837" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0014_longest_common_prefix.coverage" NAME="q0014_longest_common_prefix Coverage Results" MODIFIED="1608747384260" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0038_count_and_say.coverage" NAME="q0038_count_and_say Coverage Results" MODIFIED="1608776065979" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0010_reg_exp_match.coverage" NAME="q0010_reg_exp_match Coverage Results" MODIFIED="1608624305592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0163_missing_ranges.coverage" NAME="q0163_missing_ranges Coverage Results" MODIFIED="1608876824107" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0007_reverse_integer.coverage" NAME="q0007_reverse_integer Coverage Results" MODIFIED="1608746546511" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$fsm.coverage" NAME="fsm Coverage Results" MODIFIED="1613181191908" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/point72/fsm" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0101_symetric_tree.coverage" NAME="q0101_symetric_tree Coverage Results" MODIFIED="1608802833308" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$max_sum_k_apart.coverage" NAME="max_sum_k_apart Coverage Results" MODIFIED="1611892488880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/array" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0001_array_pair_sum.coverage" NAME="q0001_array_pair_sum Coverage Results" MODIFIED="1608409978386" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0026_remove_duplicates_from_sorted_array.coverage" NAME="q0026_remove_duplicates_from_sorted_array Coverage Results" MODIFIED="1608713408879" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0002_add_two_numbs.coverage" NAME="q0002_add_two_numbs Coverage Results" MODIFIED="1608659119762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0140_word_break_2.coverage" NAME="q0140_word_break_2 Coverage Results" MODIFIED="1608688451704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q1192.coverage" NAME="q1192 Coverage Results" MODIFIED="1610253585938" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0004_median_of_2_sorted_arrays.coverage" NAME="q0004_median_of_2_sorted_arrays Coverage Results" MODIFIED="1608504436288" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0021_merge_2_sorted_lists2.coverage" NAME="q0021_merge_2_sorted_lists2 Coverage Results" MODIFIED="1608706777228" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0028_implment_strstr.coverage" NAME="q0028_implment_strstr Coverage Results" MODIFIED="1608759847303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0091.coverage" NAME="q0091 Coverage Results" MODIFIED="1609232915759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$backpack.coverage" NAME="backpack Coverage Results" MODIFIED="1612455640701" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/algorithms/dp" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0169_majority_element.coverage" NAME="q0169_majority_element Coverage Results" MODIFIED="1608877519259" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q1091.coverage" NAME="q1091 Coverage Results" MODIFIED="1611434529608" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0069_sqrt_of_x.coverage" NAME="q0069_sqrt_of_x Coverage Results" MODIFIED="1608793026982" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0829.coverage" NAME="q0829 Coverage Results" MODIFIED="1609205752142" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0066_plus_one.coverage" NAME="q0066_plus_one Coverage Results" MODIFIED="1608789923053" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0076.coverage" NAME="q0076 Coverage Results" MODIFIED="1609327003248" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$encoding.coverage" NAME="encoding Coverage Results" MODIFIED="1611023995315" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/string" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$price_percentile.coverage" NAME="price_percentile Coverage Results" MODIFIED="1613182329988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/point72/price_percentile" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0171_excel_sheet_column_number.coverage" NAME="q0171_excel_sheet_column_number Coverage Results" MODIFIED="1608887813340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0053_maximum_subarray.coverage" NAME="q0053_maximum_subarray Coverage Results" MODIFIED="1608788868506" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0122_best_time_to_buy_and_sell_stocks2.coverage" NAME="q0122_best_time_to_buy_and_sell_stocks2 Coverage Results" MODIFIED="1608852752657" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$kmp.coverage" NAME="kmp Coverage Results" MODIFIED="1610946933095" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/string" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$segment_tree.coverage" NAME="segment_tree Coverage Results" MODIFIED="1612066338381" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0003_longest_substring_norepeat_chars.coverage" NAME="q0003_longest_substring_norepeat_chars Coverage Results" MODIFIED="1608431962724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0012_int_2_roman.coverage" NAME="q0012_int_2_roman Coverage Results" MODIFIED="1608634111296" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0980.coverage" NAME="q0980 Coverage Results" MODIFIED="1610226547325" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0021_merge_2_sorted_lists.coverage" NAME="q0021_merge_2_sorted_lists Coverage Results" MODIFIED="1608706253538" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0006_zigzag_conversion.coverage" NAME="q0006_zigzag_conversion Coverage Results" MODIFIED="1608585703784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0005_longest_palindromic_substring.coverage" NAME="q0005_longest_palindromic_substring Coverage Results" MODIFIED="1608858049331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0008_string_to_int.coverage" NAME="q0008_string_to_int Coverage Results" MODIFIED="1608588649692" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0020_valid_parentheses.coverage" NAME="q0020_valid_parentheses Coverage Results" MODIFIED="1608703295122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0121_best_time_to_buy_and_sell_stock.coverage" NAME="q0121_best_time_to_buy_and_sell_stock Coverage Results" MODIFIED="1608695712914" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0279.coverage" NAME="q0279 Coverage Results" MODIFIED="1609119957779" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+  </component>
+</project>
