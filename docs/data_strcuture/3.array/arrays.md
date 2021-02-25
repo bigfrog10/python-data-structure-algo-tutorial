@@ -59,3 +59,17 @@ https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/discuss
 max in sliding windows, is O(n) but much harder
 monotonic queue
 sum in sliding window is easy, O(n)
+
+LC 560
+find num of subarrays whose sum is equal to a given target.
+prefix sum
+
+Presum
+
+LC 485. Max Consecutive Ones
+
+39. Combination Sum
+1031. Maximum Sum of Two Non-Overlapping Subarrays
+
+300. Longest Increasing Subsequence
+491. Increasing Subsequences

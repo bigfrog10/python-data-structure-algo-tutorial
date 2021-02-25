@@ -228,6 +228,7 @@ def detect_cycles(grpah):
         res = dfs(node, stack)
 ```
 
+convert cyclic graphs to acyclic graphs.
 
 ## Shortest Distances
 BFS
@@ -287,3 +288,11 @@ Algorithms to generate MST:
 - Kruskal's algorithm  
   start with smallest edges, keep add smallest edges except those making cycles,
   until all vertices included.
+
+## Cycles
+Travelling Salesman Problem
+Hamiltonian Cycle (backtrack)
+In a complete graph, there are (n-1)!/2 different cycles (different path ).
+First, we fix one starting point to prevent duplicates (a cycle can start at any
+node). So there are only (n-1) nodes left. Since a cycle inverse is the same
+cycle, so we divide it by 2.

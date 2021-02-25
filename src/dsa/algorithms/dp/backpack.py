@@ -4,7 +4,7 @@
 #
 # This is 0-1 problem, meaning for each item we either take it or not. We can't take partials.
 # Recursion is on optimal solution for first i items and weight limit u:
-#    s[i, u] = s[i-1, w], we don't ith item in the backpack
+#    s[i, u] = s[i-1, w], we don't put ith item in the backpack
 #              s[i-1, u - w[i]] + v[i], we put the item in the backpack if w[i] <= u
 # Base cases/boundary conditions for the recursion are:
 #    s[0, u] = 0 for all u, because there is no item available

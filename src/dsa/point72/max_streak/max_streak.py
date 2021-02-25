@@ -37,3 +37,17 @@ print(max_showup(attns))  # 2
 
 attns = ['YNN', 'YYY', 'YYY', 'YNN', 'YYY', 'YYY', 'YYY']
 print(max_showup(attns))  # 3
+
+
+# a shorter version
+def max_showup(attns):
+    target = 'Y' * len(attns)
+    count = res = 0
+    for a in attns:
+        if a == target:
+            count += 1
+        else:
+            res = max(count, res)
+            count = 0
+
+    return max(res, count)  # this max is needed for last target sequence.

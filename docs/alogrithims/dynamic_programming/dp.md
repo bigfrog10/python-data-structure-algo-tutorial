@@ -12,15 +12,11 @@ This leads to result selection, such as min, max, etc.
 
 backpack problem
 
-## Graphs
-Travelling Salesman Problem
-Hamiltonian Cycle (backtrack)
-In a complete graph, there are (n-1)!/2 different cycles (different path ).
-First, we fix one starting point to prevent duplicates (a cycle can start at any
-node). So there are only (n-1) nodes left. Since a cycle inverse is the same
-cycle, so we divide it by 2.
+
 
 https://www.baeldung.com/cs/tsp-dynamic-programming
 https://www.tutorialspoint.com/design_and_analysis_of_algorithms/design_and_analysis_of_algorithms_travelling_salesman_problem.htm
 
 The hard part of DP is to generalize the problem in the right dimensions.
+
+https://www.youtube.com/watch?v=OQ5jsbhAv_M

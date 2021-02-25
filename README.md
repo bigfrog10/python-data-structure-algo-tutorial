@@ -1,5 +1,7 @@
 # Data Structures and Algorithms
 
+Recursion
+
 *Big O notation* is discussed in 
 [Introduction to Algorithms](docs/Introduction_to_Algorithms-3E-Comen.pdf)
 and [Wiki](https://en.wikipedia.org/wiki/Sorting_algorithm).
@@ -18,6 +20,8 @@ Visualization:
 - https://www.cs.usfca.edu/~galles/visualization/about.html  
 - https://visualgo.net/en  
 - https://algorithm-visualizer.org/ 
+
+https://github.com/JuliaCollections/DataStructures.jl
 
 https://web.stanford.edu/class/cs97si/
 https://opendsa-server.cs.vt.edu/ODSA/Books/Everything/html/index.html

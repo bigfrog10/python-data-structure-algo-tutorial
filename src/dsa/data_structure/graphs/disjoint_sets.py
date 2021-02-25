@@ -20,9 +20,8 @@ class DisjointSetsGraph:
 # Starting from an empty data structure, any sequence of M union and
 # find operations on N objects takes O(N + M lg* N) time
 class DisjointSetsArray:
-    def __init__(self, array):
-        self._values = array
-        self._ids = [i for i in range(len(array))]  # parents
+    def __init__(self, n):
+        self._ids = [i for i in range(n)]  # parents
         self._weights = defaultdict(lambda x: 1)  # union is faster with this
 
     def find(self, p, q):
@@ -47,3 +46,6 @@ class DisjointSetsArray:
             n = self._ids[n]
 
         return n
+
+# https://labuladong.gitbook.io/algo-en/iv.-high-frequency-interview-problem/union-find-explanation
+# https://labuladong.gitbook.io/algo-en/iv.-high-frequency-interview-problem/union-find-explanation
