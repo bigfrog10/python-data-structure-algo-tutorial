@@ -1,5 +1,7 @@
 from collections import Counter
 from functools import lru_cache
+# There is one condition not quite clear
+# The intersection of A and B is null: can same weight different items be counted as same or different.
 
 
 def opt_weights(arr: list):
@@ -17,7 +19,8 @@ def opt_weights(arr: list):
                 ans[0] = cur
                 ans[1] = weight
             return
-        if pos >= n: return
+        if pos >= n:
+            return
 
         for i in range(pos, len(nums)):
             num = nums[i]
@@ -25,6 +28,7 @@ def opt_weights(arr: list):
             dfs(i + 1, weight + num * count, cur + [num] * count)
 
     dfs(0, 0, [])
+    print(dfs.cache_info())
     return ans[0]
 
 

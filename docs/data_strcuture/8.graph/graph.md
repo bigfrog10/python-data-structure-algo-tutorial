@@ -33,6 +33,8 @@ def find_num_comps(graph):
 ```
 Runtime is Θ(|V| + |E|) because we visit all vertices and there is a neighbour loop coming from edges.
 
+LC 323
+
 ### Find-Union
 To find numbers of connected components in a graph. Here we assume nodes
 are labeled as 0 ... n and edges are labeled as (i, j).  
@@ -234,11 +236,12 @@ convert cyclic graphs to acyclic graphs.
 BFS
 ### Dijkstra’s Algorithm for shortest paths for undirected graphs 
 This algorithm computes the shortest path from a given vertex to all other vertices.
-It starts from the source node, cumulate costs for all adjacent nodes.
+It starts from the source node, cumulate costs for all adjacent nodes. All costs are
+positive.
 Then for these neighbour nodes, cumulate costs for them and set to smaller accumulation.
 So this is a greedy approach.
 ```
-def aijkstra(graph, v):
+def dijkstra(graph, v):
     
 ```
 
@@ -289,6 +292,8 @@ Algorithms to generate MST:
   start with smallest edges, keep add smallest edges except those making cycles,
   until all vertices included.
 
+LC 1135
+
 ## Cycles
 Travelling Salesman Problem
 Hamiltonian Cycle (backtrack)
@@ -296,3 +301,12 @@ In a complete graph, there are (n-1)!/2 different cycles (different path ).
 First, we fix one starting point to prevent duplicates (a cycle can start at any
 node). So there are only (n-1) nodes left. Since a cycle inverse is the same
 cycle, so we divide it by 2.
+
+
+Eulerian path and Hierholzer's Algorithm
+
+
+graph coloring:
+https://www.includehelp.com/algorithms/graph-coloring-problem-solution-using-backtracking-algorithm.aspx
+
+A* search

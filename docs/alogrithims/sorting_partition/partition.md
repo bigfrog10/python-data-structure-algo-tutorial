@@ -11,3 +11,7 @@ Partition ( O(N) )
 k closest points to origin
 
 
+https://rcoh.me/posts/linear-time-median-finding/
+
+
+https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle

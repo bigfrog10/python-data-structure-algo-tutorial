@@ -22,6 +22,7 @@ Visualization:
 - https://algorithm-visualizer.org/ 
 
 https://github.com/JuliaCollections/DataStructures.jl
+https://www.cs.auckland.ac.nz/software/AlgAnim/ds_ToC.html
 
 https://web.stanford.edu/class/cs97si/
 https://opendsa-server.cs.vt.edu/ODSA/Books/Everything/html/index.html

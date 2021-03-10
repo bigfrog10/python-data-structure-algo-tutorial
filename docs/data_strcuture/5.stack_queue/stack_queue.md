@@ -28,5 +28,7 @@ def qcopy(qin, qout):
         qout.append(e)
 ```
 
+To implement a deque using stacks, we could reach amortized O(1)
+with 3 stacks.
 
 https://introcs.cs.princeton.edu/java/43stack/
