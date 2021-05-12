@@ -1,0 +1,91 @@
+# LC1710. Maximum Units on a Truck
+def maximumUnits(self, boxTypes: List[List[int]], truckSize: int) -> int:
+    boxes = sorted(boxTypes, key=lambda x: x[1], reverse=True)
+    total, counts = 0, 0 # greedy: box count 1 with max units
+    for c, u in boxes:
+        if c <= truckSize - counts:
+            counts += c
+            total += c * u
+        else:
+            total += (truckSize - counts) * u
+            counts = truckSize
+            break
+    return total
+
+# LC1648. Sell Diminishing-Valued Colored Balls
+def maxProfit(self, inv: List[int], orders: int) -> int:
+    # https://leetcode.com/problems/sell-diminishing-valued-colored-balls/discuss/927522/Python-n-log-n-690-ms
+    arr=sorted(Counter(inv).items(), reverse=True)+[(0,0)]
+    ans, ind, width = 0, 0, 0
+
+    while orders>0: # constraint: sum(inv) >= orders
+        width += arr[ind][1] # number of ball
+        sell = min(orders, width * (arr[ind][0] - arr[ind+1][0])) # sell diff to flatten
+        whole, remainder= divmod(sell, width)
+        price_w = width * whole * (arr[ind][0] + arr[ind][0] - (whole-1)) // 2
+        price_r = remainder * (arr[ind][0] - whole)
+        ans += price_w + price_r
+        orders -= sell
+        ind += 1
+    return ans % 1_000_000_007
+
+# LC134. Gas Station, top100
+def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+    if not gas or not cost: return -1
+    total = current = 0 # sum(gas) + 1 # or some huge number
+    start_station = 0
+    for i, (g, c) in enumerate(zip(gas, cost)):
+        exp = g - c
+        total += exp
+        current = max(current + exp, exp)  # min of all previous stations to this station
+        if current < 0:
+            current = 0
+            start_station = i+1
+    return start_station if total >= 0 else -1
+
+# LC55. Jump Game
+# greedy, O(n)
+def canJump(self, nums: List[int]) -> bool:
+    target = len(nums) - 1
+    for i in range(len(nums) - 2, -1, -1):
+        if i + nums[i] >= target: target = i
+    return target == 0
+
+# LC45. Jump Game II
+def jump(self, nums: List[int]) -> int:  # O(n)
+    size = len(nums)
+    if size == 1: return 0 # this is for line 9
+    maxPos = current_jump_end = res = 0
+    for i in range(size-1):
+        # This is the key, greedy. Any other optimal solution can go as much as I could.
+        maxPos = max(maxPos,i+nums[i])
+        #if maxPos >= size-1: return res + 1
+        if current_jump_end == i: # before this is true, we search for maxpos
+            current_jump_end = maxPos
+            res += 1
+    return res
+
+# LC1326. Minimum Number of Taps to Open to Water a Garden
+def minTaps(self, n: int, ranges: List[int]) -> int:
+    jumps = [0]*(n+1)
+    for x, r in enumerate(ranges):
+        l = max(0, x-r)
+        jumps[l] = max(jumps[l], x+r)
+    step = start = end = 0
+    while end < n:
+        start, end = end+1, max(jumps[start:end+1]) # greedy on max
+        if start > end: return -1
+        step += 1
+    return step
+
+# LC1024. Video Stitching
+def videoStitching(self, clips: List[List[int]], T: int) -> int:
+    maxv = max(c[1] for c in clips)
+    max_jumps = [0]*(maxv + 1)
+    for l,r in clips: max_jumps[l] = max(max_jumps[l], r)
+    res = lo = hi = 0 # it is then a jump game
+    while hi < T:
+        lo, hi = hi, max(max_jumps[lo:hi+1])
+        if hi <= lo: return -1
+        res += 1
+    return res
