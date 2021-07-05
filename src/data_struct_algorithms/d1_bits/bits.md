@@ -11,7 +11,7 @@ n ^ n = 0
 n ^ 0 = n
 ```
 
-### Right Most Bit {#custom_id}
+### Right Most Bit 
 Given x, (x-1) will have all the bits same as x, except for the rightmost 1 in x 
 and all the bits to the right of the rightmost 1.  
 ```110 & 101 = 100 for 6 & (6-1) = 4```
@@ -39,73 +39,9 @@ def msb(n):
     return (n+1) >> 1
 ```
 
-change 1, 2, 3, ... to 1, 3, ..., 2, 4, ...
-(i+1)^1 - 1
-
-
 x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
-x = x ^ 1 ^ 1  # flip
-
 
 ### References:
 - https://hackernoon.com/xor-the-magical-bit-wise-operator-24d3012ed821
 - https://www.hackerearth.com/practice/notes/bit-manipulation/
 
-[XOR properties](#custom_id)
