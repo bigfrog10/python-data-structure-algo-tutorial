@@ -1,5 +1,10 @@
 # Data Structures and Algorithms
 
+intuitive
+<30 lines, easy to memorize 
+70% fast
+
+
 Recursion
 recursion and tail recursion
 
@@ -120,4 +125,29 @@ http://www.grantjenks.com/docs/sortedcontainers/performance.html
 https://codereview.stackexchange.com/questions/197040/min-max-heap-implementation-in-python
 
 To write unit tests, first think about coverage, make sure all lines are covered.
+
+https://kennyzhuang.gitbooks.io/algorithms-collection/content/count_of_smaller_numbers_after_self.html
+
+http://staff.ustc.edu.cn/~csli/graduate/algorithms/book6/chap10.htm
+
+http://staff.ustc.edu.cn/~csli/graduate/algorithms/book6/chap08.htm
+
+https://www.tableau.com/learn/articles/books-about-data-structures-algorithms
+
+https://github.com/sunjianbo945/leetcode
+
+https://www.redblobgames.com/pathfinding/a-star/introduction.html
+
+https://www.youtube.com/watch?v=RqQBh_Wbcu4
+
+https://medium.com/swlh/how-to-study-for-data-structures-and-algorithms-interviews-at-faang-65043e00b5df
+
+https://www.cs.princeton.edu/~rs/AlgsDS07/
+
+https://code.activestate.com/recipes/576918/
+
+https://labuladong.gitbook.io/algo-en/iv.-high-frequency-interview-problem/union-find-explanation
+
+http://juliacollections.github.io/DataStructures.jl/v0.17/heaps/
+https://github.com/JuliaCollections/DataStructures.jl
 

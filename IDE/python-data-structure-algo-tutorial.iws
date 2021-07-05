@@ -2,163 +2,216 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="29b13a08-5760-41f7-8cea-fc198b3bbcb2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Algorithms.xmind" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Data Structures.xmind" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a10_book_keeping/bbg_stock_ticker.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a10_book_keeping/collections.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a10_book_keeping/ood.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a10_book_keeping/stack_queue.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a1_math/logic.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a2_parsers/expression_parser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a7_dfs_dfs/dfs.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a7_dfs_dfs/dfs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_sorting/algos/large_data.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_sorting/heap.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/array_neighbours.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/dp.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/int_arrays.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_strings/monotonic_stack.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_strings/words.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/union_find/union_find.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d9_graph/graph_heaps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/python_libs/bisect/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/python_libs/bisect/list_of_tuples.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/python_libs/threading.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iml" beforeDir="false" afterPath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" beforeDir="false" afterPath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/06-basic-graph-algorithms.stanford.edu.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/Introduction_to_Algorithms-3E-Comen.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/Introduction_to_Alogrithms_solution-2E.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/LeetCode_Summary.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/LeetCode_Summary.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/alogrithims/Next_Permutation.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/alogrithims/algorithms.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/alogrithims/backtrack/backtrack.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/alogrithims/combinatorics.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/alogrithims/dfs_bfs/bfs.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/alogrithims/dynamic_programming/08a_dp.ppt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/alogrithims/dynamic_programming/dp.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/alogrithims/greedy/04-greedy.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/alogrithims/greedy/04greed-cse421.washington.edu.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/alogrithims/greedy/04greed.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/alogrithims/greedy/greedy-czou.ucf.edu.ppt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/alogrithims/greedy/lect07-greedy-sched.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/alogrithims/master_theorem.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/alogrithims/pointers/42.water_trap.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/alogrithims/scheduling/lec9.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/alogrithims/scheduling/lecture7scribe.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/alogrithims/scheduling/scheduling.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/alogrithims/sorting_partition/Smoothsort vs. Timsort.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/alogrithims/sorting_partition/partition.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/alogrithims/sorting_partition/sorting.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/cooervo.github.io-Algorithms-DataStructures-BigONotation.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/1.bit/bits.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/2.string/10-string-algorithms.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/2.string/Knuth-Morris-Pratt Algorithm-brilliant.org-wiki-knuth-morris-pratt-algorithm.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/2.string/strings.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/3.array/Intro to Algorithms_ CHAPTER 10_ MEDIANS AND ORDER STATISTICS.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/3.array/array2d.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/3.array/arrays.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/3.array/selection.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/4.dict_set/hashing.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/5.stack_queue/heap.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/5.stack_queue/parser.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/5.stack_queue/stack_queue.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/6.linked_list/LFU_design.drawio" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/6.linked_list/LFU_design.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/6.linked_list/linked_list.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/7.tree/1-s2.0-0893965989901225-main.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/7.tree/Tree-Me.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/7.tree/b_tree/11-b-trees-markup.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/7.tree/b_tree/5-way_b_tree.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/7.tree/b_tree/b_tree.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/7.tree/balanced_tree/avl_tree.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/7.tree/balanced_tree/balancing_search_trees.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/7.tree/balanced_tree/red_black_tree.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/7.tree/binary_index_tree/Community - Competitive Programming - Competitive Programming Tutorials - Binary Indexed Trees (2021-01-11 1_22_13 AM).html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/7.tree/binary_index_tree/bit.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/7.tree/binary_tree.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/7.tree/lec216.cop3530.cise.ufl.edu.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/7.tree/segment_tree/Efficient and easy segment trees - Codeforces.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/7.tree/segment_tree/segment_tree.drawio" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/7.tree/segment_tree/segment_tree.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/7.tree/tree.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/8.graph/01UnionFind.princeton.edu.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/8.graph/Lecture19.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/8.graph/dijkstra.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/8.graph/graph.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/data_strcuture/8.graph/topological_sort.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/find_median_of_2_sorted_arrays.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/runtime.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/花花酱 LeetCode 4. Median of Two Sorted Arrays.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../runtime.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/amazon/nearest_city/nearest_city1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/amazon/nearest_city/nearest_city2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/amazon/optimize_box_weights/opt.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/amazon/optimize_box_weights/opt1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/amazon/optimize_box_weights/opt2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/amazon/optimize_box_weights/optmize_box_weights.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/amazon/optimize_box_weights/optmize_box_weights2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/amazon/robot rodeo/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/amazon/robot rodeo/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/amazon/robot rodeo/3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/amazon/shopping_options/shopping_options02.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/amazon/shopping_options/shopping_options1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/amazon/shopping_options/shopping_options2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/amazon/shopping_options/shopping_options3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/amazon/shopping_options/shopping_options4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/amazon/shopping_options/shopping_options5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/amazon/shopping_options/shopping_options6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/algorithms/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/algorithms/dp/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/algorithms/dp/backpack.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/algorithms/dp/card_pull.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/algorithms/file_searcher.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/algorithms/fsm/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/algorithms/fsm/valid_digit/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/algorithms/fsm/valid_digit/fsm.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/algorithms/grep_command.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/algorithms/sorting/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/algorithms/sorting/merge_sort.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/algorithms/sorting/merge_sort2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/array/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/array/heap_sort.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/array/kth_largest.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/array/max_sum_k_apart.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree/bit.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree/bst.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree/segment_tree.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree/segment_tree_recursive.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree/segment_tree_recursive1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree/self_balanced_tree.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree/trie.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/dict_set/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/dict_set/rh_hashtable.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/graphs/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/graphs/disjoint_sets.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/string/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/string/encoding.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/string/encoding1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/string/kmp.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/string/longest_common_seq.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/data_structure/string/test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/dsa/fsm.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/efficient_janitor.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/hudson_river_trading/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/hudson_river_trading/consonant_vowel/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/hudson_river_trading/consonant_vowel/cv_imbalance_iterative.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/hudson_river_trading/consonant_vowel/cv_imbalance_recursion.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/hudson_river_trading/consonant_vowel/imbalance1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/hudson_river_trading/consonant_vowel/imbalance2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/hudson_river_trading/spike/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/hudson_river_trading/spike/spike.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/hudson_river_trading/spike/spike.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/hudson_river_trading/word_machine/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/hudson_river_trading/word_machine/word_machine.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/hudson_river_trading/word_machine/word_machine1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/hudson_river_trading/word_machine/word_machine2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/hudson_river_trading/word_machine/word_machine3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/point72/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/point72/etf_rtn/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/point72/etf_rtn/etf_rtn.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/point72/etf_rtn/etf_rtn1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/point72/etf_rtn/etf_rtn2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/point72/fsm/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/point72/fsm/fsm.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/point72/fsm/fsm.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/point72/max_streak/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/point72/max_streak/max_streak.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/point72/max_streak/max_streak1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/point72/max_streak/max_streak2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/point72/max_streak/max_streak3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/point72/max_streak/max_streak4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/point72/price_percentile/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/point72/price_percentile/price_percentile.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/point72/price_percentile/price_percentile.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/point72/skill.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/sql_algebra/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/sql_algebra/over_budget.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docs/06-basic-graph-algorithms.stanford.edu.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/graphs/06-basic-graph-algorithms.stanford.edu.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docs/find_median_of_2_sorted_arrays.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/partition/find_median_of_2_sorted_arrays.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/companies/facebook/recruiting_portal/9_sorting/counting_triangles.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/companies/facebook/recruiting_portal/9_sorting/counting_triangles.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/companies/hudson_river_trading/array_neighbours.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/companies/hudson_river_trading/array_neighbours.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d9_graph/dag_all_paths.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a11state_management/LC1244. Design A Leaderboard.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a11state_management/LC1396 Design Underground System.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a11state_management/LC1472. Design Browser History.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a11state_management/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d9_graph/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a11state_management/buffers.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a10_book_keeping/buffers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a11state_management/design.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a10_book_keeping/file_system.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a11state_management/load_balancer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a1_math/Next_Permutation.gif" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a1_math/Next_Permutation.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a1_math/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/union_find/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a1_math/combinatorics.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a1_math/combinatorics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a1_math/counting.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a1_math/counting.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a1_math/logic.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a1_math/random.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a1_math/random.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a2_parsers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/tries/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a2_parsers/expressions.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a2_parsers/expressions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a2_parsers/fsm.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a2_parsers/fsm.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a2_parsers/fsm.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a2_parsers/fsm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a2_parsers/parenthesis.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a2_parsers/parenthesis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a2_parsers/parser.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a2_parsers/parser.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a2_parsers/regex.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a2_parsers/regex.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a3_2D_board_games/LC723. Candy Crush.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a3_2D_board_games/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/segment_trees/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a4_sorting/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/binary_trees/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a4_sorting/algos/Smoothsort vs. Timsort.html" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/partition/Smoothsort vs. Timsort.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a4_sorting/algos/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/balanced_tree/avl_tree.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a4_sorting/algos/merge_sort.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_sorting/algos/merge_sort.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a4_sorting/algos/partition.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_partition/partition.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a4_sorting/algos/quick_sort.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_sorting/algos/quick_sort.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a4_sorting/algos/sorting.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_sorting/sorting.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a4_sorting/algos/topological_sort.png" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_sorting/algos/topological_sort.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a4_sorting/arrays.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_sorting/arrays.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a4_sorting/binary_search.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_sorting/binary_search.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a4_sorting/heap.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a4_sorting/median_stream.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_partition/median_stream.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a4_sorting/merge_sort.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_sorting/algos/merge_sort1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a4_sorting/merge_sort2.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_sorting/algos/merge_sort2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a4_sorting/merge_sort3.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_sorting/algos/merge_sort3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a4_sorting/partition.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a4_sorting/sort_partition.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_partition/partition.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a4_sorting/sorting.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a4_sorting/strings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_strings/string_sorting.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a5_divide_conquer/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a6_greedy/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d6_linked_lists/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a6_greedy/scheduling/LC1029. Two City Scheduling.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a6_greedy/scheduling/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d5_collections/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a6_greedy/scheduling/greedy.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/greedy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a6_greedy/scheduling/intervals.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_array2d/intervals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a6_greedy/scheduling/scheduling.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a7_dfs/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_strings/string_arr.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a7_dfs/backtrack.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a7_dfs_dfs/backtrack.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a7_dfs/dfs.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a7_dfs/islands.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_array2d/islands.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a8_bfs/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_strings/outside/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a8_bfs/bfs.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a7_dfs_dfs/bfs.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a9_dynamic_programming/08a_dp.ppt" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/dynamic_programming/08a_dp.ppt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a9_dynamic_programming/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_strings/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a9_dynamic_programming/backpack.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a9_dynamic_programming/backpack.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a9_dynamic_programming/card_pull.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a9_dynamic_programming/card_pull.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a9_dynamic_programming/dp.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a9_dynamic_programming/dp.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/a9_dynamic_programming/dynamic_programming.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a9_dynamic_programming/dynamic_programming.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/algorithms.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/divide_conquer.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_array2d/topological_sort.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/master_theorem.png" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/master_theorem.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/runtime.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/runtime.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/algorithms/runtime.png" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/runtime.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_array2d/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/01UnionFind.princeton.edu.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/union_find/01UnionFind.princeton.edu.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/Tree-Me.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/trees/Tree-Me.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/monotonic_queue.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/b_tree/11-b-trees-markup.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/trees/btrees/11-b-trees-markup.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/b_tree/5-way_b_tree.png" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/trees/btrees/5-way_b_tree.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/b_tree/b_tree.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/b_tree/b_tree.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/balanced_tree/avl_tree.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_sorting/algos/range_windows.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/balanced_tree/balancing_search_trees.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/trees/balancing_search_trees.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/balanced_tree/red_black_tree.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/balanced_tree/red_black_tree.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/binary_index_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/binary_index_tree/binary_index_tree.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/binary_index_tree/Community - Competitive Programming - Competitive Programming Tutorials - Binary Indexed Trees (2021-01-11 1_22_13 AM).html" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/trees/binary_index_trees/Community - Competitive Programming - Competitive Programming Tutorials - Binary Indexed Trees (2021-01-11 1_22_13 AM).html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/binary_index_tree/bit.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/binary_index_tree/bit.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/binary_search_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/binary_search_tree.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/binary_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/binary_trees/binary_tree.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/binary_tree/1-s2.0-0893965989901225-main.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/trees/1-s2.0-0893965989901225-main.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/binary_tree/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_sorting/algos/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/binary_tree/binary_tree.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/binary_trees/binary_tree.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/binary_tree/lec216.cop3530.cise.ufl.edu.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/trees/binary_trees/lec216.cop3530.cise.ufl.edu.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/binary_tree/pre_post_to_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/binary_trees/pre_post_to_tree.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/binary_tree/segment_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/segment_trees/segment_tree.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/binary_tree/segment_tree_recursive.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/segment_trees/segment_tree_recursive.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/binary_tree/segment_tree_recursive1.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/segment_trees/segment_tree_recursive1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/binary_tree/self_balanced_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/balanced_tree/self_balanced_tree.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/binary_tree/trie2.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/tries/trie2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/binary_tree_aggregation.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/binary_trees/binary_tree_aggregation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/binary_tree_construct.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/binary_trees/binary_tree_construct.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/binary_tree_traversal.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/binary_trees/binary_tree_traversal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/disjoint_sets.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/union_find/disjoint_sets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/n_ary_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/n_ary_tree.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/segment_tree/Efficient and easy segment trees - Codeforces.html" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/trees/Efficient and easy segment trees - Codeforces.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/segment_tree/segment_tree.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/segment_trees/segment_tree.drawio" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/segment_tree/segment_tree.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/segment_trees/segment_tree.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/tree.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/tree.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/trie.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/tries/trie.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d10_trees/union_find.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d11_graph/Lecture19.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/graphs/Lecture19.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d11_graph/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_sorting/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d11_graph/a_star.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d11_graph/bfs.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a7_dfs_dfs/bfs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d11_graph/dfs.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d11_graph/dijkstra.gif" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d9_graph/dijkstra.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d11_graph/directed_graphs/797. All Paths From Source to Target.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d11_graph/directed_graphs/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_partition/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d11_graph/euler_path.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d11_graph/graph.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d9_graph/graph.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d11_graph/graph_leaves.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a10_book_keeping/graph_leaves.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d11_graph/graphs.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d9_graph/graphs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d11_graph/topological_sort.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d1_bits/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d1_bits/bit_operations.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d1_bits/bit_operations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d1_bits/bits.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d1_bits/bits.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d1_bits/bits.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d1_bits/bits.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d2_ints/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d2_ints/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d2_ints/int_num.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d2_ints/int_num.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d3_arrays_int/2d_board_games.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_array2d/2d_board_games.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d3_arrays_int/2pointers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d3_arrays_int/Intro to Algorithms_ CHAPTER 10_ MEDIANS AND ORDER STATISTICS.html" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/partition/Intro to Algorithms_ CHAPTER 10_ MEDIANS AND ORDER STATISTICS.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d3_arrays_int/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d1_bits/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d3_arrays_int/ad_boards.png" beforeDir="false" afterPath="$PROJECT_DIR$/../src/companies/amazon/ad_boards.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d3_arrays_int/array2d.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_array2d/array2d.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d3_arrays_int/arrays.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/arrays.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d3_arrays_int/buy_sell_stocks.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/buy_sell_stocks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d3_arrays_int/efficient_janitor.png" beforeDir="false" afterPath="$PROJECT_DIR$/../src/companies/efficient_janitor.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d3_arrays_int/find_kth_element.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_partition/find_kth_element.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d3_arrays_int/int_arrays.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d3_arrays_int/matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_array2d/matrix.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d3_arrays_int/rook_max_sum.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_array2d/rook_max_sum.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d3_arrays_int/selection.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/partition/selection.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d3_arrays_int/sliding_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/int_2pointers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d3_arrays_int/stack_monotonic.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/monotonic_stack.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d3_arrays_int/subarrays.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/subarrays.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d3_arrays_int/sums.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/sums.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d3_arrays_int/花花酱 LeetCode 4. Median of Two Sorted Arrays.html" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/partition/花花酱 LeetCode 4. Median of Two Sorted Arrays.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d4_strings/10-string-algorithms.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/strings/10-string-algorithms.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d4_strings/2pointers.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_strings/substr_2pointers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d4_strings/Knuth-Morris-Pratt Algorithm-brilliant.org-wiki-knuth-morris-pratt-algorithm.html" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/strings/Knuth-Morris-Pratt Algorithm-brilliant.org-wiki-knuth-morris-pratt-algorithm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d4_strings/LC1209. Remove All Adjacent Duplicates in String II.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d4_strings/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a9_dynamic_programming/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d4_strings/anagrams.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_strings/anagrams.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d4_strings/dfs_bfs.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d4_strings/encoding.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_strings/outside/encoding.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d4_strings/encoding1.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_strings/outside/encoding1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d4_strings/kmp.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_strings/outside/kmp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d4_strings/palindromes.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_strings/palindromes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d4_strings/string-google.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_strings/outside/string-google.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d4_strings/string_int_conversion.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_strings/string_int_conversion.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d4_strings/string_matrix.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d4_strings/strings.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_strings/strings.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d4_strings/strings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_strings/strings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d4_strings/words.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d5_collections/LC1169. Invalid Transactions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d5_collections/LFU_design.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a10_book_keeping/cache_LFU_design.drawio" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d5_collections/LFU_design.png" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a10_book_keeping/cache_LFU_design.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d5_collections/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a7_dfs_dfs/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d5_collections/counting.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d5_collections/dict.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d5_collections/dict.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d5_collections/dicts.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a10_book_keeping/caches.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d5_collections/hashing.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d5_collections/hashing.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d5_collections/linked_list.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d5_collections/rh_hashtable.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d5_collections/rh_hashtable.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d5_collections/sets.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d6_stacks/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a2_parsers/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d6_stacks/stack_queue.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a10_book_keeping/stack_queue.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d6_stacks/stacks.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d6_stacks/stacks.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d7_queues/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a1_math/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d7_queues/queues.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d8_heap/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a10_book_keeping/concurrency_producer_consumer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d8_heap/heap.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_sorting/heap.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d9_linked_lists/LC430. Flatten a Multilevel Doubly Linked List.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d9_linked_lists/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a10_book_keeping/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d9_linked_lists/circular_linked_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d6_linked_lists/circular_linked_list.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d9_linked_lists/linked_list.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d6_linked_lists/linked_list.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d9_linked_lists/linked_list_manipulations.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d6_linked_lists/linked_list_manipulations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/data_structs/d9_linked_lists/linked_lists.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d6_linked_lists/linked_lists.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/python_libs/statistics.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/python_libs/statistics.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,6 +221,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Jupyter Notebook" />
         <option value="Python Script" />
       </list>
     </option>
@@ -195,14 +249,14 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../docs/data_strcuture/7.tree/balanced_tree" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../src/data_struct_algorithms" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.33448276" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Python" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Python" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="PyCoverageOptionsProvider">
@@ -210,21 +264,21 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\src\data_struct_algorithms\a2_parsers" />
+      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\src\data_struct_algorithms\algorithms\a10_book_keeping" />
+      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\src\data_struct_algorithms\data_structs\d3_arrays_int" />
       <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\docs\data_strcuture\7.tree\balanced_tree" />
       <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\src" />
-      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\src\dsa\code_ranker\dtf_rtn" />
-      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\src\dsa\code_ranker\max_streak" />
-      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\docs\data_strcuture\7.binary_tree\segment_tree" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\docs\alogrithims\sorting_partition" />
-      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\docs\alogrithims\scheduling" />
-      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\docs\data_strcuture\5.stack_queue" />
-      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\docs\data_strcuture\8.binary_tree" />
-      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\docs\data_strcuture\6.stack" />
+      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\src\data_struct_algorithms\d4_strings\outside" />
+      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\src\data_struct_algorithms\d4_array2d" />
+      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\src\data_struct_algorithms\d3_arrays_int\a4_sorting\algos" />
+      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\src\data_struct_algorithms" />
+      <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\src\data_struct_algorithms\algorithms\a7_dfs_dfs" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.max_amplitude_of_array">
+  <component name="RunManager" selected="Python.array_neighbours (1)">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
@@ -248,7 +302,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="array_neighbours" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="array_neighbours (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="python-data-structure-algo-tutorial" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -256,12 +310,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../src/hudson_river_trading" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../src/hudson_river_trading/array_neighbours.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/array_neighbours.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -270,7 +324,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="fit_meetings in one room" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="concurrency_producer_consumer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="python-data-structure-algo-tutorial" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -278,12 +332,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../src/dsa/data_structure/heap" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../src/data_struct_algorithms/a10_book_keeping" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../src/dsa/data_structure/heap/fit_meetings in one room.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../src/data_struct_algorithms/a10_book_keeping/concurrency_producer_consumer.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -292,7 +346,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="max_amplitude_of_array" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="dag_all_paths" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="python-data-structure-algo-tutorial" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -300,12 +354,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../src/hudson_river_trading" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../src/data_struct_algorithms/d9_graph" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../src/hudson_river_trading/max_amplitude_of_array.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../src/data_struct_algorithms/d9_graph/dag_all_paths.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -314,7 +368,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="list_of_tuples" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="python-data-structure-algo-tutorial" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -322,12 +376,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../src/facebook" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../src/python_libs/bisect" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../src/facebook/test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../src/python_libs/bisect/list_of_tuples.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -336,7 +390,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="yearbook" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="range_windows" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="python-data-structure-algo-tutorial" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -344,12 +398,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../src/facebook" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_sorting/algos" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../src/facebook/yearbook.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_sorting/algos/range_windows.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -369,11 +423,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.max_amplitude_of_array" />
-        <item itemvalue="Python.array_neighbours" />
-        <item itemvalue="Python.fit_meetings in one room" />
-        <item itemvalue="Python.test" />
-        <item itemvalue="Python.yearbook" />
+        <item itemvalue="Python.array_neighbours (1)" />
+        <item itemvalue="Python.concurrency_producer_consumer" />
+        <item itemvalue="Python.range_windows" />
+        <item itemvalue="Python.dag_all_paths" />
+        <item itemvalue="Python.list_of_tuples" />
       </list>
     </recent_temporary>
   </component>
@@ -403,6 +457,11 @@
       <workItem from="1618242821462" duration="2892000" />
       <workItem from="1618495354441" duration="4276000" />
       <workItem from="1618842029738" duration="21184000" />
+      <workItem from="1620854821661" duration="50250000" />
+      <workItem from="1621264996699" duration="174091000" />
+      <workItem from="1622647476924" duration="285707000" />
+      <workItem from="1624987329569" duration="9899000" />
+      <workItem from="1625060192231" duration="24046000" />
     </task>
     <servers />
   </component>
@@ -553,86 +612,91 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$max_streak.coverage" NAME="max_streak Coverage Results" MODIFIED="1612999733930" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/code_ranker/max_streak" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0200.coverage" NAME="q0200 Coverage Results" MODIFIED="1609183716225" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0070_climbing_stairs.coverage" NAME="q0070_climbing_stairs Coverage Results" MODIFIED="1608795548762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0108_convert_sorted_array_to_binary_search_tree.coverage" NAME="q0108_convert_sorted_array_to_binary_search_tree Coverage Results" MODIFIED="1608829832256" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0139_word_break.coverage" NAME="q0139_word_break Coverage Results" MODIFIED="1608677219823" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$segment_tree_recursive.coverage" NAME="segment_tree_recursive Coverage Results" MODIFIED="1612056100712" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0011_container_most_water.coverage" NAME="q0011_container_most_water Coverage Results" MODIFIED="1608630636749" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0056.coverage" NAME="q0056 Coverage Results" MODIFIED="1609214647194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0013_roman_2_int.coverage" NAME="q0013_roman_2_int Coverage Results" MODIFIED="1608697479926" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0104_max_depth_binary_tree.coverage" NAME="q0104_max_depth_binary_tree Coverage Results" MODIFIED="1608803186387" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0001_array_pair_sum.coverage" NAME="q0001_array_pair_sum Coverage Results" MODIFIED="1608409978386" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$segment_tree.coverage" NAME="segment_tree Coverage Results" MODIFIED="1612066338381" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree" />
     <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0010_reg_exp_match2.coverage" NAME="q0010_reg_exp_match2 Coverage Results" MODIFIED="1608627744810" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0204_count_primes.coverage" NAME="q0204_count_primes Coverage Results" MODIFIED="1608896523905" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0020_valid_parentheses.coverage" NAME="q0020_valid_parentheses Coverage Results" MODIFIED="1608703295122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0011_container_most_water.coverage" NAME="q0011_container_most_water Coverage Results" MODIFIED="1608630636749" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0012_int_2_roman.coverage" NAME="q0012_int_2_roman Coverage Results" MODIFIED="1608634111296" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0139_word_break.coverage" NAME="q0139_word_break Coverage Results" MODIFIED="1608677219823" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$file_searcher.coverage" NAME="file_searcher Coverage Results" MODIFIED="1614234628203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/algorithms" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$pre_post_to_tree.coverage" NAME="pre_post_to_tree Coverage Results" MODIFIED="1616556576919" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$closest_in_sorted_array.coverage" NAME="closest_in_sorted_array Coverage Results" MODIFIED="1616725163224" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/array" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$max_streak.coverage" NAME="max_streak Coverage Results" MODIFIED="1612999733930" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/code_ranker/max_streak" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0028_implment_strstr.coverage" NAME="q0028_implment_strstr Coverage Results" MODIFIED="1608759847303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0009_palindrome_number.coverage" NAME="q0009_palindrome_number Coverage Results" MODIFIED="1608593795884" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$word_machine.coverage" NAME="word_machine Coverage Results" MODIFIED="1615400806276" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/hudson_river_trading/word_machine" />
     <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$encoding1.coverage" NAME="encoding1 Coverage Results" MODIFIED="1611024369334" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/string" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0069_sqrt_of_x.coverage" NAME="q0069_sqrt_of_x Coverage Results" MODIFIED="1608793026982" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$price_percentile.coverage" NAME="price_percentile Coverage Results" MODIFIED="1613182329988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/point72/price_percentile" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$opt2.coverage" NAME="opt2 Coverage Results" MODIFIED="1613776715869" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/amazon/optimize_box_weights" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0171_excel_sheet_column_number.coverage" NAME="q0171_excel_sheet_column_number Coverage Results" MODIFIED="1608887813340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0038_count_and_say.coverage" NAME="q0038_count_and_say Coverage Results" MODIFIED="1608776065979" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$merge_sort.coverage" NAME="merge_sort Coverage Results" MODIFIED="1614495099769" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/algorithms/sorting" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0026_remove_duplicates_from_sorted_array.coverage" NAME="q0026_remove_duplicates_from_sorted_array Coverage Results" MODIFIED="1608713408879" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$yearbook.coverage" NAME="yearbook Coverage Results" MODIFIED="1617843776275" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/facebook" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0104_max_depth_binary_tree.coverage" NAME="q0104_max_depth_binary_tree Coverage Results" MODIFIED="1608803186387" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0204_count_primes.coverage" NAME="q0204_count_primes Coverage Results" MODIFIED="1608896523905" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$opt1__1_.coverage" NAME="opt1 (1) Coverage Results" MODIFIED="1614309891772" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/amazon/optimize_box_weights" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$fsm.coverage" NAME="fsm Coverage Results" MODIFIED="1613181191908" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/point72/fsm" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0091.coverage" NAME="q0091 Coverage Results" MODIFIED="1609232915759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$opt2__1_.coverage" NAME="opt2 (1) Coverage Results" MODIFIED="1614309800659" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/amazon/optimize_box_weights" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0200.coverage" NAME="q0200 Coverage Results" MODIFIED="1609183716225" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q1091.coverage" NAME="q1091 Coverage Results" MODIFIED="1611434529608" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$max_amplitude_of_array.coverage" NAME="max_amplitude_of_array Coverage Results" MODIFIED="1619297161462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/hudson_river_trading" />
     <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0125_valid_palindrome.coverage" NAME="q0125_valid_palindrome Coverage Results" MODIFIED="1608861904133" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0056.coverage" NAME="q0056 Coverage Results" MODIFIED="1609214647194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0122_best_time_to_buy_and_sell_stocks2.coverage" NAME="q0122_best_time_to_buy_and_sell_stocks2 Coverage Results" MODIFIED="1608852752657" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0005_longest_palindromic_substring.coverage" NAME="q0005_longest_palindromic_substring Coverage Results" MODIFIED="1608858049331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
     <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0815.coverage" NAME="q0815 Coverage Results" MODIFIED="1611461541497" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
     <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$opt1.coverage" NAME="opt1 Coverage Results" MODIFIED="1613776356732" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/amazon/optimize_box_weights" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$max_amplitude_of_array.coverage" NAME="max_amplitude_of_array Coverage Results" MODIFIED="1619297161462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/hudson_river_trading" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0009_palindrome_number.coverage" NAME="q0009_palindrome_number Coverage Results" MODIFIED="1608593795884" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0010_reg_exp_match1.coverage" NAME="q0010_reg_exp_match1 Coverage Results" MODIFIED="1608625969716" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$cv_imbalance.coverage" NAME="cv_imbalance Coverage Results" MODIFIED="1615396562817" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/hudson_river_trading/consonant_vowel" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0118_pascal_triangle.coverage" NAME="q0118_pascal_triangle Coverage Results" MODIFIED="1608830804317" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0004_median_of_2_sorted_arrays1.coverage" NAME="q0004_median_of_2_sorted_arrays1 Coverage Results" MODIFIED="1608525480903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0088_merge_sorted_array.coverage" NAME="q0088_merge_sorted_array Coverage Results" MODIFIED="1608797592837" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
     <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0014_longest_common_prefix.coverage" NAME="q0014_longest_common_prefix Coverage Results" MODIFIED="1608747384260" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0038_count_and_say.coverage" NAME="q0038_count_and_say Coverage Results" MODIFIED="1608776065979" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0021_merge_2_sorted_lists.coverage" NAME="q0021_merge_2_sorted_lists Coverage Results" MODIFIED="1608706253538" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q1192.coverage" NAME="q1192 Coverage Results" MODIFIED="1610253585938" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
     <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0010_reg_exp_match.coverage" NAME="q0010_reg_exp_match Coverage Results" MODIFIED="1608624305592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0163_missing_ranges.coverage" NAME="q0163_missing_ranges Coverage Results" MODIFIED="1608876824107" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$merge_sort2.coverage" NAME="merge_sort2 Coverage Results" MODIFIED="1614496456106" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/algorithms/sorting" />
     <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$test.coverage" NAME="test Coverage Results" MODIFIED="1617843792241" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/facebook" />
     <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0007_reverse_integer.coverage" NAME="q0007_reverse_integer Coverage Results" MODIFIED="1608746546511" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$fsm.coverage" NAME="fsm Coverage Results" MODIFIED="1613181191908" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/point72/fsm" />
     <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0101_symetric_tree.coverage" NAME="q0101_symetric_tree Coverage Results" MODIFIED="1608802833308" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$max_sum_k_apart.coverage" NAME="max_sum_k_apart Coverage Results" MODIFIED="1611892488880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/array" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$word_machine.coverage" NAME="word_machine Coverage Results" MODIFIED="1615400806276" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/hudson_river_trading/word_machine" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0001_array_pair_sum.coverage" NAME="q0001_array_pair_sum Coverage Results" MODIFIED="1608409978386" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0026_remove_duplicates_from_sorted_array.coverage" NAME="q0026_remove_duplicates_from_sorted_array Coverage Results" MODIFIED="1608713408879" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0004_median_of_2_sorted_arrays1.coverage" NAME="q0004_median_of_2_sorted_arrays1 Coverage Results" MODIFIED="1608525480903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0066_plus_one.coverage" NAME="q0066_plus_one Coverage Results" MODIFIED="1608789923053" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$segment_tree_recursive.coverage" NAME="segment_tree_recursive Coverage Results" MODIFIED="1612056100712" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0076.coverage" NAME="q0076 Coverage Results" MODIFIED="1609327003248" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0108_convert_sorted_array_to_binary_search_tree.coverage" NAME="q0108_convert_sorted_array_to_binary_search_tree Coverage Results" MODIFIED="1608829832256" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0088_merge_sorted_array.coverage" NAME="q0088_merge_sorted_array Coverage Results" MODIFIED="1608797592837" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0980.coverage" NAME="q0980 Coverage Results" MODIFIED="1610226547325" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0121_best_time_to_buy_and_sell_stock.coverage" NAME="q0121_best_time_to_buy_and_sell_stock Coverage Results" MODIFIED="1608695712914" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
     <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0002_add_two_numbs.coverage" NAME="q0002_add_two_numbs Coverage Results" MODIFIED="1608659119762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$file_searcher.coverage" NAME="file_searcher Coverage Results" MODIFIED="1614234628203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/algorithms" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0140_word_break_2.coverage" NAME="q0140_word_break_2 Coverage Results" MODIFIED="1608688451704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$spike.coverage" NAME="spike Coverage Results" MODIFIED="1615394539557" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/hudson_river_trading/spike" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q1192.coverage" NAME="q1192 Coverage Results" MODIFIED="1610253585938" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0003_longest_substring_norepeat_chars.coverage" NAME="q0003_longest_substring_norepeat_chars Coverage Results" MODIFIED="1608431962724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$array_neighbours.coverage" NAME="array_neighbours Coverage Results" MODIFIED="1619224309088" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/hudson_river_trading" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$cv_imbalance.coverage" NAME="cv_imbalance Coverage Results" MODIFIED="1615396562817" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/hudson_river_trading/consonant_vowel" />
     <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0004_median_of_2_sorted_arrays.coverage" NAME="q0004_median_of_2_sorted_arrays Coverage Results" MODIFIED="1608504436288" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
     <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0021_merge_2_sorted_lists2.coverage" NAME="q0021_merge_2_sorted_lists2 Coverage Results" MODIFIED="1608706777228" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0028_implment_strstr.coverage" NAME="q0028_implment_strstr Coverage Results" MODIFIED="1608759847303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0091.coverage" NAME="q0091 Coverage Results" MODIFIED="1609232915759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$backpack.coverage" NAME="backpack Coverage Results" MODIFIED="1612455640701" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/algorithms/dp" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0169_majority_element.coverage" NAME="q0169_majority_element Coverage Results" MODIFIED="1608877519259" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q1091.coverage" NAME="q1091 Coverage Results" MODIFIED="1611434529608" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$array_neighbours.coverage" NAME="array_neighbours Coverage Results" MODIFIED="1619224309088" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/hudson_river_trading" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0069_sqrt_of_x.coverage" NAME="q0069_sqrt_of_x Coverage Results" MODIFIED="1608793026982" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$yearbook.coverage" NAME="yearbook Coverage Results" MODIFIED="1617843776275" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/facebook" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0829.coverage" NAME="q0829 Coverage Results" MODIFIED="1609205752142" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$fit_meetings_in_one_room.coverage" NAME="fit_meetings in one room Coverage Results" MODIFIED="1618338750674" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/heap" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0066_plus_one.coverage" NAME="q0066_plus_one Coverage Results" MODIFIED="1608789923053" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0076.coverage" NAME="q0076 Coverage Results" MODIFIED="1609327003248" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$encoding.coverage" NAME="encoding Coverage Results" MODIFIED="1611023995315" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/string" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$closest_in_sorted_array.coverage" NAME="closest_in_sorted_array Coverage Results" MODIFIED="1616725163224" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/array" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$opt2__1_.coverage" NAME="opt2 (1) Coverage Results" MODIFIED="1614309800659" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/amazon/optimize_box_weights" />
     <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$reverse_to_equal.coverage" NAME="reverse_to equal Coverage Results" MODIFIED="1617594365383" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/facebook" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$price_percentile.coverage" NAME="price_percentile Coverage Results" MODIFIED="1613182329988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/point72/price_percentile" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0171_excel_sheet_column_number.coverage" NAME="q0171_excel_sheet_column_number Coverage Results" MODIFIED="1608887813340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$opt2.coverage" NAME="opt2 Coverage Results" MODIFIED="1613776715869" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/amazon/optimize_box_weights" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0053_maximum_subarray.coverage" NAME="q0053_maximum_subarray Coverage Results" MODIFIED="1608788868506" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0122_best_time_to_buy_and_sell_stocks2.coverage" NAME="q0122_best_time_to_buy_and_sell_stocks2 Coverage Results" MODIFIED="1608852752657" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$opt1__1_.coverage" NAME="opt1 (1) Coverage Results" MODIFIED="1614309891772" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/amazon/optimize_box_weights" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$merge_sort2.coverage" NAME="merge_sort2 Coverage Results" MODIFIED="1614496456106" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/algorithms/sorting" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$kmp.coverage" NAME="kmp Coverage Results" MODIFIED="1610946933095" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/string" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$segment_tree.coverage" NAME="segment_tree Coverage Results" MODIFIED="1612066338381" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0003_longest_substring_norepeat_chars.coverage" NAME="q0003_longest_substring_norepeat_chars Coverage Results" MODIFIED="1608431962724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0012_int_2_roman.coverage" NAME="q0012_int_2_roman Coverage Results" MODIFIED="1608634111296" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0980.coverage" NAME="q0980 Coverage Results" MODIFIED="1610226547325" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0021_merge_2_sorted_lists.coverage" NAME="q0021_merge_2_sorted_lists Coverage Results" MODIFIED="1608706253538" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0010_reg_exp_match1.coverage" NAME="q0010_reg_exp_match1 Coverage Results" MODIFIED="1608625969716" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$concurrency_producer_consumer.coverage" NAME="concurrency_producer_consumer Coverage Results" MODIFIED="1624079018564" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/data_struct_algorithms/a10_book_keeping" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0140_word_break_2.coverage" NAME="q0140_word_break_2 Coverage Results" MODIFIED="1608688451704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
     <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0006_zigzag_conversion.coverage" NAME="q0006_zigzag_conversion Coverage Results" MODIFIED="1608585703784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0005_longest_palindromic_substring.coverage" NAME="q0005_longest_palindromic_substring Coverage Results" MODIFIED="1608858049331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$merge_sort.coverage" NAME="merge_sort Coverage Results" MODIFIED="1614495099769" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/algorithms/sorting" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0008_string_to_int.coverage" NAME="q0008_string_to_int Coverage Results" MODIFIED="1608588649692" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$pre_post_to_tree.coverage" NAME="pre_post_to_tree Coverage Results" MODIFIED="1616556576919" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$list_of_tuples.coverage" NAME="list_of_tuples Coverage Results" MODIFIED="1622663467118" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/python_libs/bisect" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$kmp.coverage" NAME="kmp Coverage Results" MODIFIED="1610946933095" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/string" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$dag_all_paths.coverage" NAME="dag_all_paths Coverage Results" MODIFIED="1622925831632" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/data_struct_algorithms/d9_graph" />
     <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$2sum.coverage" NAME="2sum Coverage Results" MODIFIED="1616646967117" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/facebook" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$cv_imbalance_iterative.coverage" NAME="cv_imbalance_iterative Coverage Results" MODIFIED="1615400578220" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/hudson_river_trading/consonant_vowel" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0020_valid_parentheses.coverage" NAME="q0020_valid_parentheses Coverage Results" MODIFIED="1608703295122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0121_best_time_to_buy_and_sell_stock.coverage" NAME="q0121_best_time_to_buy_and_sell_stock Coverage Results" MODIFIED="1608695712914" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$array_neighbours__1_.coverage" NAME="array_neighbours (1) Coverage Results" MODIFIED="1624894614879" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0008_string_to_int.coverage" NAME="q0008_string_to_int Coverage Results" MODIFIED="1608588649692" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
     <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0279.coverage" NAME="q0279 Coverage Results" MODIFIED="1609119957779" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0169_majority_element.coverage" NAME="q0169_majority_element Coverage Results" MODIFIED="1608877519259" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$spike.coverage" NAME="spike Coverage Results" MODIFIED="1615394539557" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/hudson_river_trading/spike" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0118_pascal_triangle.coverage" NAME="q0118_pascal_triangle Coverage Results" MODIFIED="1608830804317" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$fit_meetings_in_one_room.coverage" NAME="fit_meetings in one room Coverage Results" MODIFIED="1618338750674" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/heap" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0829.coverage" NAME="q0829 Coverage Results" MODIFIED="1609205752142" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$cv_imbalance_iterative.coverage" NAME="cv_imbalance_iterative Coverage Results" MODIFIED="1615400578220" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/hudson_river_trading/consonant_vowel" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$backpack.coverage" NAME="backpack Coverage Results" MODIFIED="1612455640701" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/algorithms/dp" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$range_windows.coverage" NAME="range_windows Coverage Results" MODIFIED="1623426442982" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_sorting/algos" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0013_roman_2_int.coverage" NAME="q0013_roman_2_int Coverage Results" MODIFIED="1608697479926" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$encoding.coverage" NAME="encoding Coverage Results" MODIFIED="1611023995315" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/string" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0053_maximum_subarray.coverage" NAME="q0053_maximum_subarray Coverage Results" MODIFIED="1608788868506" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0070_climbing_stairs.coverage" NAME="q0070_climbing_stairs Coverage Results" MODIFIED="1608795548762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$max_sum_k_apart.coverage" NAME="max_sum_k_apart Coverage Results" MODIFIED="1611892488880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/array" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0163_missing_ranges.coverage" NAME="q0163_missing_ranges Coverage Results" MODIFIED="1608876824107" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
   </component>
 </project>

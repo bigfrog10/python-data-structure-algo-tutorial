@@ -21,24 +21,9 @@ def array_neighbours(arr):
         b = v
     return ret
 
-def array_neighbours1(arr):
-    stack, ret = [], []
-    for a in arr:
-        bigger = a
-        if stack:
-            e = stack.pop()
-            while e < bigger:
-                ret.append(e)
-                if not stack: break
-                e = stack.pop()
-            if e > bigger:
-                stack.append(e)
-        stack.append(a)
-    while stack:
-        ret.append(stack.pop())
 
 print(array_neighbours([2, 1, 3, 4, 5]))
 
 print(array_neighbours([2, 1, 5, 4, 3]))
 
-print(array_neighbours([5, 1, 3, 4, 2]))  # this is wrong
+print(array_neighbours([5, 1, 2, 4, 3]))
