@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="29b13a08-5760-41f7-8cea-fc198b3bbcb2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" beforeDir="false" afterPath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/d1_bits/BUTTON-COLOR.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/d1_bits/bits.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d1_bits/bits.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -253,7 +254,7 @@
       <workItem from="1621264996699" duration="174091000" />
       <workItem from="1622647476924" duration="285707000" />
       <workItem from="1624987329569" duration="9899000" />
-      <workItem from="1625060192231" duration="24353000" />
+      <workItem from="1625060192231" duration="25939000" />
     </task>
     <servers />
   </component>
