@@ -49,3 +49,5 @@ x = x ^ 1 ^ 1  # flip
 ### References:
 - https://hackernoon.com/xor-the-magical-bit-wise-operator-24d3012ed821
 - https://www.hackerearth.com/practice/notes/bit-manipulation/
+
+[button-color](BUTTON-COLOR.md)
