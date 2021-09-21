@@ -10,8 +10,6 @@ def findCelebrity(self, n: int) -> int:
             return -1
     return keep
 
-
-
 # LC1041. Robot Bounded In Circle
 def isRobotBounded(self, instructions: str) -> bool:
     # north = 0, east = 1, south = 2, west = 3

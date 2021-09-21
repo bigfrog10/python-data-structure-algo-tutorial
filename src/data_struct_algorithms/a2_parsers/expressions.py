@@ -47,9 +47,6 @@ def calculate(self, s: str) -> int:
             sign, num = c, 0 # this is for +-*/
     return sum(stack)
 
-
-
-
 # LC282. Expression Add Operators
 def addOperators(self, num: str, target: int) -> List[str]:
     n = len(num)
@@ -70,8 +67,6 @@ def addOperators(self, num: str, target: int) -> List[str]:
             if num[idx] == '0': break # after idx+1 we break out otherwise we have 00
     dfs(0, '', 0, None)
     return res
-
-
 
 # LC1106. Parsing A Boolean Expression
 def parseBoolExpr(self, expression: str) -> bool:
@@ -109,10 +104,6 @@ def calculate(self, s):
                 sign = stack.pop()
             else: sign, num = c, 0
     return sum(stack)
-
-
-
-
 
 # LC1597. Build Binary Expression Tree From Infix Expression
 def expTree(self, s: str) -> 'Node':
@@ -190,18 +181,3 @@ class TreeBuilder(object):
                 tn = VNode(s, tn2, tn1)
                 oprnd_stack.append(tn)
         return oprnd_stack.pop()
-
-# LC471. Encode String with Shortest Length
-@functools.lru_cache(None)
-def encode(self, s: str) -> str:  # O(n^4)
-    i = (s+s).find(s,1) # O(n^2)
-    encoded = str(len(s)//i) + '[' + self.encode(s[:i]) + ']' if i<len(s) else s
-    splitEncoded = [self.encode(s[:i]) + self.encode(s[i:]) for i in range(1,len(s))]
-    return min(splitEncoded + [encoded], key=len)
-
-# LC459. Repeated Substring Pattern
-def repeatedSubstringPattern(self, s: str) -> bool:
-    idx = (s + s).find(s, 1)
-    return len(s) > idx > -1
-
-

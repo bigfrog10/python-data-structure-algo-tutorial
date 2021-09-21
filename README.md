@@ -1,8 +1,21 @@
 # Data Structures and Algorithms
 
-intuitive
-<30 lines, easy to memorize 
-70% fast
+Use jupyter books:
+- can embed Latex
+- can embed pictures with MarkDown
+- can use anchor links
+    - create a title (#, ##, ###, etc) in a #%% md section, such as ### My Great Heading
+    - then in another #%% md section, refer above anchor(replace space with -), [My Title](#Data-Structures-and-Algorithms)
+
+Solutions:    
+  - intuitive, easy to memorize 
+  - try to keep <30 lines, we prefer < 20 lines 
+  - with correct runtime and space, as fast as possible while honoring above 2.
+  - during interviews, start with simple tests and cover corner cases.  
+  - searchable with tags and LeetCode references. However, string search ends with
+    html decorated strings. To drill down to the right text, first search for file names,
+    then search content inside the file.
+
 
 
 Recursion

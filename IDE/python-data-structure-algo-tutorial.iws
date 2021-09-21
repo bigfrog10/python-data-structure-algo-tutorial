@@ -2,18 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="29b13a08-5760-41f7-8cea-fc198b3bbcb2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/d1_bits/bits.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d1_bits/bits.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a2_parsers/string_expression.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python-data-structure-algo-tutorial.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/python-data-structure-algo-tutorial.ipr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" beforeDir="false" afterPath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/a1_math/combinatorics.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a1_math/combinatorics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/a1_math/logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a1_math/logic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/a2_parsers/expressions.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a2_parsers/expressions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/d1_bits/bits.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d1_bits/bits.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/sums.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/sums.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_array2d/intervals.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_array2d/intervals.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Jupyter Notebook" />
         <option value="Python Script" />
+        <option value="Jupyter Notebook" />
       </list>
     </option>
   </component>
@@ -26,6 +38,9 @@
         <option name="mavenHome" value="C:\Users\Wonderland\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\202.7319.50\plugins\maven\lib\maven3" />
       </MavenGeneralSettings>
     </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1ltDlgX5nh40iQ9gblp1MUg6vZZ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -68,6 +83,15 @@
       <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\src\data_struct_algorithms" />
       <recent name="D:\00dev\python\tutorials\python-data-structure-algo-tutorial\src\data_struct_algorithms\algorithms\a7_dfs_dfs" />
     </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" />
+        <option value="JettyConfiguration" />
+        <option value="TomeeConfiguration" />
+      </set>
+    </option>
   </component>
   <component name="RunManager" selected="Python.array_neighbours (1)">
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -214,11 +238,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.array_neighbours (1)" />
-        <item itemvalue="Python.concurrency_producer_consumer" />
         <item itemvalue="Python.range_windows" />
-        <item itemvalue="Python.dag_all_paths" />
         <item itemvalue="Python.list_of_tuples" />
+        <item itemvalue="Python.dag_all_paths" />
+        <item itemvalue="Python.concurrency_producer_consumer" />
+        <item itemvalue="Python.array_neighbours (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -252,242 +276,18 @@
       <workItem from="1621264996699" duration="174091000" />
       <workItem from="1622647476924" duration="285707000" />
       <workItem from="1624987329569" duration="9899000" />
-      <workItem from="1625060192231" duration="26307000" />
+      <workItem from="1625060192231" duration="48912000" />
+      <workItem from="1625678721314" duration="8410000" />
+      <workItem from="1630189421939" duration="599000" />
+      <workItem from="1630293709588" duration="417000" />
+      <workItem from="1630294184514" duration="1588000" />
+      <workItem from="1631043907277" duration="615000" />
+      <workItem from="1631997657498" duration="3158000" />
+      <workItem from="1632186736057" duration="616000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0008_string_to_int.py</url>
-          <line>35</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0012_int_2_roman.py</url>
-          <line>68</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0002_add_two_numbs.py</url>
-          <line>117</line>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0002_add_two_numbs.py</url>
-          <line>109</line>
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0140_word_break_2.py</url>
-          <line>44</line>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0121_best_time_to_buy_and_sell_stock.py</url>
-          <line>41</line>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0013_roman_2_int.py</url>
-          <line>65</line>
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0021_merge_2_sorted_lists.py</url>
-          <line>71</line>
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0066_plus_one.py</url>
-          <line>31</line>
-          <option name="timeStamp" value="47" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0088_merge_sorted_array.py</url>
-          <line>19</line>
-          <option name="timeStamp" value="48" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0108_convert_sorted_array_to_binary_search_tree.py</url>
-          <line>45</line>
-          <option name="timeStamp" value="50" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0005_longest_palindromic_substring.py</url>
-          <line>33</line>
-          <option name="timeStamp" value="54" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0163_missing_ranges.py</url>
-          <line>38</line>
-          <option name="timeStamp" value="67" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0200.py</url>
-          <line>7</line>
-          <option name="timeStamp" value="81" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0200.py</url>
-          <line>93</line>
-          <option name="timeStamp" value="84" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0829.py</url>
-          <line>56</line>
-          <option name="timeStamp" value="103" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0056.py</url>
-          <line>26</line>
-          <option name="timeStamp" value="108" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/dsa/data_structure/string/kmp.py</url>
-          <line>57</line>
-          <option name="timeStamp" value="148" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q1091.py</url>
-          <line>31</line>
-          <option name="timeStamp" value="152" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/dsa/leet_code/q0815.py</url>
-          <line>25</line>
-          <option name="timeStamp" value="153" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/dsa/algorithms/dp/backpack.py</url>
-          <line>88</line>
-          <option name="timeStamp" value="165" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/dsa/algorithms/file_searcher.py</url>
-          <line>14</line>
-          <option name="timeStamp" value="175" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/hudson_river_trading/consonant_vowel/cv_imbalance_recursion.py</url>
-          <line>21</line>
-          <option name="timeStamp" value="176" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/hudson_river_trading/consonant_vowel/cv_imbalance_recursion.py</url>
-          <line>32</line>
-          <option name="timeStamp" value="177" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/facebook/2sum.py</url>
-          <line>8</line>
-          <option name="timeStamp" value="181" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../src/facebook/test.py</url>
-          <line>4</line>
-          <option name="timeStamp" value="185" />
-        </line-breakpoint>
-      </breakpoints>
-      <default-breakpoints>
-        <breakpoint type="python-exception">
-          <properties notifyOnTerminate="true" exception="BaseException">
-            <option name="notifyOnTerminate" value="true" />
-          </properties>
-        </breakpoint>
-      </default-breakpoints>
-    </breakpoint-manager>
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0001_array_pair_sum.coverage" NAME="q0001_array_pair_sum Coverage Results" MODIFIED="1608409978386" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$segment_tree.coverage" NAME="segment_tree Coverage Results" MODIFIED="1612066338381" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0010_reg_exp_match2.coverage" NAME="q0010_reg_exp_match2 Coverage Results" MODIFIED="1608627744810" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0020_valid_parentheses.coverage" NAME="q0020_valid_parentheses Coverage Results" MODIFIED="1608703295122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0011_container_most_water.coverage" NAME="q0011_container_most_water Coverage Results" MODIFIED="1608630636749" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0012_int_2_roman.coverage" NAME="q0012_int_2_roman Coverage Results" MODIFIED="1608634111296" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0139_word_break.coverage" NAME="q0139_word_break Coverage Results" MODIFIED="1608677219823" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$file_searcher.coverage" NAME="file_searcher Coverage Results" MODIFIED="1614234628203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/algorithms" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$pre_post_to_tree.coverage" NAME="pre_post_to_tree Coverage Results" MODIFIED="1616556576919" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$closest_in_sorted_array.coverage" NAME="closest_in_sorted_array Coverage Results" MODIFIED="1616725163224" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/array" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$max_streak.coverage" NAME="max_streak Coverage Results" MODIFIED="1612999733930" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/code_ranker/max_streak" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0028_implment_strstr.coverage" NAME="q0028_implment_strstr Coverage Results" MODIFIED="1608759847303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0009_palindrome_number.coverage" NAME="q0009_palindrome_number Coverage Results" MODIFIED="1608593795884" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$word_machine.coverage" NAME="word_machine Coverage Results" MODIFIED="1615400806276" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/hudson_river_trading/word_machine" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$encoding1.coverage" NAME="encoding1 Coverage Results" MODIFIED="1611024369334" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/string" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0069_sqrt_of_x.coverage" NAME="q0069_sqrt_of_x Coverage Results" MODIFIED="1608793026982" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$price_percentile.coverage" NAME="price_percentile Coverage Results" MODIFIED="1613182329988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/point72/price_percentile" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$opt2.coverage" NAME="opt2 Coverage Results" MODIFIED="1613776715869" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/amazon/optimize_box_weights" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0171_excel_sheet_column_number.coverage" NAME="q0171_excel_sheet_column_number Coverage Results" MODIFIED="1608887813340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0038_count_and_say.coverage" NAME="q0038_count_and_say Coverage Results" MODIFIED="1608776065979" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$merge_sort.coverage" NAME="merge_sort Coverage Results" MODIFIED="1614495099769" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/algorithms/sorting" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0026_remove_duplicates_from_sorted_array.coverage" NAME="q0026_remove_duplicates_from_sorted_array Coverage Results" MODIFIED="1608713408879" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$yearbook.coverage" NAME="yearbook Coverage Results" MODIFIED="1617843776275" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/facebook" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0104_max_depth_binary_tree.coverage" NAME="q0104_max_depth_binary_tree Coverage Results" MODIFIED="1608803186387" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0204_count_primes.coverage" NAME="q0204_count_primes Coverage Results" MODIFIED="1608896523905" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$opt1__1_.coverage" NAME="opt1 (1) Coverage Results" MODIFIED="1614309891772" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/amazon/optimize_box_weights" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$fsm.coverage" NAME="fsm Coverage Results" MODIFIED="1613181191908" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/point72/fsm" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0091.coverage" NAME="q0091 Coverage Results" MODIFIED="1609232915759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$opt2__1_.coverage" NAME="opt2 (1) Coverage Results" MODIFIED="1614309800659" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/amazon/optimize_box_weights" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0200.coverage" NAME="q0200 Coverage Results" MODIFIED="1609183716225" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q1091.coverage" NAME="q1091 Coverage Results" MODIFIED="1611434529608" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$max_amplitude_of_array.coverage" NAME="max_amplitude_of_array Coverage Results" MODIFIED="1619297161462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/hudson_river_trading" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0125_valid_palindrome.coverage" NAME="q0125_valid_palindrome Coverage Results" MODIFIED="1608861904133" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0056.coverage" NAME="q0056 Coverage Results" MODIFIED="1609214647194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0122_best_time_to_buy_and_sell_stocks2.coverage" NAME="q0122_best_time_to_buy_and_sell_stocks2 Coverage Results" MODIFIED="1608852752657" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0005_longest_palindromic_substring.coverage" NAME="q0005_longest_palindromic_substring Coverage Results" MODIFIED="1608858049331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0815.coverage" NAME="q0815 Coverage Results" MODIFIED="1611461541497" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$opt1.coverage" NAME="opt1 Coverage Results" MODIFIED="1613776356732" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/amazon/optimize_box_weights" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0014_longest_common_prefix.coverage" NAME="q0014_longest_common_prefix Coverage Results" MODIFIED="1608747384260" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0021_merge_2_sorted_lists.coverage" NAME="q0021_merge_2_sorted_lists Coverage Results" MODIFIED="1608706253538" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q1192.coverage" NAME="q1192 Coverage Results" MODIFIED="1610253585938" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0010_reg_exp_match.coverage" NAME="q0010_reg_exp_match Coverage Results" MODIFIED="1608624305592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$merge_sort2.coverage" NAME="merge_sort2 Coverage Results" MODIFIED="1614496456106" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/algorithms/sorting" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$test.coverage" NAME="test Coverage Results" MODIFIED="1617843792241" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/facebook" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0007_reverse_integer.coverage" NAME="q0007_reverse_integer Coverage Results" MODIFIED="1608746546511" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0101_symetric_tree.coverage" NAME="q0101_symetric_tree Coverage Results" MODIFIED="1608802833308" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0004_median_of_2_sorted_arrays1.coverage" NAME="q0004_median_of_2_sorted_arrays1 Coverage Results" MODIFIED="1608525480903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0066_plus_one.coverage" NAME="q0066_plus_one Coverage Results" MODIFIED="1608789923053" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$segment_tree_recursive.coverage" NAME="segment_tree_recursive Coverage Results" MODIFIED="1612056100712" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/binary_tree" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0076.coverage" NAME="q0076 Coverage Results" MODIFIED="1609327003248" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0108_convert_sorted_array_to_binary_search_tree.coverage" NAME="q0108_convert_sorted_array_to_binary_search_tree Coverage Results" MODIFIED="1608829832256" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0088_merge_sorted_array.coverage" NAME="q0088_merge_sorted_array Coverage Results" MODIFIED="1608797592837" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0980.coverage" NAME="q0980 Coverage Results" MODIFIED="1610226547325" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0121_best_time_to_buy_and_sell_stock.coverage" NAME="q0121_best_time_to_buy_and_sell_stock Coverage Results" MODIFIED="1608695712914" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0002_add_two_numbs.coverage" NAME="q0002_add_two_numbs Coverage Results" MODIFIED="1608659119762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0003_longest_substring_norepeat_chars.coverage" NAME="q0003_longest_substring_norepeat_chars Coverage Results" MODIFIED="1608431962724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$array_neighbours.coverage" NAME="array_neighbours Coverage Results" MODIFIED="1619224309088" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/hudson_river_trading" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$cv_imbalance.coverage" NAME="cv_imbalance Coverage Results" MODIFIED="1615396562817" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/hudson_river_trading/consonant_vowel" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0004_median_of_2_sorted_arrays.coverage" NAME="q0004_median_of_2_sorted_arrays Coverage Results" MODIFIED="1608504436288" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0021_merge_2_sorted_lists2.coverage" NAME="q0021_merge_2_sorted_lists2 Coverage Results" MODIFIED="1608706777228" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$reverse_to_equal.coverage" NAME="reverse_to equal Coverage Results" MODIFIED="1617594365383" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/facebook" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0010_reg_exp_match1.coverage" NAME="q0010_reg_exp_match1 Coverage Results" MODIFIED="1608625969716" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$concurrency_producer_consumer.coverage" NAME="concurrency_producer_consumer Coverage Results" MODIFIED="1624079018564" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/data_struct_algorithms/a10_book_keeping" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0140_word_break_2.coverage" NAME="q0140_word_break_2 Coverage Results" MODIFIED="1608688451704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0006_zigzag_conversion.coverage" NAME="q0006_zigzag_conversion Coverage Results" MODIFIED="1608585703784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$list_of_tuples.coverage" NAME="list_of_tuples Coverage Results" MODIFIED="1622663467118" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/python_libs/bisect" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$kmp.coverage" NAME="kmp Coverage Results" MODIFIED="1610946933095" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/string" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$dag_all_paths.coverage" NAME="dag_all_paths Coverage Results" MODIFIED="1622925831632" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/data_struct_algorithms/d9_graph" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$2sum.coverage" NAME="2sum Coverage Results" MODIFIED="1616646967117" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/facebook" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$array_neighbours__1_.coverage" NAME="array_neighbours (1) Coverage Results" MODIFIED="1624894614879" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0008_string_to_int.coverage" NAME="q0008_string_to_int Coverage Results" MODIFIED="1608588649692" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0279.coverage" NAME="q0279 Coverage Results" MODIFIED="1609119957779" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0169_majority_element.coverage" NAME="q0169_majority_element Coverage Results" MODIFIED="1608877519259" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$spike.coverage" NAME="spike Coverage Results" MODIFIED="1615394539557" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/hudson_river_trading/spike" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0118_pascal_triangle.coverage" NAME="q0118_pascal_triangle Coverage Results" MODIFIED="1608830804317" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$fit_meetings_in_one_room.coverage" NAME="fit_meetings in one room Coverage Results" MODIFIED="1618338750674" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/heap" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0829.coverage" NAME="q0829 Coverage Results" MODIFIED="1609205752142" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$cv_imbalance_iterative.coverage" NAME="cv_imbalance_iterative Coverage Results" MODIFIED="1615400578220" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/hudson_river_trading/consonant_vowel" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$backpack.coverage" NAME="backpack Coverage Results" MODIFIED="1612455640701" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/algorithms/dp" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$range_windows.coverage" NAME="range_windows Coverage Results" MODIFIED="1623426442982" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_sorting/algos" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0013_roman_2_int.coverage" NAME="q0013_roman_2_int Coverage Results" MODIFIED="1608697479926" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$encoding.coverage" NAME="encoding Coverage Results" MODIFIED="1611023995315" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/string" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0053_maximum_subarray.coverage" NAME="q0053_maximum_subarray Coverage Results" MODIFIED="1608788868506" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0070_climbing_stairs.coverage" NAME="q0070_climbing_stairs Coverage Results" MODIFIED="1608795548762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$max_sum_k_apart.coverage" NAME="max_sum_k_apart Coverage Results" MODIFIED="1611892488880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/data_structure/array" />
-    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$q0163_missing_ranges.coverage" NAME="q0163_missing_ranges Coverage Results" MODIFIED="1608876824107" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/dsa/leet_code" />
   </component>
 </project>

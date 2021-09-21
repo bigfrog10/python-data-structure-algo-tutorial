@@ -95,3 +95,6 @@ def prisonAfterNDays(self, cells: List[int], N: int) -> List[int]:
             arr = ~ (arr << 1) ^ (arr >> 1)
             arr &= 0x7e
     return bin(arr)[2:].zfill(n)  # remove leading 0b
+
+
+# LC458

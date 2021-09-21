@@ -61,7 +61,7 @@ def canPartition(self, nums: List[int]) -> bool:
     n = len(nums)
     total_sum = sum(nums)
     if total_sum % 2 != 0: return False
-    @lru_cache(maxsize=None)
+    @lru_cache(maxsize=None)  # O(n * subset_sum)
     def dfs(idx: int, subset_sum: int) -> bool:
         if subset_sum == 0: return True
         if idx == n-1 or subset_sum < 0: return False
@@ -109,7 +109,7 @@ def minSubArrayLen(self, s: int, nums: List[int]) -> int:
 # LC494. Target Sum
 def findTargetSumWays(self, nums: List[int], S: int) -> int:
     n = len(nums)
-    @lru_cache(None)
+    @lru_cache(None)  # O(n * S)
     def dp(i, s):  # index and sum, how many ways to compose a[0], ..., a[i-1] to have sum s.
         if i == n: return s == S # 1 or 0
         add = dp(i+1, s + nums[i])
@@ -118,10 +118,6 @@ def findTargetSumWays(self, nums: List[int], S: int) -> int:
     ret = dp(0, 0)
     print(dp.cache_info())
     return ret
-
-
-
-
 
 # LC713. Subarray Product Less Than K
 def numSubarrayProductLessThanK(self, nums: List[int], k: int) -> int:

@@ -41,8 +41,6 @@ def nextPermutation(self, nums: List[int]) -> None:
     for i in range(idx+1, (n + idx+1)// 2): # reverse after idx: we swap only half, otherwise we swap twice
         nums[i], nums[n-i+idx] = nums[n-i+idx], nums[i]
 
-
-
 # LC47. Permutations II
 def permuteUnique(self, nums): # best
     ans = [[]]
@@ -71,7 +69,6 @@ def permuteUnique(self, nums: List[int]) -> List[List[int]]:
     backtrack(0)
     return list(visited)
 
-
 # LC77. Combinations
 from itertools import combinations
 def combine(self, n, k):
@@ -85,8 +82,6 @@ def combine(self, n, k):
 # for 4, 3: [[1],[2],[3],[4]],  [[1,2],[1,3],[2,3],[1,4],[2,4],[3,4]]
 # and  [[1,2,3],[1,2,4],[1,3,4],[2,3,4]]
 
-
-
 # LC1053. Previous Permutation With One Swap
 def prevPermOpt1(self, arr: List[int]) -> List[int]:
     n = len(arr)
@@ -99,16 +94,12 @@ def prevPermOpt1(self, arr: List[int]) -> List[int]:
         arr[idx], arr[midx] = arr[midx], arr[idx]
     return arr
 
-
-
 # LC78. Subsets
 def subsets(self, nums: List[int]) -> List[List[int]]:  # time and space O(2^N)
     if not nums: return []
     ret = [[]]
     for num in nums: ret += [ ss + [num] for ss in ret] # add one digit at a time
     return ret
-
-
 
 # LC118. Pascal's Triangle
 def generate(self, numRows):
@@ -117,5 +108,3 @@ def generate(self, numRows):
         res.append(row)
         row=[1] + [row[i] + row[i+1] for i in range(n)] + [1]
     return res
-
-

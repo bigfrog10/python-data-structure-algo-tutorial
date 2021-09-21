@@ -2,6 +2,16 @@ from typing import List
 import heapq
 from heapq import *
 
+# LC370. Range Addition
+def getModifiedArray(self, length: int, updates: List[List[int]]) -> List[int]:
+    arr = [0] * length  # O(n), use (start, end) as signals
+    for update in updates:
+        arr[update[0]] += update[2]
+        if update[1] + 1 < length: arr[update[1] + 1] -= update[2]
+    for i in range(1, length):
+        arr[i] += arr[i-1]
+    return arr
+
 # LC986. Interval List Intersections
 def intervalIntersection(self, firstList: List[List[int]], secondList: List[List[int]]) -> List[List[int]]:
     ret = []
