@@ -18,8 +18,8 @@ tr = {
 
 tm = {3}
 
-print(process('abab', 1, tr, tm))  # True
-print(process('ab', 1, tr, tm))  # False
+print("accept" if process('abab', 1, tr, tm) else "reject")  # True
+print("accept" if process('ab', 1, tr, tm) else "reject")  # False
 
 
 # shortcut solution

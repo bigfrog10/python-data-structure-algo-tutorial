@@ -164,3 +164,16 @@ https://labuladong.gitbook.io/algo-en/iv.-high-frequency-interview-problem/union
 http://juliacollections.github.io/DataStructures.jl/v0.17/heaps/
 https://github.com/JuliaCollections/DataStructures.jl
 
+## Layout
+
+### Format
+```
+# LC102. Whatever
+# @house robber@, @dfs@, !kmp.pdf!, $120$
+def solution() # O(n^2)
+   code # comment
+```
+
+### Layout
+- Problem's data structure goes to folder.
+- Algo's data structure or algo goes to file.
