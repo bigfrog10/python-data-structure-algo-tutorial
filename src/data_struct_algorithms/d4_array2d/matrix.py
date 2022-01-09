@@ -1,4 +1,24 @@
+from typing import List
+# LC296. Best Meeting Point
+def minTotalDistance(self, grid: List[List[int]]) -> int:  # O(mn)
+    if not grid: return 0
+    m, n = len(grid), len(grid[0])
+    rows, cols = [], []
+    for i in range(m):  # loop m and then n
+        for j in range(n):
+            if grid[i][j] == 1: rows.append(i)
+    for j in range(n):  # loop n and then m
+        for i in range(m):
+            if grid[i][j] == 1: cols.append(j)
 
+    def min_dist(locations: List[int]) -> int:  # 1 dimensional case
+        i, j, sumd = 0, len(locations)-1, 0
+        while i < j:
+            sumd += locations[j] - locations[i]
+            i, j = i+1, j-1
+        return sumd
+
+    return min_dist(rows) + min_dist(cols)  # Manhattan distance
 # LC64. Minimum Path Sum
 def minPathSum(self, grid: List[List[int]]) -> int:
     M, N = len(grid), len(grid[0])
@@ -146,6 +166,7 @@ def matrixBlockSum(self, mat: List[List[int]], K: int) -> List[List[int]]:
             r1, c1, r2, c2 = max(0, i - K), max(0, j - K), min(m, i + K + 1), min(n, j + K + 1)
             ans[i][j] = rangeSum[r2][c2] - rangeSum[r1][c2] - rangeSum[r2][c1] + rangeSum[r1][c1]
     return ans
+
 # LC1274. Number of Ships in a Rectangle
 def countShips(self, sea, P, Q):  # P - topRight, Q - bottomLeft
     res = 0

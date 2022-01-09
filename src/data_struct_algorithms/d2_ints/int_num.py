@@ -1,4 +1,17 @@
 
+# LC93. Restore IP Addresses - chart in solution is interesting
+def restoreIpAddresses(self, s: str) -> List[str]:
+    res = []
+    def add_dot(segs, start):
+        if len(segs) == 4:
+            if start == len(s): res.append('.'.join(segs))
+        else:  # < 4
+            for i in range(start, min(start+3, len(s))):
+                if s[start] == '0' and i > start: break
+                seg = s[start:i+1]
+                if 0 <= int(seg) < 256: add_dot(segs +[seg], i+1)
+    add_dot([], 0)
+    return res
 
 # LC299. Bulls and Cows
 def getHint(self, secret: str, guess: str) -> str:
@@ -53,9 +66,6 @@ def isHappy(self, n: int) -> bool:
         n = a
     return n == 1
 
-
-
-
 # LC50. Pow(x, n)
 def myPow(self, x: float, n: int) -> float:  # minimize mutiplications
     if n < 0:
@@ -83,12 +93,6 @@ def digitsCount(self, d: int, low: int, high: int) -> int: # O(logn)
         return res
     return count_less(high) - count_less(low-1)
 # use 21, 22 with 1 or 0
-
-
-
-
-
-
 
 # LC964. Least Operators to Express Number  Greedy
 class Solution:
@@ -261,6 +265,7 @@ def fractionToDecimal(self, numerator, denominator):
         result.insert(idx, '(')
         result.append(')')
     return ''.join(result).rstrip(".")
+
 def fractionToDecimal(self, n, d): # 32ms, beats 100%
     if n % d == 0: return str(n // d)
     p, q = abs(n), abs(d)
@@ -271,5 +276,3 @@ def fractionToDecimal(self, n, d): # 32ms, beats 100%
         r, s = r * 10 % q, s + str(r * 10 // q) # long division
     frac = str(p // q) + '.' + (s[:m[r]] + '(' + s[m[r]:] + ')' if r else s)
     return ('' if (n > 0) == (d > 0) else '-') + frac
-
-

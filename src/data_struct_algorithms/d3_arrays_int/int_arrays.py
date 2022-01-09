@@ -1,4 +1,27 @@
 from typing import List
+
+# LC274. H-Index
+def hIndex(self, citations: List[int]) -> int:  # O(n), better than sorting O(nlogn)
+    n = len(citations)  # Counting without sorting
+    papers = [0] * (n+1)
+    for c in citations: papers[min(n, c)] += 1  # how many papers has this citation count
+
+    sumc = 0
+    for i in reversed(range(n+1)):
+        sumc += papers[i]  # accumulate from end
+        if sumc >= i: return i  # has at least i citations for all right side together
+    return 0
+
+# LC275. H-Index II
+def hIndex(self, citations: List[int]) -> int:  # O(logn)
+    n = len(citations)
+    left, right = 0, n  # n-1 does not work for 1 element array
+    while left < right:  # sorted in asc, so we use n - i for larger citations
+        mid = left + (right - left) // 2
+        if citations[mid] < n - mid: left = mid + 1
+        else: right = mid
+    return n - left
+
 # LC287. Find the Duplicate Number  Floyd's Tortoise and Hare (Cycle Detection)
 def findDuplicate(self, nums: List[int]) -> int:  # use +/- sing, O(n) time and O(1) space
     for num in nums:

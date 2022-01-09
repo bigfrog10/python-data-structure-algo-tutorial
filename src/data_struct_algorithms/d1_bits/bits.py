@@ -1,3 +1,9 @@
+
+# LCBitwise AND of Numbers Range
+def rangeBitwiseAnd(self, m: int, n: int) -> int: # O(1) since n jumps
+    while m < n: n = n & (n - 1);
+    return n
+
 # LC868. Binary Gap
 def binaryGap(self, n: int) -> int:
     res, last, step = 0, -1, 0
@@ -97,4 +103,7 @@ def prisonAfterNDays(self, cells: List[int], N: int) -> List[int]:
     return bin(arr)[2:].zfill(n)  # remove leading 0b
 
 
-# LC458
+# LC458. Poor Pigs
+def poorPigs(self, buckets: int, minutesToDie: int, minutesToTest: int) -> int:
+    states = minutesToTest // minutesToDie + 1
+    return math.ceil(math.log(buckets) / math.log(states))

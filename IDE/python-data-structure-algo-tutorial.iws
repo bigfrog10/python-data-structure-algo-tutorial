@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="29b13a08-5760-41f7-8cea-fc198b3bbcb2" name="Default Changelist" comment="" />
+    <list default="true" id="29b13a08-5760-41f7-8cea-fc198b3bbcb2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" beforeDir="false" afterPath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/a1_math/combinatorics.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/a1_math/combinatorics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/d1_bits/bits.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d1_bits/bits.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/d2_ints/int_num.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d2_ints/int_num.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_sorting/binary_search.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/a4_sorting/binary_search.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/int_arrays.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d3_arrays_int/int_arrays.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_array2d/matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_array2d/matrix.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_strings/palindromes.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_strings/palindromes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_strings/string_arr.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d4_strings/string_arr.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/binary_search_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/data_struct_algorithms/d8_trees/binary_search_tree.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -289,6 +300,7 @@
       <workItem from="1637974572387" duration="3081000" />
       <workItem from="1638119790651" duration="2588000" />
       <workItem from="1639271734180" duration="655000" />
+      <workItem from="1641617705913" duration="15659000" />
     </task>
     <task id="LOCAL-00001" summary="update 2 sites">
       <created>1639271849713</created>

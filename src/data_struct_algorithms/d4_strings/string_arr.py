@@ -1,5 +1,30 @@
 
-# 621. Task Scheduler
+# LC271. Encode and Decode Strings
+class Codec:
+    # chunk transfer encoding
+    def encode(self, strs: [str]) -> str:
+        """Encodes a list of strings to a single string.
+        """
+        return ''.join('%d:' % len(s) + s for s in strs)
+
+    def decode(self, s: str) -> [str]:
+        """Decodes a single string to a list of strings.
+        """
+        strs, i = [], 0
+        while i < len(s):
+            j = s.find(':', i)
+            i = j + 1 + int(s[i:j])
+            strs.append(s[j+1:i])
+        return strs
+
+    # escaping
+    def encode(self, strs):
+        return ''.join(s.replace('|', '||') + ' | ' for s in strs)
+
+    def decode(self, s):
+        return [t.replace('||', '|') for t in s.split(' | ')[:-1]]  # -1 ignores last empty
+
+# LC621. Task Scheduler
 def leastInterval(self, tasks: List[str], n: int) -> int:
     freqs = [0] * 26 # frequencies of the tasks
     for t in tasks: freqs[ord(t) - ord('A')] += 1

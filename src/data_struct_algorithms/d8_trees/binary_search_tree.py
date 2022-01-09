@@ -1,4 +1,26 @@
 
+# LC95. Unique Binary Search Trees II
+def generateTrees(self, n: int) -> List[Optional[TreeNode]]:
+    def node(val, left, right):
+        node = TreeNode(val)
+        node.left = left
+        node.right = right
+        return node
+    def trees(first, last):
+        return [node(root, left, right)
+                for root in range(first, last+1)
+                for left in trees(first, root-1)
+                for right in trees(root+1, last)] or [None]
+    return trees(1, n)
+
+# LC96. Unique Binary Search Trees  # BBG
+def numTrees(self, n: int) -> int:  # O(4^n / n^(3/2)), Catalan numbers G_n
+    G = [1, 1] + [0]*(n-1)  # g(i) number of unique trees with length i
+    for i in range(2, n+1):  # O(n^2)
+        # use j as top root, left options * right options
+        for j in range(1, i+1): G[i] += G[j-1] * G[i-j]
+    return G[n]
+
 # LC1382. Balance a Binary Search Tree
 def balanceBST(self, root: TreeNode) -> TreeNode:
     def inorder(node, li):
@@ -94,13 +116,6 @@ def insertIntoBST(self, root: TreeNode, val: int) -> TreeNode: # recursive
     else: root.right = self.insertIntoBST(root.right, val)
     return root
 
-# LC96. Unique Binary Search Trees  # BBG
-def numTrees(self, n: int) -> int:
-    G = [1, 1] + [0]*(n-1)  # g(i) number of unique trees with length i
-    for i in range(2, n+1):
-        # use j as top root, left options * right options
-        for j in range(1, i+1): G[i] += G[j-1] * G[i-j]
-    return G[n]
 
 def inorderPredecessor(self, root, p):
     pred = None

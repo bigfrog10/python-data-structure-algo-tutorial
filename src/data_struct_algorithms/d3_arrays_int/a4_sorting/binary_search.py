@@ -1,6 +1,18 @@
 import bisect
-from collections import Counter, defaultdict
 from typing import List
+
+# LC1891. Cutting Ribbons
+def maxLength(self, ribbons: List[int], k: int) -> int:
+    totl, maxl = sum(ribbons), max(ribbons)
+    if k > totl: return 0
+
+    lo, hi = max(1, maxl // k), min(totl // k, maxl)
+    while lo < hi:  # binary search on desired length
+        mid = (lo + hi + 1) // 2
+        if sum(x // mid for x in ribbons) >= k: lo = mid
+        else: hi = mid - 1
+    return lo
+
 # LC658. Find K Closest Elements
 def findClosestElements(self, A, k, x):
     left, right = 0, len(A) - k
@@ -33,6 +45,22 @@ def search(self, nums: List[int], target: int) -> int:
             else: end = mid - 1
     return -1
 
+# LC81. Search in Rotated Sorted Array II
+def search(self, nums: List[int], target: int) -> bool:
+    start, end = 0, len(nums) - 1
+    while start <= end:
+        mid = (start + end) // 2
+        if nums[mid] == target: return True
+        elif nums[mid] > nums[start]:
+            if nums[start] <= target < nums[mid]: end = mid - 1
+            else: start = mid + 1  # cover 2 cases, target <> mid
+        elif nums[mid] < nums[start]:
+            if nums[mid] < target <= nums[end]: start = mid + 1
+            else: end = mid - 1
+        else:  # equal and not target, could use a while. This is O(n)
+            start += 1  # can't use mid, since it could jump out of range due to rotation
+    return False
+
 # LC153. Find Minimum in Rotated Sorted Array
 def findMin(self, nums: List[int]) -> int:
     start, end = 0, len(nums) - 1
@@ -42,7 +70,16 @@ def findMin(self, nums: List[int]) -> int:
         else: start = mid + 1
     return nums[start]
 
-
+# LC154. Find Minimum in Rotated Sorted Array II
+def findMin(self, nums: List[int]) -> int:
+    low, high = 0, len(nums)-1
+    while high > low:
+        pivot = low + (high - low) // 2
+        if nums[pivot] < nums[high]: high = pivot  # we want eliminate higher values
+        elif nums[pivot] > nums[high]: low = pivot + 1  # pivot is on left higher values
+        else: high -= 1  # have to go slowly since min could be between
+    # the 'low' and 'high' index converge to the inflection point.
+    return nums[low]
 
 # LC34. Find First and Last Position of Element in Sorted Array
 def searchRange(self, nums: List[int], target: int) -> List[int]:

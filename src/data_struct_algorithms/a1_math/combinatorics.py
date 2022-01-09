@@ -1,6 +1,8 @@
+from typing import List
+import math
 
 # LC46. Permutations
-def permute(self, nums: List[int]) -> List[List[int]]:
+def permute(nums: List[int]) -> List[List[int]]:  # O(n!) & O(n!)
     ans = [[]]
     for num in nums:
         new_arr = []
@@ -10,6 +12,43 @@ def permute(self, nums: List[int]) -> List[List[int]]:
         ans = new_arr
     return ans
 
+# LC60. Permutation Sequence
+def getPermutation(self, n: int, k: int) -> str:
+    elements = list(map(str, range(1, n+1)))  # '1', '2', ..., 'n'
+    fact = math.factorial(len(elements))  # n!, faster than reduce(operator.mul, elements)
+    k, result = k-1, ''  # zero based
+    while len(elements) > 0:
+        fact = fact // len(elements)  # check which (n-1)! slot that k falls in
+        i, k = divmod(k, fact)  # i is the index of old k within the slot
+        result += elements.pop(i)  # add ith digit, remove it to avoid repeating
+    return result
+
+# LC31. Next Permutation
+def nextPermutation(self, nums: List[int]) -> None:  # O(n)
+    if not nums: return
+    n = len(nums)
+    if n == 1: return
+
+    idx = -1  # from back, find the first value such that value < next
+    for i in range(n-1, 0, -1):
+        if nums[i-1] < nums[i]:
+            idx = i-1
+            break
+
+    if idx == -1:
+        nums.sort()
+    else:
+        idx1 = n-1 # find the value such that prev > value > next
+        for i in range(idx+1, n):
+            if nums[i] <= nums[idx]:
+                idx1 = i-1
+                break
+        nums[idx], nums[idx1] = nums[idx1], nums[idx]  # swap
+
+        # reverse after idx
+        for i in range(idx+1, (n + idx + 1) // 2):  # we swap only half, otherwise we swap twice
+            nums[i], nums[n-i+idx] = nums[n-i+idx], nums[i]
+
 # LC17. Letter Combinations of a Phone Number, top100
 def letterCombinations(self, digits):
     dict = {'2':"abc", '3':"def",  '4':"ghi", '5':"jkl",
@@ -18,7 +57,6 @@ def letterCombinations(self, digits):
     for d in digits: cmb = [p + q for p in cmb for q in dict[d]]
     return cmb
 
-# LC31. Next Permutation
 # LC556. Next Greater Element III
 def nextPermutation(self, nums: List[int]) -> None:
     if not nums: return
@@ -98,13 +136,42 @@ def prevPermOpt1(self, arr: List[int]) -> List[int]:
 def subsets(self, nums: List[int]) -> List[List[int]]:  # time and space O(2^N)
     if not nums: return []
     ret = [[]]
-    for num in nums: ret += [ ss + [num] for ss in ret] # add one digit at a time
+    for num in nums: ret += [ss + [num] for ss in ret]  # add one digit at a time
     return ret
+
+def subsets(self, nums: List[int]) -> List[List[int]]:  # samiliar to LC90
+    n, ans = len(nums), []
+
+    def backTrack(start, cur_list):
+        ans.append(cur_list[:])
+
+        for j in range(start, n):
+            cur_list.append(nums[j])
+            backTrack(j+1, cur_list)
+            cur_list.pop()
+
+    backTrack(0, [])
+    return ans
+
+# LC90. Subsets II
+def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:  # O(n * 2^n)
+    nums.sort()
+    ans = []
+    def backtrack(i=0, solution=[]):  # O(n) space from solution
+        ans.append(solution[:])
+        for j in range(i, len(nums)):
+            # We can re-use numbers, but not at this position and same previous premutation
+            if j > i and nums[j] == nums[j-1]: continue
+            solution.append(nums[j])
+            backtrack(j+1, solution)  # go down 1 element and then backout to empty
+            solution.pop()
+    backtrack()
+    return ans  # [[],[1],[1,2],[1,2,2],[2],[2,2]]
 
 # LC118. Pascal's Triangle
 def generate(self, numRows):
     row, res = [1], []
     for n in range(numRows):
         res.append(row)
-        row=[1] + [row[i] + row[i+1] for i in range(n)] + [1]
+        row = [1] + [row[i] + row[i+1] for i in range(n)] + [1]
     return res

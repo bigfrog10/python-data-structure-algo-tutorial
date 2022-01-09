@@ -61,13 +61,34 @@ def isPalindrome(self, s: str) -> bool: # ignore non alphanumeric, check is or n
         else: return False
     return True
 
-
-
 # LC266. Palindrome Permutation
 def canPermutePalindrome(self, s: str) -> bool:
     counts = Counter(s)
     odd_count = sum(1 for k, v in counts.items() if v % 2 != 0)
     return odd_count < 2
+
+# LC267. Palindrome Permutation II
+def generatePalindromes(self, s: str) -> List[str]:
+    counter, res = Counter(s), []
+
+    def backtrack(cur=""):
+        if not counter: res.append(cur)
+        else:
+            for c in list(counter.keys()):
+                counter[c] -= 2
+                if not counter[c]: del counter[c]
+                backtrack(c+cur+c)
+                counter[c] += 2
+
+    oddCounts = [c for c in counter if counter[c] % 2] # The characters in counter with odd count
+    if not len(oddCounts): backtrack()  # if no odd chars, we can simply backtrack
+    if len(oddCounts) == 1: # if exactly one odd char, backtrack with oddChar in the middle of string
+        oddChar = oddCounts[0]
+        counter[oddChar] -= 1
+        if not counter[oddChar]: del counter[oddChar]
+        backtrack(oddChar)
+
+    return res
 
 # LC647. Palindromic Substrings - return counts of these
 def countSubstrings(self, s: str) -> int: # O(n^2)
