@@ -1,4 +1,14 @@
 
+# LC680. Valid Palindrome II
+def validPalindrome(self, s: str) -> bool:  # O(n)
+    n, i = len(s), 0
+    while i < n / 2 and s[i] == s[~i]: i += 1
+    s = s[i:n - i]
+    # remove left or right char
+    return s[1:] == s[1:][::-1] or s[:-1] == s[:-1][::-1]
+
+
+
 # LC5. Longest Palindromic Substring
 def longestPalindrome(self, s): # best solution 96ms, 98%
     if not s: return 0  # O(n^2)
@@ -35,13 +45,7 @@ def minInsertions(self, s: str) -> int:
             return 1 + min(dp(left+1, right), dp(left, right-1))
     return dp(0, len(s)-1)
 
-# LC680. Valid Palindrome II
-def validPalindrome(self, s: str) -> bool:
-    n, i = len(s), 0
-    while i < n / 2 and s[i] == s[~i]: i += 1
-    s = s[i:n - i]
-    # remove left or remove right char
-    return s[1:] == s[1:][::-1] or s[:-1] == s[:-1][::-1]
+
 
 # LC125. Valid Palindrome
 def isPalindrome(self, s: str) -> bool: # ignore non alphanumeric, check is or not

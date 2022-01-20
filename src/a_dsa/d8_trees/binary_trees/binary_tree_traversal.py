@@ -1,4 +1,23 @@
 
+# LC314. Binary Tree Vertical Order Traversal
+def verticalOrder(self, root: TreeNode) -> List[List[int]]:
+    if root is None: return []  # O(n)
+    columnTable = defaultdict(list)
+    queue = deque([(root, 0)])
+    min_column = max_column = 0  # track column range
+    while queue:
+        node, column = queue.popleft()
+        if node:
+            columnTable[column].append(node.val)
+            queue.append((node.left, column - 1))
+            queue.append((node.right, column + 1))
+            min_column = min(min_column, column)
+            max_column = max(max_column, column)
+    return [columnTable[x] for x in range(min_column, max_column + 1)]
+
+
+
+
 # LC545. Boundary of Binary Tree
 def boundaryOfBinaryTree(self, root: TreeNode) -> List[int]:
     def left_bound(root): # O(n), loop all node once
@@ -209,17 +228,7 @@ def diameterOfBinaryTree(self, root: TreeNode) -> int:
     path_max(root)
     return diameter
 
-# LC314. Binary Tree Vertical Order Traversal
-def verticalOrder(self, root: TreeNode) -> List[List[int]]:
-    columnTable = defaultdict(list)
-    queue = deque([(root, 0)])
-    while queue:
-        node, column = queue.popleft()
-        if node is not None:
-            columnTable[column].append(node.val)
-            queue.append((node.left, column - 1))
-            queue.append((node.right, column + 1))
-    return [columnTable[x] for x in sorted(columnTable.keys())] # O(nlogn) sort
+
 
 # LC987. Vertical Order Traversal of a Binary Tree
 def verticalTraversal(self, root: TreeNode) -> List[List[int]]:

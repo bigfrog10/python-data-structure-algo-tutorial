@@ -1,4 +1,16 @@
 
+# LC71. Simplify Path
+def simplifyPath(self, path: str) -> str:
+    stack = []
+    for folder in path.split('/'):
+        if not folder or folder == '.': continue  # skip this
+        elif folder == '..':
+            if stack: stack.pop()  # go to parent
+        else: stack.append(folder)
+    return '/' + '/'.join(stack)
+
+
+
 
 # LC6. ZigZag Conversion
 def convert(self, s: str, numRows: int) -> str:
@@ -135,15 +147,7 @@ def longestNiceSubstring(self, s: str) -> str:
             return max(s0, s1, key=len)
     return s
 
-# LC71. Simplify Path
-def simplifyPath(self, path: str) -> str:
-    stack = []
-    for folder in path.split('/'):
-        if not folder or folder == '.': continue
-        elif folder == '..':
-            if stack: stack.pop()
-        else: stack.append(folder)
-    return '/' + '/'.join(stack)
+
 
 # LC763. Partition Labels
 def partitionLabels(self, s: str) -> List[int]: # O(n) time and space

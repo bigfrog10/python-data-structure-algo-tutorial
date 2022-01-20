@@ -1,5 +1,20 @@
 from typing import List
 
+# LC1570. Dot Product of Two Sparse Vectors
+class SparseVector:
+    def __init__(self, nums: List[int]):
+        self.sparse = {}
+        for i, n in enumerate(nums):
+            if n != 0: self.sparse[i] = n
+    def dotProduct(self, vec: 'SparseVector') -> int:
+        dot = 0
+        for i, n in self.sparse.items():
+            if i in vec.sparse: dot += n * vec.sparse[i]
+        return dot
+
+
+
+
 # LC 2056. Number of Valid Move Combinations On Chessboard
 
 # LC296. Best Meeting Point
@@ -248,17 +263,7 @@ def get_none_zero(self, A):
             res.append((i, j, A[i][j]))  # we should model sparse matrix like this
     return res
 
-# LC1570. Dot Product of Two Sparse Vectors
-class SparseVector:
-    def __init__(self, nums: List[int]):
-        self.sparse = {}
-        for i, n in enumerate(nums):
-            if n != 0: self.sparse[i] = n
-    def dotProduct(self, vec: 'SparseVector') -> int:
-        dot = 0
-        for i, n in self.sparse.items():
-            if i in vec.sparse: dot += n * vec.sparse[i]
-        return dot
+
 
 
 

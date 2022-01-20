@@ -1,4 +1,19 @@
 
+# LC560. Subarray Sum Equals K
+from typing import List
+def subarraySum(self, nums: List[int], k: int) -> int:
+    count = cusum = 0  # O(n)
+    counts = collections.defaultdict(int)
+    for i in range(len(nums)):
+        cusum += nums[i]
+        if cusum == k: count += 1
+        if cusum - k in counts: count += counts[cusum - k]
+        counts[cusum] += 1
+    return count
+
+
+
+
 # LC53. Maximum Subarray        - max sum amount all subarrays
 def maxSubArray(self, nums: List[int]) -> int:
     total = max_total = nums[0]
@@ -42,19 +57,7 @@ def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]
     combine_sum_2(0, [], target)
     return result
 
-# LC560. Subarray Sum Equals K
-from collections import defaultdict
-from typing import List
-def subarraySum(self, nums: List[int], k: int) -> int:
-    # approach 4,
-    count = cusum = 0
-    counts = defaultdict(int)
-    for i in range(len(nums)):
-        cusum += nums[i]
-        if cusum == k: count += 1
-        if cusum - k in counts: count += counts[cusum - k]
-        counts[cusum] += 1
-    return count
+
 
 # LC416. Partition Equal Subset Sum  - backpack
 def canPartition(self, nums: List[int]) -> bool:

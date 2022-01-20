@@ -3,6 +3,17 @@ from collections import Counter
 import math
 import functools
 
+# LC1762. Buildings With an Ocean View - increasing stack
+def findBuildings(self, heights: List[int]) -> List[int]:  # O(n)
+    res = [len(heights) - 1]  # last building always has a view
+    for i in range(len(heights) - 2, -1, -1):
+        if heights[i] > heights[res[-1]]: res.append(i)
+    res.reverse()
+    return res
+
+
+
+
 # LC274. H-Index
 def hIndex(self, citations: List[int]) -> int:  # O(n), better than sorting O(nlogn)
     n = len(citations)  # Counting without sorting
@@ -297,14 +308,7 @@ def containsDuplicate(self, nums):
 
 
 
-# LC1762. Buildings With an Ocean View - increasing stack
-def findBuildings(self, heights: List[int]) -> List[int]:
-    res = [len(heights) - 1]
-    for i in range(len(heights) - 2, -1, -1):
-        if heights[i] > heights[res[-1]]:
-            res.append(i)
-    res.reverse()
-    return res
+
 
 # LC350. Intersection of Two Arrays II
 def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:

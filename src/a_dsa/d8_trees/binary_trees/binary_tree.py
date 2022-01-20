@@ -6,6 +6,26 @@ class TreeNode:
         self.left = left
         self.right = right
 
+# LC1650. Lowest Common Ancestor of a Binary Tree III
+def lowestCommonAncestor(self, p: 'Node', q: 'Node') -> 'Node':
+    seen = {p, q}
+    while p or q:
+        if p:
+            p = p.parent
+            if p in seen: return p
+            elif p: seen.add(p)
+        if q:
+            q = q.parent
+            if q in seen: return q
+            elif q: seen.add(q)
+    return None
+def lowestCommonAncestor1(self, p: 'Node', q: 'Node') -> 'Node':
+    p1, p2 = p, q  # O(1) space, but goes a + b + c, still O(n)
+    while p1 != p2:
+        p1 = p1.parent if p1.parent else q
+        p2 = p2.parent if p2.parent else p
+    return p1
+
 # LC236. Lowest Common Ancestor of a Binary Tree, top100
 def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
     def dfs(node, p, q):
@@ -13,9 +33,13 @@ def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -
         if node.val == p.val or node.val == q.val: return node
         left = dfs(node.left, p, q)
         right = dfs(node.right, p, q)
-        if left and right: return node
-        return left or right
+        if left and right: return node # both are not null, then this is LCA
+        return left or right # carry the not None node
     return dfs(root, p, q)
+
+
+
+
 
 # LC226. Invert Binary Tree
 def invertTree(self, root):
@@ -124,19 +148,7 @@ def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
 
 
 
-# LC1650. Lowest Common Ancestor of a Binary Tree III
-def lowestCommonAncestor(self, p: 'Node', q: 'Node') -> 'Node':  # follow parent
-    cached = set([p, q])
-    while p is not None or q is not None:
-        if p is not None:
-            p = p.parent
-            if p in cached: return p
-            elif p: cached.add(p)
-        if q is not None:
-            q = q.parent
-            if q in cached: return q
-            elif q: cached.add(q)
-    return None
+
 
 # LC958. Check Completeness of a Binary Tree
 def isCompleteTree(self, root):

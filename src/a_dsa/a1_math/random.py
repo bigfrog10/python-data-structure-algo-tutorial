@@ -1,25 +1,16 @@
 # LC528. Random Pick with Weight
-from random import choices
-class Solution:  # based on lib
-    def __init__(self, w: List[int]):
-        self.samples = [i for i in range(len(w))]
-        s = sum(w)
-        self.weights = [ x / s for x in w ]
-    def pickIndex(self) -> int:
-        return choices(self.samples, self.weights, k=1)[0]
-from random import choices
-from itertools import accumulate
-import bisect
 class Solution:  # based on pdf
     def __init__(self, w: List[int]):
         self.samples = [i for i in range(len(w))]
         s = sum(w)
         self.weights = [ x / s for x in w ]
-        self.cumusum = list(accumulate(self.weights))  # another way to do it, faster
+        self.cumusum = list(itertools.accumulate(self.weights))  # another way to do it, faster
     def pickIndex(self) -> int:
         r = random.uniform(0, 1)
         idx = bisect.bisect(self.cumusum, r)
         return self.samples[idx]
+
+
 
 # LC398. Random Pick Index
 class Solution:
@@ -28,7 +19,7 @@ class Solution:
         for i, n in enumerate(nums): self.num2idx[n].append(i)
     def pick(self, target: int) -> int:
         idxs = self.num2idx[target]
-        i = randrange(len(idxs))
+        i = random.randrange(len(idxs))
         return idxs[i]
 
 # LC384. Shuffle an Array

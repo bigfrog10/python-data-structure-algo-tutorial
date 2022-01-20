@@ -1,4 +1,33 @@
 
+# LC1249. Minimum Remove to Make Valid Parentheses
+def minRemoveToMakeValid(self, s: str) -> str: # O(n)
+    stack, remove = [], [] # find all indices to remove
+    for i, c in enumerate(s):
+        if c not in '()': continue # others, keep it
+        elif c == '(': stack.append(i) # record it
+        # now c == ')'
+        elif not stack: remove.append(i) # mo matching ( for ), add to remove
+        else: stack.pop() # matched, remove old record
+    remove.extend(stack) # whatever left is no match
+    idx, ret = 0, ''
+    for i in remove: # remove those
+        ret += s[idx:i] # up to removed
+        idx = i + 1 # skip removed
+    ret += s[idx:] # add leftover
+    return ret
+
+# LC921. Minimum Add to Make Parentheses Valid
+def minAddToMakeValid(self, S: str) -> int:
+    left = bal = 0 # bal = num of ( minus mn of )
+    for s in S:
+        bal += 1 if s == '(' else -1 # cancel out balanced
+        if bal == -1: # there is ) unmatched
+            left += 1 # expected ( needs 1 more
+            bal += 1  # diff needs +1 too
+    return left + bal # "(((" -> ret=0, bal=3
+
+
+
 # LC22. Generate Parentheses
 def generateParenthesis(self, n: int) -> List[str]:
     ret = {'()'}
@@ -99,21 +128,7 @@ def diffWaysToCompute(self, input: str) -> List[int]:
 
 
 
-# LC1249. Minimum Remove to Make Valid Parentheses
-def minRemoveToMakeValid(self, s: str) -> str: # return one modified string
-    stack, remove = [], [] # find all indices to remove
-    for i, c in enumerate(s):
-        if c not in '()': continue  # others, keep it
-        elif c == '(': stack.append(i)  # record it
-        elif not stack: remove.append(i)  # mo match ( for ), add to remove
-        else: stack.pop()  # matched, remove old record
-    remove.extend(stack)  # whatever left is no match
-    idx, ret = 0, ''
-    for i in remove:  # remove those
-        ret += s[idx:i]  # up to removed
-        idx = i + 1  # skip removed
-    ret += s[idx:]  # add leftover
-    return ret
+
 
 # LC1614. Maximum Nesting Depth of the Parentheses
 def maxDepth(self, s: str) -> int:
@@ -126,15 +141,7 @@ def maxDepth(self, s: str) -> int:
         if c == ')': cur -= 1
     return res
 
-# LC921. Minimum Add to Make Parentheses Valid
-def minAddToMakeValid(self, S: str) -> int:
-    left = bal = 0 # bal = num of ( minus mn of )
-    for s in S:
-        bal += 1 if s == '(' else -1 # cancel out balanced
-        if bal == -1: # there is ) unmatched
-            left += 1 # expected ( needs 1 more
-            bal += 1  # diff needs +1 too
-    return left + bal # "(((" -> ret=0, bal=3
+
 
 # LC678. Valid Parenthesis String - with *
 def checkValidString(self, s):  # greedy

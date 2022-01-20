@@ -1,3 +1,21 @@
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+# LC938. Range Sum of BST
+def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
+    ret = 0  # O(n)
+    def dfs(node):
+        nonlocal ret
+        if not node: return
+        if low <= node.val <= high: ret += node.val
+        # if v < low, then all left children under v < low
+        if node.val > low: dfs(node.left)
+        if node.val < high: dfs(node.right)
+    dfs(root)
+    return ret
 
 # LC95. Unique Binary Search Trees II
 def generateTrees(self, n: int) -> List[Optional[TreeNode]]:
@@ -196,18 +214,7 @@ def searchBST(self, root: TreeNode, val: int) -> TreeNode:
         else: walker = walker.right # <
     return walker  # None
 
-# LC938. Range Sum of BST
-def rangeSumBST(self, root: TreeNode, low: int, high: int) -> int:
-    ret = 0
-    def traverse(node):
-        nonlocal ret
-        if not node: return
-        # if v < low, then all left children under v < low
-        if node.val > low: traverse(node.left)
-        if low <= node.val <= high: ret += node.val
-        if node.val < high: traverse(node.right)
-    traverse(root)
-    return ret
+
 
 
 
