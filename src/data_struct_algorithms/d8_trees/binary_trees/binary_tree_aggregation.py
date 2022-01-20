@@ -1,4 +1,36 @@
 
+# LC298. Binary Tree Longest Consecutive Sequence
+def longestConsecutive(self, root: Optional[TreeNode]) -> int:
+    def dfs(node: TreeNode, parent: TreeNode, length: int):
+        if not node: return length
+        length = length + 1 if parent and node.val == parent.val + 1 else 1
+        return max(length, dfs(node.left, node, length), dfs(node.right, node, length))
+
+    return dfs(root, None, 0)
+
+# LC549. Binary Tree Longest Consecutive Sequence II
+def longestConsecutive(self, root: Optional[TreeNode]) -> int:  # O(n)
+    res = 0
+    def longest_path(root):
+        if not root: return 0, 0
+        inc, dec = 1, 1
+
+        if root.left:
+            l_inc, l_dec = longest_path(root.left)
+            if root.left.val == root.val + 1: inc = max(inc, 1 + l_inc)
+            if root.left.val == root.val - 1: dec = max(dec, 1 + l_dec)
+        if root.right:
+            r_inc, r_dec = longest_path(root.right)
+            if root.right.val == root.val + 1: inc = max(inc, 1 + r_inc)
+            if root.right.val == root.val - 1: dec = max(dec, 1 + r_dec)
+
+        nonlocal res
+        res = max(res, inc + dec - 1)
+        return inc, dec
+
+    longest_path(root)
+    return res
+
 # LC129. Sum Root to Leaf Numbers
 def sumNumbers(self, root: TreeNode) -> int:
     total = 0

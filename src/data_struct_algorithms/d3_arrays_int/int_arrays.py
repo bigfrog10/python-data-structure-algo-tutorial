@@ -1,4 +1,7 @@
 from typing import List
+from collections import Counter
+import math
+import functools
 
 # LC274. H-Index
 def hIndex(self, citations: List[int]) -> int:  # O(n), better than sorting O(nlogn)
@@ -22,6 +25,14 @@ def hIndex(self, citations: List[int]) -> int:  # O(logn)
         else: right = mid
     return n - left
 
+# LC532. K-diff Pairs in an Array
+def findPairs(self, nums: List[int], k: int) -> int:
+    result = 0
+    counter = Counter(nums)
+    for x in counter:
+        if k > 0 and x + k in counter: result += 1
+        elif k == 0 and counter[x] > 1: result += 1
+    return result
 # LC287. Find the Duplicate Number  Floyd's Tortoise and Hare (Cycle Detection)
 def findDuplicate(self, nums: List[int]) -> int:  # use +/- sing, O(n) time and O(1) space
     for num in nums:
@@ -55,7 +66,7 @@ def productExceptSelf(self, nums: List[int]) -> List[int]:
 # LC846. Hand of Straights
 def isNStraightHand(self, hand: List[int], W: int) -> bool:
         if len(hand) % W != 0: return False
-        c = collections.Counter(hand)
+        c = Counter(hand)
         for i in sorted(c): # O(nlogn), order is no concern.
             if c[i] == 0: continue
             cnt = c[i]

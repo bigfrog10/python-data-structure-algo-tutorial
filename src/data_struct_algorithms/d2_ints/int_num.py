@@ -1,4 +1,13 @@
 
+# LC400. Nth Digit
+def findNthDigit(self, n: int) -> int:
+    n -= 1  # index alignment
+    for digit in range(1, 11):  # loop groups 10-99, 100-999, ...
+        first = 10**(digit - 1)
+        k = 9 * first * digit  # total number of digits in this group
+        if n < k: return int(str(first + n // digit)[n % digit])  # first + .. is the number where the digit is
+        n -= k
+
 # LC93. Restore IP Addresses - chart in solution is interesting
 def restoreIpAddresses(self, s: str) -> List[str]:
     res = []
@@ -134,7 +143,37 @@ def isPalindrome(self, x: int) -> bool:
         x = x // 10
     return x == rev or x == rev // 10
 
+# LC1842. Next Palindrome Using Same Digits
+def nextPalindrome(self, num: str) -> str:
+    n = len(num)
+    k, r = divmod(n, 2)
+    mid = num[k] if r else ''
 
+    s = num[:k]  # take 1st half
+    stack = []
+    for j in range(k-1, -1, -1):  # going backward
+        if not stack or s[j] >= s[j+1]: stack += s[j]  # add larger to stack
+        else:  # when see smaller element, swap with least larger element
+            index = bisect.bisect_right(stack, s[j])
+            x, stack[index] = stack[index], s[j]
+            sub = s[:j] + x + ''.join(stack)
+            return sub + mid + sub[::-1]
+    return ''
+
+# LC556. Next Greater Element III
+def nextGreaterElement(self, n: int) -> int:
+    s = str(n)
+    k = len(s)
+    stack = []
+    for j in range(k-1, -1, -1):  # going backward
+        if not stack or s[j] >= s[j+1]: stack += s[j]  # add larger to stack
+        else:  # when see smaller element, swap with least larger element
+            index = bisect.bisect_right(stack, s[j])
+            x, stack[index] = stack[index], s[j]
+            sub = s[:j] + x + ''.join(stack)
+            res = int(sub)
+            return res if res < 1<<31 else -1
+    return -1
 
 # LC38. Count and Say
 def countAndSay(self, n):

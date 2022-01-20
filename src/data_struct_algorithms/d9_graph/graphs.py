@@ -1,3 +1,34 @@
+from typing import List
+from collections import defaultdict
+
+# LC2076. Process Restricted Friend Requests
+# union find
+def friendRequests(self, n: int, restrictions: List[List[int]], requests: List[List[int]]) -> List[bool]:
+        parents = [i for i in range(n)]  # without ranker
+        forbidden = defaultdict(set)
+        for i, j in restrictions:
+            forbidden[i].add(j)
+            forbidden[j].add(i)
+        def find(i):
+            if i != parents[i]: parents[i] = find(parents[i])
+            return parents[i]
+        def union(p1, p2):
+            parents[p2] = p1
+            forbidden[p1] |= forbidden[p2]
+            for i in forbidden[p2]:
+                forbidden[i].remove(p2)
+                forbidden[i].add(p1)
+            del forbidden[p2]
+        ans = []
+        for i, j in requests:
+            p1 = find(i)
+            p2 = find(j)
+            if p1 == p2: ans.append(True)
+            elif p2 in forbidden[p1]: ans.append(False)
+            else:
+                union(p1, p2)
+                ans.append(True)
+        return ans
 
 # LC399. Evaluate Division
 def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
@@ -164,7 +195,7 @@ def containsCycle(self, grid: List[List[str]]) -> bool:  # best solution
 # Cycle Detection
 # LC684. Redundant Connection - undirected graph
 def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
-    graph = collections.defaultdict(set)
+    graph = defaultdict(set)
     def dfs(source, target): # detect cycle
         if source not in seen:
             seen.add(source)
@@ -201,4 +232,39 @@ def findRedundantDirectedConnection(self, edges):  # [[2,3],[3,1],[3,4],[4,2]]
         if u == v: return edge
         p[u] = p[v]
 
+# Merge Directed graph nodes if there is only 1 parent, and that parent has 1 child.
+def merge(adj_map: dict):  # parent -> children, such 'A' -> ['B', 'C']
+    def get_parents(am: dict):
+        res = defaultdict(set)
+        for n, c in am.items():
+            for m in c: res[c].add(m)
+        return res
 
+    parents = get_parents(adj_map)
+
+    def merge_child(node):
+        children = adj_map[node]
+        if len(children) == 1 and len(parents[children[0]]) == 1:
+            adj_map[node + children[0]] = adj_map[children[0]]
+            for c in adj_map[children[0]]:
+                parents[c].remove(children[0])
+                parents[c].add(node + children[0])
+
+            del adj_map[node]
+            del adj_map[children[0]]
+            del parents[children[0]]
+
+            merge_child(node + children[0])
+
+    keys = adj_map.keys()
+    for node in keys:
+        merge_child(node)
+
+# A -> B -> C -> D merge to ABCD
+# A ->        -> D
+#      B -> C
+# E ->        -> F
+# merges to
+# A ->    -> D
+#      BC
+# E ->    -> F

@@ -1,3 +1,5 @@
+from typing import List
+import math
 
 # LCBitwise AND of Numbers Range
 def rangeBitwiseAnd(self, m: int, n: int) -> int: # O(1) since n jumps
@@ -25,13 +27,20 @@ def subarrayBitwiseORs(self, arr: List[int]) -> int:
         res |= cur
     return len(res)
 
-# LC191. Number of 1 Bits
+# LC191. Number of 1 Bits, Hamming distance
 def hammingWeight(self, n: int) -> int:
     sum = 0
     while n != 0:
         sum += 1
         n &= (n - 1)  # n & (n-1) erase least significant bit
     return sum
+
+# LC477. Total Hamming Distance
+def totalHammingDistance(self, nums: List[int]) -> int:  # O(n), better than n^2
+    # map takes n to create, zip takes 32 (32 bit)
+    zipped = zip(*map('{:032b}'.format, nums))  # result 32 element array
+    # every pair of (0, 1) contributes 1 to the distance
+    return sum(b.count('0') * b.count('1') for b in zipped)  # constant time
 
 # LC190. Reverse Bits
 def reverseBits(self, n: int) -> int:

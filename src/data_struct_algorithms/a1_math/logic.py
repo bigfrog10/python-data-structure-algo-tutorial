@@ -23,3 +23,10 @@ def isRobotBounded(self, instructions: str) -> bool:
             x += dirs[face][0]
             y += dirs[face][1]
     return (x == 0 and y == 0) or face != 0
+
+# LC319. Bulb Switcher
+# bulb is on when switching odd number of times. ith bulb switching on rth round only if r divides i.
+# So i has odd number of divisors. But divisors comes in pairs, e.g., 36 has (1, 36), (2, 18), ...
+# The only way to have odd divisors is squares, such as (6, 6).
+def bulbSwitch(self, n: int) -> int:
+    return int(sqrt(n))

@@ -47,7 +47,7 @@ def maximalRectangle(self, matrix):
 def nextGreaterElement(self, findNums, nums):
     st, d = [], {}
     for v in nums:
-        while st and st[-1] < v: # maintain decreasing stack
+        while st and st[-1] < v:  # maintain decreasing stack
             d[st.pop()] = v
         st.append(v)
     return map(lambda x: d.get(x, -1), findNums)
@@ -56,13 +56,11 @@ def nextGreaterElement(self, findNums, nums):
 def nextGreaterElements(self, nums):  # best solution
     n = len(nums)
     ret = [-1] * n
-    stack = nums[::-1] # reverse this because append() below, append is O(1)
-    # for i in range(n - 1, -1, -1):
+    stack = nums[::-1]  # reverse this because append() below, append is O(1)
     for i in range(n)[::-1]:
-        while stack and stack[-1] <= nums[i]: # maintain decreasing order
-            stack.pop()
+        while stack and stack[-1] <= nums[i]: stack.pop()  # maintain decreasing order
         if stack: ret[i] = stack[-1] # this -1 number is larger than current
-        stack.append(nums[i]) # in case this is the next greater
+        stack.append(nums[i])  # in case this is the next greater
     return ret
 
 # LC739. Daily Temperatures

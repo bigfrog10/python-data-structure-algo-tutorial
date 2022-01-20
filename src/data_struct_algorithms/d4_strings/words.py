@@ -1,4 +1,24 @@
 
+# LC676. Implement Magic Dictionary
+class MagicDictionary:
+    def __init__(self):
+        self.trie = {}
+    def buildDict(self, dictionary: List[str]) -> None:
+        for word in dictionary:
+            node = self.trie
+            for letter in word: node = node.setdefault(letter, {})
+            node[None] = None
+    def search(self, word: str) -> bool:
+        def find(node, i, mistakeAllowed):
+            if i == len(word):
+                return None in node and not mistakeAllowed
+            if word[i] not in node:
+                return any(find(node[letter], i+1, False) for letter in node if letter) if mistakeAllowed else False
+            if mistakeAllowed:
+                return find(node[word[i]], i+1, True) or any(find(node[letter], i+1, False) for letter in node if letter and letter != word[i])
+            return find(node[word[i]], i+1, False)
+        return find(self.trie, 0, True)
+
 # LC139. Word Break, top100
 def wordBreak(self, s: str, wordDict: List[str]) -> bool:
     wds = set(wordDict)
