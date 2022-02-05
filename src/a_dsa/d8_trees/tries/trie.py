@@ -1,6 +1,6 @@
 
-# 211. Design Add and Search Words Data Structure
-class WordDictionary: # much faster
+# LC211. Design Add and Search Words Data Structure
+class WordDictionary:  # much faster
     def __init__(self): self.trie = {}
     def addWord(self, word: str) -> None:
         node = self.trie
@@ -20,40 +20,24 @@ class WordDictionary: # much faster
         return search_in_node(word, self.trie)
 
 # LC208. Implement Trie (Prefix Tree)
-class TrieNode:
-    def __init__(self, value):
-        self.value = value
-        self.children = dict()
-        self.is_end = False
-    def add_child(self, value):
-        self.children[value] = TrieNode(value)
-    def get_child(self, key):
-        return self.children[key]
-    def has_child(self, key):
-        return key in self.children
 class Trie:
-    def __init__(self):
-        self.root = TrieNode(None)
+    def __init__(self): self.trie = {}
     def insert(self, word: str) -> None:
-        node = self.root
-        for c in word:
-            if not node.has_child(c): node.add_child(c)
-            node = node.get_child(c)
-        node.is_end = True
+        node = self.trie
+        for c in word: node = node.setdefault(c, {})
+        node["-"] = True
     def search(self, word: str) -> bool:
-        node = self.root
+        t = self.trie
         for c in word:
-            if not node.has_child(c): return False
-            node = node.get_child(c)
-        return node.is_end
+            if c not in t: return False
+            t = t[c]
+        return "-" in t
     def startsWith(self, prefix: str) -> bool:
-        node = self.root
+        t = self.trie
         for c in prefix:
-            if not node.has_child(c): return False
-            node = node.get_child(c)
+            if c not in t: return False
+            t = t[c]
         return True
-
-
 
 # LC1233. Remove Sub-Folders from the Filesystem
 def removeSubfolders(self, folder: List[str]) -> List[str]:
@@ -63,7 +47,6 @@ def removeSubfolders(self, folder: List[str]) -> List[str]:
         node = trie
         for di in dirs: node = node.setdefault(di, {})
         node['end'] = path # save path to end
-    print(trie)
     ret = [] # collect top folders
     def dfs(node):
         if 'end' in node:

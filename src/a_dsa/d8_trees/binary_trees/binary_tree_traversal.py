@@ -15,8 +15,61 @@ def verticalOrder(self, root: TreeNode) -> List[List[int]]:
             max_column = max(max_column, column)
     return [columnTable[x] for x in range(min_column, max_column + 1)]
 
+# LC987. Vertical Order Traversal of a Binary Tree
+def verticalTraversal(self, root: TreeNode) -> List[List[int]]:
+    res = defaultdict(list) # column number to (row number, val)
+    def preorder(node, i, j):
+        if not node: return
+        res[j].append((i, node.val))
+        preorder(node.left, i+1, j-1)
+        preorder(node.right, i+1, j+1)
+    preorder(root, 0, 0)
+    cols = sorted(res.keys())
+    ret = [[n[1] for n in sorted(res[k])] for k in cols]
+    return ret
 
+# LC199. Binary Tree Right Side View
+def rightSideView(self, root: TreeNode) -> List[int]:
+    if not root: return []
+    ret = []
+    def traverse(node, depth):
+        if depth == len(ret): ret.append(node.val)
+        for n in [node.right, node.left]:
+            if n: traverse(n, depth+1)
+    traverse(root, 0)
+    return ret
 
+# LC543. Diameter of Binary Tree
+def diameterOfBinaryTree(self, root: TreeNode) -> int:
+    diameter = 0
+    def path_max(node):
+        nonlocal diameter
+        if not node: return 0
+        left = path_max(node.left)
+        right = path_max(node.right)
+        join = left + right # path means edges, not nodes
+        diameter = max(diameter, join)
+        return 1 + max(left, right)  # plus this node
+    path_max(root)
+    return diameter
+
+# LC103. Binary Tree Zigzag Level Order Traversal
+def zigzagLevelOrder(self, root):
+    ans, row, drxn = [], [root], 1
+    while any(row):
+        ans += [node.val for node in row][::drxn],
+        row = [child for node in row for child in (node.left, node.right) if child]
+        drxn *= -1
+    return ans
+
+# LC111. Minimum Depth of Binary Tree
+def minDepth(self, root: Optional[TreeNode]) -> int:
+    res, row = 0, [root]  # BFS for min
+    while any(row):
+        res += 1
+        if any(not(child.left or child.right) for child in row): return res
+        row = [child for node in row for child in (node.left, node.right) if child]
+    return res
 
 # LC545. Boundary of Binary Tree
 def boundaryOfBinaryTree(self, root: TreeNode) -> List[int]:
@@ -44,6 +97,70 @@ def boundaryOfBinaryTree(self, root: TreeNode) -> List[int]:
     right_bound(root.right)
     return ans
 
+# LC102. Binary Tree Level Order Traversal
+def levelOrder(self, root):
+    ans, level = [], [root]
+    while root and level:
+        ans.append([node.val for node in level])
+        level = [kid for n in level for kid in (n.left, n.right) if kid]
+    return ans
+
+# LC1973. Count Nodes Equal to Sum of Descendants
+def equalToDescendants(self, root: Optional[TreeNode]) -> int:
+    output = 0
+    def traverse(node):
+        nonlocal output
+        if node is None: return 0
+        val_left = traverse(node.left)
+        val_right = traverse(node.right)
+        if node.val == val_left + val_right: output += 1
+        return node.val + val_left + val_right
+    traverse(root)
+    return output
+
+# LC101. Symmetric Tree
+def isSymmetric(self, root: TreeNode) -> bool:
+    def is_mirror(n1, n2):
+        if n1 is None and n2 is None: return True
+        if n1 is None or n2 is None: return False
+        return n1.val == n2.val and is_mirror(n1.left, n2.right)\
+            and is_mirror(n1.right, n2.left)
+    return is_mirror(root, root)
+
+# LC257. Binary Tree Paths
+def binaryTreePaths(self, root: TreeNode) -> List[str]:
+    ret = []
+    def dfs(node, path):
+        if not node: return
+        path = path + '->' + str(node.val) if path else str(node.val)
+        if not node.left and not node.right: # leaf
+            ret.append(path)
+            return
+        dfs(node.left, path)
+        dfs(node.right, path)
+    dfs(root, '')
+    return ret
+
+# LC951. Flip Equivalent Binary Trees
+def flipEquiv(self, root1: TreeNode, root2: TreeNode) -> bool: # O(min(#nodes))
+    if not root1 and not root2: return True
+    if not root1 or not root2: return False
+    if root1.val != root2.val: return False
+    return (self.flipEquiv(root1.left, root2.left) and self.flipEquiv(root1.right, root2.right) or
+            self.flipEquiv(root1.left, root2.right) and self.flipEquiv(root1.right, root2.left))
+
+# LC662. Maximum Width of Binary Tree
+def widthOfBinaryTree(self, root: TreeNode) -> int:
+    width = 0
+    level = [(1, root)]
+    while level:
+        width = max(width, level[-1][0] - level[0][0] + 1)
+        level = [kid
+                 for number, node in level
+                 for kid in enumerate((node.left, node.right), 2 * number)
+                 if kid[1]]
+    return width
+
 # LC655. Print Binary Tree - O(n)
 def printTree(self, root: TreeNode) -> List[List[str]]:
     def get_height(node):
@@ -59,26 +176,6 @@ def printTree(self, root: TreeNode) -> List[List[str]]:
     self.output = [[''] * width for i in range(height)]
     update_output(node=root, row=0, left=0, right=width - 1)
     return self.output
-
-# LC103. Binary Tree Zigzag Level Order Traversal
-def zigzagLevelOrder(self, root):
-    ans, row, drxn = [], [root], 1
-    while any(row):
-        ans += [node.val for node in row][::drxn],
-        row = [child for node in row for child in (node.left, node.right) if child]
-        drxn *= -1
-    return ans
-
-# LC199. Binary Tree Right Side View
-def rightSideView(self, root: TreeNode) -> List[int]:
-    if not root: return []
-    ret = []
-    def traverse(node, depth):
-        if depth == len(ret): ret.append(node.val)
-        for n in [node.right, node.left]:
-            if n: traverse(n, depth+1)
-    traverse(root, 0)
-    return ret
 
 # LC250. Count Univalue Subtrees
 def countUnivalSubtrees(self, root: TreeNode) -> int:
@@ -151,47 +248,7 @@ def widthOfBinaryTree(self, root: TreeNode) -> int:
                  if kid[1]]
     return width
 
-# LC102. Binary Tree Level Order Traversal
-def levelOrder(self, root):
-    ans, level = [], [root]
-    while root and level:
-        ans.append([node.val for node in level])
-        level = [kid for n in level for kid in (n.left, n.right) if kid]
-    return ans
 
-# LC101. Symmetric Tree
-def isSymmetric(self, root: TreeNode) -> bool:
-    def is_mirror(n1, n2):
-        if n1 is None and n2 is None: return True
-        if n1 is None or n2 is None: return False
-        return n1.val == n2.val and is_mirror(n1.left, n2.right)\
-            and is_mirror(n1.right, n2.left)
-    return is_mirror(root, root)
-
-# LC951. Flip Equivalent Binary Trees
-def flipEquiv(self, root1: TreeNode, root2: TreeNode) -> bool: # O(min(#nodes))
-    if not root1 and not root2: return True
-    if not root1 or not root2: return False
-    if root1.val != root2.val: return False
-
-    return (self.flipEquiv(root1.left, root2.left) and
-            self.flipEquiv(root1.right, root2.right) or
-            self.flipEquiv(root1.left, root2.right) and
-            self.flipEquiv(root1.right, root2.left))
-
-# LC257. Binary Tree Paths
-def binaryTreePaths(self, root: TreeNode) -> List[str]:
-    ret = []
-    def dfs(node, path):
-        if not node: return
-        path = path + '->' + str(node.val) if path else str(node.val)
-        if not node.left and not node.right: # leaf
-            ret.append(path)
-            return
-        dfs(node.left, path)
-        dfs(node.right, path)
-    dfs(root, '')
-    return ret
 
 # LC1315. Sum of Nodes with Even-Valued Grandparent
 def sumEvenGrandparent(self, root: TreeNode) -> int:
@@ -207,43 +264,19 @@ def sumEvenGrandparent(self, root: TreeNode) -> int:
     dfs(root, None)
     return total
 
-
-
 # LC104. Maximum Depth of Binary Tree
 def maxDepth(self, root: TreeNode) -> int:
     if not root: return 0
     return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
-
-# LC543. Diameter of Binary Tree
-def diameterOfBinaryTree(self, root: TreeNode) -> int:
-    diameter = 0
-    def path_max(node):
-        nonlocal diameter
-        if not node: return 0
-        left = path_max(node.left)
-        right = path_max(node.right)
-        join = left + right # path means edges, not nodes
-        diameter = max(diameter, join)
-        return 1 + max(left, right)
-    path_max(root)
-    return diameter
-
-
-
-# LC987. Vertical Order Traversal of a Binary Tree
-def verticalTraversal(self, root: TreeNode) -> List[List[int]]:
-    res = defaultdict(list) # column number to (row number, val)
-    def preorder(node, i, j):
-        if not node: return
-        res[j].append((i, node.val))
-        preorder(node.left, i+1, j-1)
-        preorder(node.right, i+1, j+1)
-    preorder(root, 0, 0)
-    cols = sorted(res.keys())
-    ret = [[n[1] for n in sorted(res[k])] for k in cols]
-    return ret
-
-
+def maxDepth(self, root):
+    depth, stack = 0, [(1, root)]
+    while stack != []:
+        current_depth, root = stack.pop()
+        if root:
+            depth = max(depth, current_depth)
+            stack.append((current_depth + 1, root.left))
+            stack.append((current_depth + 1, root.right))
+    return depth
 
 # LC1448. Count Good Nodes in Binary Tree
 def goodNodes(self, root: TreeNode) -> int:
@@ -282,7 +315,7 @@ def findClosestLeaf(self, root: TreeNode, k: int) -> int:
                     queue.append(nei)
 
 # LC863. All Nodes Distance K in Binary Tree
-def distanceK(self, root: TreeNode, target: TreeNode, K: int) -> List[int]:
+def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:  # O(n)
     adj = collections.defaultdict(list)  # create graph
     def dfs(node):
         if node.left:
@@ -296,12 +329,10 @@ def distanceK(self, root: TreeNode, target: TreeNode, K: int) -> List[int]:
     dfs(root)
     res, visited = [], set() # DFS with distance
     def dfs2(node, d):
-        if d < K:
-            visited.add(node)
+        visited.add(node)
+        if d < k:
             for v in adj[node]:
                 if v not in visited: dfs2(v, d + 1)
-        else: res.append(node.val)
+        else: res.append(node.val)  # ==k, no more recursion, so won't > k
     dfs2(target, 0)
     return res
-
-

@@ -1,3 +1,16 @@
+-- LC1322. Ads Performance
+SELECT ad_id, ROUND(CASE
+    WHEN Clicked + Viewed = 0 THEN 0
+    ELSE 100 * Clicked / (Clicked + Viewed) END, 2) as ctr
+FROM
+( SELECT ad_id,
+  SUM(CASE WHEN action = 'Clicked' THEN 1 ELSE 0 END) as Clicked,
+  SUM(CASE WHEN action = 'Viewed' THEN 1 ELSE 0 END) as Viewed
+  FROM Ads
+  GROUP BY ad_id
+) as agg
+ORDER BY ctr DESC, ad_id ASC
+
 -- LC626. Exchange Seats
 select case
     when id % 2 = 0 then id - 1
@@ -33,16 +46,4 @@ select product_id,
 from products
 group by product_id
 
--- LC1322. Ads Performance
-SELECT ad_id, ROUND(CASE
-    WHEN Clicked + Viewed = 0 THEN 0
-    ELSE 100 * Clicked / (Clicked + Viewed) END, 2) as ctr
-FROM
-( SELECT ad_id,
-  SUM(CASE WHEN action = 'Clicked' THEN 1 ELSE 0 END) as Clicked,
-  SUM(CASE WHEN action = 'Viewed' THEN 1 ELSE 0 END) as Viewed
-  FROM Ads
-  GROUP BY ad_id
-) as agg
 
-ORDER BY ctr DESC, ad_id ASC

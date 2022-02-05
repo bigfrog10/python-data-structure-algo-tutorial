@@ -10,8 +10,6 @@ class Solution:  # based on pdf
         idx = bisect.bisect(self.cumusum, r)
         return self.samples[idx]
 
-
-
 # LC398. Random Pick Index
 class Solution:
     def __init__(self, nums: List[int]):
@@ -21,6 +19,8 @@ class Solution:
         idxs = self.num2idx[target]
         i = random.randrange(len(idxs))
         return idxs[i]
+
+
 
 # LC384. Shuffle an Array
 import random

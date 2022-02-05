@@ -5,8 +5,21 @@ class NumArray:
         self.accumu = [0] + list(accumulate(nums))
         print(self.accumu)
     def sumRange(self, left: int, right: int) -> int:
-        #if left == 0: return self.accumu[right] # added [0] ignore this condition
         return self.accumu[right+1] - self.accumu[left]
+
+# LC304. Range Sum Query 2D - Immutable
+class NumMatrix:
+    def __init__(self, matrix: List[List[int]]):
+        n, m = len(matrix), len(matrix[0])
+        self.sums = [ [0 for j in range(m+1)] for i in range(n+1) ]
+        for i in range(1, n+1):
+            for j in range(1, m+1):
+                self.sums[i][j] = matrix[i-1][j-1] + self.sums[i][j-1] + \
+                                  self.sums[i-1][j] - self.sums[i-1][j-1]
+    def sumRegion(self, row1: int, col1: int, row2: int, col2: int) -> int:
+        row2, col2 = row2+1, col2+1
+        return self.sums[row2][col2] + self.sums[row1][col1] \
+             - self.sums[row2][col1] - self.sums[row1][col2]
 
 # LC307. Range Sum Query - Mutable
 class NumArray:
@@ -37,20 +50,6 @@ class NumArray:
             # go to a new range, which is immediately before current range
             i -= i & (-i)  # i = i - LowestSignificentBit(i)
         return ans
-
-# LC304. Range Sum Query 2D - Immutable
-class NumMatrix(object):
-  def __init__(self, matrix):
-      n, m = len(matrix), len(matrix[0])
-      self.sums = [ [0 for j in range(m+1)] for i in range(n+1) ]
-      for i in range(1, n+1):
-          for j in range(1, m+1):
-              self.sums[i][j] = matrix[i-1][j-1] + self.sums[i][j-1] + \
-                                self.sums[i-1][j] - self.sums[i-1][j-1]
-  def sumRegion(self, row1, col1, row2, col2):
-      row2, col2 = row2+1, col2+1
-      return self.sums[row2][col2] + self.sums[row1][col1] \
-            - self.sums[row2][col1] - self.sums[row1][col2]
 
 # LC308. Range Sum Query 2D - Mutable
 class NumMatrix:

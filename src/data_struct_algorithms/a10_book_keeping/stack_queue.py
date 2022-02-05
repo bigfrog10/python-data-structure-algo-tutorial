@@ -1,4 +1,34 @@
 
+# LC622. Design Circular Queue
+class MyCircularQueue: # array based
+    def __init__(self, k: int):  # double linked list
+        self.capacity, self.queue = k, [0]*k
+        self.count = 0  # how many elements in the queue
+        self.headIndex = 0  # front element index
+        # tail element index = (head + count - 1) % capa
+    def enQueue(self, value: int) -> bool:
+        if self.count == self.capacity: return False
+        tail = (self.headIndex + self.count) % self.capacity
+        self.queue[tail] = value
+        self.count += 1
+        return True
+    def deQueue(self) -> bool:
+        if self.count == 0: return False
+        self.headIndex = (self.headIndex + 1) % self.capacity
+        self.count -= 1
+        return True
+    def Front(self) -> int: # just return the element, don't remove it
+        if self.count == 0: return -1
+        return self.queue[self.headIndex]
+    def Rear(self) -> int: # just return the element, don't remove it
+        if self.count == 0: return -1
+        tail = (self.headIndex + self.count - 1) % self.capacity
+        return self.queue[tail]
+    def isEmpty(self) -> bool:
+        return self.count == 0
+    def isFull(self) -> bool:
+        return self.count == self.capacity
+
 # LC232. Implement Queue using Stacks
 class MyQueue:
     def __init__(self):  # amortized O(1) - O(1) average for n operations
@@ -27,16 +57,12 @@ class MinStack:
             mv = (x, min(x, t[1])) # maintain current min
         else:  mv = (x, x)
         self.values.append(mv)
-    def pop(self) -> None:
-        self.values.pop()
-    def top(self) -> int:
-        t = self.values[-1]
-        return t[0]
-    def getMin(self) -> int:
-        t = self.values[-1]
-        return t[1]
+    def pop(self) -> None: self.values.pop()
+    def top(self) -> int: return self.values[-1][0]
+    def getMin(self) -> int: return self.values[-1][1]
 
 # LC716. Max Stack
+# use a stack and sorted container: all ops are at most log(n)
 class MaxStack:
     def __init__(self): self.values = []  # list end is stack top
     def push(self, x: int) -> None:
@@ -45,16 +71,10 @@ class MaxStack:
             mv = (x, max(x, t[1])) # maintain current min
         else:  mv = (x, x)
         self.values.append(mv)
-    def pop(self) -> int:
-        t = self.values.pop()
-        return t[0]
-    def top(self) -> int:
-        t = self.values[-1]
-        return t[0]
-    def peekMax(self) -> int:
-        t = self.values[-1]
-        return t[1]
-    def popMax(self) -> int:
+    def pop(self) -> int: return self.values.pop()[0]
+    def top(self) -> int: return self.values[-1][0]
+    def peekMax(self) -> int: return self.values[-1][1]
+    def popMax(self) -> int:  # O(n)
         stack = []
         maxv = self.values[-1][1]
         removed = False # remove only first max
@@ -124,36 +144,7 @@ class SnakeGame:
         else: self.snake.pop() # not eating food: append head and delete tail
         return len(self.snake)-1
 
-# LC622. Design Circular Queue
-class MyCircularQueue: # array based
-    def __init__(self, k: int):  # double linked list
-        self.capacity = k
-        self.count = 0  # how many elements in the queue
-        self.queue = [0]*k
-        self.headIndex = 0  # front element index
-        # tail element index = (head + count - 1) % capa
-    def enQueue(self, value: int) -> bool:
-        if self.count == self.capacity: return False
-        tail = (self.headIndex + self.count) % self.capacity
-        self.queue[tail] = value
-        self.count += 1
-        return True
-    def deQueue(self) -> bool:
-        if self.count == 0: return False
-        self.headIndex = (self.headIndex + 1) % self.capacity
-        self.count -= 1
-        return True
-    def Front(self) -> int: # just return the element, don't remove it
-        if self.count == 0: return -1
-        return self.queue[self.headIndex]
-    def Rear(self) -> int: # just return the element, don't remove it
-        if self.count == 0: return -1
-        tail = (self.headIndex + self.count - 1) % self.capacity
-        return self.queue[tail]
-    def isEmpty(self) -> bool:
-        return self.count == 0
-    def isFull(self) -> bool:
-        return self.count == self.capacity
+
 
 # LC1429. First Unique Number
 class FirstUnique:

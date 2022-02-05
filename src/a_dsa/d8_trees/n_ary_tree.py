@@ -1,3 +1,41 @@
+
+# LC1522. Diameter of N-Ary Tree
+def diameter(self, root: 'Node') -> int:
+    ret = 0  # root itself, in case there is no child
+    def dfs(node):  # return number of edges
+        nonlocal ret  # edges
+        if not node: return 0
+        max1 = max2 = 0
+        for child in node.children:
+            depth = dfs(child)
+            if max1 < depth: max1, max2 = depth, max1
+            elif max2 < depth: max2 = depth
+        ret = max(ret, max1 + max2)  # edges
+        return max(max1, max2) + 1  # 1 is this node-to-child edge
+    dfs(root)
+    return ret
+
+# LC1245. Tree Diameter - given graph edges
+def treeDiameter(self, edges: List[List[int]]) -> int:
+    graph = defaultdict(set)  # topological sort, n-ary tree
+    for edge in edges:
+        u, v = edge
+        graph[u].add(v)
+        graph[v].add(u)
+    vertex_left = len(graph)
+    leaves = [i for i in range(vertex_left) if len(graph[i]) == 1]
+    layers = 0
+    while vertex_left > 2:
+        vertex_left -= len(leaves)
+        next_leaves = []
+        for leaf in leaves:
+            neighbor = graph[leaf].pop()
+            graph[neighbor].remove(leaf)
+            if len(graph[neighbor]) == 1: next_leaves.append(neighbor)
+        layers += 1
+        leaves = next_leaves
+    return layers * 2 + (1 if vertex_left == 2 else 0)
+
 # LC582. Kill Process
 def killProcess(self, pid: List[int], ppid: List[int], kill: int) -> List[int]:
     d = collections.defaultdict(list)
@@ -46,41 +84,8 @@ def findMinHeightTrees(self, n: int, edges: List[List[int]]) -> List[int]:
         leaves = new_leaves
     return leaves  # last leaves, could be 1 or 2 leaves
 
-# LC1245. Tree Diameter - given graph edges
-def treeDiameter(self, edges: List[List[int]]) -> int:
-    graph = defaultdict(set)  # topological sort, n-ary tree
-    for edge in edges:
-        u, v = edge
-        graph[u].add(v)
-        graph[v].add(u)
-    vertex_left = len(graph)
-    leaves = [i for i in range(vertex_left) if len(graph[i]) == 1]
-    layers = 0
-    while vertex_left > 2:
-        vertex_left -= len(leaves)
-        next_leaves = []
-        for leaf in leaves:
-            neighbor = graph[leaf].pop()
-            graph[neighbor].remove(leaf)
-            if len(graph[neighbor]) == 1: next_leaves.append(neighbor)
-        layers += 1
-        leaves = next_leaves
-    return layers * 2 + (0 if vertex_left == 1 else 1)
 
-# LC1522. Diameter of N-Ary Tree
-def diameter(self, root: 'Node') -> int:
-    ret = 0 # root itself, in case there is no child
-    def dfs(node):
-        nonlocal ret
-        if not node: return 0
-        max1 = max2 = 0
-        for child in node.children:
-            depth = dfs(child)
-            if max1 < depth: max1, max2 = depth, max1
-            elif max2 < depth: max2 = depth
-        ret = max(ret, max1 + max2) # edges
-        return max(max1, max2) + 1 # 1 is this node
-    dfs(root)
-    return ret
+
+
 
 
