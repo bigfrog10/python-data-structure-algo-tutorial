@@ -106,3 +106,12 @@ def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[Lis
         if j + 1 < len(nums2): heapq.heappush(min_heap, (nums1[i] + nums2[j + 1], i, j + 1))
     return res
 
+# LC1376. Time Needed to Inform All Employees
+def numOfMinutes(self, n, headID, manager, informTime):
+    reports = defaultdict(list)
+    for i, m in enumerate(manager):
+        if m >= 0: reports[m].append(i)
+
+    def dfs(i):
+        return max([dfs(j) for j in reports[i]] or [0]) + informTime[i]
+    return dfs(headID)

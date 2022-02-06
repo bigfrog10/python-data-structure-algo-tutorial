@@ -134,6 +134,7 @@ def combine(self, n, k):
 # for 4, 3: [[1],[2],[3],[4]],  [[1,2],[1,3],[2,3],[1,4],[2,4],[3,4]]
 # and  [[1,2,3],[1,2,4],[1,3,4],[2,3,4]]
 
+
 # LC118. Pascal's Triangle
 def generate(self, numRows):
     row, res = [1], []
@@ -141,3 +142,30 @@ def generate(self, numRows):
         res.append(row)
         row = [1] + [row[i] + row[i+1] for i in range(n)] + [1]
     return res
+
+# LC920. Number of Music Playlists
+def numMusicPlaylists(self, N, L, K):
+    @lru_cache(None)
+    def dp(i, j): # num of playlists of length i that has exactly j unique songs
+        if i == 0: return +(j == 0)
+        ans = dp(i-1, j-1) * (N-j+1) # jth song is new song, N - (j-1) ways
+        ans += dp(i-1, j) * max(j-K, 0) # already have j songs, wait K
+        return ans % (10**9+7)
+    return dp(L, N)
+
+# LC216. Combination Sum III
+from itertools import combinations
+def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+    return [c for c in combinations(range(1, 10), k) if sum(c) == n]
+
+def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+    self.ans = []
+    def dfs(start, sol, k, n):
+        if k == 0 and n == 0:
+            self.ans.append(sol)
+        if start > 9 or start > n or k <= 0:
+            return
+        dfs(start+1, sol+[start], k-1, n-start)
+        dfs(start+1, sol, k, n)
+    dfs(1, [], k, n)
+    return self.ans

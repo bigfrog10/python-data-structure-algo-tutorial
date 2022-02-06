@@ -1,4 +1,5 @@
 
+DFS to explore all possibilities and collect stats, return 1 or all results.
 
 recursion:
 - if goal is reached

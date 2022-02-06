@@ -495,3 +495,27 @@ def countEInRow(self, i, row):
         if row[j] == 'E': tempE += 1
         if row[j] == 'W': break
     return tempE
+
+# LC909. Snakes and Ladders
+def snakesAndLadders(self, board: List[List[int]]) -> int:
+    n = len(board)
+    def coord(order):
+        q, r = divmod(order-1, n)
+        x = n - 1 - q
+        y = r if q % 2 == 0 else n-1-r  # even and odd rows
+        return x, y
+    queue, visited = deque([(1, 0)]), set()  # order, steps
+    maxs = n * n
+    while queue: # BFS to get min
+        x, s = queue.popleft()
+        if x == maxs: return s
+        if x in visited: continue
+        visited.add(x)
+        for i in range(6):
+            move = x + i + 1
+            if move > maxs: continue
+            x1, y1 = coord(move)
+            if board[x1][y1] != -1: move = board[x1][y1]
+            if move not in visited:
+                queue.append((move, s+1))
+    return -1

@@ -386,3 +386,19 @@ def getFolderNames(self, names: List[str]) -> List[str]:
         result.append(candidate)
         used.add(candidate)
     return result
+
+# LC472. Concatenated Words
+def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
+    word_set = set(words)
+    def check(word):
+        n = len(word)
+        for i in range(1, n):
+            if word[i:] not in word_set: continue
+            # so now word[i:] in word_set
+            if word[:i] in word_set: return True # so both part are words
+            if check(word[:i]): return True # recursion check
+        return False
+    res = []
+    for w in words:
+        if check(w): res.append(w)
+    return res
