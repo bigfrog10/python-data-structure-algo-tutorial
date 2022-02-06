@@ -25,7 +25,6 @@ def treeToDoublyList(self, root: 'Node') -> 'Node':  # best solution
         nonlocal prev
         if not node: return
         inorder(node.left)  # all the way to 1st node 1
-
         prev.right = node
         node.left = prev
         prev = node # this is the trick: move prev to 1

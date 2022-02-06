@@ -132,7 +132,7 @@ class VendingMachine:
     def receive_cash(self): pass  # insert coins
     def receive_credit_card(self): pass  # swipe_card
     def refund(self): pass
-class Product:
+class Product: pass
     # name, price, category
 class CreditCardService: pass
 class CashService: pass

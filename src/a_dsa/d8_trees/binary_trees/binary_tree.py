@@ -48,7 +48,7 @@ def delNodes(self, root: Optional[TreeNode], to_delete: List[int]) -> List[TreeN
 # LC1650. Lowest Common Ancestor of a Binary Tree III
 def lowestCommonAncestor(self, p: 'Node', q: 'Node') -> 'Node':
     path = set()  # store the parents (path) from root to p, and then check q's path
-    while p:
+    while p:  # O(h)
         path.add(p)
         p = p.parent
     while q not in path: q = q.parent

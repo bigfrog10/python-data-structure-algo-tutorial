@@ -10,7 +10,7 @@ def copyRandomList(self, head: 'Node') -> 'Node':
     while walker:
         walker.next = Node(walker.val, walker.next)
         walker = walker.next.next
-    walker = head # copy random pointers
+    walker = head  # copy random pointers
     while walker:
         if walker.random: walker.next.random = walker.random.next
         walker = walker.next.next

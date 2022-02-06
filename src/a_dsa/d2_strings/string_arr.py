@@ -1,4 +1,28 @@
 
+# LC721. Accounts Merge
+def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
+    graph = defaultdict(list)  # build graph for emails
+    for acct in accounts:  # O(n * m), n = len(accts), m = # of emails per account
+        for email in acct[2:]:
+            graph[acct[1]].append(email)
+            graph[email].append(acct[1])
+    seen = set()
+    def dfs(i):
+        tmp = {i}
+        for j in graph[i]:
+            if j not in seen:
+                seen.add(j)
+                tmp |= dfs(j)
+        return tmp
+    ret = []
+    for acct in accounts:
+        for email in acct[1:]:
+            if email not in seen:
+                seen.add(email)
+                eg = dfs(email)
+                ret.append([acct[0]] + sorted(eg))
+    return ret
+
 # LC621. Task Scheduler
 def leastInterval(self, tasks: List[str], n: int) -> int:
     freqs = [0] * 26  # frequencies of the tasks
@@ -101,29 +125,7 @@ def numJewelsInStones(self, jewels: str, stones: str) -> int:
     jset = set(jewels)  # O(n + m)
     return sum(s in jset for s in stones)
 
-# LC721. Accounts Merge
-def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
-    graph = defaultdict(list)  # build graph for emails
-    for acct in accounts:  # O(n * m), n = len(accts), m = # of emails per account
-        for email in acct[2:]:
-            graph[acct[1]].append(email)
-            graph[email].append(acct[1])
-    seen = set()
-    def dfs(i):
-        tmp = {i}
-        for j in graph[i]:
-            if j not in seen:
-                seen.add(j)
-                tmp |= dfs(j)
-        return tmp
-    ret = []
-    for acct in accounts:
-        for email in acct[1:]:
-            if email not in seen:
-                seen.add(email)
-                eg = dfs(email)
-                ret.append([acct[0]] + sorted(eg))
-    return ret
+
 
 # LC1529. Bulb Switcher IV
 def minFlips(self, target: str) -> int:

@@ -15,7 +15,7 @@ def myPow(self, x: float, n: int) -> float:  # minimize mutiplications
 # LC670. Maximum Swap
 def maximumSwap(self, num: int) -> int:  # O(n)
     sn = list(str(num))
-    last_idx = {int(v): i for i, v in enumerate(sn)} # last index for the value
+    last_idx = {int(v): i for i, v in enumerate(sn)}  # last index for the value
     for i, v in enumerate(sn):  # loop forward to get the largest
         for d in range(9, int(v), -1):  # find largest value above v
             if d in last_idx and last_idx[d] > i:

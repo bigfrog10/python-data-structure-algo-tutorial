@@ -2,17 +2,15 @@
 # LC314. Binary Tree Vertical Order Traversal
 def verticalOrder(self, root: TreeNode) -> List[List[int]]:
     if root is None: return []  # O(n)
-    columnTable = defaultdict(list)
-    queue = deque([(root, 0)])
-    min_column = max_column = 0  # track column range
+    queue, columnTable = collections.deque([(root, 0)]), collections.defaultdict(list)
+    min_column = max_column = 0  # track column range for last line
     while queue:
         node, column = queue.popleft()
-        if node:
-            columnTable[column].append(node.val)
-            queue.append((node.left, column - 1))
-            queue.append((node.right, column + 1))
-            min_column = min(min_column, column)
-            max_column = max(max_column, column)
+        columnTable[column].append(node.val)
+        if node.left: queue.append((node.left, column - 1))
+        if node.right: queue.append((node.right, column + 1))
+        min_column = min(min_column, column)
+        max_column = max(max_column, column)
     return [columnTable[x] for x in range(min_column, max_column + 1)]
 
 # LC987. Vertical Order Traversal of a Binary Tree
@@ -42,12 +40,12 @@ def rightSideView(self, root: TreeNode) -> List[int]:
 # LC543. Diameter of Binary Tree
 def diameterOfBinaryTree(self, root: TreeNode) -> int:
     diameter = 0
-    def path_max(node):
+    def path_max(node):  # DFS
         nonlocal diameter
         if not node: return 0
         left = path_max(node.left)
         right = path_max(node.right)
-        join = left + right # path means edges, not nodes
+        join = left + right  # path means edges, not nodes
         diameter = max(diameter, join)
         return 1 + max(left, right)  # plus this node
     path_max(root)

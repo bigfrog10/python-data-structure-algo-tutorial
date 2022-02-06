@@ -1,5 +1,10 @@
 # LC65. Valid Number
-def isNumber(self, s):
+def isNumber(self, s: str) -> bool:
+    # Example:              +-     1 or 1. or 1.2 or .2   e +- 1
+    # ? - 0 or 1 match, +: 1 or more, *: 0 or more
+    regex = re.compile(r"^[+-]?((\d+\.?\d*)|(\d*\.?\d+))([eE][+-]?\d+)?$")
+    return bool(regex.match(s.strip()))
+def isNumber(self, s: str) -> bool:
     s = s.strip()
     met_dot = met_e = met_digit = False
     for i, char in enumerate(s):
@@ -14,12 +19,6 @@ def isNumber(self, s):
         elif char.isdigit(): met_digit = True
         else: return False
     return met_digit  # must've see digits, others are optional.
-def isNumber(self, s: str) -> bool:
-    import re
-    #Example:               +-     1 or 1. or 1.2 or .2   e +- 1
-    # ? - 0 or 1 match, +: 1 or more, *: 0 or more
-    engine = re.compile(r"^[+-]?((\d+\.?\d*)|(\d*\.?\d+))(([eE])[+-]?\d+)?$")
-    return bool(engine.match(s.strip()))  # i prefer this over putting more things (\S*) in regex
 
 def isNumber(self, s: str) -> bool:
     transitions = {

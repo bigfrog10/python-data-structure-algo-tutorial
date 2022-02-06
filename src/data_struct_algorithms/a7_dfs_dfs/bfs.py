@@ -5,33 +5,6 @@
 
 
 
-# LC317. Shortest Distance from All Buildings
-from itertools import product
-def shortestDistance(self, grid):
-    if not grid or not grid[0]: return -1
-    n, m = len(grid), len(grid[0])
-    # 0 for distance, 1 for counts/buildings
-    matrix = [[[0, 0] for _ in range(m)] for _ in range(n)]
-    def bfs(start, blds):
-        q = [(start, 0)]  # 0 is the distance.
-        while q:
-            po, distance = q.pop(0)
-            for dp in (-1, 0), (1, 0), (0, 1), (0, -1):
-                i, j = po[0] + dp[0], po[1] + dp[1]
-                if 0 <= i <n and 0 <= j < m and matrix[i][j][1] == blds:
-                    if grid[i][j] == 0:
-                        matrix[i][j][0] += distance + 1
-                        matrix[i][j][1] = blds + 1
-                        q.append(([i, j], distance+1))
-    blds = 0  # count how many building we have visited
-    for i, j in product(range(n), range(m)):
-        if grid[i][j] == 1:  # loop through buildings
-            bfs([i, j], blds)
-            blds += 1
-    res = float('inf')
-    for i, j in product(range(len(matrix)), range(len(matrix[0]))):
-        if matrix[i][j][1] == blds: res = min(res, matrix[i][j][0])
-    return res if res != float('inf') else -1
 
 # LC909. Snakes and Ladders
 def snakesAndLadders(self, board: List[List[int]]) -> int:

@@ -2,9 +2,9 @@
 # LC953. Verifying an Alien Dictionary
 from typing import List
 def isAlienSorted(self, words: List[str], order: str) -> bool:
-    orderd = {x: idx for idx, x in enumerate(order)}  # O(26*n)
-    for i in range(len(words) - 1):
-        for j in range(len(words[i])):
+    orderd = {x: idx for idx, x in enumerate(order)}  # O(m*n)
+    for i in range(len(words) - 1):  # O(n)
+        for j in range(len(words[i])):  # O(m)
             if j >= len(words[i + 1]): return False  # apple > app, wrong - space is ahead of letters
             if words[i][j] != words[i + 1][j]:
                 if orderd[words[i][j]] > orderd[words[i + 1][j]]: return False

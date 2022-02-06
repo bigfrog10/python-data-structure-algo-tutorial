@@ -68,7 +68,7 @@ def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
     dist = [(-x*x - y*y, x, y) for x, y in points]
     heapq.heapify(dist)
     ret = heapq.nlargest(k, dist)
-    ret1 = [ (x, y) for _, x, y in ret]
+    ret1 = [(x, y) for _, x, y in ret]
     return ret1
 def kClosest1(self, points: List[List[int]], K: int) -> List[List[int]]:
     # O(NlogK)
@@ -77,6 +77,11 @@ def kClosest1(self, points: List[List[int]], K: int) -> List[List[int]]:
 # LC347. Top K Frequent Elements, top100
 import heapq
 import collections
+def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+    if k == len(nums): return nums
+    count = collections.Counter(nums)
+    # return sorted(count.keys(), key=lambda x: count[x])[-k:][::-1]
+    return heapq.nlargest(k, count.keys(), key=count.get)  # O(N log k) time
 def topKFrequent(self, nums: List[int], k: int) -> List[int]:
     count = collections.Counter(nums)
     arr = [(f, k) for k, f in count.items()]
@@ -97,8 +102,4 @@ def topKFrequent(self, nums: List[int], k: int) -> List[int]:
     n = len(arr)
     sorteda = quick_select(arr, 0, n-1, n-k)
     return [x[1] for x in sorteda][::-1]
-def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-    if k == len(nums): return nums
-    count = collections.Counter(nums)
-    # return sorted(count.keys(), key=lambda x: count[x])[-k:][::-1]
-    return heapq.nlargest(k, count.keys(), key=count.get)  # O(N log k) time
+

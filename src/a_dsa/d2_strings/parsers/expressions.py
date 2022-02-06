@@ -1,8 +1,7 @@
 
 # LC282. Expression Add Operators  *** 4 cards to 24 game
 def addOperators(self, num: str, target: int) -> List[str]:
-    n = len(num)
-    res = []
+    n, res = len(num), []
     def dfs(idx, expr, cur, last):  # cur is the current value, last is last value
         if idx == n:
             if cur == target: res.append(expr)
@@ -11,10 +10,10 @@ def addOperators(self, num: str, target: int) -> List[str]:
             s, x = num[idx:i], int(num[idx:i])  # s could '0'
             if last == None: dfs(i, s, x, x)
             else:
-                dfs(i, expr+"+"+s, cur + x, x)
-                dfs(i, expr+"-"+s, cur - x, -x)
+                dfs(i, expr + "+" + s, cur + x, x)
+                dfs(i, expr + "-" + s, cur - x, -x)
                 # This is to handle 1 + 2 * 3, we need to backout 2 and add 2 * 3.
-                dfs(i, expr+"*"+s, cur-last+last*x, last*x)
+                dfs(i, expr + "*" + s, cur - last + last*x, last*x)
             if num[idx] == '0': break  # after idx+1 we break out otherwise we have 00
     dfs(0, '', 0, None)
     return res
@@ -50,7 +49,7 @@ def calculate(self, s: str) -> int:
             if op == "+": stack.append(num) # previous operation, not current
             elif op == "-": stack.append(-num)
             elif op == "*": stack.append(stack.pop() * num)
-            else: stack.append(int(stack.pop() / num))
+            else: stack.append(int(stack.pop() / num))  # use int for negative
             num, op = 0, s[i]
     return sum(stack)
 def calculate(self, s: str) -> int:
@@ -89,9 +88,6 @@ def calculate(self, s: str) -> int:
     return sum(stack)
 
 
-
-
-
 # LC1106. Parsing A Boolean Expression
 def parseBoolExpr(self, expression: str) -> bool:
     func = {'&' : all, '|' : any, '!' : lambda x : not x[0]}
@@ -107,8 +103,6 @@ def parseBoolExpr(self, expression: str) -> bool:
             stack.pop() # skip (
             stack.append(stack.pop()(ss)) # operator
     return stack.pop()
-
-
 
 # LC1597. Build Binary Expression Tree From Infix Expression
 def expTree(self, s: str) -> 'Node':

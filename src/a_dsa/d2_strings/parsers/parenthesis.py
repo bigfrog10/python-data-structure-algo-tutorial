@@ -27,7 +27,7 @@ def minAddToMakeValid(self, S: str) -> int:
     return left + bal # "(((" -> ret=0, bal=3
 
 # LC301. Remove Invalid Parentheses
-def removeInvalidParentheses(self, s): # return all possible results
+def removeInvalidParentheses(self, s): # O(2^n) return all possible results
     def isvalid(s):
         ctr = 0
         for c in s:
@@ -39,7 +39,7 @@ def removeInvalidParentheses(self, s): # return all possible results
     while True:
         valid = list(filter(isvalid, level))
         if valid: return valid
-        level = {s[:i] + s[i+1:] for s in level for i in range(len(s))}
+        level = {s[:i] + s[i+1:] for s in level for i in range(len(s)) if s[i] in '()'}
 
 # LC1614. Maximum Nesting Depth of the Parentheses
 def maxDepth(self, s: str) -> int:

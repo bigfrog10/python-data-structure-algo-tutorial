@@ -6,7 +6,7 @@ import functools
 # LC1762. Buildings With an Ocean View - increasing stack
 def findBuildings(self, heights: List[int]) -> List[int]:  # O(n)
     res = [len(heights) - 1]  # last building always has a view
-    for i in range(len(heights) - 2, -1, -1):
+    for i in range(len(heights)-1)[::-1]:
         if heights[i] > heights[res[-1]]: res.append(i)
     res.reverse()
     return res

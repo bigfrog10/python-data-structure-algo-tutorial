@@ -1,17 +1,5 @@
 from typing import List
-
-# LC1570. Dot Product of Two Sparse Vectors
-class SparseVector:
-    def __init__(self, nums: List[int]):
-        self.sparse = {}
-        for i, n in enumerate(nums):
-            if n != 0: self.sparse[i] = n
-    def dotProduct(self, vec: 'SparseVector') -> int:
-        dot = 0
-        for i, n in self.sparse.items():
-            if i in vec.sparse: dot += n * vec.sparse[i]
-        return dot
-
+import itertools
 # LC1428. Leftmost Column with at Least a One
 def leftMostColumnWithOne(self, binaryMatrix: 'BinaryMatrix') -> int:
     rows, cols = binaryMatrix.dimensions()  # O(n + m), diagonal
@@ -21,6 +9,74 @@ def leftMostColumnWithOne(self, binaryMatrix: 'BinaryMatrix') -> int:
         else: current_col -= 1  # move left
     # If we never left the last column, it must have been all 0's.
     return current_col + 1 if current_col != cols - 1 else -1
+
+# LC317. Shortest Distance from All Buildings
+def shortestDistance(self, grid):
+    if not grid or not grid[0]: return -1  # O(n^2 * m^2)
+    n, m = len(grid), len(grid[0])
+    # 0 for distance, 1 for counts/buildings
+    matrix = [[[0, 0] for _ in range(m)] for _ in range(n)]
+    def bfs(start, blds):
+        q = [(start, 0)]  # 0 is the distance.
+        while q:
+            po, distance = q.pop(0)
+            for dp in (-1, 0), (1, 0), (0, 1), (0, -1):
+                i, j = po[0] + dp[0], po[1] + dp[1]
+                if 0 <= i <n and 0 <= j < m and matrix[i][j][1] == blds:
+                    if grid[i][j] == 0:
+                        matrix[i][j][0] += distance + 1
+                        matrix[i][j][1] = blds + 1  # reachable to all blds
+                        q.append(([i, j], distance+1))
+    blds = 0  # count how many building we have visited
+    for i, j in product(range(n), range(m)):  # O(mn)
+        if grid[i][j] == 1:  # loop through buildings
+            bfs([i, j], blds)
+            blds += 1
+    res = float('inf')
+    for i, j in product(range(len(matrix)), range(len(matrix[0]))):
+        if matrix[i][j][1] == blds: res = min(res, matrix[i][j][0])
+    return res if res != float('inf') else -1
+
+# LC296. Best Meeting Point
+def minTotalDistance(self, grid: List[List[int]]) -> int:  # O(mn)
+    if not grid: return 0
+    m, n = len(grid), len(grid[0])
+    rows, cols = [], []
+    for i in range(m):  # loop m and then n
+        for j in range(n):
+            if grid[i][j] == 1: rows.append(i)
+    for j in range(n):  # loop n and then m
+        for i in range(m):
+            if grid[i][j] == 1: cols.append(j)
+    def min_dist(locations: List[int]) -> int:  # 1 dimensional case
+        i, j, sumd = 0, len(locations)-1, 0
+        while i < j:
+            sumd += locations[j] - locations[i]
+            i, j = i+1, j-1
+        return sumd
+    return min_dist(rows) + min_dist(cols)  # Manhattan distance
+
+# LC498. Diagonal Traverse
+def findDiagonalOrder(self, matrix):  # O(mn)
+    if not matrix: return []
+    m, n = len(matrix), len(matrix[0])
+    ret = []
+    row = col = 0
+    for _ in range(m * n):
+        ret.append(matrix[row][col])
+        if (row + col) % 2 == 0:  # start from row, move up
+            if col == n - 1: row += 1  # hit right, move down
+            elif row == 0: col += 1  # hit top, move right
+            else:  # the order of if-else check is significant
+                row -= 1
+                col += 1
+        else:  # start from col, move down
+            if row == m - 1: col += 1  # hit bottom, move right
+            elif col == 0: row += 1  # hit left, move down
+            else:
+                row += 1
+                col -= 1
+    return ret
 
 # LC766. Toeplitz Matrix
 def isToeplitzMatrix(self, matrix: List[List[int]]) -> bool:
@@ -133,27 +189,6 @@ def swimInWater(self, grid: List[List[int]]) -> int:
                 heapq.heappush(pq, (grid[cr][cc], cr, cc))
                 seen.add((cr, cc))
 
-# LC498. Diagonal Traverse
-def findDiagonalOrder(self, matrix):
-    if not matrix: return []
-    m, n = len(matrix), len(matrix[0])
-    ret = []
-    row = col = 0
-    for _ in range(m * n):
-        ret.append(matrix[row][col])
-        if (row + col) % 2 == 0: # start from row, move up
-            if col == n - 1: row += 1 # hit right side for next sum = row + col
-            elif row == 0: col += 1
-            else:
-                row -= 1
-                col += 1
-        else: # start from col, move down
-            if row == m - 1: col += 1 # hit bottom for next sum = row + col
-            elif col == 0: row += 1
-            else:
-                row += 1
-                col -= 1
-    return ret
 
 # LC1424. Diagonal Traverse II
 def findDiagonalOrder(self, A):
@@ -162,24 +197,7 @@ def findDiagonalOrder(self, A):
         for j, a in enumerate(r): res[i + j].append(a)
     return [a for _, r in res.items() for a in reversed(r)]
 
-# LC296. Best Meeting Point
-def minTotalDistance(self, grid: List[List[int]]) -> int:  # O(mn)
-    if not grid: return 0
-    m, n = len(grid), len(grid[0])
-    rows, cols = [], []
-    for i in range(m):  # loop m and then n
-        for j in range(n):
-            if grid[i][j] == 1: rows.append(i)
-    for j in range(n):  # loop n and then m
-        for i in range(m):
-            if grid[i][j] == 1: cols.append(j)
-    def min_dist(locations: List[int]) -> int:  # 1 dimensional case
-        i, j, sumd = 0, len(locations)-1, 0
-        while i < j:
-            sumd += locations[j] - locations[i]
-            i, j = i+1, j-1
-        return sumd
-    return min_dist(rows) + min_dist(cols)  # Manhattan distance
+
 
 # LC406. Queue Reconstruction by Height
 def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:  # O(n^2)

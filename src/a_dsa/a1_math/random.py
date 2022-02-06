@@ -1,9 +1,9 @@
 # LC528. Random Pick with Weight
 class Solution:  # based on pdf
     def __init__(self, w: List[int]):
-        self.samples = [i for i in range(len(w))]
+        self.samples = list(range(len(w)))
         s = sum(w)
-        self.weights = [ x / s for x in w ]
+        self.weights = [x / s for x in w]
         self.cumusum = list(itertools.accumulate(self.weights))  # another way to do it, faster
     def pickIndex(self) -> int:
         r = random.uniform(0, 1)
@@ -19,8 +19,6 @@ class Solution:
         idxs = self.num2idx[target]
         i = random.randrange(len(idxs))
         return idxs[i]
-
-
 
 # LC384. Shuffle an Array
 import random

@@ -3,15 +3,15 @@
 def largestIsland(self, grid: List[List[int]]) -> int: # recursion
     if not grid or not grid[0]: return 0
     n = len(grid)
-    def dfs(r, c, gid):
-        ret, grid[r][c] = 1, gid
+    def dfs(r, c, gid):  # get island size
+        ret, grid[r][c] = 1, gid  # mark islands by numbers
         for x, y in ((r-1, c), (r+1, c), (r, c-1), (r, c+1)):
             if 0 <= x < n and 0 <= y < n and grid[x][y] == 1:
                 ret += dfs(x, y, gid)
         return ret
     islands, gid = {}, 2  # 0 for water, 1 for island, so we start with 2
     for r, c in product(range(n), range(n)):  # find each island size
-        if grid[r][c] == 1:
+        if grid[r][c] == 1:  # unexplored island
             islands[gid] = dfs(r, c, gid)
             gid += 1
     ret = max(islands.values() or [0]) # in case all land no water

@@ -12,17 +12,17 @@ def simplifyPath(self, path: str) -> str:
 # LC408. Valid Word Abbreviation
 def validWordAbbreviation(self, word: str, abbr: str) -> bool:
     wl = len(word)
-    i, n = 0, "0" # i is index in word
+    i, n = 0, "0"  # i is index in word
     for c in abbr:
         if c.isdigit():
-            if n == c: return False # don't allow abbr starts with 0
-            n += c # accumulate digit, "02"
-        else: # letter
+            if n == c: return False  # don't allow abbr starts with 0
+            n += c  # accumulate digit, "02"
+        else:  # letter
             i += int(n)  # add counts for previous letter
             n = '0'  # reset counts to 0
             # counts + current > wl or no match for abbr and word
-            if i >= wl or word[i] != c: return False
-            i += 1 # move to next char
+            if i >= wl or word[i] != c: return False  # core logic
+            i += 1  # move to next char
     return i + int(n) == wl
 
 # LC1047. Remove All Adjacent Duplicates In String

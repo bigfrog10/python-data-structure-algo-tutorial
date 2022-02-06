@@ -1,4 +1,20 @@
 
+# LC708. Insert into a Sorted Circular Linked List
+def insert(self, head: 'Optional[Node]', insertVal: int) -> 'Node':
+    if not head: # corner case
+        head = Node(insertVal)
+        head.next = head  # make it circular
+        return head
+    curr = head
+    while True:  # O(n)
+        if curr.val <= insertVal <= curr.next.val: break  # right place
+        if curr.val > curr.next.val: # max element
+            if insertVal >= curr.val: break # > max
+            elif insertVal <= curr.next.val: break # < min
+        curr = curr.next
+        if curr == head: break # one node list
+    curr.next = Node(insertVal, curr.next)  # insert between curr and curr.next
+    return head
 
 # LC141. Linked List Cycle
 def hasCycle(self, head: ListNode) -> bool:
@@ -19,20 +35,3 @@ def detectCycle(self, head: ListNode) -> ListNode:
     while True:
         if hare == turtle: return hare
         turtle, hare = turtle.next, hare.next
-
-# LC708. Insert into a Sorted Circular Linked List
-def insert(self, head: 'Node', insertVal: int) -> 'Node':
-    if not head: # corner case
-        head = Node(insertVal)
-        head.next = head
-        return head
-    curr = head
-    while True:  # O(n)
-        if curr.val <= insertVal <= curr.next.val: break
-        if curr.val > curr.next.val: # max element
-            if curr.val <= insertVal >= curr.next.val: break # > max
-            elif curr.val >= insertVal <= curr.next.val: break # < min
-        curr = curr.next
-        if curr == head: break # one node list
-    curr.next = Node(insertVal, curr.next)  # insert between curr and curr.next
-    return head

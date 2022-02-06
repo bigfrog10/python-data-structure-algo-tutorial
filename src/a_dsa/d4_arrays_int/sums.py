@@ -11,6 +11,18 @@ def subarraySum(self, nums: List[int], k: int) -> int:
         counts[cusum] += 1
     return count
 
+# LC523. Continuous Subarray Sum
+def checkSubarraySum(self, nums: List[int], k: int) -> bool:
+    if not nums: return False
+    summ, sd = 0, {0: -1}  # [1,1,1] 3, cumu is divisible by k, to deal with k multiples.
+    for i, n in enumerate(nums):
+        summ += n
+        if k != 0: summ = summ % k
+        if summ in sd:  # sd is sum dict, map sum -> index
+            if i - sd[summ] > 1: return True  # ==1 means single element
+        else: sd[summ] = i
+    return False
+
 # LC1074. Number of Submatrices That Sum to Target
 def numSubmatrixSumTarget(self, A, target):
     m, n = len(A), len(A[0])
@@ -28,17 +40,7 @@ def numSubmatrixSumTarget(self, A, target):
                 c[cur] += 1
     return res
 
-# LC523. Continuous Subarray Sum
-def checkSubarraySum(self, nums: List[int], k: int) -> bool:
-    if not nums: return False
-    summ, sd = 0, {0: -1}  # [1,1,1] 3, cumu is divisible by k, to deal with k multiples.
-    for i, n in enumerate(nums):
-        summ += n
-        if k != 0: summ = summ % k
-        if summ in sd:  # sd is sum dict, map sum -> index
-            if i - sd[summ] > 1: return True  # [0] 0 if we have =, it returns true but answer is false.
-        else: sd[summ] = i
-    return False
+
 
 # LC548. Split Array with Equal Sum
 def splitArray(self, nums): # O(n^2)

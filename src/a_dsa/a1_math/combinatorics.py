@@ -6,22 +6,14 @@ def nextPermutation(self, nums: List[int]) -> None:  # O(n)
     if not nums: return
     n = len(nums)
     if n == 1: return
-    idx = -1  # from back, find the first value such that value < next
-    for i in range(n-1, 0, -1):
-        if nums[i-1] < nums[i]:
-            idx = i-1  # smaller than peak
-            break
-    if idx == -1: nums.sort()
+    # from back, find the first value such that value < right
+    idx = next((i-1 for i in range(n)[::-1] if nums[i-1] < nums[i]), -1)
+    if idx == -1: nums.reverse()
     else:
-        idx1 = n-1 # find the value such that prev > value > next
-        for i in range(idx+1, n):
-            if nums[i] <= nums[idx]:
-                idx1 = i-1 # first on right side < idx element
-                break
-        nums[idx], nums[idx1] = nums[idx1], nums[idx] # swap
-        # reverse after idx
-        for i in range(idx+1, (n + idx + 1)// 2): # we swap only half, otherwise we swap twice
-            nums[i], nums[n-i+idx] = nums[n-i+idx], nums[i]
+        # find the value such that prev > value > next
+        idx1 = next((i-1 for i in range(idx+1, n) if nums[i] <= nums[idx]), n-1)
+        nums[idx], nums[idx1] = nums[idx1], nums[idx]  # swap
+        nums[idx+1:] = reversed(nums[idx+1:])
 
 # LC1053. Previous Permutation With One Swap
 def prevPermOpt1(self, arr: List[int]) -> List[int]:

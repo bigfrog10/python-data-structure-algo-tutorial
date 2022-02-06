@@ -1,4 +1,16 @@
 
+# LC1570. Dot Product of Two Sparse Vectors
+class SparseVector:
+    def __init__(self, nums: List[int]):
+        self.sparse = {}
+        for i, n in enumerate(nums):
+            if n != 0: self.sparse[i] = n
+    def dotProduct(self, vec: 'SparseVector') -> int:
+        dot = 0
+        for i, n in self.sparse.items():
+            if i in vec.sparse: dot += n * vec.sparse[i]
+        return dot
+
 # LC380. Insert Delete GetRandom O(1), RandomizedSet, top100
 import random
 class RandomizedSet:

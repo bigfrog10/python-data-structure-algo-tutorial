@@ -1,34 +1,34 @@
 from collections import deque
 
 # LC1263. Minimum Moves to Move a Box to Their Target Location
-def minPushBox(self, grid: List[List[str]]) -> int:  # faster BFS
-    for i in range(len(grid)):  # find these locations
+def minPushBox(self, grid: List[List[str]]) -> int:  # faster BFS, O((mn)^2)
+    for i in range(len(grid)):
         for j in range(len(grid[0])):
             if grid[i][j] == "T": target = (i,j)
             if grid[i][j] == "B": box = (i,j)
             if grid[i][j] == "S": person = (i,j)
-    def valid(x,y): # O(1) verify, reusable
-        return 0 <= x < len(grid) and 0 <= y < len(grid[0]) and grid[x][y] != '#'
-    def check(curr, dest, box1):  # # O(mn) BFS to check dest is reachable from curr
+    def empty(x,y): # O(1) verify
+        return 0 <= x <len(grid) and 0 <= y < len(grid[0]) and grid[x][y] != '#'
+    def reachable(curr, dest, box):  #BFS to check dest is reachable from curr
         que, v = deque([curr]), set()
         while que:
             pos = que.popleft()
             if pos == dest: return True
             for x,y in [(pos[0]+1,pos[1]), (pos[0]-1,pos[1]), (pos[0],pos[1]+1), (pos[0],pos[1]-1)]:
-                if valid(x,y) and (x,y) not in v and (x,y) != box1:
+                if empty(x,y) and (x,y) not in v and (x,y) != box:
                     v.add((x,y))
                     que.append((x,y))
         return False
-    q, vis = deque([(0, box, person)]), {box + person}
-    while q:  # O(mn) * O(mn), queue for BFS
+    q, visited = deque([(0, box, person)]), {box + person}
+    while q:  # main BFS
         dist, box, person = q.popleft()
         if box == target: return dist
         b_coord = [(box[0]+1,box[1]),(box[0]-1,box[1]),(box[0],box[1]+1),(box[0],box[1]-1)]
         p_coord = [(box[0]-1,box[1]),(box[0]+1,box[1]),(box[0],box[1]-1),(box[0],box[1]+1)]
         for new_box,new_person in zip(b_coord,p_coord):
-            if valid(*new_box) and new_box+box not in vis:
-                if valid(*new_person) and check(person,new_person,box):
-                    vis.add(new_box+box)
+            if empty(*new_box) and new_box+box not in visited:
+                if empty(*new_person) and reachable(person,new_person,box):
+                    visited.add(new_box+box)
                     q.append((dist+1,new_box,box))
     return -1
 

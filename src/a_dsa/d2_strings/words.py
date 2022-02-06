@@ -1,22 +1,7 @@
 
-# LC249. Group Shifted Strings
-def groupStrings(self, strings: List[str]) -> List[List[str]]:
-    def shash(s):
-        if not s: return -1
-        if len(s) == 1: return 1 # single char string can always be shifted
-        d = ord(s[0]) - ord('a') # d is the shift
-        ret = []
-        for c in s:
-            h = (ord(c) - d) % 26 # now shift all chars by the same
-            ret.append(h)
-        return tuple(ret)
-    groups = collections.defaultdict(list)
-    for s in strings: groups[shash(s)].append(s)
-    return groups.values()
-
 # LC140. Word Break II
 def wordBreak(s: str, wordDict: List[str]) -> List[str]:
-    word_set = set(wordDict)  # return all possible answer
+    word_set = set(wordDict)  # O(2^len(words) + W), return all possible answer
     def dfs(s):
         output = []
         if s in word_set: output.append(s)  # one of solutions
@@ -26,6 +11,15 @@ def wordBreak(s: str, wordDict: List[str]) -> List[str]:
                 for x in tmp: output.append(w + ' ' + x)
         return output
     return dfs(s)
+def wordBreak(self, s, wordDict):  # O(2^len(wordDict) + W)
+    memo, wordDict = {len(s): ['']}, set(wordDict)
+    def sentences(i):  # returns list of all sentences built from the suffix s[i:]
+        if i not in memo:
+            memo[i] = [s[i:j] + (tail and ' ' + tail)  # ' '+tail if tail else tail
+                       for j in range(i+1, len(s)+1) if s[i:j] in wordDict
+                       for tail in sentences(j)]
+        return memo[i]
+    return sentences(0)
 
 # LC139. Word Break, top100
 def wordBreak(self, s: str, wordDict: List[str]) -> bool:
@@ -45,6 +39,21 @@ def wordBreak(self, s: str, wordDict: List[str]) -> bool:
             if s[start:end] in wordDict and wordBreakMemo(s, end): return True
         return False
     return wordBreakMemo(s, 0)
+
+# LC249. Group Shifted Strings
+def groupStrings(self, strings: List[str]) -> List[List[str]]:
+    def shash(s):
+        if not s: return -1
+        if len(s) == 1: return 1  # single char string can always be shifted
+        d = ord(s[0]) - ord('a')  # d is the shift
+        ret = []
+        for c in s:
+            h = (ord(c) - d) % 26  # now shift all chars by the same to get hash
+            ret.append(h)
+        return tuple(ret)
+    groups = collections.defaultdict(list)
+    for s in strings: groups[shash(s)].append(s)
+    return groups.values()
 
 # LC127. Word Ladder, top100
 def ladderLength(self, beginWord, endWord, wordList):  # BFS

@@ -2,7 +2,7 @@ import bisect
 from typing import List
 
 # LC1539. Kth Missing Positive Number
-def findKthPositive(self, arr, k):
+def findKthPositive(self, arr, k):  # O(logn)
     beg, end = 0, len(arr)
     while beg < end:
         mid = (beg + end) // 2  # arr[mid] - mid - 1 is number of missings at mid.
