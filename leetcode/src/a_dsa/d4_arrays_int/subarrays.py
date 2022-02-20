@@ -1,44 +1,78 @@
 
-# LC674. Longest Continuous Increasing Subsequence
-def findLengthOfLCIS(self, nums: List[int]) -> int:
-    ans = anchor = 0
+# LC325. Maximum Size Subarray Sum Equals k
+def maxSubArrayLen(self, nums: List[int], k: int) -> int:
+    cumus = list(accumulate(nums))
+    maxl, cache = 0, dict()  # cumu -> index
+    for i, v in enumerate(cumus):
+        if v == k: maxl = max(maxl, i+1)
+        elif v - k in cache:  # middle subarray
+            size = i - cache[v - k]
+            maxl = max(maxl, size)
+        if v not in cache: cache[v] = i
+    return maxl
+
+# LC560. Subarray Sum Equals K
+from typing import List
+def subarraySum(self, nums: List[int], k: int) -> int:
+    count = cusum = 0  # O(n)
+    counts = collections.defaultdict(int)
     for i in range(len(nums)):
-        if i and nums[i-1] >= nums[i]: anchor = i  # reset anchor
-        ans = max(ans, i - anchor + 1)
-    return ans
+        cusum += nums[i]
+        if cusum == k: count += 1
+        if cusum - k in counts: count += counts[cusum - k]
+        counts[cusum] += 1
+    return count
 
-# LC1027. Longest Arithmetic Subsequence
-def longestArithSeqLength(self, A: List[int]) -> int:
-    n = len(A)
-    dp = {}  # dp[index][diff] the length of arithmetic sequence at index with difference diff.
-    for i in range(n):
-        for j in range(i + 1, n):  # O(n^2)
-            diff = A[j] - A[i]  # accumulate counts for each diff over all indices
-            dp[j, diff] = dp.get((i, diff), 1) + 1  # A[i], A[j] have length 2
-    return max(dp.values())
+# LC548. Split Array with Equal Sum
+def splitArray(self, nums): # O(n^2)
+    def split(A):  # return half sum
+        for i in range(1, len(A)): A[i] += A[i-1]  # cum sum
+        return {A[i-1] for i in range(1, len(A)-1) if A[i-1] == A[len(A)-1] - A[i]}
 
-# LC1143. Longest Common Subsequence
-def longestCommonSubsequence(self, text1: str, text2: str) -> int: # cached recursion
-    @lru_cache(None)
-    def solve(i, j):
-        if i == len(text1) or j == len(text2): return 0
-        if text1[i] == text2[j]: return 1 + solve(i+1, j+1)
-        else: return max(solve(i+1, j), solve(i, j+1))
-    print(solve.cache_info())
-    return solve(0, 0)
+    return any(split(nums[:j]) & split(nums[j+1:]) for j in range(3, len(nums)-3))
 
-# LC1498. Number of Subsequences That Satisfy the Given Sum Condition
-def numSubseq(self, nums: List[int], target: int) -> int:
-    nums.sort()  # min and max ignores orders, O(nlogn)
-    l, r = 0, len(nums) - 1
-    res = 0
-    mod = 10**9 + 7
-    while l <= r:  # [2,3,3,4,6,7] 12 counter example for =
-        if nums[l] + nums[r] > target: r -= 1
-        else:
-            res += pow(2, r - l, mod)  # count a[i+1] to a[j] all sub sequence
-            l += 1
-    return res % mod
+# LC523. Continuous Subarray Sum
+def checkSubarraySum(self, nums: List[int], k: int) -> bool:
+    if not nums: return False
+    summ, sd = 0, {0: -1}  # [1,1,1] 3, cumu is divisible by k, to deal with k multiples.
+    for i, n in enumerate(nums):
+        summ += n
+        if k != 0: summ = summ % k
+        if summ in sd:  # sd is sum dict, map sum -> index
+            if i - sd[summ] > 1: return True  # ==1 means single element
+        else: sd[summ] = i
+    return False
+
+# LC53. Maximum Subarray   - max sum amount all subarrays
+def maxSubArray(self, nums: List[int]) -> int:
+    total = max_total = nums[0]
+    for i in range(1, len(nums)):
+        total += nums[i]
+        # if the total is not worth to keep, start a new total
+        # we can also add code to keep track the start index.
+        total = max(total, nums[i])
+        max_total = max(max_total, total)  # this is our goal.
+    return max_total
+
+# LC209. Minimum Size Subarray Sum
+def minSubArrayLen(self, s: int, nums: List[int]) -> int:  # 2 pointers
+    total = left = 0 # since all numbers are positive, this works.
+    result = len(nums) + 1
+    for right, n in enumerate(nums):
+        total += n
+        while total >= s:
+            result = min(result, right - left + 1)
+            total -= nums[left]
+            left += 1
+    return result if result <= len(nums) else 0
+
+# LC643. Maximum Average Subarray I
+def findMaxAverage(self, nums: List[int], k: int) -> float:
+    best = window = sum(nums[:k])
+    for i in range(k,len(nums)):
+        window += nums[i] - nums[i-k]  # sliding window
+        if window > best: best = window
+    return best/k
 
 # LC581. Shortest Unsorted Continuous Subarray
 def findUnsortedSubarray(self, nums: List[int]) -> int:
@@ -49,48 +83,8 @@ def findUnsortedSubarray(self, nums: List[int]) -> int:
         maxv = max(maxv, nums[i])
         minv = min(minv, nums[~i])
         if nums[i] < maxv: end = i  # last seen smaller value with index i
-        if nums[~i] > minv: begin = n-1 - i # last seen larger value from right side
+        if nums[~i] > minv: begin = n - 1 - i  # last seen larger value from right side
     return end - begin + 1
-
-# LC334. Increasing Triplet Subsequence
-def increasingTriplet(self, nums: List[int]) -> bool:
-    first_num, second_num = float("inf"), float("inf")
-    for n in nums:
-        if n <= first_num: first_num = n
-        # even first updates later, this ensures there is smaller before this
-        elif n <= second_num: second_num = n
-        else: return True
-    return False
-
-# LC1218. Longest Arithmetic Subsequence of Given Difference
-def longestSubsequence(self, arr: List[int], diff: int) -> int:
-    res = {}  # array value -> longest length of arithmetic seq, fast
-    for num in arr:
-        res[num] = res[num - diff] + 1 if (num - diff) in res else 1
-    return max(res.values())
-
-# LC300. Longest Increasing Subsequence
-def lengthOfLIS(self, nums: List[int]) -> int:
-    hist = []  # hist[i] smallest ending element in strictly increasing sequence of length i
-    for e in nums:
-        if not hist: hist.append(e)
-        elif e > hist[-1]: hist.append(e)
-        else:
-            # find index for smallest n such that n >= e
-            idx = bisect.bisect_left(hist, e)
-            hist[idx] = e  # replace it with e
-    return len(hist)
-
-# LC128. Longest Consecutive Sequence
-def longestConsecutive(self, nums: List[int]) -> int:  # O(n)
-    hashed = set(nums)  # overall O(n)
-    maxc = 0
-    for i in nums:  # O(n)
-        if i-1 in hashed: continue  # find new start of a series
-        j = 1
-        while i + j in hashed: j += 1  # this builds only once for the for loop
-        maxc = max(maxc, j)
-    return maxc
 
 # LC525. Contiguous Array
 def findMaxLength(self, nums: List[int]) -> int:
@@ -103,6 +97,17 @@ def findMaxLength(self, nums: List[int]) -> int:
         else: c2i[count] = i
     return maxlen
 
+# LC974. Subarray Sums Divisible by K
+def subarraysDivByK(self, A: List[int], K: int) -> int:
+    if not A: return 0
+    cumu = list(accumulate(A))
+    # pre-append 0 because we count x // K == 0 in down below formula. need one more 0 for c*c(-1)
+    res = [0] + [x % K for x in cumu]  # check case 2, 3, 4
+    counts = Counter(res) # number of cumus having same residue.
+    # once we subtract any of these 2, we have the subarray sum divided by K.
+    # so selecting 2 elements has C(C-1) / 2 possibilities.
+    return sum(c * (c - 1) // 2 for c in counts.values())
+
 # LC152. Maximum Product Subarray
 def maxProduct(self, nums: List[int]) -> int:
     if not nums: return 0
@@ -111,19 +116,30 @@ def maxProduct(self, nums: List[int]) -> int:
         e = nums[i]
         emx = e * curr_max
         emn = e * curr_min
-        curr_max = max([e, emx, emn]) # we track both for +/-
+        curr_max = max([e, emx, emn])  # we track both for +/-
         curr_min = min([e, emx, emn])
         max_all = max(max_all, curr_max)
     return max_all
 
-
-# Given an array containing only positive integers, return if you can pick two integers from the array which cuts
-# the array into three pieces such that the sum of elements in all pieces is equal.
-# Example 1:
-# Input: array = [2, 4, 5, 3, 3, 9, 2, 2, 2]
-# Output: true
-# Explanation: choosing the number 5 and 9 results in three pieces [2, 4], [3, 3] and [2, 2, 2]. Sum = 6.
-#
-# Example 2:
-# Input: array =[1, 1, 1, 1],
-# Output: false
+# LC689. Maximum Sum of 3 Non-Overlapping Subarrays
+def maxSumOfThreeSubarrays(self, nums: List[int], k: int) -> List[int]:  # O(n)
+    bestSeq, best2Seq, best3Seq = 0, [0, k], [0, k, k*2]
+    seqSum, seq2Sum, seq3Sum = sum(nums[0:k]), sum(nums[k:k*2]), sum(nums[k*2:k*3])
+    # Sums of combined best windows
+    best1Sum, best2Sum, best3Sum = seqSum, seqSum + seq2Sum, seqSum + seq2Sum + seq3Sum
+    seqIndex, seq2Index, seq3Index = 1, k + 1, k*2 + 1  # Current window positions
+    while seq3Index <= len(nums) - k:
+        # Update the three sliding windows
+        seqSum += - nums[seqIndex - 1] + nums[seqIndex + k - 1]
+        seq2Sum += - nums[seq2Index - 1] + nums[seq2Index + k - 1]
+        seq3Sum += - nums[seq3Index - 1] + nums[seq3Index + k - 1]
+        if seqSum > best1Sum:  # Update best single window
+            bestSeq, best1Sum = seqIndex, seqSum
+        if seq2Sum + best1Sum > best2Sum:  # Update best two windows
+            best2Seq, best2Sum = [bestSeq, seq2Index], seq2Sum + best1Sum
+        if seq3Sum + best2Sum > best3Sum:  # Update best three windows
+            best3Seq, best3Sum = best2Seq + [seq3Index], seq3Sum + best2Sum
+        seqIndex += 1  # Update the current positions
+        seq2Index += 1
+        seq3Index += 1
+    return best3Seq

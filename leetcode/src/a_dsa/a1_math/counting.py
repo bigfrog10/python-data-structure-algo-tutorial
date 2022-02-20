@@ -27,10 +27,10 @@ def mostVisitedPattern(self, username: List[str], timestamp: List[int], website:
     user_visits = defaultdict(list)
     for u, t, w in sorted(zip(username, timestamp, website)):
         user_visits[u].append(w)
-    count = [] # tuples of 3 elements
-    for x in user_visits.values(): # x is list of web links
+    count = []  # tuples of 3 elements
+    for x in user_visits.values():  # x is list of web links
         count += list(set(itertools.combinations(x, 3)))
-    counters = sorted(Counter(count).items(), key = lambda x : (-x[1], x[0]))
+    counters = sorted(Counter(count).items(), key=lambda x : (-x[1], x[0]))
     return counters[0][0]  # list of (3-seq, count), so [0] is (3-seq, count), next 0 is 3-seq
 
 

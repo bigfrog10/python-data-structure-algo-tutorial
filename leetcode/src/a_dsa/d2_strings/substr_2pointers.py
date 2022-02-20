@@ -43,7 +43,7 @@ def minWindow(self, s, t):
     need, missing = collections.Counter(t), len(t)  # count downs
     i = 0
     I, J = 0, float('inf')
-    for j, c in enumerate(s, 1):  # starting index is 1
+    for j, c in enumerate(s, 1):  # starting index is 1, window is s[i:j]
         missing -= need[c] > 0
         need[c] -= 1
         if missing == 0:  # we found a window that has all t chars
@@ -78,9 +78,6 @@ def lengthOfLongestSubstringTwoDistinct(self, s: str) -> int:
             low += 1
         ret = max(i - low + 1, ret)
     return ret
-
-
-
 
 # LC424. Longest Repeating Character Replacement
 def characterReplacement(self, s: str, k: int) -> int:

@@ -1,23 +1,4 @@
 
-# LC211. Design Add and Search Words Data Structure
-class WordDictionary:  # much faster
-    def __init__(self): self.trie = {}
-    def addWord(self, word: str) -> None:
-        node = self.trie
-        for ch in word: node = node.setdefault(ch, {})
-        node['$'] = True  # mark end of word
-    def search(self, word: str) -> bool:
-        def search_in_node(word, node) -> bool: # recursion on dot
-            for i, ch in enumerate(word):
-                if ch in node: node = node[ch] # char found, go down
-                else:
-                    if ch == '.':  # we need to check all but $
-                        for x in node:
-                            if x != '$' and search_in_node(word[i + 1:], node[x]):
-                                return True
-                    return False
-            return '$' in node
-        return search_in_node(word, self.trie)
 
 # LC208. Implement Trie (Prefix Tree)
 class Trie:

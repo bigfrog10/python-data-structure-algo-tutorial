@@ -53,3 +53,14 @@ def numWays(self, steps: int, arrLen: int) -> int:
         return dfs(steps, pos - 1) + dfs(steps, pos) + dfs(steps, pos + 1)
     if steps is None or steps < 0 or not arrLen: return 0
     return dfs(steps, 0) % (10 ** 9 + 7)
+
+
+# LC858. Mirror Reflection
+def mirrorReflection(self, p: int, q: int) -> int:
+    # find minimal m, n s.t. m * p = n * q
+    # m is even & n is odd => return 0.
+    # m is odd & n is odd => return 1.
+    # m is odd & n is even => return 2.
+    # if m and n are even, keep reducing them to find min.
+    while p % 2 == 0 and q % 2 == 0: p, q = p // 2, q // 2
+    return 1 - p % 2 + q % 2

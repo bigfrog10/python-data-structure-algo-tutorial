@@ -1,15 +1,38 @@
 
-# LC10. Regular Expression Matching, top100
-def isMatch(self, s: str, p: str) -> bool:  # recursive, slow
-    if not p: return not s
-    first_match = s and p[0] in {s[0], '.'} # "*" can't be the first one
-    if len(p) > 1 and p[1] == '*':
-        return self.isMatch(s, p[2:]) or first_match and self.isMatch(s[1:], p)
-    else: return first_match and self.isMatch(s[1:], p[1:])
+# LC10. Regular Expression Matching, top100 - * repeating
+def isMatch(self, text, pattern): # O(nm)
+    @lru_cache(None)
+    def dp(i, j):
+        if j == len(pattern): ans = i == len(text)
+        else:
+            first_match = i < len(text) and pattern[j] in {text[i], '.'}
+            if j+1 < len(pattern) and pattern[j+1] == '*':
+                ans = dp(i, j+2) or first_match and dp(i+1, j)
+            else: ans = first_match and dp(i+1, j+1)
+        return ans
+    return dp(0, 0)
 
-# LC44. Wildcard Matching
-import functools
-def isMatch(self, s: str, p: str) -> bool:
+# LC44. Wildcard Matching - * is any sequence
+def isMatch(self, s: str, p: str) -> bool:  # Iterative, very fast, O(mn)
+    sl, pl = len(s), len(p)
+    s_idx = p_idx = 0  # 2 walkers on s and p
+    star_idx = s_tmp_idx = -1  # 2 markers
+    while s_idx < sl:
+        if p_idx < pl and p[p_idx] in {s[s_idx], '?'}:
+            s_idx += 1
+            p_idx += 1
+        elif p_idx < pl and p[p_idx] == '*':
+            star_idx = p_idx  # save current states for backtrack
+            s_tmp_idx = s_idx
+            p_idx += 1  # Then try first of 2 cases, match 0 char, skip *
+        elif star_idx == -1:  # If there is no * in previous and no match currently
+            return False
+        else: # backtrack in * case, start_idx != -1
+            p_idx = star_idx + 1  # skip * and match 1 char next line, fixed
+            s_tmp_idx = s_idx = s_tmp_idx + 1  # keep going for all unmatched chars
+    # The remaining characters in the pattern should all be '*' characters
+    return all(x == '*' for x in p[p_idx:])
+def isMatch(self, s: str, p: str) -> bool:  # O(mn(m+n))
     @functools.lru_cache(maxsize=None)
     def walk(s, p):  # DFS
         if s == p: return True  # typically "" == ""

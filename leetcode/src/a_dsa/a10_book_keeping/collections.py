@@ -71,6 +71,26 @@ class MedianFinder:
         if len(large) > len(small): return float(large[0])
         return (large[0] - small[0]) / 2.0
 
+# LC211. Design Add and Search Words Data Structure
+class WordDictionary:  # much faster
+    def __init__(self): self.trie = {}
+    def addWord(self, word: str) -> None:
+        node = self.trie
+        for ch in word: node = node.setdefault(ch, {})
+        node['$'] = True  # mark end of word
+    def search(self, word: str) -> bool:
+        def search_in_node(word, node) -> bool: # recursion on dot
+            for i, ch in enumerate(word):
+                if ch in node: node = node[ch]  # char found, go down
+                else:
+                    if ch == '.':  # we need to check all but $
+                        for x in node:
+                            if x != '$' and search_in_node(word[i + 1:], node[x]):
+                                return True
+                    return False
+            return '$' in node
+        return search_in_node(word, self.trie)
+
 # LC703. Kth Largest Element in a Stream
 class KthLargest:
     def __init__(self, k, nums):
@@ -172,20 +192,21 @@ class StreamChecker:
 # LC2034. Stock Price Fluctuation
 class StockPrice:  # all O(logn)
     def __init__(self):
-        self.time2price = SortedDict()
+        self.time2price = SortedDict() # sortedcontainers
         self.prices = SortedList()
     def update(self, timestamp: int, price: int) -> None:
-        if timestamp in self.time2price.keys():  # remove old price and add new price
+        if timestamp in self.time2price.keys(): #remove old price and add new price
             self.prices.remove(self.time2price[timestamp])
             self.time2price[timestamp] = price
             self.prices.add(price)
-        else:  # add new price
+        else: #add new price
             self.time2price[timestamp] = price
             self.prices.add(price)
-    def current(self) -> int:
-        return self.time2price[self.time2price.keys()[-1]]
+    def current(self) -> int:  # O(logn) with any index, latest price
+        return self.time2price[self.time2price.peekitem(-1)[0]]
     def maximum(self) -> int: return self.prices[-1]
     def minimum(self) -> int: return self.prices[0]
+
 
 # LC981. Time Based Key-Value Store
 class TimeMap:
@@ -207,6 +228,7 @@ class Logger:
             self.m2t[message] = timestamp
             return True
         else: return False
+
 # LC341. Flatten Nested List Iterator
 class NestedIterator:
     def __init__(self, nestedList: [NestedInteger]):

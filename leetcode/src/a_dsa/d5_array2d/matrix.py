@@ -78,62 +78,39 @@ def findDiagonalOrder(self, matrix):  # O(mn)
                 col -= 1
     return ret
 
-# LC766. Toeplitz Matrix
-def isToeplitzMatrix(self, matrix: List[List[int]]) -> bool:
-    m, n = len(matrix), len(matrix[0])
-    dd = {}  # diagonals are grouped by row-col = k,
-    for r, row in enumerate(matrix):
-        for c, v in enumerate(row):
-            if r-c not in dd: dd[r-c] = v
-            elif dd[r-c] != v: return False
-    return True
+# LC1424. Diagonal Traverse II
+def findDiagonalOrder(self, A):
+    res = defaultdict(list)
+    for i, r in enumerate(A):
+        for j, a in enumerate(r): res[i + j].append(a)
+    return [a for _, r in res.items() for a in reversed(r)]
 
-# LC1091. Shortest Path in Binary Matrix
-def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:  # O(n)
-    if not grid or grid[0][0] != 0: return -1
-    n, que, visited = len(grid), deque([(0, 0, 1)]), set()  # x, y, steps
-    while que:  # BFS
-        i, j, steps = que.popleft()
-        if i == n-1 and j == n-1: return steps
-        if (i, j) in visited: continue
-        visited.add((i, j))
-        for x, y in (-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1):
-            ni, nj = i + x, j + y
-            if 0 <= ni < n and 0 <= nj < n and grid[ni][nj] == 0 and (ni, nj) not in visited:
-                que.append((ni, nj, steps+1))
-    return -1
+# LC766. Toeplitz Matrix
+def isToeplitzMatrix(self, matrix):
+    return all(r == 0 or c == 0 or matrix[r-1][c-1] == val
+               for r, row in enumerate(matrix)
+               for c, val in enumerate(row))
 
 # LC286. Walls and Gates
 def wallsAndGates(self, rooms: List[List[int]]) -> None:
-    if not rooms:  return
-    n, m = len(rooms), len(rooms[0])
     WALL, GATE, EMPTY = -1, 0, 2147483647
-    gates = []  # find all gates
-    for i, j in product(range(n), range(m)):
-        if rooms[i][j] == GATE: gates.append((i, j))
-    queue, steps = deque(gates), 0  # BFS
-    while queue:
-        print(queue)
-        currl = len(queue)
-        for k in range(currl):
-            i, j = queue.popleft()
-            if rooms[i][j] == EMPTY: rooms[i][j] = steps
-            for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
-                x, y = i + dx, j + dy
-                if 0 <= x < n and 0 <= y < m and rooms[x][y] == EMPTY:
-                    queue.append((x, y))
-        steps += 1
+    q = [(i, j) for i, row in enumerate(rooms) for j, r in enumerate(row) if r == GATE]  # all gates
+    for i, j in q:
+        for I, J in (i+1, j), (i-1, j), (i, j+1), (i, j-1):
+            if 0 <= I < len(rooms) and 0 <= J < len(rooms[0]) and rooms[I][J] == EMPTY:
+                rooms[I][J] = rooms[i][j] + 1
+                q.append((I, J))
 
 # LC939. Minimum Area Rectangle
 def minAreaRect(self, points: List[List[int]]) -> int:  # O(n^2)
-    points_table = set((x, y) for x, y in points)
-    min_area = float('inf')
-    for (x1, y1), (x2, y2) in product(points, points):
-        if x1 > x2 and y1 > y2: # Skip looking at same point
-            if (x1, y2) in points_table and (x2, y1) in points_table:
+    res, seen = float('inf'), set()
+    for x1, y1 in points:
+        for x2, y2 in seen:
+            if (x1, y2) in seen and (x2, y1) in seen:
                 area = abs(x1 - x2) * abs(y1 - y2)
-                min_area = min(area, min_area)
-    return 0 if min_area == float('inf') else min_area
+                if area: res = min(area, res)
+        seen.add((x1, y1))
+    return res if res < float('inf') else 0
 
 # LC963. Minimum Area Rectangle II
 def minAreaFreeRect(self, points: List[List[int]]) -> float:  # O(n^2)
@@ -160,6 +137,37 @@ def minAreaFreeRect(self, points: List[List[int]]) -> float:  # O(n^2)
                     print(p1, points[lines[i][1]],  p2, p3, minArea)
         return minArea if minArea != float("inf") else 0
 
+# LC1091. Shortest Path in Binary Matrix
+def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:  # O(n)
+    if not grid or grid[0][0] != 0: return -1
+    n, que, visited = len(grid), deque([(0, 0, 1)]), set()  # x, y, steps
+    while que:  # BFS
+        i, j, steps = que.popleft()
+        if i == n-1 and j == n-1: return steps
+        if (i, j) in visited: continue
+        visited.add((i, j))
+        for x, y in (-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1):
+            ni, nj = i + x, j + y
+            if 0 <= ni < n and 0 <= nj < n and grid[ni][nj] == 0 and (ni, nj) not in visited:
+                que.append((ni, nj, steps+1))
+    return -1
+
+# LC1074. Number of Submatrices That Sum to Target
+def numSubmatrixSumTarget(self, A, target):
+    m, n = len(A), len(A[0])
+    for row in A:
+        for i in range(n - 1):
+            row[i + 1] += row[i]  # sum up each row
+    res = 0
+    for i in range(n):  # loop 2 columns
+        for j in range(i, n):  # O(mnn) runtime and O(m) space
+            c = collections.defaultdict(int)
+            cur, c[0] = 0, 1
+            for k in range(m):  # 560. Subarray Sum Equals K, 1D case
+                cur += A[k][j] - (A[k][i - 1] if i > 0 else 0)
+                res += c[cur - target]
+                c[cur] += 1
+    return res
 
 # LC329. Longest Increasing Path in a Matrix
 import functools # 100%
@@ -189,32 +197,34 @@ def swimInWater(self, grid: List[List[int]]) -> int:
                 heapq.heappush(pq, (grid[cr][cc], cr, cc))
                 seen.add((cr, cc))
 
-
-# LC1424. Diagonal Traverse II
-def findDiagonalOrder(self, A):
-    res = defaultdict(list)
-    for i, r in enumerate(A):
-        for j, a in enumerate(r): res[i + j].append(a)
-    return [a for _, r in res.items() for a in reversed(r)]
-
-
-
 # LC406. Queue Reconstruction by Height
 def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:  # O(n^2)
     res = []
     for p in sorted((-x[0], x[1]) for x in people): # from largest to smallest
         res.insert(p[1], [-p[0], p[1]]) # insert only relevant to larger values
     return res
+def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:  # O(n^(3/2))
+    blocks = [[]]
+    for p in sorted(people, key=lambda x: (-x[0], x[1])):
+        index = p[1]
+        for i, block in enumerate(blocks):
+            m = len(block)
+            if index <= m: break  # stop to find index, m, and block
+            index -= m
+        block.insert(index, p)
+        if m * m > len(people):
+            blocks.insert(i + 1, block[m//2:])  # O(m) = O(sqrt(n))
+            del block[m//2:]
+    return [p for block in blocks for p in block]
 
 # LC311. Sparse Matrix Multiplication
 def multiply(self, A: List[List[int]], B: List[List[int]]) -> List[List[int]]:
+    if not A or not A[0] or not B or not B[0]: return [[]]
     def get_none_zero(A):
         n, m, res = len(A), len(A[0]), []
         for i, j in itertools.product(range(n), range(m)):
-            if A[i][j] == 0: continue
-            res.append((i, j, A[i][j]))  # we should model sparse matrix like this
-        return res
-    if not A or not A[0] or not B or not B[0]: return [[]]
+            if A[i][j] != 0: res.append((i, j, A[i][j]))  # we should model sparse matrix like this
+        return res  # this list should use smaller space than the matrix
     sparse_A, sparse_B = get_none_zero(A), get_none_zero(B)
     n, m, k = len(A), len(A[0]), len(B[0])
     C = [[0] * k for _ in range(n)]
@@ -289,7 +299,7 @@ def spiralOrder(self, matrix):
     return result
 
 # LC661. Image Smoother
-def imageSmoother(self, img: List[List[int]]) -> List[List[int]]:
+def imageSmoother(self, img: List[List[int]]) -> List[List[int]]:  # O(mn)
     m, n = len(img), len(img[0])
     res = copy.deepcopy(img)
     for x in range(m):
@@ -322,20 +332,41 @@ def findPeakGrid(self, mat: List[List[int]]) -> List[int]:  # O(mlogn)
         if max(mat[mid]) > max(mat[mid+1]): bottom = mid
         else: top = mid+1
     return [bottom, mat[bottom].index(max(mat[bottom]))]
+def findPeakGrid(self, mat: List[List[int]]) -> List[int]:  # O(m + n)
+    m, n = len(mat), len(mat[0])
+    def quad_search(s0, e0, s1, e1):
+        m0, m1 = (s0 + e0) // 2, (s1 + e1) // 2
+        i, j = m0, m1
+        for jj in range(s1, e1):  # find max along middle lines
+            if mat[m0][jj] > mat[m0][j]: j = jj
+        for ii in range(s0, e0):
+            if mat[ii][m1] > mat[i][j]: i, j = ii, m1
+        cur = mat[i][j]  # compare with 4 sides
+        up = mat[i-1][j] if i > 0 else -1
+        down = mat[i+1][j] if i < m - 1 else -1
+        left = mat[i][j-1] if j > 0 else -1
+        right = mat[i][j+1] if j < n - 1 else - 1
+        if cur > up and cur > down and cur > left and cur > right:
+            return i, j
+        if i < m0 or (i == m0 and cur < up): e0 = m0  # move interval boundaries
+        else: s0 = m0 + 1
+        if j < m1 or (j == m1 and cur < left): e1 = m1
+        else: s1 = m1 + 1
+        return quad_search(s0, e0, s1, e1)  # drill down
+    return quad_search(0, m, 0, n)
 
 # LC417. Pacific Atlantic Water Flow
-def pacificAtlantic(self, matrix: List[List[int]]) -> List[List[int]]:
+def pacificAtlantic(self, matrix: List[List[int]]) -> List[List[int]]:  # O(nm)
     if not matrix: return []
     rows, cols = len(matrix), len(matrix[0])
     p_visited, a_visited = set(), set()
     def traverse(i, j, visited):  # goes up
         if (i, j) in visited: return
         visited.add((i, j))
-        for direction in (0, 1), (0, -1), (1, 0), (-1, 0): # Traverse neighbors.
-            next_i, next_j = i + direction[0], j + direction[1]
-            if 0 <= next_i < rows and 0 <= next_j < cols:
-                if matrix[next_i][next_j] >= matrix[i][j]:
-                    traverse(next_i, next_j, visited)
+        for dx, dy in (0, 1), (0, -1), (1, 0), (-1, 0): # Traverse neighbors.
+            ni, nj = i + dx, j + dy
+            if rows > ni >= 0 <= nj < cols and matrix[ni][nj] >= matrix[i][j]:
+                traverse(ni, nj, visited)
     for row in range(rows):  # along border, go inland
         traverse(row, 0, p_visited)
         traverse(row, cols - 1, a_visited)
@@ -371,6 +402,18 @@ def maximalSquare(self, matrix: List[List[str]]) -> int: # DP
             max_len = max(max_len, dp[i+1, j+1])
     return max_len ** 2
 
+# LC378. Kth Smallest Element in a Sorted Matrix
+def kthSmallest(self, matrix: List[List[int]], k: int) -> int:  # O(log(max-min))
+    lo, hi = matrix[0][0], matrix[-1][-1]
+    while lo < hi:
+        mid, count, j = (lo+hi)//2, 0, len(matrix[0])
+        for row in matrix:
+            while j >= 1 and row[j-1] > mid: j -= 1
+            count += j
+        if count < k: lo = mid+1
+        else: hi = mid
+    return lo
+
 # LC240. Search a 2D Matrix II
 def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
     if not matrix: return False
@@ -390,8 +433,7 @@ def countNegatives(self, grid: List[List[int]]) -> int:
         if grid[r][c] < 0:
             cnt += n - c
             r -= 1
-        else:
-            c += 1
+        else: c += 1
     return cnt
 
 # LC1314. Matrix Block Sum

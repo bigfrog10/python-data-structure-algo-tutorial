@@ -31,10 +31,9 @@ def isPalindrome(self, head):
         rev, rev.next, head = head, rev, head.next
     tail = head.next if fast else head  # fast none when list is even
     isPali = True  # head is 3, 2, 1
-    while isPali and rev:  # rev is 2, 1
+    while isPali and rev: # rev is 2, 1
         isPali = isPali and rev.val == tail.val
-        head, head.next, rev = rev, head, rev.next  # 2, 3, 2, 1, then 1, 2,3,2,1
-        tail = tail.next
+        rev, tail = rev.next, tail.next  # 2, 3, 2, 1, then 1, 2,3,2,1
     print(head)
     return isPali
 
@@ -56,6 +55,19 @@ def printLinkedListInReverse(self, head: 'ImmutableListNode') -> None:  # O(n) i
     if head:  # recursion or stack
         self.printLinkedListInReverse(head.getNext())
         head.printValue()
+def printLinkedListInReverse(self, head: 'ImmutableListNode') -> None:  # T(n)=2T(n/2)+n/2 --> T = O(nlogn)
+        walker, size = head, 0  # O(logn) space in recursion
+        while walker:  # find size
+            size += 1
+            walker = walker.getNext()
+        def dac(node, n):  # divide and conquer
+            if n == 1: node.printValue()
+            else:
+                mid, half = n // 2, node
+                for _ in range(mid): half = half.getNext()  # go to mid node
+                dac(half, n- mid)
+                dac(node, mid)
+        dac(head, size)
 def printLinkedListInReverse(self, head: 'ImmutableListNode') -> None:  # O(n) runtime and O(sqrt(n)) in space
     def getLinkedListSize(head):
         size = 0
@@ -114,8 +126,7 @@ def addTwoNumbers(self, l1, l2):
 
 # LC160. Intersection of Two Linked Lists
 def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
-    pA = headA
-    pB = headB
+    pA, pB = headA, headB  # O(m + n)
     while pA != pB:
         pA = headB if pA is None else pA.next
         pB = headA if pB is None else pB.next
@@ -161,9 +172,9 @@ def numComponents(self, head: ListNode, nums: List[int]) -> int:
 # LC1721. Swapping Nodes in a Linked List
 def swapNodes(self, head: ListNode, k: int) -> ListNode:
     slow, fast = head, head
-    for _ in range(k - 1): fast = fast.next
+    for _ in range(k - 1): fast = fast.next  # fast is kth node
     first = fast # save first, the kth from head
-    while fast.next:
+    while fast.next:  # slow is kth node from back
         slow, fast = slow.next, fast.next
     first.val, slow.val = slow.val, first.val
     return head

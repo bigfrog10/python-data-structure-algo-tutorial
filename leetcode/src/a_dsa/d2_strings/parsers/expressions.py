@@ -20,24 +20,24 @@ def addOperators(self, num: str, target: int) -> List[str]:
 
 # LC224. Basic Calculator
 def calculate(self, s):
-    stack, sign, num = [], '+', 0  # stack for () and sign in front
-    for i, c in enumerate(s + '+'):
-        if c.isdigit(): num = num * 10 + int(c)
-        elif c == '(':
-            stack.append(sign)  # save history
-            stack.append('(')
-            sign = '+'  # start new sign
-        elif c in '+-)':
-            if sign == '+': stack.append(num)
-            elif sign == '-': stack.append(-num)
-            if c == ')':
-                num, item = 0, stack.pop()
-                while item != '(':
-                    num += item
-                    item = stack.pop()
-                sign = stack.pop()
-            else: sign, num = c, 0
-    return sum(stack)
+    res, num, sign, stack = 0, 0, 1, []
+    for ss in s:
+        if ss.isdigit():
+            num = 10*num + int(ss)
+        elif ss in ["-", "+"]:
+            res += sign*num
+            num = 0
+            sign = 1 if ss == '+' else -1
+        elif ss == "(":
+            stack.append(res)
+            stack.append(sign)
+            sign, res = 1, 0
+        elif ss == ")":
+            res += sign*num
+            res *= stack.pop()  # old sign
+            res += stack.pop()  # old res
+            num = 0
+    return res + num*sign
 
 # LC227. Basic Calculator II
 def calculate(self, s: str) -> int:
@@ -87,6 +87,23 @@ def calculate(self, s: str) -> int:
             else: sign, num = c, 0 # this is for +-*/
     return sum(stack)
 
+
+
+# LC2019. The Score of Students Solving Math Expression
+def scoreOfStudents(self, s: str, answers: List[int]) -> int:  # O(n^3 * ???)
+    @functools.lru_cache(None)
+    def dp(i, j):  # all possible result for the substring from s[i] to s[j], O(n^2)
+        if i == j: return {int(s[i])}  # base case
+        res = {}
+        for m in range(i + 1, j, 2):  # O(n) ways to break substrings
+            for a in dp(i, m - 1):  # truncate to 1000
+                for b in dp(m + 1, j): # truncate to 1000
+                    cur = a * b if s[m] == '*' else a + b
+                    if cur <= 1000:  # opt with 0 <= answers[i] <= 1000
+                        res[cur] = 2
+        return res # truncate to 1000
+    res = {**dp(0, len(s) - 1), **{eval(s): 5}}
+    return sum(res.get(a, 0) for a in answers)
 
 # LC1106. Parsing A Boolean Expression
 def parseBoolExpr(self, expression: str) -> bool:

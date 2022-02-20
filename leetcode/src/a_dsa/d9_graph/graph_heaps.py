@@ -2,7 +2,7 @@ from collections import Counter, defaultdict, deque
 import heapq
 
 # LC332. Reconstruct Itinerary O(E^d), d max flights from any node.
-def findItinerary(self, tickets: List[List[str]]) -> List[str]:
+def findItinerary(self, tickets: List[List[str]]) -> List[str]:  # O(ElogE)
     if not tickets: return []
     dgraph = defaultdict(list)
     for origin, dest in tickets: dgraph[origin].append(dest)
@@ -11,24 +11,24 @@ def findItinerary(self, tickets: List[List[str]]) -> List[str]:
     def dfs(origin):
         dests = dgraph[origin]
         while dests: dfs(dests.pop()) # remove edge by Hierholzer's Algorithm
-        ret.append(origin)  # dfs adds end nodes first, lastly add start.
+        ret.append(origin)  # dfs adds end nodes first, lastly add start.  - postorder traverse
     dfs('JFK')
     return ret[::-1]
 
-# LC787. Cheapest Flights Within K Stops - weighted graph + heap
-def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, K: int) -> int:
+# LC787. Cheapest Flights Within K Stops - weighted graph
+def findCheapestPrice(self, n, flights, src, dst, K):  # O(E) runtime, O(E + V) space
     if src == dst: return 0
     d, seen = collections.defaultdict(list), collections.defaultdict(lambda: float('inf'))
-    for u, v, p in flights: d[u] += [(v, p)]
-    q = [(src, -1, 0)]
-    while q:
-        pos, k, cost = q.pop(0)
+    for u, v, p in flights: d[u] += [(v, p)]  # O(E) space
+    dque = deque([(src, -1, 0)])
+    while dque:  # O(E)
+        pos, k, cost = dque.popleft()
         if pos == dst or k == K: continue
         for nei, p in d[pos]:
             if cost + p >= seen[nei]: continue
             else:
-                seen[nei] = cost+p
-                q += [(nei, k+1, cost+p)]
+                seen[nei] = cost+p  # O(V) space
+                dque.append((nei, k+1, cost+p))
     return seen[dst] if seen[dst] < float('inf') else -1
 
 # LC2065. Maximum Path Quality of a Graph

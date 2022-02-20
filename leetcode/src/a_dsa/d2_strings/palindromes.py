@@ -1,6 +1,6 @@
 
 # LC125. Valid Palindrome
-def isPalindrome(self, s: str) -> bool: # ignore non alphanumeric, check is or not
+def isPalindrome(self, s: str) -> bool:  # ignore non alphanumeric, check is or not
     i, j = 0, len(s) - 1
     while i < j:
         while i < j and not s[i].isalnum(): i += 1
@@ -14,7 +14,7 @@ def isPalindrome(self, s: str) -> bool: # ignore non alphanumeric, check is or n
 def validPalindrome(self, s: str) -> bool:  # O(n)
     n, i = len(s), 0
     while i < n / 2 and s[i] == s[~i]: i += 1
-    s = s[i:n - i]
+    s = s[i:n - i]  # n - i = ~i + 1
     # remove left or right char
     return s[1:] == s[1:][::-1] or s[:-1] == s[:-1][::-1]
 
@@ -32,17 +32,17 @@ def isValidPalindrome(self, s: str, k: int) -> bool:  # O(n^2)
     return ret <= k
 
 # LC336. Palindrome Pairs
-def palindromePairs(self, words: List[str]) -> List[List[int]]:
+def palindromePairs(self, words: List[str]) -> List[List[int]]:  # O(nk^2)
     lookup = {w:i for i,w in enumerate(words)}
     res = []
-    for i, w in enumerate(words):  # O(nk)
-        for j in range(len(w)+1):  # for case like "a", "ba"
+    for i, w in enumerate(words):  # O(n)
+        for j in range(len(w)+1):  # O(k), for case like "a", "ba"
             pre, pos = w[:j], w[j:]
-            rev_pre, rev_pos = pre[::-1], pos[::-1]
+            rev_pre, rev_pos = pre[::-1], pos[::-1]  # O(k)
             # pre is palindrome, pos is another. != w is for distinct indices
             if pre == rev_pre and rev_pos != w and rev_pos in lookup:
                 res.append([lookup[rev_pos], i])
-            # pos is palindrome, j != len(w) is to avoid double count for ""
+            # pos is palindrome, j != len(w) is to avoid double count for "", such as ["ab", "ba"]
             if j != len(w) and pos == rev_pos and rev_pre != w and rev_pre in lookup:
                 res.append([i, lookup[rev_pre]])
     return res
@@ -93,7 +93,7 @@ def generatePalindromes(self, s: str) -> List[str]:
 def breakPalindrome(self, palindrome: str) -> str:
     if not palindrome: return ''
     n = len(palindrome)
-    if len(palindrome) == 1: return ''  # single char is always palindrome.
+    if n == 1: return ''  # single char is always palindrome.
     i = n-1  # we need to distinguish aaa and bbb
     for idx, ch in enumerate(palindrome):
         if ch != 'a':  # find first non a and replace it with a
@@ -104,45 +104,43 @@ def breakPalindrome(self, palindrome: str) -> str:
     return palindrome[:i] + 'a' + palindrome[i+1:]
 
 # LC131. Palindrome Partitioning
-def partition(self, s: str) -> List[List[str]]:
+def partition(self, s: str) -> List[List[str]]:  # O(2^n) when all substrings are palindrome, aaaa
     if not s: return []
-    # O(n^3). dp(i) = partitions of s with length <=i
-    dp = {0:[[]], 1:[[s[0]]]}
+    dp = {0: [[]], 1: [[s[0]]]}  # dp(i) = partitions of s with length <=i
     for i in range(2, len(s)+1):
         r = []
         for j in range(i):
             t = s[j:i]  # partition 1
             if t == t[::-1]:  # check if it's a palindrome
-                for p in dp[j]: r.append(p + [t]) # partition 2
+                for p in dp[j]: r.append(p + [t])  # partition 2
         dp[i] = r
     return dp[len(s)]
 def partition(self, s):  # O(2^n) when all substrings are palindrome, aaaa
     N=len(s)
     ans, stack = [], []
     def helper(i):
-        if i>=N:
+        if i >= N:
             ans.append(stack[:])
             return
         for j in range(i,N):  # O(n)
-            if s[i:j+1]==s[i:j+1][::-1]:
+            if s[i:j+1] == s[i:j+1][::-1]:
                 stack.append(s[i:j+1])
                 helper(j+1)
-                stack.pop()
+                stack.pop()  # back track
     helper(0)
     return ans
 
 # LC5. Longest Palindromic Substring
-def longestPalindrome(self, s): # best solution 96ms, 98%
-    if not s: return 0  # O(n^2)
-    start, maxLen = 0, 1
-    for i in range(len(s)):  # 2 pointers
-        if i - maxLen >= 1 and s[i - maxLen - 1:i + 1] == s[i-maxLen-1:i+1][::-1]:
-            start = i-maxLen-1 # check substring ended to i
-            maxLen += 2  # add 1 on both ends
-        elif i-maxLen >=0 and s[i-maxLen:i+1] == s[i-maxLen:i+1][::-1]:
-            start=i-maxLen
-            maxLen += 1  # add on ith char
-    return s[start:start+maxLen]
+def longestPalindrome1(self, s): # similar, slower, O(n^2)
+    def find_diameter(left, right):  # O(n)
+        while 0 <= left and right < len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        return s[left+1:right]
+    res = ""
+    for i in range(len(s)):  # O(n)
+        res = max(find_diameter(i, i), find_diameter(i, i+1), res, key=len)
+    return res
 
 # LC516. Longest Palindromic Subsequence
 def longestPalindromeSubseq(self, s: str) -> int: # O(n^2)

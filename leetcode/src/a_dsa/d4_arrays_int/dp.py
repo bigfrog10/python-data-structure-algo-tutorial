@@ -30,12 +30,12 @@ def rob(self, nums: List[int]) -> int:  # O(n)
     return max(nums[0] + rob_street(nums[2:-1]), rob_street(nums[1:]))
 
 # LC740. Delete and Earn
-def deleteAndEarn(self, nums):
+def deleteAndEarn(self, nums: List[int]) -> int:  # O(n)
     if not nums: return 0
     c = collections.Counter(nums)
     m, M = min(nums), max(nums)
     prev = curr = 0 # prev = skip current, curr = take current
-    for n in range(m, M+1):
+    for n in range(m, M+1):  # count sorting
         prev, curr = curr, max(prev + n*c[n], curr)
     return curr
 

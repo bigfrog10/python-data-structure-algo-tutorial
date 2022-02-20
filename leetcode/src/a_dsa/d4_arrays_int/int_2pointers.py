@@ -1,14 +1,14 @@
 from typing import List
 
 # LC1004. Max Consecutive Ones III
-def longestOnes(self, A: List[int], K: int) -> int:
+def longestOnes(self, nums: List[int], K: int) -> int:
     left = 0
-    for right in range(len(A)):
-        K -= 1 - A[right]
+    for right in range(len(nums)):
+        K -= 1 - nums[right]
         if K < 0:
-            K += 1 - A[left]
+            K += 1 - nums[left]
             left += 1
-    return right - left + 1  # len(A) - left, include both left and right
+    return len(nums) - left  # len(A) - left, include both left and right
 # https://leetcode.com/problems/max-consecutive-ones-iii/discuss/247564/javacpython-sliding-window/379427?page=3
 
 # LC480. Sliding Window Median
@@ -31,7 +31,7 @@ def moveZeroes(self, nums: List[int]) -> None:
             i += 1
 
 # LC42. Trapping Rain Water, top100
-def trap(self, heights: List[int]) -> int: # 2 pointers
+def trap(self, heights: List[int]) -> int: # 2 pointers, O(n)
     if not heights: return 0
     left, right = 0, len(heights)-1
     lmax = rmax = ret = 0  # maintain history

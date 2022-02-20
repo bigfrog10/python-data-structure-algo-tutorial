@@ -24,6 +24,24 @@ def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         else: merged[-1][1] = max(merged[-1][1], interval[1])
     return merged
 
+# LC252. Meeting Rooms
+def canAttendMeetings(self, intervals: List[List[int]]) -> bool:
+    si = sorted(intervals)  # sort by first element in asc order
+    for i in range(len(si) - 1):
+        if si[i][1] > si[i+1][0]: return False
+    return True
+
+# LC253. Meeting Rooms II, top100
+def minMeetingRooms(self, intervals: List[List[int]]) -> int:
+    if not intervals: return 0
+    intervals.sort()  # greedy, sort intervals by starting time. O(nlogn)
+    rooms = []
+    for intv in intervals:
+        if rooms and rooms[0] <= intv[0]: # if earliest end time < this start time
+            heapq.heappop(rooms) # remove and replace with current end time
+        heapq.heappush(rooms, intv[1])  # we sort heap by end time
+    return len(rooms)
+
 # LC759. Employee Free Time
 class Interval:
     def __init__(self, start: int = None, end: int = None):
@@ -44,7 +62,7 @@ def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
     # greedy, make more room for later
     # other optimal solution can be replaced with this one.
     end, cnt = float('-inf'), 0
-    for s, e in sorted(intervals, key=lambda x: x[1]):
+    for s, e in sorted(intervals, key=lambda x: x[1]):  # sort by end time
         if s >= end: end = e  # no overlap, keep it, so update new ending
         else:  # new interval starting < current end, so overlapped
             cnt += 1  # overlapped, so remove this, so increment counter
@@ -84,6 +102,22 @@ class MyCalendarTwo:
         return True
 
 # LC732. My Calendar III
+import sortedcontainers
+class MyCalendarThree1:
+    def __init__(self):
+        self.timeline = sortedcontainers.SortedDict([(-1, 0)])
+        self.most = 0
+    def book(self, start: int, end: int) -> int:
+        # if keys are missing, set the value to previous values
+        sidx = self.timeline.bisect_left(start)
+        self.timeline[start] = self.timeline.get(start, self.timeline.peekitem(sidx-1)[1])
+        eidx = self.timeline.bisect_left(end)  # we have to bisect after start
+        self.timeline[end] = self.timeline.get(end, self.timeline.peekitem(eidx-1)[1])
+        for i in range(sidx, eidx):  # no need to bisect again
+            t, k = self.timeline.peekitem(i)
+            self.timeline[t] = k+1
+            self.most = max(self.most, k+1)
+        return self.most
 class MyCalendarThree(object):  # or binary index tree/segment tree
     def __init__(self):
         self.pos = []
@@ -105,7 +139,7 @@ class MyCalendarThree(object):  # or binary index tree/segment tree
 
 # LC986. Interval List Intersections
 def intervalIntersection(self, firstList: List[List[int]], secondList: List[List[int]]) -> List[List[int]]:
-    ret = []
+    ret = []  # O(m + n)
     i = j = 0
     while i < len(firstList) and j < len(secondList):
         left = max(firstList[i][0], secondList[j][0])
@@ -130,33 +164,15 @@ class RangeModule:
         i, j = bl(self._X, left), br(self._X, right)
         self._X[i:j] = [left]*(i%2 == 1) + [right]*(j%2 == 1)
 
-# LC252. Meeting Rooms
-def canAttendMeetings(self, intervals: List[List[int]]) -> bool:
-    si = sorted(intervals)  # sort by first element in asc order
-    for i in range(len(si) - 1):
-        if si[i][1] > si[i+1][0]: return False
-    return True
-
-# LC253. Meeting Rooms II, top100
-def minMeetingRooms(self, intervals: List[List[int]]) -> int:
-    if not intervals: return 0
-    intervals.sort()  # greedy, sort intervals by starting time. O(nlogn)
-    rooms = []
-    for intv in intervals:
-        if rooms and rooms[0] <= intv[0]: # if earliest end time < this start time
-            heapq.heappop(rooms) # remove and replace with current end time
-        heapq.heappush(rooms, intv[1])  # we sort heap by end time
-    return len(rooms)
-
 # LC57. Insert Interval
 def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
-    s, e = newInterval[0], newInterval[1]
+    s, e = newInterval[0], newInterval[1]  # O(n)
     left = [i for i in intervals if i[1] < s]
     right = [i for i in intervals if i[0] > e]
     if left + right != intervals:
         s = min(s, intervals[len(left)][0])
         e = max(e, intervals[~len(right)][1])
-    return left + [(s, e)] + right
+    return left + [[s, e]] + right
 
 # LC370. Range Addition
 def getModifiedArray(self, length: int, updates: List[List[int]]) -> List[int]:
@@ -169,21 +185,19 @@ def getModifiedArray(self, length: int, updates: List[List[int]]) -> List[int]:
     return arr
 
 # LC1353. Maximum Number of Events That Can Be Attended
-def maxEvents(self, events: List[List[int]]) -> int:
-    events.sort()  # sort by begin date
-    pq = []  # store end time of open events
-    count = d = 0 # d is current day
-    i, n = 0, len(events)
-    while i < n or pq:
-        if not pq: d = events[i][0] # current day is start day
-        while i < n and d >= events[i][0]: # push all events we can possibly attend
-            heappush(pq, events[i][1])  # sort by end date
-            i += 1  # finish earlier to attend more events
-        heappop(pq)  # attend this one event
-        count += 1
+def maxEvents(self, events: List[List[int]]) -> int:  # O(nlogn)
+    events.sort(reverse=1)  # should sort by start date, we do this for pop()
+    hq = []  # store end time of open events
+    res = d = 0  # d is current day
+    while events or hq:
+        if not hq: d = events[-1][0]  # current day is start day
+        while events and events[-1][0] <= d:  # push all events we can possibly attend
+            heapq.heappush(hq, events.pop()[1])  # sort by end date
+        heapq.heappop(hq)  # attend this one event with earlist end date, save room for more future
+        res += 1
         d += 1
-        while pq and pq[0] < d: heappop(pq)  # remove all impossible-to-attend events
-    return count
+        while hq and hq[0] < d: heapq.heappop(hq)  # remove all impossible-to-attend events
+    return res
 
 # LC1751. Maximum Number of Events That Can Be Attended II
 def maxValue(self, events: List[List[int]], k: int) -> int:

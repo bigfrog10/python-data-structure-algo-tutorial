@@ -1,13 +1,13 @@
 
 # LC49. Group Anagrams
-def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-    if not strs: return []  # O(nklogk), n = len(strs), k = max(len(str))
-    ret = {}
+def groupAnagrams(self, strs: List[str]) -> List[List[str]]:  # O(len(strs)*max(len(strs)))
+    ans = collections.defaultdict(list)
     for s in strs:
-        s1 = ''.join(sorted(s))  # hash
-        if s1 not in ret: ret[s1] = [s]
-        else: ret[s1].append(s)
-    return ret.values()
+        count = [0] * 26
+        for c in s:
+            count[ord(c) - ord('a')] += 1
+        ans[tuple(count)].append(s)
+    return ans.values()
 
 # LC242. Valid Anagram
 def isAnagram(self, s: str, t: str) -> bool:
@@ -33,15 +33,6 @@ def findAnagrams(self, s: str, p: str) -> List[int]:
         if pcounts == scounts: ret.append(i - plen + 1)  # this is whey we need del above
     return ret
 
-# LC567. Permutation in String
-def checkInclusion(self, s1, s2):
-    d1, d2 = Counter(s1), Counter(s2[:len(s1)])
-    for start in range(len(s1), len(s2)):
-        if d1 == d2: return True
-        d2[s2[start]] += 1
-        d2[s2[start-len(s1)]] -= 1
-        if d2[s2[start-len(s1)]] == 0:
-            del d2[s2[start-len(s1)]]
-    return d1 == d2
+
 
 

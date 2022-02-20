@@ -39,7 +39,7 @@ def minKnightMoves(self, x: int, y: int) -> int:
         if x + y == 0: return 0  # (0, 0)
         elif x + y == 2: return 2  # (1, 1), (0, 2), (2, 0)
         return min(dp(abs(x-1), abs(y-2)), dp(abs(x-2), abs(y-1))) + 1
-    return dp(abs(x),abs(y))  # first quardrant due to symmetry
+    return dp(abs(x), abs(y))  # first quardrant due to symmetry
 
 # LC348. Design Tic-Tac-Toe
 class TicTacToe:
@@ -75,7 +75,7 @@ def validTicTacToe(self, board):
 
 # LC1275. Find Winner on a Tic Tac Toe Game
 def tictactoe(self, moves: List[List[int]]) -> str:
-    row, col, diag = [0] * 3, [0] * 3, [0] * 2
+    row, col, diag = [0] * 3, [0] * 3, [0] * 2  # results
     player = 1
     for i, j in moves:
         row[i] += player
@@ -152,28 +152,27 @@ def knightDialer(self, N):  # O(logn)
     return int(np.sum(res)) % mod
 
 # LC489. Robot Room Cleaner
-def cleanRoom(self, robot):
+def cleanRoom(self, robot):  # O(open cells)
     def go_back():
         robot.turnRight()
         robot.turnRight()  # turn back
         robot.move()
         robot.turnRight()
         robot.turnRight()  # turn to original dir
-    def backtrack(cell, cf):
+    def clean_cell(cell, cf):
         visited.add(cell)
         robot.clean()
         for i in range(4):
             new_d = (cf + i) % 4  # e.g., facing right needs to start from 2nd index
             new_cell = (cell[0] + directions[new_d][0], cell[1] + directions[new_d][1])
             if not new_cell in visited and robot.move():
-                backtrack(new_cell, new_d)
+                clean_cell(new_cell, new_d)
                 go_back()
-            # turn the robot following chosen direction : clockwise
-            robot.turnRight()  # as
+            robot.turnRight()  # turn the robot following chosen direction : clockwise
     # going clockwise : 0: 'up', 1: 'right', 2: 'down', 3: 'left'
     directions = [(-1, 0), (0, 1), (1, 0), (0, -1)]
     visited = set()
-    backtrack((0, 0), 0)
+    clean_cell((0, 0), 0)
 
 # LC419. Battleships in a Board
 def countBattleships(self, board: List[List[str]]) -> int:
@@ -245,7 +244,7 @@ def maximumMinimumPath(self, A: List[List[int]]) -> int:  # Time: O(MN log MN), 
     return -1
 
 # LC994. Rotting Oranges
-def orangesRotting(self, grid: List[List[int]]) -> int:
+def orangesRotting(self, grid: List[List[int]]) -> int:  # O(rows * cols)
     rows, cols = len(grid), len(grid[0])
     rotten, fresh = set(), set()
     for i, j in product(range(rows), range(cols)):
@@ -253,7 +252,7 @@ def orangesRotting(self, grid: List[List[int]]) -> int:
         if grid[i][j] == 1: fresh.add((i, j))
     timer = 0
     dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
-    while fresh: # BFS
+    while fresh:  # BFS
         if not rotten: return -1
         rotten = {(i+di, j+dj) for i, j in rotten for di, dj in dirs if (i+di, j+dj) in fresh}
         fresh -= rotten
@@ -326,13 +325,13 @@ def cherryPickup(self, grid: List[List[int]]) -> int:
 def hasPath(self, maze: List[List[int]], start: List[int], destination: List[int]) -> bool:
     q, visited = deque([start]), set()  # BFS super
     while q:
-        i,j = q.popleft()
+        i, j = q.popleft()
         if [i, j] == destination: return True
-        for di,dj in [-1,0],[0,-1],[1,0],[0,1]:
-            ni, nj = i + di  , j + dj
-            while 0 <= ni < len(maze) and 0 <= nj < len(maze[0]) and maze[ni][nj] == 0 :
-                ni, nj  = ni + di , nj + dj
-            ni, nj  = ni - di, nj - dj # need to backout 1 step
+        for di,dj in [-1, 0], [0, -1], [1, 0], [0, 1]:
+            ni, nj = i + di, j + dj
+            while 0 <= ni < len(maze) and 0 <= nj < len(maze[0]) and maze[ni][nj] == 0:
+                ni, nj = ni + di, nj + dj
+            ni, nj = ni - di, nj - dj  # need to backout 1 step
             if (ni,nj) not in visited:
                 visited.add((ni,nj))
                 q.append((ni,nj))
@@ -518,4 +517,22 @@ def snakesAndLadders(self, board: List[List[int]]) -> int:
             if board[x1][y1] != -1: move = board[x1][y1]
             if move not in visited:
                 queue.append((move, s+1))
+    return -1
+
+# LC1926. Nearest Exit from Entrance in Maze
+def nearestExit(self, maze: List[List[str]], start: List[int]) -> int:  # O(MN), BFS
+    M, N = len(maze), len(maze[0])
+    isExit = lambda i, j: not i or i == M - 1 or not j or j == N - 1
+    que, seen, level = deque([[*start]]), {tuple(start)}, 0
+    while que:
+        k = len(que)
+        while k:
+            i, j = que.popleft()
+            if isExit(i, j) and level: return level
+            for u, v in [i - 1, j], [i, j + 1], [i + 1, j], [i, j - 1]:
+                if M > u >= 0 <= v < N and maze[u][v] == '.' and (u, v) not in seen:
+                    que.append([u, v])
+                    seen.add((u, v))
+            k -= 1
+        level += 1
     return -1

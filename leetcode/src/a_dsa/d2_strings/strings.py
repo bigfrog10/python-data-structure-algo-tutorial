@@ -40,29 +40,8 @@ def removeDuplicates(self, s, k):  # O(n)
         if stack[-1][0] == c:
             stack[-1][1] += 1
             if stack[-1][1] == k: stack.pop()  # remove this group
-        else: stack.append([c, 1])
+        else: stack.append([c, 1])  # char and count
     return ''.join(c * cnt for c, cnt in stack)
-
-# LC616. Add Bold Tag in String
-def addBoldTag(self, s: str, words: List[str]) -> str:
-    status = [False] * len(s)
-    for word in words:
-        start, last = s.find(word), len(word)
-        while start != -1: # this word appears multiple places
-            for i in range(start, last+start): status[i] = True
-            start = s.find(word, start+1)
-    i, final = 0, ""
-    while i < len(s):
-        if status[i]:
-            final += "<b>"
-            while i < len(s) and status[i]:
-                final += s[i]
-                i += 1
-            final += "</b>"
-        else:
-            final += s[i]
-            i += 1
-    return final
 
 # LC2060. Check if an Original String Exists Given Two Encoded Strings
 def possiblyEquals(self, s1: str, s2: str) -> bool:
@@ -104,25 +83,12 @@ def nextClosestTime(self, time: str) -> str:
     if i + 1 < len(two_digit_values) and two_digit_values[i+1] < "24":
         return two_digit_values[i+1] + ":" + two_digit_values[0]
     return two_digit_values[0] + ":" + two_digit_values[0]
-
-# LC2019. The Score of Students Solving Math Expression
-def scoreOfStudents(self, s: str, answers: List[int]) -> int:
-        @functools.lru_cache(None)
-        def dp(i, j):  # all possible result for the substring from s[i] to s[j], O(n^2)
-            if i == j: return {int(s[i])}  # base case
-            res = {}
-            for m in range(i + 1, j, 2):  # O(n) ways to break substrings
-                for a in dp(i, m - 1):  # truncate to 1000
-                    for b in dp(m + 1, j): # truncate to 1000
-                        cur = a * b if s[m] == '*' else a + b
-                        if cur <= 1000:  # opt with 0 <= answers[i] <= 1000
-                            res[cur] = 2
-            return res # truncate to 1000
-        res = {**dp(0, len(s) - 1), **{eval(s): 5}}
-        return sum(res.get(a, 0) for a in answers)
+def nextClosestTime1(self, time):
+    return min((t <= time, t) for i in range(24 * 60) for t in ['%02d:%02d' % divmod(i, 60)]
+                if set(t) <= set(time))[1]
 
 # LC844. Backspace String Compare
-def backspaceCompare(self, S: str, T: str) -> bool:  # O(n+m)
+def backspaceCompare(self, S: str, T: str) -> bool:  # O(n+m) in runtime and space
     def build(S):
         ans = []
         for c in S:
@@ -130,6 +96,14 @@ def backspaceCompare(self, S: str, T: str) -> bool:  # O(n+m)
             elif ans: ans.pop()
         return "".join(ans)
     return build(S) == build(T)
+def backspaceCompare(self, S, T): # O(n+m) in runtime and O(1) space
+    def F(S):  # iterator, O(1)
+        skip = 0
+        for x in reversed(S):  # reversed is an iterator, O(1)
+            if x == '#': skip += 1
+            elif skip: skip -= 1
+            else: yield x
+    return all(x == y for x, y in itertools.zip_longest(F(S), F(T)))  # zip_longest is an iterator
 
 # LC1055. Shortest Way to Form String
 def shortestWay(self, source, target):
@@ -151,12 +125,12 @@ def isOneEditDistance(self, s: str, t: str) -> bool:
     l1, l2 = len(s), len(t)
     if l1 > l2: return self.isOneEditDistance(t, s)  # force s no longer than t
     if l2 - l1 > 1: return False
-    for i in range(len(s)):
+    for i in range(len(s)):  # O(n) runtime
         if s[i] != t[i]:
-            if l1 == l2: s = s[:i]+t[i]+s[i+1:]  # replacement
+            if l1 == l2: s = s[:i]+t[i]+s[i+1:]  # replacement, new string O(n)
             else: s = s[:i]+t[i]+s[i:]  # insertion
             break
-    return s == t or s == t[:-1] # delete, s = "", t = 'a'
+    return s == t or s == t[:-1]  # delete, s = "", t = 'a'
 
 # LC468. Validate IP Address
 def validIPAddress(self, IP: str) -> str:
@@ -204,7 +178,7 @@ def lengthLongestPath(self, input: str) -> int:
     return ret
 
 # LC1044. Longest Duplicate Substring
-def longestDupSubstring(self, S):  # O(nlogn) runtime, O(n) space
+def longestDupSubstring(self, S):  # O(nlogn) runtime, O(n) space, hard - Rabin-Karp
     A = [ord(c) - ord('a') for c in S]
     mod = 2**63 - 1
     def test(L):  # find duplicated substrings of length L, O(n)
@@ -226,53 +200,36 @@ def longestDupSubstring(self, S):  # O(nlogn) runtime, O(n) space
     return S[res:res + lo]
 
 # LC459. Repeated Substring Pattern
-def repeatedSubstringPattern(self, s: str) -> bool:
+def repeatedSubstringPattern(self, s: str) -> bool:  # O(n^2)
     idx = (s + s).find(s, 1)
     return len(s) > idx > -1
-
-# LC471. Encode String with Shortest Length
-@functools.lru_cache(None)
-def encode(self, s: str) -> str:  # O(n^4)
-    i = (s+s).find(s,1) # O(n^2)
-    encoded = str(len(s)//i) + '[' + self.encode(s[:i]) + ']' if i<len(s) else s
-    splitEncoded = [self.encode(s[:i]) + self.encode(s[i:]) for i in range(1,len(s))]
-    return min(splitEncoded + [encoded], key=len)
-
-# LC394. Decode String
-def decodeString(self, s: str) -> str:
-    stack = []
-    curr, k = "", 0
-    for char in s:
-        if char == "[":
-            stack.append((curr, k))
-            curr, k = "", 0
-        elif char == "]":
-            last_string, last_k = stack.pop()
-            curr = last_string + last_k * curr
-        elif char.isdigit(): k = k * 10 + int(char)
-        else: curr += char
-    return curr
-
-# LC91. Decode Ways, top100
-def numDecodings(self, s: str) -> int:  # Best, fast and short
-    @lru_cache(maxsize=None)
-    def walk(idx):
-        if idx == len(s): return 1
-        if s[idx] == '0': return 0
-        if idx == len(s) - 1: return 1  # This has to be after above check, case: '0'
-        ret = walk(idx + 1)
-        if int(s[idx: idx+2]) <= 26: ret += walk(idx + 2)
-        return ret
-    return walk(0)
+def repeatedSubstringPattern(self, s: str) -> bool:  # O(n)
+    i, j, n = 1, 0, len(s)  # KMP prefix array
+    # 1st zero no use.
+    dp = [0] * (n+1)  # dp(i) stores the largest index up to i when we have matches
+    while i < n:
+        if s[i] == s[j]:  # matched
+            i += 1
+            j += 1
+            dp[i] = j
+        elif j == 0: i += 1  # to find 1st repeat
+        else: j = dp[j]  # mismatch, then roll back j, e.g. "ababcdababcd"
+    return dp[n] and dp[n] % (n - dp[n]) == 0
 
 # LC1108. Defanging an IP Address
 def defangIPaddr(self, address: str) -> str:
     return '[.]'.join(address.split('.'))
 
 # LC833. Find And Replace in String
-def findReplaceString(self, S, indexes, sources, targets):
-    for i, s, t in sorted(zip(indexes, sources, targets), reverse=True):
-        S = S[:i] + t + S[i + len(s):] if S[i:i + len(s)] == s else S
+def findReplaceString(self, S, indexes, sources, targets):  # O(len(ops) * len(S))
+    n, m = len(S), len(indexes)
+    idxs = [[]] * n
+    for i, s, t in zip(indexes, sources, targets):  # O(m)
+        if S[i:i + len(s)] == s: idxs[i] = (s, t)
+    for i in range(len(idxs))[::-1]:  # O(m)
+        if idxs[i]:
+            s, t = idxs[i]
+            S = S[:i] + t + S[i + len(s):]  # O(n)
     return S
 
 # LC345. Reverse Vowels of a String
@@ -333,15 +290,15 @@ def convert(self, s: str, numRows: int) -> str:
 
 # LC767. Reorganize String
 def reorganizeString(self, s: str) -> str:
-    if not s: return "" # O(n) there is no sort
+    if not s: return ""  # O(n) there is no sort
     n, counts = len(s), Counter(s)
     maxk, maxc = None, -1
     for k, c in counts.items(): # only max matters
         if c > maxc: maxk, maxc = k, c
-    if maxc > (n+1) // 2: return "" # we could have ababa
+    if maxc > (n+1) // 2: return ""  # we could have ababa
     res = [''] * n
     res[:maxc*2:2] = [maxk] * maxc
-    i = maxc*2 if maxc * 2 < n else 1
+    i = maxc*2 if maxc * 2 < n else 1  # to continue fill in lower count chars.
     for k, c in counts.items():
         if k == maxk: continue
         for j in range(c):
@@ -380,8 +337,32 @@ def strStr(self, haystack: str, needle: str) -> int:
     if not haystack: return -1  # order matters, needle is not empty
     h_len, n_len = len(haystack), len(needle)
     for i in range(h_len - n_len + 1):
-        if needle == haystack[i:i+n_len]: return i
+        if needle == haystack[i:i+n_len]: return i  # O(n^2)
     return -1
+def strStr(self, haystack: str, needle: str) -> int:  # KMP, O(m + n)
+    def createNeedleSuffixArr(needle):
+        result = [0]*len(needle)
+        i, j = 1, 0
+        while i < len(needle):
+            if needle[i] == needle[j]:
+                result[i] = j + 1
+                i += 1
+                j += 1
+            elif j > 0: j = result[j-1]
+            else: i += 1
+        return result
+    if not needle: return 0
+    if not haystack or len(haystack) < len(needle): return -1
+    needleArr = createNeedleSuffixArr(needle)
+    i = j = 0
+    while i < len(haystack) and j < len(needle):
+        if haystack[i] == needle[j]:
+            i += 1
+            j += 1
+        elif j > 0: j = needleArr[j-1]
+        else: i += 1
+    return i - j if j == len(needle) else -1
+
 
 # LC1071. Greatest Common Divisor of Strings
 def gcdOfStrings(self, str1: str, str2: str) -> str:
@@ -466,33 +447,16 @@ def addBoldTag(self, s, dict):
             i += 1
     return final
 
-# LC246. Strobogrammatic Number
-def isStrobogrammatic(self, num: str) -> bool:
-    # only 0, 1, 6, 8, 9 works. 6 and 9 are paired
-    rotates = {'0': '0', '1': '1', '8': '8', '6': '9', '9': '6'}
-    left, right = 0, len(num)-1
-    while left <= right:
-        if num[left] not in rotates or rotates[num[left]] != num[right]:
-            return False
-        left += 1
-        right -= 1
-    return True
-
-# LC247. Strobogrammatic Number II
-def findStrobogrammatic(self, n: int) -> List[str]:
-    # set of 0 1 6 8 9
-    ret = [''] if n % 2 == 0 else ['0', '1', '8']  # start from center
-    for _ in range(n // 2):
-        strobo = []
-        for s in ret:
-            strobo.append('1' + s + '1')
-            strobo.append('8' + s + '8')
-            strobo.append('6' + s + '9')
-            strobo.append('9' + s + '6')
-            if len(s) < n - 2:  # 0 can't be at first position
-                strobo.append('0' + s + '0')
-        ret = strobo  # next wave spreaded from center
-    return ret
+# LC567. Permutation in String
+def checkInclusion(self, s1, s2):
+    d1, d2 = Counter(s1), Counter(s2[:len(s1)])
+    for start in range(len(s1), len(s2)):
+        if d1 == d2: return True
+        d2[s2[start]] += 1
+        d2[s2[start-len(s1)]] -= 1
+        if d2[s2[start-len(s1)]] == 0:
+            del d2[s2[start-len(s1)]]
+    return d1 == d2
 
 # LC395. Longest Substring with At Least K Repeating Characters
 def longestSubstring(self, s, k): # O(n)
@@ -517,3 +481,14 @@ def maxRepOpt1(self, S):
             # min here serves the same purpose
             res = max(res, min(A[i - 1][1] + A[i + 1][1] + 1, count[A[i + 1][0]]))
     return res
+
+# LC1832. Check if the Sentence Is Pangram
+def checkIfPangram(self, sentence: str) -> bool:
+        return len(set(sentence)) == 26
+
+# LC859. Buddy Strings
+def buddyStrings(self, A, B):
+    if len(A) != len(B): return False
+    if A == B and len(set(A)) < len(A): return True
+    dif = [(a, b) for a, b in zip(A, B) if a != b]
+    return len(dif) == 2 and dif[0] == dif[1][::-1]

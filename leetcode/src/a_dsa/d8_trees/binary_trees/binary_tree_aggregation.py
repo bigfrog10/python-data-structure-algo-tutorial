@@ -27,14 +27,6 @@ def sumNumbers(self, root: Optional[TreeNode]) -> int:
     dfs(root, 0)
     return total
 
-# LC515. Find Largest Value in Each Tree Row
-def largestValues(self, root: TreeNode) -> List[int]:
-    row, maxes = [root], []
-    while any(row):  # To deal with None in the row
-        maxes.append(max(node.val for node in row if node))
-        row = [kid for node in row for kid in (node.left, node.right) if kid]
-    return maxes
-
 # LC865. Smallest Subtree with all the Deepest Nodes
 def subtreeWithAllDeepest(self, root: TreeNode) -> TreeNode:
     def deep(root):
@@ -44,23 +36,6 @@ def subtreeWithAllDeepest(self, root: TreeNode) -> TreeNode:
         elif l[0] < r[0]: return r[0] + 1, r[1]
         else: return l[0] + 1, root
     return deep(root)[1]
-
-# LC1161. Maximum Level Sum of a Binary Tree
-def maxLevelSum(self, root: TreeNode) -> int:
-    ans, q, depth = (-math.inf, 0), [root], -1
-    while q:
-        ans = max(ans, (sum(node.val for node in q), depth))
-        q = [kid for node in q for kid in (node.left, node.right) if kid]
-        depth -= 1
-    return -ans[1]
-
-# LC637. Average of Levels in Binary Tree
-def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
-    level, averages = [root], []
-    while level:
-        averages.append(sum(node.val for node in level) / len(level))
-        level = [kid for node in level for kid in (node.left, node.right) if kid]
-    return averages
 
 # LC538. Convert BST to Greater Tree
 def convertBST(self, root: TreeNode) -> TreeNode:
@@ -87,14 +62,14 @@ def hasPathSum(self, root: TreeNode, targetSum: int) -> bool:
                dfs(node.right, target - node.val)
     return dfs(root, targetSum)
 
-# LC113. Path Sum II - return all paths
+# LC113. Path Sum II - tree return all paths
 def pathSum(self, root: TreeNode, targetSum: int) -> List[List[int]]:
-    res = [] # since we need historic info, we backtrack
+    res = []  # since we need historic info, we backtrack
     def dfs(node, target, path):
         if not node: return False
         if node.val == target:
-            if not node.left and not node.right:
-                res.append(path + [node.val]) # this is a copy
+            if not node.left and not node.right:  # leaf
+                res.append(path + [node.val])  # this is a copy
         target -= node.val
         path.append(node.val)
         dfs(node.left, target, path)
@@ -127,7 +102,6 @@ def longestConsecutive(self, root: Optional[TreeNode]) -> int:
         if not node: return length
         length = length + 1 if parent and node.val == parent.val + 1 else 1
         return max(length, dfs(node.left, node, length), dfs(node.right, node, length))
-
     return dfs(root, None, 0)
 
 # LC549. Binary Tree Longest Consecutive Sequence II
@@ -136,7 +110,6 @@ def longestConsecutive(self, root: Optional[TreeNode]) -> int:  # O(n)
     def longest_path(root):
         if not root: return 0, 0
         inc, dec = 1, 1
-
         if root.left:
             l_inc, l_dec = longest_path(root.left)
             if root.left.val == root.val + 1: inc = max(inc, 1 + l_inc)
@@ -145,11 +118,9 @@ def longestConsecutive(self, root: Optional[TreeNode]) -> int:  # O(n)
             r_inc, r_dec = longest_path(root.right)
             if root.right.val == root.val + 1: inc = max(inc, 1 + r_inc)
             if root.right.val == root.val - 1: dec = max(dec, 1 + r_dec)
-
         nonlocal res
         res = max(res, inc + dec - 1)
         return inc, dec
-
     longest_path(root)
     return res
 
@@ -201,7 +172,7 @@ def maxAncestorDiff(self, root: TreeNode) -> int:
 # LC1373. Maximum Sum BST in Binary Tree
 def maxSumBST(self, root: Optional[TreeNode]) -> int:
     res = [0]
-    def check(node):   #return bst sum, bst size, left_bound, right_bound
+    def check(node):   #return bst sum, is bst, left_bound, right_bound
         if not node: return 0, True, -inf, inf # size = sum
         s1, bst1, maxi1, mini1 = check(node.left)
         s2, bst2, maxi2, mini2 = check(node.right)
@@ -219,8 +190,8 @@ def distributeCoins(self, root: TreeNode) -> int:
     def dfs(node): # the excess number of coins in the subtree at or below this node
         if not node: return 0
         L, R = dfs(node.left), dfs(node.right)
-        self.ans += abs(L) + abs(R) # extra from children
-        return node.val + L + R - 1 # total extra
+        self.ans += abs(L) + abs(R)  # extra from children
+        return node.val + L + R - 1  # total extra
     dfs(root)
     return self.ans
 
@@ -263,5 +234,3 @@ def leafSimilar(self, root1: TreeNode, root2: TreeNode) -> bool:
     seq1 = dfs(root1, [])
     seq2 = dfs(root2, [])
     return seq1 == seq2
-
-

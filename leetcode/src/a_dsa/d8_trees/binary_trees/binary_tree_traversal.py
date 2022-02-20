@@ -26,17 +26,6 @@ def verticalTraversal(self, root: TreeNode) -> List[List[int]]:
     ret = [[n[1] for n in sorted(res[k])] for k in cols]
     return ret
 
-# LC199. Binary Tree Right Side View
-def rightSideView(self, root: TreeNode) -> List[int]:
-    if not root: return []
-    ret = []
-    def traverse(node, depth):
-        if depth == len(ret): ret.append(node.val)
-        for n in [node.right, node.left]:
-            if n: traverse(n, depth+1)
-    traverse(root, 0)
-    return ret
-
 # LC543. Diameter of Binary Tree
 def diameterOfBinaryTree(self, root: TreeNode) -> int:
     diameter = 0
@@ -51,41 +40,34 @@ def diameterOfBinaryTree(self, root: TreeNode) -> int:
     path_max(root)
     return diameter
 
-# LC103. Binary Tree Zigzag Level Order Traversal
-def zigzagLevelOrder(self, root):
-    ans, row, drxn = [], [root], 1
-    while any(row):
-        ans += [node.val for node in row][::drxn],
-        row = [child for node in row for child in (node.left, node.right) if child]
-        drxn *= -1
-    return ans
-
-# LC111. Minimum Depth of Binary Tree
-def minDepth(self, root: Optional[TreeNode]) -> int:
-    res, row = 0, [root]  # BFS for min
-    while any(row):
-        res += 1
-        if any(not(child.left or child.right) for child in row): return res
-        row = [child for node in row for child in (node.left, node.right) if child]
-    return res
+# LC662. Maximum Width of Binary Tree
+def widthOfBinaryTree(self, root: TreeNode) -> int:
+    width = 0
+    level = [(1, root)]
+    while level:
+        width = max(width, level[-1][0] - level[0][0] + 1)
+        level = [kid
+                 for number, node in level
+                 for kid in enumerate((node.left, node.right), 2 * number) if kid[1]]
+    return width
 
 # LC545. Boundary of Binary Tree
-def boundaryOfBinaryTree(self, root: TreeNode) -> List[int]:
-    def left_bound(root): # O(n), loop all node once
-       if not root: return
-       if root.left or root.right: ans.append(root.val) # condition 4
-       if root.left: left_bound(root.left) # condition 2
-       else: left_bound(root.right) # condition 3
+def boundaryOfBinaryTree(self, root: Optional[TreeNode]) -> List[int]:  # O(n) runtime, O(n) space(stack recursion)
+    def left_bound(root):
+        if not root: return
+        if root.left or root.right: ans.append(root.val) # condition 1
+        if root.left: left_bound(root.left) # condition 2
+        else: left_bound(root.right) # condition 3
     def leaf(root):
-       if not root: return
-       leaf(root.left)
-       if not root.left and not root.right: ans.append(root.val)
-       leaf(root.right)
-    def right_bound(root):
-       if not root: return
-       if not root.right: right_bound(root.left)
-       else: right_bound(root.right)
-       if root.left or root.right: ans.append(root.val) ## Reverse
+        if not root: return
+        leaf(root.left)
+        if not root.left and not root.right: ans.append(root.val)
+        leaf(root.right)
+    def right_bound(root):  ## Reversed order
+        if not root: return
+        if root.right: right_bound(root.right)  # condition 2
+        else: right_bound(root.left)  # condition 3
+        if root.left or root.right: ans.append(root.val) # condition 1,
     if not root: return []
     ans = []
     ans.append(root.val)
@@ -93,14 +75,6 @@ def boundaryOfBinaryTree(self, root: TreeNode) -> List[int]:
     leaf(root.left)
     leaf(root.right)
     right_bound(root.right)
-    return ans
-
-# LC102. Binary Tree Level Order Traversal
-def levelOrder(self, root):
-    ans, level = [], [root]
-    while root and level:
-        ans.append([node.val for node in level])
-        level = [kid for n in level for kid in (n.left, n.right) if kid]
     return ans
 
 # LC1973. Count Nodes Equal to Sum of Descendants
@@ -146,18 +120,6 @@ def flipEquiv(self, root1: TreeNode, root2: TreeNode) -> bool: # O(min(#nodes))
     if root1.val != root2.val: return False
     return (self.flipEquiv(root1.left, root2.left) and self.flipEquiv(root1.right, root2.right) or
             self.flipEquiv(root1.left, root2.right) and self.flipEquiv(root1.right, root2.left))
-
-# LC662. Maximum Width of Binary Tree
-def widthOfBinaryTree(self, root: TreeNode) -> int:
-    width = 0
-    level = [(1, root)]
-    while level:
-        width = max(width, level[-1][0] - level[0][0] + 1)
-        level = [kid
-                 for number, node in level
-                 for kid in enumerate((node.left, node.right), 2 * number)
-                 if kid[1]]
-    return width
 
 # LC655. Print Binary Tree - O(n)
 def printTree(self, root: TreeNode) -> List[List[str]]:
@@ -234,20 +196,6 @@ def findDistance(self, root: TreeNode, p: int, q: int) -> int:
     fn(root)
     return ans
 
-# LC662. Maximum Width of Binary Tree
-def widthOfBinaryTree(self, root: TreeNode) -> int:
-    width = 0
-    level = [(1, root)]
-    while level:
-        width = max(width, level[-1][0] - level[0][0] + 1)
-        level = [kid
-                 for number, node in level
-                 for kid in enumerate((node.left, node.right), 2 * number)
-                 if kid[1]]
-    return width
-
-
-
 # LC1315. Sum of Nodes with Even-Valued Grandparent
 def sumEvenGrandparent(self, root: TreeNode) -> int:
     total = 0
@@ -290,7 +238,7 @@ def goodNodes(self, root: TreeNode) -> int:
     return res
 
 # LC742. Closest Leaf in a Binary Tree
-def findClosestLeaf(self, root: TreeNode, k: int) -> int:
+def findClosestLeaf(self, root: TreeNode, k: int) -> int:  # O(n)
     graph = collections.defaultdict(list)
     knode = None
     def dfs(node, par = None): # convert to graph
@@ -303,10 +251,10 @@ def findClosestLeaf(self, root: TreeNode, k: int) -> int:
             dfs(node.right, node)
     dfs(root)
     queue, seen = collections.deque([knode]), {knode}
-    while queue: # BFS
+    while queue:  # BFS for shortest
         node = queue.popleft()
         if node:
-            if len(graph[node]) <= 1: return node.val # leaf
+            if len(graph[node]) <= 1: return node.val  # leaf
             for nei in graph[node]:
                 if nei not in seen:
                     seen.add(nei)
@@ -325,7 +273,7 @@ def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:  # O
             adj[node.right].append(node)
             dfs(node.right)
     dfs(root)
-    res, visited = [], set() # DFS with distance
+    res, visited = [], set()  # DFS with distance
     def dfs2(node, d):
         visited.add(node)
         if d < k:

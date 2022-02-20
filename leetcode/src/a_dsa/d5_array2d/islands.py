@@ -29,16 +29,15 @@ def largestIsland(self, grid: List[List[int]]) -> int: # recursion
 def shortestBridge(self, A: List[List[int]]) -> int:
     m, n = len(A), len(A[0])
     i, j = next((i, j) for i in range(m) for j in range(n) if A[i][j])
-    stack = [(i, j)]
-    seen = set(stack)
-    while stack: # dfs on first island
+    stack, seen = [(i, j)], set()
+    while stack:  # dfs on first island to populate seen
         i, j = stack.pop()
         seen.add((i, j)) # mark as visited
         for ii, jj in (i-1, j), (i, j-1), (i, j+1), (i+1, j):
             if 0 <= ii < m and 0 <= jj < n and A[ii][jj] and (ii, jj) not in seen:
                 stack.append((ii, jj))
                 seen.add((ii, jj))
-    ans = 0
+    ans = 0  # shortest distance, also levels to BFS
     queue = list(seen)
     while queue:  # bfs on second island
         newq = []
@@ -55,13 +54,14 @@ def shortestBridge(self, A: List[List[int]]) -> int:
 def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
     if not grid: return 0  # O(rows * columns)
     n, m = len(grid), len(grid[0])
+    seen = set()
     def dfs(i, j):
-        if grid[i][j] == 0 or grid[i][j] == 2: return 0
-        grid[i][j] = 2
+        if grid[i][j] == 0 or (i, j) in seen: return 0
+        seen.add((i, j))
         amax = 1
         for d in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
             a, b = i + d[0], j + d[1]
-            if 0 <= a < n and 0 <= b < m and grid[a][b] != 0 and grid[a][b] != 2:
+            if 0 <= a < n and 0 <= b < m and grid[a][b] != 0 and (a, b) not in seen:
                 amax += dfs(a, b)
         return amax
     amax = 0
@@ -84,33 +84,33 @@ def islandPerimeter(self, grid: List[List[int]]) -> int:
     return result
 
 # LC305. Number of Islands II
-def numIslands2(self, m: int, n: int, positions: List[List[int]]) -> List[int]:
-    pa = {}  # parents
+def numIslands2(self, m, n, positions):
+    parent, rank = {}, {}  # tree depth logn
     def find(x):
-        while x in pa:
-            if pa[x] in pa: pa[x]=pa[pa[x]]  # path compress
-            x = pa[x]
-        return x
-    def union(x,y):
-        pax,pay = find(x), find(y)
-        if pax == pay: return False # has been unioned.
-        pa[pax] = pay  # no rank in this implementation
-        return True
-    seen, res, count = set(), [], 0
-    for x, y in positions:  #connect with neighbor val==1,if union success,means one island disappear.
-        if (x, y) not in seen:
-            seen.add((x, y))
-            count += 1
-            for i, j in (x+1, y), (x-1, y), (x, y+1), (x, y-1):
-                if (i, j) in seen and union((i, j), (x, y)):
-                    count -= 1
-        res.append(count)
-    return res
+        if parent[x] != x: parent[x] = find(parent[x])
+        return parent[x]
+    def union(x, y):  #  M union or find sequences on N objects takes O(N + M * log*N)
+        x, y = find(x), find(y)
+        if x == y: return 0  # no new island
+        if rank[x] < rank[y]: x, y = y, x
+        parent[y] = x
+        rank[y] += rank[x]
+        return 1  # new island
+    counts, count = [], 0  # let N = m*n, union is O(N + Nlog*N)
+    for i, j in positions:  # L operations, so O(N + L* log*N)
+        if (i, j) not in parent:
+            x = parent[x] = i, j
+            rank[x] = 1
+            count += 1  # x is a new island
+            for y in (i+1, j), (i-1, j), (i, j+1), (i, j-1):
+                if y in parent: count -= union(x, y)
+        counts.append(count)
+    return counts
 
 # LC200. Number of Islands, top100
 from itertools import product
 def numIslands(self, board: List[List[str]]) -> int:
-    if not board: return 0 # O(MN)
+    if not board: return 0  # O(MN)
     rows, cols = len(board), len(board[0])
     seen = set()
     def dfs(i, j):
@@ -145,25 +145,48 @@ def numDistinctIslands(self, grid: List[List[int]]) -> int:
             if shape: shapes.add(frozenset(shape))  # hash
     return len(shapes)
 
+# LC711. Number of Distinct Islands II - transformers
+def numDistinctIslands2(self, grid: List[List[int]]) -> int:
+    m, n = len(grid), len(grid[0])
 
+    # _abs: absolute coordinate
+    def DFS(row: int, col: int, _abs: List[Tuple[int, int]]) -> None:
+        if not 0 <= row < m or not 0 <= col < n or grid[row][col] == 0:
+            return
+        grid[row][col] = 0 # Visit by marking as 0
+        _abs.append((row, col))
+        DFS(row, col + 1, _abs)
+        DFS(row + 1, col, _abs)
+        DFS(row, col - 1, _abs)
+        DFS(row - 1, col, _abs)
 
+    # Normalize by relative coordinate w.r.t. "top-left": (min(rows), min(cols))
+    # Use frozenset (immutable version of set) of coordinates to ignore cell traversal order
+    def normalize(_abs: List[Tuple[int, int]]) -> FrozenSet[List[Tuple[int, int]]]:
+        rows, cols = zip(*_abs) # Unzip _abs by calling zip(*_abs)
+        r_min, c_min = min(rows), min(cols)
+        return frozenset([(r - r_min, c - c_min) for r, c in _abs])
 
-# LC130. Surrounded Regions
-def solve(self, board):
-    if not any(board): return
-    m, n = len(board), len(board[0])
-    save = [ij for k in range(max(m,n)) for ij in ((0, k), (m-1, k), (k, 0), (k, n-1))]
-    while save:
-        i, j = save.pop()
-        if 0 <= i < m and 0 <= j < n and board[i][j] == 'O':
-            board[i][j] = 'S' # we explore from boundaries
-            save += (i, j-1), (i, j+1), (i-1, j), (i+1, j)
-    board[:] = [['XO'[c == 'S'] for c in row] for row in board]
-
-
-
-
-
+    distinct_islands = set()
+    for row in range(m):
+        for col in range(n):
+            if grid[row][col] == 1:
+                _abs = [] # Absolute coordinates
+                DFS(row, col, _abs)
+                # 8 transformations
+                transformations = []
+                transformations.append(normalize([(+r, +c) for r, c in _abs]))
+                transformations.append(normalize([(+r, -c) for r, c in _abs]))
+                transformations.append(normalize([(-r, +c) for r, c in _abs]))
+                transformations.append(normalize([(-r, -c) for r, c in _abs]))
+                transformations.append(normalize([(+c, +r) for r, c in _abs]))
+                transformations.append(normalize([(+c, -r) for r, c in _abs]))
+                transformations.append(normalize([(-c, +r) for r, c in _abs]))
+                transformations.append(normalize([(-c, -r) for r, c in _abs]))
+                # frozenset(transformations) removes duplicated transformed coordinates
+                # distinct_island.add() removes islands of duplicated transformations as before
+                distinct_islands.add(frozenset(transformations))
+    return len(distinct_islands)
 
 # LC547. Number of Provinces
 def findCircleNum(self, A): # O(rows * columns)
@@ -181,10 +204,17 @@ def findCircleNum(self, A): # O(rows * columns)
             ans += 1
     return ans
 
-
-
-
-# LC711. Number of Distinct Islands II
+# LC130. Surrounded Regions
+def solve(self, board):
+    if not any(board): return
+    m, n = len(board), len(board[0])
+    save = [ij for k in range(max(m,n)) for ij in ((0, k), (m-1, k), (k, 0), (k, n-1))]
+    while save:
+        i, j = save.pop()
+        if 0 <= i < m and 0 <= j < n and board[i][j] == 'O':
+            board[i][j] = 'S' # we explore from boundaries
+            save += (i, j-1), (i, j+1), (i-1, j), (i+1, j)
+    board[:] = [['XO'[c == 'S'] for c in row] for row in board]
 
 # LC1254. Number of Closed Islands
 def closedIsland(self, grid: List[List[int]]) -> int:
@@ -210,8 +240,14 @@ def closedIsland(self, grid: List[List[int]]) -> int:
                 islands += 1
     return islands
 
-
-
-
-
-
+# LC1905. Count Sub Islands
+def countSubIslands(self, grid1: List[List[int]], grid2: List[List[int]]) -> int:
+    n, m = len(grid2), len(grid2[0])
+    def dfs(i, j):
+        if not (0 <= i < n and 0 <= j < m and grid2[i][j]): return 1
+        grid2[i][j] = 0  # visited
+        res = grid1[i][j]
+        for di, dj in [0, 1], [1, 0], [-1, 0], [0, -1]:
+            res &= dfs(i + di, j + dj)
+        return res  # 0 or 1
+    return sum(dfs(i, j) for i in range(n) for j in range(m) if grid2[i][j])

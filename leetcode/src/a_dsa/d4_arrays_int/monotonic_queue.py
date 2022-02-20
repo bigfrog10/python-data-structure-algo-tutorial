@@ -1,13 +1,16 @@
 
+
+
 # LC862. Shortest Subarray with Sum at Least K
-def shortestSubarray(self, nums: List[int], k: int) -> int:
+def shortestSubarray(self, nums: List[int], k: int) -> int:  # O(n) in time and space
     d = collections.deque([[0, 0]])  # idx and cumu value
     res, cur = float('inf'), 0
     for i, a in enumerate(nums):
         cur += a
         while d and cur - d[0][1] >= k:
             res = min(res, i + 1 - d.popleft()[0])
-        while d and cur <= d[-1][1]: d.pop()
+        # if cur < v, the later on, cur1 - cur > cur1 - v with shorter idx
+        while d and cur <= d[-1][1]: d.pop()  # so d is increasing on cumus
         d.append([i + 1, cur])
     return res if res < float('inf') else -1
 
@@ -28,11 +31,11 @@ def longestSubarray(self, nums: List[int], limit: int) -> int:
     return len(nums) - i
 
 # LC239. Sliding Window Maximum, top100
-def maxSlidingWindow(self, nums: 'List[int]', k: 'int') -> 'List[int]':
+def maxSlidingWindow(self, nums: 'List[int]', k: 'int') -> 'List[int]':  # O(n)
     n = len(nums)
     if n == 0 or k == 0: return []
     if k == 1: return nums
-    deq = deque()
+    deq = collections.deque()
     def clean_deque(i):
         if deq and deq[0] == i - k: deq.popleft()  # remove indexes of elements not from sliding window
         # remove from deq indexes of all elements

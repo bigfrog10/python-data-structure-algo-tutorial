@@ -32,13 +32,14 @@ def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         return False
     return dfs(s)
 def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+    wordset = set(wordDict)
     @lru_cache # O(n^3) n = len(s) + O(m), m is size of dict
-    def wordBreakMemo(s: str, start: int):
+    def break_words(s: str, start: int):
         if start == len(s): return True
-        for end in range(start + 1, len(s) + 1):
-            if s[start:end] in wordDict and wordBreakMemo(s, end): return True
+        for end in range(start + 1, len(s)+1):  # O(n), need +1 for next line [start:end]
+            if s[start:end] in wordset and break_words(s, end): return True  # s[start:end] is O(n)
         return False
-    return wordBreakMemo(s, 0)
+    return break_words(s, 0)
 
 # LC249. Group Shifted Strings
 def groupStrings(self, strings: List[str]) -> List[List[str]]:
@@ -56,15 +57,15 @@ def groupStrings(self, strings: List[str]) -> List[List[str]]:
     return groups.values()
 
 # LC127. Word Ladder, top100
-def ladderLength(self, beginWord, endWord, wordList):  # BFS
-    wordList = set(wordList)
+def ladderLength(self, beginWord, endWord, wordList):  # BFS, O(m^2 * len(wordList))
+    wordList = set(wordList)  # m = len(beginWord), len(endWord)
     queue = collections.deque([[beginWord, 1]])
     while queue:  # BFS since we look for shortest
         word, length = queue.popleft()
         if word == endWord: return length
-        for i in range(len(word)):
+        for i in range(len(word)):  # O(m)
             for c in 'abcdefghijklmnopqrstuvwxyz':
-                next_word = word[:i] + c + word[i+1:]
+                next_word = word[:i] + c + word[i+1:]  # O(m)
                 if next_word in wordList:
                     wordList.remove(next_word)  # this is the key, BFS doesn't look back
                     queue.append([next_word, length + 1])
@@ -72,21 +73,42 @@ def ladderLength(self, beginWord, endWord, wordList):  # BFS
 
 # LC126. Word Ladder II, top100 - Same for find all paths in DAG
 def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List[List[str]]:
-    wordList = set(wordList)
-    res, layer = [], {beginWord: [[beginWord]]}
-    while layer:
+    wordList = set(wordList)  # O(n * m^2)
+    res, layer = [], {beginWord: [[beginWord]]}  # end word to history
+    while layer:  # O(len(words)), BFS to find min
         newlayer = collections.defaultdict(list)
         for w in layer:
             if w == endWord: res.extend(k for k in layer[w])
             else:
-                for i in range(len(w)):
+                for i in range(len(w)):   # O(m)
                     for c in 'abcdefghijklmnopqrstuvwxyz':
-                        neww = w[:i] + c + w[i+1:]
+                        neww = w[:i] + c + w[i+1:]   # O(m)
                         if neww in wordList:
                             newlayer[neww] += [j + [neww] for j in layer[w]]
         wordList -= set(newlayer.keys())
         layer = newlayer
     return res
+
+# LC616. Add Bold Tag in String, same as LC758.
+def addBoldTag(self, s: str, words: List[str]) -> str:
+    status = [False] * len(s)
+    for word in words:  # O(len(words))
+        start, last = s.find(word), len(word)  # O(len(s) * O(max(len(words))))
+        while start != -1: # this word appears multiple places
+            for i in range(start, last+start): status[i] = True
+            start = s.find(word, start+1)
+    i, final = 0, ""
+    while i < len(s):  # O(len(s))
+        if status[i]:
+            final += "<b>"
+            while i < len(s) and status[i]:
+                final += s[i]
+                i += 1
+            final += "</b>"
+        else:
+            final += s[i]
+            i += 1
+    return final
 
 # LC691. Stickers to Spell Word, effectively this is bfs since we look for min.
 def minStickers(self, stickers: List[str], target: str) -> int:
@@ -97,7 +119,7 @@ def minStickers(self, stickers: List[str], target: str) -> int:
         for sticker in counters:  # DFS on stickers/neighbours
             if target[0] not in sticker: continue  # to cut search branches
             targetnew = target
-            for s in sticker: targetnew = targetnew.replace(s, '', sticker[s])
+            for c in sticker: targetnew = targetnew.replace(c, '', sticker[c])
             if targetnew == '':
                 res = 1
                 break
@@ -105,6 +127,12 @@ def minStickers(self, stickers: List[str], target: str) -> int:
         return res
     res = dfs(target)
     return -1 if res == float('inf') else res
+
+# LC1002. Find Common Characters
+def commonChars(self, words: List[str]) -> List[str]:  # O(all chars in words)
+    res = collections.Counter(words[0])
+    for a in words: res &= collections.Counter(a)
+    return list(res.elements())
 
 # LC824 Goat Latin
 def toGoatLatin(self, sentence: str) -> str:
@@ -126,6 +154,7 @@ def exist(self, board: List[List[str]], word: str) -> bool:
         if board[i][j] != word[wi]: return False
         board[i][j] = ord(board[i][j]) ^ 256
         exist = wi+1 == wl
+        if exist: return exist
         for x, y in [(i+1, j), (i-1, j), (i, j+1), (i, j-1)]:
             if 0 <= x < h and 0 <= y < w: exist = exist or dfs(x, y, wi+1)
         board[i][j] = chr(board[i][j] ^ 256)  # backout
@@ -141,8 +170,8 @@ def exist(self, board: List[List[str]], word: str) -> bool:
 
 # LC212. Word Search II, top100
 def findWords(self, board: List[List[str]], words: List[str]) -> List[str]: # This is fast
-    trie, WORD_KEY = {}, '$'
-    for word in words:
+trie, WORD_KEY = {}, '$'  # O(M4*3^(L-1)), M=cells, L=max(len(word) for words)
+    for word in words:  # space O(number of letters in trie)
         node = trie
         for letter in word: node = node.setdefault(letter, {})
         node[WORD_KEY] = word  # save word at the end
@@ -157,9 +186,8 @@ def findWords(self, board: List[List[str]], words: List[str]) -> List[str]: # Th
         # Explore the neighbors in 4 directions, i.e. up, right, down, left
         for (dx, dy) in (-1, 0), (0, 1), (1, 0), (0, -1): # O(3^max(words))
             nx, ny = row + dx, col + dy
-            if nx < 0 or nx >= rowNum or ny < 0 or ny >= colNum: continue
-            if not board[nx][ny] in currNode: continue
-            dfs(nx, ny, currNode)
+            if rowNum > nx >= 0 <= ny < colNum and board[nx][ny] in currNode:
+                dfs(nx, ny, currNode)
         board[row][col] = letter # End of EXPLORATION, we restore the cell
         # Optimization: incrementally remove the matched leaf node in Trie.
         if not currNode: parent.pop(letter) # we pop'd WORD_KEY before
@@ -169,7 +197,7 @@ def findWords(self, board: List[List[str]], words: List[str]) -> List[str]: # Th
     return matchedWords
 
 # LC14. Longest Common Prefix
-def longestCommonPrefix(self, strs):
+def longestCommonPrefix(self, strs):  # O(sum(len(str)))
     if not strs: return ""
     shortest = min(strs, key=len)
     for i, ch in enumerate(shortest):
@@ -177,16 +205,15 @@ def longestCommonPrefix(self, strs):
             if other[i] != ch: return shortest[:i]
     return shortest
 
-# LC676. Implement Magic Dictionary
+# LC676. Implement Magic Dictionary  - one mistake is allowed
 class MagicDictionary:
-    def __init__(self):
-        self.trie = {}
+    def __init__(self): self.trie = {}
     def buildDict(self, dictionary: List[str]) -> None:
-        for word in dictionary:
+        for word in dictionary:  # O(mn), m = len(dictionary), n is max word length
             node = self.trie
             for letter in word: node = node.setdefault(letter, {})
-            node[None] = None
-    def search(self, word: str) -> bool:
+            node[None] = None  # word end marker
+    def search(self, word: str) -> bool:  # O(26n)
         def find(node, i, mistakeAllowed):
             if i == len(word): return None in node and not mistakeAllowed
             if word[i] not in node:
@@ -196,6 +223,17 @@ class MagicDictionary:
                        any(find(node[letter], i+1, False) for letter in node if letter and letter != word[i])
             return find(node[word[i]], i+1, False)
         return find(self.trie, 0, True)
+class MagicDictionary(object):
+    def _candidates(self, word):
+        for i in range(len(word)): yield word[:i] + '*' + word[i+1:]  # *ello, h*llo, etc
+    def buildDict(self, words):
+        self.words = set(words)  # O(n)
+        self.near = collections.Counter(cand for word in words
+                                        for cand in self._candidates(word))  # O(nk)
+    def search(self, word):
+        return any(self.near[cand] > 1 or  # case like [hello, hallo] and search for hello
+                   self.near[cand] == 1 and word not in self.words
+                   for cand in self._candidates(word))  # O(len(word))
 
 # LC68. Text Justification
 def fullJustify(self, words: List[str], maxWidth: int) -> List[str]:

@@ -48,7 +48,7 @@ def subsets(self, nums: List[int]) -> List[List[int]]:  # samiliar to LC90
 def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:  # O(n * 2^n)
     nums.sort()
     ans = []
-    def backtrack(i=0, solution=[]):  # O(n) space from solution
+    def backtrack(i, solution):  # O(n) space from solution
         ans.append(solution[:])  # copy
         for j in range(i, len(nums)):
             # We can re-use numbers, but not at this position and same previous premutation
@@ -56,7 +56,7 @@ def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:  # O(n * 2^n)
             solution.append(nums[j])
             backtrack(j+1, solution)  # go down 1 element and then backout to empty
             solution.pop()
-    backtrack()
+    backtrack(0, [])
     return ans  # [[],[1],[1,2],[1,2,2],[2],[2,2]]
 
 # LC17. Letter Combinations of a Phone Number, top100
@@ -75,65 +75,53 @@ def permute(nums: List[int]) -> List[List[int]]:  # O(n!) & O(n!)
     return ans
 
 # LC60. Permutation Sequence
-def getPermutation(self, n: int, k: int) -> str:
-    elements = list(map(str, range(1, n+1)))  # '1', '2', ..., 'n'
-    fact = math.factorial(len(elements))  # n!, faster than reduce(operator.mul, elements)
-    k, result = k-1, ''  # zero based
-    while len(elements) > 0:
-        fact = fact // len(elements)  # check which (n-1)! slot that k falls in
-        i, k = divmod(k, fact)  # i is the index of old k within the slot
-        result += elements.pop(i)  # add ith digit, remove it to avoid repeating
-    return result
+def getPermutation(self, n: int, k: int) -> str: # O(n^2) due to pop(i)
+    nums = list(map(str, range(1, n+1)))
+    fact = math.factorial(len(nums)-1)
+    k, ans = k-1, ''  # zero based
+    while k:
+        i, k = divmod(k, fact)  # there are (n-1)! buckets in n!, we want to know which one
+        ans += nums.pop(i)  # it's ith bucket starting with i, so pop i
+        fact //= len(nums)  # next bucket size is (n-2)! = (n-1)! / (n-1)
+    ans += ''.join(nums)
+    return ans
 
-# LC556. Next Greater Element III
-def nextPermutation(self, nums: List[int]) -> None:
-    if not nums: return
-    n = len(nums)
-    if n == 1: return
-    idx = -1  # find the first value such that value < next
-    for i in range(n-1, 0, -1):
-        if nums[i-1] < nums[i]:
-            idx = i-1
-            break
-    if idx == -1:
-        nums.sort()
-        return
-    idx1 = n-1  # find the value such that prev > value > next
-    for i in range(idx+1, n):
-        if nums[i] <= nums[idx]:
-            idx1 = i-1
-            break
-    nums[idx], nums[idx1] = nums[idx1], nums[idx]
-    for i in range(idx+1, (n + idx+1)// 2): # reverse after idx: we swap only half, otherwise we swap twice
-        nums[i], nums[n-i+idx] = nums[n-i+idx], nums[i]
 
 # LC47. Permutations II
-def permuteUnique(self, nums): # best
-    ans = [[]]
+def permuteUnique(self, nums: List[int]) -> List[List[int]]:  # O(n!), T(n) = n*T(n-1) + O(n)
+    ans = [[]]  # best case is when all numbers are the same, while worst case is when all numbers are distinct
     for n in nums:
         new_ans = []
         for p in ans:
             for i in range(len(p)+1):
                 new_ans.append(p[:i] + [n] + p[i:])
-                # we insert dups only from left side.
-                if i < len(p) and p[i] == n: break
+                if i < len(p) and p[i] == n: break  # we insert dups only from left side.
         ans = new_ans
     return ans
 
-
 # LC77. Combinations
-from itertools import combinations
 def combine(self, n, k):
-    return list(combinations(range(1, n+1), k))
-
-def combine(self, n, k):
+    return list(itertools.combinations(range(1, n+1), k))
+def combine(self, n: int, k: int) -> List[List[int]]:  # O(k * C^k_n)
     combs = [[]]
-    for _ in range(k):
-        combs = [[i] + c for c in combs for i in range(1, c[0] if c else n+1)]
+    for j in range(1, k+1)[::-1]:  # backward is much faster
+        combs = [[i] + c for c in combs for i in range(j, c[0] if c else n+1)]
     return combs
 # for 4, 3: [[1],[2],[3],[4]],  [[1,2],[1,3],[2,3],[1,4],[2,4],[3,4]]
 # and  [[1,2,3],[1,2,4],[1,3,4],[2,3,4]]
-
+def combine(self, n: int, k: int) -> List[List[int]]:  # O(k * C^k_n)
+    nums = list(range(1, k + 1)) + [n + 1]  # init first combination
+    output, j = [], 0
+    while j < k:
+        output.append(nums[:k])
+        # increase first nums[j] by one
+        # if nums[j] + 1 != nums[j + 1]
+        j = 0
+        while j < k and nums[j + 1] == nums[j] + 1:
+            nums[j] = j + 1
+            j += 1
+        nums[j] += 1
+    return output
 
 # LC118. Pascal's Triangle
 def generate(self, numRows):

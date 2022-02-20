@@ -48,13 +48,11 @@ def compress(self, chars: List[str]) -> int:
     st = i = 0
     while i < len(chars):
         while i < len(chars) and chars[i] == chars[st]: i += 1
-        if i - st == 1:  # now chars are different
-            st = i  # if there is only one char, no change
+        if i - st == 1: st = i  # single diff char, leave it alone
         else:
             count = str(i - st)
             chars[st + 1: i] = count
-            st = st + len(count) + 1
-            i = st
+            i = st = st + len(count) + 1  # skip spaces used by count
     return len(chars)
 
 # LC271. Encode and Decode Strings
@@ -81,7 +79,20 @@ def firstUniqChar(self, s: str) -> int:
         if count[ch] == 1: return idx
     return -1
 
-
+# LC648. Replace Words
+def replaceWords(self, dictionary: List[str], sentence: str) -> str:
+    trie = {}
+    for word in dictionary:
+        node = trie
+        for ch in word: node = node.setdefault(ch, {})
+        node['$'] = word
+    def replace(word):
+        node = trie
+        for ch in word:
+            if ch not in node or '$' in node: break
+            node = node[ch]
+        return node.get('$', word)
+    return ' '.join(map(replace, sentence.split()))
 
 # LC752. Open the Lock
 def openLock(self, deadends: List[str], target: str) -> int:

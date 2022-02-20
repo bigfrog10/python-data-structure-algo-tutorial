@@ -14,6 +14,22 @@ def findKthPositive(self, arr, k):  # O(logn)
 # so after index l - 1 , we need to find k - (A[l-1] - (l-1) - 1) missing numbers, i.e. k - A[l-1] + l missing numbers
 # At index l - 1, our number is A[l-1]. Add them up, the target number will be A[l-1] + k - A[l-1] + l, i.e. k + l;
 
+# LC1060. Missing Element in Sorted Array
+def missingElement(self, nums: List[int], k: int) -> int:  # logn
+    # Return how many numbers are missing until nums[idx]
+    missing = lambda idx: nums[idx] - nums[0] - idx
+    n = len(nums)
+    # If kth missing number is larger than  the last element of the array
+    if k > missing(n - 1): return nums[-1] + k - missing(n - 1)
+    left, right = 0, n - 1  # O(logn), binary search
+    # find left = right index such that missing(left - 1) < k <= missing(left)
+    while left < right:
+        pivot = left + (right - left) // 2
+        if missing(pivot) < k: left = pivot + 1
+        else: right = pivot
+    # kth missing number is greater than nums[left - 1] and less than nums[left]
+    return nums[left - 1] + k - missing(left - 1) # k - missing(left-1) is the diff
+
 # LC162. Find Peak Element
 def findPeakElement(self, nums: List[int]) -> int: # logn
     left, right = 0, len(nums)-1
@@ -43,32 +59,7 @@ def maxLength(self, ribbons: List[int], k: int) -> int:
         else: hi = mid - 1
     return lo
 
-# LC1060. Missing Element in Sorted Array
-def missingElement(self, nums: List[int], k: int) -> int:
-    # Return how many numbers are missing until nums[idx]
-    missing = lambda idx: nums[idx] - nums[0] - idx
-    n = len(nums)
-    # If kth missing number is larger than  the last element of the array
-    if k > missing(n - 1): return nums[-1] + k - missing(n - 1)
-    left, right = 0, n - 1  # O(logn), binary search
-    # find left = right index such that missing(left - 1) < k <= missing(left)
-    while left < right:
-        pivot = left + (right - left) // 2
-        if missing(pivot) < k: left = pivot + 1
-        else: right = pivot
-    # kth missing number is greater than nums[left - 1] and less than nums[left]
-    return nums[left - 1] + k - missing(left - 1) # k - missing(left-1) is the diff
 
-# LC378. Kth Smallest Element in a Sorted Matrix
-def kthSmallest(self, matrix: List[List[int]], k: int) -> int:  # best solution
-    n = len(matrix)  # O(nlognlog(max-min))
-    l, r = matrix[0][0], matrix[n - 1][n - 1]
-    while l < r:  # log(max-min)
-        mid = (l+r) // 2
-        count = sum(bisect.bisect(row, mid) for row in matrix)
-        if count < k: l = mid+1
-        else: r = mid
-    return l
 
 # LC410. Split Array Largest Sum
 def splitArray(self, nums: List[int], m: int) -> int:
@@ -120,7 +111,7 @@ def search(self, nums: List[int], target: int) -> int:
     return -1
 
 # LC81. Search in Rotated Sorted Array II
-def search(self, nums: List[int], target: int) -> bool:
+def search(self, nums: List[int], target: int) -> bool:  # O(n) worst case
     start, end = 0, len(nums) - 1
     while start <= end:
         mid = (start + end) // 2
@@ -155,25 +146,51 @@ def findMin(self, nums: List[int]) -> int:
     # the 'low' and 'high' index converge to the inflection point.
     return nums[low]
 
+# LC540. Single Element in a Sorted Array
+def singleNonDuplicate(self, nums: List[int]) -> int:  # simplest and fast
+    lo, hi = 0, len(nums) - 1
+    while lo < hi:
+        mid = lo + (hi - lo) // 2
+        if mid % 2 == 1: mid -= 1  # move to even case
+        if nums[mid] == nums[mid + 1]:  # means we have even numbers of left
+            lo = mid + 2  # so go to right to find the odd/single
+        else: hi = mid  # otherwise move to left.
+    return nums[lo]  # because hi is not equal
+
+# LC702. Search in a Sorted Array of Unknown Size
+def search(self, reader: 'ArrayReader', target: int) -> int:
+    hi = 1
+    while reader.get(hi) < target: hi <<= 1
+    lo = hi >> 1
+    while lo <= hi:
+        mid = lo + hi >> 1
+        if reader.get(mid) < target: lo = mid + 1
+        elif reader.get(mid) > target: hi = mid - 1
+        else: return mid
+    return -1
+
 # LC34. Find First and Last Position of Element in Sorted Array
-def searchRange(self, nums: List[int], target: int) -> List[int]:  # O(logn)
+def searchRange(self, nums: List[int], target: int) -> List[int]:
     if not nums or target < nums[0] or target > nums[-1]: return [-1, -1]
     left, right = 0, len(nums) - 1
     while left < right:  # search left
-        if nums[left] == target: break
         mid = left + (right - left) // 2
         if nums[mid] < target: left = mid+1
         else: right = mid  # we keep right side >= target
     if nums[left] != target: return [-1, -1]
-    ret = [left]
-    right = len(nums) - 1  # search right
-    while left < right:
-        if nums[right] == target: break
-        mid = left + (right - left) // 2 + 1
+    left1, right = left, len(nums) - 1  # search right
+    while left1 < right:
+        mid = left1 + (right - left1 + 1) // 2
         if nums[mid] > target: right = mid - 1
-        else: left = mid
-    ret.append(right)
-    return ret
+        else: left1 = mid
+    return [left, right]
+def searchRange1(self, nums: List[int], target: int) -> List[int]:
+    if not nums: return [-1, -1]
+    left = bisect.bisect_left(nums, target)  # the index of leftmost target
+    left = left if left < len(nums) and nums[left] == target else -1
+    if left == -1: return [-1, -1]
+    right = bisect.bisect(nums, target)  # the index right after target
+    return [left, right - 1]
 
 # LC852. Peak Index in a Mountain Array
 def peakIndexInMountainArray(self, arr: List[int]) -> int:

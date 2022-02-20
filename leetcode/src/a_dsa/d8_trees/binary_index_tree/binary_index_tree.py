@@ -27,10 +27,10 @@ class NumArray:
     # https://leetcode.com/problems/range-sum-query-mutable/discuss/954063/Python-144ms-80-Fenwick-Tree
     def __init__(self, nums: List[int]):
         self._nums = [0] * len(nums)
-        self._ftree = [0] * (len(nums) + 1) # Fenwich tree start with index 1
+        self._ftree = [0] * (len(nums) + 1)  # Fenwich tree start with index 1
         for i in range(len(nums)):
             self.update(i, nums[i])
-    def update(self, i: int, val: int) -> None:
+    def update(self, i: int, val: int) -> None:  # O(logn)
         if i >= len(self._nums) or i < 0: return
         delta = val - self._nums[i]  # get the delta
         self._nums[i] = val
@@ -41,9 +41,9 @@ class NumArray:
             i += i & (-i)  # i = i + LowestSignificentBit(i)
     def sumRange(self, i: int, j: int) -> int:
         return self._getSum(j) - self._getSum(i-1)
-    def _getSum(self, i:int) -> int:
+    def _getSum(self, i:int) -> int:  # log(n)
         if i < 0: return 0
-        i += 1 #Fenwich tree start with index 1
+        i += 1 # Fenwich tree start with index 1
         ans = 0
         while i > 0:
             ans += self._ftree[i]

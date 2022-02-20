@@ -1,59 +1,37 @@
 
-# LC560. Subarray Sum Equals K
-from typing import List
-def subarraySum(self, nums: List[int], k: int) -> int:
-    count = cusum = 0  # O(n)
-    counts = collections.defaultdict(int)
-    for i in range(len(nums)):
-        cusum += nums[i]
-        if cusum == k: count += 1
-        if cusum - k in counts: count += counts[cusum - k]
-        counts[cusum] += 1
-    return count
+# LC16. 3Sum Closest
+def threeSumClosest(self, nums: List[int], target: int) -> int:  # O(n^2)
+    diff = float('inf')
+    nums.sort()  # O(nlogn), required by 2 pointers
+    for i in range(len(nums)):  # O(n)
+        lo, hi = i + 1, len(nums) - 1
+        while lo < hi:  # O(n)
+            sum1 = nums[i] + nums[lo] + nums[hi]
+            if abs(target - sum1) < abs(diff):
+                diff = target - sum1
+            if sum1 < target: lo += 1
+            else: hi -= 1
+        if diff == 0: break
+    return target - diff
+# https://leetcode.com/problems/3sum-closest/discuss/778177/Python3-%3A-Runtime%3A-52-ms-faster-than-99.77
 
-# LC523. Continuous Subarray Sum
-def checkSubarraySum(self, nums: List[int], k: int) -> bool:
-    if not nums: return False
-    summ, sd = 0, {0: -1}  # [1,1,1] 3, cumu is divisible by k, to deal with k multiples.
-    for i, n in enumerate(nums):
-        summ += n
-        if k != 0: summ = summ % k
-        if summ in sd:  # sd is sum dict, map sum -> index
-            if i - sd[summ] > 1: return True  # ==1 means single element
-        else: sd[summ] = i
-    return False
-
-# LC1074. Number of Submatrices That Sum to Target
-def numSubmatrixSumTarget(self, A, target):
-    m, n = len(A), len(A[0])
-    for row in A:
-        for i in range(n - 1):
-            row[i + 1] += row[i]  # sum up each row
-    res = 0
-    for i in range(n):  # loop 2 columns
-        for j in range(i, n):  # O(mnn) runtime and O(m) space
-            c = collections.defaultdict(int)
-            cur, c[0] = 0, 1
-            for k in range(m):  # 560. Subarray Sum Equals K, 1D case
-                cur += A[k][j] - (A[k][i - 1] if i > 0 else 0)
-                res += c[cur - target]
-                c[cur] += 1
-    return res
-
-
-
-# LC548. Split Array with Equal Sum
-def splitArray(self, nums): # O(n^2)
-    def split(A):  # return half sum
-        for i in range(1, len(A)): A[i] += A[i-1]  # cum sum
-        return {A[i-1] for i in range(1, len(A)-1) if A[i-1] == A[len(A)-1] - A[i]}
-
-    return any(split(nums[:j]) & split(nums[j+1:]) for j in range(3, len(nums)-3))
+# LC1011. Capacity To Ship Packages Within D Days
+def shipWithinDays(self, weights: List[int], D: int) -> int:
+    left, right = max(weights), sum(weights)
+    while left < right:  # O(log(right - left)
+        midw, days, currw = (left + right) // 2, 1, 0
+        for w in weights:  # O(n)
+            if currw + w > midw:
+                days += 1
+                currw = 0
+            currw += w
+        if days > D: left = midw + 1
+        else: right = midw
+    return left
 
 # LC724. Find Pivot Index
 def pivotIndex(self, nums: List[int]) -> int:
-    S = sum(nums)
-    leftsum = 0
+    S, leftsum = sum(nums), 0
     for i, x in enumerate(nums):
         if leftsum == (S - leftsum - x): return i
         leftsum += x
@@ -94,26 +72,13 @@ def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]
 # LC377. Combination Sum IV
 def combinationSum4(self, nums: List[int], target: int) -> int:  # O(T * N)
     @functools.lru_cache(maxsize = None)
-    def combs(remain):
+    def combs(remain):  # O(target)
         if remain == 0: return 1
         result = 0
-        for num in nums:
+        for num in nums:  # O(n)
             if remain - num >= 0: result += combs(remain - num)
         return result
     return combs(target)
-
-# LC325. Maximum Size Subarray Sum Equals k
-def maxSubArrayLen(self, nums: List[int], k: int) -> int:
-    cumus = list(accumulate(nums))
-    maxl, cache = 0, dict()
-    for i in range(len(nums)):
-        v = cumus[i]
-        if v == k: maxl = max(maxl, i+1)
-        elif v - k in cache:  # middle subarray
-            size = i - cache[v - k]
-            maxl = max(maxl, size)
-        if v not in cache: cache[v] = i
-    return maxl
 
 # LC494. Target Sum
 def findTargetSumWays(self, nums: List[int], S: int) -> int:
@@ -126,28 +91,18 @@ def findTargetSumWays(self, nums: List[int], S: int) -> int:
         return add + sub
     return dp(0, 0)
 
-# LC643. Maximum Average Subarray I
-def findMaxAverage(self, nums: List[int], k: int) -> float:
-    best = window = sum(nums[:k])
-    for i in range(k,len(nums)):
-        window += nums[i] - nums[i-k]  # sliding window
-        if window > best: best = window
-    return best/k
-
 # LC416. Partition Equal Subset Sum  - backpack
-def canPartition(self, nums: List[int]) -> bool:
-    n = len(nums)
-    total_sum = sum(nums)
-    if total_sum % 2 != 0: return False
-    @lru_cache(maxsize=None)  # O(n * subset_sum)
+def canPartition(self, nums: List[int]) -> bool:  # sequence, not continuous subset
+    n, total = len(nums), sum(nums)  # O(n * total)
+    if total % 2 != 0: return False
+    @lru_cache(maxsize=None)
     def dfs(idx: int, subset_sum: int) -> bool:
         if subset_sum == 0: return True
         if idx == n-1 or subset_sum < 0: return False
         # include this element, or skip this element
         result = dfs(idx + 1, subset_sum - nums[idx + 1]) or dfs(idx + 1, subset_sum)
         return result
-    subset_sum = total_sum // 2
-    return dfs(0, subset_sum)
+    return dfs(0, total // 2)
 
 # LC698. Partition to K Equal Sum Subsets
 def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
@@ -169,40 +124,6 @@ def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
         return False
     return dfs(0)
 
-# LC689. Maximum Sum of 3 Non-Overlapping Subarrays
-def maxSumOfThreeSubarrays(self, nums: List[int], k: int) -> List[int]:  # O(n)
-    bestSeq, best2Seq, best3Seq = 0, [0, k], [0, k, k*2]
-    seqSum, seq2Sum, seq3Sum = sum(nums[0:k]), sum(nums[k:k*2]), sum(nums[k*2:k*3])
-    # Sums of combined best windows
-    best1Sum, best2Sum, best3Sum = seqSum, seqSum + seq2Sum, seqSum + seq2Sum + seq3Sum
-    seqIndex, seq2Index, seq3Index = 1, k + 1, k*2 + 1 # Current window positions
-    while seq3Index <= len(nums) - k:
-        # Update the three sliding windows
-        seqSum += - nums[seqIndex - 1] + nums[seqIndex + k - 1]
-        seq2Sum += - nums[seq2Index - 1] + nums[seq2Index + k - 1]
-        seq3Sum += - nums[seq3Index - 1] + nums[seq3Index + k - 1]
-        if seqSum > best1Sum: # Update best single window
-            bestSeq, best1Sum = seqIndex, seqSum
-        if seq2Sum + best1Sum > best2Sum: # Update best two windows
-            best2Seq, best2Sum = [bestSeq, seq2Index], seq2Sum + best1Sum
-        if seq3Sum + best2Sum > best3Sum: # Update best three windows
-            best3Seq, best3Sum = best2Seq + [seq3Index], seq3Sum + best2Sum
-        seqIndex += 1 # Update the current positions
-        seq2Index += 1
-        seq3Index += 1
-    return best3Seq
-
-# LC53. Maximum Subarray   - max sum amount all subarrays
-def maxSubArray(self, nums: List[int]) -> int:
-    total = max_total = nums[0]
-    for i in range(1, len(nums)):
-        total += nums[i]
-        # if the total is not worth to keep, start a new total
-        # we can also add code to keep track the start index.
-        total = max(total, nums[i])
-        max_total = max(max_total, total)  # this is our goal.
-    return max_total
-
 # LC1. Two Sum, top100
 def twoSum(self, nums, target):
     cache = {}
@@ -211,18 +132,6 @@ def twoSum(self, nums, target):
         if diff in cache: return [cache[diff], i]
         else: cache[num] = i
     return None
-
-# LC209. Minimum Size Subarray Sum
-def minSubArrayLen(self, s: int, nums: List[int]) -> int:  # 2 pointers
-    total = left = 0 # since all numbers are positive, this works.
-    result = len(nums) + 1
-    for right, n in enumerate(nums):
-        total += n
-        while total >= s:
-            result = min(result, right - left + 1)
-            total -= nums[left]
-            left += 1
-    return result if result <= len(nums) else 0
 
 # LC713. Subarray Product Less Than K
 def numSubarrayProductLessThanK(self, nums: List[int], k: int) -> int:
@@ -262,8 +171,6 @@ def sumOddLengthSubarrays(self, A):  # O(n)
         res += ((i + 1) * (n - i) + 1) // 2 * a  # +1 for ceiling
     return res
 
-
-
 # LC167. Two Sum II - Input array is sorted
 def twoSum(self, numbers: List[int], target: int) -> List[int]:
     # There is no O(logn) solution, so we shoot for O(n)
@@ -296,21 +203,6 @@ def threeSum(self, nums: List[int]) -> List[List[int]]:
         if nums[i] > 0: break
         if i == 0 or nums[i - 1] != nums[i]: twoSum(i, res)
     return res
-
-# LC16. 3Sum Closest
-def threeSumClosest(self, nums: List[int], target: int) -> int:
-    diff = float('inf')
-    nums.sort()  # O(nlogn), required by 2 pointers
-    for i in range(len(nums)):
-        lo, hi = i + 1, len(nums) - 1
-        while lo < hi:
-            sum1 = nums[i] + nums[lo] + nums[hi]
-            if abs(target - sum1) < abs(diff):
-                diff = target - sum1
-            if sum1 < target: lo += 1
-            else: hi -= 1
-        if diff == 0: break
-    return target - diff
 
 # LC259. 3Sum Smaller
 def threeSumSmaller(self, nums: List[int], target: int) -> int:
@@ -368,8 +260,6 @@ def fourSumCount(self, A: List[int], B: List[int], C: List[int], D: List[int]) -
     for i, j in itertools.product(C, D): ret += counts[-i-j]
     return ret
 
-
-
 # LC1010. Pairs of Songs With Total Durations Divisible by 60
 def numPairsDivisibleBy60(self, time: List[int]) -> int:
     counts = [0] * 60
@@ -380,21 +270,3 @@ def numPairsDivisibleBy60(self, time: List[int]) -> int:
         else: ret += counts[60-t]
         counts[t] += 1
     return ret
-
-# LC1011. Capacity To Ship Packages Within D Days
-def shipWithinDays(self, weights: List[int], D: int) -> int:
-    left, right = max(weights), sum(weights)
-    while left < right:  # O(log(right - left)
-        midw, days, currw = (left + right) // 2, 1, 0
-        for w in weights:  # O(n)
-            if currw + w > midw:
-                days += 1
-                currw = 0
-            currw += w
-        if days > D: left = midw + 1
-        else: right = midw
-    return left
-
-
-
-

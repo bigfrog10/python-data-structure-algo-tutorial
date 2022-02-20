@@ -38,22 +38,23 @@ def nextGreaterElement(self, n: int) -> int:
 
 # LC788. Rotated Digits
 def rotatedDigits(self, N: int) -> int:  # O(logn)
-    s1, s2 = set([0, 1, 8]), set([0, 1, 8, 2, 5, 6, 9])
+    s1, s2 = {0, 1, 8}, {0, 1, 8, 2, 5, 6, 9}
     res, s = 0, set()
     N = list(map(int, str(N)))  # 157 -> [1, 5, 7]
     for i, v in enumerate(N):
         for j in range(v):
-            if s.issubset(s2) and j in s2:  # there are n-i-1 digits remain
-                res += 7**(len(N) - i - 1)  # combinations of s2
-            if s.issubset(s1) and j in s1:
+            if j in s2 and s.issubset(s2): # there are n-i-1 digits remain
+                res += 7**(len(N) - i - 1)  # combinations of picking from s2
+            if j in s1 and s.issubset(s1):
                 res -= 3**(len(N) - i - 1)  # combinations of s1, same number, so discount
         if v not in s2: return res  # if it's 3, 4, 7, then we can't do it after this number
         s.add(v)
     return res + (s.issubset(s2) and not s.issubset(s1))
 
 # LC2081. Sum of k-Mirror Numbers
-    def fn(x):  # "Return next k-symmetric number
-        m = len(x)//2
+def kMirror(self, k: int, n: int) -> int:  # O(nlogn)
+    def fn(x):  # Return next k-symmetric number
+        m = len(x)//2  # O(logn)
         for i in range(m, len(x)):
             if int(x[i])+1 < k:
                 x[i] = x[~i] = str(int(x[i])+1)
@@ -61,8 +62,8 @@ def rotatedDigits(self, N: int) -> int:  # O(logn)
                 return x
         return ["1"] + ["0"]*(len(x)-1) + ["1"]
     x, ans = ["0"], 0  # x is the first k-mirror number
-    for _ in range(n):
-        while True:
+    for _ in range(n):  # O(n)
+        while True:  # generate a k-mirror number, then check it in base 10
             x = fn(x)
             val = int("".join(x), k)
             if str(val)[::-1] == str(val): break
@@ -138,7 +139,7 @@ def isPerfectSquare(self, num: int) -> bool:
 
 # LC93. Restore IP Addresses - chart in solution is interesting
 def restoreIpAddresses(self, s: str) -> List[str]:
-    res = []
+    res = []  # 3^3 possibilities, start or ., have only 3 possibility to put the next dot.
     def add_dot(segs, start):
         if len(segs) == 4:
             if start == len(s): res.append('.'.join(segs))
@@ -149,6 +150,34 @@ def restoreIpAddresses(self, s: str) -> List[str]:
                 if 0 <= int(seg) < 256: add_dot(segs +[seg], i+1)
     add_dot([], 0)
     return res
+
+# LC246. Strobogrammatic Number
+def isStrobogrammatic(self, num: str) -> bool:
+    # only 0, 1, 6, 8, 9 works. 6 and 9 are paired
+    rotates = {'0': '0', '1': '1', '8': '8', '6': '9', '9': '6'}
+    left, right = 0, len(num)-1
+    while left <= right:
+        if num[left] not in rotates or rotates[num[left]] != num[right]:
+            return False
+        left += 1
+        right -= 1
+    return True
+
+# LC247. Strobogrammatic Number II
+def findStrobogrammatic(self, n: int) -> List[str]:
+    # set of 0 1 6 8 9
+    ret = [''] if n % 2 == 0 else ['0', '1', '8']  # start from center
+    for _ in range(n // 2):
+        strobo = []
+        for s in ret:
+            strobo.append('1' + s + '1')
+            strobo.append('8' + s + '8')
+            strobo.append('6' + s + '9')
+            strobo.append('9' + s + '6')
+            if len(s) < n - 2:  # 0 can't be at first position
+                strobo.append('0' + s + '0')
+        ret = strobo  # next wave spreaded from center
+    return ret
 
 # LC509. Fibonacci Number
 def fib(self, n: int) -> int:
@@ -184,7 +213,7 @@ def isHappy(self, n: int) -> bool:
 
 # LC279. Perfect Squares, top100. minimal -> BFS
 def numSquares(self, n):
-    square_nums = [i * i for i in range(1, int(n**0.5)+1)]  # list of square numbers that are less than `n`
+    square_nums = [i * i for i in range(1, int(n**0.5)+1)]  # O(sqrt(n)) space and runtime
     queue, level = {n}, 0
     while queue:  # BFS
         level += 1
@@ -212,8 +241,8 @@ def getHint(self, secret: str, guess: str) -> str:
     return f'{bulls}A{cows}B'
 
 # LC9. Palindrome Number
-def isPalindrome(self, x: int) -> bool:
-    if x < 0 or (x > 0 and x % 10 == 0): return False
+def isPalindrome(self, x: int) -> bool:  # O(logn)
+    if x < 0 or (x > 0 and x % 10 == 0): return False  # 1 and 10 returns same in below
     rev = 0
     while x > rev:
         rev = rev * 10 + x % 10
@@ -283,12 +312,10 @@ def nextPalindrome(self, num: str) -> str:
             return sub + mid + sub[::-1]
     return ''
 
-
-
 # LC69. Sqrt(x)
 def mySqrt(self, x: int) -> int:
     if x == 0: return 0
-    if x < 4: return 1 # to ensure sqrt(x) < x / 2
+    if x < 4: return 1  # to ensure sqrt(x) < x / 2
     left, right = 2, x // 2  # first 2 is sqrt(4)
     while left <= right:
         middle = left + (right - left) // 2
@@ -297,7 +324,13 @@ def mySqrt(self, x: int) -> int:
         elif sqr < x: left = middle + 1
         else: return middle
     return right  # close to sqrt(x)
-
+def mySqrt(self, x: int) -> int:  # This is a new pattern
+    left, right = 0, x
+    while left < right:
+        mid = (left + right + 1) // 2
+        if mid * mid > x: right = mid - 1
+        else: left = mid
+    return left
 
 
 # LC343. Integer Break - 2 ** 3 < 3 ** 2, use derivative to know max x = e

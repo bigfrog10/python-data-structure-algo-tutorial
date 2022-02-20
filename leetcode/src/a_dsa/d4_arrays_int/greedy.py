@@ -25,12 +25,22 @@ def videoStitching(self, clips: List[List[int]], T: int) -> int:
     return res
 
 # LC1306. Jump Game III  O(n)
-def canReach(self, arr: List[int], start: int) -> bool: # modify existing array
-    if 0 <= start < len(arr) and arr[start] >= 0:
+def canReach(self, arr: List[int], start: int) -> bool:  # O(n) runtime and space
+    if 0 <= start < len(arr) and arr[start] >= 0:  # DFS
         if arr[start] == 0: return True
         arr[start] = - arr[start]  # visited
         return self.canReach(arr, start + arr[start]) or self.canReach(arr, start - arr[start])
     return False  # existing array can be restored back
+def canReach(self, arr: List[int], start: int) -> bool:  # O(n) runtime and space
+    q, n = [start], len(arr)  # BFS
+    while q:
+        node = q.pop(0)
+        if arr[node] == 0: return True
+        if arr[node] < 0: continue  # visited
+        arr[node] = -arr[node]  # mark as visited
+        for i in [node + arr[node], node - arr[node]]:
+            if 0 <= i < n: q.append(i)
+    return False
 
 # LC55. Jump Game
 def canJump(self, nums: List[int]) -> bool:  # greedy, O(n)

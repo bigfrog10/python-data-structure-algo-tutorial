@@ -19,7 +19,7 @@ def sortedSquares(self, nums: List[int]) -> List[int]: # O(n)
     n = len(nums)
     result = [0] * n
     left, right = 0, n-1
-    for i in range(n - 1, -1, -1):
+    for i in range(n)[::-1]:
         if abs(nums[left]) < abs(nums[right]):
             square = nums[right]
             right -= 1
@@ -40,12 +40,12 @@ def isMonotonic(self, A: List[int]) -> bool:
 
 # LC2071. Maximum Number of Tasks You Can Assign
 def maxTaskAssign(self, tasks: List[int], workers: List[int], pills: int, strength: int) -> int:
-    from sortedcontainers import SortedList  # O(nlogn * logn)
+from sortedcontainers import SortedList  # O(nlogn * logn)
     tasks.sort()  # sort once, small to large
     workers.sort()
-    def check_valid(ans):
-        _tasks = SortedList(tasks[:ans])  # O(nlogn)
-        _workers = workers[-ans:]
+    def check_valid(ans):  # can finish "ans" tasks or not
+        _tasks = SortedList(tasks[:ans])  # weakest tasks
+        _workers = workers[-ans:]  # strongest workers
         remain_pills = pills
         for worker in _workers:  # O(n)
             task = _tasks[0]
@@ -107,43 +107,6 @@ def findMissingRanges(self, nums: List[int], lower: int, upper: int) -> List[str
         prev = curr
     return res
 
-# LC1099. Two Sum Less Than K
-def twoSumLessThanK(self, nums: List[int], k: int) -> int:
-    nums.sort()  # O(nlogn)
-    answer, left, right = -1, 0, len(nums) -1
-    while left < right:
-        sum = nums[left] + nums[right]
-        if sum < k:
-            answer = max(answer, sum)
-            left += 1
-        else: right -= 1
-    return answer
-
-# LC1877. Minimize Maximum Pair Sum in Array
-def minPairSum(self, nums: List[int]) -> int:
-    nums.sort()
-    return max(nums[i] + nums[~i] for i in range(len(nums) // 2))
-
-# LC26. Remove Duplicates from Sorted Array
-def removeDuplicates(self, nums: List[int]) -> int:
-    i = 0  # 2 pointers
-    for j in range(1, len(nums)):
-        if nums[j] != nums[i]:  # if equal, we keep going without doing anything.
-            i += 1
-            nums[i] = nums[j]
-    return i+1
-
-# LC540. Single Element in a Sorted Array
-def singleNonDuplicate(self, nums: List[int]) -> int:  # simplest and fast
-    lo, hi = 0, len(nums) - 1
-    while lo < hi:
-        mid = lo + (hi - lo) // 2
-        if mid % 2 == 1: mid -= 1  # move to even case
-        if nums[mid] == nums[mid + 1]:  # means we have even numbers of left
-            lo = mid + 2  # so go to right to find the odd/single
-        else: hi = mid  # otherwise move to left.
-    return nums[lo]  # because hi is not equal
-
 # LC1636. Sort Array by Increasing Frequency
 def frequencySort(self, nums: List[int]) -> List[int]:
     count = collections.Counter(nums)
@@ -179,22 +142,14 @@ def checkPossibility(self, nums: List[int]) -> bool:
 
 # LC1909. Remove One Element to Make the Array Strictly Increasing
 def canBeIncreasing(self, nums: List[int]) -> bool:
-    removed = False
-    nums = [0] + nums + [1001] # min-1, max + 1 of this array
-    for i in range(len(nums) - 3):
-        if nums[i + 1] >= nums[i + 2]:
-            if removed: return False
-            if nums[i] >= nums[i + 2] and nums[i + 1] >= nums[i + 3]:
-                return False
-            removed = True
+    cnt = 0
+    for i in range(1, len(nums)):
+        if nums[i] <= nums[i-1]:
+            if cnt > 0: return False
+            cnt += 1
+            if i > 1 and nums[i] <= nums[i-2]:
+                nums[i] = nums[i-1]  # case like [1,6,7,5,8]
     return True
-
-# LC1636. Sort Array by Increasing Frequency
-def frequencySort(self, nums: List[int]) -> List[int]:
-    count = collections.Counter(nums)
-    return sorted(nums, key=lambda x: (count[x], -x))
-
-
 
 # LC1387. Sort Integers by The Power Value
 def getKth(self, lo: int, hi: int, k: int) -> int:
@@ -211,6 +166,24 @@ def getKth(self, lo: int, hi: int, k: int) -> int:
     return ans[1]
 
 # LC4. Median of Two Sorted Arrays, top100
+def findMedianSortedArrays(self, A, B):  # O(log(m+n))
+    l = len(A) + len(B)
+    if l % 2 == 1: return self.kth(A, B, l // 2)
+    else: return (self.kth(A, B, l // 2) + self.kth(A, B, l // 2 - 1)) / 2.
+def kth(self, a, b, k):
+    if not a: return b[k]
+    if not b: return a[k]
+    ia, ib = len(a) // 2 , len(b) // 2
+    ma, mb = a[ia], b[ib]
+
+    if ia + ib < k:  # when k is bigger than the sum of a and b's median indices
+        # if a's median is bigger than b's, b's first half doesn't include k
+        if ma > mb: return self.kth(a, b[ib + 1:], k - ib - 1)
+        else: return self.kth(a[ia + 1:], b, k - ia - 1)
+    else:  # when k is smaller than the sum of a and b's indices
+        # if a's median is bigger than b's, a's second half doesn't include k
+        if ma > mb: return self.kth(a[:ia], b, k)
+        else: return self.kth(a, b[:ib], k)
 def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
     # https://leetcode.com/problems/median-of-two-sorted-arrays/discuss/2481/Share-my-O(log(min(mn)))-solution-with-explanation
     A, B = nums1, nums2  # O(log(min(m, n)))
@@ -286,3 +259,10 @@ def findLeastNumOfUniqueInts(self, arr: List[int], k: int) -> int:
             k = k - v
         else: break
     return len(counts) - len(removals)
+
+# LC1331. Rank Transform of an Array
+def arrayRankTransform(self, arr: List[int]) -> List[int]:  # O(nlogn)
+    rank = {}
+    for a in sorted(arr):
+        rank.setdefault(a, len(rank) + 1)  # if not there, use this value
+    return map(rank.get, arr)

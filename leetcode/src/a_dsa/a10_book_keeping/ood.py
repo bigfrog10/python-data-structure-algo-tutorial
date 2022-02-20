@@ -1,5 +1,3 @@
-
-
 # https://github.com/donnemartin/system-design-primer
 # clarify requirements
 # hash out primary use cases
@@ -87,22 +85,6 @@ class ParkingAdmin:
 # if we care car size, we need to model Vehicle, large, mid, small
 # https://www.educative.io/courses/grokking-the-object-oriented-design-interview/gxM3gRxmr8Z
 
-# LC535. Encode and Decode TinyURL
-from random import choices
-chars = string.ascii_letters + string.digits  # upper, lower, digits
-class Codec:
-    def __init__(self):
-        self.url2code = {}
-        self.code2url = {}
-    def encode(self, longUrl: str) -> str:
-        while longUrl not in self.url2code: # or pre-generate for speed
-            code = ''.join(choices(chars, k=7))
-            if code not in self.code2url:
-                self.code2url[code] = longUrl
-                self.url2code[longUrl] = code
-        return 'http://tinyurl.com/' + self.url2code[longUrl]
-    def decode(self, shortUrl: str) -> str:
-        return self.code2url[shortUrl[-7:]]
 # Base 62, UUID
 # https://www.tfzx.net/article/1230313.html
 

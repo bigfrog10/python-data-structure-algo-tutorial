@@ -21,7 +21,7 @@ def isBipartite(self, graph: List[List[int]]) -> bool:
     for node in range(len(graph)):  # go through each node
         if node in color: continue
         stack = [node]  # DFS
-        color[node] = 0 # paint color, component start
+        color[node] = 0  # paint color, component start
         while stack:
             node = stack.pop()
             for nei in graph[node]:
@@ -61,15 +61,25 @@ def friendRequests(self, n: int, restrictions: List[List[int]], requests: List[L
 
 # LC399. Evaluate Division
 def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
-    quot = collections.defaultdict(dict)
-    for (num, den), val in zip(equations, values):
-        quot[num][num] = quot[den][den] = 1.0
-        quot[num][den] = val
-        quot[den][num] = 1 / val
-    for k, i, j in itertools.permutations(quot, 3):
-        if k in quot[i] and j in quot[k]:
-            quot[i][j] = quot[i][k] * quot[k][j]
-    return [quot[num].get(den, -1.0) for num, den in queries]
+    graph = defaultdict(dict)
+    for (a, b), v in zip(equations, values):  # O(n)
+        graph[a][b] = v
+        graph[b][a] = 1.0 / v
+    def dfs(x, y, w, visited):  # use dfs to find query values.
+        visited.add(x)
+        ns = graph[x]
+        for var, weight in ns.items():
+            if var == y: return w * weight
+            if var not in visited:
+                s = dfs(var, y, w*weight, visited)
+                if s != 0: return s
+        return 0
+    ret = []
+    for a, b in queries:  # O(m)
+        r = dfs(a, b, 1, set())  # O(n)
+        if r == 0: ret.append(-1)
+        else: ret.append(r)
+    return ret
 def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
         alphabet = set(sum(equations, []))  # start with []. return all diff chars in a set
         uf = UnionFind(alphabet)  # O((N+M)log∗N)
@@ -184,7 +194,7 @@ def leadsToDestination(self, n: int, edges: List[List[int]], source: int, destin
 
 # LC797. All Paths From Source to Target
 # To return all solutions, we need to dfs with path  # BBG
-def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
+def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:  # O(n * 2^n)
     results, target = [], len(graph) - 1
     def backtrack(currNode, path):  # we need all paths, so backtrack on path.
         if currNode == target:
@@ -206,28 +216,19 @@ def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
     dfs(0, [0])
     return res
 
-
-
-
-
-
-
-
-
 # LC1559. Detect Cycles in 2D Grid
 def containsCycle(self, grid: List[List[str]]) -> bool:  # O(mn)
-    seen = defaultdict(int)  # 0 not seen, 1 seen with False, -1 seen with True
-    def dfs(i, j, p):  # p is parent coordinate
-        if seen[i,j]: return seen[i,j] == -1
-        seen[i,j] = -1
-        for x, y in (i+1, j), (i-1, j), (i, j+1), (i, j-1):
-            if (x, y) == p: continue
-            if m > x >= 0 <= y < n and grid[x][y] == grid[i][j]:
-                if dfs(x, y, (i, j)): return True
-        seen[i, j] = 1
-        return False
     m, n = len(grid), len(grid[0])
-    return any(not seen[i,j] and dfs(i, j, (i, j)) for i, j in product(range(m), range(n)))
+    visited = set()
+    def dfs(node, parent):
+        if node in visited: return True
+        visited.add(node)
+        nx,ny = node
+        for cx, cy in [nx+1,ny], [nx-1, ny],[nx,ny+1], [nx,ny-1]:
+            if m > cx >= 0 <= cy < n and grid[cx][cy] == grid[nx][ny] and (cx,cy) != parent:
+                if dfs((cx, cy), node): return True
+        return False
+    return any((i,j) not in visited and dfs((i, j), (i, j)) for i, j in product(range(m), range(n)))
 
 # Cycle Detection
 # LC684. Redundant Connection - undirected graph

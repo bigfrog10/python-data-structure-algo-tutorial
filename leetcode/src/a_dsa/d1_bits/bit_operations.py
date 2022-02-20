@@ -49,7 +49,7 @@ def multiply(self, num1, num2):
         cnt += 1
         x = x >> 1
     return str(ret)
-def multiply(self, num1, num2):
+def multiply(self, num1, num2):  # O(mn)
     res = [0]* (len(num1) + len(num2))
     for i, e1 in enumerate(reversed(num1)):
         for j, e2 in enumerate(reversed(num2)):

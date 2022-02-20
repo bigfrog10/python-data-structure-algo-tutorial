@@ -1,5 +1,5 @@
 
-# LC622. Design Circular Queue
+# LC622. Design Circular Queue - RingBuffer
 class MyCircularQueue: # array based
     def __init__(self, k: int):  # double linked list
         self.capacity, self.queue = k, [0]*k
@@ -54,7 +54,7 @@ class MinStack:
     def push(self, x: int) -> None:
         if self.values:
             t = self.values[-1]
-            mv = (x, min(x, t[1])) # maintain current min
+            mv = (x, min(x, t[1]))  # maintain current min
         else:  mv = (x, x)
         self.values.append(mv)
     def pop(self) -> None: self.values.pop()
@@ -62,8 +62,49 @@ class MinStack:
     def getMin(self) -> int: return self.values[-1][1]
 
 # LC716. Max Stack
-# use a stack and sorted container: all ops are at most log(n)
-class MaxStack:
+class Dllist:
+    def __init__(self, value, left=None, right=None):
+        self.val = value
+        self.left = left
+        self.right = right
+    def __repr__(self):
+        return f'[{self.val}: left={self.left.val if self.left else None}, right={self.right.val if self.right else None}]'
+import sortedcontainers
+class MaxStack:  # This is O(1) solution
+    def __init__(self):
+        self.head = Dllist('head')
+        self.tail = Dllist('tail')
+        self.head.right = self.tail
+        self.tail.left = self.head
+        self.values = sortedcontainers.SortedDict()  # pointers to double linked list
+        self.size = 0
+    def push(self, x: int) -> None:
+        node = Dllist(x, left=self.tail.left, right=self.tail)
+        self.tail.left.right, self.tail.left = node, node
+        if x in self.values: self.values[x].append(node)
+        else: self.values[x] = [node]
+        self.size += 1
+    def pop(self) -> int:
+        if self.size == 0: return -1
+        node = self.tail.left
+        node.left.right, self.tail.left = self.tail, node.left
+        self.size -= 1
+        self.values[node.val].pop()
+        if not self.values[node.val]: del self.values[node.val]
+        return node.val
+    def top(self) -> int: return self.tail.left.val
+    def peekMax(self) -> int:
+        key, nodes = self.values.peekitem()
+        return key
+    def popMax(self) -> int:  # O(n)
+        if self.size == 0: return -1
+        key, nodes = self.values.peekitem()
+        node = nodes.pop()
+        if not nodes: del self.values[key]
+        self.size -= 1
+        node.left.right, node.right.left = node.right, node.left
+        return key
+class MaxStack:  # use a stack and sorted container: all ops are at most log(n)
     def __init__(self): self.values = []  # list end is stack top
     def push(self, x: int) -> None:
         if self.values:
@@ -74,7 +115,7 @@ class MaxStack:
     def pop(self) -> int: return self.values.pop()[0]
     def top(self) -> int: return self.values[-1][0]
     def peekMax(self) -> int: return self.values[-1][1]
-    def popMax(self) -> int:  # O(n)
+    def popMax(self) -> int:   # O(n)
         stack = []
         maxv = self.values[-1][1]
         removed = False # remove only first max
@@ -92,7 +133,7 @@ class MaxStack:
 # LC895. Maximum Frequency Stack
 class FreqStack(object): # This is O(1) operations
     def __init__(self):
-        self.maxf = 0 # This is the trick to keep O(1)
+        self.maxf = 0  # This is the trick to keep O(1)
         self.v2f = collections.defaultdict(int)
         self.f2v = collections.defaultdict(list)
     def push(self, x):
@@ -102,13 +143,11 @@ class FreqStack(object): # This is O(1) operations
         self.maxf = max(self.maxf, self.v2f[x])
     def pop(self):
         x = self.f2v[self.maxf].pop()
-        #if that's the only max element in frequency decrease by 1
-        if not self.f2v[self.maxf]:
+        if not self.f2v[self.maxf]:  #if that's the only max element in frequency decrease by 1
             self.maxf -= 1 # this is true because of the line below, i.e., freq dec by 1
         # we don't need to reinsert x with lower frequency, it's already there.
         self.v2f[x] -= 1
         return x
-
 
 # LC225. Implement Stack using Queues
 import collections
@@ -143,8 +182,6 @@ class SnakeGame:
             self.food.popleft()   # delete the food that's already eaten
         else: self.snake.pop() # not eating food: append head and delete tail
         return len(self.snake)-1
-
-
 
 # LC1429. First Unique Number
 class FirstUnique:

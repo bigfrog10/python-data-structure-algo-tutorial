@@ -23,20 +23,15 @@ def depthSum(self, nestedList: List[NestedInteger]) -> int:
 
 # LC364. Nested List Weight Sum II
 def depthSumInverse(self, nestedList: List[NestedInteger]) -> int:
-    # https://leetcode.com/problems/nested-list-weight-sum-ii/discuss/1027152/Python3-1-pass-bfs
-    # good bfs idea
-    queue = nestedList
-    s1 = 0
-    s2 = 0  # breathe sum
-    q1 = []  # breathe layer
-    while queue:
+    queue = nestedList  # O(n), n = total number of elements
+    s1, s2, q1 = 0, 0, []  # return, level sum, level queue
+    while queue:  # BFS
         e = queue.pop()
         if e.isInteger(): s2 += e.getInteger()
         else: q1.extend(e.getList())
         if not queue:
             s1 += s2 # keep add same value to simulate weight
-            queue = q1
-            q1 = []
+            queue, q1 = q1, []
     return s1
 
 # LC238. Product of Array Except Self, top100
@@ -51,22 +46,9 @@ def productExceptSelf(self, nums: List[int]) -> List[int]:
         tmp *= nums[i]
     return ret
 
-# LC983. Minimum Cost For Tickets
-def mincostTickets(self, days: List[int], costs: List[int]) -> int:
-    durations = [1, 7, 30]  # this should be in parameter passed in
-    day_set = set(days)
-    @lru_cache(None)
-    def dp(i):  # BFS on days
-        if i > days[-1]: return 0
-        elif i in day_set: # if we do travel today
-            return min(dp(i + d) + c for c, d in zip(costs, durations))
-        else: return dp(i + 1) # wait for next day if we don't travel today
-    # print(dp.cache_info())
-    return dp(days[0])
-
 # LC1868. Product of Two Run-Length Encoded Arrays
 def findRLEArray(self, encoded1: List[List[int]], encoded2: List[List[int]]) -> List[List[int]]:
-    res, l, r = [], 0, 0  # O(n + m), counts of unique numbers
+    res, l, r = [], 0, 0   # O(n + m), counts of unique numbers
     while encoded1[-1][-1] != 0:
         prod = encoded1[l][0] * encoded2[r][0]
         low = min(encoded1[l][1], encoded2[r][1])
@@ -77,6 +59,7 @@ def findRLEArray(self, encoded1: List[List[int]], encoded2: List[List[int]]) -> 
         encoded2[r][1] -= low
         if encoded1[l][1] == 0: l += 1
         if encoded2[r][1] == 0: r += 1
+    return res
 
 # LC932. Beautiful Array
 def beautifulArray(self, n: int) -> List[int]:
@@ -104,25 +87,16 @@ def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
     return False
 
 # LC41. First Missing Positive, top100
-def firstMissingPositive(self, nums: List[int]) -> int:
-    # missing is in [1 ..., len(nums)] and we care only positives
-    positives = set(x for x in nums if 0 < x <= len(nums))
-    n = len(positives)
-    if n == 0: return 1  # if all nums are 0, then next is 1 and 1 is missing
-    for i in range(1, n+1):  # this order honors smallest missing
-        if i not in positives: return i
-    return n + 1
-def firstMissingPositive(self, nums: List[int]) -> int:
+def firstMissingPositive(self, nums: List[int]) -> int:  # O(1) space
     n = len(nums)
-    for i in range(n):  # clean up so range is [1, n]
-        if nums[i] < 1 or nums[i] > n: nums[i] = 0
-    for i in range(n):
-        if nums[i] > 0:  # 1 <= nums[i] % (n + 1) <= n:
-            ind = nums[i] % (n + 1) - 1  # ensure ind in bound.
-            nums[ind] += n + 1  # seen == a > n
-    for i in range(n):
-        if nums[i] <= n: return i + 1  # not seen == a <= n
-    return n + 1
+    for i, v in enumerate(nums):
+        if v <= 0: nums[i] = n+1  # zero out negatives
+    for v in nums:
+        i = abs(v) - 1
+        if i < n: nums[i] = -abs(nums[i])
+    for i, v in enumerate(nums):
+        if v > 0: return i+1
+    return n+1
 
 # LC219. Contains Duplicate II
 def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
@@ -202,25 +176,23 @@ def findPairs(self, nums: List[int], k: int) -> int:
         elif k == 0 and counter[x] > 1: result += 1
     return result
 
-# LC974. Subarray Sums Divisible by K
-def subarraysDivByK(self, A: List[int], K: int) -> int:
-    if not A: return 0
-    cumu = list(accumulate(A))
-    # pre-append 0 because we count x // K == 0 in down below formula.
-    res = [0] + [x % K for x in cumu]
-    counts = Counter(res) # number of cumus having same residue.
-    # once we subtract any of these 2, we have the subarray sum divided by K.
-    # so selecting 2 elements has C(C-1) / 2 possibilities.
-    return sum(c * (c - 1) // 2 for c in counts.values())
+# LC26. Remove Duplicates from Sorted Array
+def removeDuplicates(self, nums: List[int]) -> int:
+    i = 0  # 2 pointers
+    for j in range(1, len(nums)):
+        if nums[j] != nums[i]:  # if equal, we keep going without doing anything.
+            i += 1
+            nums[i] = nums[j]
+    return i+1
 
 # LC765. Couples Holding Hands
-def minSwapsCouples(self, row):
-    idxs, swap = {}, 0
+def minSwapsCouples(self, row):  # O(n)
     idxs = {x:i for (i,x) in enumerate(row)}
+    swap = 0
     for i in range(0, len(row), 2):
         partner = row[i] ^ 1
         j = idxs[partner]
-        if j-i != 1:
+        if j-i != 1:  # not next to each other
             row[i+1], row[j] = row[j], row[i+1]
             idxs[row[j]] = j
             swap += 1
@@ -237,6 +209,7 @@ def missingNumber(self, nums):
     for i, num in enumerate(nums):
         missing ^= i ^ num
     return missing
+
 # LC66. Plus One
 def plusOne(self, digits: List[int]) -> List[int]:
     for i in reversed(range(len(digits))):
@@ -299,20 +272,28 @@ def rotate(self, nums: List[int], k: int) -> None:
     nums[k:], nums[:k] = nums[:n-k], nums[n-k:]
 
 # LC287. Find the Duplicate Number  Floyd's Tortoise and Hare (Cycle Detection)
-def findDuplicate(self, nums: List[int]) -> int:  # O(1) space and O(n) time
-    for num in nums:  # repeating number could repeat many times
-        if nums[abs(num)] < 0:
-            ans = abs(num)
-            break
-        nums[abs(num)] = -nums[abs(num)]
-    for i in range(len(nums)): # restore nums
-        nums[i] = abs(nums[i])
-    return ans
+def findDuplicate(self, nums):  # O(1) space and O(n) time, Floyd's
+    tortoise = hare = nums[0]
+    while True:
+        tortoise = nums[tortoise]
+        hare = nums[nums[hare]]
+        if tortoise == hare: break
+    tortoise = nums[0]
+    while tortoise != hare:  # Find the "entrance" to the cycle.
+        tortoise = nums[tortoise]
+        hare = nums[hare]
+    return hare
 
 # LC169. Majority Element
-def majorityElement(self, nums: List[int]) -> int:
+def majorityElement(self, nums: List[int]) -> int:  # O(n) runtime and space
     counts = collections.Counter(nums)
     return max(counts.keys(), key=counts.get)
+def majorityElement(self, nums):  # O(n) runtime, O(1) space, Boyer-Moore Voting Algorithm
+    candidate, count = None, 0
+    for num in nums:
+        if count == 0: candidate = num  # discard prefix, pairs of 1 majority and not.
+        count += 1 if num == candidate else -1
+    return candidate
 
 # LC1295. Find Numbers with Even Number of Digits
 def findNumbers(self, nums: List[int]) -> int:
@@ -358,17 +339,17 @@ def coinChange(self, coins: List[int], amount: int) -> int:
     return -1
 
 # LC518. Coin Change 2
-def change(self, amount: int, coins: List[int]) -> int:
-    if not coins: return 1 if amount == 0 else 0
-    dp = [1] + [0] * amount
+def change(self, amount: int, coins: List[int]) -> int:  # O(amount) space
+    if not coins: return 1 if amount == 0 else 0  # O(amount * len(coins))
+    dp = [1] + [0] * amount  # 1 is for 0 amount and no coins
     for c in coins:
         for i in range(c, amount+1): dp[i] += dp[i-c]
     return dp[amount]
-def change(self, amount: int, coins: List[int]) -> int:
+def change1(self, amount: int, coins: List[int]) -> int:  # O(amount * len(coins)) knapsack problem
     coins.sort(reverse=True)  # make it much faster, but not necessary
     @lru_cache(maxsize=None)
     def f(i, amount):  # having i is to remove double count, (2, 1, 1), (1, 2, 1), (1,1,2)
-        if amount == 0 : return 1
+        if amount == 0: return 1
         if amount < 0 or i >= len(coins): return 0
         return f(i, amount-coins[i]) + f(i+1, amount)
     return f(0, amount)
@@ -576,12 +557,8 @@ def findShortestSubArray(self, nums: List[int]) -> int:
     degree = max(len(v) for v in dt.values())
     return min(dt[k][-1] - dt[k][0] + 1 for k in dt if len(dt[k]) == degree)
 
-
-
-
-
 # LC350. Intersection of Two Arrays II
-def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:  # O(n + m)
     counts1 = collections.Counter(nums1)
     counts2 = collections.Counter(nums2)
     res = [] # or we may just loop nums2 and manipulate counts.

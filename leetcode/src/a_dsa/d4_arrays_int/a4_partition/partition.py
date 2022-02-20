@@ -1,21 +1,18 @@
 
 # LC75. Sort Colors   Dutch National Flag
 def sortColors(self, nums: List[int]) -> None:
-    if not nums: return
-    lnth = len(nums)
-    # https://en.wikipedia.org/wiki/Dutch_national_flag_problem
-    lidx, hidx = 0, lnth - 1
-    mid_h = 0
-    color = 1 # among 0, 1, 2 different colors
-    while mid_h <= hidx:  #O(n)
-        if nums[mid_h] < color:
-            nums[lidx], nums[mid_h] = nums[mid_h], nums[lidx]
-            lidx += 1
-            mid_h += 1
-        elif nums[mid_h] > color:
-            nums[mid_h], nums[hidx] = nums[hidx], nums[mid_h]
-            hidx -= 1
-        else: mid_h += 1
+    p0 = 0  # for all idx < p0 : nums[idx < p0] = 0
+    curr = 0  # curr is an index of element under consideration
+    p2 = len(nums) - 1  # for all idx > p2 : nums[idx > p2] = 2
+    while curr <= p2:
+        if nums[curr] == 0:
+            nums[p0], nums[curr] = nums[curr], nums[p0]
+            p0 += 1
+            curr += 1
+        elif nums[curr] == 2:
+            nums[curr], nums[p2] = nums[p2], nums[curr]
+            p2 -= 1
+        else: curr += 1
 
 # LC2089. Find Target Indices After Sorting Array
 def targetIndices(self, nums: List[int], target: int) -> List[int]:

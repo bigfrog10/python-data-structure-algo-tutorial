@@ -72,8 +72,6 @@ def flatten(self, root: TreeNode) -> None: # preorder
             node.left = None  # single linked list
         node = node.right  # This is original node.left
 
-
-
 # LC106. Construct Binary Tree from Inorder and Postorder Traversal  # BBG
 def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:
     inorder_idxs={v: i for i, v in enumerate(inorder)}
@@ -89,17 +87,15 @@ def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:
 # LC889. Construct Binary Tree from Preorder and Postorder Traversal
 def constructFromPrePost(self, pre: List[int], post: List[int]) -> TreeNode:
     preIndex, posIndex = 0, 0
-    def recurse(pre, post):  # O(n) since we loop preindex once
+    def construct(pre, post):  # O(n) since we loop preindex once
         nonlocal preIndex, posIndex
         root = TreeNode(pre[preIndex])
         preIndex += 1
-        if (root.val != post[posIndex]):
-            root.left = recurse(pre, post)
-        if (root.val != post[posIndex]):
-            root.right = recurse(pre, post)
+        if (root.val != post[posIndex]): root.left = construct(pre, post)
+        if (root.val != post[posIndex]): root.right = construct(pre, post)
         posIndex += 1
         return root
-    return recurse(pre, post)
+    return construct(pre, post)
 
 # LC1367. Linked List in Binary Tree
 def isSubPath(self, head: ListNode, root: TreeNode) -> bool:
@@ -113,7 +109,7 @@ def isSubPath(self, head: ListNode, root: TreeNode) -> bool:
 
 # LC536. Construct Binary Tree from String
 def str2tree(self, s: str) -> Optional[TreeNode]:  # O(n)
-    def build(iteri) -> TreeNode:
+    def build(iteri) -> TreeNode:  # works for pattern "num(a)(b))"
         num = ''
         while (nxt := next(iteri)) not in '()': num += nxt
         node = TreeNode(int(num))
@@ -121,7 +117,7 @@ def str2tree(self, s: str) -> Optional[TreeNode]:  # O(n)
             node.left = build(iteri)
             if next(iteri) == '(':
                 node.right = build(iteri)
-                next(iteri)  # skip tail ')'
+                next(iteri)  # skip tail ')', need below extra )
         return node
     return build(iter(s + ')')) if s else None
 

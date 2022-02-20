@@ -52,7 +52,7 @@ class BSTIterator:
 
 # LC1382. Balance a Binary Search Tree
 def balanceBST(self, root: TreeNode) -> TreeNode:  # O(n) runtime and O(n) space
-    def inorder(node, li):  # O(N)
+    def inorder(node, li):  # O(N), collect all nodes to a list
         if not node: return
         inorder(node.left, li)
         li.append(node)
@@ -102,7 +102,7 @@ def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:  # O(
         nonlocal head
         if l > r: return None
         mid = (l + r) // 2
-        left = convert(l, mid - 1)
+        left = convert(l, mid - 1)  # order is significant!
         node = TreeNode(head.val)
         node.left = left
         head = head.next
@@ -110,15 +110,15 @@ def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:  # O(
         return node
     return convert(0, size - 1)
 
-# LC1305. All Elements in Two Binary Search Trees
+# LC1305. All Elements in Two Binary Search Trees, merge trees
 def getAllElements(self, root1: TreeNode, root2: TreeNode) -> List[int]:
     stack1, stack2, output = [], [], []  # O(m + n)
     while root1 or root2 or stack1 or stack2:
         while root1:
             stack1.append(root1)
-            root1 = root1.left # find smallest
+            root1 = root1.left  # find smallest
         while root2:
-            stack2.append(root2)
+            stack2.append(root2)  # find smallest
             root2 = root2.left
         if not stack2 or stack1 and stack1[-1].val <= stack2[-1].val:
             root1 = stack1.pop()
@@ -170,8 +170,8 @@ def bstToGst(self, root: TreeNode) -> TreeNode:
 
 # LC230. Kth Smallest Element in a BST
 def kthSmallest(self, root: TreeNode, k: int) -> int:  # iterative
-    stack = []
-    while True:
+    stack = []  # O(H) space
+    while True:  # O(H + k)
         while root:  # go all the way to left to smallest.
             stack.append(root)
             root = root.left
@@ -180,6 +180,10 @@ def kthSmallest(self, root: TreeNode, k: int) -> int:  # iterative
         if not k: return root.val
         root = root.right
     return None
+def kthSmallest(self, root, k):  # O(n)
+    def inorder(r):
+        return inorder(r.left) + [r.val] + inorder(r.right) if r else []
+    return inorder(root)[k - 1]
 
 # LC285. Inorder Successor in BST
 def inorderSuccessor(self, root: 'TreeNode', p: 'TreeNode') -> 'TreeNode':
@@ -199,7 +203,7 @@ def inorderSuccessor(self, node: 'Node') -> 'Node':
         node = node.right
         while node.left: node = node.left
         return node
-    # the successor is somewhere upper in the tree
+    # the successor is somewhere upper in the left tree
     while node.parent and node == node.parent.right: node = node.parent
     return node.parent  # first left
 
@@ -224,22 +228,19 @@ def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -
             return root
 
 # LC897. Increasing Order Search Tree
-def increasingBST(self, root, tail = None):  # O(n) runtime, O(H) space
-    if not root: return tail
-    res = self.increasingBST(root.left, root)  # left tree -> link list + root
-    root.left = None
-    root.right = self.increasingBST(root.right, tail)  # right tree -> link list + tail
-    return res
+def increasingBST(self, root: TreeNode) -> TreeNode:  # O(n) runtime, O(H) space
+    def rearrange(node, tail):
+        if not node: return tail
+        res = rearrange(node.left, node)  # left tree -> link list + root
+        node.left = None
+        node.right = rearrange(node.right, tail)  # right tree -> link list + tail
+        return res
+    return rearrange(root, None)
 
 # LC95. Unique Binary Search Trees II
-def generateTrees(self, n: int) -> List[Optional[TreeNode]]:
-    def node(val, left, right):
-        node = TreeNode(val)
-        node.left = left
-        node.right = right
-        return node
-    def trees(first, last):
-        return [node(root, left, right)
+def generateTrees(self, n: int) -> List[Optional[TreeNode]]:  # O(n * catalan number), O(4^n)
+    def trees(first, last):  # g(n) = sum [g(i-1) * g(n-i)] i=1..n, g(0) = g(1) = 1
+        return [TreeNode(root, left, right)
                 for root in range(first, last+1)
                 for left in trees(first, root-1)
                 for right in trees(root+1, last)] or [None]
@@ -317,3 +318,63 @@ def splitBST(self, root: TreeNode, V: int) -> List[TreeNode]:
         smaller, larger = self.splitBST(root.left, V)
         root.left = larger
         return smaller, root
+
+# LC1902. Depth of BST Given Insertion Order
+def maxDepthBST(self, order: List[int]) -> int:  # O(nlogn)
+    depths = sortedcontainers.SortedDict()
+    depths[-math.inf] = 0 # add dummy bounds to avoid extra ifs
+    #depths[math.inf] = 0
+    for x in order:
+        i = depths.bisect_left(x)
+        depths[x] = 1 + max(depths.values()[i - 1:i + 1])  # left and right subtrees
+    return max(depths.values())
+
+# LC1932. Merge BSTs to Create Single BST
+def canMerge(self, trees: List[TreeNode]) -> Optional[TreeNode]:
+    nodes = {}
+    indeg = collections.defaultdict(int)
+    for t in trees:
+        if t.val not in indeg: indeg[t.val] = 0  # select 0 below in sources
+        if t.left:
+            indeg[t.left.val] += 1
+            if t.left.val not in nodes: nodes[t.left.val] = t.left
+        if t.right:
+            indeg[t.right.val] += 1
+            if t.right.val not in nodes: nodes[t.right.val] = t.right
+        nodes[t.val] = t
+    sources = [k for k, v in indeg.items() if v == 0]
+    if len(sources) != 1: return None  # check single root
+
+    self.cur = float('-inf')
+    self.is_invalid = False
+    seen = set()
+    def inorder(val):
+        seen.add(val)
+        node = nodes[val]
+        if node.left: node.left = inorder(node.left.val)
+        # check inorder increasing
+        if val <= self.cur:
+            self.is_invalid = True
+            return
+        self.cur = val
+        if node.right: node.right = inorder(node.right.val)
+        return node
+
+    root = inorder(sources[0])
+    if len(seen) != len(nodes) or self.is_invalid:
+        return None  # check full traversal
+    return root
+
+# LC783. Minimum Distance Between BST Nodes
+def minDiffInBST(self, root: Optional[TreeNode]) -> int:
+    def dfs(node):
+        if node:
+            dfs(node.left)
+            self.ans = min(self.ans, node.val - self.prev)
+            self.prev = node.val
+            dfs(node.right)
+
+    self.prev = float('-inf')
+    self.ans = float('inf')
+    dfs(root)
+    return self.ans

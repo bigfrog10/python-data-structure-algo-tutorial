@@ -15,7 +15,7 @@ def intToRoman(self, num: int) -> str:
     integer = { 1000: "M", 900: "CM", 500: "D", 400: "CD", 100: "C",
         90: "XC", 50: "L", 40: "XL", 10: "X", 9: "IX", 5: "V", 4: "IV", 1: "I"}
     s = ""
-    for k, v in integer.items():
+    for k, v in integer.items():  # insertion order
         d, num = divmod(num, k)
         s += d*v
     return s
@@ -37,7 +37,7 @@ def numberToWords(self, num):
     zero3 = ["","Thousand","Million","Billion"]
 
     def hundreds(num):
-        if num == 0: return ""  # need this to prevent extra space
+        if num == 0: return ""  # need this to prevent extra space in next line
         elif num < 20: return lessThan20[num] + " "
         elif num < 100: return tens[num // 10] + " " + hundreds(num % 10)
         else: return lessThan20[num // 100] + " Hundred " + hundreds(num % 100)

@@ -48,12 +48,16 @@ def customSortString(self, order: str, s: str) -> str:
     return "".join(ans)
 
 # LC451. Sort Characters By Frequency
-def frequencySort(self, s: str) -> str:
-    counts = Counter(s)
-    keys = sorted(counts.keys(), reverse=True, key=lambda x: counts[x])
-    ret = ''
-    for k in keys: ret += k * counts[k]
-    return ret
+def frequencySort(self, s: str) -> str:  # O(n)
+    if not s: return s
+    counts = collections.Counter(s)  # Determine the frequency of each character.
+    max_freq = max(counts.values())
+    buckets = [[] for _ in range(max_freq + 1)]  # count -> char list
+    for c, i in counts.items(): buckets[i].append(c)  # Bucket sort the characters by frequency.
+    res = []
+    for i in range(len(buckets))[::-1]:
+        for c in buckets[i]: res.append(c * i)
+    return "".join(res)
 
 # LC1985. Find the Kth Largest Integer in the Array
 def kthLargestNumber(self, nums: List[str], k: int) -> str:  # O(nlogk)

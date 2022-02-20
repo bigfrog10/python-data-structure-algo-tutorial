@@ -4,14 +4,8 @@
 
 -- LC1699. Number of Calls Between Two Persons
 SELECT
-    CASE
-        WHEN from_id > to_id THEN to_id
-        ELSE from_id
-    END AS person1,
-    CASE
-        WHEN from_id > to_id THEN from_id
-        ELSE to_id
-    END AS person2,
+    CASE WHEN from_id > to_id THEN to_id ELSE from_id END AS person1,
+    CASE WHEN from_id > to_id THEN from_id ELSE to_id END AS person2,
     COUNT(duration) AS call_count,
     SUM(duration) AS total_duration
 FROM Calls
@@ -20,10 +14,10 @@ GROUP BY person2,person1
 -- 1511. Customer Order Frequency
 SELECT customer_id, name
 FROM Customers JOIN Orders USING(customer_id)
-    JOIN Product USING(product_id)
+               JOIN Product USING(product_id)
 GROUP BY customer_id
 HAVING SUM(IF(LEFT(order_date, 7) = '2020-06', quantity, 0) * price) >= 100
-    AND SUM(IF(LEFT(order_date, 7) = '2020-07', quantity, 0) * price) >= 100
+   AND SUM(IF(LEFT(order_date, 7) = '2020-07', quantity, 0) * price) >= 100
 
 -- LC1164. Product Price at a Given Date
 select distinct product_id, 10 as price

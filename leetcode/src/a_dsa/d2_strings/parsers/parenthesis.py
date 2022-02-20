@@ -1,19 +1,19 @@
 
 # LC1249. Minimum Remove to Make Valid Parentheses
-def minRemoveToMakeValid(self, s: str) -> str: # O(n)
-    stack, remove = [], [] # find all indices to remove
+def minRemoveToMakeValid(self, s: str) -> str:  # O(n)
+    stack, remove = [], []  # find all indices to remove
     for i, c in enumerate(s):
-        if c not in '()': continue # others, keep it
-        elif c == '(': stack.append(i) # record it
+        if c not in '()': continue  # others, keep it
+        elif c == '(': stack.append(i)  # record it
         # now c == ')'
-        elif not stack: remove.append(i) # mo matching ( for ), add to remove
-        else: stack.pop() # matched, remove old record
-    remove.extend(stack) # whatever left is no match
+        elif not stack: remove.append(i)  # mo matching ( for ), add to remove
+        else: stack.pop()  # matched, remove old record
+    remove.extend(stack)  # whatever left is no match
     idx, ret = 0, ''
-    for i in remove: # remove those
-        ret += s[idx:i] # up to removed
-        idx = i + 1 # skip removed
-    ret += s[idx:] # add leftover
+    for i in remove:  # remove those
+        ret += s[idx:i]  # up to removed
+        idx = i + 1  # skip removed
+    ret += s[idx:]  # add leftover
     return ret
 
 # LC921. Minimum Add to Make Parentheses Valid
@@ -61,19 +61,19 @@ def generateParenthesis(self, n: int) -> List[str]:
 
 # LC1541. Minimum Insertions to Balance a Parentheses String
 def minInsertions(self, s: str) -> int:
-    res = right = 0  # res=needed ops for (, right is ops needed for ).
+    open_missing = close_missing = close_needed = 0  # miss (, miss ), and miss ))
     for c in s:
         if c == '(':
-            right += 2
-            if right % 2:  # for 1 )
-                right -= 1
-                res += 1
-        if c == ')':  # "))())("
-            right -= 1  # so we could tracke )) for one (
-            if right < 0:  # if we need more right, then need (, so res + 1
-                right += 2
-                res += 1
-    return right + res
+            if close_needed % 2:  # if we have odd ) in the last step
+                close_missing += 1  # for previous invalid, have to add one closing bracket to make it valid
+                close_needed -= 1  # no need to track the last invalid case
+            close_needed += 2
+        else:  # it's )
+            close_needed -= 1
+            if close_needed < 0: # previously we have ")))"
+                open_missing += 1  # so increment this for ( to balance )))
+                close_needed += 2  # no need to track the last invalid
+    return open_missing + close_missing + close_needed
 
 # LC20. Valid Parentheses, top100
 def isValid(self, s: str) -> bool:
@@ -99,19 +99,20 @@ def scoreOfParentheses(self, S: str) -> int:
 
 # LC241. Different Ways to Add Parentheses
 def diffWaysToCompute(self, expression: str) -> List[int]:
-    res = []
-    if '+' not in expression and '-' not in expression and '*' not in expression:
-        res.append(int(expression))  # base case
-    for i, v in enumerate(expression):
-        if v == '+' or v == '-' or v == '*':
-            listFirst = self.diffWaysToCompute(expression[0: i])
-            listSecond = self.diffWaysToCompute(expression[i + 1:])
-            for valuei in listFirst:
-                for valuej in listSecond:
-                    if v == '+': res.append(valuei + valuej)
-                    elif v == '-': res.append(valuei - valuej)
-                    else: res.append(valuei * valuej)
-    return res
+    # runtime is: http://people.math.sc.edu/howard/Classes/554b/catalan.pdf
+    # runtime is C_(n-1) = (select n-1 from 2(n-1)) / n, n = len(expr)
+    # pn = sum(p_i * p_(n-i)) for i in 1 to n-1
+    @lru_cache(None)
+    def diff_ways(expr: str):
+        res = []
+        if expr.isdigit(): res.append(int(expr))  # base case
+        for i, v in enumerate(expr):
+            if v in '+-*':
+                pre = diff_ways(expr[0: i])
+                post = diff_ways(expr[i + 1:])
+                res.extend(a+b if v=='+' else a-b if v=='-' else a*b for a in pre for b in post)
+        return res
+    return diff_ways(expression)
 
 # LC32. Longest Valid Parentheses
 def longestValidParentheses(self, s):
@@ -145,10 +146,9 @@ def longestValidParentheses(self, s):
 
 # LC678. Valid Parenthesis String - with *
 def checkValidString(self, s):  # greedy
-    lo = hi = 0  # smallest and largest possible number of open left brackets
-    for c in s:
-        lo += 1 if c == '(' else -1  # treat * as )
-        hi += 1 if c != ')' else -1  # treat * as (
-        if hi < 0: break  # too many )
-        lo = max(lo, 0)  # if low is minus, replace it with 0
-    return lo == 0
+    cmin = cmax = 0  # smallest and largest possible number of (, or how many ) expected
+    for i in s:
+        cmax += - 1 if i == ")" else cmax + 1  # treat * as (
+        cmin = cmin + 1 if i == '(' else max(cmin - 1, 0)
+        if cmax < 0: return False  # too many (
+    return cmin == 0

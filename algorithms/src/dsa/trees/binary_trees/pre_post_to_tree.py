@@ -1,4 +1,5 @@
 
+# not needed, see 889
 class TreeNode:
     def __init__(self, data, left=None, right=None):
         self.data = data
