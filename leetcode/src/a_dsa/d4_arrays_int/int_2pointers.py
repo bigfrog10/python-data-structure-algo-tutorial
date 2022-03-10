@@ -1,6 +1,6 @@
 from typing import List
 
-# LC1004. Max Consecutive Ones III
+# LC1004. Max Consecutive Ones III - can flip <=k bits.
 def longestOnes(self, nums: List[int], K: int) -> int:
     left = 0
     for right in range(len(nums)):

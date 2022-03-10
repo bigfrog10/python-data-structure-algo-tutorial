@@ -1,18 +1,14 @@
 
 # LC50. Pow(x, n)
-def myPow(self, x: float, n: int) -> float:  # minimize mutiplications
-    if n < 0:
-        n = -n
-        x = 1 / x
+def myPow(self, x: float, n: int) -> float:  # O(logn)
+    if n < 0: n, x = -n, 1 / x
     ret = 1
-    f = x
     while n > 0:
-        if n % 2 != 0: ret *= f
-        f = f * f
-        n = n // 2
+        if n % 2 != 0: ret *= x
+        x, n = x * x, n // 2
     return ret
 
-# LC670. Maximum Swap
+# LC670. Maximum Swap - swap digits in number to get max
 def maximumSwap(self, num: int) -> int:  # O(n)
     sn = list(str(num))
     last_idx = {int(v): i for i, v in enumerate(sn)}  # last index for the value
@@ -34,7 +30,7 @@ def nextGreaterElement(self, n: int) -> int:
     digits[i-1], digits[j] = digits[j], digits[i-1]  # swap
     digits[i:] = digits[i:][::-1]  # reverse
     ret = int(''.join(digits))
-    return ret if ret < 1<<31 else -1
+    return ret if ret < 1 << 31 else -1
 
 # LC788. Rotated Digits
 def rotatedDigits(self, N: int) -> int:  # O(logn)
@@ -52,23 +48,26 @@ def rotatedDigits(self, N: int) -> int:  # O(logn)
     return res + (s.issubset(s2) and not s.issubset(s1))
 
 # LC2081. Sum of k-Mirror Numbers
-def kMirror(self, k: int, n: int) -> int:  # O(nlogn)
-    def fn(x):  # Return next k-symmetric number
-        m = len(x)//2  # O(logn)
-        for i in range(m, len(x)):
-            if int(x[i])+1 < k:
-                x[i] = x[~i] = str(int(x[i])+1)
-                for ii in range(m, i): x[ii] = x[~ii] = '0' # 262 -> 303 for k=7
-                return x
-        return ["1"] + ["0"]*(len(x)-1) + ["1"]
-    x, ans = ["0"], 0  # x is the first k-mirror number
-    for _ in range(n):  # O(n)
-        while True:  # generate a k-mirror number, then check it in base 10
-            x = fn(x)
-            val = int("".join(x), k)
-            if str(val)[::-1] == str(val): break
-        ans += val
-    return ans
+def kMirror(self, k: int, n: int) -> int:
+    @cache   ## why generator does not work
+    def generate(start, n):  # n is number of digits, O(k^(n/2))
+        if n == 1: return [str(i) for i in range(start, k)]
+        elif n == 2: return [str(i) + str(i) for i in range(start, k)]
+        else:
+            arr = []
+            for elem in [str(i) for i in range(start, k)]:
+                for center in generate(0, n - 2):
+                    arr.append(elem + center + elem)
+            return arr
+    ans, counter, digits = 0, 0, 1
+    while True:
+        for num in generate(1, digits):  # start from 1, need positive int
+            numBase = str(int(num, k))
+            if numBase == numBase[::-1]:
+                ans += int(numBase)
+                counter += 1
+                if counter == n: return ans
+        digits += 1
 
 # LC405. Convert a Number to Hexadecimal
 def toHex(self, num: int) -> str:
@@ -164,13 +163,13 @@ def isStrobogrammatic(self, num: str) -> bool:
     return True
 
 # LC247. Strobogrammatic Number II
-def findStrobogrammatic(self, n: int) -> List[str]:
+def findStrobogrammatic(self, n: int) -> List[str]:  # O(5^(n/2) * n)
     # set of 0 1 6 8 9
     ret = [''] if n % 2 == 0 else ['0', '1', '8']  # start from center
     for _ in range(n // 2):
         strobo = []
         for s in ret:
-            strobo.append('1' + s + '1')
+            strobo.append('1' + s + '1')  # string append O(n)
             strobo.append('8' + s + '8')
             strobo.append('6' + s + '9')
             strobo.append('9' + s + '6')
@@ -410,7 +409,6 @@ def fractionToDecimal(self, numerator, denominator):
         result.insert(idx, '(')
         result.append(')')
     return ''.join(result).rstrip(".")
-
 def fractionToDecimal(self, n, d): # 32ms, beats 100%
     if n % d == 0: return str(n // d)
     p, q = abs(n), abs(d)

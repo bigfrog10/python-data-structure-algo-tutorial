@@ -12,7 +12,7 @@ def findBuildings(self, heights: List[int]) -> List[int]:  # O(n)
     return res
 
 # LC339. Nested List Weight Sum
-def depthSum(self, nestedList: List[NestedInteger]) -> int:
+def depthSum(self, nestedList: List[NestedInteger]) -> int:  # O(all ints) time, O(D) space
     def dfs(nested_list, depth):
         total = 0
         for nested in nested_list:
@@ -54,7 +54,6 @@ def findRLEArray(self, encoded1: List[List[int]], encoded2: List[List[int]]) -> 
         low = min(encoded1[l][1], encoded2[r][1])
         if res and res[-1][0] == prod: res[-1][1] += low # extend freq if same value
         else: res.append([prod, low])
-
         encoded1[l][1] -= low  # minus the finished range
         encoded2[r][1] -= low
         if encoded1[l][1] == 0: l += 1
@@ -83,7 +82,7 @@ def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
                 flowerbed[idx] = 1
                 count += 1
         if count >= n: return True
-        idx += 2 if idx + 2 < m else 1
+        idx += 2 if idx + 2 < m else 1  # case [1, 0, 0]
     return False
 
 # LC41. First Missing Positive, top100
@@ -444,22 +443,12 @@ def minIncrementForUnique(self, nums: List[int]) -> int: # O(n)
     return ans
 
 # LC179. Largest Number
-def largestNumber(self, nums: List[int]) -> str:
-    num = [str(x) for x in nums]
-    # cmp(x, y) can be replaced by (x > y) - (x < y)
-    # in this problem x is (a+b) and y is (b+a)
-    cmp = lambda b, a: ((a+b)>(b+a))-((a+b)<(b+a))
-    num.sort(key = functools.cmp_to_key(cmp))
+def largestNumber(self, num):  # O(nlogn)
+    num = [str(x) for x in num]
+    cmp = lambda x, y: (x > y) - (x < y)  # standard comparator
+    custcmp = lambda a, b: cmp(b + a, a + b)  # specific to this problem
+    num.sort(key = functools.cmp_to_key(custcmp))
     return ''.join(num).lstrip('0') or '0'
-
-
-
-
-
-
-
-
-
 
 # LC775. Global and Local Inversions
 def isIdealPermutation(self, A):

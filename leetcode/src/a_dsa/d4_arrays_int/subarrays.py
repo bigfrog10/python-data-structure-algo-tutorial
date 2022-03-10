@@ -1,15 +1,26 @@
 
 # LC325. Maximum Size Subarray Sum Equals k
-def maxSubArrayLen(self, nums: List[int], k: int) -> int:
-    cumus = list(accumulate(nums))
-    maxl, cache = 0, dict()  # cumu -> index
-    for i, v in enumerate(cumus):
-        if v == k: maxl = max(maxl, i+1)
-        elif v - k in cache:  # middle subarray
-            size = i - cache[v - k]
-            maxl = max(maxl, size)
-        if v not in cache: cache[v] = i
+def maxSubArrayLen(self, nums: List[int], k: int) -> int:  # O(n) time and space
+    maxl, cumu, cache = 0, 0, dict()  # cumu -> index
+    for i, v in enumerate(nums):
+        cumu += v
+        if cumu == k: maxl = max(maxl, i+1)
+        elif cumu - k in cache:  # middle subarray
+            maxl = max(maxl, i - cache[cumu - k])
+        if cumu not in cache: cache[cumu] = i  # maintain earliest index
     return maxl
+
+# LC523. Continuous Subarray Sum
+def checkSubarraySum(self, nums: List[int], k: int) -> bool:
+    if not nums: return False
+    summ, sd = 0, {0: -1}  # [2,4,3] 6, we need -1 for 2-element requirement
+    for i, n in enumerate(nums):
+        summ += n
+        if k != 0: summ = summ % k
+        if summ in sd:  # sd is sum dict, map sum -> index
+            if i - sd[summ] > 1: return True  # [0] 0 if we have =, it returns true but answer is false.
+        else: sd[summ] = i
+    return False
 
 # LC560. Subarray Sum Equals K
 from typing import List
@@ -23,25 +34,13 @@ def subarraySum(self, nums: List[int], k: int) -> int:
         counts[cusum] += 1
     return count
 
-# LC548. Split Array with Equal Sum
+# LC548. Split Array with Equal Sum - split 4 sums
 def splitArray(self, nums): # O(n^2)
     def split(A):  # return half sum
         for i in range(1, len(A)): A[i] += A[i-1]  # cum sum
         return {A[i-1] for i in range(1, len(A)-1) if A[i-1] == A[len(A)-1] - A[i]}
 
     return any(split(nums[:j]) & split(nums[j+1:]) for j in range(3, len(nums)-3))
-
-# LC523. Continuous Subarray Sum
-def checkSubarraySum(self, nums: List[int], k: int) -> bool:
-    if not nums: return False
-    summ, sd = 0, {0: -1}  # [1,1,1] 3, cumu is divisible by k, to deal with k multiples.
-    for i, n in enumerate(nums):
-        summ += n
-        if k != 0: summ = summ % k
-        if summ in sd:  # sd is sum dict, map sum -> index
-            if i - sd[summ] > 1: return True  # ==1 means single element
-        else: sd[summ] = i
-    return False
 
 # LC53. Maximum Subarray   - max sum amount all subarrays
 def maxSubArray(self, nums: List[int]) -> int:

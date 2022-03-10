@@ -25,16 +25,17 @@ def copyRandomList(self, head: 'Node') -> 'Node':
 
 # LC234. Palindrome Linked List
 def isPalindrome(self, head):
-    fast, rev = head, None  # use head as slow
-    while fast and fast.next:  # 1, 2, 3, 2, 1
+    fast, rev = head, None # use head as slow
+    while fast and fast.next:  # 1, 2, 3, 2, 1    1, 2, 3, 4, 2, 1
         fast = fast.next.next
         rev, rev.next, head = head, rev, head.next
+    # head = 3 2 1, tail = 2 1   head = 3 2 1, tail = 4 2 1
     tail = head.next if fast else head  # fast none when list is even
-    isPali = True  # head is 3, 2, 1
-    while isPali and rev: # rev is 2, 1
+    isPali = True
+    while rev:
         isPali = isPali and rev.val == tail.val
-        rev, tail = rev.next, tail.next  # 2, 3, 2, 1, then 1, 2,3,2,1
-    print(head)
+        head, head.next, rev = rev, head, rev.next  # restore head to original
+        tail = tail.next  # 2, 3, 2, 1, then 1, 2,3,2,1
     return isPali
 
 # LC328. Odd Even Linked List
@@ -143,12 +144,11 @@ def getDecimalValue(self, head: ListNode) -> int:
 # LC430. Flatten a Multilevel Doubly Linked List
 def flatten(self, head: 'Node') -> 'Node': # DFS
     if not head: return None
-    prev = pseudoHead = Node(0,None,head,None)
+    prev = dummy = Node(0, None, head, None)
     stack = [head]
     while stack: # DFS
         curr = stack.pop()
-        prev.next = curr  # link prev and current, double direction
-        curr.prev = prev
+        prev.next, curr.prev = curr, prev  # link prev and current, double direction
         if curr.next: # push current to stack so we deal with child first
             stack.append(curr.next)
         if curr.child: # deal with child before next
@@ -156,8 +156,8 @@ def flatten(self, head: 'Node') -> 'Node': # DFS
             curr.child = None # don't forget to remove all child pointers.
         prev = curr
     # detach the pseudo head node from the result.
-    pseudoHead.next.prev = None
-    return pseudoHead.next
+    dummy.next.prev = None
+    return dummy.next
 
 # LC817. Linked List Components
 def numComponents(self, head: ListNode, nums: List[int]) -> int:

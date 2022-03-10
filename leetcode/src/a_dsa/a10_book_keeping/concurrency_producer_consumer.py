@@ -47,3 +47,38 @@ t2.start()
 t1.join()
 t2.join()
 print(f'{bbq.size()}')
+
+
+# LC1242. Web Crawler Multithreaded
+class Solution:
+
+    def __init__(self):
+        self.queue = Queue()
+        self.visited = set()
+        self.result = []
+        self.lock = RLock()
+
+    def crawl(self, startUrl: str, htmlParser: 'HtmlParser') -> List[str]:
+        self.visited = set([startUrl])
+        self.queue.put(startUrl)
+        with ThreadPoolExecutor() as e:
+            for _ in range(8):
+                e.submit(self.run, htmlParser)  # start workers
+        return self.result
+
+    def run(self, htmlParser):
+        try:
+            while True:
+                item = self.queue.get(block=True, timeout=0.05)  # use timeout to quit, or pass None here.
+                self.result.append(item)
+                for url in htmlParser.getUrls(item):
+                    with self.lock:  # lock don't do anything due to GIL
+                        if self.hostname(url) != self.hostname(item):
+                            continue
+                        if url in self.visited: continue
+                        self.visited.add(url)
+                        self.queue.put(url)
+        except: pass
+
+    def hostname(self, url):
+        return url.split('//')[1].split('/')[0]

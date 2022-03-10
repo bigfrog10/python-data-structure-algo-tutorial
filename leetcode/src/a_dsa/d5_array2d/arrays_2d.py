@@ -1,6 +1,18 @@
 
 # LC983. Minimum Cost For Tickets
-def mincostTickets(self, days: List[int], costs: List[int]) -> int:
+def mincostTickets(self, days, costs):   # O(len(days))
+    durations = [1, 7, 30]
+    N = len(days)
+    @lru_cache(None)
+    def dp(i): # How much money to do days[i]+
+        if i >= N: return 0
+        ans, j = float('inf'), i
+        for c, d in zip(costs, durations):
+            while j < N and days[j] < days[i] + d: j += 1
+            ans = min(ans, dp(j) + c)
+        return ans
+    return dp(0)
+def mincostTickets(self, days: List[int], costs: List[int]) -> int:  # O(max(durs))
     durations = [1, 7, 30]  # this should be in parameter passed in
     day_set = set(days)
     @lru_cache(None)

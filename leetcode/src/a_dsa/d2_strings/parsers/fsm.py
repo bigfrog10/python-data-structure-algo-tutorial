@@ -19,7 +19,6 @@ def isNumber(self, s: str) -> bool:
         elif char.isdigit(): met_digit = True
         else: return False
     return met_digit  # must've see digits, others are optional.
-
 def isNumber(self, s: str) -> bool:
     transitions = {
         'start': {'.': 'dot', '+': 'sign1', '-': 'sign1', 'd': 'D1'},

@@ -1,5 +1,5 @@
 
-# LC1522. Diameter of N-Ary Tree
+# LC1522. Diameter of N-Ary Tree - path = edges
 def diameter(self, root: 'Node') -> int:
     ret = 0  # root itself, in case there is no child
     def dfs(node):  # return number of edges
@@ -83,9 +83,3 @@ def findMinHeightTrees(self, n: int, edges: List[List[int]]) -> List[int]:
             if len(neighbors[nb]) == 1: new_leaves.append(nb)
         leaves = new_leaves
     return leaves  # last leaves, could be 1 or 2 leaves
-
-
-
-
-
-

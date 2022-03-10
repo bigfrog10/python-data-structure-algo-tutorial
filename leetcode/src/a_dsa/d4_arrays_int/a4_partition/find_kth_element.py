@@ -1,6 +1,6 @@
 
 # LC215. Kth Largest Element in an Array, top100
-def findKthLargest(self, nums: List[int], k: int) -> int:
+def findKthLargest(self, nums: List[int], k: int) -> int:  # average O(n)
     # on average, we reduce by n/2, so add up to 1*n
     # worst case, we reduce by 1, so n-1, n-2, ..., so add up to n^2.
     def partition(nums, left, right):  # bisect right
@@ -21,7 +21,7 @@ def findKthLargest(self, nums: List[int], k: int) -> int:
     return quick_select(nums, 0, n-1, n-k)
 # top k elements: https://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/
 
-def findKthLargest(self, nums: List[int], k: int) -> int:  # long solution
+def findKthLargest(self, nums: List[int], k: int) -> int:  # long solution, O(n)
     def partition(a: list, pivot, start=0, end=None):
         # O(n), break list a to 2, right is larger, left is equal or smaller
         if end is None: end = len(a)
@@ -32,7 +32,6 @@ def findKthLargest(self, nums: List[int], k: int) -> int:  # long solution
             if i < j: a[i], a[j] = a[j], a[i]
         if j == end-1: return start + (end - start) // 2
         return j
-
     def bucket_medians(nums: list, start, end, bucket_size=5):
         medians, i, bucket = [], start, []
         while i < end:
@@ -45,7 +44,6 @@ def findKthLargest(self, nums: List[int], k: int) -> int:  # long solution
             j = len(bucket) // 2
             medians.append(bucket[j])
         return medians
-
     def kth_smallest(nums: list, start, end, kth, bucket_size=5):  # O(n)
         if end - start <= bucket_size:  # recursion base case
             a = sorted(nums[start:end])

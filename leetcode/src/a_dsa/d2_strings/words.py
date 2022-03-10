@@ -1,27 +1,36 @@
 
-# LC140. Word Break II
-def wordBreak(s: str, wordDict: List[str]) -> List[str]:
-    word_set = set(wordDict)  # O(2^len(words) + W), return all possible answer
-    def dfs(s):
-        output = []
-        if s in word_set: output.append(s)  # one of solutions
-        for w in word_set:  # or we loop s with prefix
-            if s.startswith(w):
-                tmp = dfs(s[len(w):])
-                for x in tmp: output.append(w + ' ' + x)
-        return output
-    return dfs(s)
-def wordBreak(self, s, wordDict):  # O(2^len(wordDict) + W)
+# LC140. Word Break II - return all possible answer
+def wordBreak(self, s, wordDict):  # O(2^len(s) + len(worddict),
     memo, wordDict = {len(s): ['']}, set(wordDict)
     def sentences(i):  # returns list of all sentences built from the suffix s[i:]
         if i not in memo:
             memo[i] = [s[i:j] + (tail and ' ' + tail)  # ' '+tail if tail else tail
                        for j in range(i+1, len(s)+1) if s[i:j] in wordDict
-                       for tail in sentences(j)]
+                       for tail in sentences(j)]  # str O(n^2), besides sentences(j)
         return memo[i]
     return sentences(0)
+def wordBreak(s: str, wordDict: List[str]) -> List[str]:
+    word_set = set(wordDict)  # O(2^len(s) + len(worddict),
+    def dfs(s):
+        output = []
+        if s in word_set: output.append(s)  # one of solutions
+        for w in word_set:  # or we loop s with prefix, O(n^2)
+            if s.startswith(w):
+                tmp = dfs(s[len(w):])
+                for x in tmp: output.append(w + ' ' + x)
+        return output
+    return dfs(s)
 
 # LC139. Word Break, top100
+def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+    wordset = set(wordDict)  ## O(n^3) n = len(s) + O(m), m is size of dict
+    @lru_cache  # O(n)
+    def break_words(start: int):
+        if start == len(s): return True
+        for end in range(start + 1, len(s)+1):  # O(n), need +1 for next line [start:end]
+            if s[start:end] in wordset and break_words(end): return True  # s[start:end] is O(n)
+        return False
+    return break_words(0)
 def wordBreak(self, s: str, wordDict: List[str]) -> bool:
     wds = set(wordDict)
     @lru_cache(None)
@@ -31,21 +40,11 @@ def wordBreak(self, s: str, wordDict: List[str]) -> bool:
             if s.startswith(w) and dfs(s[len(w):]): return True
         return False
     return dfs(s)
-def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-    wordset = set(wordDict)
-    @lru_cache # O(n^3) n = len(s) + O(m), m is size of dict
-    def break_words(s: str, start: int):
-        if start == len(s): return True
-        for end in range(start + 1, len(s)+1):  # O(n), need +1 for next line [start:end]
-            if s[start:end] in wordset and break_words(s, end): return True  # s[start:end] is O(n)
-        return False
-    return break_words(s, 0)
 
 # LC249. Group Shifted Strings
 def groupStrings(self, strings: List[str]) -> List[List[str]]:
     def shash(s):
         if not s: return -1
-        if len(s) == 1: return 1  # single char string can always be shifted
         d = ord(s[0]) - ord('a')  # d is the shift
         ret = []
         for c in s:
@@ -109,10 +108,51 @@ def addBoldTag(self, s: str, words: List[str]) -> str:
             final += s[i]
             i += 1
     return final
+def addBoldTag(self, s: str, words: List[str]) -> str:  # long solution with kmp
+    def kmp_pi(s: str):  # the length of the longest *proper* prefix of s which is also a suffix
+        m = len(s)
+        pi = [0] * m
+        fmm_idx = 0  # index of first mismatch
+        for i in range(1, m):
+            # when there is a mismatch, rollback to previous suffix.
+            while fmm_idx and s[i] != s[fmm_idx]: fmm_idx = pi[fmm_idx-1]
+            # if fmm_idx = 0, continue with pi[i] = 0
+            if s[i] == s[fmm_idx]:  # if matched, move forward
+                fmm_idx += 1
+                pi[i] = fmm_idx
+        return pi
+    def kmp_search(text, pattern):  # return first indices of all occurrences of pattern in text
+        matches, pi = [], kmp_pi(pattern)
+        n, m = len(text), len(pattern)
+        k = 0  # pattern index
+        for i in range(n):
+            while k and text[i] != pattern[k]: k = pi[k - 1]  # if k = 0, continue
+            if text[i] == pattern[k]:
+                if k == m - 1:
+                    matches.append(i - k)
+                    k = pi[k]
+                else: k += 1
+        return matches
+    status = [False] * len(s)  # compromise to flags
+    for word in words:  # O(len(words) * len(s))
+        idxs = kmp_search(s, word)
+        for i in idxs: status[i:i+len(word)] = [True] * len(word)
+    i, res = 0, ""
+    while i < len(s):  # O(len(s))
+        if status[i]:
+            res += "<b>"
+            while i < len(s) and status[i]:
+                res += s[i]
+                i += 1
+            res += "</b>"
+        else:
+            res += s[i]
+            i += 1
+    return res
 
-# LC691. Stickers to Spell Word, effectively this is bfs since we look for min.
+# LC691. Stickers to Spell Word - effectively this is bfs since we look for min.
 def minStickers(self, stickers: List[str], target: str) -> int:
-    counters = [Counter(s) for s in stickers]
+    counters = [Counter(s) for s in stickers]  # O(S^T with lowers)
     @lru_cache(None)
     def dfs(target):  # target string to child nodes by apply stickers
         res = float('inf')
@@ -120,10 +160,8 @@ def minStickers(self, stickers: List[str], target: str) -> int:
             if target[0] not in sticker: continue  # to cut search branches
             targetnew = target
             for c in sticker: targetnew = targetnew.replace(c, '', sticker[c])
-            if targetnew == '':
-                res = 1
-                break
-            elif targetnew != target: res = min(res, 1 + dfs(targetnew))
+            if not targetnew: return 1
+            res = min(res, 1 + dfs(targetnew))
         return res
     res = dfs(target)
     return -1 if res == float('inf') else res
@@ -147,7 +185,7 @@ def toGoatLatin(self, sentence: str) -> str:
     return ' '.join(ret)
 
 # LC79. Word Search, top100 - search in 2d matrix
-def exist(self, board: List[List[str]], word: str) -> bool:
+def exist(self, board: List[List[str]], word: str) -> bool:  # O(h*w*3^wl)
     if not board or not board[0]: return False
     h, w, wl = len(board), len(board[0]), len(word)
     def dfs(i, j, wi):
@@ -156,7 +194,9 @@ def exist(self, board: List[List[str]], word: str) -> bool:
         exist = wi+1 == wl
         if exist: return exist
         for x, y in [(i+1, j), (i-1, j), (i, j+1), (i, j-1)]:
-            if 0 <= x < h and 0 <= y < w: exist = exist or dfs(x, y, wi+1)
+            if 0 <= x < h and 0 <= y < w:
+                exist = exist or dfs(x, y, wi+1)
+                if exist: return exist
         board[i][j] = chr(board[i][j] ^ 256)  # backout
         return exist
     bls = set()  # precheck board has all letters from word,
@@ -268,7 +308,16 @@ def findSubstring(self, s: str, words: List[str]) -> List[int]:  # O(numWords * 
         if seen == wordBag: res.append(i)  # store result
     return res
 
-
+# LC2023. Number of Pairs of Strings With Concatenation Equal to Target
+def numOfPairs(self, nums: List[str], target: str) -> int:
+    freq = Counter(nums)
+    ans = 0
+    for k, v in freq.items():
+        if target.startswith(k):
+            suffix = target[len(k):]
+            ans += v * freq[suffix]
+            if k == suffix: ans -= freq[suffix]  # together, n^2 - n when prefix = suffix
+    return ans
 
 # LC692. Top K Frequent Words
 def topKFrequent(self, words: List[str], k: int) -> List[str]:  # O(n)

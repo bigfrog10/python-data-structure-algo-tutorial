@@ -1,6 +1,6 @@
 
 # LC622. Design Circular Queue - RingBuffer
-class MyCircularQueue: # array based
+class MyCircularQueue: # array based, O(1) for all ops
     def __init__(self, k: int):  # double linked list
         self.capacity, self.queue = k, [0]*k
         self.count = 0  # how many elements in the queue
@@ -24,10 +24,8 @@ class MyCircularQueue: # array based
         if self.count == 0: return -1
         tail = (self.headIndex + self.count - 1) % self.capacity
         return self.queue[tail]
-    def isEmpty(self) -> bool:
-        return self.count == 0
-    def isFull(self) -> bool:
-        return self.count == self.capacity
+    def isEmpty(self) -> bool: return self.count == 0
+    def isFull(self) -> bool: return self.count == self.capacity
 
 # LC232. Implement Queue using Stacks
 class MyQueue:
@@ -70,7 +68,7 @@ class Dllist:
     def __repr__(self):
         return f'[{self.val}: left={self.left.val if self.left else None}, right={self.right.val if self.right else None}]'
 import sortedcontainers
-class MaxStack:  # This is O(1) solution
+class MaxStack:  # This is O(logn) solution
     def __init__(self):
         self.head = Dllist('head')
         self.tail = Dllist('tail')
@@ -92,7 +90,7 @@ class MaxStack:  # This is O(1) solution
         self.values[node.val].pop()
         if not self.values[node.val]: del self.values[node.val]
         return node.val
-    def top(self) -> int: return self.tail.left.val
+    def top(self) -> int: return self.tail.left.val  # O(1)
     def peekMax(self) -> int:
         key, nodes = self.values.peekitem()
         return key

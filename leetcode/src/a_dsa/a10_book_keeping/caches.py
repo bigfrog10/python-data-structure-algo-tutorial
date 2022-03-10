@@ -3,11 +3,11 @@ class LRUCache:
     def __init__(self, capacity: int): # use ordered dict, language specific
         self.capacity = capacity
         self.values = collections.OrderedDict()
-    def get(self, key: int) -> int:
+    def get(self, key: int) -> int:  # O(1)
         if key not in self.values: return -1
         self.values.move_to_end(key)  # O(1)
         return self.values[key]
-    def put(self, key: int, value: int) -> None:
+    def put(self, key: int, value: int) -> None:  # O(1)
         if key in self.values: self.values.move_to_end(key) # update
         self.values[key] = value
         if len(self.values) > self.capacity: self.values.popitem(last=False)  # O(1)

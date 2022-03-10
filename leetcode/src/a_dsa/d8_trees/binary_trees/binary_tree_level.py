@@ -1,9 +1,34 @@
 
+# LC314. Binary Tree Vertical Order Traversal - Just column info
+def verticalOrder(self, root: TreeNode) -> List[List[int]]:  # O(n)
+    if root is None: return []
+    queue, columnTable = collections.deque([(root, 0)]), collections.defaultdict(list)
+    min_column = max_column = 0  # track column range for last line
+    while queue:  # BFS
+        node, column = queue.popleft()
+        columnTable[column].append(node.val)
+        if node.left: queue.append((node.left, column - 1))
+        if node.right: queue.append((node.right, column + 1))
+        min_column = min(min_column, column)
+        max_column = max(max_column, column)
+    return [columnTable[x] for x in range(min_column, max_column + 1)]
+
+# LC662. Maximum Width of Binary Tree - row max width
+def widthOfBinaryTree(self, root: TreeNode) -> int:
+    width = 0
+    level = [(1, root)]
+    while level:
+        width = max(width, level[-1][0] - level[0][0] + 1)
+        level = [kid
+                 for number, node in level
+                 for kid in enumerate((node.left, node.right), 2 * number) if kid[1]]
+    return width
+
 # LC515. Find Largest Value in Each Tree Row
 def largestValues(self, root: TreeNode) -> List[int]:
     row, maxes = [root], []
     while any(row):  # To deal with None in the row
-        maxes.append(max(node.val for node in row if node))
+        maxes.append(max(node.val for node in row))
         row = [kid for node in row for kid in (node.left, node.right) if kid]
     return maxes
 
@@ -72,14 +97,14 @@ def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
     return averages
 
 # LC199. Binary Tree Right Side View
-def rightSideView(self, root: TreeNode) -> List[int]:
-    if not root: return []
+def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+    if not root: return []  ## O(n) time and O(H) space
     ret = []
-    def traverse(node, depth):
+    def dfs(node, depth):
         if depth == len(ret): ret.append(node.val)
         for n in [node.right, node.left]:
-            if n: traverse(n, depth+1)
-    traverse(root, 0)
+            if n: dfs(n, depth+1)
+    dfs(root, 0)
     return ret
 
 # LC103. Binary Tree Zigzag Level Order Traversal
@@ -131,3 +156,5 @@ def isCousins(self, root: TreeNode, x: int, y: int) -> bool:
         if x in p and y in p and p[x] != p[y]: return True
         stk = [child for node in stk for child in (node.left,node.right) if child]
     return False
+
+

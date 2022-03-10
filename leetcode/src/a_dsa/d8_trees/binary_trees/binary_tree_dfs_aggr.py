@@ -1,6 +1,6 @@
 
 # LC124. Binary Tree Maximum Path Sum
-def maxPathSum(self, root: TreeNode) -> int:
+def maxPathSum(self, root: TreeNode) -> int:  # O(V) time, O(H) space
     max_sum = float('-inf')
     def path_max(node):
         nonlocal max_sum
@@ -14,7 +14,7 @@ def maxPathSum(self, root: TreeNode) -> int:
     return max_sum
 
 # LC129. Sum Root to Leaf Numbers
-def sumNumbers(self, root: Optional[TreeNode]) -> int:
+def sumNumbers(self, root: Optional[TreeNode]) -> int:  # O(n) runtime, O(h) space
     total = 0
     def dfs(node, path_total): # path related indicates DFS
         nonlocal total
@@ -63,17 +63,16 @@ def hasPathSum(self, root: TreeNode, targetSum: int) -> bool:
     return dfs(root, targetSum)
 
 # LC113. Path Sum II - tree return all paths
-def pathSum(self, root: TreeNode, targetSum: int) -> List[List[int]]:
-    res = []  # since we need historic info, we backtrack
-    def dfs(node, target, path):
+def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:  # O(n^2)
+    res = [] # since we need historic info, we backtrack
+    def dfs(node, target, path):  # O(n)
         if not node: return False
         if node.val == target:
             if not node.left and not node.right:  # leaf
-                res.append(path + [node.val])  # this is a copy
-        target -= node.val
+                res.append(path + [node.val]) # this is a copy, O(n)
         path.append(node.val)
-        dfs(node.left, target, path)
-        dfs(node.right, target, path)
+        dfs(node.left, target - node.val, path)
+        dfs(node.right, target - node.val, path)
         path.pop() # backtrack
     dfs(root, targetSum, [])
     return res
@@ -96,8 +95,20 @@ def pathSum(self, root: TreeNode, target: int) -> int:
     path_sum_count(root, 0)  # accumu is 0 at start
     return count
 
+# LC666. Path Sum IV - encode sum
+def pathSum(self, nums: List[int]) -> int:
+    total, counter = 0, Counter()
+    # to count occurrance of this value for all paths
+    for n in reversed(nums):  # from bottom up
+        depth, pos, value = n // 100, (n % 100) // 10, n % 10
+        # if counter is 0, it's a new path; else existing path.
+        total += value * counter[(depth, pos)] or value
+        # to increment parent counter with path numbers
+        counter[(depth-1, (pos+1) // 2)] += counter[(depth, pos)] or 1
+    return total
+
 # LC298. Binary Tree Longest Consecutive Sequence
-def longestConsecutive(self, root: Optional[TreeNode]) -> int:
+def longestConsecutive(self, root: Optional[TreeNode]) -> int:  # O(n) time and space
     def dfs(node: TreeNode, parent: TreeNode, length: int):
         if not node: return length
         length = length + 1 if parent and node.val == parent.val + 1 else 1
@@ -194,18 +205,6 @@ def distributeCoins(self, root: TreeNode) -> int:
         return node.val + L + R - 1  # total extra
     dfs(root)
     return self.ans
-
-# LC666. Path Sum IV - encode sum
-def pathSum(self, nums: List[int]) -> int:
-    total, counter = 0, Counter()
-    # to count occurrance of this value for all paths
-    for n in reversed(nums): # from bottom up
-        depth, pos, value = n // 100, (n % 100) // 10, n % 10
-        # if counter is 0, it's a new path; else existing path.
-        total += value * counter[(depth, pos)] or value
-        # to increment parent counter with path numbers
-        counter[(depth-1, (pos+1) // 2)] += counter[(depth, pos)] or 1
-    return total
 
 # LC1120. Maximum Average Subtree
 def maximumAverageSubtree(self, root: TreeNode) -> float:

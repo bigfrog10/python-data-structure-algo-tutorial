@@ -1,6 +1,6 @@
 
 # LC71. Simplify Path
-def simplifyPath(self, path: str) -> str:
+def simplifyPath(self, path: str) -> str:  # O(n) runtime and space
     stack = []
     for folder in path.split('/'):
         if not folder or folder == '.': continue  # skip this
@@ -10,6 +10,10 @@ def simplifyPath(self, path: str) -> str:
     return '/' + '/'.join(stack)
 
 # LC408. Valid Word Abbreviation
+def validWordAbbreviation(self, word, abbr):
+    # turn "i12iz4n" to "i.{12}iz.{4}n$"
+    pattern = re.sub('([1-9]\d*)', r'.{\1}', abbr) + '$'
+    return bool(re.match(pattern, word))
 def validWordAbbreviation(self, word: str, abbr: str) -> bool:
     wl = len(word)
     i, n = 0, "0"  # i is index in word
@@ -50,7 +54,7 @@ def possiblyEquals(self, s1: str, s2: str) -> bool:
         for i in range(1, len(s)): # split digits among s
             ans |= {x+y for x in gg(s[:i]) for y in gg(s[i:])}
         return ans
-    @cache  # make it O(n^3) like
+    @cache  # make it O(n^4) like
     def fn(i, j, diff):  # DFS  # Return True if s1[i:] matches s2[j:] with given differences
         if i == len(s1) and j == len(s2): return diff == 0
         if i < len(s1) and s1[i].isdigit():
@@ -120,17 +124,15 @@ def shortestWay(self, source, target):
     return result if i == 0 else result + 1     # add 1 for partial source
 
 # LC161. One Edit Distance
-def isOneEditDistance(self, s: str, t: str) -> bool:
-    if s == t: return False
-    l1, l2 = len(s), len(t)
-    if l1 > l2: return self.isOneEditDistance(t, s)  # force s no longer than t
-    if l2 - l1 > 1: return False
-    for i in range(len(s)):  # O(n) runtime
+def isOneEditDistance(self, s: 'str', t: 'str') -> 'bool':  # O(n) time and space
+    ns, nt = len(s), len(t)
+    if ns > nt: return self.isOneEditDistance(t, s)
+    if nt - ns > 1: return False
+    for i in range(ns):
         if s[i] != t[i]:
-            if l1 == l2: s = s[:i]+t[i]+s[i+1:]  # replacement, new string O(n)
-            else: s = s[:i]+t[i]+s[i:]  # insertion
-            break
-    return s == t or s == t[:-1]  # delete, s = "", t = 'a'
+            if ns == nt: return s[i + 1:] == t[i + 1:]  # can be O(1) in space
+            else: return s[i:] == t[i + 1:]  # can be O(1) in space
+    return ns + 1 == nt
 
 # LC468. Validate IP Address
 def validIPAddress(self, IP: str) -> str:
@@ -148,7 +150,7 @@ def validIPAddress(self, IP: str) -> str:
 
 # LC1202. Smallest String With Swaps
 def smallestStringWithSwaps(self, s: str, pairs: List[List[int]]) -> str:
-    class UF:
+    class UF:  ## O(n) space, O(n + mlogn) time, m = len(pairs)
         def __init__(self, n): self.p = list(range(n))
         def union(self, x, y): self.p[self.find(x)] = self.find(y)
         def find(self, x):
@@ -298,7 +300,8 @@ def reorganizeString(self, s: str) -> str:
     if maxc > (n+1) // 2: return ""  # we could have ababa
     res = [''] * n
     res[:maxc*2:2] = [maxk] * maxc
-    i = maxc*2 if maxc * 2 < n else 1  # to continue fill in lower count chars.
+    # to continue fill in lower count chars. "bfrbs", if more lower freq chars
+    i = maxc*2 if maxc * 2 < n else 1
     for k, c in counts.items():
         if k == maxk: continue
         for j in range(c):

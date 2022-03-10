@@ -1,8 +1,8 @@
 
 # LC953. Verifying an Alien Dictionary
 from typing import List
-def isAlienSorted(self, words: List[str], order: str) -> bool:
-    orderd = {x: idx for idx, x in enumerate(order)}  # O(m*n)
+def isAlienSorted(self, words: List[str], order: str) -> bool:  # O(total chars in words)
+    orderd = {x: idx for idx, x in enumerate(order)}
     for i in range(len(words) - 1):  # O(n)
         for j in range(len(words[i])):  # O(m)
             if j >= len(words[i + 1]): return False  # apple > app, wrong - space is ahead of letters
@@ -12,9 +12,9 @@ def isAlienSorted(self, words: List[str], order: str) -> bool:
     return True
 
 # LC269. Alien Dictionary, top100
-def alienOrder(self, words: List[str]) -> str:
-    adj_list = defaultdict(set)  #  the in_degree of each unique letter to 0.
-    in_degree = Counter({c: 0 for word in words for c in word})
+def alienOrder(self, words: List[str]) -> str:  # O(total word lengths)
+    adj_list = defaultdict(set)  #  the in_degree of each unique letter to 0. (n^2) space
+    in_degree = Counter({c: 0 for word in words for c in word})  # needed below
     for first_word, second_word in zip(words[:-1], words[1:]):
         first_word = first_word.strip()
         second_word = second_word.strip()

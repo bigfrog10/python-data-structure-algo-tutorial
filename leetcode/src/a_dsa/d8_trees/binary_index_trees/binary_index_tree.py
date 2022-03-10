@@ -87,3 +87,5 @@ class NumMatrix:
         sum1 = self._bit_query(row2+1, col2+1) + self._bit_query(row1, col1)
         sum2 = self._bit_query(row2+1, col1) + self._bit_query(row1, col2+1)
         return sum1 - sum2
+
+

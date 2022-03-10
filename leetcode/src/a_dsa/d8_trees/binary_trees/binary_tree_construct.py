@@ -59,8 +59,7 @@ def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
     return rec(0, len(inorder)-1)
 
 # LC114. Flatten Binary Tree to Linked List
-def flatten(self, root: TreeNode) -> None: # preorder
-    if not root: return None
+def flatten(self, root: Optional[TreeNode]) -> None:  # O(n), O(1)
     node = root
     while node:
         if node.left:
@@ -68,8 +67,7 @@ def flatten(self, root: TreeNode) -> None: # preorder
             while rightmost.right:  # Find the rightmost node
                 rightmost = rightmost.right
             rightmost.right = node.right  # predecessor
-            node.right = node.left
-            node.left = None  # single linked list
+            node.right, node.left = node.left, None
         node = node.right  # This is original node.left
 
 # LC106. Construct Binary Tree from Inorder and Postorder Traversal  # BBG
@@ -144,34 +142,5 @@ def checkEqualTree(self, root: TreeNode) -> bool:
         seen.append(sum_(node.left) + sum_(node.right) + node.val)
         return seen[-1]
     total = sum_(root)
-    seen.pop() # pop out root sum
+    seen.pop()  # pop out root sum
     return total / 2.0 in seen
-
-
-# LC449. Serialize and Deserialize BST
-class Codec:  # json: node -> {1: [{2:[None, None]}, {3:[None, None]}]}
-    def serialize(self, root):
-        if not root: return ''  # base case
-        def node_to_json(node): # DFS
-            ret = f'"{node.val}":['
-            if node.left: ret += node_to_json(node.left) + ','
-            else: ret += 'null,'
-            if node.right: ret += node_to_json(node.right)
-            else: ret += 'null'
-            ret += ']'
-            ret = '{' + ret + '}'
-            return ret
-        ret = node_to_json(root)
-        return ret
-
-    def deserialize(self, data):
-        if not data: return []
-        def dict_to_node(kvs): #DFS
-            if kvs is None: return None  # base case
-            for k, v in kvs.items():
-                tn = TreeNode(int(k))
-                tn.left = dict_to_node(v[0])
-                tn.right = dict_to_node(v[1])
-                return tn
-        kv = json.loads(data)
-        return dict_to_node(kv)

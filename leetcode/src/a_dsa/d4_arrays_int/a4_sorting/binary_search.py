@@ -30,7 +30,7 @@ def missingElement(self, nums: List[int], k: int) -> int:  # logn
     # kth missing number is greater than nums[left - 1] and less than nums[left]
     return nums[left - 1] + k - missing(left - 1) # k - missing(left-1) is the diff
 
-# LC162. Find Peak Element
+# LC162. Find Peak Element - return peak index
 def findPeakElement(self, nums: List[int]) -> int: # logn
     left, right = 0, len(nums)-1
     while left < right:
@@ -49,12 +49,12 @@ def findClosestElements(self, A, k, x): # O(logn + k)
     return A[left:left + k]  # left = right
 
 # LC1891. Cutting Ribbons
-def maxLength(self, ribbons: List[int], k: int) -> int:
+def maxLength(self, ribbons: List[int], k: int) -> int:  # O(log(min(totl // k, maxl)))
     totl, maxl = sum(ribbons), max(ribbons)
     if k > totl: return 0
     lo, hi = max(1, maxl // k), min(totl // k, maxl)
     while lo < hi:  # binary search on desired length
-        mid = (lo + hi + 1) // 2
+        mid = (lo + hi + 1) // 2  # pattern for max
         if sum(x // mid for x in ribbons) >= k: lo = mid
         else: hi = mid - 1
     return lo

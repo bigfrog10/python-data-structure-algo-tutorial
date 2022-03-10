@@ -1,14 +1,14 @@
 from typing import List
 import itertools
 # LC1428. Leftmost Column with at Least a One
-def leftMostColumnWithOne(self, binaryMatrix: 'BinaryMatrix') -> int:
-    rows, cols = binaryMatrix.dimensions()  # O(n + m), diagonal
-    current_row, current_col = 0, cols - 1  # upper right corner
-    while current_row < rows and current_col >= 0:
-        if binaryMatrix.get(current_row, current_col) == 0: current_row += 1  # move down
-        else: current_col -= 1  # move left
+def leftMostColumnWithOne(self, binaryMatrix: 'BinaryMatrix') -> int:  # O(n + m), diagonal
+    rows, cols = binaryMatrix.dimensions()
+    row, col = 0, cols - 1  # upper right corner
+    while row < rows and col >= 0:
+        if binaryMatrix.get(row, col) == 0: row += 1  # move down
+        else: col -= 1  # move left
     # If we never left the last column, it must have been all 0's.
-    return current_col + 1 if current_col != cols - 1 else -1
+    return col + 1 if col != cols - 1 else -1
 
 # LC317. Shortest Distance from All Buildings
 def shortestDistance(self, grid):
@@ -18,7 +18,7 @@ def shortestDistance(self, grid):
     matrix = [[[0, 0] for _ in range(m)] for _ in range(n)]
     def bfs(start, blds):
         q = [(start, 0)]  # 0 is the distance.
-        while q:
+        while q:  # BFS for distance
             po, distance = q.pop(0)
             for dp in (-1, 0), (1, 0), (0, 1), (0, -1):
                 i, j = po[0] + dp[0], po[1] + dp[1]
@@ -86,14 +86,14 @@ def findDiagonalOrder(self, A):
     return [a for _, r in res.items() for a in reversed(r)]
 
 # LC766. Toeplitz Matrix
-def isToeplitzMatrix(self, matrix):
+def isToeplitzMatrix(self, matrix):  # O(mn) runtime, O(1) space, has follow ups
     return all(r == 0 or c == 0 or matrix[r-1][c-1] == val
                for r, row in enumerate(matrix)
                for c, val in enumerate(row))
 
 # LC286. Walls and Gates
-def wallsAndGates(self, rooms: List[List[int]]) -> None:
-    WALL, GATE, EMPTY = -1, 0, 2147483647
+def wallsAndGates(self, rooms: List[List[int]]) -> None:  # O(mn)
+    WALL, GATE, EMPTY = -1, 0, 2147483647  # given
     q = [(i, j) for i, row in enumerate(rooms) for j, r in enumerate(row) if r == GATE]  # all gates
     for i, j in q:
         for I, J in (i+1, j), (i-1, j), (i, j+1), (i, j-1):
@@ -138,7 +138,7 @@ def minAreaFreeRect(self, points: List[List[int]]) -> float:  # O(n^2)
         return minArea if minArea != float("inf") else 0
 
 # LC1091. Shortest Path in Binary Matrix
-def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:  # O(n)
+def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:  # O(n) runtime and space
     if not grid or grid[0][0] != 0: return -1
     n, que, visited = len(grid), deque([(0, 0, 1)]), set()  # x, y, steps
     while que:  # BFS
@@ -184,38 +184,35 @@ def longestIncreasingPath(self, matrix):
     return max(dfs(x, y) for x in range(M) for y in range(N))
 
 # LC778. Swim in Rising Water
-def swimInWater(self, grid: List[List[int]]) -> int:
+def swimInWater(self, grid: List[List[int]]) -> int:  # O(N^2log(N^2)) time, O(N^2) time
     N = len(grid)
     pq, seen = [(grid[0][0], 0, 0)], {(0, 0)}
     ans = 0
-    while pq: # DFS
+    while pq: # DFS, O(N^2)
         d, r, c = heapq.heappop(pq)
         ans = max(ans, d)
         if r == c == N-1: return ans
-        for cr, cc in ((r-1, c), (r+1, c), (r, c-1), (r, c+1)):
-            if 0 <= cr < N and 0 <= cc < N and (cr, cc) not in seen:
-                heapq.heappush(pq, (grid[cr][cc], cr, cc))
+        for cr, cc in (r-1, c), (r+1, c), (r, c-1), (r, c+1):
+            if N > cr >= 0 <= cc < N and (cr, cc) not in seen:
+                heapq.heappush(pq, (grid[cr][cc], cr, cc))  # log
                 seen.add((cr, cc))
 
 # LC406. Queue Reconstruction by Height
+def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:  # O(nlogn)
+    from sortedcontainers import SortedList
+    people.sort(key=lambda x: (x[0], -x[1]))
+    ans = [None] * len(people)
+    sl = SortedList(list(range(len(people))))
+    for p in people:
+        idx = sl[p[1]]
+        ans[idx] = p
+        sl.remove(idx)  # logn
+    return ans
 def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:  # O(n^2)
     res = []
     for p in sorted((-x[0], x[1]) for x in people): # from largest to smallest
         res.insert(p[1], [-p[0], p[1]]) # insert only relevant to larger values
     return res
-def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:  # O(n^(3/2))
-    blocks = [[]]
-    for p in sorted(people, key=lambda x: (-x[0], x[1])):
-        index = p[1]
-        for i, block in enumerate(blocks):
-            m = len(block)
-            if index <= m: break  # stop to find index, m, and block
-            index -= m
-        block.insert(index, p)
-        if m * m > len(people):
-            blocks.insert(i + 1, block[m//2:])  # O(m) = O(sqrt(n))
-            del block[m//2:]
-    return [p for block in blocks for p in block]
 
 # LC311. Sparse Matrix Multiplication
 def multiply(self, A: List[List[int]], B: List[List[int]]) -> List[List[int]]:
@@ -403,16 +400,15 @@ def maximalSquare(self, matrix: List[List[str]]) -> int: # DP
     return max_len ** 2
 
 # LC378. Kth Smallest Element in a Sorted Matrix
-def kthSmallest(self, matrix: List[List[int]], k: int) -> int:  # O(log(max-min))
-    lo, hi = matrix[0][0], matrix[-1][-1]
-    while lo < hi:
-        mid, count, j = (lo+hi)//2, 0, len(matrix[0])
-        for row in matrix:
-            while j >= 1 and row[j-1] > mid: j -= 1
-            count += j
-        if count < k: lo = mid+1
-        else: hi = mid
-    return lo
+def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+    n = len(matrix)  # O(nlognlog(max-min))
+    l, r = matrix[0][0], matrix[n - 1][n - 1]
+    while l < r:  # log(max-min)
+        mid = (l+r) // 2
+        count = sum(bisect.bisect(row, mid) for row in matrix)
+        if count < k: l = mid+1
+        else: r = mid
+    return l
 
 # LC240. Search a 2D Matrix II
 def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:

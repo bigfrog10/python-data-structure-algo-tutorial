@@ -35,13 +35,36 @@ def findCheapestPrice(self, n, flights, src, dst, K):  # O(E) runtime, O(E + V) 
 def maximalPathQuality(self, values: List[int], edges: List[List[int]], maxTime: int) -> int:
     G = collections.defaultdict(dict)
     for i, j, t in edges: G[i][j] = G[j][i] = t
+    @cache
     def dfs(i, seen, time):
-        res = sum(values[j] for j in seen) if i == 0 else 0
+        res = sum(values[j] for j in seen) if i == 0 else 0  # come back to 0
         for j in G[i]:
             if time >= G[i][j]: res = max(res, dfs(j, seen | {j}, time - G[i][j]))
         return res
-    return dfs(0, {0}, maxTime)
-
+    return dfs(0, frozenset({0}), maxTime)
+def maximalPathQuality(self, values: List[int], edges: List[List[int]], maxTime: int) -> int:
+    neighbours = defaultdict(list)  ## O(ElogV) for Dijkstra, worst is EV.
+    for v,w,t in edges:
+        neighbours[v].append((w,t))
+        neighbours[w].append((v,t))
+    times = defaultdict(lambda: float("inf"))
+    hq = [(0, 0)]
+    while hq:
+        time, node = heappop(hq)
+        if times[node] == float("inf"):
+            times[node] = time
+            for nb, t in neighbours[node]:
+                if time + t <= maxTime//2 and times[nb] == float("inf"):
+                    heappush(hq, (time + t, nb))
+    @cache
+    def dfs(time, value, visited, node):
+        res = value if node == 0 else -float("inf")
+        for nb, t in neighbours[node]:
+            if time + t + times[nb] <= maxTime:
+                val = dfs(time + t, value, visited | (1<<nb), nb)
+                res = max(res, val if (visited >> nb) & 1 else val + values[nb])
+        return res
+    return dfs(0, values[0], 1, 0)
 
 
 # LC743. Network Delay Time

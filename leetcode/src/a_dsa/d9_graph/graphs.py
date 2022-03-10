@@ -2,13 +2,13 @@ from typing import List
 from collections import defaultdict
 
 # LC133. Clone Graph
-def cloneGraph(self, node: 'Node') -> 'Node':
+def cloneGraph(self, node: 'Node') -> 'Node':  # O(V + E) runtime, O(V) space
     if not node: return None
-    v2n = dict() # v is unique, new node references
+    exist2new = {} # v is unique, new node references
     def dfs(node):
-        if node.val in v2n: return v2n[node.val]
+        if node in exist2new: return exist2new[node]
         nn = Node(node.val)
-        v2n[node.val] = nn
+        exist2new[node] = nn
         for ne in node.neighbors:
             nn.neighbors.append(dfs(ne))
         return nn
@@ -16,7 +16,7 @@ def cloneGraph(self, node: 'Node') -> 'Node':
     return nr
 
 # LC785. Is Graph Bipartite?
-def isBipartite(self, graph: List[List[int]]) -> bool:
+def isBipartite(self, graph: List[List[int]]) -> bool:  # O(V + E)
     color = {}  # like seen in other cases
     for node in range(len(graph)):  # go through each node
         if node in color: continue
@@ -36,13 +36,13 @@ def isBipartite(self, graph: List[List[int]]) -> bool:
 def friendRequests(self, n: int, restrictions: List[List[int]], requests: List[List[int]]) -> List[bool]:
     parents = [i for i in range(n)]  # without ranker
     forbidden = collections.defaultdict(set)
-    for i, j in restrictions:
+    for i, j in restrictions:  # O(restrictions)
         forbidden[i].add(j)
         forbidden[j].add(i)
-    def find(i):
-        if i != parents[i]: parents[i] = find(parents[i])
+    def find(i):  # O(n)
+        if i != parents[i]: parents[i] = find(parents[i])  # compression
         return parents[i]
-    def union(p1, p2):
+    def union(p1, p2):  # no find, so O(forbidden size)
         parents[p2] = p1
         forbidden[p1] |= forbidden[p2]
         for i in forbidden[p2]:
@@ -50,7 +50,7 @@ def friendRequests(self, n: int, restrictions: List[List[int]], requests: List[L
             forbidden[i].add(p1)
         del forbidden[p2]
     ans = []
-    for i, j in requests:
+    for i, j in requests:  # O(n + mlogn), m num of unions
         p1, p2 = find(i), find(j)
         if p1 == p2: ans.append(True)
         elif p2 in forbidden[p1]: ans.append(False)
@@ -61,7 +61,7 @@ def friendRequests(self, n: int, restrictions: List[List[int]], requests: List[L
 
 # LC399. Evaluate Division
 def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
-    graph = defaultdict(dict)
+    graph = defaultdict(dict)  # O(mn)
     for (a, b), v in zip(equations, values):  # O(n)
         graph[a][b] = v
         graph[b][a] = 1.0 / v
@@ -108,7 +108,10 @@ class UnionFind:
         pu, vu = self.find(u)
         pv, vv = self.find(v)
         if pu == pv: return
-        if self.rank[pu] > self.rank[pv]: self.union(v, u, 1/w)
+        if self.rank[pu] > self.rank[pv]: # self.union(v, u, 1/w)
+            self.parent[pv] = self.parent[pu]
+            self.value[pv] = 1/w * vu / vv
+            self.rank[pu] += self.rank[pv]
         else:
             self.parent[pu] = self.parent[pv]
             self.value[pu] = w * vv / vu

@@ -23,7 +23,9 @@ def prevPermOpt1(self, arr: List[int]) -> List[int]:
     if idx >= 0:  # Otherwise, we have increasing series, just return
         midx = idx + 1  # now find max < arr[idx], swap with that
         for i in range(midx+1, n):  # max != arr[idx], otherwise no change in swap
-            if arr[idx] > arr[i] > arr[midx]: midx = i
+            if arr[idx] > arr[i]:
+                if arr[i] > arr[midx]: midx = i
+            else: break
         arr[idx], arr[midx] = arr[midx], arr[idx]
     return arr
 

@@ -18,7 +18,7 @@ def addOperators(self, num: str, target: int) -> List[str]:
     dfs(0, '', 0, None)
     return res
 
-# LC224. Basic Calculator
+# LC224. Basic Calculator - with +-()
 def calculate(self, s):
     res, num, sign, stack = 0, 0, 1, []
     for ss in s:
@@ -33,14 +33,35 @@ def calculate(self, s):
             stack.append(sign)
             sign, res = 1, 0
         elif ss == ")":
-            res += sign*num
-            res *= stack.pop()  # old sign
-            res += stack.pop()  # old res
+            res += sign*num  # expr inside ')'
+            res *= stack.pop()  # old sign before '('
+            res += stack.pop()  # old res before '('
             num = 0
     return res + num*sign
 
-# LC227. Basic Calculator II
-def calculate(self, s: str) -> int:
+# LC227. Basic Calculator II  # only +-*/, no parenth
+def calculate(self, s: str) -> int:  # O(n) runtime but O(1) space, better than above.
+    val = res = 0
+    n, i, op = len(s), 0, '+'
+    while i < n:
+        if s[i].isdigit():
+            num, i = int(s[i]), i+1
+            while i < n and s[i].isdigit():
+                num = num * 10 + int(s[i])
+                i += 1
+            if op == '+': val = num
+            elif op == "-": val = -num
+            elif op == "*": val *= num
+            elif op == "/": val = int(val / num)
+        elif s[i] in '+-*/':
+            if s[i] in '+-':  # save val for */
+                res += val
+                val = 0
+            op = s[i]
+            i += 1
+        else: i += 1 # skip space
+    return res + val
+def calculate(self, s: str) -> int:  # O(n) runtime and space
     num, op = 0, "+"
     stack = []
     for i in range(len(s)):
@@ -64,7 +85,8 @@ def calculate(self, s: str) -> int:
             sign, num = c, 0 # this is for +-*/
     return sum(stack)
 
-# LC772. Basic Calculator III
+
+# LC772. Basic Calculator III - +-*/()
 def calculate(self, s: str) -> int:
     stack, sign, num = [], '+', 0  # stack for () and sign in front
     for i, c in enumerate(s + '+'):

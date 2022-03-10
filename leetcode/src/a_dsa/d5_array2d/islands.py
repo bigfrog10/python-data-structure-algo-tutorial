@@ -1,6 +1,6 @@
 
 # LC827. Making A Large Island
-def largestIsland(self, grid: List[List[int]]) -> int: # recursion
+def largestIsland(self, grid: List[List[int]]) -> int: # O(n^2) runtime and space
     if not grid or not grid[0]: return 0
     n = len(grid)
     def dfs(r, c, gid):  # get island size
@@ -14,7 +14,7 @@ def largestIsland(self, grid: List[List[int]]) -> int: # recursion
         if grid[r][c] == 1:  # unexplored island
             islands[gid] = dfs(r, c, gid)
             gid += 1
-    ret = max(islands.values() or [0]) # in case all land no water
+    ret = max(islands.values() or [0])  # in case all land no water
     for r, c in product(range(n), range(n)):
         if grid[r][c] == 0:  # go through each water
             seen = set()  # this is to filter out repetitive islands from differnt landings
@@ -70,17 +70,14 @@ def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
     return amax
 
 # LC463. Island Perimeter
-def islandPerimeter(self, grid: List[List[int]]) -> int:
+def islandPerimeter(self, grid: List[List[int]]) -> int:  # O(mn), O(1)
     rows, cols = len(grid), len(grid[0])
     result = 0
-    for r in range(rows):
-        for c in range(cols):
-            if grid[r][c] == 1:
-                up = 0 if r == 0 else grid[r-1][c]
-                down = 0 if r == rows-1 else grid[r+1][c]
-                left = 0 if c == 0 else grid[r][c-1]
-                right = 0 if c == cols-1 else grid[r][c+1]
-                result += 4-(up+left+right+down)
+    for r, c in itertools.product(range(rows), range(cols)):
+        if grid[r][c] == 1:
+            result += 4
+            if r > 0 and grid[r-1][c] == 1: result -= 2  # remove borders between
+            if c > 0 and grid[r][c-1] == 1: result -= 2
     return result
 
 # LC305. Number of Islands II

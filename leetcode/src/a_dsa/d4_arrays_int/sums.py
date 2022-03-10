@@ -16,7 +16,7 @@ def threeSumClosest(self, nums: List[int], target: int) -> int:  # O(n^2)
 # https://leetcode.com/problems/3sum-closest/discuss/778177/Python3-%3A-Runtime%3A-52-ms-faster-than-99.77
 
 # LC1011. Capacity To Ship Packages Within D Days
-def shipWithinDays(self, weights: List[int], D: int) -> int:
+def shipWithinDays(self, weights: List[int], D: int) -> int:  # O(nlog(sum - max))
     left, right = max(weights), sum(weights)
     while left < right:  # O(log(right - left)
         midw, days, currw = (left + right) // 2, 1, 0
@@ -80,7 +80,7 @@ def combinationSum4(self, nums: List[int], target: int) -> int:  # O(T * N)
         return result
     return combs(target)
 
-# LC494. Target Sum
+# LC494. Target Sum - with plus minus +- operators
 def findTargetSumWays(self, nums: List[int], S: int) -> int:
     n = len(nums)
     @lru_cache(None)  # O(n * S)
@@ -90,19 +90,17 @@ def findTargetSumWays(self, nums: List[int], S: int) -> int:
         sub = dp(i+1, s - nums[i])
         return add + sub
     return dp(0, 0)
+def findTargetSumWays(self, nums: List[int], target: int) -> int:
+    count = collections.Counter({0: 1}) # Iterative, DP
+    for x in nums:
+        step = collections.Counter()
+        for y in count:
+            step[y + x] += count[y]
+            step[y - x] += count[y]
+        count = step
+    return count[target]
 
-# LC416. Partition Equal Subset Sum  - backpack
-def canPartition(self, nums: List[int]) -> bool:  # sequence, not continuous subset
-    n, total = len(nums), sum(nums)  # O(n * total)
-    if total % 2 != 0: return False
-    @lru_cache(maxsize=None)
-    def dfs(idx: int, subset_sum: int) -> bool:
-        if subset_sum == 0: return True
-        if idx == n-1 or subset_sum < 0: return False
-        # include this element, or skip this element
-        result = dfs(idx + 1, subset_sum - nums[idx + 1]) or dfs(idx + 1, subset_sum)
-        return result
-    return dfs(0, total // 2)
+
 
 # LC698. Partition to K Equal Sum Subsets
 def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
@@ -186,6 +184,25 @@ def twoSum(self, numbers: List[int], target: int) -> List[int]:
     return None
 
 # LC15. 3Sum top100
+def threeSum(self, nums):  # shorter and quicker 90%
+    n = len(nums)
+    nums.sort()
+    res = []
+    for i in range(n-2):
+        if nums[i] > 0: break  # then all 3 are > 0 and sum > 0, so can't be 0
+        if i > 0 and nums[i] == nums[i-1]: continue
+        l, r = i+1, n-1
+        while l < r:
+            s = nums[i] + nums[l] + nums[r]
+            if s < 0: l +=1
+            elif s > 0: r -= 1
+            else:
+                res.append((nums[i], nums[l], nums[r]))
+                while l < r and nums[l] == nums[l+1]: l += 1 # prevent dups
+                while l < r and nums[r] == nums[r-1]: r -= 1
+                l += 1
+                r -= 1
+    return res
 def threeSum(self, nums: List[int]) -> List[List[int]]:
     def twoSum(i: int, res: List[List[int]]):
         seen = set()
@@ -205,10 +222,10 @@ def threeSum(self, nums: List[int]) -> List[List[int]]:
     return res
 
 # LC259. 3Sum Smaller
-def threeSumSmaller(self, nums: List[int], target: int) -> int:
+def threeSumSmaller(self, nums: List[int], target: int) -> int:  # O(n^2)
     if not nums or len(nums) < 3: return 0
+    lnth = len(nums)
     def sum2smaller(nums, start, target):
-        lnth = len(nums)
         counts = 0
         lo, hi = start, lnth-1
         while lo < hi:

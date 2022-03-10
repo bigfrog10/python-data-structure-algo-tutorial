@@ -1,6 +1,5 @@
 from typing import List
 import heapq
-from heapq import *
 
 # LC636. Exclusive Time of Functions, jobs, process
 def exclusiveTime(self, n, logs):  # O(n) runtime and space
@@ -15,7 +14,7 @@ def exclusiveTime(self, n, logs):  # O(n) runtime and space
             if stack: stack[-1][1] += time  # update parent time
     return res
 
-# LC56. Merge Intervals, top100
+# LC56. Merge Intervals, top100 - remove overlaps
 def merge(self, intervals: List[List[int]]) -> List[List[int]]:
     intervals.sort(key=lambda x: x[0])
     merged = []
@@ -42,18 +41,44 @@ def minMeetingRooms(self, intervals: List[List[int]]) -> int:
         heapq.heappush(rooms, intv[1])  # we sort heap by end time
     return len(rooms)
 
+# LC1288. Remove Covered Intervals
+def removeCoveredIntervals(self, intervals: List[List[int]]) -> int:
+    intervals.sort(key = lambda x: (x[0], -x[1]))
+    count = prev_end = 0
+    for _, end in intervals:
+        if end > prev_end:  # if current interval is not covered by the previous one
+            count += 1
+            prev_end = end
+    return count
+
 # LC759. Employee Free Time
 class Interval:
     def __init__(self, start: int = None, end: int = None):
         self.start = start
         self.end = end
-def employeeFreeTime(self, schedule: '[[Interval]]') -> '[Interval]':  # fastest
-    intervals = sorted((interval.start, interval.end) for s in schedule for interval in s)
-    res, moving_end = [], intervals[0][1]
-    for s, e in intervals:  # O(n)
-        if s > moving_end: res.append(Interval(moving_end, s))
-        moving_end = max(e, moving_end)
+def employeeFreeTime(self, schedule: '[[Interval]]') -> '[Interval]': # O(nlogm), n total intervals
+    min_heap, res = [], []
+    for i in range(len(schedule)):  # m = len(schedule) is the number of employees
+        # the last elem in tuple is next idx of interval for the employee
+        heapq.heappush(min_heap, (schedule[i][0].start, schedule[i][0].end, i, 1))
+    end = min_heap[0][1]
+    while min_heap:
+        new_start, new_end, i, j = heapq.heappop(min_heap)
+        if new_start <= end: end = max(end, new_end)
+        else:
+            res.append(Interval(end, new_start))
+            end = new_end
+        if j < len(schedule[i]):
+            heapq.heappush(min_heap, (schedule[i][j].start, schedule[i][j].end, i, j+1))
     return res
+def employeeFreeTime(self, schedule: '[[Interval]]') -> '[Interval]':  # O(nlogn)
+        # This can be done by merge-sort to achieve O(n)
+        intervals = sorted((interval.start, interval.end) for s in schedule for interval in s)
+        res, moving_end = [], intervals[0][1]
+        for s, e in intervals:  # O(n)
+            if s > moving_end: res.append(Interval(moving_end, s))
+            moving_end = max(e, moving_end)
+        return res
 
 # LC435. Non-overlapping Intervals
 def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
@@ -68,17 +93,29 @@ def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
             cnt += 1  # overlapped, so remove this, so increment counter
     return cnt
 
+# LC986. Interval List Intersections
+def intervalIntersection(self, firstList: List[List[int]], secondList: List[List[int]]) -> List[List[int]]:
+    ret = []  # O(m + n)
+    i = j = 0
+    while i < len(firstList) and j < len(secondList):
+        left = max(firstList[i][0], secondList[j][0])
+        right = min(firstList[i][1], secondList[j][1])
+        if left <= right: ret.append((left, right))  # add intersection
+        if firstList[i][1] < secondList[j][1]: i += 1  # move short end
+        else: j += 1
+    return ret
+
 # LC729. My Calendar I
+from sortedcontainers import SortedList
 class MyCalendar:
-    def __init__(self): self.intervals = []  # like [s1, e1, s2, e2, ...]
-    def book(self, start: int, end: int) -> bool:
-        if end <= start: return False
-        i = bisect.bisect_right(self.intervals, start)
-        if i % 2: return False  # start is in some stored interval
-        j = bisect.bisect_left(self.intervals, end)
-        if i != j: return False  # overlapped
-        self.intervals[i:i] = [start, end]
-        return True
+    def __init__(self): self.arr = SortedList()  # list is not good enough for performance
+    def book(self, start, end):  # O(logn) for 1 booking
+        q1, q2 = self.arr.bisect_right(start), self.arr.bisect_left(end)
+        if q1 == q2 and q1 % 2 == 0:
+            self.arr.add(start)
+            self.arr.add(end)
+            return True
+        return False
 
 # LC731. My Calendar II
 class MyCalendarTwo:
@@ -137,18 +174,6 @@ class MyCalendarThree(object):  # or binary index tree/segment tree
             self.max = max(self.max, c)
         return self.max
 
-# LC986. Interval List Intersections
-def intervalIntersection(self, firstList: List[List[int]], secondList: List[List[int]]) -> List[List[int]]:
-    ret = []  # O(m + n)
-    i = j = 0
-    while i < len(firstList) and j < len(secondList):
-        left = max(firstList[i][0], secondList[j][0])
-        right = min(firstList[i][1], secondList[j][1])
-        if left <= right: ret.append((left, right))  # add intersection
-        if firstList[i][1] < secondList[j][1]: i += 1  # move short end
-        else: j += 1
-    return ret
-
 # LC715. Range Module
 from bisect import bisect_left as bl, bisect_right as br
 class RangeModule:
@@ -156,13 +181,38 @@ class RangeModule:
         self._X = []  # intervals are [even, odd)
     def addRange(self, left, right):
         i, j = bl(self._X, left), br(self._X, right)
-        self._X[i:j] = [left]*(i % 2 == 0) + [right]*(j % 2 == 0)
+        self._X[i:j] = [left]*(i % 2 == 0) + [right]*(j % 2 == 0)  # O(n)
     def queryRange(self, left, right):
         i, j = br(self._X, left), bl(self._X, right)
         return i == j and i%2 == 1
     def removeRange(self, left, right):
         i, j = bl(self._X, left), br(self._X, right)
-        self._X[i:j] = [left]*(i%2 == 1) + [right]*(j%2 == 1)
+        self._X[i:j] = [left]*(i%2 == 1) + [right]*(j%2 == 1)  # O(n)
+class RangeModule:
+    def __init__(self):
+        self.starts = SortedDict({-1: 0})  # intervals start -> end
+    def addRange(self, left: int, right: int) -> None:  # O(klogn)
+        while True:
+            pos = self.starts.bisect_right(right)
+            mkey = self.starts.iloc[pos-1]
+            if mkey == -1: break
+            mval = self.starts[mkey]
+            if mval < left: break
+            left, right = min(left, mkey), max(right, mval)
+            del self.starts[mkey]
+        self.starts[left] = right
+    def queryRange(self, left: int, right: int) -> bool:  # logn
+        pos = self.starts.bisect_right(left)
+        mkey = self.starts.iloc[pos-1]
+        return mkey > -1 and self.starts[mkey] >= right
+    def removeRange(self, left: int, right: int) -> None:  # O(klogn)
+        self.addRange(left, right)
+        pos = self.starts.bisect_right(left)
+        mkey = self.starts.iloc[pos-1]
+        mval = self.starts[mkey]
+        del self.starts[mkey]
+        if mkey < left: self.starts[mkey] = left
+        if mval > right: self.starts[right] = mval
 
 # LC57. Insert Interval
 def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:

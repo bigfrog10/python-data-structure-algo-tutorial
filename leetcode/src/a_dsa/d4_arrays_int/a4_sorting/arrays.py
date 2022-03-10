@@ -1,7 +1,7 @@
 from typing import List
 from collections import Counter
 
-# LC88. Merge Sorted Array
+# LC88. Merge Sorted Array - merge n2 to n1
 def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
     i, j, k = m-1, n-1, m+n-1  # start from backward
     while i > -1 and j > -1:
@@ -83,18 +83,21 @@ def arraysIntersection(self, arr1: List[int], arr2: List[int], arr3: List[int]) 
     return ans
 
 # LC825. Friends Of Appropriate Ages
-def numFriendRequests(self, ages: List[int]) -> int:  # O(nlogn)
-    ages.sort()
-    N, cnt = len(ages), 0
-    for i in range(N):
-        a = ages[i]
-        idx1 = bisect.bisect(ages, a)
-        idx2 = bisect.bisect(ages, 0.5 * a + 7)
-        cnt += max(0, idx1 - idx2 - 1)
-    return cnt
+def numFriendRequests(self, ages: List[int]) -> int:  # O(n), prefix sum problem
+    buckets = [0] * 121  # 120 is given
+    for a in ages: buckets[a] += 1  # bucket count
+    res = 0
+    for i in range(1, len(buckets)):
+        cnt = buckets[i]
+        buckets[i] += buckets[i-1]  # requirement 2
+        if not cnt: continue
+        mid = i // 2 + 7  # requirement 1
+        if mid >= i: continue
+        res += cnt * (buckets[i] - buckets[mid] - 1)
+    return res
 
 # LC163. Missing Ranges
-def findMissingRanges(self, nums: List[int], lower: int, upper: int) -> List[str]:
+def findMissingRanges(self, nums: List[int], lower: int, upper: int) -> List[str]:  # O(n), O(1)
     def formatRange(lower, upper):
         if lower == upper: return str(lower)
         else: return str(lower) + "->" + str(upper)

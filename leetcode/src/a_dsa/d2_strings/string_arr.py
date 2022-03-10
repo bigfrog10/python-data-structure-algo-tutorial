@@ -2,12 +2,12 @@
 # LC721. Accounts Merge
 def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
     graph = defaultdict(list)  # build graph for emails
-    for acct in accounts:  # O(n * m), n = len(accts), m = # of emails per account
+    for acct in accounts:  ## O(MlogM), M total number of emails
         for email in acct[2:]:
             graph[acct[1]].append(email)
             graph[email].append(acct[1])
     seen = set()
-    def dfs(i):
+    def dfs(i):  # to cllect all relevant emails
         tmp = {i}
         for j in graph[i]:
             if j not in seen:
@@ -20,7 +20,7 @@ def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
             if email not in seen:
                 seen.add(email)
                 eg = dfs(email)
-                ret.append([acct[0]] + sorted(eg))
+                ret.append([acct[0]] + sorted(eg))  # O(nlogn)
     return ret
 
 # LC621. Task Scheduler
@@ -44,16 +44,30 @@ def leastInterval(self, tasks: List[str], n: int) -> int:
     return max(len(tasks), (f_max - 1) * (n + 1) + n_max)
 
 # LC443. String Compression
-def compress(self, chars: List[str]) -> int:
+def compress(self, chars: List[str]) -> int:  # chars gets shrinked
     st = i = 0
     while i < len(chars):
         while i < len(chars) and chars[i] == chars[st]: i += 1
-        if i - st == 1: st = i  # single diff char, leave it alone
+        if i - st == 1:  st = i # single diff char, leave it alone
         else:
             count = str(i - st)
-            chars[st + 1: i] = count
+            chars[st + 1 : i] = count
             i = st = st + len(count) + 1  # skip spaces used by count
     return len(chars)
+def compress(self, chars: List[str]) -> int:
+    st = i = j = 0
+    while i < len(chars):
+        while i < len(chars) and chars[i] == chars[st]: i += 1
+        chars[j] = chars[st]
+        j += 1  # skip char
+        if i - st == 1:
+            st = i # single diff char, leave it alone
+        else:
+            count = str(i - st)
+            chars[j:j+len(count)] = count
+            j += len(count)
+            st = i
+    return j  # chars size is not changed, only end index returned.
 
 # LC271. Encode and Decode Strings
 class Codec:
@@ -95,7 +109,7 @@ def replaceWords(self, dictionary: List[str], sentence: str) -> str:
     return ' '.join(map(replace, sentence.split()))
 
 # LC752. Open the Lock
-def openLock(self, deadends: List[str], target: str) -> int:
+def openLock(self, deadends: List[str], target: str) -> int:  # O(n^2 * 10^n + D), N is Number of dials, 4
     def nbs(digit):  # neighbours
         d = int(digit)
         d1 = d - 1 if d > 0 else 9

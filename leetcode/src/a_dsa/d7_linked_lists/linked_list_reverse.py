@@ -18,15 +18,12 @@ def reverseBetween(self, head, m, n):
     return dummy.next
 
 # LC24. Swap Nodes in Pairs
-def swapPairs(self, head: ListNode) -> ListNode:
-    prev_node = dummy = ListNode(-1, head)
+def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    prev = dummy = ListNode(None, head)
     while head and head.next:
-        first_node, second_node = head, head.next # Nodes to be swapped
-        # relink to down the road
-        prev_node.next, first_node.next = second_node, second_node.next
-        second_node.next = first_node # reverse between current and next
-        # Reinitializing the head and prev_node for next swap
-        prev_node, head = first_node, first_node.next
+        prev.next, head.next = head.next, head.next.next
+        prev.next.next = head
+        prev, head = head, head.next
     return dummy.next
 
 # LC25. Reverse Nodes in k-Group

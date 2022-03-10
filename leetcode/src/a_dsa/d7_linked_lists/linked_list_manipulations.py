@@ -15,14 +15,13 @@ def mergeTwoLists(self, l1, l2):
 
 # LC23. Merge k Sorted Lists, top100
 def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-    amount = len(lists)
-    interval = 1
-    while interval < amount:
-        for i in range(0, amount - interval, interval * 2):
-            # LC21. Merge Two Sorted Lists
-            lists[i] = self.mergeTwoLists(lists[i], lists[i + interval])
-        interval *= 2
-    return lists[0] if amount > 0 else None
+    lstlen = len(lists)  # O(Nlogk)
+    jump = 1
+    while jump < lstlen:
+        for i in range(0, lstlen - jump, jump * 2):
+            lists[i] = self.mergeTwoLists(lists[i], lists[i + jump])  ## use above method
+        jump *= 2
+    return lists[0] if lstlen > 0 else None
 
 # LC148. Sort List
 def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
@@ -46,11 +45,11 @@ def merge(self, l, r):
     return dummy.next
 
 # LC19. Remove Nth Node From End of List
-def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
-    dummy = ListNode(0, head)
+def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+    dummy = ListNode(0, head)  # handle k=0
     first = second = dummy
-    for i in range(n+1): first = first.next  # +1 to rearch null at the end
-    while first: first, second = first.next, second.next  # loop to end
+    for i in range(n+1): first = first.next  # +1 for dummy, after nth node in front.
+    while first: first, second = first.next, second.next  # parent of nth node in back.
     second.next = second.next.next
     return dummy.next
 

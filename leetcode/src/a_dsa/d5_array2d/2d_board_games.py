@@ -7,35 +7,35 @@ def minPushBox(self, grid: List[List[str]]) -> int:  # faster BFS, O((mn)^2)
             if grid[i][j] == "T": target = (i,j)
             if grid[i][j] == "B": box = (i,j)
             if grid[i][j] == "S": person = (i,j)
-    def empty(x,y): # O(1) verify
+    def empty(x, y): # O(1) verify
         return 0 <= x <len(grid) and 0 <= y < len(grid[0]) and grid[x][y] != '#'
     def reachable(curr, dest, box):  #BFS to check dest is reachable from curr
         que, v = deque([curr]), set()
         while que:
             pos = que.popleft()
             if pos == dest: return True
-            for x,y in [(pos[0]+1,pos[1]), (pos[0]-1,pos[1]), (pos[0],pos[1]+1), (pos[0],pos[1]-1)]:
-                if empty(x,y) and (x,y) not in v and (x,y) != box:
+            for x, y in (pos[0]+1,pos[1]), (pos[0]-1,pos[1]), (pos[0],pos[1]+1), (pos[0],pos[1]-1):
+                if empty(x, y) and (x, y) != box and (x, y) not in v:
                     v.add((x,y))
                     que.append((x,y))
         return False
     q, visited = deque([(0, box, person)]), {box + person}
     while q:  # main BFS
-        dist, box, person = q.popleft()
-        if box == target: return dist
+        pushes, box, person = q.popleft()
+        if box == target: return pushes
         b_coord = [(box[0]+1,box[1]),(box[0]-1,box[1]),(box[0],box[1]+1),(box[0],box[1]-1)]
         p_coord = [(box[0]-1,box[1]),(box[0]+1,box[1]),(box[0],box[1]-1),(box[0],box[1]+1)]
-        for new_box,new_person in zip(b_coord,p_coord):
-            if empty(*new_box) and new_box+box not in visited:
-                if empty(*new_person) and reachable(person,new_person,box):
+        for new_box, new_person in zip(b_coord,p_coord):
+            if empty(*new_box) and new_box + box not in visited:
+                if empty(*new_person) and reachable(person, new_person, box):
                     visited.add(new_box+box)
-                    q.append((dist+1,new_box,box))
+                    q.append((pushes + 1,new_box,box))
     return -1
 
 # LC1197. Minimum Knight Moves
-def minKnightMoves(self, x: int, y: int) -> int:
+def minKnightMoves(self, x: int, y: int) -> int:  # O(x*y)
     @lru_cache(None)
-    def dp(x,y):
+    def dp(x,y):  # O(x*y) in cache
         if x + y == 0: return 0  # (0, 0)
         elif x + y == 2: return 2  # (1, 1), (0, 2), (2, 0)
         return min(dp(abs(x-1), abs(y-2)), dp(abs(x-2), abs(y-1))) + 1
@@ -188,7 +188,7 @@ def countBattleships(self, board: List[List[str]]) -> int:
 
 # LC529. Minesweeper
 def updateBoard(self, board: List[List[str]], click: List[int]) -> List[List[str]]:
-    n, m = len(board), len(board[0])  # https://leetcode.com/problems/minesweeper/discuss/99897/10-line-python-solution
+    n, m = len(board), len(board[0])  ## O(mn)
     dirs = ((-1, 0), (1, 0), (0, 1), (0, -1), (-1, 1), (-1, -1), (1, 1), (1, -1))
     def dfs(i, j):  # don't need visited since we alter values already
         if board[i][j] == 'M': board[i][j] = 'X'  # we should get here, i.e., don't step on mine.
@@ -337,6 +337,22 @@ def hasPath(self, maze: List[List[int]], start: List[int], destination: List[int
                 q.append((ni,nj))
     return False
 
+# LC1926. Nearest Exit from Entrance in Maze
+def nearestExit(self, maze: List[List[str]], start: List[int]) -> int:  # O(MN), BFS
+    M, N = len(maze), len(maze[0])
+    isExit = lambda i, j: not i or i == M - 1 or not j or j == N - 1
+    que, seen, level = deque([[*start]]), {tuple(start)}, 0
+    while que:
+        for _ in range(len(que)):
+            i, j = que.popleft()
+            if isExit(i, j) and level: return level
+            for u, v in [i - 1, j], [i, j + 1], [i + 1, j], [i, j - 1]:
+                if M > u >= 0 <= v < N and maze[u][v] == '.' and (u, v) not in seen:
+                    que.append([u, v])
+                    seen.add((u, v))
+        level += 1
+    return -1
+
 # LC36. Valid Sudoku
 def isValidSudoku(self, board: List[List[str]]) -> bool:  # one pass, faster, cache encoded positions
     digits = set('123456789')
@@ -391,7 +407,7 @@ def solveSudoku(self, board): # fast, since no n so O(1)
     dfs()
 
 # 1293. Shortest Path in a Grid with Obstacles Elimination
-def shortestPath(self, grid: List[List[int]], k: int) -> int:  # best, A*
+def shortestPath(self, grid: List[List[int]], k: int) -> int:  # best, A*  O(Nklog(Nk))
     m, n = len(grid), len(grid[0])
     state = m-1, n-1, k
     queue, seen = [(m+n-2, 0, state)], {state}  # manhattan distance
@@ -519,20 +535,4 @@ def snakesAndLadders(self, board: List[List[int]]) -> int:
                 queue.append((move, s+1))
     return -1
 
-# LC1926. Nearest Exit from Entrance in Maze
-def nearestExit(self, maze: List[List[str]], start: List[int]) -> int:  # O(MN), BFS
-    M, N = len(maze), len(maze[0])
-    isExit = lambda i, j: not i or i == M - 1 or not j or j == N - 1
-    que, seen, level = deque([[*start]]), {tuple(start)}, 0
-    while que:
-        k = len(que)
-        while k:
-            i, j = que.popleft()
-            if isExit(i, j) and level: return level
-            for u, v in [i - 1, j], [i, j + 1], [i + 1, j], [i, j - 1]:
-                if M > u >= 0 <= v < N and maze[u][v] == '.' and (u, v) not in seen:
-                    que.append([u, v])
-                    seen.add((u, v))
-            k -= 1
-        level += 1
-    return -1
+

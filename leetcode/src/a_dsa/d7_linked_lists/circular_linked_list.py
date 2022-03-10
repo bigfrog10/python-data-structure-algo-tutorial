@@ -1,7 +1,7 @@
 
 # LC708. Insert into a Sorted Circular Linked List
 def insert(self, head: 'Optional[Node]', insertVal: int) -> 'Node':
-    if not head: # corner case
+    if not head:  # corner case
         head = Node(insertVal)
         head.next = head  # make it circular
         return head

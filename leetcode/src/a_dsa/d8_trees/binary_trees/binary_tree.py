@@ -38,44 +38,37 @@ def delNodes(self, root: Optional[TreeNode], to_delete: List[int]) -> List[TreeN
         if not root: return None
         root_deleted = root.val in to_delete_set
         if is_root and not root_deleted: res.append(root)
-
         root.left = dfs(root.left, root_deleted) # if root is deleted, then left and right are roots.
         root.right = dfs(root.right, root_deleted)
         return None if root_deleted else root
     dfs(root, True)
     return res
 
-# LC1650. Lowest Common Ancestor of a Binary Tree III
-def lowestCommonAncestor(self, p: 'Node', q: 'Node') -> 'Node':
-    path = set()  # store the parents (path) from root to p, and then check q's path
-    while p:  # O(h)
-        path.add(p)
-        p = p.parent
-    while q not in path: q = q.parent
-    return q
+# LC1650. Lowest Common Ancestor of a Binary Tree III - has parent, given 2 nodes
 def lowestCommonAncestor1(self, p: 'Node', q: 'Node') -> 'Node':
-    p1, p2 = p, q  # O(1) space, but goes a + b + c, still O(n)
+    p1, p2 = p, q  # O(1) space, but goes a + b + c, still O(2h)
     while p1 != p2:
         p1 = p1.parent if p1.parent else q
         p2 = p2.parent if p2.parent else p
     return p1
 
-# LC236. Lowest Common Ancestor of a Binary Tree, top100
+# LC236. Lowest Common Ancestor of a Binary Tree, top100 - normal node, in the tree
 def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-    def dfs(node, p, q):
+    def dfs(node, p, q):  ## O(n) time and space
         if not node: return None
-        if node.val == p.val or node.val == q.val: return node
+        if node == p or node == q: return node
         left = dfs(node.left, p, q)
         right = dfs(node.right, p, q)
         if left and right: return node  # both are not null, then this is LCA
         return left or right  # carry the not None node
     return dfs(root, p, q)
 
-# LC1644. Lowest Common Ancestor of a Binary Tree II
+# LC1644. Lowest Common Ancestor of a Binary Tree II, normal node, might not in tree
 def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
     res = None
     def dfs(node):  # return how many matches
         nonlocal res
+        if res: return 0
         if not node: return 0
         cur = node == p or node == q # count of matches
         left = dfs(node.left)
@@ -114,13 +107,22 @@ def validateBinaryTreeNodes(self, n: int, leftChild: List[int], rightChild: List
     return sum(indegree) == 0
 
 # LC572. Subtree of Another Tree
-def isSubtree(self, s: TreeNode, t: TreeNode) -> bool:
+def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:  # O(mn)
     def preorder(node):
         if not node: return 'none'
         return f'[root={node.val},l={preorder(node.left)},r={preorder(node.right)}]'
-    s1 = preorder(s)
-    s2 = preorder(t)
+    s1 = preorder(root)
+    s2 = preorder(subRoot)
     return s1.find(s2) > -1
+
+def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:  # O(mn)
+    def is_same(node1, node2):
+        if not node1 or not node2: return node1 == node2
+        if node1.val != node2.val: return False
+        return is_same(node1.left, node2.left) and is_same(node1.right, node2.right)
+    if not root: return False
+    if is_same(root, subRoot): return True
+    return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
 
 # LC814. Binary Tree Pruning
 def pruneTree(self, root: TreeNode) -> TreeNode:
@@ -200,16 +202,6 @@ def countNodes(self, root): # O((logn)^2)
         return pow(2, leftDepth) + self.countNodes(root.right)
     else: # right is complete
         return pow(2, rightDepth) + self.countNodes(root.left)
-
-
-
-# LC958. Check Completeness of a Binary Tree
-def isCompleteTree(self, root: Optional[TreeNode]) -> bool:
-    bfs, i = [root], 0
-    while bfs[i]:  # on exit, i is the first None we see.
-        bfs.extend([bfs[i].left, bfs[i].right])
-        i += 1
-    return not any(bfs[i:])  # we shouldn't have any non None after i
 
 # LC654. Maximum Binary Tree
 def constructMaximumBinaryTree(self, nums: List[int]) -> TreeNode:

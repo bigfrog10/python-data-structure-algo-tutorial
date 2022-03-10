@@ -1,16 +1,9 @@
 
 # LC739. Daily Temperatures
-def dailyTemperatures(self, T: List[int]) -> List[int]:
-    ret, stack = [0] * len(T), []  # monotonic stack, decreasing
-    for i in reversed(range(len(T))):
-        while stack and T[i] >= T[stack[-1]]: stack.pop()
-        if stack: ret[i] = stack[-1] - i
-        stack.append(i)
-    return ret
 def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
     n = len(temperatures)
     answer, hottest = [0] * n, 0  # O(n) runtime, O(1) space
-    for curr_day in range(n - 1, -1, -1):
+    for curr_day in range(n)[::-1]:
         current_temp = temperatures[curr_day]
         if current_temp >= hottest:
             hottest = current_temp
@@ -18,16 +11,24 @@ def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
         days = 1
         while current_temp >= temperatures[curr_day + days]:
             # this is the "days" jump to shrink the while total to N for the for loop
-            days += answer[curr_day + days]
+            days += answer[curr_day + days]  # accu through valley
         answer[curr_day] = days
     return answer
+def dailyTemperatures(self, T: List[int]) -> List[int]:
+    ret, stack = [0] * len(T), []  # monotonic stack, decreasing
+    for i in reversed(range(len(T))):
+        while stack and T[i] >= T[stack[-1]]: stack.pop()
+        if stack: ret[i] = stack[-1] - i
+        stack.append(i)
+    return ret
 
 # LC1944. Number of Visible People in a Queue
 def canSeePersonsCount(self, heights: List[int]) -> List[int]:  # O(n)
     stack, res = [], [0] * len(heights)  # decreasing mono stack
     for i, v in enumerate(heights):
+        # pop() can see v
         while stack and v >= heights[stack[-1]]: res[stack.pop()] += 1
-        if stack: res[stack[-1]] += 1  # if there is a higher one, count 1
+        if stack: res[stack[-1]] += 1  # -1 can see v
         stack.append(i)
     return res
 

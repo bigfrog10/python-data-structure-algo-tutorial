@@ -1,6 +1,6 @@
 
-# LC1249. Minimum Remove to Make Valid Parentheses
-def minRemoveToMakeValid(self, s: str) -> str:  # O(n)
+# LC1249. Minimum Remove to Make Valid Parentheses - return string result
+def minRemoveToMakeValid(self, s: str) -> str:  # O(n) runtime and space
     stack, remove = [], []  # find all indices to remove
     for i, c in enumerate(s):
         if c not in '()': continue  # others, keep it
@@ -16,19 +16,19 @@ def minRemoveToMakeValid(self, s: str) -> str:  # O(n)
     ret += s[idx:]  # add leftover
     return ret
 
-# LC921. Minimum Add to Make Parentheses Valid
-def minAddToMakeValid(self, S: str) -> int:
-    left = bal = 0 # bal = num of ( minus mn of )
+# LC921. Minimum Add to Make Parentheses Valid - return num of operations
+def minAddToMakeValid(self, S: str) -> int:  # O(n)
+    left = bal = 0  # bal = # of '(' - # of ')'
     for s in S:
-        bal += 1 if s == '(' else -1 # cancel out balanced
-        if bal == -1: # there is ) unmatched
-            left += 1 # expected ( needs 1 more
+        bal += 1 if s == '(' else -1  # cancel out balanced
+        if bal == -1:  # there is ) unmatched
+            left += 1  # expected ( needs 1 more
             bal += 1  # diff needs +1 too
-    return left + bal # "(((" -> ret=0, bal=3
+    return left + bal  # "(((" -> ret=0, bal=3
 
-# LC301. Remove Invalid Parentheses
+# LC301. Remove Invalid Parentheses - return all results
 def removeInvalidParentheses(self, s): # O(2^n) return all possible results
-    def isvalid(s):
+    def isvalid(s):  # O(n)
         ctr = 0
         for c in s:
             if c == '(': ctr += 1
@@ -36,9 +36,9 @@ def removeInvalidParentheses(self, s): # O(2^n) return all possible results
             if ctr < 0: return False
         return ctr == 0
     level = {s}
-    while True:
+    while True:  # O(2^(n-1)), no need to check single char sets.
         valid = list(filter(isvalid, level))
-        if valid: return valid
+        if valid: return valid  # we want min num of removals
         level = {s[:i] + s[i+1:] for s in level for i in range(len(s)) if s[i] in '()'}
 
 # LC1614. Maximum Nesting Depth of the Parentheses
@@ -115,7 +115,7 @@ def diffWaysToCompute(self, expression: str) -> List[int]:
     return diff_ways(expression)
 
 # LC32. Longest Valid Parentheses
-def longestValidParentheses(self, s):
+def longestValidParentheses(self, s: str) -> int:  # O(n) time and space
     stack, longest = [0], 0  # track current length and its max
     for c in s:
         if c == "(": stack.append(0)
@@ -126,23 +126,21 @@ def longestValidParentheses(self, s):
                 longest = max(longest, stack[-1])
             else: stack = [0]  # get unmatched ), restart
     return longest
-def longestValidParentheses(self, s):
-    l, r = 0, 0
-    max_ = 0
-    for i in range(len(s)):
-        if s[i] == '(': l +=1
-        else: r +=1
-        if l == r: max_ = max(max_, 2 * r)
-        else:
-            if r >= l: l = r = 0
-    l,r = 0,0
-    for i in reversed(range(len(s))):
-        if s[i] == '(': l += 1
-        else: r += 1
-        if l == r: max_ = max(max_, 2 * l)
-        else:
-            if l >= r: l = r = 0
-    return max_
+def longestValidParentheses(self, s: str) -> int:  # O(n) time and O(1) space
+    n = len(s)
+    maxl = left = right = 0
+    for c in s:  # from left to right
+        if c == '(': left += 1
+        else: right += 1
+        if left == right: maxl = max(maxl, 2 * right)
+        elif left <= right: left = right = 0  # start over with new
+    left = right = 0
+    for c in s[::-1]:
+        if c == '(': left += 1
+        else: right += 1
+        if left == right: maxl = max(maxl, 2 * left)
+        elif left >= right: left = right = 0
+    return maxl
 
 # LC678. Valid Parenthesis String - with *
 def checkValidString(self, s):  # greedy
