@@ -1,4 +1,18 @@
 
+# LC536. Construct Binary Tree from String
+def str2tree(self, s: str) -> Optional[TreeNode]:  # O(n)
+    def build(iteri) -> TreeNode:  # works for pattern "num(a)(b))"
+        num = ''
+        while (nxt := next(iteri)) not in '()': num += nxt
+        node = TreeNode(int(num))
+        if nxt == '(':
+            node.left = build(iteri)
+            if next(iteri) == '(':
+                node.right = build(iteri)
+                next(iteri)  # skip tail ')', need below extra )
+        return node
+    return build(iter(s + ')')) if s else None
+
 # LC297. Serialize and Deserialize Binary Tree
 class Codec:
     def serialize(self, root):
@@ -58,7 +72,7 @@ def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
         return root
     return rec(0, len(inorder)-1)
 
-# LC114. Flatten Binary Tree to Linked List
+# LC114. Flatten Binary Tree to Linked List - pre-order
 def flatten(self, root: Optional[TreeNode]) -> None:  # O(n), O(1)
     node = root
     while node:
@@ -105,20 +119,6 @@ def isSubPath(self, head: ListNode, root: TreeNode) -> bool:
     if not root: return False
     return dfs(head, root) or self.isSubPath(head, root.left) or self.isSubPath(head, root.right)
 
-# LC536. Construct Binary Tree from String
-def str2tree(self, s: str) -> Optional[TreeNode]:  # O(n)
-    def build(iteri) -> TreeNode:  # works for pattern "num(a)(b))"
-        num = ''
-        while (nxt := next(iteri)) not in '()': num += nxt
-        node = TreeNode(int(num))
-        if nxt == '(':
-            node.left = build(iteri)
-            if next(iteri) == '(':
-                node.right = build(iteri)
-                next(iteri)  # skip tail ')', need below extra )
-        return node
-    return build(iter(s + ')')) if s else None
-
 # LC1485. Clone Binary Tree With Random Pointer
 def copyRandomBinaryTree(self, root: 'Node') -> 'NodeCopy':
     nodeArr = {}
@@ -132,7 +132,6 @@ def copyRandomBinaryTree(self, root: 'Node') -> 'NodeCopy':
         nRoot.random = dfs(root.random)
         return nRoot
     return dfs(root)
-
 
 # LC663. Equal Tree Partition
 def checkEqualTree(self, root: TreeNode) -> bool:

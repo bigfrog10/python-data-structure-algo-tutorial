@@ -1,34 +1,4 @@
 
-# LC16. 3Sum Closest
-def threeSumClosest(self, nums: List[int], target: int) -> int:  # O(n^2)
-    diff = float('inf')
-    nums.sort()  # O(nlogn), required by 2 pointers
-    for i in range(len(nums)):  # O(n)
-        lo, hi = i + 1, len(nums) - 1
-        while lo < hi:  # O(n)
-            sum1 = nums[i] + nums[lo] + nums[hi]
-            if abs(target - sum1) < abs(diff):
-                diff = target - sum1
-            if sum1 < target: lo += 1
-            else: hi -= 1
-        if diff == 0: break
-    return target - diff
-# https://leetcode.com/problems/3sum-closest/discuss/778177/Python3-%3A-Runtime%3A-52-ms-faster-than-99.77
-
-# LC1011. Capacity To Ship Packages Within D Days
-def shipWithinDays(self, weights: List[int], D: int) -> int:  # O(nlog(sum - max))
-    left, right = max(weights), sum(weights)
-    while left < right:  # O(log(right - left)
-        midw, days, currw = (left + right) // 2, 1, 0
-        for w in weights:  # O(n)
-            if currw + w > midw:
-                days += 1
-                currw = 0
-            currw += w
-        if days > D: left = midw + 1
-        else: right = midw
-    return left
-
 # LC724. Find Pivot Index
 def pivotIndex(self, nums: List[int]) -> int:
     S, leftsum = sum(nums), 0
@@ -100,8 +70,6 @@ def findTargetSumWays(self, nums: List[int], target: int) -> int:
         count = step
     return count[target]
 
-
-
 # LC698. Partition to K Equal Sum Subsets
 def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
     nums, ASum = [n for n in nums if n != 0], sum(nums) # O(2^n)
@@ -121,15 +89,6 @@ def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
             if buckets[j] == 0: break
         return False
     return dfs(0)
-
-# LC1. Two Sum, top100
-def twoSum(self, nums, target):
-    cache = {}
-    for i, num in enumerate(nums):
-        diff = target - num
-        if diff in cache: return [cache[diff], i]
-        else: cache[num] = i
-    return None
 
 # LC713. Subarray Product Less Than K
 def numSubarrayProductLessThanK(self, nums: List[int], k: int) -> int:
@@ -168,114 +127,6 @@ def sumOddLengthSubarrays(self, A):  # O(n)
     for i, a in enumerate(A):
         res += ((i + 1) * (n - i) + 1) // 2 * a  # +1 for ceiling
     return res
-
-# LC167. Two Sum II - Input array is sorted
-def twoSum(self, numbers: List[int], target: int) -> List[int]:
-    # There is no O(logn) solution, so we shoot for O(n)
-    # The purpose is to use O(1) space, so take out the hashmap.
-    if not numbers or len(numbers) < 2: return None
-    lnth = len(numbers)
-    i, j = 0, lnth - 1
-    while i < j:
-        a, b = numbers[i], numbers[j]
-        if a + b < target: i += 1
-        elif a + b == target: return [i+1, j+1]
-        else: j -= 1
-    return None
-
-# LC15. 3Sum top100
-def threeSum(self, nums):  # shorter and quicker 90%
-    n = len(nums)
-    nums.sort()
-    res = []
-    for i in range(n-2):
-        if nums[i] > 0: break  # then all 3 are > 0 and sum > 0, so can't be 0
-        if i > 0 and nums[i] == nums[i-1]: continue
-        l, r = i+1, n-1
-        while l < r:
-            s = nums[i] + nums[l] + nums[r]
-            if s < 0: l +=1
-            elif s > 0: r -= 1
-            else:
-                res.append((nums[i], nums[l], nums[r]))
-                while l < r and nums[l] == nums[l+1]: l += 1 # prevent dups
-                while l < r and nums[r] == nums[r-1]: r -= 1
-                l += 1
-                r -= 1
-    return res
-def threeSum(self, nums: List[int]) -> List[List[int]]:
-    def twoSum(i: int, res: List[List[int]]):
-        seen = set()
-        j = i + 1
-        while j < len(nums):
-            complement = -nums[i] - nums[j]
-            if complement in seen:
-                res.append([nums[i], nums[j], complement])
-                while j + 1 < len(nums) and nums[j] == nums[j + 1]: j += 1
-            seen.add(nums[j])
-            j += 1
-    res = []
-    nums.sort()
-    for i in range(len(nums)):
-        if nums[i] > 0: break
-        if i == 0 or nums[i - 1] != nums[i]: twoSum(i, res)
-    return res
-
-# LC259. 3Sum Smaller
-def threeSumSmaller(self, nums: List[int], target: int) -> int:  # O(n^2)
-    if not nums or len(nums) < 3: return 0
-    lnth = len(nums)
-    def sum2smaller(nums, start, target):
-        counts = 0
-        lo, hi = start, lnth-1
-        while lo < hi:
-            if nums[lo] + nums[hi] < target:
-                counts += hi - lo  # ordered array
-                lo += 1
-            else: hi -= 1
-        return counts
-    nums.sort()
-    counts = 0
-    for i in range(len(nums)-2):
-        counts += sum2smaller(nums, i+1, target - nums[i])
-    return counts
-
-# LC18. 4Sum
-def fourSum(self, nums: List[int], target: int) -> List[List[int]]:  # O(n^(k-1))
-    def kSum(nums: List[int], target: int, k: int) -> List[List[int]]:
-        res = []
-        if not nums: return res
-        average_value = target // k
-        if average_value < nums[0] or nums[-1] < average_value: return res
-        if k == 2: return twoSum(nums, target)
-        for i in range(len(nums)):
-            if i == 0 or nums[i - 1] != nums[i]:  # to avoid dupes
-                for subset in kSum(nums[i + 1:], target - nums[i], k - 1):
-                    res.append([nums[i]] + subset)
-        return res
-    def twoSum(nums: List[int], target: int) -> List[List[int]]:
-        res = []  # solution for sorted array
-        lo, hi = 0, len(nums) - 1
-        while (lo < hi):
-            curr_sum = nums[lo] + nums[hi]
-            if curr_sum < target or (lo > 0 and nums[lo] == nums[lo - 1]): lo += 1
-            elif curr_sum > target or (hi < len(nums) - 1 and nums[hi] == nums[hi + 1]):
-                hi -= 1
-            else:
-                res.append([nums[lo], nums[hi]])
-                lo += 1
-                hi -= 1
-        return res
-    nums.sort()
-    return kSum(nums, target, 4)
-
-# LC454. 4Sum II
-def fourSumCount(self, A: List[int], B: List[int], C: List[int], D: List[int]) -> int:
-    counts = collections.Counter()  # O(n^2)
-    for i, j in itertools.product(A, B): counts[i+j] += 1
-    ret = 0
-    for i, j in itertools.product(C, D): ret += counts[-i-j]
-    return ret
 
 # LC1010. Pairs of Songs With Total Durations Divisible by 60
 def numPairsDivisibleBy60(self, time: List[int]) -> int:

@@ -1,27 +1,4 @@
 
-# LC325. Maximum Size Subarray Sum Equals k
-def maxSubArrayLen(self, nums: List[int], k: int) -> int:  # O(n) time and space
-    maxl, cumu, cache = 0, 0, dict()  # cumu -> index
-    for i, v in enumerate(nums):
-        cumu += v
-        if cumu == k: maxl = max(maxl, i+1)
-        elif cumu - k in cache:  # middle subarray
-            maxl = max(maxl, i - cache[cumu - k])
-        if cumu not in cache: cache[cumu] = i  # maintain earliest index
-    return maxl
-
-# LC523. Continuous Subarray Sum
-def checkSubarraySum(self, nums: List[int], k: int) -> bool:
-    if not nums: return False
-    summ, sd = 0, {0: -1}  # [2,4,3] 6, we need -1 for 2-element requirement
-    for i, n in enumerate(nums):
-        summ += n
-        if k != 0: summ = summ % k
-        if summ in sd:  # sd is sum dict, map sum -> index
-            if i - sd[summ] > 1: return True  # [0] 0 if we have =, it returns true but answer is false.
-        else: sd[summ] = i
-    return False
-
 # LC560. Subarray Sum Equals K
 from typing import List
 def subarraySum(self, nums: List[int], k: int) -> int:
@@ -33,6 +10,29 @@ def subarraySum(self, nums: List[int], k: int) -> int:
         if cusum - k in counts: count += counts[cusum - k]
         counts[cusum] += 1
     return count
+
+# LC325. Maximum Size Subarray Sum Equals k
+def maxSubArrayLen(self, nums: List[int], k: int) -> int:  # O(n) time and space
+    maxl, cumu, cache = 0, 0, dict()  # cumu -> index
+    for i, v in enumerate(nums):
+        cumu += v
+        if cumu == k: maxl = max(maxl, i+1)
+        elif cumu - k in cache:  # middle subarray
+            maxl = max(maxl, i - cache[cumu - k])
+        if cumu not in cache: cache[cumu] = i  # maintain earliest index
+    return maxl
+
+# LC523. Continuous Subarray Sum - sum to multiple of k
+def checkSubarraySum(self, nums: List[int], k: int) -> bool:
+    if not nums: return False
+    summ, sd = 0, {0: -1}  # [2,4,3] 6, we need -1 for 2-element requirement
+    for i, n in enumerate(nums):
+        summ += n
+        if k != 0: summ = summ % k
+        if summ in sd:  # sd is sum dict, map sum -> index
+            if i - sd[summ] > 1: return True  # [0] 0 if we have =, it returns true but answer is false.
+        else: sd[summ] = i
+    return False
 
 # LC548. Split Array with Equal Sum - split 4 sums
 def splitArray(self, nums): # O(n^2)

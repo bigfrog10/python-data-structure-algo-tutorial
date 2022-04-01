@@ -33,7 +33,7 @@ def findCheapestPrice(self, n, flights, src, dst, K):  # O(E) runtime, O(E + V) 
 
 # LC2065. Maximum Path Quality of a Graph
 def maximalPathQuality(self, values: List[int], edges: List[List[int]], maxTime: int) -> int:
-    G = collections.defaultdict(dict)
+    G = collections.defaultdict(dict)  ## O(EV)
     for i, j, t in edges: G[i][j] = G[j][i] = t
     @cache
     def dfs(i, seen, time):
@@ -66,7 +66,6 @@ def maximalPathQuality(self, values: List[int], edges: List[List[int]], maxTime:
         return res
     return dfs(0, values[0], 1, 0)
 
-
 # LC743. Network Delay Time
 def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
     graph = collections.defaultdict(list) # dijkstra's with heap
@@ -79,10 +78,6 @@ def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
         for nei, d2 in graph[node]:
             if nei not in dist: heapq.heappush(pq, (d+d2, nei))
     return max(dist.values()) if len(dist) == n else -1
-
-
-
-
 
 # LC1135. Connecting Cities With Minimum Cost
 def minimumCost(self, N: int, connections: List[List[int]]) -> int:

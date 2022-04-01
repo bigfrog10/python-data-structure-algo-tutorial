@@ -1,5 +1,5 @@
 
-# LC674. Longest Continuous Increasing Subsequence
+# LC674. Longest Continuous Increasing Subsequence - this is really continuous subarray, not sequences
 def findLengthOfLCIS(self, nums: List[int]) -> int:
     ans = anchor = 0
     for i in range(len(nums)):

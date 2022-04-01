@@ -1,6 +1,6 @@
 
 
-# LC987. Vertical Order Traversal of a Binary Tree
+# LC987. Vertical Order Traversal of a Binary Tree - sort in same position
 def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:  # O(nlog(n/w)
     res = defaultdict(list) # column number to (row number, val)
     min_col = max_col = 0  # track column range
@@ -85,7 +85,7 @@ def findClosestLeaf(self, root: TreeNode, k: int) -> int:  # O(n)
                     queue.append(nei)
 
 # LC863. All Nodes Distance K in Binary Tree
-def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:  # O(n)
+def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:  # O(n) time
     adj = collections.defaultdict(list)  # create graph, O(V) space
     def dfs(node):
         if node.left:

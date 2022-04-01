@@ -71,13 +71,13 @@ def kMirror(self, k: int, n: int) -> int:
 
 # LC405. Convert a Number to Hexadecimal
 def toHex(self, num: int) -> str:
-    if num == 0:return '0'
     mappings = "0123456789abcdef"
     result = []
-    for i in range(8):
+    for _ in range(8):  # 32 bit integer
         num, r = divmod(num, 16)
         result.append(mappings[r])
-    return (''.join(result[::-1])).lstrip('0')
+        if num == 0: break
+    return ''.join(result[::-1])
 
 # LC400. Nth Digit
 def findNthDigit(self, n: int) -> int:
@@ -224,6 +224,17 @@ def numSquares(self, n):
                 else: next_queue.add(remainder - square_num)
         queue = next_queue
     return level
+
+# LC402. Remove K Digits
+def removeKdigits(self, num: str, k: int) -> str:
+    numStack = []
+    for digit in num:  # monotone increasing
+        while k and numStack and numStack[-1] > digit:
+            numStack.pop()
+            k -= 1
+        numStack.append(digit)
+    finalStack = numStack[:-k] if k else numStack
+    return "".join(finalStack).lstrip('0') or "0"
 
 # LC299. Bulls and Cows
 def getHint(self, secret: str, guess: str) -> str:
@@ -395,27 +406,14 @@ def consecutiveNumbersSum(self, N: int) -> int:
     return count
 
 # LC166. Fraction to Recurring Decimal
-def fractionToDecimal(self, numerator, denominator):
-    n, remainder = divmod(abs(numerator), abs(denominator))
-    sign = '-' if numerator*denominator < 0 else ''
-    result = [sign + str(n), '.']
-    remainders = {}  # remainder -> index for (
-    while remainder > 0 and remainder not in remainders:
-        remainders[remainder] = len(result)
-        n, remainder = divmod(remainder*10, abs(denominator))
-        result.append(str(n))
-    if remainder in remainders:
-        idx = remainders[remainder]
-        result.insert(idx, '(')
-        result.append(')')
-    return ''.join(result).rstrip(".")
 def fractionToDecimal(self, n, d): # 32ms, beats 100%
-    if n % d == 0: return str(n // d)
+    if n % d == 0: return str(n // d)  # 5/6
     p, q = abs(n), abs(d)
-    r = p % q
-    s, m = '', {} # s is quotient, m records length pre to repeat
+    r = p % q  # 5
+    s, m = '', {}  # s is quotient, m records length pre to repeat
     while r and r not in m:
         m[r] = len(s)
-        r, s = r * 10 % q, s + str(r * 10 // q) # long division
+        r, s = r * 10 % q, s + str(r * 10 // q)  # long division
+    # s = 83, m = 5->0, 2->1, frac = 0.8(3)
     frac = str(p // q) + '.' + (s[:m[r]] + '(' + s[m[r]:] + ')' if r else s)
     return ('' if (n > 0) == (d > 0) else '-') + frac

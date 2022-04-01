@@ -20,12 +20,13 @@ def addOperators(self, num: str, target: int) -> List[str]:
 
 # LC224. Basic Calculator - with +-()
 def calculate(self, s):
-    res, num, sign, stack = 0, 0, 1, []
+    res, stack = 0, []
+    num, sign = 0, 1
     for ss in s:
         if ss.isdigit():
-            num = 10*num + int(ss)
+            num = 10 * num + int(ss)
         elif ss in ["-", "+"]:
-            res += sign*num
+            res += sign * num
             num = 0
             sign = 1 if ss == '+' else -1
         elif ss == "(":
@@ -33,14 +34,14 @@ def calculate(self, s):
             stack.append(sign)
             sign, res = 1, 0
         elif ss == ")":
-            res += sign*num  # expr inside ')'
+            res += sign * num   # expr inside ')'
             res *= stack.pop()  # old sign before '('
             res += stack.pop()  # old res before '('
             num = 0
-    return res + num*sign
+    return res + num * sign
 
 # LC227. Basic Calculator II  # only +-*/, no parenth
-def calculate(self, s: str) -> int:  # O(n) runtime but O(1) space, better than above.
+def calculate(self, s: str) -> int:  # O(n) runtime but O(1) space,
     val = res = 0
     n, i, op = len(s), 0, '+'
     while i < n:
@@ -73,18 +74,6 @@ def calculate(self, s: str) -> int:  # O(n) runtime and space
             else: stack.append(int(stack.pop() / num))  # use int for negative
             num, op = 0, s[i]
     return sum(stack)
-def calculate(self, s: str) -> int:
-    stack, sign, num = [], '+', 0  # stack for () and sign in front
-    for i, c in enumerate(s + '+'):
-        if c.isdigit(): num = num * 10 + int(c)
-        elif c in '+-*/)':
-            if sign == '+': stack.append(num)
-            elif sign == '-': stack.append(-num)
-            elif sign == '*': stack.append(stack.pop() * num)
-            elif sign == '/': stack.append(int(stack.pop() / num))
-            sign, num = c, 0 # this is for +-*/
-    return sum(stack)
-
 
 # LC772. Basic Calculator III - +-*/()
 def calculate(self, s: str) -> int:
@@ -108,8 +97,6 @@ def calculate(self, s: str) -> int:
                 sign = stack.pop()
             else: sign, num = c, 0 # this is for +-*/
     return sum(stack)
-
-
 
 # LC2019. The Score of Students Solving Math Expression
 def scoreOfStudents(self, s: str, answers: List[int]) -> int:  # O(n^3 * ???)

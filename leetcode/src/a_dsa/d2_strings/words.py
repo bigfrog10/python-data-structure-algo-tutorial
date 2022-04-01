@@ -1,14 +1,19 @@
 
 # LC140. Word Break II - return all possible answer
-def wordBreak(self, s, wordDict):  # O(2^len(s) + len(worddict),
-    memo, wordDict = {len(s): ['']}, set(wordDict)
-    def sentences(i):  # returns list of all sentences built from the suffix s[i:]
-        if i not in memo:
-            memo[i] = [s[i:j] + (tail and ' ' + tail)  # ' '+tail if tail else tail
-                       for j in range(i+1, len(s)+1) if s[i:j] in wordDict
-                       for tail in sentences(j)]  # str O(n^2), besides sentences(j)
-        return memo[i]
-    return sentences(0)
+def wordBreak(self, s: str, wordDict):  #  we may have O(2^n) solutions, n=len(s)
+    word_set = set(wordDict)   # this line takes O(?) time
+    @cache
+    def dfs(s):
+        if s == '': return []
+        output = []
+        if s in word_set: output.append(s) # one of solutions
+        for i in range(len(s) - 1):
+            if s[: i + 1] in word_set:  # substring takes n
+                tmp = dfs(s[i + 1: ])  # tmp is like ['a b', 'ab']
+                for x in tmp: output.append(s[: i + 1] + ' ' + x)
+        return output
+    res = dfs(s)
+    return res
 def wordBreak(s: str, wordDict: List[str]) -> List[str]:
     word_set = set(wordDict)  # O(2^len(s) + len(worddict),
     def dfs(s):
@@ -208,7 +213,7 @@ def exist(self, board: List[List[str]], word: str) -> bool:  # O(h*w*3^wl)
             if dfs(i, j, 0): return True
     return False
 
-# LC212. Word Search II, top100
+# LC212. Word Search II - return all words
 def findWords(self, board: List[List[str]], words: List[str]) -> List[str]: # This is fast
 trie, WORD_KEY = {}, '$'  # O(M4*3^(L-1)), M=cells, L=max(len(word) for words)
     for word in words:  # space O(number of letters in trie)
@@ -386,7 +391,7 @@ def areSentencesSimilar(self, sentence1: List[str], sentence2: List[str], simila
 def reverseWords(self, s: str) -> str:
     return " ".join(reversed(s.split()))
 
-# LC809. Expressive Words
+# LC809. Expressive Words - stretchy word
 def expressiveWords(self, s: str, words: List[str]) -> int:  # O(n * max(all words and s))
     def check(S, W):  # 2 pointers
         i, j, n, m = 0, 0, len(S), len(W)

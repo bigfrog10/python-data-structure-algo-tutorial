@@ -8,7 +8,7 @@ def findKthPositive(self, arr, k):  # O(logn)
         mid = (beg + end) // 2  # arr[mid] - mid - 1 is number of missings at mid.
         if arr[mid] - mid - 1 < k: beg = mid + 1
         else: end = mid
-    return end + k
+    return end + k  # # end-1 is the largest index < k: arr[end-1] + k - (arr[end-1] - (end-1) - 1) = k + end
 # l is the first index that gives at least k missing numbers. It may have more missing numbers than we need, so we are actually interested in index l - 1.
 # At index l - 1, we have A[l-1] - (l-1) - 1 missing numbers
 # so after index l - 1 , we need to find k - (A[l-1] - (l-1) - 1) missing numbers, i.e. k - A[l-1] + l missing numbers
@@ -48,18 +48,28 @@ def findClosestElements(self, A, k, x): # O(logn + k)
         else: right = mid  # smaller element always wins when there is a tie
     return A[left:left + k]  # left = right
 
-# LC1891. Cutting Ribbons
-def maxLength(self, ribbons: List[int], k: int) -> int:  # O(log(min(totl // k, maxl)))
-    totl, maxl = sum(ribbons), max(ribbons)
-    if k > totl: return 0
-    lo, hi = max(1, maxl // k), min(totl // k, maxl)
-    while lo < hi:  # binary search on desired length
-        mid = (lo + hi + 1) // 2  # pattern for max
-        if sum(x // mid for x in ribbons) >= k: lo = mid
-        else: hi = mid - 1
-    return lo
-
-
+# LC34. Find First and Last Position of Element in Sorted Array
+def searchRange(self, nums: List[int], target: int) -> List[int]:
+    if not nums or target < nums[0] or target > nums[-1]: return [-1, -1]
+    left, right = 0, len(nums) - 1
+    while left < right:  # search left
+        mid = left + (right - left) // 2
+        if nums[mid] < target: left = mid+1
+        else: right = mid  # we keep right side >= target
+    if nums[left] != target: return [-1, -1]
+    left1, right = left, len(nums) - 1  # search right
+    while left1 < right:
+        mid = left1 + (right - left1 + 1) // 2
+        if nums[mid] > target: right = mid - 1
+        else: left1 = mid
+    return [left, right]
+def searchRange1(self, nums: List[int], target: int) -> List[int]:
+    if not nums: return [-1, -1]
+    left = bisect.bisect_left(nums, target)  # the index of leftmost target
+    left = left if left < len(nums) and nums[left] == target else -1
+    if left == -1: return [-1, -1]
+    right = bisect.bisect(nums, target)  # the index right after target
+    return [left, right - 1]
 
 # LC410. Split Array Largest Sum
 def splitArray(self, nums: List[int], m: int) -> int:
@@ -168,29 +178,6 @@ def search(self, reader: 'ArrayReader', target: int) -> int:
         elif reader.get(mid) > target: hi = mid - 1
         else: return mid
     return -1
-
-# LC34. Find First and Last Position of Element in Sorted Array
-def searchRange(self, nums: List[int], target: int) -> List[int]:
-    if not nums or target < nums[0] or target > nums[-1]: return [-1, -1]
-    left, right = 0, len(nums) - 1
-    while left < right:  # search left
-        mid = left + (right - left) // 2
-        if nums[mid] < target: left = mid+1
-        else: right = mid  # we keep right side >= target
-    if nums[left] != target: return [-1, -1]
-    left1, right = left, len(nums) - 1  # search right
-    while left1 < right:
-        mid = left1 + (right - left1 + 1) // 2
-        if nums[mid] > target: right = mid - 1
-        else: left1 = mid
-    return [left, right]
-def searchRange1(self, nums: List[int], target: int) -> List[int]:
-    if not nums: return [-1, -1]
-    left = bisect.bisect_left(nums, target)  # the index of leftmost target
-    left = left if left < len(nums) and nums[left] == target else -1
-    if left == -1: return [-1, -1]
-    right = bisect.bisect(nums, target)  # the index right after target
-    return [left, right - 1]
 
 # LC852. Peak Index in a Mountain Array
 def peakIndexInMountainArray(self, arr: List[int]) -> int:

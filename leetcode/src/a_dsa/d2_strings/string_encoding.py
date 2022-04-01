@@ -1,4 +1,31 @@
 
+# LC2060. Check if an Original String Exists Given Two Encoded Strings
+def possiblyEquals(self, s1: str, s2: str) -> bool:
+    def gg(s):  # Return possible length
+        ans = {int(s)}
+        for i in range(1, len(s)): # split digits among s
+            ans |= {x+y for x in gg(s[:i]) for y in gg(s[i:])}
+        return ans
+    @cache  # make it O(n^4) like
+    def fn(i, j, diff):  # DFS  # Return True if s1[i:] matches s2[j:] with given differences
+        if i == len(s1) and j == len(s2): return diff == 0
+        if i < len(s1) and s1[i].isdigit():
+            ii = i
+            while ii < len(s1) and s1[ii].isdigit(): ii += 1  # get all digits
+            return any(fn(ii, j, diff-x) for x in gg(s1[i:ii]))
+        elif j < len(s2) and s2[j].isdigit():
+            jj = j
+            while jj < len(s2) and s2[jj].isdigit(): jj += 1  # get all digits
+            return any(fn(i, jj, diff+x) for x in gg(s2[j:jj]))
+        elif diff == 0:  # chars, not digits
+            if i < len(s1) and j < len(s2) and s1[i] == s2[j]: return fn(i+1, j+1, 0)
+        elif diff > 0:
+            if i < len(s1): return fn(i+1, j, diff-1)
+        else:
+            if j < len(s2): return fn(i, j+1, diff+1)
+        return False
+    return fn(0, 0, 0)  # diff < 0, means s1 has wild chars, > 0 means s2 has wild chars
+
 # LC91. Decode Ways, top100
 def numDecodings(self, s: str) -> int:  # Best, fast and short
     @lru_cache(maxsize=None)
@@ -55,3 +82,46 @@ def decodeString(self, s: str) -> str:
         elif char.isdigit(): k = k * 10 + int(char)
         else: curr += char
     return curr
+
+# LC271. Encode and Decode Strings
+class Codec:
+    def encode(self, strs: [str]) -> str:  # chunk transfer encoding
+        return ''.join('%d:' % len(s) + s for s in strs)
+    def decode(self, s: str) -> [str]:
+        strs, i = [], 0
+        while i < len(s):
+            j = s.find(':', i)
+            i = j + 1 + int(s[i:j])
+            strs.append(s[j+1:i])
+        return strs
+    # escaping
+    def encode(self, strs):
+        return ''.join(s.replace('|', '||') + ' | ' for s in strs)
+    def decode(self, s):
+        return [t.replace('||', '|') for t in s.split(' | ')[:-1]]  # -1 ignores last empty
+
+# LC443. String Compression
+def compress(self, chars: List[str]) -> int:  # chars gets shrinked
+    st = i = 0
+    while i < len(chars):
+        while i < len(chars) and chars[i] == chars[st]: i += 1
+        if i - st == 1:  st = i # single diff char, leave it alone
+        else:
+            count = str(i - st)
+            chars[st + 1 : i] = count
+            i = st = st + len(count) + 1  # skip spaces used by count
+    return len(chars)
+def compress(self, chars: List[str]) -> int:
+    st = i = j = 0
+    while i < len(chars):
+        while i < len(chars) and chars[i] == chars[st]: i += 1
+        chars[j] = chars[st]
+        j += 1  # skip char
+        if i - st == 1:
+            st = i # single diff char, leave it alone
+        else:
+            count = str(i - st)
+            chars[j:j+len(count)] = count
+            j += len(count)
+            st = i
+    return j  # chars size is not changed, only end index returned.

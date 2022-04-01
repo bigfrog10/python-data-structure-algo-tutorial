@@ -40,7 +40,7 @@ def addBinary(self, a: str, b: str) -> str:
     return f'{x:0b}'
 
 # LC29. Divide Two Integers
-def divide(self, A, B):
+def divide(self, A, B):  # logn
     if A == -2147483648 and B == -1: return 2147483647  # overflow  # -2^31
     a, b, res = abs(A), abs(B), 0
     for x in range(32)[::-1]:

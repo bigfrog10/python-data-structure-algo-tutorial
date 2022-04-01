@@ -1,3 +1,4 @@
+
 # LC303. Range Sum Query - Immutable
 from itertools import accumulate
 class NumArray:

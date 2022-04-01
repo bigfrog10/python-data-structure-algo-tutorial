@@ -34,29 +34,40 @@ def isBipartite(self, graph: List[List[int]]) -> bool:  # O(V + E)
 
 # LC2076. Process Restricted Friend Requests
 def friendRequests(self, n: int, restrictions: List[List[int]], requests: List[List[int]]) -> List[bool]:
-    parents = [i for i in range(n)]  # without ranker
+    parents, ranks = [i for i in range(n)], [1] * n  # much faster
     forbidden = collections.defaultdict(set)
-    for i, j in restrictions:  # O(restrictions)
+    for i, j in restrictions:
         forbidden[i].add(j)
         forbidden[j].add(i)
-    def find(i):  # O(n)
-        if i != parents[i]: parents[i] = find(parents[i])  # compression
+
+    def find(i):
+        if i != parents[i]: parents[i] = find(parents[i])
         return parents[i]
-    def union(p1, p2):  # no find, so O(forbidden size)
-        parents[p2] = p1
+
+    def union(p1, p2):
+        if ranks[p1] >= ranks[p2]:
+            parents[p2] = p1
+            ranks[p1] += ranks[p2]
+        else:
+            parents[p1] = p2
+            ranks[p2] += ranks[p1]
+            p1, p2 = p2, p1
+
         forbidden[p1] |= forbidden[p2]
         for i in forbidden[p2]:
             forbidden[i].remove(p2)
             forbidden[i].add(p1)
         del forbidden[p2]
+
     ans = []
-    for i, j in requests:  # O(n + mlogn), m num of unions
+    for i, j in requests:  # m requests on n object, takes O(N + Mlog*N), log* is almost constant
         p1, p2 = find(i), find(j)
         if p1 == p2: ans.append(True)
         elif p2 in forbidden[p1]: ans.append(False)
         else:
             union(p1, p2)
             ans.append(True)
+
     return ans
 
 # LC399. Evaluate Division
@@ -219,19 +230,6 @@ def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
     dfs(0, [0])
     return res
 
-# LC1559. Detect Cycles in 2D Grid
-def containsCycle(self, grid: List[List[str]]) -> bool:  # O(mn)
-    m, n = len(grid), len(grid[0])
-    visited = set()
-    def dfs(node, parent):
-        if node in visited: return True
-        visited.add(node)
-        nx,ny = node
-        for cx, cy in [nx+1,ny], [nx-1, ny],[nx,ny+1], [nx,ny-1]:
-            if m > cx >= 0 <= cy < n and grid[cx][cy] == grid[nx][ny] and (cx,cy) != parent:
-                if dfs((cx, cy), node): return True
-        return False
-    return any((i,j) not in visited and dfs((i, j), (i, j)) for i, j in product(range(m), range(n)))
 
 # Cycle Detection
 # LC684. Redundant Connection - undirected graph

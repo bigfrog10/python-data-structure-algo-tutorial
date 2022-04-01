@@ -2,7 +2,23 @@
 # LC1570. Dot Product of Two Sparse Vectors
 class SparseVector:
     def __init__(self, nums: List[int]):
-        self.sparse = {}
+        self.pairs = []
+        for index, value in enumerate(nums):
+            if value != 0: self.pairs.append([index, value])
+    def dotProduct(self, vec: 'SparseVector') -> int:
+        result = 0
+        p, q = 0, 0
+        while p < len(self.pairs) and q < len(vec.pairs):
+            if self.pairs[p][0] == vec.pairs[q][0]:
+                result += self.pairs[p][1] * vec.pairs[q][1]
+                p += 1
+                q += 1
+            elif self.pairs[p][0] < vec.pairs[q][0]: p += 1
+            else: q += 1
+        return result
+class SparseVector:
+    def __init__(self, nums: List[int]):
+        self.sparse = {}  # slow down with hash
         for i, n in enumerate(nums):
             if n != 0: self.sparse[i] = n
     def dotProduct(self, vec: 'SparseVector') -> int:
@@ -57,6 +73,21 @@ class RandomizedCollection: # 93%, fast
         return True
     def getRandom(self) -> int:
         return random.choice(self.values)
+
+# LC346. Moving Average from Data Stream
+class MovingAverage:
+    def __init__(self, size: int):
+        self.size = size
+        self.queue = deque()
+        self.mv = 0
+    def next(self, val: int) -> float:
+        size, queue = self.size, self.queue
+        queue.append(val)
+        if len(queue) > size:
+            v = queue.popleft()
+            self.mv = self.mv + (val - v) / size
+        else: self.mv = sum(queue) / len(queue)
+        return self.mv
 
 # LC295. Find Median from Data Stream, top100
 class MedianFinder:
@@ -192,21 +223,17 @@ class StreamChecker:
 # LC2034. Stock Price Fluctuation
 class StockPrice:  # all O(logn)
     def __init__(self):
-        self.time2price = SortedDict() # sortedcontainers
+        self.time2price = SortedDict()  # sortedcontainers
         self.prices = SortedList()
     def update(self, timestamp: int, price: int) -> None:
-        if timestamp in self.time2price.keys(): #remove old price and add new price
+        if timestamp in self.time2price.keys():  #remove old price and add new price
             self.prices.remove(self.time2price[timestamp])
-            self.time2price[timestamp] = price
-            self.prices.add(price)
-        else: #add new price
-            self.time2price[timestamp] = price
-            self.prices.add(price)
+        self.time2price[timestamp] = price
+        self.prices.add(price)
     def current(self) -> int:  # O(logn) with any index, latest price
         return self.time2price[self.time2price.peekitem(-1)[0]]
     def maximum(self) -> int: return self.prices[-1]
     def minimum(self) -> int: return self.prices[0]
-
 
 # LC981. Time Based Key-Value Store
 class TimeMap:
@@ -246,6 +273,18 @@ class NestedIterator:
             # the stack in reverse order.
             self.stack.extend(reversed(self.stack.pop().getList()))
 
+# LC1865. Finding Pairs With a Certain Sum
+class FindSumPairs:
+    def __init__(self, nums1: List[int], nums2: List[int]):
+        self.freq1 = Counter(nums1)
+        self.freq2 = Counter(nums2)
+        self.nums2 = nums2  # for index purpose
+    def add(self, index: int, val: int) -> None:
+        self.freq2[self.nums2[index]] -= 1  # Remove old one
+        self.nums2[index] += val
+        self.freq2[self.nums2[index]] += 1  # Count new one
+    def count(self, tot: int) -> int:
+        return sum(val * self.freq2[tot - key] for key, val in self.freq1.items())
 
 # LC244. Shortest Word Distance II
 class WordDistance:
@@ -300,6 +339,7 @@ class SnapshotArray(object):  # This copies only relevant changes
         else: return 0
 
 # LC706. Design HashMap
+
 
 # LC284. Peeking Iterator
 class PeekingIterator:

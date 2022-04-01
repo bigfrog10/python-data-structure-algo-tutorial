@@ -1,5 +1,5 @@
 
-# LC1249. Minimum Remove to Make Valid Parentheses - return string result
+# LC1249. Minimum Remove to Make Valid Parentheses - with letters, return one string result
 def minRemoveToMakeValid(self, s: str) -> str:  # O(n) runtime and space
     stack, remove = [], []  # find all indices to remove
     for i, c in enumerate(s):
@@ -26,7 +26,7 @@ def minAddToMakeValid(self, S: str) -> int:  # O(n)
             bal += 1  # diff needs +1 too
     return left + bal  # "(((" -> ret=0, bal=3
 
-# LC301. Remove Invalid Parentheses - return all results
+# LC301. Remove Invalid Parentheses - with letters, return all results
 def removeInvalidParentheses(self, s): # O(2^n) return all possible results
     def isvalid(s):  # O(n)
         ctr = 0
@@ -59,7 +59,7 @@ def generateParenthesis(self, n: int) -> List[str]:
         ret = {s[:i] + '()' + s[i:] for s in ret for i in range(len(s))}
     return ret
 
-# LC1541. Minimum Insertions to Balance a Parentheses String
+# LC1541. Minimum Insertions to Balance a Parentheses String - unbalanced ( to ))
 def minInsertions(self, s: str) -> int:
     open_missing = close_missing = close_needed = 0  # miss (, miss ), and miss ))
     for c in s:
@@ -86,6 +86,14 @@ def isValid(self, s: str) -> bool:
             if PAIRS[stack[-1]] == c: stack.pop() # matched
             else: return False # no suppose to have other chars
     return len(stack) == 0
+
+# LC1963. Minimum Number of Swaps to Make the String Balanced
+def minSwaps(self, s: str) -> int:
+    balance = max_bal = 0
+    for c in s:
+        balance += -1 if c == '[' else 1
+        max_bal = max(max_bal, balance)
+    return (max_bal + 1) // 2  # ceiling
 
 # LC856. Score of Parentheses
 def scoreOfParentheses(self, S: str) -> int:

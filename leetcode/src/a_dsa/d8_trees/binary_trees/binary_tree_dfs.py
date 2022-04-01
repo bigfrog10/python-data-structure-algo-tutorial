@@ -129,17 +129,7 @@ def findLeaves(self, root: TreeNode) -> List[List[int]]:
     dfs(root)
     return out
 
-# LC669. Trim a Binary Search Tree
-def trimBST(self, root: Optional[TreeNode], low: int, high: int) -> Optional[TreeNode]:
-    def trim(node):  # O(n) time and space
-        if not node: return None
-        elif node.val > high: return trim(node.left)
-        elif node.val < low: return trim(node.right)
-        else:
-            node.left = trim(node.left)
-            node.right = trim(node.right)
-            return node
-    return trim(root)
+
 
 # LC1740. Find Distance in a Binary Tree
 def findDistance(self, root: TreeNode, p: int, q: int) -> int:

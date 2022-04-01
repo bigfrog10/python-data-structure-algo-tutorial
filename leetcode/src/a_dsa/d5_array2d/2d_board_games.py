@@ -1,6 +1,6 @@
 from collections import deque
 
-# LC1263. Minimum Moves to Move a Box to Their Target Location
+# LC1263. Minimum Moves to Move a Box to Their Target Location - move box
 def minPushBox(self, grid: List[List[str]]) -> int:  # faster BFS, O((mn)^2)
     for i in range(len(grid)):
         for j in range(len(grid[0])):
@@ -40,52 +40,6 @@ def minKnightMoves(self, x: int, y: int) -> int:  # O(x*y)
         elif x + y == 2: return 2  # (1, 1), (0, 2), (2, 0)
         return min(dp(abs(x-1), abs(y-2)), dp(abs(x-2), abs(y-1))) + 1
     return dp(abs(x), abs(y))  # first quardrant due to symmetry
-
-# LC348. Design Tic-Tac-Toe
-class TicTacToe:
-    def __init__(self, n: int):
-        self.row, self.col = [0] * n, [0] * n
-        self.diag, self.anti_diag = 0, 0
-        self.n = n
-    def move(self, row: int, col: int, player: int) -> int:
-        offset = player * 2 - 3  # either 1 or -1 for player 1 or 2
-        self.row[row] += offset  # mark this player position with -1 or 1
-        self.col[col] += offset
-        if row == col: self.diag += offset
-        if row + col == self.n - 1: self.anti_diag += offset
-        if offset * self.n in [self.row[row], self.col[col], self.diag, self.anti_diag]:
-            return player
-        return 0
-
-# LC794. Valid Tic-Tac-Toe State
-def validTicTacToe(self, board):
-    FIRST, SECOND = 'XO'
-    x_count = sum(row.count(FIRST) for row in board)
-    o_count = sum(row.count(SECOND) for row in board)
-    def win(board, player):
-        for i in range(3):
-            if all(board[i][j] == player for j in range(3)): return True
-            if all(board[j][i] == player for j in range(3)): return True
-        return (player == board[1][1] == board[0][0] == board[2][2] or
-                player == board[1][1] == board[0][2] == board[2][0])
-    if o_count not in {x_count-1, x_count}: return False
-    if win(board, FIRST) and x_count-1 != o_count: return False
-    if win(board, SECOND) and x_count != o_count: return False
-    return True
-
-# LC1275. Find Winner on a Tic Tac Toe Game
-def tictactoe(self, moves: List[List[int]]) -> str:
-    row, col, diag = [0] * 3, [0] * 3, [0] * 2  # results
-    player = 1
-    for i, j in moves:
-        row[i] += player
-        col[j] += player
-        if i == j: diag[0] += player
-        if i + j == 2: diag[1] += player
-        if row[i] == 3 or col[j] == 3 or 3 in diag: return "A"
-        if row[i] == -3 or col[j] == -3 or -3 in diag: return "B"
-        player = -player
-    return "Draw" if len(moves) == 9 else "Pending"
 
 # LC 2056. Number of Valid Move Combinations On Chessboard
 def countCombinations(self, pieces, positions):
@@ -174,6 +128,20 @@ def cleanRoom(self, robot):  # O(open cells)
     visited = set()
     clean_cell((0, 0), 0)
 
+# LC1559. Detect Cycles in 2D Grid
+def containsCycle(self, grid: List[List[str]]) -> bool:  # O(mn)
+    m, n = len(grid), len(grid[0])
+    visited = set()
+    def dfs(node, parent):
+        if node in visited: return True
+        visited.add(node)
+        nx,ny = node
+        for cx, cy in [nx+1,ny], [nx-1, ny],[nx,ny+1], [nx,ny-1]:
+            if m > cx >= 0 <= cy < n and grid[cx][cy] == grid[nx][ny] and (cx,cy) != parent:
+                if dfs((cx, cy), node): return True
+        return False
+    return any((i,j) not in visited and dfs((i, j), (i, j)) for i, j in product(range(m), range(n)))
+
 # LC419. Battleships in a Board
 def countBattleships(self, board: List[List[str]]) -> int:
     total = 0
@@ -204,6 +172,38 @@ def updateBoard(self, board: List[List[str]], click: List[int]) -> List[List[str
     dfs(*click)
     return board
 
+# 1293. Shortest Path in a Grid with Obstacles Elimination
+def shortestPath(self, grid: List[List[int]], k: int) -> int:  # O(Nk), N is # of cells
+    rows, cols = len(grid), len(grid[0])
+    if k >= rows + cols - 2: return rows + cols - 2
+    state = (0, 0, k)  # (row, col, remaining quota to eliminate obstacles)
+    queue, seen = deque([(0, state)]), set([state])  # (steps, state)
+    while queue:
+        steps, (row, col, k) = queue.popleft()
+        if (row, col) == (rows - 1, cols - 1): return steps
+        for x, y in (row, col + 1), (row + 1, col), (row, col - 1), (row - 1, col):
+            if 0 <= x < rows and 0 <= y < cols:
+                nk = k - grid[x][y]
+                new_state = x, y, nk
+                if nk >= 0 and new_state not in seen:
+                    seen.add(new_state)
+                    queue.append((steps + 1, new_state))
+    return -1
+def shortestPath(self, grid: List[List[int]], k: int) -> int:  # best, A*, O(Nklog(Nk))
+    m, n = len(grid), len(grid[0])
+    state = m-1, n-1, k
+    queue, seen = [(m+n-2, 0, state)], {state}  # manhattan distance
+    while queue:
+        _, steps, (i, j, k) = heapq.heappop(queue)  # _ is for sorting
+        if k >= i + j - 1: return steps + i + j  # free walk with no obstacle
+        for x, y in (i+1, j), (i-1, j), (i, j+1), (i, j-1):
+            if m > x >= 0 <= y < n:
+                state = x, y, k - grid[x][y]
+                if state not in seen and state[2] >= 0:
+                    heapq.heappush(queue, (x+y+steps+1, steps+1, state))
+                    seen.add(state)
+    return -1
+
 # LC51. N-Queens
 def solveNQueens(self, n: int) -> List[List[str]]:
     res, board = [], [] # O(n!)
@@ -227,7 +227,7 @@ def solveNQueens(self, n: int) -> List[List[str]]:
     res1 = [['.' * col + 'Q' + '.'*(n - col - 1) for col in board] for board in res]
     return res1
 
-# LC1102. Path With Maximum Minimum Value
+# LC1102. Path With Maximum Minimum Value - minmax search
 def maximumMinimumPath(self, A: List[List[int]]) -> int:  # Time: O(MN log MN), space O(MN)
     R, C = len(A), len(A[0])  # Dijkstra
     maxHeap = [(-A[0][0], 0, 0)]
@@ -351,75 +351,6 @@ def nearestExit(self, maze: List[List[str]], start: List[int]) -> int:  # O(MN),
                     que.append([u, v])
                     seen.add((u, v))
         level += 1
-    return -1
-
-# LC36. Valid Sudoku
-def isValidSudoku(self, board: List[List[str]]) -> bool:  # one pass, faster, cache encoded positions
-    digits = set('123456789')
-    visited = defaultdict(set)  # 'row' + i, 'col' + j, 'sqr' + i-j as 3 keys to hold visited
-    for i in range(9):
-        row = board[i]
-        for j in range(9):
-            c = row[j]
-            if c == '.': continue
-            if c not in digits: return False
-            showed = visited['row' + str(i)]
-            if c in showed: return False
-            showed.add(c)
-            showed = visited['col' + str(j)]
-            if c in showed: return False
-            showed.add(c)
-            showed = visited['sqr' + str(i // 3) + '-' + str(j // 3)]
-            if c in showed: return False
-            showed.add(c)
-    return True
-
-# LC37. Sudoku Solver
-def solveSudoku(self, board): # fast, since no n so O(1)
-    rows, cols = collections.defaultdict(set), collections.defaultdict(set)
-    triples, empties = collections.defaultdict(set), collections.deque()
-    for r in range(9):
-        for c in range(9):
-            if board[r][c] == ".": empties.append((r, c))
-            else:
-                rows[r].add(board[r][c])
-                cols[c].add(board[r][c])
-                triples[(r // 3, c // 3)].add(board[r][c])
-    def dfs():
-        if not empties: return True
-        r, c = empties[0]
-        t = (r // 3, c // 3)
-        for dig in {"1", "2", "3", "4", "5", "6", "7", "8", "9"}:
-            if dig not in rows[r] and dig not in cols[c] and dig not in triples[t]:
-                board[r][c] = dig
-                rows[r].add(dig)
-                cols[c].add(dig)
-                triples[t].add(dig)
-                empties.popleft()
-                if dfs(): return True
-                else:  # backout
-                    board[r][c] = "."
-                    rows[r].discard(dig)
-                    cols[c].discard(dig)
-                    triples[t].discard(dig)
-                    empties.appendleft((r, c))
-        return False
-    dfs()
-
-# 1293. Shortest Path in a Grid with Obstacles Elimination
-def shortestPath(self, grid: List[List[int]], k: int) -> int:  # best, A*  O(Nklog(Nk))
-    m, n = len(grid), len(grid[0])
-    state = m-1, n-1, k
-    queue, seen = [(m+n-2, 0, state)], {state}  # manhattan distance
-    while queue:
-        _, steps, (i, j, k) = heapq.heappop(queue)
-        if k >= i + j - 1: return steps + i + j  # free walk with no obstacle
-        for x, y in (i+1, j), (i-1, j), (i, j+1), (i, j-1):
-            if m > x >= 0 <= y < n:
-                state = x, y, k - grid[x][y]
-                if state not in seen and state[2] >= 0:
-                    heapq.heappush(queue, (x+y+steps+1, steps+1, state))
-                    seen.add(state)
     return -1
 
 # LC62. Unique Paths - no blocks

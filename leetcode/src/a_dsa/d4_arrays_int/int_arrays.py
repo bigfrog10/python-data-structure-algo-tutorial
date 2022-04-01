@@ -3,6 +3,8 @@ from collections import Counter
 import math
 import functools
 
+# LC164. Maximum Gap
+
 # LC1762. Buildings With an Ocean View - increasing stack
 def findBuildings(self, heights: List[int]) -> List[int]:  # O(n)
     res = [len(heights) - 1]  # last building always has a view
@@ -52,7 +54,7 @@ def findRLEArray(self, encoded1: List[List[int]], encoded2: List[List[int]]) -> 
     while encoded1[-1][-1] != 0:
         prod = encoded1[l][0] * encoded2[r][0]
         low = min(encoded1[l][1], encoded2[r][1])
-        if res and res[-1][0] == prod: res[-1][1] += low # extend freq if same value
+        if res and res[-1][0] == prod: res[-1][1] += low  # extend freq if same value
         else: res.append([prod, low])
         encoded1[l][1] -= low  # minus the finished range
         encoded2[r][1] -= low
@@ -61,6 +63,8 @@ def findRLEArray(self, encoded1: List[List[int]], encoded2: List[List[int]]) -> 
     return res
 
 # LC932. Beautiful Array
+# Given a beautiful array A: A*c, A + c, and delete elements from A are still beautiful.
+# Given two Beautiful array A and B, whose elements are odd and even respectively, then concatenation array A + B
 def beautifulArray(self, n: int) -> List[int]:
     res = [1]
     while len(res) < n:
@@ -183,6 +187,18 @@ def removeDuplicates(self, nums: List[int]) -> int:
             i += 1
             nums[i] = nums[j]
     return i+1
+
+# LC80. Remove Duplicates from Sorted Array II
+def removeDuplicates(self, nums: List[int]) -> int:
+    j, count = 1, 1
+    for i in range(1, len(nums)):
+        if nums[i] == nums[i - 1]: count += 1
+        else: count = 1
+
+        if count <= 2:
+            nums[j] = nums[i]
+            j += 1
+    return j
 
 # LC765. Couples Holding Hands
 def minSwapsCouples(self, row):  # O(n)

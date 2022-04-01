@@ -28,17 +28,4 @@ def read(self, buf, n):
         size += count
     return min(size, n)
 
-# LC346. Moving Average from Data Stream
-class MovingAverage:
-    def __init__(self, size: int):
-        self.size = size
-        self.queue = deque()
-        self.mv = 0
-    def next(self, val: int) -> float:
-        size, queue = self.size, self.queue
-        queue.append(val)
-        if len(queue) > size:
-            v = queue.popleft()
-            self.mv = self.mv + (val - v) / size
-        else: self.mv = sum(queue) / len(queue)
-        return self.mv
+

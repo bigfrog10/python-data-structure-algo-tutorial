@@ -2,6 +2,13 @@ from typing import List
 import math
 
 # LC393. UTF-8 Validation
+# Char. number range  |        UTF-8 octet sequence
+#       (hexadecimal)    |              (binary)
+#    --------------------+---------------------------------------------
+#    0000 0000-0000 007F | 0xxxxxxx
+#    0000 0080-0000 07FF | 110xxxxx 10xxxxxx
+#    0000 0800-0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx
+#    0001 0000-0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
 def validUtf8(self, data: List[int]) -> bool:
     i = 0
     while i < len(data):
@@ -9,9 +16,9 @@ def validUtf8(self, data: List[int]) -> bool:
         while data[i] & mask:  # validate leading bits
             skip += 1
             mask >>= 1
-        if skip == 1 or skip > 4: return False
+        if skip == 1 or skip > 4: return False  # only 0xxx, 110x, 1110, 11110 are valid
         if any(not x & 1 << 7 or x & 1 << 6 for x in data[i+1:i+skip]):
-            return False
+            return False  # 2nd byte has 10xx
         i += max(1, skip)
     return i == len(data)
 

@@ -78,7 +78,7 @@ def permute(nums: List[int]) -> List[List[int]]:  # O(n!) & O(n!)
 
 # LC60. Permutation Sequence
 def getPermutation(self, n: int, k: int) -> str: # O(n^2) due to pop(i)
-    nums = list(map(str, range(1, n+1)))
+    nums = list(map(str, range(1, n+1)))  # '1', '2', ..., 'n'
     fact = math.factorial(len(nums)-1)
     k, ans = k-1, ''  # zero based
     while k:
@@ -104,11 +104,14 @@ def permuteUnique(self, nums: List[int]) -> List[List[int]]:  # O(n!), T(n) = n*
 # LC77. Combinations
 def combine(self, n, k):
     return list(itertools.combinations(range(1, n+1), k))
+
+# 4, 3: [[3],[4]], then  [[2,3],[2,4],[3,4]], and then [[1,2,3],[1,2,4],[1,3,4],[2,3,4]]
 def combine(self, n: int, k: int) -> List[List[int]]:  # O(k * C^k_n)
     combs = [[]]
     for j in range(1, k+1)[::-1]:  # backward is much faster
         combs = [[i] + c for c in combs for i in range(j, c[0] if c else n+1)]
     return combs
+
 # for 4, 3: [[1],[2],[3],[4]],  [[1,2],[1,3],[2,3],[1,4],[2,4],[3,4]]
 # and  [[1,2,3],[1,2,4],[1,3,4],[2,3,4]]
 def combine(self, n: int, k: int) -> List[List[int]]:  # O(k * C^k_n)

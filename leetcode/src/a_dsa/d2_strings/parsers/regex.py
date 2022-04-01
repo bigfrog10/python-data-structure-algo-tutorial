@@ -11,6 +11,14 @@ def isMatch(self, text, pattern): # O(nm)
             else: ans = first_match and dp(i+1, j+1)
         return ans
     return dp(0, 0)
+# slower
+@lru_cache(None)
+def isMatch(self, s: str, p: str) -> bool:  # O(len(s)*len(p)) due to dp, but substring take len(s) and len(p)
+    if not p: return not s
+    first_match = s and p[0] in {s[0], '.'}  # "*" can't be the first one
+    if len(p) > 1 and p[1] == '*':
+        return self.isMatch(s, p[2:]) or first_match and self.isMatch(s[1:], p)
+    else: return first_match and self.isMatch(s[1:], p[1:])
 
 # LC44. Wildcard Matching - * is any sequence
 def isMatch(self, s: str, p: str) -> bool:  # Iterative, very fast, O(mn)

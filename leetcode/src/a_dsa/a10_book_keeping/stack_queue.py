@@ -186,11 +186,11 @@ class FirstUnique:
     def __init__(self, nums: List[int]):
         self.deque = deque(nums)
         self.count = Counter(nums)
-    def showFirstUnique(self) -> int:
+    def showFirstUnique(self) -> int:  # amortized O(1)
         while self.deque and self.count[self.deque[0]] > 1:
             self.deque.popleft()
         return self.deque[0] if self.deque else -1
-    def add(self, value: int) -> None:
+    def add(self, value: int) -> None:  # O(1)
         if value not in self.count:
             self.deque.append(value)
         self.count[value] += 1  # we may have values inside queue.

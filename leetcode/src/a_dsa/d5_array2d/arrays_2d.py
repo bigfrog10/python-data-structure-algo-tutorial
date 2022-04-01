@@ -88,7 +88,7 @@ def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
 
 # LC1168. Optimize Water Distribution in a Village
 def minCostToSupplyWater(self, n: int, wells, pipes) -> int:  # O((N+M) * log(N+M)), because of heap
-    # build graph, Prim's algo for minimum spanning tree
+    # build graph, Prim's algo for minimum spanning tree.  O(N+M) space
     graph = collections.defaultdict(list)
     for u, v, w in pipes:
         graph[u].append([w, u, v])
@@ -143,16 +143,3 @@ def numOfMinutes(self, n, headID, manager, informTime):
     def dfs(i):
         return max([dfs(j) for j in reports[i]] or [0]) + informTime[i]
     return dfs(headID)
-
-# LC1854. Maximum Population Year
-def maximumPopulation(self, logs: List[List[int]]) -> int:  # O(n)
-    delta, start = [0] * 101, 1950  # the timespan 1950-2050 covers 101 years
-    for l in logs:  # counting sort
-        delta[l[0] - start] += 1
-        delta[l[1] - start] -= 1
-    cumu, maxPop, year = 0, 0, start
-    for i, d in enumerate(delta):
-        cumu += d
-        if cumu > maxPop:
-            maxPop, year = cumu, start + i
-    return year

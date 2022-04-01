@@ -36,6 +36,26 @@ def alienOrder(self, words: List[str]) -> str:  # O(total word lengths)
             if in_degree[d] == 0: queue.append(d)
     if len(output) < len(in_degree): return ""  # cyclic ordering
     return "".join(output)
+def alienOrder(self, words: List[str]) -> str:  # O(total word lengths)
+    graph = defaultdict(list) # {c: [] for c in chars}
+    degrees = Counter({c: 0 for word in words for c in word})  # 0 needed below
+    for w1, w2 in zip(words, words[1:]):
+        for c1, c2 in zip(w1, w2):
+            if c1 != c2:
+                graph[c1].append(c2)  # space is u^2, unique char size
+                degrees[c2] += 1
+                break
+        else:  # won't execute if above break
+            if len(w1) > len(w2): return ""  # space is before letters
+    queue = [c for c in degrees if degrees[c] == 0]
+    ans = ""
+    while queue:
+        c = queue.pop()
+        ans += c
+        for n in graph[c]:
+            degrees[n] -= 1
+            if degrees[n] == 0: queue.append(n)
+    return ans if len(ans) == len(degrees) else ""  # cyclic ordering
 
 # LC791. Custom Sort String
 def customSortString(self, order: str, s: str) -> str:

@@ -18,6 +18,25 @@ def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
     return ret
 
 # LC426. Convert Binary Search Tree to Sorted Doubly Linked List, BST
+def treeToDoublyList(self, root: 'Node') -> 'Node':  # O(n) time and O(1) space, Morris Traversal
+    if not root: return root
+    first, prev = None, None
+    while root:
+        if root.left:
+            pred = root.left  # find predecessor of root
+            while pred.right and pred.right != root: pred = pred.right
+            if pred.right: # already visited root's predecessor, (keep pred pointer to root)
+                root.left = prev
+                prev, root = root, root.right  # now move to next node, after all visit to left
+            else:  # have not seen root's predecessor yet
+                pred.right = root  # create this link for later visit root again
+                root = root.left  # still unvisited nodes in the left subtree, go to the left
+        else:  # no left
+            if prev: root.left, prev.right = prev, root
+            else: first = root  # this is the head of the list, most left element
+            prev, root = root, root.right  # now move to next node
+    first.left, prev.right = prev, first
+    return first
 def treeToDoublyList(self, root: 'Node') -> 'Node':  # O(n) runtime and space
     if not root: return None
     prev = dummy = Node(-1)  # dummy is head, stay there
@@ -25,14 +44,29 @@ def treeToDoublyList(self, root: 'Node') -> 'Node':  # O(n) runtime and space
         nonlocal prev
         if not node: return
         inorder(node.left)  # all the way to 1st node 1
-        prev.right = node
-        node.left = prev
+        prev.right, node.left = node, prev  # point to each other
         prev = node  # this is the trick: move prev to 1
         inorder(node.right)
     inorder(root)
     prev.right = dummy.right  # fix head and tail
     dummy.right.left = prev
     return dummy.right
+
+# LC173. Binary Search Tree Iterator
+class BSTIterator:
+    def __init__(self, root: TreeNode):
+        self.stack = []
+        self._leftmost_inorder(root)
+    def _leftmost_inorder(self, root):
+        while root:
+            self.stack.append(root)
+            root = root.left
+    def next(self) -> int:  # amortized O(1)
+        topmost_node = self.stack.pop()
+        if topmost_node.right: self._leftmost_inorder(topmost_node.right)
+        return topmost_node.val
+    def hasNext(self) -> bool:
+        return len(self.stack) > 0
 
 # LC1382. Balance a Binary Search Tree
 def balanceBST(self, root: TreeNode) -> TreeNode:  # O(n) runtime, O(1) space
@@ -80,22 +114,6 @@ def balanceBST(self, root: TreeNode) -> TreeNode:  # O(n) runtime and O(n) space
     nodes = []
     inorder(root, nodes)
     return buildBst(nodes, 0, len(nodes) - 1)
-
-# LC173. Binary Search Tree Iterator
-class BSTIterator:
-    def __init__(self, root: TreeNode):
-        self.stack = []
-        self._leftmost_inorder(root)
-    def _leftmost_inorder(self, root):
-        while root:
-            self.stack.append(root)
-            root = root.left
-    def next(self) -> int:  # amortized O(1)
-        topmost_node = self.stack.pop()
-        if topmost_node.right: self._leftmost_inorder(topmost_node.right)
-        return topmost_node.val
-    def hasNext(self) -> bool:
-        return len(self.stack) > 0
 
 # LC270. Closest Binary Search Tree Value
 def closestValue(self, root: Optional[TreeNode], target: float) -> int: # O(H)
@@ -224,7 +242,7 @@ def inorderSuccessor(self, root: 'TreeNode', p: 'TreeNode') -> 'TreeNode':
             root = root.left
     return successor
 
-# LC510. Inorder Successor in BST II
+# LC510. Inorder Successor in BST II - has parent
 def inorderSuccessor(self, node: 'Node') -> 'Node':
     # the successor is somewhere lower in the right subtree
     if node.right:
@@ -273,6 +291,18 @@ def generateTrees(self, n: int) -> List[Optional[TreeNode]]:  # O(n * catalan nu
                 for left in trees(first, root-1)
                 for right in trees(root+1, last)] or [None]
     return trees(1, n)
+
+# LC669. Trim a Binary Search Tree
+def trimBST(self, root: Optional[TreeNode], low: int, high: int) -> Optional[TreeNode]:
+    def trim(node):  # O(n) time and space
+        if not node: return None
+        elif node.val > high: return trim(node.left)
+        elif node.val < low: return trim(node.right)
+        else:
+            node.left = trim(node.left)
+            node.right = trim(node.right)
+            return node
+    return trim(root)
 
 # LC96. Unique Binary Search Trees  # BBG
 def numTrees(self, n: int) -> int:  # O(4^n / n^(3/2)), Catalan numbers G_n
@@ -480,13 +510,13 @@ class FenwickTree:
         rv = 0
         while x > 0:
             rv += self.BIT[x]
-            x -= x&-x
+            x -= x & -x
         return rv
 
     def add(self, x: int, delta: int) -> None:
         while x < len(self.BIT):
             self.BIT[x] += delta
-            x += x&-x
+            x += x & -x
 
 class Solution:
     def reversePairs(self, nums: List[int]) -> int:

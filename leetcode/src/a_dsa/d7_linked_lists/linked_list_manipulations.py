@@ -17,8 +17,8 @@ def mergeTwoLists(self, l1, l2):
 def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
     lstlen = len(lists)  # O(Nlogk)
     jump = 1
-    while jump < lstlen:
-        for i in range(0, lstlen - jump, jump * 2):
+    while jump < lstlen:  # logk
+        for i in range(0, lstlen - jump, jump * 2):   # O(all nodes)
             lists[i] = self.mergeTwoLists(lists[i], lists[i + jump])  ## use above method
         jump *= 2
     return lists[0] if lstlen > 0 else None

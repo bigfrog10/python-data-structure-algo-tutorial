@@ -89,11 +89,11 @@ def numFriendRequests(self, ages: List[int]) -> int:  # O(n), prefix sum problem
     res = 0
     for i in range(1, len(buckets)):
         cnt = buckets[i]
-        buckets[i] += buckets[i-1]  # requirement 2
+        buckets[i] += buckets[i-1]  # cumu sum
         if not cnt: continue
         mid = i // 2 + 7  # requirement 1
         if mid >= i: continue
-        res += cnt * (buckets[i] - buckets[mid] - 1)
+        res += cnt * (buckets[i] - buckets[mid] - 1)  # minus self
     return res
 
 # LC163. Missing Ranges

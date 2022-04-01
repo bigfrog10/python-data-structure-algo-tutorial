@@ -10,7 +10,7 @@ def isPalindrome(self, s: str) -> bool:  # O(n)
         j -= 1
     return True
 
-# LC680. Valid Palindrome II
+# LC680. Valid Palindrome II - deleting at most one character
 def validPalindrome(self, s: str) -> bool:  # O(n)
     n, i = len(s), 0
     while i < n / 2 and s[i] == s[~i]: i += 1
@@ -23,7 +23,7 @@ def isValidPalindrome(self, s: str, k: int) -> bool:  # O(n^2) time and O(n) spa
     n = len(s)
     dp = [0] * n  # how many modifications we do for palindrome for j
     for i in range(n-1)[::-1]:
-        prev = dp[i]  # dp[i+1][i]
+        prev = dp[i]  # dp[i+1][j-1]
         for j in range(i+1, n):
             tmp = dp[j]  # dp[i+1][j]
             if s[i] == s[j]: dp[j] = prev  # no change on modifications
@@ -160,3 +160,18 @@ def minInsertions(self, s: str) -> int:
         else:
             return 1 + min(dp(left+1, right), dp(left, right-1))
     return dp(0, len(s)-1)
+
+# LC730. Count Different Palindromic Subsequences
+def countPalindromicSubsequences(self, S: str) -> int:  # O(n^3)
+    MOD = 1000000007
+    @lru_cache(maxsize=None)
+    def compute(start: int, end: int) -> int:  # O(n^2)
+        if start >= end: return 0
+        count = 0
+        for ch in "abcd":
+            left, right = S.find(ch, start, end), S.rfind(ch, start, end)  # O(n)
+            if left == -1 or right == -1:
+                continue
+            count += 1 if left == right else 2 + compute(left + 1, right)  # 2 for 'a', 'aa'. recursion for a*a
+        return count % MOD
+    return compute(0, len(S))

@@ -1,7 +1,7 @@
 from typing import List
 import heapq
 
-# LC636. Exclusive Time of Functions, jobs, process
+# LC636. Exclusive Time of Functions, jobs, process time
 def exclusiveTime(self, n, logs):  # O(n) runtime and space
     res, stack = [0] * n, []
     for log in logs:
@@ -13,6 +13,18 @@ def exclusiveTime(self, n, logs):  # O(n) runtime and space
             res[int(log[0])] += time - start[1]  # add exclusive time, no child time.
             if stack: stack[-1][1] += time  # update parent time
     return res
+
+# LC986. Interval List Intersections
+def intervalIntersection(self, firstList: List[List[int]], secondList: List[List[int]]) -> List[List[int]]:
+    ret = []  # O(m + n)
+    i = j = 0
+    while i < len(firstList) and j < len(secondList):
+        left = max(firstList[i][0], secondList[j][0])
+        right = min(firstList[i][1], secondList[j][1])
+        if left <= right: ret.append((left, right))  # add intersection
+        if firstList[i][1] < secondList[j][1]: i += 1  # move short end
+        else: j += 1
+    return ret
 
 # LC56. Merge Intervals, top100 - remove overlaps
 def merge(self, intervals: List[List[int]]) -> List[List[int]]:
@@ -30,7 +42,7 @@ def canAttendMeetings(self, intervals: List[List[int]]) -> bool:
         if si[i][1] > si[i+1][0]: return False
     return True
 
-# LC253. Meeting Rooms II, top100
+# LC253. Meeting Rooms II - min # of conf rooms asked
 def minMeetingRooms(self, intervals: List[List[int]]) -> int:
     if not intervals: return 0
     intervals.sort()  # greedy, sort intervals by starting time. O(nlogn)
@@ -56,29 +68,15 @@ class Interval:
     def __init__(self, start: int = None, end: int = None):
         self.start = start
         self.end = end
-def employeeFreeTime(self, schedule: '[[Interval]]') -> '[Interval]': # O(nlogm), n total intervals
-    min_heap, res = [], []
-    for i in range(len(schedule)):  # m = len(schedule) is the number of employees
-        # the last elem in tuple is next idx of interval for the employee
-        heapq.heappush(min_heap, (schedule[i][0].start, schedule[i][0].end, i, 1))
-    end = min_heap[0][1]
-    while min_heap:
-        new_start, new_end, i, j = heapq.heappop(min_heap)
-        if new_start <= end: end = max(end, new_end)
-        else:
-            res.append(Interval(end, new_start))
-            end = new_end
-        if j < len(schedule[i]):
-            heapq.heappush(min_heap, (schedule[i][j].start, schedule[i][j].end, i, j+1))
-    return res
-def employeeFreeTime(self, schedule: '[[Interval]]') -> '[Interval]':  # O(nlogn)
-        # This can be done by merge-sort to achieve O(n)
-        intervals = sorted((interval.start, interval.end) for s in schedule for interval in s)
-        res, moving_end = [], intervals[0][1]
-        for s, e in intervals:  # O(n)
-            if s > moving_end: res.append(Interval(moving_end, s))
-            moving_end = max(e, moving_end)
-        return res
+def employeeFreeTime(self, schedule: '[[Interval]]') -> '[Interval]':  # O(nlogm), m = # of employees
+    all_s = heapq.merge(*schedule, key=lambda x: x.start)
+    ans = []
+    prev = next(all_s).end
+    while a := next(all_s, None):
+        if a.start > prev:
+            ans.append(Interval(prev, a.start))
+        prev = max(prev, a.end)
+    return ans
 
 # LC435. Non-overlapping Intervals
 def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
@@ -93,27 +91,15 @@ def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
             cnt += 1  # overlapped, so remove this, so increment counter
     return cnt
 
-# LC986. Interval List Intersections
-def intervalIntersection(self, firstList: List[List[int]], secondList: List[List[int]]) -> List[List[int]]:
-    ret = []  # O(m + n)
-    i = j = 0
-    while i < len(firstList) and j < len(secondList):
-        left = max(firstList[i][0], secondList[j][0])
-        right = min(firstList[i][1], secondList[j][1])
-        if left <= right: ret.append((left, right))  # add intersection
-        if firstList[i][1] < secondList[j][1]: i += 1  # move short end
-        else: j += 1
-    return ret
-
 # LC729. My Calendar I
 from sortedcontainers import SortedList
 class MyCalendar:
     def __init__(self): self.arr = SortedList()  # list is not good enough for performance
     def book(self, start, end):  # O(logn) for 1 booking
-        q1, q2 = self.arr.bisect_right(start), self.arr.bisect_left(end)
+        q1, q2 = self.arr.bisect_right(start), self.arr.bisect_left(end)  #logn
         if q1 == q2 and q1 % 2 == 0:
-            self.arr.add(start)
-            self.arr.add(end)
+            self.arr.add(start)  # logn
+            self.arr.add(end)    # logn
             return True
         return False
 
@@ -138,7 +124,7 @@ class MyCalendarTwo:
         for k in range(i, j): self.cnt[self.pos[k]] += 1
         return True
 
-# LC732. My Calendar III
+# LC732. My Calendar III k-booking
 import sortedcontainers
 class MyCalendarThree1:
     def __init__(self):
@@ -315,19 +301,17 @@ def minTransfers(self, transactions: List[List[int]]) -> int:
     return dfs(0)
 
 # LC1854. Maximum Population Year
-def maximumPopulation(self, logs: List[List[int]]) -> int:
-    dates = []
-    for birth, death in logs:
-        dates.append((birth, 1))
-        dates.append((death, -1))
-    dates.sort()
-    population = max_population = max_year = 0
-    for year, change in dates:
-        population += change
-        if population > max_population:
-            max_population = population
-            max_year = year
-    return max_year
+def maximumPopulation(self, logs: List[List[int]]) -> int:  # O(n)
+    delta, start = [0] * 101, 1950  # the timespan 1950-2050 covers 101 years
+    for l in logs:  # counting sort
+        delta[l[0] - start] += 1
+        delta[l[1] - start] -= 1
+    cumu, maxPop, year = 0, 0, start
+    for i, d in enumerate(delta):
+        cumu += d
+        if cumu > maxPop:
+            maxPop, year = cumu, start + i
+    return year
 
 # LC1169. Invalid Transactions
 class Solution:
@@ -365,7 +349,7 @@ class Solution:
 class Solution:
     def twoCitySchedCost(self, costs: List[List[int]]) -> int:
         # Sort by a gain which company has by sending a person to city A and not to city B
-        costs.sort(key = lambda x : x[0] - x[1]) # greedy
+        costs.sort(key = lambda x : x[0] - x[1])  # greedy
         total = 0
         n = len(costs) // 2
         # To optimize the company expenses, send the first n persons to the city A

@@ -1,5 +1,5 @@
 
-# LC721. Accounts Merge
+# LC721. Accounts Merge - emails merge
 def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
     graph = defaultdict(list)  # build graph for emails
     for acct in accounts:  ## O(MlogM), M total number of emails
@@ -20,7 +20,7 @@ def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
             if email not in seen:
                 seen.add(email)
                 eg = dfs(email)
-                ret.append([acct[0]] + sorted(eg))  # O(nlogn)
+                ret.append([acct[0]] + sorted(eg))  # O(nlogn), n = (accounts #) * max(email length)
     return ret
 
 # LC621. Task Scheduler
@@ -42,49 +42,6 @@ def leastInterval(self, tasks: List[str], n: int) -> int:
     # at least len(tasks) if no repeat. with repeat we need extra cooling
     # (n+1) tasks in each group with cooling, (f_max-1) groups, last group is n_max
     return max(len(tasks), (f_max - 1) * (n + 1) + n_max)
-
-# LC443. String Compression
-def compress(self, chars: List[str]) -> int:  # chars gets shrinked
-    st = i = 0
-    while i < len(chars):
-        while i < len(chars) and chars[i] == chars[st]: i += 1
-        if i - st == 1:  st = i # single diff char, leave it alone
-        else:
-            count = str(i - st)
-            chars[st + 1 : i] = count
-            i = st = st + len(count) + 1  # skip spaces used by count
-    return len(chars)
-def compress(self, chars: List[str]) -> int:
-    st = i = j = 0
-    while i < len(chars):
-        while i < len(chars) and chars[i] == chars[st]: i += 1
-        chars[j] = chars[st]
-        j += 1  # skip char
-        if i - st == 1:
-            st = i # single diff char, leave it alone
-        else:
-            count = str(i - st)
-            chars[j:j+len(count)] = count
-            j += len(count)
-            st = i
-    return j  # chars size is not changed, only end index returned.
-
-# LC271. Encode and Decode Strings
-class Codec:
-    def encode(self, strs: [str]) -> str:  # chunk transfer encoding
-        return ''.join('%d:' % len(s) + s for s in strs)
-    def decode(self, s: str) -> [str]:
-        strs, i = [], 0
-        while i < len(s):
-            j = s.find(':', i)
-            i = j + 1 + int(s[i:j])
-            strs.append(s[j+1:i])
-        return strs
-    # escaping
-    def encode(self, strs):
-        return ''.join(s.replace('|', '||') + ' | ' for s in strs)
-    def decode(self, s):
-        return [t.replace('||', '|') for t in s.split(' | ')[:-1]]  # -1 ignores last empty
 
 # LC387. First Unique Character in a String
 def firstUniqChar(self, s: str) -> int:

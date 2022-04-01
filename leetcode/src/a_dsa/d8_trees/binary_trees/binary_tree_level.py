@@ -13,6 +13,17 @@ def verticalOrder(self, root: TreeNode) -> List[List[int]]:  # O(n)
         max_column = max(max_column, column)
     return [columnTable[x] for x in range(min_column, max_column + 1)]
 
+# LC199. Binary Tree Right Side View
+def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+    if not root: return []  ## O(n) time and O(H) space
+    ret = []
+    def dfs(node, depth):
+        if depth == len(ret): ret.append(node.val)
+        for n in [node.right, node.left]:
+            if n: dfs(n, depth+1)
+    dfs(root, 0)
+    return ret
+
 # LC662. Maximum Width of Binary Tree - row max width
 def widthOfBinaryTree(self, root: TreeNode) -> int:
     width = 0
@@ -96,16 +107,7 @@ def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
         level = [kid for node in level for kid in (node.left, node.right) if kid]
     return averages
 
-# LC199. Binary Tree Right Side View
-def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
-    if not root: return []  ## O(n) time and O(H) space
-    ret = []
-    def dfs(node, depth):
-        if depth == len(ret): ret.append(node.val)
-        for n in [node.right, node.left]:
-            if n: dfs(n, depth+1)
-    dfs(root, 0)
-    return ret
+
 
 # LC103. Binary Tree Zigzag Level Order Traversal
 def zigzagLevelOrder(self, root):

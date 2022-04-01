@@ -1,5 +1,5 @@
 
-# LC71. Simplify Path
+# LC71. Simplify Path -  file paths
 def simplifyPath(self, path: str) -> str:  # O(n) runtime and space
     stack = []
     for folder in path.split('/'):
@@ -37,7 +37,7 @@ def removeDuplicates(self, S: str) -> str: # O(n)
         else: output.append(ch)
     return ''.join(output)
 
-# LC1209. Remove All Adjacent Duplicates in String II
+# LC1209. Remove All Adjacent Duplicates in String II - k duplicates
 def removeDuplicates(self, s, k):  # O(n)
     stack = [['#', 0]]  # 0 for ignoring when joining at the last
     for c in s:
@@ -47,40 +47,13 @@ def removeDuplicates(self, s, k):  # O(n)
         else: stack.append([c, 1])  # char and count
     return ''.join(c * cnt for c, cnt in stack)
 
-# LC2060. Check if an Original String Exists Given Two Encoded Strings
-def possiblyEquals(self, s1: str, s2: str) -> bool:
-    def gg(s):  # Return possible length
-        ans = {int(s)}
-        for i in range(1, len(s)): # split digits among s
-            ans |= {x+y for x in gg(s[:i]) for y in gg(s[i:])}
-        return ans
-    @cache  # make it O(n^4) like
-    def fn(i, j, diff):  # DFS  # Return True if s1[i:] matches s2[j:] with given differences
-        if i == len(s1) and j == len(s2): return diff == 0
-        if i < len(s1) and s1[i].isdigit():
-            ii = i
-            while ii < len(s1) and s1[ii].isdigit(): ii += 1  # get all digits
-            return any(fn(ii, j, diff-x) for x in gg(s1[i:ii]))
-        elif j < len(s2) and s2[j].isdigit():
-            jj = j
-            while jj < len(s2) and s2[jj].isdigit(): jj += 1  # get all digits
-            return any(fn(i, jj, diff+x) for x in gg(s2[j:jj]))
-        elif diff == 0:  # chars, not digits
-            if i < len(s1) and j < len(s2) and s1[i] == s2[j]: return fn(i+1, j+1, 0)
-        elif diff > 0:
-            if i < len(s1): return fn(i+1, j, diff-1)
-        else:
-            if j < len(s2): return fn(i, j+1, diff+1)
-        return False
-    return fn(0, 0, 0)  # diff < 0, means s1 has wild chars, > 0 means s2 has wild chars
-
 # LC681. Next Closest Time
 def nextClosestTime(self, time: str) -> str:
-    hour, minute = time.split(":")
+    hour, minute = time.split(":")  # 19:34
     # Generate all possible 2 digit values. There are at most 16 sorted values here
-    nums = sorted(set(hour + minute))
-    two_digit_values = [a+b for a in nums for b in nums]
-    i = two_digit_values.index(minute)
+    nums = sorted(set(hour + minute))  # 1, 3, 4, 9
+    two_digit_values = [a+b for a in nums for b in nums]  # 11, 13, 14,
+    i = two_digit_values.index(minute)  # index is 6 for 34, next is 39
     if i + 1 < len(two_digit_values) and two_digit_values[i+1] < "60":
         return hour + ":" + two_digit_values[i+1]
     i = two_digit_values.index(hour)
@@ -218,6 +191,13 @@ def repeatedSubstringPattern(self, s: str) -> bool:  # O(n)
         else: j = dp[j]  # mismatch, then roll back j, e.g. "ababcdababcd"
     return dp[n] and dp[n] % (n - dp[n]) == 0
 
+# LC686. Repeated String Match
+def repeatedStringMatch(self, a: str, b: str) -> int:
+    times = math.ceil(len(b) / len(a))
+    if b in a * times: return times
+    elif b in a * (times+1): return times + 1
+    return -1
+
 # LC1108. Defanging an IP Address
 def defangIPaddr(self, address: str) -> str:
     return '[.]'.join(address.split('.'))
@@ -248,7 +228,7 @@ def reverseVowels(self, s):
     return ''.join(s)
 
 # LC72. Edit Distance
-def minDistance(self, word1: str, word2: str) -> int:
+def minDistance(self, word1: str, word2: str) -> int:  # O(mn)
     @lru_cache(None)  # O(mn) runtime and space
     def levenshtein(i, j):  # distance of word1[:i] and word2[:j]
         if i == 0: return j  # Need to insert j chars
@@ -278,7 +258,12 @@ def minDistance(self, word1: str, word2: str) -> int:
             prev = tmp
     return dp[-1]
 
-# LC6. ZigZag Conversion
+# LC1790. Check if One String Swap Can Make Strings Equal
+def areAlmostEqual(self, s1: str, s2: str) -> bool:
+    diff = [[x, y] for x, y in zip(s1, s2) if x != y]
+    return not diff or len(diff) == 2 and diff[0][::-1] == diff[1]
+
+# LC6. ZigZag Conversion - string zigzag
 def convert(self, s: str, numRows: int) -> str:
     if numRows == 1: return s
     rows = [''] * numRows
@@ -288,7 +273,7 @@ def convert(self, s: str, numRows: int) -> str:
         if cur_row == 0 or cur_row == numRows-1:
             down *= -1
         cur_row += down
-    return ''.join([row for row in rows])
+    return ''.join(rows)
 
 # LC767. Reorganize String
 def reorganizeString(self, s: str) -> str:

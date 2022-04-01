@@ -106,10 +106,3 @@ def maxProfit(self, inv: List[int], orders: int) -> int:
         orders -= sell
         ind += 1
     return ans % 1_000_000_007
-
-
-
-
-
-
-
