@@ -1,5 +1,5 @@
 
-# LC721. Accounts Merge - emails merge
+# LC721. Accounts Merge - emails merge  - account merge
 def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
     graph = defaultdict(list)  # build graph for emails
     for acct in accounts:  ## O(MlogM), M total number of emails
@@ -23,7 +23,7 @@ def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
                 ret.append([acct[0]] + sorted(eg))  # O(nlogn), n = (accounts #) * max(email length)
     return ret
 
-# LC621. Task Scheduler
+# LC621. Task Scheduler - with cooling period
 def leastInterval(self, tasks: List[str], n: int) -> int:
     freqs = [0] * 26  # frequencies of the tasks
     for t in tasks: freqs[ord(t) - ord('A')] += 1

@@ -30,16 +30,9 @@ def missingElement(self, nums: List[int], k: int) -> int:  # logn
     # kth missing number is greater than nums[left - 1] and less than nums[left]
     return nums[left - 1] + k - missing(left - 1) # k - missing(left-1) is the diff
 
-# LC162. Find Peak Element - return peak index
-def findPeakElement(self, nums: List[int]) -> int: # logn
-    left, right = 0, len(nums)-1
-    while left < right:
-        mid = (left + right) // 2
-        if nums[mid] > nums[mid+1]: right = mid  # decreasing, so peak is on the other side
-        else: left = mid + 1
-    return left
 
-# LC658. Find K Closest Elements
+
+# LC658. Find K Closest Elements - arround x in the array
 def findClosestElements(self, A, k, x): # O(logn + k)
     left, right = 0, len(A) - k
     while left < right:
@@ -156,7 +149,7 @@ def findMin(self, nums: List[int]) -> int:
     # the 'low' and 'high' index converge to the inflection point.
     return nums[low]
 
-# LC540. Single Element in a Sorted Array
+# LC540. Single Element in a Sorted Array - find it in log time
 def singleNonDuplicate(self, nums: List[int]) -> int:  # simplest and fast
     lo, hi = 0, len(nums) - 1
     while lo < hi:
@@ -224,23 +217,6 @@ def searchInsert(self, nums: List[int], target: int) -> int:
         if target < nums[pivot]: right = pivot - 1
         else: left = pivot + 1
     return left
-
-# LC719. Find K-th Smallest Pair Distance
-def smallestDistancePair(self, nums: List[int], k: int) -> int:
-    def less_than(x: int) -> int:
-        i, pairs = 0, 0 # sliding window starts from i, ends in j
-        for j in range(len(nums)):  # O(2n)
-            # ignore dist > x pairs. increase i to find pairs <= x
-            while nums[j] - nums[i] > x: i += 1
-            pairs += j - i # since sorted, so we count in all pairs in between
-        return pairs # number of pairs with dist <= x
-    nums.sort()  # O(nlogn)
-    low, high = 0, nums[-1] - nums[0]
-    while low < high: # binary search on differences so we have exactly k pairs, log(D)
-        mid = low + (high - low) // 2
-        if less_than(mid) < k: low = mid + 1
-        else: high = mid
-    return low
 
 # LC704. Binary Search
 def search(self, nums: List[int], target: int) -> int:

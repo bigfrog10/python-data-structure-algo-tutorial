@@ -83,7 +83,7 @@ def maximalRectangle(self, matrix):
             stack.append(i)
     return ans
 
-# LC496. Next Greater Element I
+# LC496. Next Greater Element I - first greater on right, 2 arrays
 def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
     st, d = [], {}  # O(len(nums2)) runtime and space
     for n in nums2:
@@ -91,7 +91,7 @@ def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
         st.append(n)
     return [d.get(x, -1) for x in nums1]
 
-# LC503. Next Greater Element II
+# LC503. Next Greater Element II - circular array
 def nextGreaterElements(self, nums):  # best solution
     n = len(nums)
     ret = [-1] * n

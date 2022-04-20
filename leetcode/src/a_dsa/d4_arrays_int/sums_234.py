@@ -1,5 +1,5 @@
 
-# LC1. Two Sum, top100
+# LC1. Two Sum, top100 - 2sum
 def twoSum(self, nums, target):
     cache = {}
     for i, num in enumerate(nums):
@@ -8,7 +8,7 @@ def twoSum(self, nums, target):
         else: cache[num] = i
     return None
 
-# LC167. Two Sum II - Input array is sorted
+# LC167. Two Sum II - Input array is sorted 2sum
 def twoSum(self, numbers: List[int], target: int) -> List[int]:
     # There is no O(logn) solution, so we shoot for O(n)
     # The purpose is to use O(1) space, so take out the hashmap.
@@ -22,7 +22,7 @@ def twoSum(self, numbers: List[int], target: int) -> List[int]:
         else: j -= 1
     return None
 
-# LC1099. Two Sum Less Than K
+# LC1099. Two Sum Less Than K - 2sum
 def twoSumLessThanK(self, nums: List[int], k: int) -> int:
     nums.sort()  # O(nlogn)
     answer, left, right = -1, 0, len(nums) -1
@@ -153,7 +153,7 @@ def fourSum(self, nums: List[int], target: int) -> List[List[int]]:  # O(n^(k-1)
     nums.sort()
     return kSum(nums, target, 4)
 
-# LC454. 4Sum II
+# LC454. 4Sum II - number of ways to add to target
 def fourSumCount(self, A: List[int], B: List[int], C: List[int], D: List[int]) -> int:
     counts = collections.Counter()  # O(n^2)
     for i, j in itertools.product(A, B): counts[i+j] += 1

@@ -6,8 +6,7 @@ def largestIsland(self, grid: List[List[int]]) -> int: # O(n^2) runtime and spac
     def dfs(r, c, gid):  # get island size
         ret, grid[r][c] = 1, gid  # mark islands by numbers
         for x, y in ((r-1, c), (r+1, c), (r, c-1), (r, c+1)):
-            if 0 <= x < n and 0 <= y < n and grid[x][y] == 1:
-                ret += dfs(x, y, gid)
+            if 0 <= x < n and 0 <= y < n and grid[x][y] == 1: ret += dfs(x, y, gid)
         return ret
     islands, gid = {}, 2  # 0 for water, 1 for island, so we start with 2
     for r, c in product(range(n), range(n)):  # find each island size
@@ -19,8 +18,7 @@ def largestIsland(self, grid: List[List[int]]) -> int: # O(n^2) runtime and spac
         if grid[r][c] == 0:  # go through each water
             seen = set()  # this is to filter out repetitive islands from differnt landings
             for x, y in ((r-1, c), (r+1, c), (r, c-1), (r, c+1)):
-                if 0 <= x < n and 0 <= y < n and grid[x][y] > 1:
-                    seen.add(grid[x][y])
+                if 0 <= x < n and 0 <= y < n and grid[x][y] > 1: seen.add(grid[x][y])
             expand = sum(islands[p] for p in seen) + 1
             ret = max(ret, expand)
     return ret

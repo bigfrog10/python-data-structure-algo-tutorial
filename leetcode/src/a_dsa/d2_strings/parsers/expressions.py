@@ -19,7 +19,7 @@ def addOperators(self, num: str, target: int) -> List[str]:
     return res
 
 # LC224. Basic Calculator - with +-()
-def calculate(self, s):
+def calculate(self, s):  # O(n) time and space
     res, stack = 0, []
     num, sign = 0, 1
     for ss in s:
@@ -55,12 +55,12 @@ def calculate(self, s: str) -> int:  # O(n) runtime but O(1) space,
             elif op == "*": val *= num
             elif op == "/": val = int(val / num)
         elif s[i] in '+-*/':
-            if s[i] in '+-':  # save val for */
+            if s[i] in '+-':  # it's a term, not a factor for */
                 res += val
                 val = 0
             op = s[i]
             i += 1
-        else: i += 1 # skip space
+        else: i += 1  # skip space
     return res + val
 def calculate(self, s: str) -> int:  # O(n) runtime and space
     num, op = 0, "+"

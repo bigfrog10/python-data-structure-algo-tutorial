@@ -91,7 +91,7 @@ def printLinkedListInReverse(self, head: 'ImmutableListNode') -> None:  # O(n) r
     while blocks:
         printLinkedListInReverseDirect(blocks.pop(), block_size)
 
-# LC2. Add Two Numbers, top100
+# LC2. Add Two Numbers, top100 - link list reverse order
 def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
     result = result_tail = ListNode(0)
     carry = 0

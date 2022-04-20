@@ -1,5 +1,5 @@
 
-# LC724. Find Pivot Index
+# LC724. Find Pivot Index - break array to left and right with equal sum
 def pivotIndex(self, nums: List[int]) -> int:
     S, leftsum = sum(nums), 0
     for i, x in enumerate(nums):
@@ -7,7 +7,7 @@ def pivotIndex(self, nums: List[int]) -> int:
         leftsum += x
     return -1
 
-# LC39. Combination Sum  # O(n^(target/min))
+# LC39. Combination Sum  # O(n^(target/min)) - return combos, can use elems multiple times
 def combinationSum(self, candidates, target):  # fastest
     candidates = sorted(candidates)  # small to large, cut branches
     result = []  # O(n^(target/min cand), power is tree depth
@@ -22,7 +22,7 @@ def combinationSum(self, candidates, target):  # fastest
     dfs(target, [])
     return result
 
-# LC40. Combination Sum II
+# LC40. Combination Sum II - could have dupes and use only once
 def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
     result = [] # O(2^n)
     def combine_sum_2(start, path, target):
@@ -39,7 +39,7 @@ def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]
     combine_sum_2(0, [], target)
     return result
 
-# LC377. Combination Sum IV
+# LC377. Combination Sum IV - return number of combinations
 def combinationSum4(self, nums: List[int], target: int) -> int:  # O(T * N)
     @functools.lru_cache(maxsize = None)
     def combs(remain):  # O(target)
@@ -50,7 +50,7 @@ def combinationSum4(self, nums: List[int], target: int) -> int:  # O(T * N)
         return result
     return combs(target)
 
-# LC494. Target Sum - with plus minus +- operators
+# LC494. Target Sum - with plus minus +- operators - ints expression built for target
 def findTargetSumWays(self, nums: List[int], S: int) -> int:
     n = len(nums)
     @lru_cache(None)  # O(n * S)

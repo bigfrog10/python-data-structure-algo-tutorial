@@ -1,6 +1,6 @@
 
 from typing import List
-# LC207. Course Schedule, top100
+# LC207. Course Schedule - tru if can finish
 def canFinish(self, n, prerequisites):  # O(V + E)
     G = [[] for i in range(n)] # g[i] needs i finished earlier
     degree = [0] * n

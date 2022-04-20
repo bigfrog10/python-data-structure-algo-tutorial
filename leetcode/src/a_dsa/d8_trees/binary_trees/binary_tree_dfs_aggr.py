@@ -27,16 +27,6 @@ def sumNumbers(self, root: Optional[TreeNode]) -> int:  # O(n) runtime, O(h) spa
     dfs(root, 0)
     return total
 
-# LC865. Smallest Subtree with all the Deepest Nodes
-def subtreeWithAllDeepest(self, root: TreeNode) -> TreeNode:
-    def deep(root):
-        if not root: return 0, None  # depth, node
-        l, r = deep(root.left), deep(root.right)
-        if l[0] > r[0]: return l[0] + 1, l[1]
-        elif l[0] < r[0]: return r[0] + 1, r[1]
-        else: return l[0] + 1, root
-    return deep(root)[1]
-
 # LC538. Convert BST to Greater Tree
 def convertBST(self, root: TreeNode) -> TreeNode:
     post_sum = 0
@@ -51,8 +41,8 @@ def convertBST(self, root: TreeNode) -> TreeNode:
     dfs(root)
     return root
 
-# LC112. Path Sum
-def hasPathSum(self, root: TreeNode, targetSum: int) -> bool:
+# LC112. Path Sum - if a path sum = target
+def hasPathSum(self, root: TreeNode, targetSum: int) -> bool:  # O(n) both
     def dfs(node, target):  # DFS since we are asked if exists a path
         if not node: return False
         if node.val == target:
@@ -77,8 +67,8 @@ def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]: 
     dfs(root, targetSum, [])
     return res
 
-# LC437. Path Sum III - any path sum=target count
-def pathSum(self, root: TreeNode, target: int) -> int:
+# LC437. Path Sum III - all paths sum=target count tree path sum
+def pathSum(self, root: TreeNode, target: int) -> int:  # O(n) both
     count, cusum_counts = 0, defaultdict(int)
     def path_sum_count(node, curr_sum):
         nonlocal count
@@ -107,7 +97,7 @@ def pathSum(self, nums: List[int]) -> int:
         counter[(depth-1, (pos+1) // 2)] += counter[(depth, pos)] or 1
     return total
 
-# LC298. Binary Tree Longest Consecutive Sequence
+# LC298. Binary Tree Longest Consecutive Sequence - parent to child
 def longestConsecutive(self, root: Optional[TreeNode]) -> int:  # O(n) time and space
     def dfs(node: TreeNode, parent: TreeNode, length: int):
         if not node: return length
@@ -115,7 +105,7 @@ def longestConsecutive(self, root: Optional[TreeNode]) -> int:  # O(n) time and 
         return max(length, dfs(node.left, node, length), dfs(node.right, node, length))
     return dfs(root, None, 0)
 
-# LC549. Binary Tree Longest Consecutive Sequence II
+# LC549. Binary Tree Longest Consecutive Sequence II - any node to any node
 def longestConsecutive(self, root: Optional[TreeNode]) -> int:  # O(n)
     res = 0
     def longest_path(root):
@@ -134,20 +124,6 @@ def longestConsecutive(self, root: Optional[TreeNode]) -> int:  # O(n)
         return inc, dec
     longest_path(root)
     return res
-
-# LC129. Sum Root to Leaf Numbers
-def sumNumbers(self, root: TreeNode) -> int:
-    total = 0
-    def dfs(node, path_total): # path related indicates DFS
-        nonlocal total
-        if not node: return
-        path_total = node.val + path_total * 10
-        if not node.left and not node.right: total += path_total
-        else:
-            dfs(node.left, path_total)
-            dfs(node.right, path_total)
-    dfs(root, 0)
-    return total
 
 # LC988. Smallest String Starting From Leaf
 def smallestFromLeaf(self, root: TreeNode) -> str:

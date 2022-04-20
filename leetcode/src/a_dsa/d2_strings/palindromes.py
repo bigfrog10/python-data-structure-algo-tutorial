@@ -13,7 +13,7 @@ def isPalindrome(self, s: str) -> bool:  # O(n)
 # LC680. Valid Palindrome II - deleting at most one character
 def validPalindrome(self, s: str) -> bool:  # O(n)
     n, i = len(s), 0
-    while i < n / 2 and s[i] == s[~i]: i += 1
+    while i < n / 2 and s[i] == s[~i]: i += 1  # ~i = -i-1, bitwise negative
     s = s[i:n - i]  # n - i = ~i + 1
     # remove left or right char
     return s[1:] == s[1:][::-1] or s[:-1] == s[:-1][::-1]
@@ -37,8 +37,7 @@ def isValidPalindrome(self, s: str, k: int) -> bool:  # O(n^2) time and space
         if i == j-1: return 0 if s[i] == s[j] else 1
         if s[i] == s[j]: return drop(i+1, j-1)
         else: return min(drop(i+1, j), drop(i, j-1)) + 1
-    ret = drop(0, len(s)-1)
-    return ret <= k
+    return drop(0, len(s)-1) <= k
 
 # LC336. Palindrome Pairs
 def palindromePairs(self, words: List[str]) -> List[List[int]]:  # O(nk^2)

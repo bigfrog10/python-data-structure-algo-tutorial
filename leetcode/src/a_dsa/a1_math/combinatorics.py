@@ -6,11 +6,11 @@ def nextPermutation(self, nums: List[int]) -> None:  # O(n)
     if not nums: return
     n = len(nums)
     if n == 1: return
-    # from back, find the first value such that value < right
+    # from back, find the first value such that value < right, 1, 8, 4, 7, 6, 5, 3, 1 => 4 (idx=2)
     idx = next((i-1 for i in range(n)[::-1] if nums[i-1] < nums[i]), -1)
     if idx == -1: nums.reverse()
     else:
-        # find the value such that prev > value > next
+        # find the value such that prev > value > next, find 5 (idx=5)
         idx1 = next((i-1 for i in range(idx+1, n) if nums[i] <= nums[idx]), n-1)
         nums[idx], nums[idx1] = nums[idx1], nums[idx]  # swap
         nums[idx+1:] = reversed(nums[idx+1:])
@@ -29,7 +29,7 @@ def prevPermOpt1(self, arr: List[int]) -> List[int]:
         arr[idx], arr[midx] = arr[midx], arr[idx]
     return arr
 
-# LC78. Subsets
+# LC78. Subsets  - unique elem
 def subsets(self, nums: List[int]) -> List[List[int]]:  # time and space O(2^N)
     if not nums: return []
     ret = [[]]
@@ -46,7 +46,7 @@ def subsets(self, nums: List[int]) -> List[List[int]]:  # samiliar to LC90
     backTrack(0, [])
     return ans
 
-# LC90. Subsets II
+# LC90. Subsets II - dupe elem
 def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:  # O(n * 2^n)
     nums.sort()
     ans = []
@@ -61,7 +61,7 @@ def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:  # O(n * 2^n)
     backtrack(0, [])
     return ans  # [[],[1],[1,2],[1,2,2],[2],[2,2]]
 
-# LC17. Letter Combinations of a Phone Number, top100
+# LC17. Letter Combinations of a Phone Number, top100 -
 def letterCombinations(self, digits):
     dict = {'2':"abc", '3':"def",  '4':"ghi", '5':"jkl",
             '6':"mno", '7':"pqrs", '8':"tuv", '9':"wxyz"}

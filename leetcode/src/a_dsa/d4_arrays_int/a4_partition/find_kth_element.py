@@ -61,15 +61,13 @@ def findKthLargest(self, nums: List[int], k: int) -> int:  # long solution, O(n)
     return -kth_smallest(n1, 0, len(n1), k)
 
 # LC973. K Closest Points to Origin
-def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
-    # copied from 215
-    dist = [(-x*x - y*y, x, y) for x, y in points]
-    heapq.heapify(dist)
-    ret = heapq.nlargest(k, dist)
-    ret1 = [(x, y) for _, x, y in ret]
-    return ret1
-def kClosest1(self, points: List[List[int]], K: int) -> List[List[int]]:
-    # O(NlogK)
+def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:  # O(NlogK)
+    heap = []
+    for x, y in points:
+        heapq.heappush(heap, (-(x*x + y*y), x, y))
+        if len(heap) > K: heappop(heap)
+    return [[x, y] for _, x, y in heap]
+def kClosest1(self, points: List[List[int]], K: int) -> List[List[int]]:  # O(NlogK)
     return heapq.nsmallest(K, points, lambda p: p[0] * p[0] + p[1] * p[1])
 
 # LC347. Top K Frequent Elements, top100

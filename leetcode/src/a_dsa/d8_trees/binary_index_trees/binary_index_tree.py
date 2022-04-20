@@ -89,4 +89,34 @@ class NumMatrix:
         sum2 = self._bit_query(row2+1, col1) + self._bit_query(row1, col2+1)
         return sum1 - sum2
 
+# LC493. - ignore, just BIT
+# https://leetcode.com/problems/reverse-pairs/discuss/571969/Super-clean-and-concise-Python-3-Binary-Indexed-Tree-Reverse-Pairs
+class FenwickTree:
+    def __init__(self, n: int) -> None:
+        self.BIT = [0] * (n+1)
+
+    def sum(self, x: int) -> int:
+        rv = 0
+        while x > 0:
+            rv += self.BIT[x]
+            x -= x & -x
+        return rv
+
+    def add(self, x: int, delta: int) -> None:
+        while x < len(self.BIT):
+            self.BIT[x] += delta
+            x += x & -x
+
+class Solution:
+    def reversePairs(self, nums: List[int]) -> int:
+        doubleNums = [n * 2 for n in nums]
+        m = {n: i+1 for i, n in enumerate(sorted(set(nums + doubleNums)))}
+        numsRanks = [m[n] for n in nums]
+        doubleNumsRanks = [m[n] for n in doubleNums]
+        ft = FenwickTree(len(nums * 2))
+        rv = 0
+        for i in range(len(nums)-1, -1, -1):
+            rv += ft.sum(numsRanks[i]-1)
+            ft.add(doubleNumsRanks[i], 1)
+        return rv
 

@@ -1,5 +1,5 @@
 
-# LC1650. Lowest Common Ancestor of a Binary Tree III - has parent, given 2 nodes
+# LC1650. Lowest Common Ancestor of a Binary Tree III - has parent, given 2 nodes. tree LCA
 def lowestCommonAncestor1(self, p: 'Node', q: 'Node') -> 'Node':
     p1, p2 = p, q  # O(1) space, but goes a + b + c, still O(2h)
     while p1 != p2:
@@ -18,7 +18,7 @@ def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -
         return left or right  # carry the not None node
     return dfs(root, p, q)
 
-# LC1644. Lowest Common Ancestor of a Binary Tree II, normal node, might not in tree
+# LC1644. Lowest Common Ancestor of a Binary Tree II, normal node, might not be in tree
 def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
     res = None
     def dfs(node):  # return how many matches
@@ -44,6 +44,16 @@ def lcaDeepestLeaves(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         return h1 + 1, node
     return dfs(root)[1]
 
+# LC865. Smallest Subtree with all the Deepest Nodes
+def subtreeWithAllDeepest(self, root: TreeNode) -> TreeNode:
+    def deep(root):
+        if not root: return 0, None  # depth, node
+        l, r = deep(root.left), deep(root.right)
+        if l[0] > r[0]: return l[0] + 1, l[1]
+        elif l[0] < r[0]: return r[0] + 1, r[1]
+        else: return l[0] + 1, root
+    return deep(root)[1]
+
 # LC2096. Step-By-Step Directions From a Binary Tree Node to Another
 def getDirections(self, root: Optional[TreeNode], startValue: int, destValue: int) -> str:
     def find(n: TreeNode, val: int, path: List[str]) -> bool:
@@ -54,15 +64,7 @@ def getDirections(self, root: Optional[TreeNode], startValue: int, destValue: in
         elif n.right and find(n.right, val, path):
             path += "R"
         return path
-    ######################################################
-    def lca(node):
-        """Return lowest common ancestor of start and dest nodes."""
-        if not node or node.val in (startValue , destValue): return node
-        left, right = lca(node.left), lca(node.right)
-        return node if left and right else left or right
 
-    root = lca(root) # only this sub-tree matters
-    ######################################################
     s, d = [], []
     find(root, startValue, s)
     find(root, destValue, d)

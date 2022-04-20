@@ -1,5 +1,5 @@
 
-# LC560. Subarray Sum Equals K
+# LC560. Subarray Sum Equals K - total count of subarrays whose sum equals to k
 from typing import List
 def subarraySum(self, nums: List[int], k: int) -> int:
     count = cusum = 0  # O(n)
@@ -10,17 +10,6 @@ def subarraySum(self, nums: List[int], k: int) -> int:
         if cusum - k in counts: count += counts[cusum - k]
         counts[cusum] += 1
     return count
-
-# LC325. Maximum Size Subarray Sum Equals k
-def maxSubArrayLen(self, nums: List[int], k: int) -> int:  # O(n) time and space
-    maxl, cumu, cache = 0, 0, dict()  # cumu -> index
-    for i, v in enumerate(nums):
-        cumu += v
-        if cumu == k: maxl = max(maxl, i+1)
-        elif cumu - k in cache:  # middle subarray
-            maxl = max(maxl, i - cache[cumu - k])
-        if cumu not in cache: cache[cumu] = i  # maintain earliest index
-    return maxl
 
 # LC523. Continuous Subarray Sum - sum to multiple of k
 def checkSubarraySum(self, nums: List[int], k: int) -> bool:
@@ -33,6 +22,42 @@ def checkSubarraySum(self, nums: List[int], k: int) -> bool:
             if i - sd[summ] > 1: return True  # [0] 0 if we have =, it returns true but answer is false.
         else: sd[summ] = i
     return False
+
+# LC209. Minimum Size Subarray Sum - min size with sum target
+def minSubArrayLen(self, s: int, nums: List[int]) -> int:  # 2 pointers
+    total = left = 0 # since all numbers are positive, this works.
+    result = len(nums) + 1
+    for right, n in enumerate(nums):
+        total += n
+        while total >= s:
+            result = min(result, right - left + 1)
+            total -= nums[left]
+            left += 1
+    return result if result <= len(nums) else 0
+
+# LC974. Subarray Sums Divisible by K
+def subarraysDivByK(self, A: List[int], K: int) -> int:
+    if not A: return 0
+    cumu = list(accumulate(A))
+    # pre-append 0 because we count x // K == 0 in down below formula. need one more 0 for c*c(-1)
+    res = [0] + [x % K for x in cumu]  # check case 2, 3, 4
+    counts = Counter(res) # number of cumus having same residue.
+    # once we subtract any of these 2, we have the subarray sum divided by K.
+    # so selecting 2 elements has C(C-1) / 2 possibilities.
+    return sum(c * (c - 1) // 2 for c in counts.values())
+
+# LC325. Maximum Size Subarray Sum Equals k
+def maxSubArrayLen(self, nums: List[int], k: int) -> int:  # O(n) time and space
+    maxl, cumu, cache = 0, 0, dict()  # cumu -> index
+    for i, v in enumerate(nums):
+        cumu += v
+        if cumu == k: maxl = max(maxl, i+1)
+        elif cumu - k in cache:  # middle subarray
+            maxl = max(maxl, i - cache[cumu - k])
+        if cumu not in cache: cache[cumu] = i  # maintain earliest index
+    return maxl
+
+
 
 # LC548. Split Array with Equal Sum - split 4 sums
 def splitArray(self, nums): # O(n^2)
@@ -53,19 +78,8 @@ def maxSubArray(self, nums: List[int]) -> int:
         max_total = max(max_total, total)  # this is our goal.
     return max_total
 
-# LC209. Minimum Size Subarray Sum
-def minSubArrayLen(self, s: int, nums: List[int]) -> int:  # 2 pointers
-    total = left = 0 # since all numbers are positive, this works.
-    result = len(nums) + 1
-    for right, n in enumerate(nums):
-        total += n
-        while total >= s:
-            result = min(result, right - left + 1)
-            total -= nums[left]
-            left += 1
-    return result if result <= len(nums) else 0
 
-# LC643. Maximum Average Subarray I
+# LC643. Maximum Average Subarray I - max window average
 def findMaxAverage(self, nums: List[int], k: int) -> float:
     best = window = sum(nums[:k])
     for i in range(k,len(nums)):
@@ -95,17 +109,6 @@ def findMaxLength(self, nums: List[int]) -> int:
         if count in c2i: maxlen = max(maxlen, i - c2i[count])
         else: c2i[count] = i
     return maxlen
-
-# LC974. Subarray Sums Divisible by K
-def subarraysDivByK(self, A: List[int], K: int) -> int:
-    if not A: return 0
-    cumu = list(accumulate(A))
-    # pre-append 0 because we count x // K == 0 in down below formula. need one more 0 for c*c(-1)
-    res = [0] + [x % K for x in cumu]  # check case 2, 3, 4
-    counts = Counter(res) # number of cumus having same residue.
-    # once we subtract any of these 2, we have the subarray sum divided by K.
-    # so selecting 2 elements has C(C-1) / 2 possibilities.
-    return sum(c * (c - 1) // 2 for c in counts.values())
 
 # LC152. Maximum Product Subarray
 def maxProduct(self, nums: List[int]) -> int:

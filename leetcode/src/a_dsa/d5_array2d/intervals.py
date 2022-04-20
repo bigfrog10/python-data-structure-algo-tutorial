@@ -1,7 +1,7 @@
 from typing import List
 import heapq
 
-# LC636. Exclusive Time of Functions, jobs, process time
+# LC636. Exclusive Time of Functions, jobs, process time, cpu single thread
 def exclusiveTime(self, n, logs):  # O(n) runtime and space
     res, stack = [0] * n, []
     for log in logs:
@@ -78,7 +78,7 @@ def employeeFreeTime(self, schedule: '[[Interval]]') -> '[Interval]':  # O(nlogm
         prev = max(prev, a.end)
     return ans
 
-# LC435. Non-overlapping Intervals
+# LC435. Non-overlapping Intervals - minimal intervals to be removed for nonoverlapping
 def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
     # https://leetcode.com/problems/non-overlapping-intervals/discuss/276056/Python-Greedy-Interval-Scheduling
     # O(nlogn) since we sort the input

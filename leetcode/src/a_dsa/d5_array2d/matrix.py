@@ -10,52 +10,6 @@ def leftMostColumnWithOne(self, binaryMatrix: 'BinaryMatrix') -> int:  # O(n + m
     # If we never left the last column, it must have been all 0's.
     return col + 1 if col != cols - 1 else -1
 
-# LC317. Shortest Distance from All Buildings
-def shortestDistance(self, grid):
-    if not grid or not grid[0]: return -1  # O(n^2 * m^2)
-    n, m = len(grid), len(grid[0])
-    # 0 for distance, 1 for counts/buildings
-    matrix = [[[0, 0] for _ in range(m)] for _ in range(n)]
-    def bfs(start, blds):
-        q = [(start, 0)]  # 0 is the distance.
-        while q:  # BFS for distance
-            po, distance = q.pop(0)
-            for dp in (-1, 0), (1, 0), (0, 1), (0, -1):
-                i, j = po[0] + dp[0], po[1] + dp[1]
-                if 0 <= i <n and 0 <= j < m and matrix[i][j][1] == blds:
-                    if grid[i][j] == 0:
-                        matrix[i][j][0] += distance + 1
-                        matrix[i][j][1] = blds + 1  # reachable to all blds
-                        q.append(([i, j], distance+1))
-    blds = 0  # count how many building we have visited
-    for i, j in product(range(n), range(m)):  # O(mn)
-        if grid[i][j] == 1:  # loop through buildings
-            bfs([i, j], blds)
-            blds += 1
-    res = float('inf')
-    for i, j in product(range(len(matrix)), range(len(matrix[0]))):
-        if matrix[i][j][1] == blds: res = min(res, matrix[i][j][0])
-    return res if res != float('inf') else -1
-
-# LC296. Best Meeting Point
-def minTotalDistance(self, grid: List[List[int]]) -> int:  # O(mn)
-    if not grid: return 0
-    m, n = len(grid), len(grid[0])
-    rows, cols = [], []
-    for i in range(m):  # loop m and then n
-        for j in range(n):
-            if grid[i][j] == 1: rows.append(i)
-    for j in range(n):  # loop n and then m
-        for i in range(m):
-            if grid[i][j] == 1: cols.append(j)
-    def min_dist(locations: List[int]) -> int:  # 1 dimensional case
-        i, j, sumd = 0, len(locations)-1, 0
-        while i < j:
-            sumd += locations[j] - locations[i]
-            i, j = i+1, j-1
-        return sumd
-    return min_dist(rows) + min_dist(cols)  # Manhattan distance
-
 # LC498. Diagonal Traverse
 def findDiagonalOrder(self, matrix):  # O(mn)
     if not matrix: return []
@@ -93,29 +47,18 @@ def isToeplitzMatrix(self, matrix):  # O(mn) runtime, O(1) space, has follow ups
 def isToeplitzMatrix(self, m):
     return all(r1[:-1] == r2[1:] for r1,r2 in zip(m, m[1:]))
 
-# LC778. Swim in Rising Water
-def swimInWater(self, grid: List[List[int]]) -> int:  # O(N^2log(N^2)) time, O(N^2) space
-    N = len(grid)
-    pq, seen = [(grid[0][0], 0, 0)], {(0, 0)}
-    ans = 0
-    while pq: # DFS, O(N^2)
-        d, r, c = heapq.heappop(pq)
-        ans = max(ans, d)
-        if r == c == N-1: return ans
-        for cr, cc in (r-1, c), (r+1, c), (r, c-1), (r, c+1):
-            if N > cr >= 0 <= cc < N and (cr, cc) not in seen:
-                heapq.heappush(pq, (grid[cr][cc], cr, cc))  # log
-                seen.add((cr, cc))
-
-# LC286. Walls and Gates
-def wallsAndGates(self, rooms: List[List[int]]) -> None:  # O(mn)
-    WALL, GATE, EMPTY = -1, 0, 2147483647  # given
-    q = [(i, j) for i, row in enumerate(rooms) for j, r in enumerate(row) if r == GATE]  # all gates
-    for i, j in q:
-        for I, J in (i+1, j), (i-1, j), (i, j+1), (i, j-1):
-            if 0 <= I < len(rooms) and 0 <= J < len(rooms[0]) and rooms[I][J] == EMPTY:
-                rooms[I][J] = rooms[i][j] + 1
-                q.append((I, J))
+# LC74. Search a 2D Matrix - matrix binary search elem in matrix
+def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:  # O(log(mn))
+    if not matrix: return False
+    m, n = len(matrix), len(matrix[0])
+    left, right = 0, m * n - 1 # binary search
+    while left <= right:
+        pivot_idx = (left + right) // 2
+        pivot_element = matrix[pivot_idx // n][pivot_idx % n]
+        if target == pivot_element: return True
+        elif target < pivot_element: right = pivot_idx - 1
+        else: left = pivot_idx + 1
+    return False
 
 # LC939. Minimum Area Rectangle
 def minAreaRect(self, points: List[List[int]]) -> int:  # O(n^2)
@@ -153,21 +96,6 @@ def minAreaFreeRect(self, points: List[List[int]]) -> float:  # O(n^2)
                     print(p1, points[lines[i][1]],  p2, p3, minArea)
         return minArea if minArea != float("inf") else 0
 
-# LC1091. Shortest Path in Binary Matrix
-def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:  # O(n) runtime and space
-    if not grid or grid[0][0] != 0: return -1
-    n, que, visited = len(grid), deque([(0, 0, 1)]), set()  # x, y, steps
-    while que:  # BFS
-        i, j, steps = que.popleft()
-        if i == n-1 and j == n-1: return steps
-        if (i, j) in visited: continue
-        visited.add((i, j))
-        for x, y in (-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1):
-            ni, nj = i + x, j + y
-            if 0 <= ni < n and 0 <= nj < n and grid[ni][nj] == 0 and (ni, nj) not in visited:
-                que.append((ni, nj, steps+1))
-    return -1
-
 # LC1074. Number of Submatrices That Sum to Target - area sum to target
 def numSubmatrixSumTarget(self, A, target):
     m, n = len(A), len(A[0])
@@ -185,37 +113,56 @@ def numSubmatrixSumTarget(self, A, target):
                 c[cur] += 1
     return res
 
-# LC329. Longest Increasing Path in a Matrix
-import functools # 100%
-def longestIncreasingPath(self, matrix):
-    if not matrix or not matrix[0]: return 0
-    M, N = len(matrix), len(matrix[0])
-    @functools.lru_cache(maxsize=None)
-    def dfs(i, j):
-        ret, val = 0, matrix[i][j]
-        for x, y in (i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1):
-            if 0 <= x < M and 0 <= y < N and val < matrix[x][y]:
-                ret = max(ret, dfs(x, y))
-        return ret + 1  # add this cell
-    return max(dfs(x, y) for x in range(M) for y in range(N))
+# LC378. Kth Smallest Element in a Sorted Matrix
+def kthSmallest(self, matrix: List[List[int]], k: int) -> int:  # O(klogk) time and O(k) space
+    m, n = len(matrix), len(matrix[0])  # For general, the matrix need not be a square
+    minHeap = []  # val, r, c
+    for r in range(min(k, m)): heappush(minHeap, (matrix[r][0], r, 0))
 
-
-# LC406. Queue Reconstruction by Height
-def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:  # O(nlogn)
-    from sortedcontainers import SortedList
-    people.sort(key=lambda x: (x[0], -x[1]))
-    ans = [None] * len(people)
-    sl = SortedList(list(range(len(people))))
-    for p in people:
-        idx = sl[p[1]]
-        ans[idx] = p
-        sl.remove(idx)  # logn
+    ans = -1  # any dummy value
+    for i in range(k):
+        ans, r, c = heappop(minHeap)
+        if c+1 < n: heappush(minHeap, (matrix[r][c + 1], r, c + 1))
     return ans
-def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:  # O(n^2)
-    res = []
-    for p in sorted((-x[0], x[1]) for x in people): # from largest to smallest
-        res.insert(p[1], [-p[0], p[1]]) # insert only relevant to larger values
-    return res
+def kthSmallest(self, matrix, k):
+    m, n = len(matrix), len(matrix[0])  # For general, the matrix need not be a square
+    def countLessOrEqual(x):
+        cnt = 0
+        c = n - 1  # start with the rightmost column
+        for r in range(m):
+            while c >= 0 and matrix[r][c] > x: c -= 1  # decrease column until matrix[r][c] <= x
+            cnt += (c + 1)
+        return cnt
+    left, right = matrix[0][0], matrix[-1][-1]
+    ans = -1
+    while left <= right:
+        mid = (left + right) // 2
+        if countLessOrEqual(mid) >= k:
+            ans = mid
+            right = mid - 1  # try to looking for a smaller value in the left side
+        else:
+            left = mid + 1  # try to looking for a bigger value in the right side
+    return ans
+
+# LC542. 01 Matrix - distance to 0
+def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:  # O(rc)
+    m, n = len(mat), len(mat[0])
+
+    for r in range(m):
+        for c in range(n):
+            if mat[r][c] > 0:
+                top = mat[r - 1][c] if r > 0 else math.inf
+                left = mat[r][c - 1] if c > 0 else math.inf
+                mat[r][c] = min(top, left) + 1
+
+    for r in range(m - 1, -1, -1):
+        for c in range(n - 1, -1, -1):
+            if mat[r][c] > 0:
+                bottom = mat[r + 1][c] if r < m - 1 else math.inf
+                right = mat[r][c + 1] if c < n - 1 else math.inf
+                mat[r][c] = min(mat[r][c], bottom + 1, right + 1)
+
+    return mat
 
 # LC311. Sparse Matrix Multiplication
 def multiply(self, A: List[List[int]], B: List[List[int]]) -> List[List[int]]:
@@ -233,18 +180,7 @@ def multiply(self, A: List[List[int]], B: List[List[int]]) -> List[List[int]]:
             if j == x: C[i][y] += val_A * val_B
     return C
 
-# LC74. Search a 2D Matrix
-def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:  # O(log(mn))
-    if not matrix: return False
-    m, n = len(matrix), len(matrix[0])
-    left, right = 0, m * n - 1 # binary search
-    while left <= right:
-        pivot_idx = (left + right) // 2
-        pivot_element = matrix[pivot_idx // n][pivot_idx % n]
-        if target == pivot_element: return True
-        elif target < pivot_element: right = pivot_idx - 1
-        else: left = pivot_idx + 1
-    return False
+
 
 # LC2033. Minimum Operations to Make a Uni-Value Grid
 def minOperations(self, grid: List[List[int]], x: int) -> int:
@@ -254,15 +190,7 @@ def minOperations(self, grid: List[List[int]], x: int) -> int:
     median = sorted(vals)[len(vals) // 2]  # O(N) possible via "quick select"
     return sum(abs(val - median)//x for val in vals)
 
-# LC64. Minimum Path Sum
-def minPathSum(self, grid: List[List[int]]) -> int:
-    M, N = len(grid), len(grid[0])
-    dp = [0] + [float('inf')] * (N-1)
-    for i in range(M):
-        dp[0] = dp[0] + grid[i][0]
-        for j in range(1, N):
-            dp[j] = min(dp[j-1], dp[j]) + grid[i][j]
-    return dp[-1]
+
 
 # LC73. Set Matrix Zeroes
 def setZeroes(self, matrix):
@@ -277,7 +205,7 @@ def setZeroes(self, matrix):
     # Set the zeros for the first row
     if firstRowHasZero: matrix[0] = [0] * n
 
-# LC54. Spiral Matrix, top100
+# LC54. Spiral Matrix, top100 - return elems in spiral
 def spiralOrder(self, matrix):
     res = []
     while matrix:
@@ -354,26 +282,6 @@ def findPeakGrid(self, mat: List[List[int]]) -> List[int]:  # O(m + n)
         return quad_search(s0, e0, s1, e1)  # drill down
     return quad_search(0, m, 0, n)
 
-# LC417. Pacific Atlantic Water Flow
-def pacificAtlantic(self, matrix: List[List[int]]) -> List[List[int]]:  # O(nm)
-    if not matrix: return []
-    rows, cols = len(matrix), len(matrix[0])
-    p_visited, a_visited = set(), set()
-    def traverse(i, j, visited):  # goes up
-        if (i, j) in visited: return
-        visited.add((i, j))
-        for dx, dy in (0, 1), (0, -1), (1, 0), (-1, 0): # Traverse neighbors.
-            ni, nj = i + dx, j + dy
-            if rows > ni >= 0 <= nj < cols and matrix[ni][nj] >= matrix[i][j]:
-                traverse(ni, nj, visited)
-    for row in range(rows):  # along border, go inland
-        traverse(row, 0, p_visited)
-        traverse(row, cols - 1, a_visited)
-    for col in range(cols):
-        traverse(0, col, p_visited)
-        traverse(rows - 1, col, a_visited)
-    return list(p_visited & a_visited)
-
 # LC632. Smallest Range Covering Elements from K Lists
 def smallestRange(self, A): # O(nlogk)
     pq = [(row[0], i, 0) for i, row in enumerate(A)] # push 1st element from each list
@@ -401,36 +309,7 @@ def maximalSquare(self, matrix: List[List[str]]) -> int: # DP
             max_len = max(max_len, dp[i+1, j+1])
     return max_len ** 2
 
-# LC378. Kth Smallest Element in a Sorted Matrix
-def kthSmallest(self, matrix: List[List[int]], k: int) -> int:  # O(klogk) time and O(k) space
-    m, n = len(matrix), len(matrix[0])  # For general, the matrix need not be a square
-    minHeap = []  # val, r, c
-    for r in range(min(k, m)): heappush(minHeap, (matrix[r][0], r, 0))
 
-    ans = -1  # any dummy value
-    for i in range(k):
-        ans, r, c = heappop(minHeap)
-        if c+1 < n: heappush(minHeap, (matrix[r][c + 1], r, c + 1))
-    return ans
-def kthSmallest(self, matrix, k):
-    m, n = len(matrix), len(matrix[0])  # For general, the matrix need not be a square
-    def countLessOrEqual(x):
-        cnt = 0
-        c = n - 1  # start with the rightmost column
-        for r in range(m):
-            while c >= 0 and matrix[r][c] > x: c -= 1  # decrease column until matrix[r][c] <= x
-            cnt += (c + 1)
-        return cnt
-    left, right = matrix[0][0], matrix[-1][-1]
-    ans = -1
-    while left <= right:
-        mid = (left + right) // 2
-        if countLessOrEqual(mid) >= k:
-            ans = mid
-            right = mid - 1  # try to looking for a smaller value in the left side
-        else:
-            left = mid + 1  # try to looking for a bigger value in the right side
-    return ans
 
 # LC240. Search a 2D Matrix II
 def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
@@ -503,7 +382,7 @@ def maxPoints(self, points: List[List[int]]) -> int:
         ans = max(ans, helper(currentPoint, points))
     return ans
 
-# LC59. Spiral Matrix II
+# LC59. Spiral Matrix II  generate
 def generateMatrix(self, n): # this is python 3 version
     res, lo = [[n*n]], n*n
     while lo > 1:

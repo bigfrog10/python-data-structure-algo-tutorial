@@ -1,8 +1,3 @@
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
 
 # LC938. Range Sum of BST - works for count, average as well
 def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
@@ -16,41 +11,6 @@ def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
         if node.val < high: dfs(node.right)
     dfs(root)
     return ret
-
-# LC426. Convert Binary Search Tree to Sorted Doubly Linked List, BST
-def treeToDoublyList(self, root: 'Node') -> 'Node':  # O(n) time and O(1) space, Morris Traversal
-    if not root: return root
-    first, prev = None, None
-    while root:
-        if root.left:
-            pred = root.left  # find predecessor of root
-            while pred.right and pred.right != root: pred = pred.right
-            if pred.right: # already visited root's predecessor, (keep pred pointer to root)
-                root.left = prev
-                prev, root = root, root.right  # now move to next node, after all visit to left
-            else:  # have not seen root's predecessor yet
-                pred.right = root  # create this link for later visit root again
-                root = root.left  # still unvisited nodes in the left subtree, go to the left
-        else:  # no left
-            if prev: root.left, prev.right = prev, root
-            else: first = root  # this is the head of the list, most left element
-            prev, root = root, root.right  # now move to next node
-    first.left, prev.right = prev, first
-    return first
-def treeToDoublyList(self, root: 'Node') -> 'Node':  # O(n) runtime and space
-    if not root: return None
-    prev = dummy = Node(-1)  # dummy is head, stay there
-    def inorder(node):  # recursion stack is O(n)
-        nonlocal prev
-        if not node: return
-        inorder(node.left)  # all the way to 1st node 1
-        prev.right, node.left = node, prev  # point to each other
-        prev = node  # this is the trick: move prev to 1
-        inorder(node.right)
-    inorder(root)
-    prev.right = dummy.right  # fix head and tail
-    dummy.right.left = prev
-    return dummy.right
 
 # LC173. Binary Search Tree Iterator
 class BSTIterator:
@@ -68,53 +28,6 @@ class BSTIterator:
     def hasNext(self) -> bool:
         return len(self.stack) > 0
 
-# LC1382. Balance a Binary Search Tree
-def balanceBST(self, root: TreeNode) -> TreeNode:  # O(n) runtime, O(1) space
-    # DSQ, no recursion
-    def to_vine(node):  # to a single linked list, input is the dummy node
-        n, cnt = node.right, 0  ## right rotation
-        while n:
-            if n.left:
-                old_n, n  = n, n.left  # move
-                old_n.left, n.right = n.right, old_n  # make list
-                node.right = n  # track header
-            else:
-                node, n = n, n.right
-                cnt += 1
-        return cnt
-    dummy = TreeNode(-1, right=root)
-    size = to_vine(dummy)
-    def compress(node, size: int):  ## left rotation
-        n = node.right
-        for _ in range(size):
-            old_n, n = n, n.right  # move
-            old_n.right, n.left = n.left, old_n  # make tree
-            node.right, node = n, n  # track header
-            n = n.right
-    h = 2 ** int(math.log2(size+1)) - 1
-    compress(dummy, size - h)
-    while h > 1:
-        h = h // 2
-        compress(dummy, h)
-    return dummy.right
-def balanceBST(self, root: TreeNode) -> TreeNode:  # O(n) runtime and O(n) space
-    def inorder(node, li):  # O(N), collect all nodes to a list
-        if not node: return
-        inorder(node.left, li)
-        li.append(node)
-        inorder(node.right, li)
-    def buildBst(li, start, end):  # O(N)
-        if not li or start > end: return None
-        mid = start + (end - start) // 2
-        root = li[mid]
-        root.left = buildBst(li, start, mid - 1)
-        root.right = buildBst(li, mid + 1, end)
-        return root
-    if not root: return None
-    nodes = []
-    inorder(root, nodes)
-    return buildBst(nodes, 0, len(nodes) - 1)
-
 # LC270. Closest Binary Search Tree Value
 def closestValue(self, root: Optional[TreeNode], target: float) -> int: # O(H)
     closest = root.val
@@ -123,38 +36,6 @@ def closestValue(self, root: Optional[TreeNode], target: float) -> int: # O(H)
         # if target < root.val, then target to right side distance > target to root distance
         root = root.left if target < root.val else root.right
     return closest
-
-# LC108. Convert Sorted Array to Binary Search Tree
-def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
-    def to_bst(nums, b, e) -> TreeNode:
-        if b > e: return None
-        mid = b + (e - b) // 2  # if len even, use 2nd or 1st
-        root = TreeNode(nums[mid], None, None)
-        root.left = to_bst(nums, b, mid-1)
-        root.right = to_bst(nums, mid + 1, e)
-        return root
-    return to_bst(nums, 0, len(nums)-1)
-
-# LC109. Convert Sorted List to Binary Search Tree, similar logic as in LC108
-def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:  # O(n) time, O(logn) space
-    def findSize(head):
-        ptr, c = head, 0
-        while ptr:
-            ptr = ptr.next
-            c += 1
-        return c
-    size = findSize(head)
-    def convert(l, r):  # Recursively form a BST out of linked list from l --> r
-        nonlocal head
-        if l > r: return None
-        mid = (l + r) // 2
-        left = convert(l, mid - 1)  # order is significant!
-        node = TreeNode(head.val)
-        node.left = left
-        head = head.next
-        node.right = convert(mid + 1, r)
-        return node
-    return convert(0, size - 1)
 
 # LC1305. All Elements in Two Binary Search Trees, merge trees
 def getAllElements(self, root1: TreeNode, root2: TreeNode) -> List[int]:
@@ -253,17 +134,7 @@ def inorderSuccessor(self, node: 'Node') -> 'Node':
     while node.parent and node == node.parent.right: node = node.parent
     return node.parent  # first left
 
-# LC1008. Construct Binary Search Tree from Preorder Traversal
-def bstFromPreorder(self, preorder: List[int]) -> Optional[TreeNode]:
-    def buildTree(A, bound):
-        if not A or A[-1] > bound: return None
-        node = TreeNode(A.pop())
-        node.left = buildTree(A, node.val)
-        node.right = buildTree(A, bound)
-        return node
-    return buildTree(preorder[::-1], float('inf'))
-
-# LC235. Lowest Common Ancestor of a Binary Search Tree
+# LC235. Lowest Common Ancestor of a Binary Search Tree - lca
 def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
     while root:
         if p.val < root.val > q.val:
@@ -423,7 +294,7 @@ def canMerge(self, trees: List[TreeNode]) -> Optional[TreeNode]:
         return None  # check full traversal
     return root
 
-# LC783. Minimum Distance Between BST Nodes
+# LC783. Minimum Distance Between BST Nodes - min diff of values in nodes
 def minDiffInBST(self, root: Optional[TreeNode]) -> int:
     def dfs(node):
         if node:
@@ -499,34 +370,3 @@ def recoverTree(self, root: Optional[TreeNode]) -> None:
         pred = root
         root = root.right # check right side
     x.val, y.val = y.val, x.val
-
-# LC493. - ignore, just BIT
-# https://leetcode.com/problems/reverse-pairs/discuss/571969/Super-clean-and-concise-Python-3-Binary-Indexed-Tree-Reverse-Pairs
-class FenwickTree:
-    def __init__(self, n: int) -> None:
-        self.BIT = [0] * (n+1)
-
-    def sum(self, x: int) -> int:
-        rv = 0
-        while x > 0:
-            rv += self.BIT[x]
-            x -= x & -x
-        return rv
-
-    def add(self, x: int, delta: int) -> None:
-        while x < len(self.BIT):
-            self.BIT[x] += delta
-            x += x & -x
-
-class Solution:
-    def reversePairs(self, nums: List[int]) -> int:
-        doubleNums = [n * 2 for n in nums]
-        m = {n: i+1 for i, n in enumerate(sorted(set(nums + doubleNums)))}
-        numsRanks = [m[n] for n in nums]
-        doubleNumsRanks = [m[n] for n in doubleNums]
-        ft = FenwickTree(len(nums * 2))
-        rv = 0
-        for i in range(len(nums)-1, -1, -1):
-            rv += ft.sum(numsRanks[i]-1)
-            ft.add(doubleNumsRanks[i], 1)
-        return rv

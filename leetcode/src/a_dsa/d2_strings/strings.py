@@ -1,5 +1,5 @@
 
-# LC71. Simplify Path -  file paths
+# LC71. Simplify Path -  file paths, canonical path
 def simplifyPath(self, path: str) -> str:  # O(n) runtime and space
     stack = []
     for folder in path.split('/'):
@@ -24,12 +24,11 @@ def validWordAbbreviation(self, word: str, abbr: str) -> bool:
         else:  # letter
             i += int(n)  # add counts for previous letter
             n = '0'  # reset counts to 0
-            # counts + current > wl or no match for abbr and word
             if i >= wl or word[i] != c: return False  # core logic
             i += 1  # move to next char
     return i + int(n) == wl
 
-# LC1047. Remove All Adjacent Duplicates In String
+# LC1047. Remove All Adjacent Duplicates In String - remove duplicates with 2 chars
 def removeDuplicates(self, S: str) -> str: # O(n)
     output = []
     for ch in S:
@@ -81,6 +80,16 @@ def backspaceCompare(self, S, T): # O(n+m) in runtime and O(1) space
             elif skip: skip -= 1
             else: yield x
     return all(x == y for x, y in itertools.zip_longest(F(S), F(T)))  # zip_longest is an iterator
+
+# LC848. Shifting Letters
+def shiftingLetters(self, s: str, shifts: List[int]) -> str:
+    ans = []
+    X = sum(shifts) % 26
+    for i, c in enumerate(s):
+        index = ord(c) - ord('a')
+        ans.append(chr(ord('a') + (index + X) % 26))
+        X = (X - shifts[i]) % 26
+    return "".join(ans)
 
 # LC1055. Shortest Way to Form String
 def shortestWay(self, source, target):
@@ -275,7 +284,7 @@ def convert(self, s: str, numRows: int) -> str:
         cur_row += down
     return ''.join(rows)
 
-# LC767. Reorganize String
+# LC767. Reorganize String - rearrange chars
 def reorganizeString(self, s: str) -> str:
     if not s: return ""  # O(n) there is no sort
     n, counts = len(s), Counter(s)
@@ -402,7 +411,7 @@ def longestNiceSubstring(self, s: str) -> str:
             return max(s0, s1, key=len)
     return s
 
-# LC763. Partition Labels
+# LC763. Partition Labels - substring no repeating chars
 def partitionLabels(self, s: str) -> List[int]: # O(n) time and space
     max_idx = {letter: i for i, letter in enumerate(s)}
     ret = []
@@ -446,7 +455,7 @@ def checkInclusion(self, s1, s2):
             del d2[s2[start-len(s1)]]
     return d1 == d2
 
-# LC395. Longest Substring with At Least K Repeating Characters
+# LC395. Longest Substring with At Least K Repeating Characters - repeat k counter for each char
 def longestSubstring(self, s, k): # O(n)
     counts = Counter(s)
     for c in set(s):
@@ -474,7 +483,7 @@ def maxRepOpt1(self, S):
 def checkIfPangram(self, sentence: str) -> bool:
         return len(set(sentence)) == 26
 
-# LC859. Buddy Strings
+# LC859. Buddy Strings - swap 2 letters
 def buddyStrings(self, A, B):
     if len(A) != len(B): return False
     if A == B and len(set(A)) < len(A): return True

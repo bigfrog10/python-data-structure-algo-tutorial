@@ -6,7 +6,7 @@ def reverseList(self, head: ListNode) -> ListNode:
         curr.next, prev, curr = prev, curr, curr.next
     return prev
 
-# LC92. Reverse Linked List II
+# LC92. Reverse Linked List II - reverse between 2 nodes
 def reverseBetween(self, head, m, n):
     dummy = start = ListNode(0, head)
     for _ in range(m-1): start = start.next  # move the  position before m

@@ -26,7 +26,7 @@ def possiblyEquals(self, s1: str, s2: str) -> bool:
         return False
     return fn(0, 0, 0)  # diff < 0, means s1 has wild chars, > 0 means s2 has wild chars
 
-# LC91. Decode Ways, top100
+# LC91. Decode Ways, top100 - decode 12 to 1,2 and 12
 def numDecodings(self, s: str) -> int:  # Best, fast and short
     @lru_cache(maxsize=None)
     def walk(idx):
@@ -68,7 +68,7 @@ def encode(self, s: str) -> str:  # O(n^2)
         return smallest
     return mincode(s)
 
-# LC394. Decode String
+# LC394. Decode String - expand copies
 def decodeString(self, s: str) -> str:
     stack = []
     curr, k = "", 0

@@ -1,4 +1,11 @@
 
+# LC1218. Longest Arithmetic Subsequence of Given Difference
+def longestSubsequence(self, arr: List[int], diff: int) -> int:
+    res = {}  # array value -> longest length of arithmetic seq, fast
+    for num in arr:
+        res[num] = res[num - diff] + 1 if (num - diff) in res else 1
+    return max(res.values())
+
 # LC674. Longest Continuous Increasing Subsequence - this is really continuous subarray, not sequences
 def findLengthOfLCIS(self, nums: List[int]) -> int:
     ans = anchor = 0
@@ -27,7 +34,7 @@ def longestCommonSubsequence(self, text1: str, text2: str) -> int: # cached recu
     print(solve.cache_info())
     return solve(0, 0)
 
-# LC1498. Number of Subsequences That Satisfy the Given Sum Condition
+# LC1498. Number of Subsequences That Satisfy the Given Sum Condition - max + min <= target
 def numSubseq(self, nums: List[int], target: int) -> int:
     nums.sort()  # min and max ignores orders, O(nlogn)
     l, r = 0, len(nums) - 1
@@ -50,12 +57,7 @@ def increasingTriplet(self, nums: List[int]) -> bool:
         else: return True
     return False
 
-# LC1218. Longest Arithmetic Subsequence of Given Difference
-def longestSubsequence(self, arr: List[int], diff: int) -> int:
-    res = {}  # array value -> longest length of arithmetic seq, fast
-    for num in arr:
-        res[num] = res[num - diff] + 1 if (num - diff) in res else 1
-    return max(res.values())
+
 
 # LC300. Longest Increasing Subsequence
 def lengthOfLIS(self, nums: List[int]) -> int:  # O(nlogn) runtime, O(n) space

@@ -8,7 +8,20 @@ def myPow(self, x: float, n: int) -> float:  # O(logn)
         x, n = x * x, n // 2
     return ret
 
-# LC670. Maximum Swap - swap digits in number to get max
+# LC166. Fraction to Recurring Decimal
+def fractionToDecimal(self, n, d): # 32ms, beats 100%
+    if n % d == 0: return str(n // d)  # 5/6
+    p, q = abs(n), abs(d)
+    r = p % q  # 5
+    s, m = '', {}  # s is quotient, m records length pre to repeat
+    while r and r not in m:
+        m[r] = len(s)
+        r, s = r * 10 % q, s + str(r * 10 // q)  # long division
+    # s = 83, m = 5->0, 2->1, frac = 0.8(3)
+    frac = str(p // q) + '.' + (s[:m[r]] + '(' + s[m[r]:] + ')' if r else s)
+    return ('' if (n > 0) == (d > 0) else '-') + frac
+
+# LC670. Maximum Swap - swap digits in number to get max - swap max - max swap
 def maximumSwap(self, num: int) -> int:  # O(n)
     sn = list(str(num))
     last_idx = {int(v): i for i, v in enumerate(sn)}  # last index for the value
@@ -19,7 +32,7 @@ def maximumSwap(self, num: int) -> int:  # O(n)
                 return int(''.join(sn))
     return num
 
-# LC556. Next Greater Element III
+# LC556. Next Greater Element III - almost same as next permutation
 def nextGreaterElement(self, n: int) -> int:
     digits = list(str(n))
     i = len(digits) - 1
@@ -343,7 +356,7 @@ def mySqrt(self, x: int) -> int:  # This is a new pattern
     return left
 
 
-# LC343. Integer Break - 2 ** 3 < 3 ** 2, use derivative to know max x = e
+# LC343. Integer Break - 2 ** 3 < 3 ** 2, use derivative to know max x = e, break integer to factors
 def integerBreak(self, n: int) -> int:
     if n == 2 or n == 3: return n - 1
     if n % 3 == 0: return 3**(n//3)
@@ -405,15 +418,3 @@ def consecutiveNumbersSum(self, N: int) -> int:
         k += 1
     return count
 
-# LC166. Fraction to Recurring Decimal
-def fractionToDecimal(self, n, d): # 32ms, beats 100%
-    if n % d == 0: return str(n // d)  # 5/6
-    p, q = abs(n), abs(d)
-    r = p % q  # 5
-    s, m = '', {}  # s is quotient, m records length pre to repeat
-    while r and r not in m:
-        m[r] = len(s)
-        r, s = r * 10 % q, s + str(r * 10 // q)  # long division
-    # s = 83, m = 5->0, 2->1, frac = 0.8(3)
-    frac = str(p // q) + '.' + (s[:m[r]] + '(' + s[m[r]:] + ')' if r else s)
-    return ('' if (n > 0) == (d > 0) else '-') + frac

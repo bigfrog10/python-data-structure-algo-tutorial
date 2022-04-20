@@ -17,8 +17,8 @@ def medianSlidingWindow(self, nums: List[int], k: int) -> List[float]:  # O(nk)
     medians = []
     for a, b in zip(nums, nums[k:] + [0]):
         medians.append((window[k//2] + window[~(k//2)]) / 2.)
-        window.remove(a)
-        bisect.insort(window, b)
+        window.remove(a)  # O(k)
+        bisect.insort(window, b) # O(k)
     return medians
 
 # LC283. Move Zeroes
@@ -88,6 +88,18 @@ def subarraysWithKDistinct(self, A: List[int], K: int) -> int:
         return res
     return atMostK(A, K) - atMostK(A, K - 1)
 
-
+# LC611. Valid Triangle Number
+def triangleNumber(self, nums: List[int]) -> int:
+    n = len(nums)
+    nums.sort()
+    count = 0
+    for i in range(n-1,1,-1):
+        hi, lo = i - 1, 0
+        while lo < hi:
+            if nums[hi]+nums[lo] > nums[i]:
+                count += hi - lo
+                hi -= 1
+            else: lo += 1
+    return count
 
 

@@ -14,7 +14,7 @@ def sortColors(self, nums: List[int]) -> None:
             p2 -= 1
         else: curr += 1
 
-# LC2089. Find Target Indices After Sorting Array
+# LC2089. Find Target Indices After Sorting Array - target index
 def targetIndices(self, nums: List[int], target: int) -> List[int]:
     lt_count, eq_count = 0, 0  # partition. O(n), rathern than O(nlogn)
     for n in nums:

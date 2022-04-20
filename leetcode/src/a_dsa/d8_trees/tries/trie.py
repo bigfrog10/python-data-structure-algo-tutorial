@@ -20,7 +20,7 @@ class Trie:
             t = t[c]
         return True
 
-# LC1233. Remove Sub-Folders from the Filesystem
+# LC1233. Remove Sub-Folders from the Filesystem - remove subfolders
 def removeSubfolders(self, folder: List[str]) -> List[str]:
     trie = {}
     for path in folder: # build trie from input

@@ -5,7 +5,6 @@
       <change afterPath="$PROJECT_DIR$/../../algorithms/docs/strings/SuffixT1withFigs.pdf" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../algorithms/docs/strings/catalan.pdf" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../algorithms/docs/trees/BalancingTrees.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../algorithms/src/dsa/arrays/2_pointers.md" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../algorithms/src/dsa/arrays/__init__.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../algorithms/src/dsa/arrays/monotonic_stack_queue.md" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../algorithms/src/dsa/arrays/scheduling.md" afterDir="false" />
@@ -24,59 +23,58 @@
       <change afterPath="$PROJECT_DIR$/../../algorithms/src/dsa/strings/__init__.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../algorithms/src/dsa/trees/__init__.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../algorithms/src/dsa/trees/binary_trees/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/array_binary_search.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/sums_234.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/2d_board_game_tic_tac_toe_sudoku.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/matrix_01.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/a_dsa/d7_linked_lists/double_linked_list.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree_lca.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/algos/binary_search.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/matrix_paths.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_search_trees/bst_structure.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/tree_nodes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/a_dsa/d9_graph/union_find/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../algorithms/algorithms.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../algorithms/algorithms.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../algorithms/src/dsa/dfs/dfs.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../algorithms/src/dsa/dfs/dfs.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" beforeDir="false" afterPath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/a10_book_keeping/bbg_stock_ticker.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/a10_book_keeping/z_bbg_stock_ticker.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/a10_book_keeping/buffers.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/a10_book_keeping/buffers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/a10_book_keeping/collections.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/a10_book_keeping/collections.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/a10_book_keeping/graph_leaves.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/a10_book_keeping/z_graph_leaves.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/a10_book_keeping/ood.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/a10_book_keeping/z_ood.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/a10_book_keeping/stack_queue.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/a10_book_keeping/stack_queue.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/a1_math/combinatorics.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/a1_math/combinatorics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d1_bits/bit_operations.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d1_bits/bit_operations.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d1_bits/bits.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d1_bits/bits.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/a1_math/random.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/a1_math/random.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/monotonic_stack.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/monotonic_stack.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/palindromes.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/palindromes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/parsers/expressions.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/parsers/expressions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/parsers/fsm.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/parsers/fsm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/parsers/parenthesis.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/parsers/parenthesis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/parsers/regex.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/parsers/regex.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/string_arr.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/string_arr.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/string_encoding.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/string_encoding.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/string_sorting.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/string_sorting.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/strings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/strings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/words.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/words.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d3_ints/int_num.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d3_ints/int_num.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_partition/find_kth_element.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_partition/find_kth_element.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_partition/partition.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_partition/partition.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/arrays.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/arrays.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/binary_search.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/binary_search.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/greedy.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/greedy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/array_binary_search.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/array_binary_search.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_2pointers.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_2pointers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_arrays.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_arrays.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/monotonic_stack.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/monotonic_stack.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/subarrays.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/subarrays.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/subsequences.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/subsequences.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/sums.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/sums.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/sums2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/sums_234.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/sums_234.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/2d_board_games.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/2d_board_games.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/arrays_2d.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/arrays_2d.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/intervals.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/intervals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/islands.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/islands.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/matrix.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/sorted_intervals.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/intervals_sorted.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d7_linked_lists/linked_list_manipulations.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d7_linked_lists/linked_list_manipulations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/matrix_01.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/topological_sort.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/topological_sort.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d7_linked_lists/linked_list_reverse.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d7_linked_lists/linked_list_reverse.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d7_linked_lists/linked_lists.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d7_linked_lists/linked_lists.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_index_trees/binary_index_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_index_trees/binary_index_tree.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_search_trees/binary_search_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_search_trees/binary_search_tree.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree_construct.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree_construct.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree_dfs.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree_dfs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree_dfs_aggr.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree_dfs_aggr.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree_lca.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree_lca.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree_level.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree_level.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree_traversal.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree_traversal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/union_find/union_find.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/union_find/union_find.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d9_graph/graph_heaps.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d9_graph/graph_heaps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree_traversal.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/tries/trie.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/tries/trie.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/union_find/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../algorithms/src/dsa/arrays/2_pointers.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/union_find/disjoint_sets.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d9_graph/union_find/disjoint_sets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/union_find/union_find.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d9_graph/union_find/union_find.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d9_graph/graphs.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d9_graph/graphs.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -143,7 +141,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.33448276" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="PyCoverageOptionsProvider">
@@ -174,7 +172,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Python.concurrency_producer_consumer">
+  <component name="RunManager" selected="Python.binary_search">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
@@ -197,6 +195,28 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="binary_search" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="python-data-structure-algo-tutorial" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/algos" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/algos/binary_search.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="concurrency_producer_consumer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="python-data-structure-algo-tutorial" />
@@ -361,6 +381,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.binary_search" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -424,7 +449,8 @@
       <workItem from="1647017114187" duration="89161000" />
       <workItem from="1647968613532" duration="30733000" />
       <workItem from="1648496942537" duration="16086000" />
-      <workItem from="1648699485922" duration="1599000" />
+      <workItem from="1648699485922" duration="15599000" />
+      <workItem from="1649511742078" duration="91944000" />
     </task>
     <task id="LOCAL-00001" summary="update 2 sites">
       <created>1639271849713</created>
@@ -482,7 +508,14 @@
       <option name="project" value="LOCAL" />
       <updated>1646877800379</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="re-org">
+      <created>1648815533568</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1648815533568</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -495,10 +528,10 @@
     <MESSAGE value="update 2 sites" />
     <MESSAGE value="more problems" />
     <MESSAGE value="fb problems" />
-    <MESSAGE value="re-org" />
     <MESSAGE value="update algos with runtime and space" />
     <MESSAGE value="2nd round" />
-    <option name="LAST_COMMIT_MESSAGE" value="2nd round" />
+    <MESSAGE value="re-org" />
+    <option name="LAST_COMMIT_MESSAGE" value="re-org" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -513,6 +546,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$fsm.coverage" NAME="fsm Coverage Results" MODIFIED="1637977101327" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/companies/point72/fsm" />
+    <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$binary_search.coverage" NAME="binary_search Coverage Results" MODIFIED="1650145952467" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/algos" />
     <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$range_windows__1_.coverage" NAME="range_windows (1) Coverage Results" MODIFIED="1644191844050" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/algos" />
     <SUITE FILE_PATH="coverage/python_data_structure_algo_tutorial$sorted_intervals.coverage" NAME="sorted_intervals Coverage Results" MODIFIED="1645579586725" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../src/a_dsa/d5_array2d" />
   </component>

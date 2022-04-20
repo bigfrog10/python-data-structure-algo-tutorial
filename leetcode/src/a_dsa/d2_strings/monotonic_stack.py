@@ -1,5 +1,5 @@
 
-# LC316. Remove Duplicate Letters
+# LC316. Remove Duplicate Letters - dupe chars
 def removeDuplicateLetters(self, s: str) -> str:  # O(n) time and O(1) space
     last_idx = {c: i for i, c in enumerate(s)}
     stack, seen = [], set()  # O(26)

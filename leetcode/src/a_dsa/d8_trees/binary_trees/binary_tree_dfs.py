@@ -1,5 +1,5 @@
 
-# LC543. Diameter of Binary Tree
+# LC543. Diameter of Binary Tree - binary tree diameter
 def diameterOfBinaryTree(self, root: TreeNode) -> int:
     diameter = 0
     def path_max(node):  # DFS
@@ -34,6 +34,22 @@ def isSymmetric(self, root: TreeNode) -> bool:
         return n1.val == n2.val and is_mirror(n1.left, n2.right) and is_mirror(n1.right, n2.left)
     return is_mirror(root, root)
 
+# LC1443. Minimum Time to Collect All Apples in a Tree
+def minTime(self, n: int, edges: List[List[int]], hasApple: List[bool]) -> int:
+    adj = [[] for _ in range(n)]  # graph DFS
+    for u, v in edges:
+        adj[u].append(v)
+        adj[v].append(u)
+    visited = set()
+    def dfs(node):
+        if node in visited: return 0
+        visited.add(node)
+        secs = 0
+        for child in adj[node]: secs += dfs(child)
+        if secs > 0: return secs + 2  # otherwise, no need to count this
+        else: return 2 if hasApple[node] else 0
+    return max(dfs(0) - 2, 0)
+
 # LC951. Flip Equivalent Binary Trees
 def flipEquiv(self, root1: TreeNode, root2: TreeNode) -> bool: # O(min(#nodes))
     if not root1 and not root2: return True
@@ -55,6 +71,22 @@ def binaryTreePaths(self, root: TreeNode) -> List[str]:
         dfs(node.right, path)
     dfs(root, '')
     return ret
+
+# LC1740. Find Distance in a Binary Tree
+def findDistance(self, root: TreeNode, p: int, q: int) -> int:
+    ans = 0
+    def fn(node):  # Traverse the tree post-order.
+        nonlocal ans
+        if not node: return False, -inf
+        ltf, lv = fn(node.left)
+        rtf, rv = fn(node.right)
+        if node.val in (p, q) or ltf and rtf:
+            if ltf: ans += lv + 1
+            if rtf: ans += rv + 1
+            return True, 0
+        return ltf or rtf, max(lv, rv) + 1
+    fn(root)
+    return ans
 
 # LC104. Maximum Depth of Binary Tree
 def maxDepth(self, root: TreeNode) -> int:
@@ -129,24 +161,6 @@ def findLeaves(self, root: TreeNode) -> List[List[int]]:
     dfs(root)
     return out
 
-
-
-# LC1740. Find Distance in a Binary Tree
-def findDistance(self, root: TreeNode, p: int, q: int) -> int:
-    ans = 0
-    def fn(node):  # Traverse the tree post-order.
-        nonlocal ans
-        if not node: return False, -inf
-        ltf, lv = fn(node.left)
-        rtf, rv = fn(node.right)
-        if node.val in (p, q) or ltf and rtf:
-            if ltf: ans += lv + 1
-            if rtf: ans += rv + 1
-            return True, 0
-        return ltf or rtf, max(lv, rv) + 1
-    fn(root)
-    return ans
-
 # LC1315. Sum of Nodes with Even-Valued Grandparent
 def sumEvenGrandparent(self, root: TreeNode) -> int:
     total = 0
@@ -173,19 +187,3 @@ def goodNodes(self, root: TreeNode) -> int:
         dfs(node.right, nmax)
     dfs(root, root.val)
     return res
-
-# LC1443. Minimum Time to Collect All Apples in a Tree
-def minTime(self, n: int, edges: List[List[int]], hasApple: List[bool]) -> int:
-    adj = [[] for _ in range(n)]  # graph DFS
-    for u, v in edges:
-        adj[u].append(v)
-        adj[v].append(u)
-    visited = set()
-    def dfs(node):
-        if node in visited: return 0
-        visited.add(node)
-        secs = 0
-        for child in adj[node]: secs += dfs(child)
-        if secs > 0: return secs + 2  # otherwise, no need to count this
-        else: return 2 if hasApple[node] else 0
-    return max(dfs(0) - 2, 0)

@@ -3,7 +3,17 @@ from collections import Counter
 import math
 import functools
 
-# LC164. Maximum Gap
+# LC164. Maximum Gap - max diff sorted
+def maximumGap(self, nums: List[int]) -> int:  # O(n)  Pigeonhole Principle
+    lo, hi, n = min(nums), max(nums), len(nums)
+    if n <= 2 or hi == lo: return hi - lo
+    B = defaultdict(list)
+    for num in nums:
+        ind = n-2 if num == hi else (num - lo) * (n-1) // (hi-lo)
+        B[ind].append(num)
+
+    cands = [[min(B[i]), max(B[i])] for i in range(n-1) if B[i]]
+    return max(y[0]-x[1] for x,y in zip(cands, cands[1:]))
 
 # LC1762. Buildings With an Ocean View - increasing stack
 def findBuildings(self, heights: List[int]) -> List[int]:  # O(n)
@@ -25,16 +35,16 @@ def depthSum(self, nestedList: List[NestedInteger]) -> int:  # O(all ints) time,
 
 # LC364. Nested List Weight Sum II
 def depthSumInverse(self, nestedList: List[NestedInteger]) -> int:
-    queue = nestedList  # O(n), n = total number of elements
-    s1, s2, q1 = 0, 0, []  # return, level sum, level queue
+    queue = nestedList  ## O(n), n = total number of elements
+    res, s2, q1 = 0, 0, []  # return, level sum, level queue
     while queue:  # BFS
         e = queue.pop()
         if e.isInteger(): s2 += e.getInteger()
         else: q1.extend(e.getList())
         if not queue:
-            s1 += s2 # keep add same value to simulate weight
+            res += s2 # keep add same value to simulate weight
             queue, q1 = q1, []
-    return s1
+    return res
 
 # LC238. Product of Array Except Self, top100
 def productExceptSelf(self, nums: List[int]) -> List[int]:
@@ -47,20 +57,6 @@ def productExceptSelf(self, nums: List[int]) -> List[int]:
         ret[i] = ret[i] * tmp
         tmp *= nums[i]
     return ret
-
-# LC1868. Product of Two Run-Length Encoded Arrays
-def findRLEArray(self, encoded1: List[List[int]], encoded2: List[List[int]]) -> List[List[int]]:
-    res, l, r = [], 0, 0   # O(n + m), counts of unique numbers
-    while encoded1[-1][-1] != 0:
-        prod = encoded1[l][0] * encoded2[r][0]
-        low = min(encoded1[l][1], encoded2[r][1])
-        if res and res[-1][0] == prod: res[-1][1] += low  # extend freq if same value
-        else: res.append([prod, low])
-        encoded1[l][1] -= low  # minus the finished range
-        encoded2[r][1] -= low
-        if encoded1[l][1] == 0: l += 1
-        if encoded2[r][1] == 0: r += 1
-    return res
 
 # LC932. Beautiful Array
 # Given a beautiful array A: A*c, A + c, and delete elements from A are still beautiful.
@@ -110,6 +106,16 @@ def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
         if len(showed) == k: showed.remove(nums[idx - k])
         showed.add(v)
     return False
+
+# LC2090. K Radius Subarray Averages
+def getAverages(self, nums: List[int], k: int) -> List[int]:
+    ans = [-1]*len(nums)
+    rsm, r = 0, 2*k+1 # range sum, 2k elements on both sides and center
+    for i, x in enumerate(nums):
+        rsm += x
+        if i >= r: rsm -= nums[i-r]  # i is 0 index based
+        if i+1 >= r: ans[i-k] = rsm // r  # i is 0 index based, i+1 is no. of elementsF
+    return ans
 
 # LC274. H-Index
 def hIndex(self, citations: List[int]) -> int:  # O(n), better than sorting O(nlogn)
@@ -179,27 +185,6 @@ def findPairs(self, nums: List[int], k: int) -> int:
         elif k == 0 and counter[x] > 1: result += 1
     return result
 
-# LC26. Remove Duplicates from Sorted Array
-def removeDuplicates(self, nums: List[int]) -> int:
-    i = 0  # 2 pointers
-    for j in range(1, len(nums)):
-        if nums[j] != nums[i]:  # if equal, we keep going without doing anything.
-            i += 1
-            nums[i] = nums[j]
-    return i+1
-
-# LC80. Remove Duplicates from Sorted Array II
-def removeDuplicates(self, nums: List[int]) -> int:
-    j, count = 1, 1
-    for i in range(1, len(nums)):
-        if nums[i] == nums[i - 1]: count += 1
-        else: count = 1
-
-        if count <= 2:
-            nums[j] = nums[i]
-            j += 1
-    return j
-
 # LC765. Couples Holding Hands
 def minSwapsCouples(self, row):  # O(n)
     idxs = {x:i for (i,x) in enumerate(row)}
@@ -244,21 +229,6 @@ def addToArrayForm(self, num: List[int], k: int) -> List[int]:
         k, num[i] = divmod(num[i] + k, 10)  # treat k as carry
     return [int(i) for i in str(k)] + num if k else num
 
-# LC1231. Divide Chocolate
-def maximizeSweetness(self, A, K):
-    left, right = 1, sum(A) // (K + 1)
-    while left < right:
-        mid = (left + right + 1) // 2
-        cur = cuts = 0
-        for a in A: ## doing cuts now
-            cur += a
-            if cur >= mid:
-                cuts += 1
-                cur = 0
-        if cuts > K: left = mid
-        else: right = mid - 1
-    return right
-
 # LC442. Find All Duplicates in an Array
 def findDuplicates(self, nums: List[int]) -> List[int]:  # run it again to restore
     res = []
@@ -273,7 +243,7 @@ def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
     set2 = set(nums2)
     return list(set2 & set1)
 
-# LC448. Find All Numbers Disappeared in an Array
+# LC448. Find All Numbers Disappeared in an Array - missing in [1, n]
 def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
     for i in range(len(nums)):
         index = abs(nums[i]) - 1
@@ -491,29 +461,6 @@ def unhappyFriends(self, n: int, preferences: List[List[int]], pairs: List[List[
                 break
     return res
 
-# LC611. Valid Triangle Number
-def triangleNumber(self, nums: List[int]) -> int:
-    n = len(nums)
-    nums.sort()
-    count = 0
-    for i in range(n-1,1,-1):
-        hi, lo = i - 1, 0
-        while lo < hi:
-            if nums[hi]+nums[lo] > nums[i]:
-                count += hi - lo
-                hi -= 1
-            else: lo += 1
-    return count
-
-
-
-
-
-
-
-
-
-
 # LC315. Count of Smaller Numbers After Self  # BBG hard
 def countSmaller(self, nums: List[int]) -> List[int]:
     sorted_arr = [] # O(nlogn)
@@ -581,7 +528,3 @@ def minCost(self, s: str, cost: List[int]) -> int:
         res += min(max_cost, cost[i]) # add min first, then update max next line
         max_cost = max(max_cost, cost[i]) # this ensures max is not added
     return res
-
-
-
-

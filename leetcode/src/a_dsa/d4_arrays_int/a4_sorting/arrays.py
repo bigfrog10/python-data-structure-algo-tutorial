@@ -29,6 +29,27 @@ def sortedSquares(self, nums: List[int]) -> List[int]: # O(n)
         result[i] = square * square
     return result
 
+# LC26. Remove Duplicates from Sorted Array
+def removeDuplicates(self, nums: List[int]) -> int:
+    i = 0  # 2 pointers
+    for j in range(1, len(nums)):
+        if nums[j] != nums[i]:  # if equal, we keep going without doing anything.
+            i += 1
+            nums[i] = nums[j]
+    return i+1
+
+# LC80. Remove Duplicates from Sorted Array II
+def removeDuplicates(self, nums: List[int]) -> int:
+    j, count = 1, 1
+    for i in range(1, len(nums)):
+        if nums[i] == nums[i - 1]: count += 1
+        else: count = 1
+
+        if count <= 2:
+            nums[j] = nums[i]
+            j += 1
+    return j
+
 # LC896. Monotonic Array
 def isMonotonic(self, A: List[int]) -> bool:
     increasing = decreasing = True  # so all equals is true
@@ -38,9 +59,9 @@ def isMonotonic(self, A: List[int]) -> bool:
         if not increasing and not decreasing: return False
     return True
 
-# LC2071. Maximum Number of Tasks You Can Assign
+# LC2071. Maximum Number of Tasks You Can Assign - with pills
 def maxTaskAssign(self, tasks: List[int], workers: List[int], pills: int, strength: int) -> int:
-from sortedcontainers import SortedList  # O(nlogn * logn)
+    from sortedcontainers import SortedList  # O(nlogn * logn)
     tasks.sort()  # sort once, small to large
     workers.sort()
     def check_valid(ans):  # can finish "ans" tasks or not
@@ -130,6 +151,13 @@ def sortArrayByParity(self, nums: List[int]) -> List[int]:
         if nums[i] % 2 == 0: i += 1
         if nums[j] % 2 == 1: j -= 1
     return nums
+
+# LC1331. Rank Transform of an Array
+def arrayRankTransform(self, arr: List[int]) -> List[int]:  # O(nlogn)
+    rank = {}
+    for a in sorted(arr):
+        rank.setdefault(a, len(rank) + 1)  # if not there, use this value
+    return map(rank.get, arr)
 
 # LC665. Non-decreasing Array
 def checkPossibility(self, nums: List[int]) -> bool:
@@ -263,9 +291,4 @@ def findLeastNumOfUniqueInts(self, arr: List[int], k: int) -> int:
         else: break
     return len(counts) - len(removals)
 
-# LC1331. Rank Transform of an Array
-def arrayRankTransform(self, arr: List[int]) -> List[int]:  # O(nlogn)
-    rank = {}
-    for a in sorted(arr):
-        rank.setdefault(a, len(rank) + 1)  # if not there, use this value
-    return map(rank.get, arr)
+

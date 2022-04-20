@@ -67,7 +67,6 @@ def friendRequests(self, n: int, restrictions: List[List[int]], requests: List[L
         else:
             union(p1, p2)
             ans.append(True)
-
     return ans
 
 # LC399. Evaluate Division
@@ -292,6 +291,31 @@ def shortestAlternatingPaths(self, n: int, red_edges: List[List[int]], blue_edge
                 graph[node][opp_color].remove(child)
                 q.append((child, opp_color))
     return [r if r != math.inf else -1 for r in res]
+
+# LC834. Sum of Distances in Tree
+def sumOfDistancesInTree(self, N: int, edges: List[List[int]]) -> List[int]:
+    tree = collections.defaultdict(set)  # it's really a graph
+    res = [0] * N
+    count = [1] * N  # count[i] is the total number of nodes in subtree i, which also includes the node i itself
+    for i, j in edges:
+        tree[i].add(j)
+        tree[j].add(i)
+
+    def dfs(root, pre):
+        for i in tree[root]:
+            if i != pre:
+                dfs(i, root)
+                count[root] += count[i]
+                res[root] += res[i] + count[i]
+
+    def dfs2(root, pre):
+        for i in tree[root]:
+            if i != pre:
+                res[i] = res[root] - count[i] + N - count[i]
+                dfs2(i, root)
+    dfs(0, -1)
+    dfs2(0, -1)
+    return res
 
 # Merge Directed graph nodes if there is only 1 parent, and that parent has 1 child.
 def merge(adj_map: dict):  # parent -> children, such 'A' -> ['B', 'C']

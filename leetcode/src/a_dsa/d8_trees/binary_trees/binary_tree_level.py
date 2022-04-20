@@ -107,8 +107,6 @@ def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
         level = [kid for node in level for kid in (node.left, node.right) if kid]
     return averages
 
-
-
 # LC103. Binary Tree Zigzag Level Order Traversal
 def zigzagLevelOrder(self, root):
     ans, row, drxn = [], [root], 1
@@ -158,5 +156,3 @@ def isCousins(self, root: TreeNode, x: int, y: int) -> bool:
         if x in p and y in p and p[x] != p[y]: return True
         stk = [child for node in stk for child in (node.left,node.right) if child]
     return False
-
-

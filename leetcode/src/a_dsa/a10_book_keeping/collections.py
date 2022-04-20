@@ -16,16 +16,6 @@ class SparseVector:
             elif self.pairs[p][0] < vec.pairs[q][0]: p += 1
             else: q += 1
         return result
-class SparseVector:
-    def __init__(self, nums: List[int]):
-        self.sparse = {}  # slow down with hash
-        for i, n in enumerate(nums):
-            if n != 0: self.sparse[i] = n
-    def dotProduct(self, vec: 'SparseVector') -> int:
-        dot = 0
-        for i, n in self.sparse.items():
-            if i in vec.sparse: dot += n * vec.sparse[i]
-        return dot
 
 # LC380. Insert Delete GetRandom O(1), RandomizedSet, top100
 import random
@@ -133,6 +123,19 @@ class KthLargest:
         if len(self.nums) < self.k: heapq.heappush(self.nums, val)
         elif val > self.nums[0]: heapq.heapreplace(self.nums, val)
         return self.nums[0]  # min, which is the kth largest
+
+# LC1865. Finding Pairs With a Certain Sum
+class FindSumPairs:
+    def __init__(self, nums1: List[int], nums2: List[int]):
+        self.freq1 = Counter(nums1)
+        self.freq2 = Counter(nums2)
+        self.nums2 = nums2  # for index purpose
+    def add(self, index: int, val: int) -> None:
+        self.freq2[self.nums2[index]] -= 1  # Remove old one
+        self.nums2[index] += val
+        self.freq2[self.nums2[index]] += 1  # Count new one
+    def count(self, tot: int) -> int:
+        return sum(val * self.freq2[tot - key] for key, val in self.freq1.items())
 
 # LC535. Encode and Decode TinyURL
 from random import choices
@@ -273,18 +276,7 @@ class NestedIterator:
             # the stack in reverse order.
             self.stack.extend(reversed(self.stack.pop().getList()))
 
-# LC1865. Finding Pairs With a Certain Sum
-class FindSumPairs:
-    def __init__(self, nums1: List[int], nums2: List[int]):
-        self.freq1 = Counter(nums1)
-        self.freq2 = Counter(nums2)
-        self.nums2 = nums2  # for index purpose
-    def add(self, index: int, val: int) -> None:
-        self.freq2[self.nums2[index]] -= 1  # Remove old one
-        self.nums2[index] += val
-        self.freq2[self.nums2[index]] += 1  # Count new one
-    def count(self, tot: int) -> int:
-        return sum(val * self.freq2[tot - key] for key, val in self.freq1.items())
+
 
 # LC244. Shortest Word Distance II
 class WordDistance:
