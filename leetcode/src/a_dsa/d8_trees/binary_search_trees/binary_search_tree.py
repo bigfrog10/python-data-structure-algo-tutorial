@@ -37,7 +37,7 @@ def closestValue(self, root: Optional[TreeNode], target: float) -> int: # O(H)
         root = root.left if target < root.val else root.right
     return closest
 
-# LC1305. All Elements in Two Binary Search Trees, merge trees
+# LC1305. All Elements in Two Binary Search Trees - merge trees, 2 bst, return sorted elem list
 def getAllElements(self, root1: TreeNode, root2: TreeNode) -> List[int]:
     stack1, stack2, output = [], [], []  # O(m + n)
     while root1 or root2 or stack1 or stack2:
@@ -78,8 +78,7 @@ def isValidBST(self, root: TreeNode) -> bool:
     def validate(node, low=-math.inf, high=math.inf):
         if not node: return True
         if node.val <= low or node.val >= high: return False
-        return validate(node.right, node.val, high) and\
-               validate(node.left, low, node.val)
+        return validate(node.right, node.val, high) and validate(node.left, low, node.val)
     return validate(root)
 
 # LC1038. Binary Search Tree to Greater Sum Tree
@@ -144,16 +143,6 @@ def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -
         else:
             return root
 
-# LC897. Increasing Order Search Tree
-def increasingBST(self, root: TreeNode) -> TreeNode:  # O(n) runtime, O(H) space
-    def rearrange(node, tail):
-        if not node: return tail
-        res = rearrange(node.left, node)  # left tree -> link list + root
-        node.left = None
-        node.right = rearrange(node.right, tail)  # right tree -> link list + tail
-        return res
-    return rearrange(root, None)
-
 # LC95. Unique Binary Search Trees II
 def generateTrees(self, n: int) -> List[Optional[TreeNode]]:  # O(n * catalan number), O(4^n)
     def trees(first, last):  # g(n) = sum [g(i-1) * g(n-i)] i=1..n, g(0) = g(1) = 1
@@ -163,7 +152,7 @@ def generateTrees(self, n: int) -> List[Optional[TreeNode]]:  # O(n * catalan nu
                 for right in trees(root+1, last)] or [None]
     return trees(1, n)
 
-# LC669. Trim a Binary Search Tree
+# LC669. Trim a Binary Search Tree - keep nodes with given range
 def trimBST(self, root: Optional[TreeNode], low: int, high: int) -> Optional[TreeNode]:
     def trim(node):  # O(n) time and space
         if not node: return None
@@ -184,7 +173,7 @@ def numTrees(self, n: int) -> int:  # O(4^n / n^(3/2)), Catalan numbers G_n
     return G[n]
 
 # LC450. Delete Node in a BST
-def deleteNode(self, root, key):
+def deleteNode(self, root, key):  # O(H)
     def DFS(node, target):
         if not node: return None
         if node.val == target:

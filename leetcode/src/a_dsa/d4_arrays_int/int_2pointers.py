@@ -15,7 +15,7 @@ def longestOnes(self, nums: List[int], K: int) -> int:
 def medianSlidingWindow(self, nums: List[int], k: int) -> List[float]:  # O(nk)
     window = sorted(nums[:k])
     medians = []
-    for a, b in zip(nums, nums[k:] + [0]):
+    for a, b in zip(nums, nums[k:] + [0]):  # add 0 to add last value
         medians.append((window[k//2] + window[~(k//2)]) / 2.)
         window.remove(a)  # O(k)
         bisect.insort(window, b) # O(k)
@@ -46,6 +46,16 @@ def trap(self, heights: List[int]) -> int: # 2 pointers, O(n)
             right -= 1
     return ret
 
+# LC2090. K Radius Subarray Averages
+def getAverages(self, nums: List[int], k: int) -> List[int]:
+    ans = [-1]*len(nums)
+    rsm, r = 0, 2*k+1 # range sum, 2k elements on both sides and center
+    for i, x in enumerate(nums):
+        rsm += x
+        if i >= r: rsm -= nums[i-r]  # i is 0 index based
+        if i+1 >= r: ans[i-k] = rsm // r  # i is 0 index based, i+1 is no. of elementsF
+    return ans
+
 # LC11. Container With Most Water
 def maxArea(self, height: List[int]) -> int:
     i, j = 0, len(height) - 1
@@ -55,8 +65,6 @@ def maxArea(self, height: List[int]) -> int:
         if height[i] < height[j]: i += 1
         else: j -= 1
     return water
-
-
 
 # LC1248. Count Number of Nice Subarrays
 def numberOfSubarrays(self, nums: List[int], k: int) -> int:

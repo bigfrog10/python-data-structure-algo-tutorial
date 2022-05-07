@@ -53,7 +53,7 @@ def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNod
     second.next = second.next.next
     return dummy.next
 
-# LC203. Remove Linked List Elements
+# LC203. Remove Linked List Elements - by value
 def removeElements(self, head: ListNode, val: int) -> ListNode:
     sentinel = ListNode(0, head)
     prev, curr = sentinel, head
@@ -63,7 +63,7 @@ def removeElements(self, head: ListNode, val: int) -> ListNode:
         curr = curr.next
     return sentinel.next
 
-# LC83. Remove Duplicates from Sorted List
+# LC83. Remove Duplicates from Sorted List - keep one dupe copy
 def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
     curr = head
     while curr and curr.next:
@@ -71,21 +71,16 @@ def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
         else: curr = curr.next
     return head
 
-# LC82. Remove Duplicates from Sorted List II  # BBG
-def deleteDuplicates(self, head: ListNode) -> ListNode:
-    pred = sentinel = ListNode(0, head)
+# LC82. Remove Duplicates from Sorted List II - remove all dupes
+def deleteDuplicates(self, head: ListNode) -> ListNode:  # O(n)
+    prev = dummy = ListNode(-1, head)
     while head:
-        # if it's a beginning of duplicates sublist
-        # skip all duplicates
-        if head.next and head.val == head.next.val:
-            # move till the end of duplicates sublist
-            while head.next and head.val == head.next.val:
-                head = head.next
-            pred.next = head.next # skip all duplicates
-        # otherwise, move predecessor
-        else: pred = pred.next
+        while head.next and head.val == head.next.val:
+            head = head.next  # at the end, head is last dupe elem
+        if prev.next == head:prev = head  # no dupe
+        else:prev.next = head.next  # has dupe, skip them
         head = head.next
-    return sentinel.next
+    return dummy.next
 
 # LC237. Delete Node in a Linked List
 def deleteNode(self, node):

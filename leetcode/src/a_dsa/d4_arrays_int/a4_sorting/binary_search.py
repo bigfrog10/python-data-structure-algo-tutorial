@@ -1,7 +1,7 @@
 import bisect
 from typing import List
 
-# LC1539. Kth Missing Positive Number
+# LC1539. Kth Missing Positive Number - from 1
 def findKthPositive(self, arr, k):  # O(logn)
     beg, end = 0, len(arr)
     while beg < end:
@@ -14,7 +14,7 @@ def findKthPositive(self, arr, k):  # O(logn)
 # so after index l - 1 , we need to find k - (A[l-1] - (l-1) - 1) missing numbers, i.e. k - A[l-1] + l missing numbers
 # At index l - 1, our number is A[l-1]. Add them up, the target number will be A[l-1] + k - A[l-1] + l, i.e. k + l;
 
-# LC1060. Missing Element in Sorted Array
+# LC1060. Missing Element in Sorted Array - kth missing from the left start value
 def missingElement(self, nums: List[int], k: int) -> int:  # logn
     # Return how many numbers are missing until nums[idx]
     missing = lambda idx: nums[idx] - nums[0] - idx
@@ -29,8 +29,6 @@ def missingElement(self, nums: List[int], k: int) -> int:  # logn
         else: right = pivot
     # kth missing number is greater than nums[left - 1] and less than nums[left]
     return nums[left - 1] + k - missing(left - 1) # k - missing(left-1) is the diff
-
-
 
 # LC658. Find K Closest Elements - arround x in the array
 def findClosestElements(self, A, k, x): # O(logn + k)
@@ -64,31 +62,7 @@ def searchRange1(self, nums: List[int], target: int) -> List[int]:
     right = bisect.bisect(nums, target)  # the index right after target
     return [left, right - 1]
 
-# LC410. Split Array Largest Sum
-def splitArray(self, nums: List[int], m: int) -> int:
-    l, r = max(nums), sum(nums)
-    while l < r:
-        mid = (l + r) // 2
-        count, cur = 1, 0
-        for n in nums:
-            cur += n
-            if cur > mid:
-                count += 1
-                cur = n
-        if count > m: l = mid + 1
-        else: r = mid
-    return l
 
-# LC875. Koko Eating Bananas
-def minEatingSpeed(self, piles: List[int], h: int) -> int:
-    left, right = 1, max(piles)  # we start 1 because we want min value
-    while left < right:
-        mid = left + (right - left) // 2
-        # ceiling = (x - 1) // q + 1
-        counts = sum((p-1) // mid + 1 for p in piles)
-        if counts > h: left = mid + 1  # we split too much, so try to split less
-        else: right = mid  # we reduce this to get min
-    return left
 
 # LC278. First Bad Version
 def firstBadVersion(self, n):
@@ -98,56 +72,6 @@ def firstBadVersion(self, n):
         if isBadVersion(mid): end = mid  # keep end side is bad
         else: start = mid + 1  # start side is after good
     return start
-
-# LC33. Search in Rotated Sorted Array, top100
-def search(self, nums: List[int], target: int) -> int:
-    start, end = 0, len(nums) - 1
-    while start <= end:
-        mid = (start + end) // 2
-        if nums[mid] == target: return mid
-        elif nums[mid] >= nums[start]:
-            if nums[start] <= target < nums[mid]: end = mid - 1
-            else: start = mid + 1  # cover 2 cases, target <> mid
-        else:
-            if nums[mid] < target <= nums[end]: start = mid + 1
-            else: end = mid - 1
-    return -1
-
-# LC81. Search in Rotated Sorted Array II
-def search(self, nums: List[int], target: int) -> bool:  # O(n) worst case
-    start, end = 0, len(nums) - 1
-    while start <= end:
-        mid = (start + end) // 2
-        if nums[mid] == target: return True
-        elif nums[mid] > nums[start]:
-            if nums[start] <= target < nums[mid]: end = mid - 1
-            else: start = mid + 1  # cover 2 cases, target <> mid
-        elif nums[mid] < nums[start]:
-            if nums[mid] < target <= nums[end]: start = mid + 1
-            else: end = mid - 1
-        else:  # equal and not target, could use a while. This is O(n)
-            start += 1  # can't use mid, since it could jump out of range due to rotation
-    return False
-
-# LC153. Find Minimum in Rotated Sorted Array
-def findMin(self, nums: List[int]) -> int:
-    start, end = 0, len(nums) - 1
-    while start < end:
-        mid = (start + end) // 2
-        if nums[mid] < nums[end]: end = mid
-        else: start = mid + 1
-    return nums[start]
-
-# LC154. Find Minimum in Rotated Sorted Array II
-def findMin(self, nums: List[int]) -> int:
-    low, high = 0, len(nums)-1
-    while high > low:
-        pivot = low + (high - low) // 2
-        if nums[pivot] < nums[high]: high = pivot  # we want eliminate higher values
-        elif nums[pivot] > nums[high]: low = pivot + 1  # pivot is on left higher values
-        else: high -= 1  # have to go slowly since min could be between
-    # the 'low' and 'high' index converge to the inflection point.
-    return nums[low]
 
 # LC540. Single Element in a Sorted Array - find it in log time
 def singleNonDuplicate(self, nums: List[int]) -> int:  # simplest and fast
@@ -217,6 +141,7 @@ def searchInsert(self, nums: List[int], target: int) -> int:
         if target < nums[pivot]: right = pivot - 1
         else: left = pivot + 1
     return left
+# return bisect.bisect_left(nums, target)
 
 # LC704. Binary Search
 def search(self, nums: List[int], target: int) -> int:
@@ -242,6 +167,7 @@ class HitCounter:
         self.data = self.data[idx:]
         return ret
 
+
 def closest(arr: list, target: int):
     if not arr:
         return None
@@ -259,7 +185,6 @@ def closest(arr: list, target: int):
     ld = abs(arr[left] - target)
     rd = abs(arr[right] - target)
     return arr[left] if ld < rd else arr[right]
-
 
 print(closest([1, 2, 3], 2))  # 2
 print(closest([1, 4, 6], 3))  # 4

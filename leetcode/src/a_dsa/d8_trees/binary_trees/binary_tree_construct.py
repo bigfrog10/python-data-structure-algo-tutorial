@@ -39,6 +39,19 @@ class Codec:
         kv = json.loads(data)
         return dict_to_node(kv)
 
+# LC1110. Delete Nodes And Return Forest - delete tree nodes
+def delNodes(self, root: Optional[TreeNode], to_delete: List[int]) -> List[TreeNode]:
+    res, to_delete_set = [], set(to_delete)
+    def dfs(root, is_root):
+        if not root: return None
+        root_deleted = root.val in to_delete_set
+        if is_root and not root_deleted: res.append(root)
+        root.left = dfs(root.left, root_deleted) # if root is deleted, then left and right are roots.
+        root.right = dfs(root.right, root_deleted)
+        return None if root_deleted else root
+    dfs(root, True)
+    return res
+
 # LC919. Complete Binary Tree Inserter
 class CBTInserter:
     # Store tree nodes to a list self.tree in bfs order.
@@ -59,6 +72,18 @@ class CBTInserter:
     def get_root(self) -> Optional[TreeNode]:
         return self.tree[0]
 
+# LC114. Flatten Binary Tree to Linked List - pre-order
+def flatten(self, root: Optional[TreeNode]) -> None:  # O(n), O(1)
+    node = root
+    while node:
+        if node.left:
+            rightmost = node.left
+            while rightmost.right:  # Find the rightmost node
+                rightmost = rightmost.right
+            rightmost.right = node.right  # predecessor
+            node.right, node.left = node.left, None
+        node = node.right  # This is original node.left
+
 # LC105. Construct Binary Tree from Preorder and Inorder Traversal
 def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
     if not preorder: return None
@@ -71,18 +96,6 @@ def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
         root.right = rec(mid+1, rightpt)
         return root
     return rec(0, len(inorder)-1)
-
-# LC114. Flatten Binary Tree to Linked List - pre-order
-def flatten(self, root: Optional[TreeNode]) -> None:  # O(n), O(1)
-    node = root
-    while node:
-        if node.left:
-            rightmost = node.left
-            while rightmost.right:  # Find the rightmost node
-                rightmost = rightmost.right
-            rightmost.right = node.right  # predecessor
-            node.right, node.left = node.left, None
-        node = node.right  # This is original node.left
 
 # LC106. Construct Binary Tree from Inorder and Postorder Traversal  # BBG
 def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:

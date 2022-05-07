@@ -54,9 +54,9 @@ def subtreeWithAllDeepest(self, root: TreeNode) -> TreeNode:
         else: return l[0] + 1, root
     return deep(root)[1]
 
-# LC2096. Step-By-Step Directions From a Binary Tree Node to Another
+# LC2096. Step-By-Step Directions From a Binary Tree Node to Another - LR direction
 def getDirections(self, root: Optional[TreeNode], startValue: int, destValue: int) -> str:
-    def find(n: TreeNode, val: int, path: List[str]) -> bool:
+    def find(n: TreeNode, val: int, path: List[str]) -> bool:  # root to this node
         if n.val == val:
             return True
         if n.left and find(n.left, val, path):

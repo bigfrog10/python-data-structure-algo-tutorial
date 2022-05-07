@@ -45,20 +45,20 @@ def nextGreaterElement(self, n: int) -> int:
     ret = int(''.join(digits))
     return ret if ret < 1 << 31 else -1
 
-# LC788. Rotated Digits
+# LC788. Rotated Digits - num of good integers, strobo
 def rotatedDigits(self, N: int) -> int:  # O(logn)
     s1, s2 = {0, 1, 8}, {0, 1, 8, 2, 5, 6, 9}
     res, s = 0, set()
     N = list(map(int, str(N)))  # 157 -> [1, 5, 7]
-    for i, v in enumerate(N):
-        for j in range(v):
+    for i, v in enumerate(N):  # go through each digit, 1, 5, 7
+        for j in range(v):  # for 0, or 1 and then next digit, 0, 1, 2, 3, 4, ...
             if j in s2 and s.issubset(s2): # there are n-i-1 digits remain
                 res += 7**(len(N) - i - 1)  # combinations of picking from s2
             if j in s1 and s.issubset(s1):
                 res -= 3**(len(N) - i - 1)  # combinations of s1, same number, so discount
         if v not in s2: return res  # if it's 3, 4, 7, then we can't do it after this number
         s.add(v)
-    return res + (s.issubset(s2) and not s.issubset(s1))
+    return res + (s.issubset(s2) and not s.issubset(s1))  # last digit
 
 # LC2081. Sum of k-Mirror Numbers
 def kMirror(self, k: int, n: int) -> int:
@@ -163,7 +163,7 @@ def restoreIpAddresses(self, s: str) -> List[str]:
     add_dot([], 0)
     return res
 
-# LC246. Strobogrammatic Number
+# LC246. Strobogrammatic Number - if it is such a number
 def isStrobogrammatic(self, num: str) -> bool:
     # only 0, 1, 6, 8, 9 works. 6 and 9 are paired
     rotates = {'0': '0', '1': '1', '8': '8', '6': '9', '9': '6'}
@@ -175,7 +175,7 @@ def isStrobogrammatic(self, num: str) -> bool:
         right -= 1
     return True
 
-# LC247. Strobogrammatic Number II
+# LC247. Strobogrammatic Number II - return all results
 def findStrobogrammatic(self, n: int) -> List[str]:  # O(5^(n/2) * n)
     # set of 0 1 6 8 9
     ret = [''] if n % 2 == 0 else ['0', '1', '8']  # start from center
@@ -223,6 +223,14 @@ def isHappy(self, n: int) -> bool:
         n = a
     return n == 1
 
+# LC263. Ugly Number
+def isUgly(self, num: int) -> bool:
+    for p in 2, 3, 5:
+        while num % p == 0 < num:
+            num /= p
+    return num == 1
+
+
 # LC279. Perfect Squares, top100. minimal -> BFS
 def numSquares(self, n):
     square_nums = [i * i for i in range(1, int(n**0.5)+1)]  # O(sqrt(n)) space and runtime
@@ -238,7 +246,7 @@ def numSquares(self, n):
         queue = next_queue
     return level
 
-# LC402. Remove K Digits
+# LC402. Remove K Digits - int remove digits to get min
 def removeKdigits(self, num: str, k: int) -> str:
     numStack = []
     for digit in num:  # monotone increasing
@@ -316,8 +324,6 @@ def countNumbersWithUniqueDigits(self, n: int) -> int:
         res += cnt
     return res
 
-
-
 # LC1842. Next Palindrome Using Same Digits
 def nextPalindrome(self, num: str) -> str:
     n = len(num)
@@ -355,7 +361,6 @@ def mySqrt(self, x: int) -> int:  # This is a new pattern
         else: left = mid
     return left
 
-
 # LC343. Integer Break - 2 ** 3 < 3 ** 2, use derivative to know max x = e, break integer to factors
 def integerBreak(self, n: int) -> int:
     if n == 2 or n == 3: return n - 1
@@ -366,9 +371,6 @@ def integerBreak(self, n: int) -> int:
 # LC1025. Divisor Game # BBG
 def divisorGame(self, N: int) -> bool:
     return N & 1 == 0
-
-
-
 
 # LC172. Factorial Trailing Zeroes
 def trailingZeroes(self, n: int) -> int:
@@ -417,4 +419,3 @@ def consecutiveNumbersSum(self, N: int) -> int:
         if m % k == 0: count += 1
         k += 1
     return count
-

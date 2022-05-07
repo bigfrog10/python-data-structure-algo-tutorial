@@ -39,7 +39,31 @@ def maximizeSweetness(self, A, K):
         else: right = mid - 1
     return right
 
-# LC719. Find K-th Smallest Pair Distance - kth pair
+# LC162. Find Peak Element - return peak index, array peak element
+def findPeakElement(self, nums: List[int]) -> int: # logn
+    left, right = 0, len(nums)-1
+    while left < right:
+        mid = (left + right) // 2
+        if nums[mid] > nums[mid+1]: right = mid  # decreasing, so peak is on the other side
+        else: left = mid + 1
+    return left
+
+# LC410. Split Array Largest Sum
+def splitArray(self, nums: List[int], m: int) -> int:
+    l, r = max(nums), sum(nums)
+    while l < r:
+        mid = (l + r) // 2
+        count, cur = 1, 0
+        for n in nums:
+            cur += n
+            if cur > mid:
+                count += 1
+                cur = n
+        if count > m: l = mid + 1
+        else: r = mid
+    return l
+
+# LC719. Find K-th Smallest Pair Distance - kth pair distance
 def smallestDistancePair(self, nums: List[int], k: int) -> int:
     def less_than(x: int) -> int:
         i, pairs = 0, 0 # sliding window starts from i, ends in j
@@ -56,11 +80,32 @@ def smallestDistancePair(self, nums: List[int], k: int) -> int:
         else: high = mid
     return low
 
-# LC162. Find Peak Element - return peak index, array peak element
-def findPeakElement(self, nums: List[int]) -> int: # logn
-    left, right = 0, len(nums)-1
+# LC875. Koko Eating Bananas
+def minEatingSpeed(self, piles: List[int], h: int) -> int:
+    left, right = 1, max(piles)  # we start 1 because we want min value
     while left < right:
-        mid = (left + right) // 2
-        if nums[mid] > nums[mid+1]: right = mid  # decreasing, so peak is on the other side
-        else: left = mid + 1
+        mid = left + (right - left) // 2
+        # ceiling = (x - 1) // q + 1
+        counts = sum((p-1) // mid + 1 for p in piles)
+        if counts > h: left = mid + 1  # we split too much, so try to split less
+        else: right = mid  # we reduce this to get min
     return left
+
+# LC1395. Count Number of Teams - team of 3 solders, increasing or descreasing ratings
+from sortedcontainers import SortedList
+def numTeams(self, rating: List[int]) -> int:  # nlogn
+    def count_low_high(sl, x):
+        lo = sl.bisect_left(x)
+        hi = len(sl) - lo
+        return lo, hi
+
+    result = 0
+    left = SortedList()
+    right = SortedList(rating)
+    for x in rating:  # O(n)
+        right.remove(x)  # logn
+        loL, hiL = count_low_high(left ,x)
+        loR, hiR = count_low_high(right,x)
+        result += loL * hiR + hiL * loR
+        left.add(x)
+    return result

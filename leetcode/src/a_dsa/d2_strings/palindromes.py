@@ -39,7 +39,7 @@ def isValidPalindrome(self, s: str, k: int) -> bool:  # O(n^2) time and space
         else: return min(drop(i+1, j), drop(i, j-1)) + 1
     return drop(0, len(s)-1) <= k
 
-# LC336. Palindrome Pairs
+# LC336. Palindrome Pairs - of a word list
 def palindromePairs(self, words: List[str]) -> List[List[int]]:  # O(nk^2)
     lookup = {w:i for i,w in enumerate(words)}
     res = []
@@ -70,7 +70,7 @@ def countSubstrings(self, s: str) -> int:  # O(n^2)
         total += expand(i, i+1)  # even expansion from double center
     return total
 
-# LC266. Palindrome Permutation - if one
+# LC266. Palindrome Permutation - if any permuatation can be a palindrome
 def canPermutePalindrome(self, s: str) -> bool:  # O(n) runtime, O(1) space
     counts = Counter(s)
     odd_count = sum(1 for k, v in counts.items() if v % 2 != 0)

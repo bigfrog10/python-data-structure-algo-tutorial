@@ -11,7 +11,7 @@ def subarraySum(self, nums: List[int], k: int) -> int:
         counts[cusum] += 1
     return count
 
-# LC523. Continuous Subarray Sum - sum to multiple of k
+# LC523. Continuous Subarray Sum - if exist s.t. sum to multiple of k
 def checkSubarraySum(self, nums: List[int], k: int) -> bool:
     if not nums: return False
     summ, sd = 0, {0: -1}  # [2,4,3] 6, we need -1 for 2-element requirement
@@ -22,18 +22,6 @@ def checkSubarraySum(self, nums: List[int], k: int) -> bool:
             if i - sd[summ] > 1: return True  # [0] 0 if we have =, it returns true but answer is false.
         else: sd[summ] = i
     return False
-
-# LC209. Minimum Size Subarray Sum - min size with sum target
-def minSubArrayLen(self, s: int, nums: List[int]) -> int:  # 2 pointers
-    total = left = 0 # since all numbers are positive, this works.
-    result = len(nums) + 1
-    for right, n in enumerate(nums):
-        total += n
-        while total >= s:
-            result = min(result, right - left + 1)
-            total -= nums[left]
-            left += 1
-    return result if result <= len(nums) else 0
 
 # LC974. Subarray Sums Divisible by K
 def subarraysDivByK(self, A: List[int], K: int) -> int:
@@ -46,6 +34,31 @@ def subarraysDivByK(self, A: List[int], K: int) -> int:
     # so selecting 2 elements has C(C-1) / 2 possibilities.
     return sum(c * (c - 1) // 2 for c in counts.values())
 
+# LC209. Minimum Size Subarray Sum - min size with sum target, all positives
+def minSubArrayLen(self, s: int, nums: List[int]) -> int:  # 2 pointers
+    total = left = 0 # since all numbers are positive, this works.
+    result = len(nums) + 1
+    for right, n in enumerate(nums):
+        total += n
+        while total >= s:
+            result = min(result, right - left + 1)
+            total -= nums[left]
+            left += 1
+    return result if result <= len(nums) else 0
+
+# LC862. Shortest Subarray with Sum at Least K - could be negative
+def shortestSubarray(self, nums: List[int], k: int) -> int:  # O(n) in time and space
+    d = collections.deque([[0, 0]])  # idx and cumu value
+    res, cur = float('inf'), 0
+    for i, a in enumerate(nums):
+        cur += a
+        while d and cur - d[0][1] >= k:
+            res = min(res, i + 1 - d.popleft()[0])
+        # if cur < v, the later on, cur1 - cur > cur1 - v with shorter idx
+        while d and cur <= d[-1][1]: d.pop()  # so d is increasing on cumus
+        d.append([i + 1, cur])
+    return res if res < float('inf') else -1
+
 # LC325. Maximum Size Subarray Sum Equals k
 def maxSubArrayLen(self, nums: List[int], k: int) -> int:  # O(n) time and space
     maxl, cumu, cache = 0, 0, dict()  # cumu -> index
@@ -56,8 +69,6 @@ def maxSubArrayLen(self, nums: List[int], k: int) -> int:  # O(n) time and space
             maxl = max(maxl, i - cache[cumu - k])
         if cumu not in cache: cache[cumu] = i  # maintain earliest index
     return maxl
-
-
 
 # LC548. Split Array with Equal Sum - split 4 sums
 def splitArray(self, nums): # O(n^2)
@@ -77,7 +88,6 @@ def maxSubArray(self, nums: List[int]) -> int:
         total = max(total, nums[i])
         max_total = max(max_total, total)  # this is our goal.
     return max_total
-
 
 # LC643. Maximum Average Subarray I - max window average
 def findMaxAverage(self, nums: List[int], k: int) -> float:
@@ -99,7 +109,29 @@ def findUnsortedSubarray(self, nums: List[int]) -> int:
         if nums[~i] > minv: begin = n - 1 - i  # last seen larger value from right side
     return end - begin + 1
 
-# LC525. Contiguous Array
+# LC2025. Maximum Number of Ways to Partition an Array - to  2 parts with equal sum
+def waysToPartition(self, nums: List[int], k: int) -> int:
+    # https://leetcode.com/problems/maximum-number-of-ways-to-partition-an-array/discuss/1499026/Short-Python-solution-Compute-prefix-sums%3A-O(n)
+    prefix_sums = list(accumulate(nums))
+    total_sum = prefix_sums[-1]
+    # not replace with k, :-1 is because it's half sum, -1 is the other half, [0, 0, 0]
+    best = prefix_sums[:-1].count(total_sum // 2) if total_sum % 2 == 0 else 0
+    # diff = after pivot - before pivot = total sum - prefix_sum * 2, exclude last
+    # [0, 1, 0], 0 requires last exclusion
+    after_counts = Counter(total_sum - 2 * prefix_sum for prefix_sum in prefix_sums[:-1])
+    before_counts = Counter()
+    best = max(best, after_counts[k - nums[0]])  # If we change first num
+    for prefix, x in zip(prefix_sums, nums[1:]):  # O(n)
+        gap = total_sum - 2 * prefix  # diff need to fix
+        after_counts[gap] -= 1
+        before_counts[gap] += 1
+        # k-num[i] is the diff to replace num[i], and the diff of presums
+        # This value, for a fixed i, is the count of indices j with j > i that satisfy gap[j] == k - nums[i],
+        # plus the number of indices j with 1 <= j <= i such that -gap[j] == k - nums[i]
+        best = max(best, after_counts[k - x] + before_counts[x - k])
+    return best
+
+# LC525. Contiguous Array - longest subarray with equal # of 1 and 0
 def findMaxLength(self, nums: List[int]) -> int:
     c2i = {} # store value to index, cache
     maxlen = count = 0

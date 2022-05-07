@@ -1,6 +1,6 @@
 from typing import List
 import itertools
-# LC1428. Leftmost Column with at Least a One - sorted 0/1 matrix
+# LC1428. Leftmost Column with at Least a One - sorted 01 matrix
 def leftMostColumnWithOne(self, binaryMatrix: 'BinaryMatrix') -> int:  # O(n + m), diagonal
     rows, cols = binaryMatrix.dimensions()
     row, col = 0, cols - 1  # upper right corner
@@ -73,28 +73,28 @@ def minAreaRect(self, points: List[List[int]]) -> int:  # O(n^2)
 
 # LC963. Minimum Area Rectangle II
 def minAreaFreeRect(self, points: List[List[int]]) -> float:  # O(n^2)
-        def distSquare(x1,y1,x2,y2): return (x1-x2)**2 + (y1-y2)**2
-        def dist(x1,y1,x2,y2): return sqrt((x1-x2)**2 + (y1-y2)**2)
-        def midPos(x1,y1,x2,y2): return ((x1+x2)/2,(y1+y2)/2)
+    def distSquare(x1,y1,x2,y2): return (x1-x2)**2 + (y1-y2)**2
+    def dist(x1,y1,x2,y2): return sqrt((x1-x2)**2 + (y1-y2)**2)
+    def midPos(x1,y1,x2,y2): return ((x1+x2)/2,(y1+y2)/2)
 
-        linesMap = defaultdict(list) # (len, mid of p1 and p2) => [(p1,p2)], grouping
-        N = len(points)
-        for i in range(N):
-            for j in range(i + 1, N):
-                l = distSquare(*points[i], *points[j])
-                m = midPos(*points[i], *points[j])
-                linesMap[(l, m)].append((i,j))
-        minArea = float("inf")
-        for lines in linesMap.values():
-            if len(lines) < 2: continue
-            M = len(lines)
-            for i in range(M): # try all pairs of lines
-                for j in range(i + 1, M):
-                    p1, p2, p3 = points[lines[i][0]], points[lines[j][0]], points[lines[j][1]]
-                    d1, d2 = dist(*p1, *p2), dist(*p1, *p3)
-                    minArea = min(minArea, d1 * d2)
-                    print(p1, points[lines[i][1]],  p2, p3, minArea)
-        return minArea if minArea != float("inf") else 0
+    linesMap = defaultdict(list) # (len, mid of p1 and p2) => [(p1,p2)], grouping
+    N = len(points)
+    for i in range(N):
+        for j in range(i + 1, N):
+            l = distSquare(*points[i], *points[j])
+            m = midPos(*points[i], *points[j])
+            linesMap[(l, m)].append((i,j))
+    minArea = float("inf")
+    for lines in linesMap.values():
+        if len(lines) < 2: continue
+        M = len(lines)
+        for i in range(M): # try all pairs of lines
+            for j in range(i + 1, M):
+                p1, p2, p3 = points[lines[i][0]], points[lines[j][0]], points[lines[j][1]]
+                d1, d2 = dist(*p1, *p2), dist(*p1, *p3)
+                minArea = min(minArea, d1 * d2)
+                print(p1, points[lines[i][1]],  p2, p3, minArea)
+    return minArea if minArea != float("inf") else 0
 
 # LC1074. Number of Submatrices That Sum to Target - area sum to target
 def numSubmatrixSumTarget(self, A, target):
@@ -118,7 +118,6 @@ def kthSmallest(self, matrix: List[List[int]], k: int) -> int:  # O(klogk) time 
     m, n = len(matrix), len(matrix[0])  # For general, the matrix need not be a square
     minHeap = []  # val, r, c
     for r in range(min(k, m)): heappush(minHeap, (matrix[r][0], r, 0))
-
     ans = -1  # any dummy value
     for i in range(k):
         ans, r, c = heappop(minHeap)
@@ -180,17 +179,12 @@ def multiply(self, A: List[List[int]], B: List[List[int]]) -> List[List[int]]:
             if j == x: C[i][y] += val_A * val_B
     return C
 
-
-
-# LC2033. Minimum Operations to Make a Uni-Value Grid
+# LC2033. Minimum Operations to Make a Uni-Value Grid - uni value, univalue
 def minOperations(self, grid: List[List[int]], x: int) -> int:
-    # https://asvrada.github.io/blog/median-shortest-distance-sum/
-    vals = list(itertools.chain(*grid))  # flatting matrix to array
-    if len(set(val % x for val in vals)) > 1: return -1  # 1 is for min element
-    median = sorted(vals)[len(vals) // 2]  # O(N) possible via "quick select"
+    vals = list(itertools.chain(*grid))  # flatting matrix to array - [[2,4],[6,8]] ->  [2,4,6,8]
+    if len(set(val % x for val in vals)) > 1: return -1  # if we have 2 diff residues, can't do it.
+    median = heapq.nlargest((len(vals)+1) // 2, vals)[-1]  # O(N) possible via "quick select"
     return sum(abs(val - median)//x for val in vals)
-
-
 
 # LC73. Set Matrix Zeroes
 def setZeroes(self, matrix):
@@ -239,6 +233,21 @@ def imageSmoother(self, img: List[List[int]]) -> List[List[int]]:  # O(mn)
 # LC48. Rotate Image
 def rotate(self, A):
     A[:] = zip(*A[::-1])
+def rotate(self, matrix: List[List[int]]) -> None:
+    # divide and conquer, outer borders, one layer at a time
+    def border_rotate(matrix, pi):  # i is the upper right corner, pivot index
+        h = len(matrix) - 2 * pi
+        if h == 0: return # False  # signal time to stop
+        hi = h - 1  # last index from pivot to the other corner
+        last = pi + hi # last index from pivot to the other corner - 1
+        for i in range(hi):  # we stop before the corner
+            tmp = matrix[pi][pi+i]  # upper left corner to tmp
+            matrix[pi][pi+i] = matrix[last - i][pi]  # lower left corner to upper left
+            matrix[last - i][pi] = matrix[last][last-i]  # lower right to lower left
+            matrix[last][last-i] = matrix[pi+i][last]  # upper right to lower right
+            matrix[pi+i][last] = tmp  # upper left, tmp, to upper right
+    for i in range(len(matrix) // 2):
+        border_rotate(matrix, i)
 
 # LC1329. Sort the Matrix Diagonally
 def diagonalSort(self, mat: List[List[int]]) -> List[List[int]]:
@@ -309,9 +318,7 @@ def maximalSquare(self, matrix: List[List[str]]) -> int: # DP
             max_len = max(max_len, dp[i+1, j+1])
     return max_len ** 2
 
-
-
-# LC240. Search a 2D Matrix II
+# LC240. Search a 2D Matrix II - zigzag search
 def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
     if not matrix: return False
     h, w = len(matrix), len(matrix[0])
@@ -322,7 +329,7 @@ def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         else: col += 1
     return False
 
-# LC1351. Count Negative Numbers in a Sorted Matrix
+# LC1351. Count Negative Numbers in a Sorted Matrix - zigzag
 def countNegatives(self, grid: List[List[int]]) -> int:
     m, n = len(grid), len(grid[0])  # O(m + n)
     r, c, cnt = m - 1, 0, 0
@@ -408,32 +415,3 @@ def spiralMatrixIII(self, R, C, r0, c0):
         step_size += 1
         sign *= -1
     return coordinates
-
-def rotate(self, matrix: List[List[int]]) -> None:
-    # divide and conquer, outer borders, one layer at a time
-    def border_rotate(matrix, pi):  # i is the upper right corner, pivot index
-        h = len(matrix) - 2 * pi
-        if h == 0: return # False  # signal time to stop
-        hi = h - 1  # last index from pivot to the other corner
-        last = pi + hi # last index from pivot to the other corner - 1
-        for i in range(hi):  # we stop before the corner
-            tmp = matrix[pi][pi+i]  # upper left corner to tmp
-            matrix[pi][pi+i] = matrix[last - i][pi]  # lower left corner to upper left
-            matrix[last - i][pi] = matrix[last][last-i]  # lower right to lower left
-            matrix[last][last-i] = matrix[pi+i][last]  # upper right to lower right
-            matrix[pi+i][last] = tmp  # upper left, tmp, to upper right
-    for i in range(len(matrix) // 2):
-        border_rotate(matrix, i)
-
-# LC251. Flatten 2D Vector
-class Vector2D:
-    def __init__(self, v: List[List[int]]):
-        self.nums = []
-        for inner_list in v:
-            self.nums.extend(inner_list)
-        self.position = -1
-    def next(self) -> int:
-        self.position += 1
-        return self.nums[self.position]
-    def hasNext(self) -> bool:
-        return self.position + 1 < len(self.nums)

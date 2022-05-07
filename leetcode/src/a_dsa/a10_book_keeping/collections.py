@@ -1,22 +1,4 @@
 
-# LC1570. Dot Product of Two Sparse Vectors
-class SparseVector:
-    def __init__(self, nums: List[int]):
-        self.pairs = []
-        for index, value in enumerate(nums):
-            if value != 0: self.pairs.append([index, value])
-    def dotProduct(self, vec: 'SparseVector') -> int:
-        result = 0
-        p, q = 0, 0
-        while p < len(self.pairs) and q < len(vec.pairs):
-            if self.pairs[p][0] == vec.pairs[q][0]:
-                result += self.pairs[p][1] * vec.pairs[q][1]
-                p += 1
-                q += 1
-            elif self.pairs[p][0] < vec.pairs[q][0]: p += 1
-            else: q += 1
-        return result
-
 # LC380. Insert Delete GetRandom O(1), RandomizedSet, top100
 import random
 class RandomizedSet:
@@ -64,34 +46,6 @@ class RandomizedCollection: # 93%, fast
     def getRandom(self) -> int:
         return random.choice(self.values)
 
-# LC346. Moving Average from Data Stream
-class MovingAverage:
-    def __init__(self, size: int):
-        self.size = size
-        self.queue = deque()
-        self.mv = 0
-    def next(self, val: int) -> float:
-        size, queue = self.size, self.queue
-        queue.append(val)
-        if len(queue) > size:
-            v = queue.popleft()
-            self.mv = self.mv + (val - v) / size
-        else: self.mv = sum(queue) / len(queue)
-        return self.mv
-
-# LC295. Find Median from Data Stream, top100
-class MedianFinder:
-    def __init__(self):
-        self.heaps = [], []  # max heap from smalls, min heap from larges
-    def addNum(self, num: int) -> None:
-        small, large = self.heaps
-        heappush(small, -heappushpop(large, num))
-        if len(large) < len(small): heappush(large, -heappop(small))
-    def findMedian(self) -> float:
-        small, large = self.heaps
-        if len(large) > len(small): return float(large[0])
-        return (large[0] - small[0]) / 2.0
-
 # LC211. Design Add and Search Words Data Structure
 class WordDictionary:  # much faster
     def __init__(self): self.trie = {}
@@ -112,30 +66,35 @@ class WordDictionary:  # much faster
             return '$' in node
         return search_in_node(word, self.trie)
 
-# LC703. Kth Largest Element in a Stream
-class KthLargest:
-    def __init__(self, k, nums):
-        self.nums = nums
-        self.k = k
-        heapq.heapify(self.nums)  # min heap
-        while len(self.nums) > k: heapq.heappop(self.nums) # min popped
-    def add(self, val):
-        if len(self.nums) < self.k: heapq.heappush(self.nums, val)
-        elif val > self.nums[0]: heapq.heapreplace(self.nums, val)
-        return self.nums[0]  # min, which is the kth largest
-
-# LC1865. Finding Pairs With a Certain Sum
-class FindSumPairs:
-    def __init__(self, nums1: List[int], nums2: List[int]):
-        self.freq1 = Counter(nums1)
-        self.freq2 = Counter(nums2)
-        self.nums2 = nums2  # for index purpose
-    def add(self, index: int, val: int) -> None:
-        self.freq2[self.nums2[index]] -= 1  # Remove old one
-        self.nums2[index] += val
-        self.freq2[self.nums2[index]] += 1  # Count new one
-    def count(self, tot: int) -> int:
-        return sum(val * self.freq2[tot - key] for key, val in self.freq1.items())
+# LC676. Implement Magic Dictionary  - one mistake is allowed
+class MagicDictionary(object):
+    def _candidates(self, word):
+        for i in range(len(word)): yield word[:i] + '*' + word[i+1:]  # *ello, h*llo, etc
+    def buildDict(self, words):
+        self.words = set(words)  # O(n)
+        self.near = collections.Counter(cand for word in words
+                                        for cand in self._candidates(word))  # O(nk)
+    def search(self, word):
+        return any(self.near[cand] > 1 or  # case like [hello, hallo] and search for hello
+                   self.near[cand] == 1 and word not in self.words
+                   for cand in self._candidates(word))  # O(len(word))
+class MagicDictionary:
+    def __init__(self): self.trie = {}
+    def buildDict(self, dictionary: List[str]) -> None:
+        for word in dictionary:  # O(mn), m = len(dictionary), n is max word length
+            node = self.trie
+            for letter in word: node = node.setdefault(letter, {})
+            node[None] = None  # word end marker
+    def search(self, word: str) -> bool:  # O(26n)
+        def find(node, i, mistakeAllowed):
+            if i == len(word): return None in node and not mistakeAllowed
+            if word[i] not in node:
+                return any(find(node[letter], i+1, False) for letter in node if letter) if mistakeAllowed else False
+            if mistakeAllowed:
+                return find(node[word[i]], i+1, True) or \
+                       any(find(node[letter], i+1, False) for letter in node if letter and letter != word[i])
+            return find(node[word[i]], i+1, False)
+        return find(self.trie, 0, True)
 
 # LC535. Encode and Decode TinyURL
 from random import choices
@@ -154,46 +113,6 @@ class Codec:
     def decode(self, shortUrl: str) -> str:  # Decodes a shortened URL to its original URL.
         return self.code2url[shortUrl[-7:]]
 
-# LC641. Design Circular Deque
-class MyCircularDeque:
-    def __init__(self, k: int):
-        self.k = k
-        self.arr = [-1] * k  # -1 is required by the problem
-        self.front = 0 # current empty
-        self.rear = 1 # current empty
-        self._size = 0
-    def insertFront(self, value: int) -> bool:
-        if self.isFull(): return False
-        self.arr[self.front] = value
-        self.front = (self.front - 1) % self.k
-        self._size += 1
-        return True
-    def insertLast(self, value: int) -> bool:
-        if self.isFull(): return False
-        self.arr[self.rear] = value
-        self.rear = (self.rear + 1) % self.k
-        self._size += 1
-        return True
-    def deleteFront(self) -> bool:
-        if self.isEmpty(): return False
-        self.front = (self.front + 1) % self.k
-        self.arr[self.front] = -1 # -1 is required by the problem
-        self._size -= 1
-        return True
-    def deleteLast(self) -> bool:
-        if self.isEmpty(): return False
-        self.rear = (self.rear - 1) % self.k
-        self.arr[self.rear] = -1 # -1 is required by the problem
-        self._size -= 1
-        return True
-    def getFront(self) -> int:
-        f = (self.front + 1) % self.k
-        return self.arr[f]
-    def getRear(self) -> int:
-        r = (self.rear - 1 + self.k) % self.k
-        return self.arr[r]
-    def isEmpty(self) -> bool: return self._size == 0
-    def isFull(self) -> bool: return self._size == self.k
 # LC1244. Design A Leaderboard
 class Leaderboard:
     def __init__(self):
@@ -276,8 +195,6 @@ class NestedIterator:
             # the stack in reverse order.
             self.stack.extend(reversed(self.stack.pop().getList()))
 
-
-
 # LC244. Shortest Word Distance II
 class WordDistance:
     def __init__(self, words: List[str]):
@@ -289,7 +206,6 @@ class WordDistance:
         if key in self.memo: return self.memo[key]
         self.memo[key] = min([abs(a - b) for a, b in itertools.product(self.d[word1], self.d[word2])])
         return self.memo[key]
-
 
 # LC642. Design Search Autocomplete System
 from collections import defaultdict
@@ -406,3 +322,15 @@ class BrowserHistory:
             self.idx = len(self.hist) - 1
         return self.hist[self.idx]
 
+# LC251. Flatten 2D Vector
+class Vector2D:
+    def __init__(self, v: List[List[int]]):
+        self.nums = []
+        for inner_list in v:
+            self.nums.extend(inner_list)
+        self.position = -1
+    def next(self) -> int:
+        self.position += 1
+        return self.nums[self.position]
+    def hasNext(self) -> bool:
+        return self.position + 1 < len(self.nums)

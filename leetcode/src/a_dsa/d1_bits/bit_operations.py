@@ -23,7 +23,7 @@ def getSum(self, a: int, b: int) -> int:
     return a if a < max_int else ~(a ^ mask)  # ^ mask revert a's bits
 
 # LC67. Add Binary
-def addBinary(self, a, b):
+def addBinary(self, a: str, b: str) -> str:
     summ, carry = [], 0
     i, j = len(a) - 1, len(b) - 1
     while i >= 0 or j >= 0 or carry:

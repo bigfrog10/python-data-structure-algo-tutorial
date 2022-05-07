@@ -43,7 +43,7 @@ class Solution:
 #         return self.array
         # Knuth, ACP
         for i in range(self.len):
-            rand_idx = random.randint(i, self.len-1)
+            rand_idx = random.randrange(i, self.len)
             # swap generated to the front
             self.n[i], self.n[rand_idx] = self.n[rand_idx], self.n[i]
             # be careful here: https://blog.codinghorror.com/the-danger-of-naivete/

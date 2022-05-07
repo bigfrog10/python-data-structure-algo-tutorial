@@ -58,7 +58,7 @@ def alienOrder(self, words: List[str]) -> str:  # O(total word lengths)
     return ans if len(ans) == len(degrees) else ""  # cyclic ordering
 
 # LC791. Custom Sort String
-def customSortString(self, order: str, s: str) -> str:
+def customSortString(self, order: str, s: str) -> str:  # O(s + t) time and O(t) space
     count = collections.Counter(s)
     ans = []
     for c in order:
@@ -67,8 +67,8 @@ def customSortString(self, order: str, s: str) -> str:
     for c in count: ans.append(c * count[c])
     return "".join(ans)
 
-# LC451. Sort Characters By Frequency
-def frequencySort(self, s: str) -> str:  # O(n)
+# LC451. Sort Characters By Frequency - sort by freq
+def frequencySort(self, s: str) -> str:  # O(n), not nlogn, using bucket sort
     if not s: return s
     counts = collections.Counter(s)  # Determine the frequency of each character.
     max_freq = max(counts.values())
@@ -79,7 +79,7 @@ def frequencySort(self, s: str) -> str:  # O(n)
         for c in buckets[i]: res.append(c * i)
     return "".join(res)
 
-# LC1985. Find the Kth Largest Integer in the Array
+# LC1985. Find the Kth Largest Integer in the Array - find kth largest
 def kthLargestNumber(self, nums: List[str], k: int) -> str:  # O(nlogk)
     pq = [] # min-heap
     for x in nums:

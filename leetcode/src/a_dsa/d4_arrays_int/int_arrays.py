@@ -23,7 +23,7 @@ def findBuildings(self, heights: List[int]) -> List[int]:  # O(n)
     res.reverse()
     return res
 
-# LC339. Nested List Weight Sum
+# LC339. Nested List Weight Sum - top elem has less weight
 def depthSum(self, nestedList: List[NestedInteger]) -> int:  # O(all ints) time, O(D) space
     def dfs(nested_list, depth):
         total = 0
@@ -33,7 +33,7 @@ def depthSum(self, nestedList: List[NestedInteger]) -> int:  # O(all ints) time,
         return total
     return dfs(nestedList, 1)
 
-# LC364. Nested List Weight Sum II
+# LC364. Nested List Weight Sum II - top elem has more weight
 def depthSumInverse(self, nestedList: List[NestedInteger]) -> int:
     queue = nestedList  ## O(n), n = total number of elements
     res, s2, q1 = 0, 0, []  # return, level sum, level queue
@@ -67,7 +67,7 @@ def beautifulArray(self, n: int) -> List[int]:
         res = [i * 2 - 1 for i in res] + [i * 2 for i in res]
     return [i for i in res if i <= n]
 
-# LC1460. Make Two Arrays Equal by Reversing Sub-arrays
+# LC1460. Make Two Arrays Equal by Reversing Sub-arrays - reverse array
 def canBeEqual(self, target: List[int], arr: List[int]) -> bool:
     return collections.Counter(target) == collections.Counter(arr)
 
@@ -97,8 +97,8 @@ def firstMissingPositive(self, nums: List[int]) -> int:  # O(1) space
         if v > 0: return i+1
     return n+1
 
-# LC219. Contains Duplicate II
-def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+# LC219. Contains Duplicate II - duplicates within index range k
+def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:  # O(n) time and O(k) space
     if k == 0: return False
     showed = set()  # if we have 2 same elements with k frame, then we are done.
     for idx, v in enumerate(nums):
@@ -107,15 +107,18 @@ def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
         showed.add(v)
     return False
 
-# LC2090. K Radius Subarray Averages
-def getAverages(self, nums: List[int], k: int) -> List[int]:
-    ans = [-1]*len(nums)
-    rsm, r = 0, 2*k+1 # range sum, 2k elements on both sides and center
-    for i, x in enumerate(nums):
-        rsm += x
-        if i >= r: rsm -= nums[i-r]  # i is 0 index based
-        if i+1 >= r: ans[i-k] = rsm // r  # i is 0 index based, i+1 is no. of elementsF
-    return ans
+# LC1262. Greatest Sum Divisible by Three
+def maxSumDivThree(self, nums: List[int]) -> int:
+    # https://leetcode.com/problems/greatest-sum-divisible-by-three/discuss/431077/JavaC%2B%2BPython-One-Pass-O(1)-space
+    # dp[0] = largest sum which is divisible by 3
+    # dp[1] = largest sum when divided by 3, remainder = 1
+    # dp[2] = largest sum when divided by 3, remainder = 2
+    # dp_cur[(rem + num) % 3] = max(dp_prev[(rem + num) % 3], dp_prev[rem]+num)
+    dp = [0, 0, 0]
+    for a in nums:
+        for i in dp[:]:
+            dp[(i + a) % 3] = max(dp[(i + a) % 3], i + a)
+    return dp[0]
 
 # LC274. H-Index
 def hIndex(self, citations: List[int]) -> int:  # O(n), better than sorting O(nlogn)
@@ -154,28 +157,6 @@ def minCost(self, n: int, cuts: List[int]) -> int:  # O(n^3)
     res = cost(0, n)
     return res
 
-# LC2025. Maximum Number of Ways to Partition an Array
-def waysToPartition(self, nums: List[int], k: int) -> int:
-    # https://leetcode.com/problems/maximum-number-of-ways-to-partition-an-array/discuss/1499026/Short-Python-solution-Compute-prefix-sums%3A-O(n)
-    prefix_sums = list(accumulate(nums))
-    total_sum = prefix_sums[-1]
-    # not replace with k, :-1 is because it's half sum, -1 is the other half, [0, 0, 0]
-    best = prefix_sums[:-1].count(total_sum // 2) if total_sum % 2 == 0 else 0
-    # diff = after pivot - before pivot = total sum - prefix_sum * 2, exclude last
-    # [0, 1, 0], 0 requires last exclusion
-    after_counts = Counter(total_sum - 2 * prefix_sum for prefix_sum in prefix_sums[:-1])
-    before_counts = Counter()
-    best = max(best, after_counts[k - nums[0]])  # If we change first num
-    for prefix, x in zip(prefix_sums, nums[1:]):  # O(n)
-        gap = total_sum - 2 * prefix  # diff need to fix
-        after_counts[gap] -= 1
-        before_counts[gap] += 1
-        # k-num[i] is the diff to replace num[i], and the diff of presums
-        # This value, for a fixed i, is the count of indices j with j > i that satisfy gap[j] == k - nums[i],
-        # plus the number of indices j with 1 <= j <= i such that -gap[j] == k - nums[i]
-        best = max(best, after_counts[k - x] + before_counts[x - k])
-    return best
-
 # LC532. K-diff Pairs in an Array
 def findPairs(self, nums: List[int], k: int) -> int:
     result = 0
@@ -198,18 +179,6 @@ def minSwapsCouples(self, row):  # O(n)
             swap += 1
     return swap
 
-# LC268. Missing Number
-def missingNumber(self, nums: List[int]) -> int:
-    s = sum(nums)
-    n = len(nums)
-    t = n * (n + 1) // 2
-    return t - s
-def missingNumber(self, nums):
-    missing = len(nums)
-    for i, num in enumerate(nums):
-        missing ^= i ^ num
-    return missing
-
 # LC66. Plus One
 def plusOne(self, digits: List[int]) -> List[int]:
     for i in reversed(range(len(digits))):
@@ -223,7 +192,7 @@ def plusOne(self, digits: List[int]) -> List[int]:
 def sumOfUnique(self, nums: List[int]) -> int:
     return sum(a for a, c in collections.Counter(nums).items() if c == 1)
 
-# LC989. Add to Array-Form of Integer
+# LC989. Add to Array-Form of Integer - array + integer
 def addToArrayForm(self, num: List[int], k: int) -> List[int]:
     for i in range(len(num) - 1, -1, -1):
         k, num[i] = divmod(num[i] + k, 10)  # treat k as carry
@@ -237,37 +206,17 @@ def findDuplicates(self, nums: List[int]) -> List[int]:  # run it again to resto
         else: nums[abs(x)-1] *= -1
     return res
 
-# LC349. Intersection of Two Arrays
+# LC349. Intersection of Two Arrays - return unique elems
 def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
     set1 = set(nums1)
     set2 = set(nums2)
     return list(set2 & set1)
-
-# LC448. Find All Numbers Disappeared in an Array - missing in [1, n]
-def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
-    for i in range(len(nums)):
-        index = abs(nums[i]) - 1
-        nums[index] = - abs(nums[index])
-    return [i + 1 for i in range(len(nums)) if nums[i] > 0]
 
 # LC189. Rotate Array
 def rotate(self, nums: List[int], k: int) -> None:
     n = len(nums)
     k = k % n
     nums[k:], nums[:k] = nums[:n-k], nums[n-k:]
-
-# LC287. Find the Duplicate Number  Floyd's Tortoise and Hare (Cycle Detection)
-def findDuplicate(self, nums):  # O(1) space and O(n) time, Floyd's
-    tortoise = hare = nums[0]
-    while True:
-        tortoise = nums[tortoise]
-        hare = nums[nums[hare]]
-        if tortoise == hare: break
-    tortoise = nums[0]
-    while tortoise != hare:  # Find the "entrance" to the cycle.
-        tortoise = nums[tortoise]
-        hare = nums[hare]
-    return hare
 
 # LC169. Majority Element
 def majorityElement(self, nums: List[int]) -> int:  # O(n) runtime and space
@@ -307,9 +256,9 @@ def summaryRanges(self, nums: List[int]) -> List[str]:
             pointer = i+1
     return ans
 
-# LC322. Coin Change
+# LC322. Coin Change - least number of coins to sum up to target
 def coinChange(self, coins: List[int], amount: int) -> int:
-    if amount == 0:  return 0 # 680 ms, it also is O(c^(amount / min(coins)))
+    if amount == 0:  return 0 # 680 ms, it also is O(c^(amount / min(coins))), c is num of coins, power is height
     coins.sort(reverse=True) # we try to put larger coins to reduce numbers of coins
     queue, visited = deque([(0, 0)]), {0}
     while queue:
@@ -352,7 +301,7 @@ def maximumProduct(self, nums: List[int]) -> int:
         elif n < min2: min2 = n
     return max(max1 * max2 * max3, max1 * min1 * min2)
 
-# LC1299. Replace Elements with Greatest Element on Right Side
+# LC1299. Replace Elements with Greatest Element on Right Side - next greater
 def replaceElements(self, arr: List[int]) -> List[int]:
     mx = -1
     for i in range(len(arr))[::-1]:
@@ -369,7 +318,7 @@ def thirdMax(self, nums: List[int]) -> int:
             elif num > v[2]: v = [v[0], v[1], num]
     return max(nums) if float('-inf') in v else v[2]
 
-# LC136. Single Number
+# LC136. Single Number - single nodupe in array
 def singleNumber(self, nums: List[int]) -> int:
     res = 0
     for i in nums: res ^= i
@@ -428,7 +377,7 @@ def minIncrementForUnique(self, nums: List[int]) -> int: # O(n)
             ans += x - dups.pop() # get dup fill in this slot
     return ans
 
-# LC179. Largest Number
+# LC179. Largest Number - after re-arrange array ints
 def largestNumber(self, num):  # O(nlogn)
     num = [str(x) for x in num]
     cmp = lambda x, y: (x > y) - (x < y)  # standard comparator
@@ -509,7 +458,7 @@ def findShortestSubArray(self, nums: List[int]) -> int:
     degree = max(len(v) for v in dt.values())
     return min(dt[k][-1] - dt[k][0] + 1 for k in dt if len(dt[k]) == degree)
 
-# LC350. Intersection of Two Arrays II
+# LC350. Intersection of Two Arrays II - same elems appear multiple times, use bag
 def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:  # O(n + m)
     counts1 = collections.Counter(nums1)
     counts2 = collections.Counter(nums2)

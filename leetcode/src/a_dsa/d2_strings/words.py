@@ -26,7 +26,7 @@ def wordBreak(s: str, wordDict: List[str]) -> List[str]:
         return output
     return dfs(s)
 
-# LC139. Word Break, top100
+# LC139. Word Break, top100 - return breakable or not
 def wordBreak(self, s: str, wordDict: List[str]) -> bool:
     wordset = set(wordDict)  ## O(n^3) n = len(s) + O(m), m is size of dict
     @lru_cache  # O(n)
@@ -97,7 +97,7 @@ def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List
 def addBoldTag(self, s: str, words: List[str]) -> str:
     status = [False] * len(s)
     for word in words:  # O(len(words))
-        start, last = s.find(word), len(word)  # O(len(s) * O(max(len(words))))
+        start, last = s.find(word), len(word)  # O(len(s) * O(maxlen(words)))
         while start != -1: # this word appears multiple places
             for i in range(start, last+start): status[i] = True
             start = s.find(word, start+1)
@@ -155,6 +155,27 @@ def addBoldTag(self, s: str, words: List[str]) -> str:  # long solution with kmp
             i += 1
     return res
 
+# LC758. Bold Words in String
+def addBoldTag(self, s, dict):
+    status = [False]*len(s)
+    for word in dict:
+        start, last = s.find(word), len(word)
+        while start != -1: # this word appears multiple places
+            for i in range(start, last+start): status[i] = True
+            start = s.find(word, start+1)
+    i, final = 0, ""
+    while i < len(s):
+        if status[i]:
+            final += "<b>"
+            while i < len(s) and status[i]:
+                final += s[i]
+                i += 1
+            final += "</b>"
+        else:
+            final += s[i]
+            i += 1
+    return final
+
 # LC691. Stickers to Spell Word - effectively this is bfs since we look for min.
 def minStickers(self, stickers: List[str], target: str) -> int:
     counters = [Counter(s) for s in stickers]  # O(S^T with lowers)
@@ -166,7 +187,8 @@ def minStickers(self, stickers: List[str], target: str) -> int:
             targetnew = target
             for c in sticker: targetnew = targetnew.replace(c, '', sticker[c])
             if not targetnew: return 1
-            res = min(res, 1 + dfs(targetnew))
+            if len(targetnew) < len(target):
+                res = min(res, 1 + dfs(targetnew))
         return res
     res = dfs(target)
     return -1 if res == float('inf') else res
@@ -241,7 +263,7 @@ def findWords(self, board: List[List[str]], words: List[str]) -> List[str]: # Th
             if board[row][col] in trie: dfs(row, col, trie)
     return matchedWords
 
-# LC14. Longest Common Prefix
+# LC14. Longest Common Prefix - lcp
 def longestCommonPrefix(self, strs):  # O(sum(len(str)))
     if not strs: return ""
     shortest = min(strs, key=len)
@@ -249,36 +271,6 @@ def longestCommonPrefix(self, strs):  # O(sum(len(str)))
         for other in strs:
             if other[i] != ch: return shortest[:i]
     return shortest
-
-# LC676. Implement Magic Dictionary  - one mistake is allowed
-class MagicDictionary:
-    def __init__(self): self.trie = {}
-    def buildDict(self, dictionary: List[str]) -> None:
-        for word in dictionary:  # O(mn), m = len(dictionary), n is max word length
-            node = self.trie
-            for letter in word: node = node.setdefault(letter, {})
-            node[None] = None  # word end marker
-    def search(self, word: str) -> bool:  # O(26n)
-        def find(node, i, mistakeAllowed):
-            if i == len(word): return None in node and not mistakeAllowed
-            if word[i] not in node:
-                return any(find(node[letter], i+1, False) for letter in node if letter) if mistakeAllowed else False
-            if mistakeAllowed:
-                return find(node[word[i]], i+1, True) or \
-                       any(find(node[letter], i+1, False) for letter in node if letter and letter != word[i])
-            return find(node[word[i]], i+1, False)
-        return find(self.trie, 0, True)
-class MagicDictionary(object):
-    def _candidates(self, word):
-        for i in range(len(word)): yield word[:i] + '*' + word[i+1:]  # *ello, h*llo, etc
-    def buildDict(self, words):
-        self.words = set(words)  # O(n)
-        self.near = collections.Counter(cand for word in words
-                                        for cand in self._candidates(word))  # O(nk)
-    def search(self, word):
-        return any(self.near[cand] > 1 or  # case like [hello, hallo] and search for hello
-                   self.near[cand] == 1 and word not in self.words
-                   for cand in self._candidates(word))  # O(len(word))
 
 # LC68. Text Justification
 def fullJustify(self, words: List[str], maxWidth: int) -> List[str]:
@@ -391,6 +383,12 @@ def areSentencesSimilar(self, sentence1: List[str], sentence2: List[str], simila
 def reverseWords(self, s: str) -> str:
     return " ".join(reversed(s.split()))
 
+# LC557. Reverse Words in a String III
+def reverseWords(self, s: str) -> str:
+    words = s.split(' ')
+    res = ' '.join(w[::-1] for w in words)
+    return res
+
 # LC809. Expressive Words - stretchy word
 def expressiveWords(self, s: str, words: List[str]) -> int:  # O(n * max(all words and s))
     def check(S, W):  # 2 pointers
@@ -426,13 +424,13 @@ def longestStrChain(self, words: List[str]) -> int:
     return result
 
 # LC1268. Search Suggestions System
-def suggestedProducts(self, A, word):
-    A.sort()
+def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
+    products.sort()
     res, prefix, i = [], '', 0
-    for c in word:
+    for c in searchWord:
         prefix += c
-        i = bisect.bisect_left(A, prefix, i)
-        res.append([w for w in A[i:i + 3] if w.startswith(prefix)])
+        i = bisect.bisect_left(products, prefix, i)
+        res.append([w for w in products[i:i + 3] if w.startswith(prefix)])
     return res
 
 # LC524. Longest Word in Dictionary through Deleting - not only counts, but also order
@@ -482,7 +480,7 @@ def getFolderNames(self, names: List[str]) -> List[str]:
 # LC472. Concatenated Words
 def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
     word_set = set(words)
-    def check(word):
+    def check(word):  # could use cache here
         n = len(word)
         for i in range(1, n):
             if word[i:] not in word_set: continue
@@ -491,6 +489,15 @@ def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
             if check(word[:i]): return True # recursion check
         return False
     res = []
-    for w in words:
+    for w in words:  # O(n) - number of words
         if check(w): res.append(w)
     return res
+
+# LC243. Shortest Word Distance - distance between 2 given words in the array
+def shortestDistance(self, wordsDict: List[str], word1: str, word2: str) -> int:
+    out = first = second = float('inf')
+    for i,word in enumerate(wordsDict):
+        if word == word1: first = i
+        elif word == word2: second = i
+        out = min(abs(first - second), out)
+    return out

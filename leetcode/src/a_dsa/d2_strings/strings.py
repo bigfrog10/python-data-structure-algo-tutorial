@@ -28,24 +28,6 @@ def validWordAbbreviation(self, word: str, abbr: str) -> bool:
             i += 1  # move to next char
     return i + int(n) == wl
 
-# LC1047. Remove All Adjacent Duplicates In String - remove duplicates with 2 chars
-def removeDuplicates(self, S: str) -> str: # O(n)
-    output = []
-    for ch in S:
-        if output and ch == output[-1]: output.pop()
-        else: output.append(ch)
-    return ''.join(output)
-
-# LC1209. Remove All Adjacent Duplicates in String II - k duplicates
-def removeDuplicates(self, s, k):  # O(n)
-    stack = [['#', 0]]  # 0 for ignoring when joining at the last
-    for c in s:
-        if stack[-1][0] == c:
-            stack[-1][1] += 1
-            if stack[-1][1] == k: stack.pop()  # remove this group
-        else: stack.append([c, 1])  # char and count
-    return ''.join(c * cnt for c, cnt in stack)
-
 # LC681. Next Closest Time
 def nextClosestTime(self, time: str) -> str:
     hour, minute = time.split(":")  # 19:34
@@ -106,6 +88,13 @@ def shortestWay(self, source, target):
     return result if i == 0 else result + 1     # add 1 for partial source
 
 # LC161. One Edit Distance
+def isOneEditDistance(self, s, t):  # O(n) time and space
+    if s == t: return False
+    i = 0
+    while i < min(len(s),len(t)):
+        if s[i] == t[i]: i += 1
+        else: break
+    return s[i+1:] == t[i+1:] or s[i:] == t[i+1:] or s[i+1:]==t[i:]
 def isOneEditDistance(self, s: 'str', t: 'str') -> 'bool':  # O(n) time and space
     ns, nt = len(s), len(t)
     if ns > nt: return self.isOneEditDistance(t, s)
@@ -161,52 +150,6 @@ def lengthLongestPath(self, input: str) -> int:
             ret = max(ret, tmp[depth] + depth)
     return ret
 
-# LC1044. Longest Duplicate Substring
-def longestDupSubstring(self, S):  # O(nlogn) runtime, O(n) space, hard - Rabin-Karp
-    A = [ord(c) - ord('a') for c in S]
-    mod = 2**63 - 1
-    def test(L):  # find duplicated substrings of length L, O(n)
-        p = pow(26, L, mod)  # without hashing, as L -> N/2, this is O(n^2)
-        cur = reduce(lambda x, y: (x * 26 + y) % mod, A[:L])
-        seen = {cur}
-        for i in range(L, len(S)):  # slide this window
-            cur = (cur * 26 + A[i] - A[i - L] * p) % mod  # rolling hash
-            if cur in seen: return i - L + 1  # return start position
-            seen.add(cur)
-    res, lo, hi = 0, 0, len(S)  # bisect on length L, O(logn)
-    while lo < hi:
-        mi = (lo + hi + 1) // 2
-        pos = test(mi)
-        if pos:
-            lo = mi
-            res = pos
-        else: hi = mi - 1
-    return S[res:res + lo]
-
-# LC459. Repeated Substring Pattern
-def repeatedSubstringPattern(self, s: str) -> bool:  # O(n^2)
-    idx = (s + s).find(s, 1)
-    return len(s) > idx > -1
-def repeatedSubstringPattern(self, s: str) -> bool:  # O(n)
-    i, j, n = 1, 0, len(s)  # KMP prefix array
-    # 1st zero no use.
-    dp = [0] * (n+1)  # dp(i) stores the largest index up to i when we have matches
-    while i < n:
-        if s[i] == s[j]:  # matched
-            i += 1
-            j += 1
-            dp[i] = j
-        elif j == 0: i += 1  # to find 1st repeat
-        else: j = dp[j]  # mismatch, then roll back j, e.g. "ababcdababcd"
-    return dp[n] and dp[n] % (n - dp[n]) == 0
-
-# LC686. Repeated String Match
-def repeatedStringMatch(self, a: str, b: str) -> int:
-    times = math.ceil(len(b) / len(a))
-    if b in a * times: return times
-    elif b in a * (times+1): return times + 1
-    return -1
-
 # LC1108. Defanging an IP Address
 def defangIPaddr(self, address: str) -> str:
     return '[.]'.join(address.split('.'))
@@ -236,7 +179,7 @@ def reverseVowels(self, s):
         l, r = l + 1, r - 1
     return ''.join(s)
 
-# LC72. Edit Distance
+# LC72. Edit Distance - between 2 words
 def minDistance(self, word1: str, word2: str) -> int:  # O(mn)
     @lru_cache(None)  # O(mn) runtime and space
     def levenshtein(i, j):  # distance of word1[:i] and word2[:j]
@@ -246,7 +189,6 @@ def minDistance(self, word1: str, word2: str) -> int:  # O(mn)
         # delete or replace
         return min(levenshtein(i-1, j), levenshtein(i, j-1), levenshtein(i-1, j-1)) + 1
     return levenshtein(len(word1), len(word2))
-
 def minDistance(self, word1: str, word2: str) -> int:
     # In the above, recursion relies only previous row, so we could save space
     n, m = len(word1), len(word2)
@@ -328,7 +270,7 @@ def diStringMatch(self, s: str) -> List[int]:
             hi -= 1
     return ans + [lo]
 
-# LC28. Implement strStr()
+# LC28. Implement strStr() - index of needle in hay, KMP
 def strStr(self, haystack: str, needle: str) -> int:
     if not needle: return 0  # '' or None
     if not haystack: return -1  # order matters, needle is not empty
@@ -359,7 +301,6 @@ def strStr(self, haystack: str, needle: str) -> int:  # KMP, O(m + n)
         elif j > 0: j = needleArr[j-1]
         else: i += 1
     return i - j if j == len(needle) else -1
-
 
 # LC1071. Greatest Common Divisor of Strings
 def gcdOfStrings(self, str1: str, str2: str) -> str:
@@ -423,28 +364,7 @@ def partitionLabels(self, s: str) -> List[int]: # O(n) time and space
             start = i+1
     return ret
 
-# LC758. Bold Words in String
-def addBoldTag(self, s, dict):
-    status = [False]*len(s)
-    for word in dict:
-        start, last = s.find(word), len(word)
-        while start != -1: # this word appears multiple places
-            for i in range(start, last+start): status[i] = True
-            start = s.find(word, start+1)
-    i, final = 0, ""
-    while i < len(s):
-        if status[i]:
-            final += "<b>"
-            while i < len(s) and status[i]:
-                final += s[i]
-                i += 1
-            final += "</b>"
-        else:
-            final += s[i]
-            i += 1
-    return final
-
-# LC567. Permutation in String
+# LC567. Permutation in String - s1 is a permutation of substring of s2
 def checkInclusion(self, s1, s2):
     d1, d2 = Counter(s1), Counter(s2[:len(s1)])
     for start in range(len(s1), len(s2)):
@@ -454,14 +374,6 @@ def checkInclusion(self, s1, s2):
         if d2[s2[start-len(s1)]] == 0:
             del d2[s2[start-len(s1)]]
     return d1 == d2
-
-# LC395. Longest Substring with At Least K Repeating Characters - repeat k counter for each char
-def longestSubstring(self, s, k): # O(n)
-    counts = Counter(s)
-    for c in set(s):
-        if counts[c] < k:
-            return max(self.longestSubstring(t, k) for t in s.split(c))
-    return len(s)
 
 # LC1156. Swap For Longest Repeated Character Substring
 def maxRepOpt1(self, S):

@@ -40,7 +40,7 @@ def countCombinations(self, pieces, positions):
     return dfs(0)
 
 # LC935. Knight Dialer
-def knightDialer(self, n: int) -> int:
+def knightDialer(self, n: int) -> int:  # O(n) time and O(1) space
     MOD = 10**9 + 7
     moves = [[4,6],[6,8],[7,9],[4,8],[3,9,0],[],[1,7,0],[2,6],[1,3],[2,4]]
     dp = [1] * 10  # counts for current hop and current digit
@@ -179,7 +179,7 @@ def colorBorder(self, grid: List[List[int]], row: int, col: int, color: int) -> 
     return grid
 
 # LC723. Candy Crush
-def candyCrush(self, board):  # TIME : O(M * N)
+def candyCrush(self, board):  # TIME : O((M * N)^2)
     R, C = len(board), len(board[0])
     crushed = False
     for i in range(R):  # mark crushed cells by negative numbers
@@ -206,7 +206,7 @@ def candyCrush(self, board):  # TIME : O(M * N)
                 row_idx -= 1
     return self.candyCrush(board) if crushed else board
 
-# LC1926. Nearest Exit from Entrance in Maze
+# LC1926. Nearest Exit from Entrance in Maze -
 def nearestExit(self, maze: List[List[str]], start: List[int]) -> int:  # O(MN), BFS
     M, N = len(maze), len(maze[0])
     isExit = lambda i, j: not i or i == M - 1 or not j or j == N - 1

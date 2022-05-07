@@ -32,6 +32,16 @@ def treeToDoublyList(self, root: 'Node') -> 'Node':  # O(n) runtime and space
     dummy.right.left = prev
     return dummy.right
 
+# LC897. Increasing Order Search Tree - tree bst to linked list
+def increasingBST(self, root: TreeNode) -> TreeNode:  # O(n) runtime, O(H) space
+    def rearrange(node, tail):
+        if not node: return tail
+        res = rearrange(node.left, node)  # left tree -> link list + root
+        node.left = None
+        node.right = rearrange(node.right, tail)  # right tree -> link list + tail
+        return res
+    return rearrange(root, None)
+
 # LC1008. Construct Binary Search Tree from Preorder Traversal
 def bstFromPreorder(self, preorder: List[int]) -> Optional[TreeNode]:
     def buildTree(A, bound):
@@ -41,6 +51,25 @@ def bstFromPreorder(self, preorder: List[int]) -> Optional[TreeNode]:
         node.right = buildTree(A, bound)
         return node
     return buildTree(preorder[::-1], float('inf'))
+
+def from_postorder(nodes: Sequence[int]) -> BinaryTree[int]:
+    def build_subtree(subtree_nodes: Sequence[int]) -> BinaryTree[int]:
+        if not subtree_nodes:
+            return None
+
+        n = len(subtree_nodes)
+        # Locates the insertion point for x to maintain sorted order.
+        # This is the first element greater than root.
+        x = bisect.bisect_left(subtree_nodes, subtree_nodes[-1], hi=n - 1)
+
+        root = BinaryTree(subtree_nodes[-1])
+        root.left = build_subtree(subtree_nodes[:x])
+        # slice returns empty list if end is <= start
+        root.right = build_subtree(subtree_nodes[x:n - 1])
+
+        return root
+
+    return build_subtree(nodes)
 
 # LC108. Convert Sorted Array to Binary Search Tree
 def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
@@ -54,7 +83,7 @@ def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
     return to_bst(nums, 0, len(nums)-1)
 
 # LC109. Convert Sorted List to Binary Search Tree, similar logic as in LC108
-def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:  # O(n) time, O(logn) space
+def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:  # O(n) time, O(logn) or O(n) space
     def findSize(head):
         ptr, c = head, 0
         while ptr:
@@ -74,7 +103,7 @@ def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:  # O(
         return node
     return convert(0, size - 1)
 
-# LC1382. Balance a Binary Search Tree
+# LC1382. Balance a Binary Search Tree - balance bst
 # http://www.smunlisted.com/day-stout-warren-dsw-algorithm.html
 # https://csactor.blogspot.com/2018/08/dsw-day-stout-warren-algorithm-dsw.html
 def balanceBST(self, root: TreeNode) -> TreeNode:  # O(n) runtime, O(1) space

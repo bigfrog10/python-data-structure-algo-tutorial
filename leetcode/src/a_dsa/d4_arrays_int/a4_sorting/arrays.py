@@ -29,7 +29,7 @@ def sortedSquares(self, nums: List[int]) -> List[int]: # O(n)
         result[i] = square * square
     return result
 
-# LC26. Remove Duplicates from Sorted Array
+# LC26. Remove Duplicates from Sorted Array - in place change
 def removeDuplicates(self, nums: List[int]) -> int:
     i = 0  # 2 pointers
     for j in range(1, len(nums)):
@@ -38,7 +38,7 @@ def removeDuplicates(self, nums: List[int]) -> int:
             nums[i] = nums[j]
     return i+1
 
-# LC80. Remove Duplicates from Sorted Array II
+# LC80. Remove Duplicates from Sorted Array II - keep 2 same values, in place change
 def removeDuplicates(self, nums: List[int]) -> int:
     j, count = 1, 1
     for i in range(1, len(nums)):
@@ -87,7 +87,7 @@ def maxTaskAssign(self, tasks: List[int], workers: List[int], pills: int, streng
         else: hi = mid - 1
     return lo
 
-# LC1213. Intersection of Three Sorted Arrays
+# LC1213. Intersection of Three Sorted Arrays - 3 sorted array
 def arraysIntersection(self, arr1: List[int], arr2: List[int], arr3: List[int]) -> List[int]:
     ans = []
     p1 = p2 = p3 = 0
@@ -143,7 +143,7 @@ def relativeSortArray(self, arr1: List[int], arr2: List[int]) -> List[int]:
     arr1.sort(key=lambda x: aord.get(x, maxv+x))
     return arr1
 
-# LC905. Sort Array By Parity
+# LC905. Sort Array By Parity - move even to front, odd to back
 def sortArrayByParity(self, nums: List[int]) -> List[int]:
     i, j = 0, len(nums) - 1
     while i < j:

@@ -1,5 +1,5 @@
 
-# LC124. Binary Tree Maximum Path Sum
+# LC124. Binary Tree Maximum Path Sum - max path sum
 def maxPathSum(self, root: TreeNode) -> int:  # O(V) time, O(H) space
     max_sum = float('-inf')
     def path_max(node):
@@ -67,7 +67,7 @@ def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]: 
     dfs(root, targetSum, [])
     return res
 
-# LC437. Path Sum III - all paths sum=target count tree path sum
+# LC437. Path Sum III -  return num of all paths sum=target count tree path sum
 def pathSum(self, root: TreeNode, target: int) -> int:  # O(n) both
     count, cusum_counts = 0, defaultdict(int)
     def path_sum_count(node, curr_sum):
@@ -142,7 +142,7 @@ def smallestFromLeaf(self, root: TreeNode) -> str:
     dfs(root, "")
     return res
 
-# LC1026. Maximum Difference Between Node and Ancestor
+# LC1026. Maximum Difference Between Node and Ancestor - max diff
 def maxAncestorDiff(self, root: TreeNode) -> int:
     md = 0  # along each treepath, we get min and max
     def dfs(node, minv, maxv):

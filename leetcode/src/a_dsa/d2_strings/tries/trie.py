@@ -1,5 +1,4 @@
 
-
 # LC208. Implement Trie (Prefix Tree)
 class Trie:
     def __init__(self): self.trie = {}
@@ -57,4 +56,17 @@ def findNumOfValidWords(self, words: List[str], puzzles: List[str]) -> List[int]
     for i in range(len(puzzles)): dfs(trie, i, False)
     return res
 
-
+# LC648. Replace Words - root successor
+def replaceWords(self, dictionary: List[str], sentence: str) -> str:
+    trie = {}
+    for word in dictionary:
+        node = trie
+        for ch in word: node = node.setdefault(ch, {})
+        node['$'] = word
+    def replace(word):
+        node = trie
+        for ch in word:
+            if ch not in node or '$' in node: break
+            node = node[ch]
+        return node.get('$', word)
+    return ' '.join(map(replace, sentence.split()))

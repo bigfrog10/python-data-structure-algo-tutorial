@@ -7,6 +7,14 @@ def pivotIndex(self, nums: List[int]) -> int:
         leftsum += x
     return -1
 
+# LC1991. Find the Middle Index in Array - same as above
+def findMiddleIndex(self, nums: List[int]) -> int:
+    S, leftsum = sum(nums), 0
+    for i, x in enumerate(nums):
+        if leftsum == (S - leftsum - x): return i
+        leftsum += x
+    return -1
+
 # LC39. Combination Sum  # O(n^(target/min)) - return combos, can use elems multiple times
 def combinationSum(self, candidates, target):  # fastest
     candidates = sorted(candidates)  # small to large, cut branches
@@ -49,26 +57,6 @@ def combinationSum4(self, nums: List[int], target: int) -> int:  # O(T * N)
             if remain - num >= 0: result += combs(remain - num)
         return result
     return combs(target)
-
-# LC494. Target Sum - with plus minus +- operators - ints expression built for target
-def findTargetSumWays(self, nums: List[int], S: int) -> int:
-    n = len(nums)
-    @lru_cache(None)  # O(n * S)
-    def dp(i, s):  # index and sum, how many ways to compose a[0], ..., a[i-1] to have sum s.
-        if i == n: return s == S  # 1 or 0
-        add = dp(i+1, s + nums[i])
-        sub = dp(i+1, s - nums[i])
-        return add + sub
-    return dp(0, 0)
-def findTargetSumWays(self, nums: List[int], target: int) -> int:
-    count = collections.Counter({0: 1}) # Iterative, DP
-    for x in nums:
-        step = collections.Counter()
-        for y in count:
-            step[y + x] += count[y]
-            step[y - x] += count[y]
-        count = step
-    return count[target]
 
 # LC698. Partition to K Equal Sum Subsets
 def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:

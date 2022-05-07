@@ -13,7 +13,7 @@ def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:  # O(n
     def preorder(node, i, j):
         nonlocal min_col, max_col
         if not node: return
-        res[j].append((i, node.val))
+        res[j].append((i, node.val))  # keep same cell values together
         min_col = min(min_col, j)
         max_col = max(max_col, j)
         preorder(node.left, i+1, j-1)
@@ -60,18 +60,25 @@ def inorderTraversal(self, root):
 
 # LC144. Binary Tree Preorder Traversal
 
-# LC1110. Delete Nodes And Return Forest
-def delNodes(self, root: Optional[TreeNode], to_delete: List[int]) -> List[TreeNode]:
-    res, to_delete_set = [], set(to_delete)
-    def dfs(root, is_root):
-        if not root: return None
-        root_deleted = root.val in to_delete_set
-        if is_root and not root_deleted: res.append(root)
-        root.left = dfs(root.left, root_deleted) # if root is deleted, then left and right are roots.
-        root.right = dfs(root.right, root_deleted)
-        return None if root_deleted else root
-    dfs(root, True)
-    return res
+
+
+# LC958. Check Completeness of a Binary Tree
+def isCompleteTree(self, root):  # O(N) time and O(H) space
+    def dfs(root):
+        if not root: return 0
+        l, r = dfs(root.left), dfs(root.right)
+        if l & (l + 1) == 0 and l / 2 <= r <= l:
+            return l + r + 1
+        if r & (r + 1) == 0 and r <= l <= r * 2 + 1:
+            return l + r + 1
+        return -1
+    return dfs(root) > 0
+def isCompleteTree(self, root: Optional[TreeNode]) -> bool:  # O(N) time and space
+    bfs, i = [root], 0
+    while bfs[i]:  # on exit, i is the first None we see.
+        bfs.extend([bfs[i].left, bfs[i].right])
+        i += 1
+    return not any(bfs[i:])  # we shouldn't have any non None after i
 
 # LC1361. Validate Binary Tree Nodes
 def validateBinaryTreeNodes(self, n: int, leftChild: List[int], rightChild: List[int]) -> bool: # slower
@@ -107,24 +114,6 @@ def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bo
     if is_same(root, subRoot): return True
     return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
 
-# LC958. Check Completeness of a Binary Tree
-def isCompleteTree(self, root):  # O(N) time and O(H) space
-    def dfs(root):
-        if not root: return 0
-        l, r = dfs(root.left), dfs(root.right)
-        if l & (l + 1) == 0 and l / 2 <= r <= l:
-            return l + r + 1
-        if r & (r + 1) == 0 and r <= l <= r * 2 + 1:
-            return l + r + 1
-        return -1
-    return dfs(root) > 0
-def isCompleteTree(self, root: Optional[TreeNode]) -> bool:  # O(N) time and space
-    bfs, i = [root], 0
-    while bfs[i]:  # on exit, i is the first None we see.
-        bfs.extend([bfs[i].left, bfs[i].right])
-        i += 1
-    return not any(bfs[i:])  # we shouldn't have any non None after i
-
 # LC226. Invert Binary Tree
 def invertTree(self, root):
     if root is None: return None
@@ -140,7 +129,7 @@ def mergeTrees(self, t1: TreeNode, t2: TreeNode) -> TreeNode:
     t1.right = self.mergeTrees(t1.right, t2.right)
     return t1
 
-# LC110. Balanced Binary Tree
+# LC110. Balanced Binary Tree - check whether it's balanced
 def isBalanced(self, root: TreeNode) -> bool:
     def dfs(node):
         if not node: return True, 0  # is balanced, depth
@@ -190,19 +179,17 @@ def countNodes(self, root): # O((logn)^2)
     else: # right is complete
         return pow(2, rightDepth) + self.countNodes(root.left)
 
-# LC654. Maximum Binary Tree
-def constructMaximumBinaryTree(self, nums: List[int]) -> TreeNode:
-    def dfs(arr):
-        if not arr: return None
-        if len(arr) == 1: return TreeNode(arr[0])
-        mx, imx = float('-inf'), -1
-        for i, x in enumerate(arr):
-            if x > mx: mx, imx = x, i
-        n = TreeNode(mx)
-        n.left = dfs(arr[:imx])
-        n.right = dfs(arr[imx+1:])
-        return n
-    return dfs(nums)
+# LC654. Maximum Binary Tree - root is max among children
+def constructMaximumBinaryTree(self, nums: List[int]) -> Optional[TreeNode]:
+    stack = []
+    for x in nums:
+        n = TreeNode(x)
+        while stack and x > stack[-1].val:
+            n.left = stack.pop()
+        if stack:
+            stack[-1].right = n
+        stack.append(n)
+    return stack[0]
 
 # LC998. Maximum Binary Tree II
 def insertIntoMaxTree(self, root, val):

@@ -24,7 +24,7 @@ def minAddToMakeValid(self, S: str) -> int:  # O(n)
         if bal == -1:  # there is ) unmatched
             left += 1  # expected ( needs 1 more
             bal += 1  # diff needs +1 too
-    return left + bal  # "(((" -> ret=0, bal=3
+    return left + bal  # "(((" -> left=0, bal=3
 
 # LC301. Remove Invalid Parentheses - with letters, return all results
 def removeInvalidParentheses(self, s): # O(2^n) return all possible results
@@ -75,7 +75,7 @@ def minInsertions(self, s: str) -> int:
                 close_needed += 2  # no need to track the last invalid
     return open_missing + close_missing + close_needed
 
-# LC20. Valid Parentheses, top100
+# LC20. Valid Parentheses - {} () []
 def isValid(self, s: str) -> bool:
     PAIRS = {'(': ')', '{': '}', '[': ']'}
     stack = []  # to store unprocessed
@@ -87,7 +87,7 @@ def isValid(self, s: str) -> bool:
             else: return False # no suppose to have other chars
     return len(stack) == 0
 
-# LC1963. Minimum Number of Swaps to Make the String Balanced
+# LC1963. Minimum Number of Swaps to Make the String Balanced - parenthesis
 def minSwaps(self, s: str) -> int:
     balance = max_bal = 0
     for c in s:
@@ -122,7 +122,7 @@ def diffWaysToCompute(self, expression: str) -> List[int]:
         return res
     return diff_ways(expression)
 
-# LC32. Longest Valid Parentheses
+# LC32. Longest Valid Parentheses - longest substring
 def longestValidParentheses(self, s: str) -> int:  # O(n) time and space
     stack, longest = [0], 0  # track current length and its max
     for c in s:
@@ -141,7 +141,7 @@ def longestValidParentheses(self, s: str) -> int:  # O(n) time and O(1) space
         if c == '(': left += 1
         else: right += 1
         if left == right: maxl = max(maxl, 2 * right)
-        elif left <= right: left = right = 0  # start over with new
+        elif left < right: left = right = 0  # start over with new
     left = right = 0
     for c in s[::-1]:
         if c == '(': left += 1

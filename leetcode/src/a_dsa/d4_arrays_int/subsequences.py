@@ -14,7 +14,7 @@ def findLengthOfLCIS(self, nums: List[int]) -> int:
         ans = max(ans, i - anchor + 1)
     return ans
 
-# LC1027. Longest Arithmetic Subsequence
+# LC1027. Longest Arithmetic Subsequence - las
 def longestArithSeqLength(self, A: List[int]) -> int:
     n = len(A)
     dp = {}  # dp[index][diff] the length of arithmetic sequence at index with difference diff.
@@ -24,7 +24,7 @@ def longestArithSeqLength(self, A: List[int]) -> int:
             dp[j, diff] = dp.get((i, diff), 1) + 1  # A[i], A[j] have length 2
     return max(dp.values())
 
-# LC1143. Longest Common Subsequence
+# LC1143. Longest Common Subsequence - lcs
 def longestCommonSubsequence(self, text1: str, text2: str) -> int: # cached recursion
     @lru_cache(None)
     def solve(i, j):
@@ -56,8 +56,6 @@ def increasingTriplet(self, nums: List[int]) -> bool:
         elif n <= second_num: second_num = n
         else: return True
     return False
-
-
 
 # LC300. Longest Increasing Subsequence
 def lengthOfLIS(self, nums: List[int]) -> int:  # O(nlogn) runtime, O(n) space

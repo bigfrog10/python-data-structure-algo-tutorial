@@ -55,7 +55,7 @@ def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:  # O(n^2
         res.insert(p[1], [-p[0], p[1]]) # insert only relevant to larger values
     return res
 
-# LC2092. Find All People With Secret
+# LC2092. Find All People With Secret - x and y meet at time t
 def findAllPeople(self, n: int, meetings: List[List[int]], firstPerson: int) -> List[int]:
     sm = sorted(meetings, key=lambda x: x[2])  # O(mlogm), m = # of meetings.
     can = {0, firstPerson}
@@ -91,21 +91,7 @@ def numBusesToDestination(self, routes, S, T): # BFS on stops
             routes[route] = []  # ***neat trick: seen route, cut buses for min
     return -1
 
-# LC1319. Number of Operations to Make Network Connected
-def makeConnected(self, n: int, connections: List[List[int]]) -> int:  # O(m) m = len(conns)
-    if len(connections) < n - 1: return -1
-    G = [set() for i in range(n)]
-    for i, j in connections:  # space could be n^2, for fully connected net
-        G[i].add(j)
-        G[j].add(i)
-    seen = [0] * n
-    def dfs(i):
-        if seen[i]: return 0
-        seen[i] = 1
-        for j in G[i]: dfs(j)
-        return 1
-    # the number of connected networks - 1 is what we need to do to connect them
-    return sum(dfs(i) for i in range(n)) - 1
+
 
 # LC946. Validate Stack Sequences
 def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
@@ -175,7 +161,7 @@ def numOfMinutes(self, n, headID, manager, informTime):
         return max([dfs(j) for j in reports[i]] or [0]) + informTime[i]
     return dfs(headID)
 
-# LC1640. Check Array Formation Through Concatenation - chain arrays
+# LC1640. Check Array Formation Through Concatenation - chain arrays, concat array
 def canFormArray(self, arr: List[int], pieces: List[List[int]]) -> bool:  # nlogn
     n, p_len = len(arr), len(pieces)
     pieces.sort()  # O(nlogn)
@@ -197,3 +183,19 @@ def canFormArray(self, arr: List[int], pieces: List[List[int]]) -> bool:  # nlog
             if x != arr[i]: return False
             i += 1
     return True
+
+# LC223. Rectangle Area - intersection of 2 rectangles
+def computeArea(self, A, B, C, D, E, F, G, H):  # AB lower left, CD upper right
+    # overlap lower left is [max(A, E), max(B, F)], upper right is [min(C, G), min(D, H)]
+    overlap = max(min(C,G) - max(A,E), 0) * max(min(D,H) - max(B,F), 0)
+    return (A-C)*(B-D) + (E-G)*(F-H) - overlap
+
+# LC836. Rectangle Overlap - intersection of 2 rectangles
+def isRectangleOverlap(self, rec1: List[int], rec2: List[int]) -> bool:
+    A, B, C, D = rec1[0], rec1[1], rec1[2], rec1[3]
+    E, F, G, H = rec2[0], rec2[1], rec2[2], rec2[3]
+    x1 = max(A, E)
+    y1 = max(B, F)
+    x2 = min(C, G)
+    y2 = min(D, H)
+    return x1 < x2 and y1 < y2

@@ -50,22 +50,7 @@ def firstUniqChar(self, s: str) -> int:
         if count[ch] == 1: return idx
     return -1
 
-# LC648. Replace Words
-def replaceWords(self, dictionary: List[str], sentence: str) -> str:
-    trie = {}
-    for word in dictionary:
-        node = trie
-        for ch in word: node = node.setdefault(ch, {})
-        node['$'] = word
-    def replace(word):
-        node = trie
-        for ch in word:
-            if ch not in node or '$' in node: break
-            node = node[ch]
-        return node.get('$', word)
-    return ' '.join(map(replace, sentence.split()))
-
-# LC752. Open the Lock
+# LC752. Open the Lock - open lock
 def openLock(self, deadends: List[str], target: str) -> int:  # O(n^2 * 10^n + D), N is Number of dials, 4
     def nbs(digit):  # neighbours
         d = int(digit)
@@ -86,12 +71,6 @@ def openLock(self, deadends: List[str], target: str) -> int:  # O(n^2 * 10^n + D
                     queue.append([nstate, level+1])
     return -1
 
-# LC557. Reverse Words in a String III
-def reverseWords(self, s: str) -> str:
-    words = s.split(' ')
-    res = ' '.join(w[::-1] for w in words)
-    return res
-
 # LC344. Reverse String
 def reverseString(self, s: List[str]) -> None:
     t = len(s)
@@ -106,8 +85,6 @@ def isIsomorphic(self, s: str, t: str) -> bool:
 def numJewelsInStones(self, jewels: str, stones: str) -> int:
     jset = set(jewels)  # O(n + m)
     return sum(s in jset for s in stones)
-
-
 
 # LC1529. Bulb Switcher IV
 def minFlips(self, target: str) -> int:

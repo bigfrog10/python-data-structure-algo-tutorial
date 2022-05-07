@@ -1,5 +1,5 @@
 
-# LC282. Expression Add Operators  *** 4 cards to 24 game
+# LC282. Expression Add Operators  - return all results *** 4 cards to 24 game
 def addOperators(self, num: str, target: int) -> List[str]:
     n, res = len(num), []
     def dfs(idx, expr, cur, last):  # cur is the current value, last is last value
@@ -35,7 +35,7 @@ def calculate(self, s):  # O(n) time and space
             sign, res = 1, 0
         elif ss == ")":
             res += sign * num   # expr inside ')'
-            res *= stack.pop()  # old sign before '('
+            res *= stack.pop()  # old sign before '(', -(3) shows we can't combine res and sign first
             res += stack.pop()  # old res before '('
             num = 0
     return res + num * sign
@@ -46,7 +46,7 @@ def calculate(self, s: str) -> int:  # O(n) runtime but O(1) space,
     n, i, op = len(s), 0, '+'
     while i < n:
         if s[i].isdigit():
-            num, i = int(s[i]), i+1
+            num = 0
             while i < n and s[i].isdigit():
                 num = num * 10 + int(s[i])
                 i += 1
@@ -97,6 +97,26 @@ def calculate(self, s: str) -> int:
                 sign = stack.pop()
             else: sign, num = c, 0 # this is for +-*/
     return sum(stack)
+
+# LC494. Target Sum - with plus minus +- operators - ints expression built for target
+def findTargetSumWays(self, nums: List[int], S: int) -> int:
+    n = len(nums)
+    @lru_cache(None)  # O(n * S)
+    def dp(i, s):  # index and sum, how many ways to compose a[0], ..., a[i-1] to have sum s.
+        if i == n: return s == S  # 1 or 0
+        add = dp(i+1, s + nums[i])
+        sub = dp(i+1, s - nums[i])
+        return add + sub
+    return dp(0, 0)
+def findTargetSumWays(self, nums: List[int], target: int) -> int:
+    count = collections.Counter({0: 1}) # Iterative, DP
+    for x in nums:
+        step = collections.Counter()
+        for y in count:
+            step[y + x] += count[y]
+            step[y - x] += count[y]
+        count = step
+    return count[target]
 
 # LC2019. The Score of Students Solving Math Expression
 def scoreOfStudents(self, s: str, answers: List[int]) -> int:  # O(n^3 * ???)

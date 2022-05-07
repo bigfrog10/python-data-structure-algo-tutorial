@@ -24,12 +24,4 @@ def connectSticks(self, sticks: List[int]) -> int:  # same idea, but much faster
         r += c
     return r
 
-# LC630. Course Schedule III
-def scheduleCourse(self, A: List[List[int]]) -> int:
-    start, pq = 0, []
-    for t, end in sorted(A, key = lambda c: c[1]):
-        start += t
-        heapq.heappush(pq, -t)
-        while start > end:
-            start += heapq.heappop(pq)
-    return len(pq)
+

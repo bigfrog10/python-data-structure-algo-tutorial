@@ -1,5 +1,5 @@
 # https://cp-algorithms.com/data_structures/disjoint_set_union.html
-# 2076. Process Restricted Friend Requests
+# close to 2076. Process Restricted Friend Requests
 class UnionFind:
     def __init__(self, alphabet):
         self.parent = {c: c for c in alphabet}

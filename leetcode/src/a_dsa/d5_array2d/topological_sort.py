@@ -1,6 +1,6 @@
 
 from typing import List
-# LC207. Course Schedule - tru if can finish
+# LC207. Course Schedule - true if can finish
 def canFinish(self, n, prerequisites):  # O(V + E)
     G = [[] for i in range(n)] # g[i] needs i finished earlier
     degree = [0] * n
@@ -14,7 +14,7 @@ def canFinish(self, n, prerequisites):  # O(V + E)
             if degree[j] == 0: bfs.append(j)
     return len(bfs) == n
 
-# LC210. Course Schedule II
+# LC210. Course Schedule II - return course order to take
 def findOrder(self, numCourses, prerequisites): # O(V + E)
     n = numCourses
     G = [[] for i in range(n)] # g[i] needs i finished earlier

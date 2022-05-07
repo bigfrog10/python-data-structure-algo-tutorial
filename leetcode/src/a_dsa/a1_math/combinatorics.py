@@ -76,7 +76,7 @@ def permute(nums: List[int]) -> List[List[int]]:  # O(n!) & O(n!)
         ans = [each[:i] + [num] + each[i:] for each in ans for i in range(len(each)+1)]
     return ans
 
-# LC60. Permutation Sequence
+# LC60. Permutation Sequence - return kth permutation
 def getPermutation(self, n: int, k: int) -> str: # O(n^2) due to pop(i)
     nums = list(map(str, range(1, n+1)))  # '1', '2', ..., 'n'
     fact = math.factorial(len(nums)-1)
@@ -87,7 +87,6 @@ def getPermutation(self, n: int, k: int) -> str: # O(n^2) due to pop(i)
         fact //= len(nums)  # next bucket size is (n-2)! = (n-1)! / (n-1)
     ans += ''.join(nums)
     return ans
-
 
 # LC47. Permutations II
 def permuteUnique(self, nums: List[int]) -> List[List[int]]:  # O(n!), T(n) = n*T(n-1) + O(n)
@@ -104,7 +103,6 @@ def permuteUnique(self, nums: List[int]) -> List[List[int]]:  # O(n!), T(n) = n*
 # LC77. Combinations
 def combine(self, n, k):
     return list(itertools.combinations(range(1, n+1), k))
-
 # 4, 3: [[3],[4]], then  [[2,3],[2,4],[3,4]], and then [[1,2,3],[1,2,4],[1,3,4],[2,3,4]]
 def combine(self, n: int, k: int) -> List[List[int]]:  # O(k * C^k_n)
     combs = [[]]

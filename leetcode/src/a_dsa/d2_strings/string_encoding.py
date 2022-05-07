@@ -1,10 +1,10 @@
 
 # LC2060. Check if an Original String Exists Given Two Encoded Strings
 def possiblyEquals(self, s1: str, s2: str) -> bool:
-    def gg(s):  # Return possible length
+    def comb(s):  # Return possible length
         ans = {int(s)}
         for i in range(1, len(s)): # split digits among s
-            ans |= {x+y for x in gg(s[:i]) for y in gg(s[i:])}
+            ans |= {x+y for x in comb(s[:i]) for y in comb(s[i:])}
         return ans
     @cache  # make it O(n^4) like
     def fn(i, j, diff):  # DFS  # Return True if s1[i:] matches s2[j:] with given differences
@@ -12,11 +12,11 @@ def possiblyEquals(self, s1: str, s2: str) -> bool:
         if i < len(s1) and s1[i].isdigit():
             ii = i
             while ii < len(s1) and s1[ii].isdigit(): ii += 1  # get all digits
-            return any(fn(ii, j, diff-x) for x in gg(s1[i:ii]))
+            return any(fn(ii, j, diff-x) for x in comb(s1[i:ii]))
         elif j < len(s2) and s2[j].isdigit():
             jj = j
             while jj < len(s2) and s2[jj].isdigit(): jj += 1  # get all digits
-            return any(fn(i, jj, diff+x) for x in gg(s2[j:jj]))
+            return any(fn(i, jj, diff+x) for x in comb(s2[j:jj]))
         elif diff == 0:  # chars, not digits
             if i < len(s1) and j < len(s2) and s1[i] == s2[j]: return fn(i+1, j+1, 0)
         elif diff > 0:
@@ -26,7 +26,7 @@ def possiblyEquals(self, s1: str, s2: str) -> bool:
         return False
     return fn(0, 0, 0)  # diff < 0, means s1 has wild chars, > 0 means s2 has wild chars
 
-# LC91. Decode Ways, top100 - decode 12 to 1,2 and 12
+# LC91. Decode Ways, decode 12 to 1,2 and 12
 def numDecodings(self, s: str) -> int:  # Best, fast and short
     @lru_cache(maxsize=None)
     def walk(idx):

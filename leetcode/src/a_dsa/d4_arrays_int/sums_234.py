@@ -22,7 +22,7 @@ def twoSum(self, numbers: List[int], target: int) -> List[int]:
         else: j -= 1
     return None
 
-# LC1099. Two Sum Less Than K - 2sum
+# LC1099. Two Sum Less Than K - 2sum, max sum < K returned
 def twoSumLessThanK(self, nums: List[int], k: int) -> int:
     nums.sort()  # O(nlogn)
     answer, left, right = -1, 0, len(nums) -1
@@ -51,7 +51,7 @@ def minPairSum(self, nums: List[int]) -> int:
     nums.sort()
     return max(nums[i] + nums[~i] for i in range(len(nums) // 2))
 
-# LC16. 3Sum Closest
+# LC16. 3Sum Closest - find closest sum
 def threeSumClosest(self, nums: List[int], target: int) -> int:  # O(n^2)
     diff = float('inf')
     nums.sort()  # O(nlogn), required by 2 pointers
@@ -67,7 +67,7 @@ def threeSumClosest(self, nums: List[int], target: int) -> int:  # O(n^2)
     return target - diff
 # https://leetcode.com/problems/3sum-closest/discuss/778177/Python3-%3A-Runtime%3A-52-ms-faster-than-99.77
 
-# LC15. 3Sum top100
+# LC15. 3Sum - return all distinct tuples
 def threeSum(self, nums):  # shorter and quicker 90%, O(n^2)
     n = len(nums)
     nums.sort()
@@ -105,7 +105,7 @@ def threeSum(self, nums: List[int]) -> List[List[int]]:
         if i == 0 or nums[i - 1] != nums[i]: twoSum(i, res)
     return res
 
-# LC259. 3Sum Smaller
+# LC259. 3Sum Smaller - num of triples with sum < target
 def threeSumSmaller(self, nums: List[int], target: int) -> int:  # O(n^2)
     if not nums or len(nums) < 3: return 0
     lnth = len(nums)
@@ -124,7 +124,7 @@ def threeSumSmaller(self, nums: List[int], target: int) -> int:  # O(n^2)
         counts += sum2smaller(nums, i+1, target - nums[i])
     return counts
 
-# LC18. 4Sum
+# LC18. 4Sum - return all quadruplets sum to target
 def fourSum(self, nums: List[int], target: int) -> List[List[int]]:  # O(n^(k-1))
     def kSum(nums: List[int], target: int, k: int) -> List[List[int]]:
         res = []

@@ -31,7 +31,7 @@ def minPushBox(self, grid: List[List[str]]) -> int:  # faster BFS, O((mn)^2)
                     q.append((pushes + 1,new_box,box))
     return -1
 
-# LC1091. Shortest Path in Binary Matrix
+# LC1091. Shortest Path in Binary Matrix - 01 matrix
 def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:  # O(n) runtime and space
     if not grid or grid[0][0] != 0: return -1
     n, que, visited = len(grid), deque([(0, 0, 1)]), set()  # x, y, steps
@@ -150,7 +150,7 @@ def swimInWater(self, grid: List[List[int]]) -> int:  # O(N^2log(N^2)) time, O(N
                 heapq.heappush(pq, (grid[cr][cc], cr, cc))  # log
                 seen.add((cr, cc))
 
-# LC286. Walls and Gates
+# LC286. Walls and Gates - distance from gates
 def wallsAndGates(self, rooms: List[List[int]]) -> None:  # O(mn)
     WALL, GATE, EMPTY = -1, 0, 2147483647  # given
     q = [(i, j) for i, row in enumerate(rooms) for j, r in enumerate(row) if r == GATE]  # all gates
@@ -212,7 +212,7 @@ def shortestPath(self, grid: List[List[int]], k: int) -> int:  # best, A*, O(Nkl
                     seen.add(state)
     return -1
 
-# LC64. Minimum Path Sum
+# LC64. Minimum Path Sum - min path sum
 def minPathSum(self, grid: List[List[int]]) -> int:
     M, N = len(grid), len(grid[0])
     dp = [0] + [float('inf')] * (N-1)
@@ -252,7 +252,7 @@ def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
                 else: cur[j] += cur[j-1]  # previous cur[j] + current cur[j-1]
     return cur[-1]
 
-# LC980. Unique Paths III - has blocks, arbitrary start and end
+# LC980. Unique Paths III - has blocks, arbitrary start and end, obstacle
 def uniquePathsIII(self, A): # O(3^n)
     m, n, empty = len(A), len(A[0]), 1
     for i in range(m):  # find start x, y and count empty cells

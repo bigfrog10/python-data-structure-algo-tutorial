@@ -26,8 +26,7 @@ def dailyTemperatures(self, T: List[int]) -> List[int]:
 def canSeePersonsCount(self, heights: List[int]) -> List[int]:  # O(n)
     stack, res = [], [0] * len(heights)  # decreasing mono stack
     for i, v in enumerate(heights):
-        # pop() can see v
-        while stack and v >= heights[stack[-1]]: res[stack.pop()] += 1
+        while stack and v >= heights[stack[-1]]: res[stack.pop()] += 1  # pop() can see v
         if stack: res[stack[-1]] += 1  # -1 can see v
         stack.append(i)
     return res

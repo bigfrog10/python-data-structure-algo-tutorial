@@ -17,7 +17,22 @@ def reverseBetween(self, head, m, n):
     start.next = pre  # point start to new head
     return dummy.next
 
-# LC24. Swap Nodes in Pairs
+# LC234. Palindrome Linked List
+def isPalindrome(self, head):
+    fast, rev = head, None # use head as slow
+    while fast and fast.next:  # 1, 2, 3, 2, 1    1, 2, 3, 4, 2, 1
+        fast = fast.next.next
+        rev, rev.next, head = head, rev, head.next
+    # head = 3 2 1, tail = 2 1   head = 3 2 1, tail = 4 2 1
+    tail = head.next if fast else head  # fast none when list is even
+    isPali = True
+    while rev:
+        isPali = isPali and rev.val == tail.val
+        head, head.next, rev = rev, head, rev.next  # restore head to original
+        tail = tail.next  # 2, 3, 2, 1, then 1, 2,3,2,1
+    return isPali
+
+# LC24. Swap Nodes in Pairs - reverse pair
 def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
     prev = dummy = ListNode(None, head)
     while head and head.next:
@@ -32,7 +47,7 @@ def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
     while curr:
         n += 1
         curr = curr.next
-    dummy = nhead = ListNode()  # the new list to insert to
+    dummy = nhead = ListNode()  # the new list to insert to, nhead is previous
     ntail = None  # store temp head for next
     for _ in range(n//k):
         ntail = head  # the save the position for later jumping to
@@ -42,7 +57,7 @@ def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
     ntail.next = head  # for last remainder connection
     return dummy.next
 
-# LC143. Reorder List
+# LC143. Reorder List - odd + <even reverse>
 def reorderList(self, head: ListNode) -> None:
     if not head: return
     slow = fast = head  # in 1->2->3->4->5->6 find 4

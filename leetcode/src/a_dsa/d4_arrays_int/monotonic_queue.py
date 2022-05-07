@@ -1,19 +1,4 @@
 
-
-
-# LC862. Shortest Subarray with Sum at Least K
-def shortestSubarray(self, nums: List[int], k: int) -> int:  # O(n) in time and space
-    d = collections.deque([[0, 0]])  # idx and cumu value
-    res, cur = float('inf'), 0
-    for i, a in enumerate(nums):
-        cur += a
-        while d and cur - d[0][1] >= k:
-            res = min(res, i + 1 - d.popleft()[0])
-        # if cur < v, the later on, cur1 - cur > cur1 - v with shorter idx
-        while d and cur <= d[-1][1]: d.pop()  # so d is increasing on cumus
-        d.append([i + 1, cur])
-    return res if res < float('inf') else -1
-
 # LC1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
 def longestSubarray(self, nums: List[int], limit: int) -> int:
     maxd = collections.deque()

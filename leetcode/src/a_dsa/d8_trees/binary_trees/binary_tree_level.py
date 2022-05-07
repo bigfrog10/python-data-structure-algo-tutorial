@@ -29,7 +29,7 @@ def widthOfBinaryTree(self, root: TreeNode) -> int:
     width = 0
     level = [(1, root)]
     while level:
-        width = max(width, level[-1][0] - level[0][0] + 1)
+        width = max(width, level[-1][0] - level[0][0] + 1)  # last - first at the same level
         level = [kid
                  for number, node in level
                  for kid in enumerate((node.left, node.right), 2 * number) if kid[1]]

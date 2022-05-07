@@ -68,13 +68,13 @@ class Dllist:
     def __repr__(self):
         return f'[{self.val}: left={self.left.val if self.left else None}, right={self.right.val if self.right else None}]'
 import sortedcontainers
-class MaxStack:  # This is O(logn) solution
+class MaxStack:  # This is O(logn) solution with extra space needed
     def __init__(self):
         self.head = Dllist('head')
         self.tail = Dllist('tail')
         self.head.right = self.tail
         self.tail.left = self.head
-        self.values = sortedcontainers.SortedDict()  # pointers to double linked list
+        self.values = sortedcontainers.SortedDict()  # pointers to double linked list, value to nodes
         self.size = 0
     def push(self, x: int) -> None:
         node = Dllist(x, left=self.tail.left, right=self.tail)
@@ -162,6 +162,47 @@ class Stack:
         return self._queue[0]
     def empty(self):
         return not len(self._queue)
+
+# LC641. Design Circular Deque
+class MyCircularDeque:
+    def __init__(self, k: int):
+        self.k = k
+        self.arr = [-1] * k  # -1 is required by the problem
+        self.front = 0 # current empty
+        self.rear = 1 # current empty
+        self._size = 0
+    def insertFront(self, value: int) -> bool:
+        if self.isFull(): return False
+        self.arr[self.front] = value
+        self.front = (self.front - 1) % self.k
+        self._size += 1
+        return True
+    def insertLast(self, value: int) -> bool:
+        if self.isFull(): return False
+        self.arr[self.rear] = value
+        self.rear = (self.rear + 1) % self.k
+        self._size += 1
+        return True
+    def deleteFront(self) -> bool:
+        if self.isEmpty(): return False
+        self.front = (self.front + 1) % self.k
+        self.arr[self.front] = -1 # -1 is required by the problem
+        self._size -= 1
+        return True
+    def deleteLast(self) -> bool:
+        if self.isEmpty(): return False
+        self.rear = (self.rear - 1) % self.k
+        self.arr[self.rear] = -1 # -1 is required by the problem
+        self._size -= 1
+        return True
+    def getFront(self) -> int:
+        f = (self.front + 1) % self.k
+        return self.arr[f]
+    def getRear(self) -> int:
+        r = (self.rear - 1 + self.k) % self.k
+        return self.arr[r]
+    def isEmpty(self) -> bool: return self._size == 0
+    def isFull(self) -> bool: return self._size == self.k
 
 # LC353. Design Snake Game
 class SnakeGame:

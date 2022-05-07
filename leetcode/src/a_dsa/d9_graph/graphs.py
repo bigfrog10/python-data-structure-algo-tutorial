@@ -92,7 +92,7 @@ def calcEquation(self, equations: List[List[str]], values: List[float], queries:
     return ret
 def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
         alphabet = set(sum(equations, []))  # start with []. return all diff chars in a set
-        uf = UnionFind(alphabet)  # O((N+M)log∗N)
+        uf = UnionFind(alphabet)  # O(N+M*lg∗N)
         for (u, v), w in zip(equations, values): uf.union(u, v, w)
         ans = []
         for u, v in queries:
@@ -104,8 +104,8 @@ def calcEquation(self, equations: List[List[str]], values: List[float], queries:
             else: ans.append(-1)
         return ans
         return ans
-class UnionFind:
-    def __init__(self, alphabet):
+class UnionFind:  ## M union and find operations on N objects takes O(N + M lg* N) time
+    def __init__(self, alphabet):  ## weighted union + path compression
         self.parent = {c: c for c in alphabet}
         self.value = {c: 1 for c in alphabet}
         self.rank = {c: 1 for c in alphabet}
@@ -167,7 +167,7 @@ def minimumSemesters(self, N: int, relations: List[List[int]]) -> int:
     return max_level if len(seen) == N else -1
 
 # LC1192. Critical Connections in a Network
-def criticalConnections(self, n: int, connections: List[List[int]]) -> List[List[int]]:
+def criticalConnections(self, n: int, connections: List[List[int]]) -> List[List[int]]:  # O(V+E)
     network = [[] for _ in range(n)]
     for a, b in connections:
         network[a].append(b)
@@ -187,6 +187,22 @@ def criticalConnections(self, n: int, connections: List[List[int]]) -> List[List
         return low[node]
     tarjan(0, 0, 0)
     return ret
+
+# LC1319. Number of Operations to Make Network Connected
+def makeConnected(self, n: int, connections: List[List[int]]) -> int:  # O(m) m = len(conns)
+    if len(connections) < n - 1: return -1
+    G = [set() for i in range(n)]
+    for i, j in connections:  # space could be n^2, for fully connected net
+        G[i].add(j)
+        G[j].add(i)
+    seen = [0] * n
+    def dfs(i):
+        if seen[i]: return 0
+        seen[i] = 1
+        for j in G[i]: dfs(j)
+        return 1
+    # the number of connected networks - 1 is what we need to do to connect them
+    return sum(dfs(i) for i in range(n)) - 1
 
 # LC1059. All Paths from Source Lead to Destination # BBG
 def leadsToDestination(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:

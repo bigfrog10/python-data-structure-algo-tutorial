@@ -13,7 +13,7 @@ def diameterOfBinaryTree(self, root: TreeNode) -> int:
     path_max(root)
     return diameter
 
-# LC1973. Count Nodes Equal to Sum of Descendants
+# LC1973. Count Nodes Equal to Sum of Descendants - subnodes sum
 def equalToDescendants(self, root: Optional[TreeNode]) -> int:
     output = 0
     def traverse(node):  # return sum of this subtree
@@ -58,7 +58,7 @@ def flipEquiv(self, root1: TreeNode, root2: TreeNode) -> bool: # O(min(#nodes))
     return (self.flipEquiv(root1.left, root2.left) and self.flipEquiv(root1.right, root2.right) or
             self.flipEquiv(root1.left, root2.right) and self.flipEquiv(root1.right, root2.left))
 
-# LC257. Binary Tree Paths
+# LC257. Binary Tree Paths - return all root-leaf paths
 def binaryTreePaths(self, root: TreeNode) -> List[str]:
     ret = []
     def dfs(node, path):
@@ -72,7 +72,7 @@ def binaryTreePaths(self, root: TreeNode) -> List[str]:
     dfs(root, '')
     return ret
 
-# LC1740. Find Distance in a Binary Tree
+# LC1740. Find Distance in a Binary Tree - distance in binary tree
 def findDistance(self, root: TreeNode, p: int, q: int) -> int:
     ans = 0
     def fn(node):  # Traverse the tree post-order.

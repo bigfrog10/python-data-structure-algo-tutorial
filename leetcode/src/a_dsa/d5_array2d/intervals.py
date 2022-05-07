@@ -14,7 +14,7 @@ def exclusiveTime(self, n, logs):  # O(n) runtime and space
             if stack: stack[-1][1] += time  # update parent time
     return res
 
-# LC986. Interval List Intersections
+# LC986. Interval List Intersections - of 2 lists of intervals
 def intervalIntersection(self, firstList: List[List[int]], secondList: List[List[int]]) -> List[List[int]]:
     ret = []  # O(m + n)
     i = j = 0
@@ -26,7 +26,7 @@ def intervalIntersection(self, firstList: List[List[int]], secondList: List[List
         else: j += 1
     return ret
 
-# LC56. Merge Intervals, top100 - remove overlaps
+# LC56. Merge Intervals - remove overlaps of a list
 def merge(self, intervals: List[List[int]]) -> List[List[int]]:
     intervals.sort(key=lambda x: x[0])
     merged = []
@@ -53,6 +53,16 @@ def minMeetingRooms(self, intervals: List[List[int]]) -> int:
         heapq.heappush(rooms, intv[1])  # we sort heap by end time
     return len(rooms)
 
+# LC630. Course Schedule III
+def scheduleCourse(self, A: List[List[int]]) -> int:  # nlogn
+    start, pq = 0, []  # pq has all courses taken now
+    for t, end in sorted(A, key = lambda c: c[1]):  # sort by deadline
+        start += t
+        heapq.heappush(pq, -t)  # finish shortest duration first to save more room for others
+        while start > end:  # if can't take, pop out
+            start += heapq.heappop(pq)
+    return len(pq)
+
 # LC1288. Remove Covered Intervals
 def removeCoveredIntervals(self, intervals: List[List[int]]) -> int:
     intervals.sort(key = lambda x: (x[0], -x[1]))
@@ -69,6 +79,7 @@ class Interval:
         self.start = start
         self.end = end
 def employeeFreeTime(self, schedule: '[[Interval]]') -> '[Interval]':  # O(nlogm), m = # of employees
+    # merge to a single list and merge-sorted by start, O(n), not O(nlogn)
     all_s = heapq.merge(*schedule, key=lambda x: x.start)
     ans = []
     prev = next(all_s).end
@@ -205,7 +216,7 @@ def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[Lis
     s, e = newInterval[0], newInterval[1]  # O(n)
     left = [i for i in intervals if i[1] < s]
     right = [i for i in intervals if i[0] > e]
-    if left + right != intervals:
+    if left + right != intervals:  # we have overlaps, update start and end
         s = min(s, intervals[len(left)][0])
         e = max(e, intervals[~len(right)][1])
     return left + [[s, e]] + right
@@ -235,7 +246,7 @@ def maxEvents(self, events: List[List[int]]) -> int:  # O(nlogn)
         while hq and hq[0] < d: heapq.heappop(hq)  # remove all impossible-to-attend events
     return res
 
-# LC1751. Maximum Number of Events That Can Be Attended II
+# LC1751. Maximum Number of Events That Can Be Attended II - with max meeting values
 def maxValue(self, events: List[List[int]], k: int) -> int:
     n = len(events)
     events.sort(key=lambda x: x[1])
