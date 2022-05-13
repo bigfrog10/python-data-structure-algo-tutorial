@@ -1,31 +1,6 @@
 from typing import List
 import heapq
 
-# LC636. Exclusive Time of Functions, jobs, process time, cpu single thread
-def exclusiveTime(self, n, logs):  # O(n) runtime and space
-    res, stack = [0] * n, []
-    for log in logs:
-        log = log.split(":")
-        if log[1] == "start": stack.append([int(log[2]), 0])  # 0 means no time spent on this yet.
-        else:  # end
-            start = stack.pop()
-            time = int(log[2]) - start[0] + 1  # time spent on this pid
-            res[int(log[0])] += time - start[1]  # add exclusive time, no child time.
-            if stack: stack[-1][1] += time  # update parent time
-    return res
-
-# LC986. Interval List Intersections - of 2 lists of intervals
-def intervalIntersection(self, firstList: List[List[int]], secondList: List[List[int]]) -> List[List[int]]:
-    ret = []  # O(m + n)
-    i = j = 0
-    while i < len(firstList) and j < len(secondList):
-        left = max(firstList[i][0], secondList[j][0])
-        right = min(firstList[i][1], secondList[j][1])
-        if left <= right: ret.append((left, right))  # add intersection
-        if firstList[i][1] < secondList[j][1]: i += 1  # move short end
-        else: j += 1
-    return ret
-
 # LC56. Merge Intervals - remove overlaps of a list
 def merge(self, intervals: List[List[int]]) -> List[List[int]]:
     intervals.sort(key=lambda x: x[0])
@@ -53,6 +28,82 @@ def minMeetingRooms(self, intervals: List[List[int]]) -> int:
         heapq.heappush(rooms, intv[1])  # we sort heap by end time
     return len(rooms)
 
+# LC370. Range Addition
+def getModifiedArray(self, length: int, updates: List[List[int]]) -> List[int]:
+    arr = [0] * length  # O(n), use (start, end) as signals
+    for update in updates:
+        arr[update[0]] += update[2]
+        if update[1] + 1 < length: arr[update[1] + 1] -= update[2]
+    for i in range(1, length):
+        arr[i] += arr[i-1]
+    return arr
+
+# LC465. Optimal Account Balancing
+def minTransfers(self, transactions: List[List[int]]) -> int:  # O(2^N)
+    tuplify = lambda balance: tuple(sorted((k, v) for k, v in balance.items()))
+    @lru_cache(None)
+    def dfs(balances):
+        if not balances: return 0
+        res = math.inf
+        balances = {k: v for k, v in balances}
+        for size in range(2, len(balances) + 1):
+            for group in itertools.combinations(balances.keys(), size):
+                if sum(balances[k] for k in group) == 0:
+                    remaining_balances = {k: v for k, v in balances.items() if k not in group}
+                    res = min(res, size - 1 + dfs(tuplify(remaining_balances)))
+        return res
+
+    balances = collections.defaultdict(int)
+    for u, v, z in transactions:
+        balances[u] += z
+        balances[v] -= z
+    return dfs(tuplify({k: v for k, v in balances.items() if v}))
+
+# LC986. Interval List Intersections - of 2 lists of intervals
+def intervalIntersection(self, firstList: List[List[int]], secondList: List[List[int]]) -> List[List[int]]:
+    ret = []  # O(m + n)
+    i = j = 0
+    while i < len(firstList) and j < len(secondList):
+        left = max(firstList[i][0], secondList[j][0])
+        right = min(firstList[i][1], secondList[j][1])
+        if left <= right: ret.append((left, right))  # add intersection
+        if firstList[i][1] < secondList[j][1]: i += 1  # move short end
+        else: j += 1
+    return ret
+
+# LC759. Employee Free Time
+class Interval:
+    def __init__(self, start: int = None, end: int = None):
+        self.start = start
+        self.end = end
+def employeeFreeTime(self, schedule: '[[Interval]]') -> '[Interval]':  # O(nlogm), m = # of employees
+    # merge to a single list and merge-sorted by start, O(n), not O(nlogn)
+    all_s = heapq.merge(*schedule, key=lambda x: x.start)
+    ans = []
+    prev = next(all_s).end
+    while a := next(all_s, None):
+        if a.start > prev:
+            ans.append(Interval(prev, a.start))
+        prev = max(prev, a.end)
+    return ans
+
+# LC636. Exclusive Time of Functions, jobs, process time, cpu single thread
+def exclusiveTime(self, n, logs):  # O(n) runtime and space
+    res, stack = [0] * n, []
+    for log in logs:
+        log = log.split(":")
+        if log[1] == "start": stack.append([int(log[2]), 0])  # 0 means no time spent on this yet.
+        else:  # end
+            start = stack.pop()
+            time = int(log[2]) - start[0] + 1  # time spent on this pid
+            res[int(log[0])] += time - start[1]  # add exclusive time, no child time.
+            if stack: stack[-1][1] += time  # update parent time
+    return res
+
+
+
+
+
 # LC630. Course Schedule III
 def scheduleCourse(self, A: List[List[int]]) -> int:  # nlogn
     start, pq = 0, []  # pq has all courses taken now
@@ -73,21 +124,7 @@ def removeCoveredIntervals(self, intervals: List[List[int]]) -> int:
             prev_end = end
     return count
 
-# LC759. Employee Free Time
-class Interval:
-    def __init__(self, start: int = None, end: int = None):
-        self.start = start
-        self.end = end
-def employeeFreeTime(self, schedule: '[[Interval]]') -> '[Interval]':  # O(nlogm), m = # of employees
-    # merge to a single list and merge-sorted by start, O(n), not O(nlogn)
-    all_s = heapq.merge(*schedule, key=lambda x: x.start)
-    ans = []
-    prev = next(all_s).end
-    while a := next(all_s, None):
-        if a.start > prev:
-            ans.append(Interval(prev, a.start))
-        prev = max(prev, a.end)
-    return ans
+
 
 # LC435. Non-overlapping Intervals - minimal intervals to be removed for nonoverlapping
 def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
@@ -221,15 +258,7 @@ def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[Lis
         e = max(e, intervals[~len(right)][1])
     return left + [[s, e]] + right
 
-# LC370. Range Addition
-def getModifiedArray(self, length: int, updates: List[List[int]]) -> List[int]:
-    arr = [0] * length  # O(n), use (start, end) as signals
-    for update in updates:
-        arr[update[0]] += update[2]
-        if update[1] + 1 < length: arr[update[1] + 1] -= update[2]
-    for i in range(1, length):
-        arr[i] += arr[i-1]
-    return arr
+
 
 # LC1353. Maximum Number of Events That Can Be Attended
 def maxEvents(self, events: List[List[int]]) -> int:  # O(nlogn)
@@ -292,24 +321,7 @@ def findMinArrowShots(self, points: List[List[int]]) -> int:
             end = e
     return cnt
 
-# LC465. Optimal Account Balancing
-def minTransfers(self, transactions: List[List[int]]) -> int:
-# https://leetcode.com/problems/optimal-account-balancing/discuss/95355/Concise-9ms-DFS-solution-(detailed-explanation)
-    debt = collections.defaultdict(int)   # n! because T(n) = n*T(n-1)
-    for t in transactions: # each persion's net
-        debt[t[0]] -= t[2]
-        debt[t[1]] += t[2]
-    def dfs(s): # dfs on ids
-        while s < len(debt) and debt[s]==0: s += 1
-        if s == len(debt): return 0
-        r = float('inf')
-        for i in range(s+1, len(debt)):
-            if debt[i]*debt[s] < 0:
-                debt[i] += debt[s] # settle s with i
-                r = min(r, 1 + dfs(s+1))
-                debt[i] -= debt[s] # backtrack
-        return r
-    return dfs(0)
+
 
 # LC1854. Maximum Population Year
 def maximumPopulation(self, logs: List[List[int]]) -> int:  # O(n)

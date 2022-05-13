@@ -1,4 +1,9 @@
 
+# LC692. Top K Frequent Words
+def topKFrequent(self, words: List[str], k: int) -> List[str]:  # O(n)
+    freqs = Counter(words)
+    return heapq.nsmallest(k, freqs.keys(), lambda w: (-freqs[w], w))
+
 # LC215. Kth Largest Element in an Array, top100
 def findKthLargest(self, nums: List[int], k: int) -> int:  # average O(n)
     # on average, we reduce by n/2, so add up to 1*n

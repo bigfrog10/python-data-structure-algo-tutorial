@@ -6,6 +6,32 @@ class TreeNode:
         self.left = left
         self.right = right
 
+# LC545. Boundary of Binary Tree
+def boundaryOfBinaryTree(self, root: Optional[TreeNode]) -> List[int]:  # O(n) runtime, O(n) space(stack recursion)
+    def left_bound(root):
+        if not root: return
+        if root.left or root.right: ans.append(root.val) # condition 1
+        if root.left: left_bound(root.left) # condition 2
+        else: left_bound(root.right) # condition 3
+    def leaf(root):
+        if not root: return
+        leaf(root.left)
+        if not root.left and not root.right: ans.append(root.val)
+        leaf(root.right)
+    def right_bound(root):  ## Reversed order
+        if not root: return
+        if root.right: right_bound(root.right)  # condition 2
+        else: right_bound(root.left)  # condition 3
+        if root.left or root.right: ans.append(root.val) # condition 1,
+    if not root: return []
+    ans = []
+    ans.append(root.val)
+    left_bound(root.left)
+    leaf(root.left)
+    leaf(root.right)
+    right_bound(root.right)
+    return ans
+
 # LC987. Vertical Order Traversal of a Binary Tree - sort in same position
 def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:  # O(nlog(n/w)
     res = defaultdict(list) # column number to (row number, val)
@@ -223,31 +249,7 @@ def findClosestLeaf(self, root: TreeNode, k: int) -> int:  # O(n)
                     seen.add(nei)
                     queue.append(nei)
 
-# LC545. Boundary of Binary Tree
-def boundaryOfBinaryTree(self, root: Optional[TreeNode]) -> List[int]:  # O(n) runtime, O(n) space(stack recursion)
-    def left_bound(root):
-        if not root: return
-        if root.left or root.right: ans.append(root.val) # condition 1
-        if root.left: left_bound(root.left) # condition 2
-        else: left_bound(root.right) # condition 3
-    def leaf(root):
-        if not root: return
-        leaf(root.left)
-        if not root.left and not root.right: ans.append(root.val)
-        leaf(root.right)
-    def right_bound(root):  ## Reversed order
-        if not root: return
-        if root.right: right_bound(root.right)  # condition 2
-        else: right_bound(root.left)  # condition 3
-        if root.left or root.right: ans.append(root.val) # condition 1,
-    if not root: return []
-    ans = []
-    ans.append(root.val)
-    left_bound(root.left)
-    leaf(root.left)
-    leaf(root.right)
-    right_bound(root.right)
-    return ans
+
 
 # LC863. All Nodes Distance K in Binary Tree
 def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:  # O(n) time

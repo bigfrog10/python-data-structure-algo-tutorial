@@ -1,5 +1,126 @@
 from collections import deque
 
+# LC1730. Shortest Path to Get Food
+def getFood(self, grid: List[List[str]]) -> int:  # O(mn)
+    rows, cols = len(grid), len(grid[0])
+    for r, c in product(range(rows), range(cols)):
+        if grid[r][c] == '*':
+                start = (r,c)
+                break
+    directions = [(0, -1), (0, 1), (1, 0), (-1,0)]
+    deque, seen = collections.deque([start]), set()
+    res = 0
+    while deque:
+        for _ in range(len(deque)):
+            currR, currC = deque.popleft()
+            seen.add((currR, currC))
+            if grid[currR][currC] == '#': return res
+            for dx, dy in directions:
+                x, y = currR + dx, currC + dy
+                if 0 <= x < rows and 0 <= y < cols and grid[x][y] != 'X' and (x,y) not in seen:
+                    deque.append((x,y))
+                    seen.add((x,y))
+        res += 1
+    return -1
+
+# LC994. Rotting Oranges
+def orangesRotting(self, grid: List[List[int]]) -> int:  # O(rows * cols)
+    rows, cols = len(grid), len(grid[0])
+    rotten, fresh = set(), set()
+    for i, j in product(range(rows), range(cols)):
+        if grid[i][j] == 2: rotten.add((i, j))
+        if grid[i][j] == 1: fresh.add((i, j))
+    timer = 0
+    dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+    while fresh:  # BFS
+        if not rotten: return -1
+        rotten = {(i+di, j+dj) for i, j in rotten for di, dj in dirs if (i+di, j+dj) in fresh}
+        fresh -= rotten
+        timer += 1
+    return timer
+
+# LC174. Dungeon Game - knight princess
+def calculateMinimumHP(self, dungeon: List[List[int]]) -> int:  # O(n) space
+    m, n = len(dungeon), len(dungeon[0])
+    dp = [float('inf')] * (n+1)
+    dp[n-1] = 1
+    for i in reversed(range(m)):
+        for j in reversed(range(n)):
+            cost = min(dp[j+1], dp[j]) - dungeon[i][j]
+            dp[j] =  max(cost, 1)
+    return dp[0]
+def calculateMinimumHP(self, dungeon: List[List[int]]) -> int:  # O(mn) time and space
+    m, n = len(dungeon), len(dungeon[0])
+    @functools.lru_cache(None)
+    def dp(i,j):  # min health needed from i, j to end
+        if (i,j) in ((m-1,n),(m,n-1)): return 1  # pass end cell
+        if i == m or j == n: return math.inf  # go out of boundary
+        ncost = min(dp(i+1,j), dp(i,j+1)) - dungeon[i][j]
+        return max(ncost, 1)  # if < 1, it means dungeon has more orbs
+    return dp(0,0)
+
+# LC773. Sliding Puzzle - to 123,450
+def slidingPuzzle(self, board: List[List[int]]) -> int:
+    swaps = [[1, 3], [0, 2, 4], [1, 5], [0, 4], [1, 3, 5], [2, 4]]
+    goal = [1,2,3, 4,5,0]
+    board = board[0] + board[1]
+    i = board.index(0)
+    q = collections.deque([(board, 0, i)])
+    visited = set([tuple(board)])
+    while q:
+        board, moves, i = q.popleft()
+        if board == goal: return moves
+        for j in swaps[i]:
+            nxt = board[:]
+            nxt[i], nxt[j] = nxt[j], nxt[i]
+            if tuple(nxt) not in visited:
+                visited.add(tuple(nxt))
+                q.append((nxt, moves + 1, j))
+    return -1
+
+# LC529. Minesweeper
+def updateBoard(self, board: List[List[str]], click: List[int]) -> List[List[str]]:
+    n, m = len(board), len(board[0])  ## O(mn)
+    dirs = ((-1, 0), (1, 0), (0, 1), (0, -1), (-1, 1), (-1, -1), (1, 1), (1, -1))
+    def dfs(i, j):  # don't need visited since we alter values already
+        if board[i][j] == 'M': board[i][j] = 'X'  # we should get here, i.e., don't step on mine.
+        elif board[i][j] == 'E':
+            # neighbour mines
+            nm = sum(board[i+dx][j+dy] == 'M' for dx, dy in dirs if 0 <= i+dx < n and 0 <= j+dy < m)
+            board[i][j] = str(nm or 'B')
+            if not nm: # no mine nearby
+                for dx, dy in dirs:
+                    if 0 <= i+dx < n and 0 <= j+dy < m: dfs(i + dx, j + dy)
+            # the logic with mine nearby is complicated, with this logic missing
+            # there could be cells not visited, e.g., a mine at (1, 1).
+    dfs(*click)
+    return board
+
+# LC361. Bomb Enemy
+def maxKilledEnemies(self, grid):  # O(mn) time and O(n) space
+    if not grid: return 0
+    m, n = len(grid), len(grid[0])
+    result = 0
+    colhits = [0] * n
+    for i, row in enumerate(grid):
+        for j, cell in enumerate(row):
+            if j == 0 or row[j-1] == 'W':
+                rowhits = 0
+                k = j
+                while k < n and row[k] != 'W':
+                    rowhits += row[k] == 'E'
+                    k += 1
+            if i == 0 or grid[i-1][j] == 'W':
+                colhits[j] = 0
+                k = i
+                while k < m and grid[k][j] != 'W':
+                    colhits[j] += grid[k][j] == 'E'
+                    k += 1
+            if cell == '0':
+                result = max(result, rowhits + colhits[j])
+    return result
+
+
 # LC1197. Minimum Knight Moves
 def minKnightMoves(self, x: int, y: int) -> int:  # O(x*y)
     @lru_cache(None)
@@ -108,23 +229,6 @@ def countBattleships(self, board: List[List[str]]) -> int:
                 total += flag
     return total
 
-# LC529. Minesweeper
-def updateBoard(self, board: List[List[str]], click: List[int]) -> List[List[str]]:
-    n, m = len(board), len(board[0])  ## O(mn)
-    dirs = ((-1, 0), (1, 0), (0, 1), (0, -1), (-1, 1), (-1, -1), (1, 1), (1, -1))
-    def dfs(i, j):  # don't need visited since we alter values already
-        if board[i][j] == 'M': board[i][j] = 'X'  # we should get here, i.e., don't step on mine.
-        elif board[i][j] == 'E':
-            # neighbour mines
-            nm = sum(board[i+dx][j+dy] == 'M' for dx, dy in dirs if 0 <= i+dx < n and 0 <= j+dy < m)
-            board[i][j] = str(nm or 'B')
-            if not nm: # no mine nearby
-                for dx, dy in dirs:
-                    if 0 <= i+dx < n and 0 <= j+dy < m: dfs(i + dx, j + dy)
-            # the logic with mine nearby is complicated, with this logic missing
-            # there could be cells not visited, e.g., a mine at (1, 1).
-    dfs(*click)
-    return board
 
 # LC51. N-Queens - n queens
 def solveNQueens(self, n: int) -> List[List[str]]:
@@ -149,21 +253,7 @@ def solveNQueens(self, n: int) -> List[List[str]]:
     res1 = [['.' * col + 'Q' + '.'*(n - col - 1) for col in board] for board in res]
     return res1
 
-# LC994. Rotting Oranges
-def orangesRotting(self, grid: List[List[int]]) -> int:  # O(rows * cols)
-    rows, cols = len(grid), len(grid[0])
-    rotten, fresh = set(), set()
-    for i, j in product(range(rows), range(cols)):
-        if grid[i][j] == 2: rotten.add((i, j))
-        if grid[i][j] == 1: fresh.add((i, j))
-    timer = 0
-    dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
-    while fresh:  # BFS
-        if not rotten: return -1
-        rotten = {(i+di, j+dj) for i, j in rotten for di, dj in dirs if (i+di, j+dj) in fresh}
-        fresh -= rotten
-        timer += 1
-    return timer
+
 
 # LC1034. Coloring A Border
 def colorBorder(self, grid: List[List[int]], row: int, col: int, color: int) -> List[List[int]]:
@@ -239,26 +329,7 @@ def gameOfLife(self, board: List[List[int]]) -> None: # 1 bit for old, 1 bit for
         for j in range(n):
             board[i][j] >>= 1
 
-# LC361. Bomb Enemy
-def maxKilledEnemies(self, grid):
-    maxEnemy = 0
-    tgrid = [list(i) for i in zip(*grid)]
-    for i in range(len(grid)): # for each row, we duplicate scan for each seg(sep by walls)
-        for j in range(len(grid[0])):
-            if grid[i][j] == '0':
-                maxEnemy = max(maxEnemy,
-                               self.countEInRow(j, grid[i]) + self.countEInRow(i, tgrid[j]))
-    return maxEnemy
-def countEInRow(self, i, row):
-    #if len(row) == 1: return 0
-    tempE = 0
-    for j in range(i+1, len(row)): # move right
-        if row[j] == 'E': tempE += 1
-        if row[j] == 'W': break
-    for j in range(i-1,-1,-1): # move left
-        if row[j] == 'E': tempE += 1
-        if row[j] == 'W': break
-    return tempE
+
 
 # LC909. Snakes and Ladders
 def snakesAndLadders(self, board: List[List[int]]) -> int:

@@ -1,4 +1,47 @@
 
+# LC200. Number of Islands
+from itertools import product
+def numIslands(self, board: List[List[str]]) -> int:
+    if not board: return 0  # O(MN)
+    rows, cols = len(board), len(board[0])
+    seen = set()
+    def dfs(i, j):
+        seen.add((i, j))
+        for dx, dy in (1, 0), (-1, 0), (0, 1), (0, -1):
+            x, y = i + dx, j + dy
+            if 0 <= x < rows and 0 <= y < cols and board[i][j] == '1' and (x, y) not in seen:
+                dfs(x, y)
+    count = 0
+    for i, j in product(range(rows), range(cols)):
+        if board[i][j] == '1' and (i, j) not in seen:
+            count += 1
+            dfs(i, j)
+    return count
+
+# LC305. Number of Islands II - add land one by one - union find
+def numIslands2(self, m, n, positions):
+    parent, rank = {}, {}  # tree depth logn
+    def find(x):
+        if parent[x] != x: parent[x] = find(parent[x])
+        return parent[x]
+    def union(x, y):  #  M union or find sequences on N objects takes O(N + M * log*N)
+        x, y = find(x), find(y)
+        if x == y: return 0  # no new island
+        if rank[x] < rank[y]: x, y = y, x
+        parent[y] = x
+        rank[y] += rank[x]
+        return 1  # new island
+    counts, count = [], 0  # let N = m*n, union is O(N + Nlog*N)
+    for i, j in positions:  # L operations, so O(N + L* log*N)
+        if (i, j) not in parent:
+            x = parent[x] = i, j
+            rank[x] = 1
+            count += 1  # x is a new island
+            for y in (i+1, j), (i-1, j), (i, j+1), (i, j-1):
+                if y in parent: count -= union(x, y)
+        counts.append(count)
+    return counts
+
 # LC827. Making A Large Island
 def largestIsland(self, grid: List[List[int]]) -> int: # O(n^2) runtime and space
     if not grid or not grid[0]: return 0
@@ -78,48 +121,9 @@ def islandPerimeter(self, grid: List[List[int]]) -> int:  # O(mn), O(1)
             if c > 0 and grid[r][c-1] == 1: result -= 2
     return result
 
-# LC305. Number of Islands II
-def numIslands2(self, m, n, positions):
-    parent, rank = {}, {}  # tree depth logn
-    def find(x):
-        if parent[x] != x: parent[x] = find(parent[x])
-        return parent[x]
-    def union(x, y):  #  M union or find sequences on N objects takes O(N + M * log*N)
-        x, y = find(x), find(y)
-        if x == y: return 0  # no new island
-        if rank[x] < rank[y]: x, y = y, x
-        parent[y] = x
-        rank[y] += rank[x]
-        return 1  # new island
-    counts, count = [], 0  # let N = m*n, union is O(N + Nlog*N)
-    for i, j in positions:  # L operations, so O(N + L* log*N)
-        if (i, j) not in parent:
-            x = parent[x] = i, j
-            rank[x] = 1
-            count += 1  # x is a new island
-            for y in (i+1, j), (i-1, j), (i, j+1), (i, j-1):
-                if y in parent: count -= union(x, y)
-        counts.append(count)
-    return counts
 
-# LC200. Number of Islands, top100
-from itertools import product
-def numIslands(self, board: List[List[str]]) -> int:
-    if not board: return 0  # O(MN)
-    rows, cols = len(board), len(board[0])
-    seen = set()
-    def dfs(i, j):
-        seen.add((i, j))
-        for dx, dy in (1, 0), (-1, 0), (0, 1), (0, -1):
-            x, y = i + dx, j + dy
-            if 0 <= x < rows and 0 <= y < cols and board[i][j] == '1' and (x, y) not in seen:
-                dfs(x, y)
-    count = 0
-    for i, j in product(range(rows), range(cols)):
-        if board[i][j] == '1' and (i, j) not in seen:
-            count += 1
-            dfs(i, j)
-    return count
+
+
 
 # LC694. Number of Distinct Islands - transformations
 def numDistinctIslands(self, grid: List[List[int]]) -> int:

@@ -1,4 +1,20 @@
 
+# LC655. Print Binary Tree - O(n)
+def printTree(self, root: TreeNode) -> List[List[str]]:
+    def get_height(node):
+        return 0 if not node else 1 + max(get_height(node.left), get_height(node.right))
+    def update_output(node, row, left, right):
+        if not node: return
+        mid = (left + right) // 2
+        self.output[row][mid] = str(node.val)
+        update_output(node.left, row + 1 , left, mid - 1)
+        update_output(node.right, row + 1 , mid + 1, right)
+    height = get_height(root)
+    width = 2 ** height - 1
+    self.output = [[''] * width for i in range(height)]
+    update_output(node=root, row=0, left=0, right=width - 1)
+    return self.output
+
 # LC543. Diameter of Binary Tree - binary tree diameter
 def diameterOfBinaryTree(self, root: TreeNode) -> int:
     diameter = 0
@@ -102,21 +118,7 @@ def maxDepth(self, root):
             stack.append((current_depth + 1, root.right))
     return depth
 
-# LC655. Print Binary Tree - O(n)
-def printTree(self, root: TreeNode) -> List[List[str]]:
-    def get_height(node):
-        return 0 if not node else 1 + max(get_height(node.left), get_height(node.right))
-    def update_output(node, row, left, right):
-        if not node: return
-        mid = (left + right) // 2
-        self.output[row][mid] = str(node.val)
-        update_output(node.left, row + 1 , left, mid - 1)
-        update_output(node.right, row + 1 , mid + 1, right)
-    height = get_height(root)
-    width = 2 ** height - 1
-    self.output = [[''] * width for i in range(height)]
-    update_output(node=root, row=0, left=0, right=width - 1)
-    return self.output
+
 
 # LC250. Count Univalue Subtrees
 def countUnivalSubtrees(self, root: TreeNode) -> int:

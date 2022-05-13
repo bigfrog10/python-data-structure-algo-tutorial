@@ -1,4 +1,26 @@
 
+# LC1044. Longest Duplicate Substring
+def longestDupSubstring(self, S):  # O(nlogn) runtime, O(n) space, hard - Rabin-Karp
+    A = [ord(c) - ord('a') for c in S]
+    mod = 2**63 - 1
+    def test(L):  # find duplicated substrings of length L, O(n)
+        cur = reduce(lambda x, y: (x * 26 + y) % mod, A[:L])
+        seen = {cur}
+        p = pow(26, L, mod)  # without hashing, as L -> N/2, this is O(n^2)
+        for i in range(L, len(S)):  # slide this window
+            cur = (cur * 26 + A[i] - A[i - L] * p) % mod  # rolling hash
+            if cur in seen: return i - L + 1  # return start position
+            seen.add(cur)
+    res, lo, hi = 0, 0, len(S)  # bisect on length L, O(logn)
+    while lo < hi:
+        mi = (lo + hi + 1) // 2
+        pos = test(mi)
+        if pos:
+            lo = mi
+            res = pos
+        else: hi = mi - 1
+    return S[res:res + lo]
+
 # LC316. Remove Duplicate Letters - dupe chars with smallest order
 def removeDuplicateLetters(self, s: str) -> str:  # O(n) time and O(1) space
     last_idx = {c: i for i, c in enumerate(s)}
@@ -45,27 +67,7 @@ def removeDuplicates(self, s, k):  # O(n)
         else: stack.append([c, 1])  # char and count
     return ''.join(c * cnt for c, cnt in stack)
 
-# LC1044. Longest Duplicate Substring
-def longestDupSubstring(self, S):  # O(nlogn) runtime, O(n) space, hard - Rabin-Karp
-    A = [ord(c) - ord('a') for c in S]
-    mod = 2**63 - 1
-    def test(L):  # find duplicated substrings of length L, O(n)
-        cur = reduce(lambda x, y: (x * 26 + y) % mod, A[:L])
-        seen = {cur}
-        p = pow(26, L, mod)  # without hashing, as L -> N/2, this is O(n^2)
-        for i in range(L, len(S)):  # slide this window
-            cur = (cur * 26 + A[i] - A[i - L] * p) % mod  # rolling hash
-            if cur in seen: return i - L + 1  # return start position
-            seen.add(cur)
-    res, lo, hi = 0, 0, len(S)  # bisect on length L, O(logn)
-    while lo < hi:
-        mi = (lo + hi + 1) // 2
-        pos = test(mi)
-        if pos:
-            lo = mi
-            res = pos
-        else: hi = mi - 1
-    return S[res:res + lo]
+
 
 # LC459. Repeated Substring Pattern - repeat string
 def repeatedSubstringPattern(self, s: str) -> bool:  # O(n^2)

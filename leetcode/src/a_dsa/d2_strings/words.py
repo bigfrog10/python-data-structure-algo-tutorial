@@ -1,4 +1,121 @@
 
+# LC472. Concatenated Words
+def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
+    word_set = set(words)
+    def check(word):  # could use cache here
+        n = len(word)
+        for i in range(1, n):
+            if word[i:] not in word_set: continue
+            # so now word[i:] in word_set
+            if word[:i] in word_set: return True # so both part are words
+            if check(word[:i]): return True # recursion check
+        return False
+    res = []
+    for w in words:  # O(n) - number of words
+        if check(w): res.append(w)
+    return res
+
+# LC127. Word Ladder, top100
+def ladderLength(self, beginWord, endWord, wordList):  # BFS, O(m^2 * len(wordList))
+    wordList = set(wordList)  # m = len(beginWord), len(endWord)
+    queue = collections.deque([[beginWord, 1]])
+    while queue:  # BFS since we look for shortest
+        word, length = queue.popleft()
+        if word == endWord: return length
+        for i in range(len(word)):  # O(m)
+            for c in 'abcdefghijklmnopqrstuvwxyz':
+                next_word = word[:i] + c + word[i+1:]  # O(m)
+                if next_word in wordList:
+                    wordList.remove(next_word)  # this is the key, BFS doesn't look back
+                    queue.append([next_word, length + 1])
+    return 0
+
+# LC126. Word Ladder II, top100 - Same for find all paths in DAG
+def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List[List[str]]:
+    wordList = set(wordList)  # O(n * m^2)
+    res, layer = [], {beginWord: [[beginWord]]}  # end word to history
+    while layer:  # O(len(words)), BFS to find min
+        newlayer = collections.defaultdict(list)
+        for w in layer:
+            if w == endWord: res.extend(k for k in layer[w])
+            else:
+                for i in range(len(w)):   # O(m)
+                    for c in 'abcdefghijklmnopqrstuvwxyz':
+                        neww = w[:i] + c + w[i+1:]   # O(m)
+                        if neww in wordList:
+                            newlayer[neww] += [j + [neww] for j in layer[w]]
+        wordList -= set(newlayer.keys())
+        layer = newlayer
+    return res
+
+# LC79. Word Search, top100 - search in 2d matrix
+def exist(self, board: List[List[str]], word: str) -> bool:  # O(h*w*3^wl)
+    if not board or not board[0]: return False
+    h, w, wl = len(board), len(board[0]), len(word)
+    def dfs(i, j, wi):
+        if board[i][j] != word[wi]: return False
+        board[i][j] = ord(board[i][j]) ^ 256
+        exist = wi+1 == wl
+        if exist: return exist
+        for x, y in [(i+1, j), (i-1, j), (i, j+1), (i, j-1)]:
+            if 0 <= x < h and 0 <= y < w:
+                exist = exist or dfs(x, y, wi+1)
+                if exist: return exist
+        board[i][j] = chr(board[i][j] ^ 256)  # backout
+        return exist
+    bls = set()  # precheck board has all letters from word,
+    for row in board: bls.update(row)  # this makes the test faster 5% -> 74%
+    wls = set(word)
+    if len(wls - bls) > 0: return False
+    for i in range(h):
+        for j in range(w):
+            if dfs(i, j, 0): return True
+    return False
+
+# LC212. Word Search II - return all words
+def findWords(self, board: List[List[str]], words: List[str]) -> List[str]: # This is fast
+    trie, WORD_KEY = {}, '$'  # O(M4*3^(L-1)), M=cells, L=max(len(word) for words)
+    for word in words:  # space O(number of letters in trie)
+        node = trie
+        for letter in word: node = node.setdefault(letter, {})
+        node[WORD_KEY] = word  # save word at the end
+    rowNum, colNum = len(board), len(board[0])
+    matchedWords = []
+    def dfs(row, col, parent):
+        letter = board[row][col]
+        currNode = parent[letter]
+        word_match = currNode.pop(WORD_KEY, None)  # check end, cut branches
+        if word_match: matchedWords.append(word_match)
+        board[row][col] = '#' # Before the EXPLORATION, mark the cell as visited, backtracking
+        # Explore the neighbors in 4 directions, i.e. up, right, down, left
+        for (dx, dy) in (-1, 0), (0, 1), (1, 0), (0, -1): # O(3^max(words))
+            nx, ny = row + dx, col + dy
+            if rowNum > nx >= 0 <= ny < colNum and board[nx][ny] in currNode:
+                dfs(nx, ny, currNode)
+        board[row][col] = letter # End of EXPLORATION, we restore the cell
+        # Optimization: incrementally remove the matched leaf node in Trie.
+        if not currNode: parent.pop(letter) # we pop'd WORD_KEY before
+    for row in range(rowNum): # O(nm)
+        for col in range(colNum):# starting from each of the cells
+            if board[row][col] in trie: dfs(row, col, trie)
+    return matchedWords
+
+# LC68. Text Justification
+def fullJustify(self, words: List[str], maxWidth: int) -> List[str]:
+    ans = []
+    line, width = [], 0
+    for word in words:
+        if width + len(line) + len(word) > maxWidth:  # len(line) spaces
+            n, k = divmod(maxWidth - width, max(1, len(line)-1))
+            for i in range(max(1, len(line)-1)):
+                line[i] += " " * (n + (i < k))  # add space after word
+            ans.append("".join(line))
+            line, width = [], 0
+        line.append(word)
+        width += len(word)
+    ans.append(" ".join(line).ljust(maxWidth))
+    return ans
+
 # LC140. Word Break II - return all possible answer
 def wordBreak(self, s: str, wordDict):  #  we may have O(2^n) solutions, n=len(s)
     word_set = set(wordDict)   # this line takes O(?) time
@@ -60,38 +177,7 @@ def groupStrings(self, strings: List[str]) -> List[List[str]]:
     for s in strings: groups[shash(s)].append(s)
     return groups.values()
 
-# LC127. Word Ladder, top100
-def ladderLength(self, beginWord, endWord, wordList):  # BFS, O(m^2 * len(wordList))
-    wordList = set(wordList)  # m = len(beginWord), len(endWord)
-    queue = collections.deque([[beginWord, 1]])
-    while queue:  # BFS since we look for shortest
-        word, length = queue.popleft()
-        if word == endWord: return length
-        for i in range(len(word)):  # O(m)
-            for c in 'abcdefghijklmnopqrstuvwxyz':
-                next_word = word[:i] + c + word[i+1:]  # O(m)
-                if next_word in wordList:
-                    wordList.remove(next_word)  # this is the key, BFS doesn't look back
-                    queue.append([next_word, length + 1])
-    return 0
 
-# LC126. Word Ladder II, top100 - Same for find all paths in DAG
-def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List[List[str]]:
-    wordList = set(wordList)  # O(n * m^2)
-    res, layer = [], {beginWord: [[beginWord]]}  # end word to history
-    while layer:  # O(len(words)), BFS to find min
-        newlayer = collections.defaultdict(list)
-        for w in layer:
-            if w == endWord: res.extend(k for k in layer[w])
-            else:
-                for i in range(len(w)):   # O(m)
-                    for c in 'abcdefghijklmnopqrstuvwxyz':
-                        neww = w[:i] + c + w[i+1:]   # O(m)
-                        if neww in wordList:
-                            newlayer[neww] += [j + [neww] for j in layer[w]]
-        wordList -= set(newlayer.keys())
-        layer = newlayer
-    return res
 
 # LC616. Add Bold Tag in String, same as LC758.
 def addBoldTag(self, s: str, words: List[str]) -> str:
@@ -211,57 +297,6 @@ def toGoatLatin(self, sentence: str) -> str:
         ret.append(w)
     return ' '.join(ret)
 
-# LC79. Word Search, top100 - search in 2d matrix
-def exist(self, board: List[List[str]], word: str) -> bool:  # O(h*w*3^wl)
-    if not board or not board[0]: return False
-    h, w, wl = len(board), len(board[0]), len(word)
-    def dfs(i, j, wi):
-        if board[i][j] != word[wi]: return False
-        board[i][j] = ord(board[i][j]) ^ 256
-        exist = wi+1 == wl
-        if exist: return exist
-        for x, y in [(i+1, j), (i-1, j), (i, j+1), (i, j-1)]:
-            if 0 <= x < h and 0 <= y < w:
-                exist = exist or dfs(x, y, wi+1)
-                if exist: return exist
-        board[i][j] = chr(board[i][j] ^ 256)  # backout
-        return exist
-    bls = set()  # precheck board has all letters from word,
-    for row in board: bls.update(row)  # this makes the test faster 5% -> 74%
-    wls = set(word)
-    if len(wls - bls) > 0: return False
-    for i in range(h):
-        for j in range(w):
-            if dfs(i, j, 0): return True
-    return False
-
-# LC212. Word Search II - return all words
-def findWords(self, board: List[List[str]], words: List[str]) -> List[str]: # This is fast
-    trie, WORD_KEY = {}, '$'  # O(M4*3^(L-1)), M=cells, L=max(len(word) for words)
-    for word in words:  # space O(number of letters in trie)
-        node = trie
-        for letter in word: node = node.setdefault(letter, {})
-        node[WORD_KEY] = word  # save word at the end
-    rowNum, colNum = len(board), len(board[0])
-    matchedWords = []
-    def dfs(row, col, parent):
-        letter = board[row][col]
-        currNode = parent[letter]
-        word_match = currNode.pop(WORD_KEY, None)  # check end, cut branches
-        if word_match: matchedWords.append(word_match)
-        board[row][col] = '#' # Before the EXPLORATION, mark the cell as visited, backtracking
-        # Explore the neighbors in 4 directions, i.e. up, right, down, left
-        for (dx, dy) in (-1, 0), (0, 1), (1, 0), (0, -1): # O(3^max(words))
-            nx, ny = row + dx, col + dy
-            if rowNum > nx >= 0 <= ny < colNum and board[nx][ny] in currNode:
-                dfs(nx, ny, currNode)
-        board[row][col] = letter # End of EXPLORATION, we restore the cell
-        # Optimization: incrementally remove the matched leaf node in Trie.
-        if not currNode: parent.pop(letter) # we pop'd WORD_KEY before
-    for row in range(rowNum): # O(nm)
-        for col in range(colNum):# starting from each of the cells
-            if board[row][col] in trie: dfs(row, col, trie)
-    return matchedWords
 
 # LC14. Longest Common Prefix - lcp
 def longestCommonPrefix(self, strs):  # O(sum(len(str)))
@@ -272,21 +307,7 @@ def longestCommonPrefix(self, strs):  # O(sum(len(str)))
             if other[i] != ch: return shortest[:i]
     return shortest
 
-# LC68. Text Justification
-def fullJustify(self, words: List[str], maxWidth: int) -> List[str]:
-    ans = []
-    line, width = [], 0
-    for word in words:
-        if width + len(line) + len(word) > maxWidth:  # len(line) spaces
-            n, k = divmod(maxWidth - width, max(1, len(line)-1))
-            for i in range(max(1, len(line)-1)):
-                line[i] += " " * (n + (i < k))  # add space after word
-            ans.append("".join(line))
-            line, width = [], 0
-        line.append(word)
-        width += len(word)
-    ans.append(" ".join(line).ljust(maxWidth))
-    return ans
+
 
 # LC30. Substring with Concatenation of All Words
 def findSubstring(self, s: str, words: List[str]) -> List[int]:  # O(numWords * len(s))
@@ -316,10 +337,6 @@ def numOfPairs(self, nums: List[str], target: str) -> int:
             if k == suffix: ans -= freq[suffix]  # together, n^2 - n when prefix = suffix
     return ans
 
-# LC692. Top K Frequent Words
-def topKFrequent(self, words: List[str], k: int) -> List[str]:  # O(n)
-    freqs = Counter(words)
-    return heapq.nsmallest(k, freqs.keys(), lambda w: (-freqs[w], w))
 
 # LC609. Find Duplicate File in System
 def findDuplicate(self, paths: List[str]) -> List[List[str]]:
@@ -477,21 +494,7 @@ def getFolderNames(self, names: List[str]) -> List[str]:
         used.add(candidate)
     return result
 
-# LC472. Concatenated Words
-def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
-    word_set = set(words)
-    def check(word):  # could use cache here
-        n = len(word)
-        for i in range(1, n):
-            if word[i:] not in word_set: continue
-            # so now word[i:] in word_set
-            if word[:i] in word_set: return True # so both part are words
-            if check(word[:i]): return True # recursion check
-        return False
-    res = []
-    for w in words:  # O(n) - number of words
-        if check(w): res.append(w)
-    return res
+
 
 # LC243. Shortest Word Distance - distance between 2 given words in the array
 def shortestDistance(self, wordsDict: List[str], word1: str, word2: str) -> int:

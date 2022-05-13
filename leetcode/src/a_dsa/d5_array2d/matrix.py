@@ -1,5 +1,17 @@
 from typing import List
 import itertools
+# LC1861. Rotating the Box - stones, obstacles
+def rotateTheBox(self, box: List[List[str]]) -> List[List[str]]:
+    for row in box:
+        bottom = len(row) - 1            # initialize with the last position in row
+        for j in range(len(row))[::-1]:  # iterate from the end of the row
+            if row[j] == "*":            # we cannot move stones behind obstacles,
+                bottom = j - 1           # so update move position to the first before obstacle
+            elif row[j] == "#":          # if stone, move it to the "move_position"
+                row[bottom], row[j] = row[j], row[bottom]
+                bottom -= 1
+    return zip(*box[::-1])               # rotate array, or list(...)
+
 # LC1428. Leftmost Column with at Least a One - sorted 01 matrix
 def leftMostColumnWithOne(self, binaryMatrix: 'BinaryMatrix') -> int:  # O(n + m), diagonal
     rows, cols = binaryMatrix.dimensions()
@@ -9,6 +21,61 @@ def leftMostColumnWithOne(self, binaryMatrix: 'BinaryMatrix') -> int:  # O(n + m
         else: col -= 1  # move left
     # If we never left the last column, it must have been all 0's.
     return col + 1 if col != cols - 1 else -1
+
+# LC1878. Get Biggest Three Rhombus Sums in a Grid
+def getBiggestThree(self, grid):  # O(C), C number of cells
+    m, n, heap = len(grid), len(grid[0]), []
+
+    def update(heap, num):
+        if num not in heap:
+            heappush(heap, num)
+            if len(heap) > 3: heappop(heap)
+        return heap
+
+    for num in chain(*grid): update(heap, num)
+
+    @lru_cache(None)
+    def dp(i, j, dr):
+        if not 0 <= i < n or not 0 <= j < m: return 0
+        return dp(i-1, j+dr, dr) + grid[j][i]
+
+    for q in range(1, (1 + min(m, n))//2):  # q is center to point length in the square case
+        for i in range(q, n - q):
+            for j in range(q, m - q):
+                p1 = dp(i + q, j, -1) - dp(i, j - q, -1)  # upper right edge without upper point
+                p2 = dp(i - 1, j + q - 1, -1) - dp(i - q - 1, j - 1, -1)  # lower left edge without lower point
+                p3 = dp(i, j - q, 1) - dp(i - q, j, 1)  # upper left edge without left point
+                p4 = dp(i + q - 1, j + 1, 1) - dp(i - 1, j + q + 1, 1)  # lower right edge without right point
+                update(heap, p1 + p2 + p3 + p4)
+
+    return sorted(heap)[::-1]
+
+# LC764. Largest Plus Sign
+def orderOfLargestPlusSign(self, N: int, mines: List[List[int]]) -> int:  # O(N^2)
+    grid = [[N] * N for i in range(N)]
+
+    for m in mines: grid[m[0]][m[1]] = 0
+
+    for i in range(N):
+        l, r, u, d = 0, 0, 0, 0
+        for j, k in zip(range(N), reversed(range(N))):
+            l = l + 1 if grid[i][j] != 0 else 0
+            if l < grid[i][j]:
+                grid[i][j] = l
+            r = r + 1 if grid[i][k] != 0 else 0
+            if r < grid[i][k]:
+                grid[i][k] = r
+            u = u + 1 if grid[j][i] != 0 else 0
+            if u < grid[j][i]:
+                grid[j][i] = u
+            d = d + 1 if grid[k][i] != 0 else 0
+            if d < grid[k][i]:
+                grid[k][i] = d
+    res = 0
+    for i in range(N):
+        for j in range(N):
+            if res < grid[i][j]: res = grid[i][j]
+    return res
 
 # LC498. Diagonal Traverse
 def findDiagonalOrder(self, matrix):  # O(mn)

@@ -1,6 +1,48 @@
 from collections import Counter, defaultdict, deque
 import heapq
 
+# LC1584. Min Cost to Connect All Points
+def minCostConnectPoints(self, points: List[List[int]]) -> int:
+    # Prim's algo: O(V^2), V = len(points), space O(V)
+    d = {(x, y): float('inf') if i else 0 for i, (x, y) in enumerate(points)}
+    res = 0
+    while d:
+        x, y = min(d, key=d.get)  # obtain the current minimum edge
+        res += d.pop((x, y))      # and remove the corresponding point
+        for x1, y1 in d:          # for the rest of the points, update the minimum manhattan distance
+            d[(x1, y1)] = min(d[(x1, y1)], abs(x-x1)+abs(y-y1))
+    return res
+def minCostConnectPoints(self, a: List[List[int]]) -> int:  # O(n^2 logn) and O(n^2)
+    # Prim's algorithm: standard algo, not using condition: edges are not restricted
+    n = len(a)
+    ans, visited, pq, i = 0, set([0]), [], 0
+    rem = set(range(1, n))  # nodes not processed
+    dist = lambda x, y: abs(x[0] - y[0]) + abs(x[1] - y[1])
+    while len(visited) < n:
+        for j in rem:
+            if j not in visited: heappush(pq, (dist(a[i], a[j]), j))
+        while pq[0][1] in visited:
+            heappop(pq)
+        val, i = heappop(pq)
+        visited.add(i)
+        rem.discard(i)
+        ans += val
+    return ans
+
+# LC743. Network Delay Time
+# https://www.toutiao.com/article/7076288121079431692/
+def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:  # O(E + VlogV)
+    graph = collections.defaultdict(list) # dijkstra's with heap
+    for u, v, w in times: graph[u].append((v, w))
+    pq, dist = [(0, k)], {} # cost 0 at node k; distance or cost
+    while pq:
+        d, node = heapq.heappop(pq)
+        if node in dist: continue
+        dist[node] = d
+        for nei, d2 in graph[node]:
+            if nei not in dist: heapq.heappush(pq, (d+d2, nei))
+    return max(dist.values()) if len(dist) == n else -1
+
 # LC332. Reconstruct Itinerary O(E^d), d max flights from any node.
 def findItinerary(self, tickets: List[List[str]]) -> List[str]:  # O(ElogE)
     if not tickets: return []
@@ -66,18 +108,7 @@ def maximalPathQuality(self, values: List[int], edges: List[List[int]], maxTime:
         return res
     return dfs(0, values[0], 1, 0)
 
-# LC743. Network Delay Time
-def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
-    graph = collections.defaultdict(list) # dijkstra's with heap
-    for u, v, w in times: graph[u].append((v, w))
-    pq, dist = [(0, k)], {} # cost 0 at node k; distance or cost
-    while pq:
-        d, node = heapq.heappop(pq)
-        if node in dist: continue
-        dist[node] = d
-        for nei, d2 in graph[node]:
-            if nei not in dist: heapq.heappush(pq, (d+d2, nei))
-    return max(dist.values()) if len(dist) == n else -1
+
 
 # LC1135. Connecting Cities With Minimum Cost
 def minimumCost(self, N: int, connections: List[List[int]]) -> int:

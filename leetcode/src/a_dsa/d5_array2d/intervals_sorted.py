@@ -1,3 +1,31 @@
+
+# LC502. IPO
+def findMaximizedCapital(self, k: int, w: int, profits: List[int], capital: List[int]) -> int:
+    heap = []  ## O(max(N, K) log N)
+    projects = sorted(zip(profits, capital), key=lambda l: l[1])
+    i = 0
+    for _ in range(k):
+        while i < len(projects) and projects[i][1] <= w:
+            heapq.heappush(heap, -projects[i][0])
+            i += 1
+        if heap: w -= heapq.heappop(heap)
+    return w
+
+# LC871. Minimum Number of Refueling Stops
+def minRefuelStops(self, target: int, tank: int, stations: List[List[int]]) -> int:
+    pq = []  # A maxheap is simulated using negative values
+    stations.append((target, 0))
+    ans = prev = 0
+    for location, capacity in stations:
+        tank -= location - prev
+        while pq and tank < 0:  # must refuel in past
+            tank += -heapq.heappop(pq)  # fill with largest supply
+            ans += 1
+        if tank < 0: return -1
+        heapq.heappush(pq, -capacity)
+        prev = location
+    return ans
+
 # https://leetcode.com/discuss/interview-question/124616/Merge-two-interval-lists
 # pandas way: https://stackoverflow.com/questions/53371736/quick-algorithm-to-create-union-of-multiple-intervals-data
 def mergeIntervals(int1, int2):

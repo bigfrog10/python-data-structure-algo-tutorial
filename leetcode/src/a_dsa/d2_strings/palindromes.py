@@ -1,4 +1,22 @@
 
+# LC1400. Construct K Palindrome Strings
+def canConstruct(self, s: str, k: int) -> bool:
+    if k > len(s): return False
+    # odd count elems have to <=k
+    return sum(i & 1 for i in collections.Counter(s).values()) <= k
+
+# LC564. Find the Closest Palindrome - close to given non palindrome
+def nearestPalindromic(self, n: str) -> str:
+    l = len(n)
+    # with different digits width, it must be either 10...01 or 9...9
+    candidates = {str(10 ** l + 1), str(10 ** (l - 1) - 1)}
+    # the closest must be in middle digit +1, 0, -1, then flip left to right
+    prefix = int(n[:(l + 1)//2])
+    for i in map(str, (prefix - 1, prefix, prefix + 1)):
+        candidates.add(i + [i, i[:-1]][l & 1][::-1])
+    candidates.discard(n)
+    return min(candidates, key=lambda x: (abs(int(x) - int(n)), int(x)))
+
 # LC125. Valid Palindrome - ignore non alphanumeric, check is or not
 def isPalindrome(self, s: str) -> bool:  # O(n)
     i, j = 0, len(s) - 1  #

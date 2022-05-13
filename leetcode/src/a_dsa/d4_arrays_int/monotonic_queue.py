@@ -1,6 +1,7 @@
 
 # LC1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
-def longestSubarray(self, nums: List[int], limit: int) -> int:
+# https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/discuss/609771/JavaC%2B%2BPython-Deques-O(N)
+def longestSubarray(self, nums: List[int], limit: int) -> int:  # O(n)
     maxd = collections.deque()
     mind = collections.deque()
     i = 0
@@ -15,7 +16,7 @@ def longestSubarray(self, nums: List[int], limit: int) -> int:
             i += 1
     return len(nums) - i
 
-# LC239. Sliding Window Maximum, top100
+# LC239. Sliding Window Maximum
 def maxSlidingWindow(self, nums: 'List[int]', k: 'int') -> 'List[int]':  # O(n)
     n = len(nums)
     if n == 0 or k == 0: return []

@@ -1,4 +1,39 @@
 
+# LC815. Bus Routes
+def numBusesToDestination(self, routes, S, T): # BFS on stops
+    stop2routes = collections.defaultdict(set)
+    for i, route in enumerate(routes):
+        for j in route: stop2routes[j].add(i)  # label stop with bus route #
+    queue, seen = [(S, 0)], {S}
+    for stop, bus in queue:  # BFS for min stops
+        if stop == T: return bus
+        for route in stop2routes[stop]:  # for each bus in this stop
+            for st in routes[route]:  # for each stop with this bus
+                if st not in seen:
+                    queue.append((st, bus + 1))
+                    seen.add(st)
+            routes[route] = []  # ***neat trick: seen route, cut buses for min
+    return -1
+
+# LC1743. Restore the Array From Adjacent Pairs
+def restoreArray(self, adjacentPairs: List[List[int]]) -> List[int]:
+    adj, ans, n = defaultdict(list), [], len(adjacentPairs) + 1
+    for a, b in adjacentPairs:
+        adj[a] += [b]
+        adj[b] += [a]
+    prev = -math.inf
+    for k, v in adj.items():
+        if len(v) == 1:
+            ans += [k]
+            break
+    while len(ans) < n:
+        for next in adj.pop(ans[-1]):
+            if next != prev:
+                prev = ans[-1]
+                ans += [next]
+                break
+    return ans
+
 # LC983. Minimum Cost For Tickets - ticket cost
 def mincostTickets(self, days, costs):   # O(len(days))
     durations = [1, 7, 30]
@@ -74,24 +109,6 @@ def findAllPeople(self, n: int, meetings: List[List[int]], firstPerson: int) -> 
                     can.add(y)
                     queue.append(y)  # This ensures no order dependency
     return can
-
-# LC815. Bus Routes
-def numBusesToDestination(self, routes, S, T): # BFS on stops
-    stop2routes = collections.defaultdict(set)
-    for i, route in enumerate(routes):
-        for j in route: stop2routes[j].add(i)  # label stop with bus route #
-    queue, seen = [(S, 0)], {S}
-    for stop, bus in queue:  # BFS for min stops
-        if stop == T: return bus
-        for route in stop2routes[stop]:  # for each bus in this stop
-            for st in routes[route]:  # for each stop with this bus
-                if st not in seen:
-                    queue.append((st, bus + 1))
-                    seen.add(st)
-            routes[route] = []  # ***neat trick: seen route, cut buses for min
-    return -1
-
-
 
 # LC946. Validate Stack Sequences
 def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:

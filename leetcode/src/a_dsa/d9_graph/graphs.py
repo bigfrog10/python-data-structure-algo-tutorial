@@ -1,6 +1,66 @@
 from typing import List
 from collections import defaultdict
 
+# LC399. Evaluate Division
+def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
+    graph = defaultdict(dict)  # O(mn)
+    for (a, b), v in zip(equations, values):  # O(n)
+        graph[a][b] = v
+        graph[b][a] = 1.0 / v
+    def dfs(x, y, w, visited):  # use dfs to find query values.
+        visited.add(x)
+        ns = graph[x]
+        for var, weight in ns.items():
+            if var == y: return w * weight
+            if var not in visited:
+                s = dfs(var, y, w*weight, visited)
+                if s != 0: return s
+        return 0
+    ret = []
+    for a, b in queries:  # O(m)
+        r = dfs(a, b, 1, set())  # O(n)
+        if r == 0: ret.append(-1)
+        else: ret.append(r)
+    return ret
+def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
+        alphabet = set(sum(equations, []))  # start with []. return all diff chars in a set
+        uf = UnionFind(alphabet)  # O(N+M*lg∗N)
+        for (u, v), w in zip(equations, values): uf.union(u, v, w)
+        ans = []
+        for u, v in queries:
+            if u in alphabet and v in alphabet:
+                pu, vu = uf.find(u)
+                pv, vv = uf.find(v)
+                if pu == pv: ans.append(vu / vv)
+                else: ans.append(-1)
+            else: ans.append(-1)
+        return ans
+        return ans
+class UnionFind:  ## M union and find operations on N objects takes O(N + M lg* N) time
+    def __init__(self, alphabet):  ## weighted union + path compression
+        self.parent = {c: c for c in alphabet}
+        self.value = {c: 1 for c in alphabet}
+        self.rank = {c: 1 for c in alphabet}
+    def find(self, u):
+        if u != self.parent[u]:
+            self.parent[u], val = self.find(self.parent[u])
+            self.value[u] *= val
+        return self.parent[u], self.value[u]
+    def union(self, u, v, w):
+        pu, vu = self.find(u)
+        pv, vv = self.find(v)
+        if pu == pv: return
+        if self.rank[pu] > self.rank[pv]: # self.union(v, u, 1/w)
+            self.parent[pv] = self.parent[pu]
+            self.value[pv] = 1/w * vu / vv
+            self.rank[pu] += self.rank[pv]
+        else:
+            self.parent[pu] = self.parent[pv]
+            self.value[pu] = w * vv / vu
+            self.rank[pv] += self.rank[pu]
+
+# LC1579. Remove Max Number of Edges to Keep Graph Fully Traversable
+
 # LC133. Clone Graph
 def cloneGraph(self, node: 'Node') -> 'Node':  # O(V + E) runtime, O(V) space
     if not node: return None
@@ -69,63 +129,6 @@ def friendRequests(self, n: int, restrictions: List[List[int]], requests: List[L
             ans.append(True)
     return ans
 
-# LC399. Evaluate Division
-def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
-    graph = defaultdict(dict)  # O(mn)
-    for (a, b), v in zip(equations, values):  # O(n)
-        graph[a][b] = v
-        graph[b][a] = 1.0 / v
-    def dfs(x, y, w, visited):  # use dfs to find query values.
-        visited.add(x)
-        ns = graph[x]
-        for var, weight in ns.items():
-            if var == y: return w * weight
-            if var not in visited:
-                s = dfs(var, y, w*weight, visited)
-                if s != 0: return s
-        return 0
-    ret = []
-    for a, b in queries:  # O(m)
-        r = dfs(a, b, 1, set())  # O(n)
-        if r == 0: ret.append(-1)
-        else: ret.append(r)
-    return ret
-def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
-        alphabet = set(sum(equations, []))  # start with []. return all diff chars in a set
-        uf = UnionFind(alphabet)  # O(N+M*lg∗N)
-        for (u, v), w in zip(equations, values): uf.union(u, v, w)
-        ans = []
-        for u, v in queries:
-            if u in alphabet and v in alphabet:
-                pu, vu = uf.find(u)
-                pv, vv = uf.find(v)
-                if pu == pv: ans.append(vu / vv)
-                else: ans.append(-1)
-            else: ans.append(-1)
-        return ans
-        return ans
-class UnionFind:  ## M union and find operations on N objects takes O(N + M lg* N) time
-    def __init__(self, alphabet):  ## weighted union + path compression
-        self.parent = {c: c for c in alphabet}
-        self.value = {c: 1 for c in alphabet}
-        self.rank = {c: 1 for c in alphabet}
-    def find(self, u):
-        if u != self.parent[u]:
-            self.parent[u], val = self.find(self.parent[u])
-            self.value[u] *= val
-        return self.parent[u], self.value[u]
-    def union(self, u, v, w):
-        pu, vu = self.find(u)
-        pv, vv = self.find(v)
-        if pu == pv: return
-        if self.rank[pu] > self.rank[pv]: # self.union(v, u, 1/w)
-            self.parent[pv] = self.parent[pu]
-            self.value[pv] = 1/w * vu / vv
-            self.rank[pu] += self.rank[pv]
-        else:
-            self.parent[pu] = self.parent[pv]
-            self.value[pu] = w * vv / vu
-            self.rank[pv] += self.rank[pu]
 
 # LC323. Number of Connected Components in an Undirected Graph
 def countComponents(self, n, edges):

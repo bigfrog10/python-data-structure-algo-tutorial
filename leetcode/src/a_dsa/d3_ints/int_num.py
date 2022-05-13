@@ -1,4 +1,55 @@
 
+# LC313. Super Ugly Number
+def nthSuperUglyNumber(self, n, primes):
+    uglies = [1]
+    merged = heapq.merge(*map(lambda p: (u*p for u in uglies), primes))
+    # merged = list(merged)
+    uniqed = (u for u, _ in itertools.groupby(merged))
+    any(map(uglies.append, itertools.islice(uniqed, n-1)))
+    return uglies[-1]
+def nthSuperUglyNumber(self, n: int, primes: List[int]) -> int:
+    res, heap = [1], [(primes[i], primes[i], 0) for i in range(len(primes))]
+    while len(res) < n:
+        val, prm, idx = heappop(heap)
+        if val <= res[-1]:
+            while val <= res[-1]: idx += 1; val = prm * res[idx]
+        else:
+            res += val,
+            val, idx = prm * res[idx + 1], idx + 1
+        heappush(heap, (val, prm, idx))
+    return res[-1]
+
+# LC1492. The kth Factor of n
+def kthFactor(self, n: int, k: int) -> int:
+    isqrt = math.isqrt(n)
+    for i in range(1, isqrt + 1):
+        if n % i == 0:
+            k -= 1
+            if k == 0: return i
+    for i in reversed(range(1, isqrt + 1)):
+        if i * i == n: continue
+        if n % i == 0:
+            k -= 1
+            if k == 0: return n // i
+    return -1
+
+# LC1842. Next Palindrome Using Same Digits
+def nextPalindrome(self, num: str) -> str:
+    n = len(num)
+    k, r = divmod(n, 2)
+    mid = num[k] if r else ''
+
+    s = num[:k]  # take 1st half
+    stack = []
+    for j in range(k-1, -1, -1):  # going backward
+        if not stack or s[j] >= s[j+1]: stack += s[j]  # add larger to stack
+        else:  # when see smaller element, swap with least larger element
+            index = bisect.bisect_right(stack, s[j])
+            x, stack[index] = stack[index], s[j]
+            sub = s[:j] + x + ''.join(stack)
+            return sub + mid + sub[::-1]
+    return ''
+
 # LC50. Pow(x, n)
 def myPow(self, x: float, n: int) -> float:  # O(logn)
     if n < 0: n, x = -n, 1 / x
@@ -324,22 +375,7 @@ def countNumbersWithUniqueDigits(self, n: int) -> int:
         res += cnt
     return res
 
-# LC1842. Next Palindrome Using Same Digits
-def nextPalindrome(self, num: str) -> str:
-    n = len(num)
-    k, r = divmod(n, 2)
-    mid = num[k] if r else ''
 
-    s = num[:k]  # take 1st half
-    stack = []
-    for j in range(k-1, -1, -1):  # going backward
-        if not stack or s[j] >= s[j+1]: stack += s[j]  # add larger to stack
-        else:  # when see smaller element, swap with least larger element
-            index = bisect.bisect_right(stack, s[j])
-            x, stack[index] = stack[index], s[j]
-            sub = s[:j] + x + ''.join(stack)
-            return sub + mid + sub[::-1]
-    return ''
 
 # LC69. Sqrt(x)
 def mySqrt(self, x: int) -> int:

@@ -1,4 +1,9 @@
 
+# LC2187. Minimum Time to Complete Trips
+def minimumTime(self, time: List[int], totalTrips: int) -> int:
+    m = min(time) * totalTrips  ## O(logm)
+    return bisect_left(range(1, m), totalTrips, key= lambda x: sum(x // t for t in time)) + 1
+
 # LC1891. Cutting Ribbons
 def maxLength(self, ribbons: List[int], k: int) -> int:  # O(log(min(totl // k, maxl)))
     totl, maxl = sum(ribbons), max(ribbons)

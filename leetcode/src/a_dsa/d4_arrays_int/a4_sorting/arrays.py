@@ -291,4 +291,4 @@ def findLeastNumOfUniqueInts(self, arr: List[int], k: int) -> int:
         else: break
     return len(counts) - len(removals)
 
-
+# Merge 3 sorted arrays and remove duplicates

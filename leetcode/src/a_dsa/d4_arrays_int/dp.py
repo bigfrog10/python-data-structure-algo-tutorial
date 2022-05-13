@@ -123,8 +123,8 @@ def mergeStones(self, stones: List[int], K: int) -> int:
     return dp(0, n-1)
 
 # LC1335. Minimum Difficulty of a Job Schedule
-def minDifficulty(self, jobDifficulty: List[int], d: int) -> int:
-    n = len(jobDifficulty) # DP, remove loop k, fastest
+def minDifficulty(self, jobDifficulty: List[int], d: int) -> int:  # O(nd)
+    n = len(jobDifficulty)
     @lru_cache(None)
     def dp(days, jidx, maxd):
         if jidx < days: return float('inf') # we need at least 1 job per day
@@ -132,7 +132,6 @@ def minDifficulty(self, jobDifficulty: List[int], d: int) -> int:
         nmax = max(maxd, jobDifficulty[jidx]) # if we fit jidx .. n-1 in one day
         a = dp(days-1, jidx-1, 0) + nmax  # last day has last new job
         b = dp(days, jidx-1, nmax)  # merge last new job into existing partitions
-        #print(f'day={day}, jidx={jidx}, nmax={nmax}')
         return min(a, b)
     r = dp(d-1, n-1, 0)  # we use d-1 is to accommodate jidx < days condition
     return -1 if r == float('inf') else r

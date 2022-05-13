@@ -1,4 +1,45 @@
 
+# LC2262. Total Appeal of A String
+def appealSum(self, s: str) -> int:
+    last = {}
+    res = 0
+    for i,c in enumerate(s):
+        last[c] = i + 1
+        res += sum(last.values())  # for each v, we have v strings of that key char.
+    return res
+
+# LC2062. Count Vowel Substrings of a String
+def countVowelSubstrings(self, word: str) -> int:
+    vowels = {'a', 'e', 'i', 'o', 'u'}
+
+    ans, last_consonant = 0, -1
+    last_seen_vowels = {v: -2 for v in vowels}
+    for i, x in enumerate(word):
+        if x not in vowels:
+            last_consonant = i
+        else:
+            last_seen_vowels[x] = i
+            ans += max(min(last_seen_vowels.values())-last_consonant, 0)
+    return ans
+
+# LC2063. Vowels of All Substrings
+def countVowels(self, s: str) -> int:
+    # for each vowel c on i, there are 0...i for left, and n-i for right
+    return sum((i + 1) * (len(s) - i) for i, c in enumerate(s) if c in 'aeiou')
+
+# LC828. Count Unique Characters of All Substrings of a Given String
+def uniqueLetterString(self, s: str) -> int:
+    index = {c: [-1, -1] for c in ascii_uppercase}
+    res = 0
+    for i, c in enumerate(s):
+        k, j = index[c]
+        res += (i - j) * (j - k)
+        index[c] = [j, i]
+    for c in index:
+        k, j = index[c]
+        res += (len(s) - j) * (j - k)
+    return res % (10**9 + 7)
+
 # LC71. Simplify Path -  file paths, canonical path
 def simplifyPath(self, path: str) -> str:  # O(n) runtime and space
     stack = []

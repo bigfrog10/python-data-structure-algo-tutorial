@@ -17,6 +17,21 @@ def reverseBetween(self, head, m, n):
     start.next = pre  # point start to new head
     return dummy.next
 
+# LC2130. Maximum Twin Sum of a Linked List
+def pairSum(self, head: Optional[ListNode]) -> int:
+    fast, rev = head, None # use head as slow
+    while fast and fast.next:  # 1, 2, 3, 2, 1    1, 2, 3, 4, 2, 1
+        fast = fast.next.next
+        rev, rev.next, head = head, rev, head.next
+    # head = 3 2 1, tail = 2 1   head = 3 2 1, tail = 4 2 1
+    tail = head.next if fast else head  # fast none when list is even
+    res = 0
+    while rev:
+        res = max(res, rev.val + tail.val)
+        head, head.next, rev = rev, head, rev.next  # restore head to original
+        tail = tail.next  # 2, 3, 2, 1, then 1, 2,3,2,1
+    return res
+
 # LC234. Palindrome Linked List
 def isPalindrome(self, head):
     fast, rev = head, None # use head as slow

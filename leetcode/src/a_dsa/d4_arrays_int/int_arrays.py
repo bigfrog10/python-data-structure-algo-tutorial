@@ -3,6 +3,39 @@ from collections import Counter
 import math
 import functools
 
+# LC755. Pour Water
+def pourWater(self, heights: List[int], volume: int, k: int) -> List[int]:  # O(n + V)
+    N = len(heights)
+    j = k # ! important optimization
+    for i in range(volume):  # O(V)
+        while j > 0 and heights[j] >= heights[j-1]: # totally, j travels n
+            j -= 1
+        while j < N - 1 and heights[j] >= heights[j+1]:
+            j += 1
+        while j > k and heights[j]== heights[j-1]:
+            j -= 1
+        heights[j] += 1
+    return heights
+
+# LC926. Flip String to Monotone Increasing - 01
+def minFlipsMonoIncr(self, s: str) -> int:  # O(n) and O(1)
+    ones = flip = 0
+    for ch in s:
+        if ch == '1': ones += 1  # when 1's come, not need to flip
+        else: flip += 1  # when 0's come, either flip this 0 to 1, plus old flips
+        flip = min(flip, ones)  # or flip old ones to 0
+    return flip
+
+# LC696. Count Binary Substrings - with same 0s and 1s
+def countBinarySubstrings(self, s: str) -> int:
+    ans, prev, cur = 0, 0, 1 # prev and curr strike lengths
+    for i in range(1, len(s)):
+        if s[i-1] != s[i]:
+            ans += min(prev, cur) # 01/10, 0011/1100, etc
+            prev, cur = cur, 1
+        else: cur += 1
+    return ans + min(prev, cur)
+
 # LC164. Maximum Gap - max diff sorted
 def maximumGap(self, nums: List[int]) -> int:  # O(n)  Pigeonhole Principle
     lo, hi, n = min(nums), max(nums), len(nums)
@@ -57,6 +90,14 @@ def productExceptSelf(self, nums: List[int]) -> List[int]:
         ret[i] = ret[i] * tmp
         tmp *= nums[i]
     return ret
+
+# LC2214. Minimum Health to Beat Game
+def minimumHealth(self, damage: List[int], armor: int) -> int:
+    cumu, maxd = 0, -float('Inf')
+    for loss_point in damage:
+        cumu += loss_point
+        maxd = max(maxd, loss_point)
+    return cumu - min(maxd, armor) + 1
 
 # LC932. Beautiful Array
 # Given a beautiful array A: A*c, A + c, and delete elements from A are still beautiful.

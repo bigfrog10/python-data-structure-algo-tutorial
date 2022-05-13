@@ -1,4 +1,55 @@
 
+# LC582. Kill Process
+def killProcess(self, pid: List[int], ppid: List[int], kill: int) -> List[int]:
+    d = collections.defaultdict(list)
+    for c, p in zip(pid, ppid): d[p].append(c)
+    bfs = [kill]
+    for i in bfs: bfs.extend(d.get(i, []))
+    return bfs
+
+# LC427. Construct Quad Tree
+def construct(self, grid: List[List[int]]) -> 'Node':
+    def build(r1, c1, r2, c2):
+        if r1 > r2 or c1 > c2: return None
+        # leaf if all cells have same value
+        isLeaf = all(grid[i][j] == grid[r1][c1] for i in range(r1, r2+1) for j in range(c1, c2+1))
+        if isLeaf: return Node(grid[r1][c1], True, None, None, None, None)
+
+        rowMid, colMid = (r1 + r2) // 2, (c1 + c2) // 2
+        return Node(False, False,
+            build(r1, c1, rowMid, colMid),           # top left
+            build(r1, colMid + 1, rowMid, c2),       # top right
+            build(rowMid + 1, c1, r2, colMid),       # bottom left
+            build(rowMid + 1, colMid + 1, r2, c2))  # bottom right
+
+    return build(0, 0, len(grid)-1, len(grid[0]) - 1)
+
+# LC428. Serialize and Deserialize N-ary Tree
+class Codec:
+    def serialize(self, root: 'Node') -> str:
+        if not root: return ''
+        def node_to_json(node):
+            ret = f'"{node.val}":['
+            for child in node.children:
+                ret += node_to_json(child) + ','
+            if ret[-1] == ',': ret = ret[:-1]
+            ret += ']'
+            ret = '{' + ret + '}'
+            return ret
+        ret = node_to_json(root)
+        return ret
+    def deserialize(self, data: str) -> 'Node':
+        if not data: return None
+        def dict_to_node(kvs): #DFS
+            if kvs is None: return None  # base case
+            for k, v in kvs.items():
+                tn = Node(int(k), [])
+                for value in v:
+                    tn.children.append(dict_to_node(value))
+                return tn
+        kv = json.loads(data)
+        return dict_to_node(kv)
+
 # LC1522. Diameter of N-Ary Tree - path = edges
 def diameter(self, root: 'Node') -> int:
     ret = 0  # root itself, in case there is no child
@@ -36,13 +87,7 @@ def treeDiameter(self, edges: List[List[int]]) -> int:
         leaves = next_leaves
     return layers * 2 + (1 if vertex_left == 2 else 0)
 
-# LC582. Kill Process
-def killProcess(self, pid: List[int], ppid: List[int], kill: int) -> List[int]:
-    d = collections.defaultdict(list)
-    for c, p in zip(pid, ppid): d[p].append(c)
-    bfs = [kill]
-    for i in bfs: bfs.extend(d.get(i, []))
-    return bfs
+
 
 # LC261. Graph Valid Tree
 def validTree(self, n: int, edges: List[List[int]]) -> bool:

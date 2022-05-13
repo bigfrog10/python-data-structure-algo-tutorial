@@ -1,4 +1,35 @@
 
+# LC1710. Maximum Units on a Truck
+def maximumUnits(self, boxTypes: List[List[int]], truckSize: int) -> int:
+    boxes = sorted(boxTypes, key=lambda x: x[1], reverse=True)  # O(nlogn)
+    total, counts = 0, 0 # greedy: box count 1 with max units
+    for c, u in boxes:
+        if c <= truckSize - counts:
+            counts += c
+            total += c * u
+        else:
+            total += (truckSize - counts) * u
+            counts = truckSize
+            break
+    return total
+
+# LC1648. Sell Diminishing-Valued Colored Balls
+def maxProfit(self, inv: List[int], orders: int) -> int:
+    # https://leetcode.com/problems/sell-diminishing-valued-colored-balls/discuss/927522/Python-n-log-n-690-ms
+    arr=sorted(Counter(inv).items(), reverse=True)+[(0,0)]
+    ans, ind, width = 0, 0, 0
+
+    while orders>0: # constraint: sum(inv) >= orders
+        width += arr[ind][1] # number of ball
+        sell = min(orders, width * (arr[ind][0] - arr[ind+1][0])) # sell diff to flatten
+        whole, remainder= divmod(sell, width)
+        price_w = width * whole * (arr[ind][0] + arr[ind][0] - (whole-1)) // 2
+        price_r = remainder * (arr[ind][0] - whole)
+        ans += price_w + price_r
+        orders -= sell
+        ind += 1
+    return ans % 1_000_000_007
+
 # LC1326. Minimum Number of Taps to Open to Water a Garden
 def minTaps(self, n: int, ranges: List[int]) -> int:
     jumps = [0]*(n+1)
@@ -76,33 +107,6 @@ def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
             start_station = i+1
     return start_station if total >= 0 else -1
 
-# LC1710. Maximum Units on a Truck
-def maximumUnits(self, boxTypes: List[List[int]], truckSize: int) -> int:
-    boxes = sorted(boxTypes, key=lambda x: x[1], reverse=True)
-    total, counts = 0, 0 # greedy: box count 1 with max units
-    for c, u in boxes:
-        if c <= truckSize - counts:
-            counts += c
-            total += c * u
-        else:
-            total += (truckSize - counts) * u
-            counts = truckSize
-            break
-    return total
 
-# LC1648. Sell Diminishing-Valued Colored Balls
-def maxProfit(self, inv: List[int], orders: int) -> int:
-    # https://leetcode.com/problems/sell-diminishing-valued-colored-balls/discuss/927522/Python-n-log-n-690-ms
-    arr=sorted(Counter(inv).items(), reverse=True)+[(0,0)]
-    ans, ind, width = 0, 0, 0
 
-    while orders>0: # constraint: sum(inv) >= orders
-        width += arr[ind][1] # number of ball
-        sell = min(orders, width * (arr[ind][0] - arr[ind+1][0])) # sell diff to flatten
-        whole, remainder= divmod(sell, width)
-        price_w = width * whole * (arr[ind][0] + arr[ind][0] - (whole-1)) // 2
-        price_r = remainder * (arr[ind][0] - whole)
-        ans += price_w + price_r
-        orders -= sell
-        ind += 1
-    return ans % 1_000_000_007
+

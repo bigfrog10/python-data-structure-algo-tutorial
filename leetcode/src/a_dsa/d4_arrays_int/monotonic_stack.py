@@ -1,4 +1,54 @@
 
+# LC1950. Maximum of Minimum Values in All Subarrays - minmax of all subarrays
+def findMaximums(self, nums: List[int]) -> List[int]:
+    stack = []
+    nums = [-1] + nums + [0]
+    n = len(nums)
+    res = [0] * (n - 2)
+    for i, num in enumerate(nums):
+        while stack and nums[stack[-1]] >= num:
+            j = stack.pop()
+            k = i - 1 - (stack[-1] + 1)  # k is the range where nums[j] is max, array length
+            res[k] = max(res[k], nums[j])
+        stack.append(i)
+    for i in range(n - 3, 0, -1):  # example, 5, 1, 1, 5
+        res[i - 1] = max(res[i], res[i - 1])
+    return res
+
+# LC2104. Sum of Subarray Ranges - see LC828
+def subArrayRanges(self, nums: List[int]) -> int:  # O(n) time and space
+    res = 0
+    inf = float('inf')
+    A = [-inf] + nums + [-inf]
+    s = []
+    for i, x in enumerate(A):
+        while s and A[s[-1]] > x:
+            j = s.pop()
+            k = s[-1]
+            res -= A[j] * (i - j) * (j - k)
+        s.append(i)
+
+    A = [inf] + nums + [inf]
+    s = []
+    for i, x in enumerate(A):
+        while s and A[s[-1]] < x:
+            j = s.pop()
+            k = s[-1]
+            res += A[j] * (i - j) * (j - k)
+        s.append(i)
+    return res
+
+# LC907. Sum of Subarray Minimums
+def sumSubarrayMins(self, arr: List[int]) -> int:  # O(n)
+    res, stack = 0, []  #  non-decreasing
+    A = [float('-inf')] + arr + [float('-inf')]
+    for i, n in enumerate(A):
+        while stack and A[stack[-1]] > n:
+            cur = stack.pop()
+            res += A[cur] * (i - cur) * (cur - stack[-1])  # right * left
+        stack.append(i)
+    return res % (10**9 + 7)
+
 # LC739. Daily Temperatures
 def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
     n = len(temperatures)
