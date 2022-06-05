@@ -1,4 +1,46 @@
 
+# LC50. Pow(x, n)
+def myPow(self, x: float, n: int) -> float:  # O(logn)
+    if n < 0: n, x = -n, 1 / x
+    ret = 1
+    while n > 0:
+        if n % 2 != 0: ret *= x
+        x, n = x * x, n // 2
+    return ret
+
+# LC670. Maximum Swap - swap digits in number to get max - swap max - max swap
+def maximumSwap(self, num: int) -> int:  # O(n)
+    sn = list(str(num))
+    last_idx = {int(v): i for i, v in enumerate(sn)}  # last index for the value
+    for i, v in enumerate(sn):  # loop forward to get the largest
+        for d in range(9, int(v), -1):  # find largest value above v
+            if d in last_idx and last_idx[d] > i:
+                sn[i], sn[last_idx[d]] = sn[last_idx[d]], sn[i]
+                return int(''.join(sn))
+    return num
+
+# LC2081. Sum of k-Mirror Numbers, k mirror
+def kMirror(self, k: int, n: int) -> int:
+    @cache   ## why generator does not work
+    def generate(start, n):  # n is number of digits, O(k^(n/2))
+        if n == 1: return [str(i) for i in range(start, k)]
+        elif n == 2: return [str(i) + str(i) for i in range(start, k)]
+        else:
+            arr = []
+            for elem in [str(i) for i in range(start, k)]:
+                for center in generate(0, n - 2):
+                    arr.append(elem + center + elem)
+            return arr
+    ans, counter, digits = 0, 0, 1
+    while True:
+        for num in generate(1, digits):  # start from 1, need positive int
+            numBase = str(int(num, k))
+            if numBase == numBase[::-1]:
+                ans += int(numBase)
+                counter += 1
+                if counter == n: return ans
+        digits += 1
+
 # LC313. Super Ugly Number
 def nthSuperUglyNumber(self, n, primes):
     uglies = [1]
@@ -50,38 +92,18 @@ def nextPalindrome(self, num: str) -> str:
             return sub + mid + sub[::-1]
     return ''
 
-# LC50. Pow(x, n)
-def myPow(self, x: float, n: int) -> float:  # O(logn)
-    if n < 0: n, x = -n, 1 / x
-    ret = 1
-    while n > 0:
-        if n % 2 != 0: ret *= x
-        x, n = x * x, n // 2
-    return ret
-
 # LC166. Fraction to Recurring Decimal
 def fractionToDecimal(self, n, d): # 32ms, beats 100%
     if n % d == 0: return str(n // d)  # 5/6
-    p, q = abs(n), abs(d)
+    p, q = abs(n), abs(d)  # p 5, q 6
     r = p % q  # 5
     s, m = '', {}  # s is quotient, m records length pre to repeat
     while r and r not in m:
         m[r] = len(s)
         r, s = r * 10 % q, s + str(r * 10 // q)  # long division
-    # s = 83, m = 5->0, 2->1, frac = 0.8(3)
+    # s = 83, m = 5->0, 2->1, frac = 0.8(3), r = 2
     frac = str(p // q) + '.' + (s[:m[r]] + '(' + s[m[r]:] + ')' if r else s)
     return ('' if (n > 0) == (d > 0) else '-') + frac
-
-# LC670. Maximum Swap - swap digits in number to get max - swap max - max swap
-def maximumSwap(self, num: int) -> int:  # O(n)
-    sn = list(str(num))
-    last_idx = {int(v): i for i, v in enumerate(sn)}  # last index for the value
-    for i, v in enumerate(sn):  # loop forward to get the largest
-        for d in range(9, int(v), -1):  # find largest value above v
-            if d in last_idx and last_idx[d] > i:
-                sn[i], sn[last_idx[d]] = sn[last_idx[d]], sn[i]
-                return int(''.join(sn))
-    return num
 
 # LC556. Next Greater Element III - almost same as next permutation
 def nextGreaterElement(self, n: int) -> int:
@@ -111,27 +133,7 @@ def rotatedDigits(self, N: int) -> int:  # O(logn)
         s.add(v)
     return res + (s.issubset(s2) and not s.issubset(s1))  # last digit
 
-# LC2081. Sum of k-Mirror Numbers
-def kMirror(self, k: int, n: int) -> int:
-    @cache   ## why generator does not work
-    def generate(start, n):  # n is number of digits, O(k^(n/2))
-        if n == 1: return [str(i) for i in range(start, k)]
-        elif n == 2: return [str(i) + str(i) for i in range(start, k)]
-        else:
-            arr = []
-            for elem in [str(i) for i in range(start, k)]:
-                for center in generate(0, n - 2):
-                    arr.append(elem + center + elem)
-            return arr
-    ans, counter, digits = 0, 0, 1
-    while True:
-        for num in generate(1, digits):  # start from 1, need positive int
-            numBase = str(int(num, k))
-            if numBase == numBase[::-1]:
-                ans += int(numBase)
-                counter += 1
-                if counter == n: return ans
-        digits += 1
+
 
 # LC405. Convert a Number to Hexadecimal
 def toHex(self, num: int) -> str:

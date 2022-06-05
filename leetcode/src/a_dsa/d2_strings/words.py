@@ -1,4 +1,65 @@
 
+# LC249. Group Shifted Strings
+def groupStrings(self, strings: List[str]) -> List[List[str]]:
+    def shash(s):
+        if not s: return -1
+        d = ord(s[0]) - ord('a')  # d is the shift
+        ret = []
+        for c in s:
+            h = (ord(c) - d) % 26  # now shift all chars by the same to get hash
+            ret.append(h)
+        return tuple(ret)
+    groups = collections.defaultdict(list)
+    for s in strings: groups[shash(s)].append(s)
+    return groups.values()
+
+# LC140. Word Break II - return all possible answer
+def wordBreak(self, s: str, wordDict):  #  we may have O(2^n) solutions, n=len(s)
+    word_set = set(wordDict)   # this line takes O(?) time
+    @cache
+    def dfs(s):
+        if s == '': return []
+        output = []
+        if s in word_set: output.append(s) # one of solutions
+        for i in range(len(s) - 1):
+            if s[: i + 1] in word_set:  # substring takes n
+                tmp = dfs(s[i + 1: ])  # tmp is like ['a b', 'ab']
+                for x in tmp: output.append(s[: i + 1] + ' ' + x)
+        return output
+    res = dfs(s)
+    return res
+def wordBreak(s: str, wordDict: List[str]) -> List[str]:
+    word_set = set(wordDict)  # O(2^len(s) + len(worddict),
+    def dfs(s):
+        output = []
+        if s in word_set: output.append(s)  # one of solutions
+        for w in word_set:  # or we loop s with prefix, O(n^2)
+            if s.startswith(w):
+                tmp = dfs(s[len(w):])
+                for x in tmp: output.append(w + ' ' + x)
+        return output
+    return dfs(s)
+
+# LC139. Word Break, top100 - return breakable or not
+def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+    wordset = set(wordDict)  ## O(n^3) n = len(s) + O(m), m is size of dict
+    @lru_cache  # O(n)
+    def break_words(start: int):
+        if start == len(s): return True
+        for end in range(start + 1, len(s)+1):  # O(n), need +1 for next line [start:end]
+            if s[start:end] in wordset and break_words(end): return True  # s[start:end] is O(n)
+        return False
+    return break_words(0)
+def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+    wds = set(wordDict)
+    @lru_cache(None)
+    def dfs(s):
+        if s in wds: return True
+        for w in wordDict:
+            if s.startswith(w) and dfs(s[len(w):]): return True
+        return False
+    return dfs(s)
+
 # LC472. Concatenated Words
 def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
     word_set = set(words)
@@ -15,9 +76,9 @@ def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
         if check(w): res.append(w)
     return res
 
-# LC127. Word Ladder, top100
+# LC127. Word Ladder, return min # of words to transform
 def ladderLength(self, beginWord, endWord, wordList):  # BFS, O(m^2 * len(wordList))
-    wordList = set(wordList)  # m = len(beginWord), len(endWord)
+    wordList = set(wordList)  # m = max word length
     queue = collections.deque([[beginWord, 1]])
     while queue:  # BFS since we look for shortest
         word, length = queue.popleft()
@@ -116,70 +177,32 @@ def fullJustify(self, words: List[str], maxWidth: int) -> List[str]:
     ans.append(" ".join(line).ljust(maxWidth))
     return ans
 
-# LC140. Word Break II - return all possible answer
-def wordBreak(self, s: str, wordDict):  #  we may have O(2^n) solutions, n=len(s)
-    word_set = set(wordDict)   # this line takes O(?) time
-    @cache
-    def dfs(s):
-        if s == '': return []
-        output = []
-        if s in word_set: output.append(s) # one of solutions
-        for i in range(len(s) - 1):
-            if s[: i + 1] in word_set:  # substring takes n
-                tmp = dfs(s[i + 1: ])  # tmp is like ['a b', 'ab']
-                for x in tmp: output.append(s[: i + 1] + ' ' + x)
-        return output
-    res = dfs(s)
-    return res
-def wordBreak(s: str, wordDict: List[str]) -> List[str]:
-    word_set = set(wordDict)  # O(2^len(s) + len(worddict),
-    def dfs(s):
-        output = []
-        if s in word_set: output.append(s)  # one of solutions
-        for w in word_set:  # or we loop s with prefix, O(n^2)
-            if s.startswith(w):
-                tmp = dfs(s[len(w):])
-                for x in tmp: output.append(w + ' ' + x)
-        return output
-    return dfs(s)
-
-# LC139. Word Break, top100 - return breakable or not
-def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-    wordset = set(wordDict)  ## O(n^3) n = len(s) + O(m), m is size of dict
-    @lru_cache  # O(n)
-    def break_words(start: int):
-        if start == len(s): return True
-        for end in range(start + 1, len(s)+1):  # O(n), need +1 for next line [start:end]
-            if s[start:end] in wordset and break_words(end): return True  # s[start:end] is O(n)
-        return False
-    return break_words(0)
-def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-    wds = set(wordDict)
-    @lru_cache(None)
-    def dfs(s):
-        if s in wds: return True
-        for w in wordDict:
-            if s.startswith(w) and dfs(s[len(w):]): return True
-        return False
-    return dfs(s)
-
-# LC249. Group Shifted Strings
-def groupStrings(self, strings: List[str]) -> List[List[str]]:
-    def shash(s):
-        if not s: return -1
-        d = ord(s[0]) - ord('a')  # d is the shift
-        ret = []
-        for c in s:
-            h = (ord(c) - d) % 26  # now shift all chars by the same to get hash
-            ret.append(h)
-        return tuple(ret)
-    groups = collections.defaultdict(list)
-    for s in strings: groups[shash(s)].append(s)
-    return groups.values()
-
-
-
 # LC616. Add Bold Tag in String, same as LC758.
+def addBoldTag(self, s: str, dict1: List[str]) -> str:  # O(len(s) * len(words)) time and O(len(s)) space
+    if not dict1: return s
+
+    words = set(dict1)
+    idxs = []
+    for i in range(len(s)):  # O(len(s) * len(words) * max(words len)
+        suffix = s[i:]
+        for w in words:
+            if suffix.startswith(w): idxs.append([i, i + len(w)])
+
+    if not idxs: return s  # idx length is O(len(s) * len(words))
+    intvs = []
+    for t in idxs:
+        if len(intvs) == 0 or intvs[-1][1] < t[0]: intvs.append(t)
+        else: intvs[-1][1] = max(t[1], intvs[-1][1])
+
+    res = []
+    start = end = 0
+    for a in intvs:  # intvs length is O(len(s) * len(words))
+        end = a[0]
+        res.append(s[start:end])
+        res.append(f"<b>{s[a[0]:a[1]]}</b>")
+        start = a[1]
+    res.append(s[start:])
+    return ''.join(res)
 def addBoldTag(self, s: str, words: List[str]) -> str:
     status = [False] * len(s)
     for word in words:  # O(len(words))
@@ -441,7 +464,7 @@ def longestStrChain(self, words: List[str]) -> int:
     return result
 
 # LC1268. Search Suggestions System
-def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
+def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:  #  O(nlog(n))+O(mlog(n))
     products.sort()
     res, prefix, i = [], '', 0
     for c in searchWord:
@@ -449,6 +472,7 @@ def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[s
         i = bisect.bisect_left(products, prefix, i)
         res.append([w for w in products[i:i + 3] if w.startswith(prefix)])
     return res
+# Or Trie
 
 # LC524. Longest Word in Dictionary through Deleting - not only counts, but also order
 def findLongestWord(self, s, d):

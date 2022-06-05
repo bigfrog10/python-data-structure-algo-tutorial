@@ -59,34 +59,6 @@ def isMonotonic(self, A: List[int]) -> bool:
         if not increasing and not decreasing: return False
     return True
 
-# LC2071. Maximum Number of Tasks You Can Assign - with pills
-def maxTaskAssign(self, tasks: List[int], workers: List[int], pills: int, strength: int) -> int:
-    from sortedcontainers import SortedList  # O(nlogn * logn)
-    tasks.sort()  # sort once, small to large
-    workers.sort()
-    def check_valid(ans):  # can finish "ans" tasks or not
-        _tasks = SortedList(tasks[:ans])  # weakest tasks
-        _workers = workers[-ans:]  # strongest workers
-        remain_pills = pills
-        for worker in _workers:  # O(n)
-            task = _tasks[0]
-            # the worker can finish the min task without pill, just move on
-            if worker >= task: _tasks.pop(0)  # log(n)
-            elif remain_pills and worker + strength >= task:
-                # the worker cannot finish the min task without pill, but can solve it with pill
-                # remove the max task that the strengthened worker can finish instead
-                remove_task_idx = _tasks.bisect_right(worker + strength)
-                _tasks.pop(remove_task_idx - 1)
-                remain_pills -= 1
-            else: return False
-        return True
-    lo, hi = 0, min(len(workers), len(tasks))  #  O(logn)
-    while lo < hi:
-        mid = (lo + hi + 1) // 2
-        if check_valid(mid): lo = mid
-        else: hi = mid - 1
-    return lo
-
 # LC1213. Intersection of Three Sorted Arrays - 3 sorted array
 def arraysIntersection(self, arr1: List[int], arr2: List[int], arr3: List[int]) -> List[int]:
     ans = []

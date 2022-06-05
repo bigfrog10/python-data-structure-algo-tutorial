@@ -1,4 +1,17 @@
 
+# LC1865. Finding Pairs With a Certain Sum
+class FindSumPairs:
+    def __init__(self, nums1: List[int], nums2: List[int]):
+        self.freq1 = Counter(nums1)
+        self.freq2 = Counter(nums2)
+        self.nums2 = nums2  # for index purpose
+    def add(self, index: int, val: int) -> None:
+        self.freq2[self.nums2[index]] -= 1  # Remove old one
+        self.nums2[index] += val
+        self.freq2[self.nums2[index]] += 1  # Count new one
+    def count(self, tot: int) -> int:
+        return sum(val * self.freq2[tot - key] for key, val in self.freq1.items())
+
 # LC1570. Dot Product of Two Sparse Vectors
 class SparseVector:
     def __init__(self, nums: List[int]):
@@ -56,20 +69,50 @@ class KthLargest:
         elif val > self.nums[0]: heapq.heapreplace(self.nums, val)
         return self.nums[0]  # min, which is the kth largest
 
-# LC1865. Finding Pairs With a Certain Sum
-class FindSumPairs:
-    def __init__(self, nums1: List[int], nums2: List[int]):
-        self.freq1 = Counter(nums1)
-        self.freq2 = Counter(nums2)
-        self.nums2 = nums2  # for index purpose
-    def add(self, index: int, val: int) -> None:
-        self.freq2[self.nums2[index]] -= 1  # Remove old one
-        self.nums2[index] += val
-        self.freq2[self.nums2[index]] += 1  # Count new one
-    def count(self, tot: int) -> int:
-        return sum(val * self.freq2[tot - key] for key, val in self.freq1.items())
-
 # LC1206. Design Skiplist - operations in O(logn)
+# Or use this: https://leetcode.com/problems/design-skiplist/discuss/500036/python-nodes-with-two-pointers
+class Node(object):
+    def __init__(self,val):
+        self.val,self.next, self.down = val, None, None
+
+class Skiplist(object):
+    def __init__(self, levels = 30):
+        self.heads = [Node(-float('inf')) for _ in range(levels)]
+        for c,n in zip(self.heads, self.heads[1:]): c.down = n
+
+    def search(self, target):
+        cur = self.heads[0]
+        while(cur):
+            if cur.next is None or cur.val < target <= cur.next.val:
+                if cur.next and target == cur.next.val: return True
+                cur = cur.down
+            else: cur = cur.next
+        return False
+
+    def add(self, num):
+        stack,cur,prev = collections.deque([]),self.heads[0], None
+        while(cur):
+            if cur.next is None or cur.val < num  <= cur.next.val:
+                stack.append(cur)
+                cur = cur.down
+            else: cur = cur.next
+        while(stack):
+            cur = stack.pop()
+            node = Node(num)
+            node.next,cur.next = cur.next, node
+            if prev: node.down = prev
+            prev = node
+            if random.randint(0,len(self.heads)-1) < len(self.heads) -1 : break
+
+    def erase(self, num):
+        b,cur = False,self.heads[0]
+        while(cur):
+            if cur.next is None or cur.val < num <= cur.next.val:
+                if cur.next and cur.next.val == num:
+                    b,cur.next = True,cur.next.next
+                cur = cur.down
+            else: cur = cur.next
+        return b
 class ListNode:
     def __init__(self, val, cnt=1, next=None, down=None):
         self.val = val
@@ -125,5 +168,3 @@ class Skiplist:
                 else: node.next = node.next.next
             else: break
         return ans
-
-# Or use this: https://leetcode.com/problems/design-skiplist/discuss/500036/python-nodes-with-two-pointers

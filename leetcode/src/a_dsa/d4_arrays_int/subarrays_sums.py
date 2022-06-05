@@ -23,7 +23,18 @@ def checkSubarraySum(self, nums: List[int], k: int) -> bool:
         else: sd[summ] = i
     return False
 
-# LC974. Subarray Sums Divisible by K
+# LC325. Maximum Size Subarray Sum Equals k
+def maxSubArrayLen(self, nums: List[int], k: int) -> int:  # O(n) time and space
+    maxl, cumu, cache = 0, 0, dict()  # cumu -> index
+    for i, v in enumerate(nums):
+        cumu += v
+        if cumu == k: maxl = max(maxl, i+1)
+        elif cumu - k in cache:  # middle subarray
+            maxl = max(maxl, i - cache[cumu - k])
+        if cumu not in cache: cache[cumu] = i  # maintain earliest index
+    return maxl
+
+# LC974. Subarray Sums Divisible by K - return # of such sums
 def subarraysDivByK(self, A: List[int], K: int) -> int:
     if not A: return 0
     cumu = list(accumulate(A))
@@ -58,17 +69,6 @@ def shortestSubarray(self, nums: List[int], k: int) -> int:  # O(n) in time and 
         while d and cur <= d[-1][1]: d.pop()  # so d is increasing on cumus
         d.append([i + 1, cur])
     return res if res < float('inf') else -1
-
-# LC325. Maximum Size Subarray Sum Equals k
-def maxSubArrayLen(self, nums: List[int], k: int) -> int:  # O(n) time and space
-    maxl, cumu, cache = 0, 0, dict()  # cumu -> index
-    for i, v in enumerate(nums):
-        cumu += v
-        if cumu == k: maxl = max(maxl, i+1)
-        elif cumu - k in cache:  # middle subarray
-            maxl = max(maxl, i - cache[cumu - k])
-        if cumu not in cache: cache[cumu] = i  # maintain earliest index
-    return maxl
 
 # LC548. Split Array with Equal Sum - split 4 sums
 def splitArray(self, nums): # O(n^2)
@@ -109,7 +109,7 @@ def findUnsortedSubarray(self, nums: List[int]) -> int:
         if nums[~i] > minv: begin = n - 1 - i  # last seen larger value from right side
     return end - begin + 1
 
-# LC2025. Maximum Number of Ways to Partition an Array - to  2 parts with equal sum
+# LC2025. Maximum Number of Ways to Partition an Array - to  2 parts with equal sum with change k
 def waysToPartition(self, nums: List[int], k: int) -> int:
     # https://leetcode.com/problems/maximum-number-of-ways-to-partition-an-array/discuss/1499026/Short-Python-solution-Compute-prefix-sums%3A-O(n)
     prefix_sums = list(accumulate(nums))
@@ -131,7 +131,7 @@ def waysToPartition(self, nums: List[int], k: int) -> int:
         best = max(best, after_counts[k - x] + before_counts[x - k])
     return best
 
-# LC525. Contiguous Array - longest subarray with equal # of 1 and 0
+# LC525. Contiguous Array - longest subarray with equal # of 1 and 0, 01 array
 def findMaxLength(self, nums: List[int]) -> int:
     c2i = {} # store value to index, cache
     maxlen = count = 0

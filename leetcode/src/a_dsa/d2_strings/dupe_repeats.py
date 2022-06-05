@@ -1,4 +1,12 @@
 
+# LC1047. Remove All Adjacent Duplicates In String - remove duplicates with 2 chars
+def removeDuplicates(self, S: str) -> str: # O(n)
+    output = []
+    for ch in S:
+        if output and ch == output[-1]: output.pop()
+        else: output.append(ch)
+    return ''.join(output)
+
 # LC1044. Longest Duplicate Substring
 def longestDupSubstring(self, S):  # O(nlogn) runtime, O(n) space, hard - Rabin-Karp
     A = [ord(c) - ord('a') for c in S]
@@ -49,14 +57,6 @@ def removeDuplicateLetters(self, s: str) -> str:  # O(n)
             stack.append(c)
     return ''.join(stack)
 
-# LC1047. Remove All Adjacent Duplicates In String - remove duplicates with 2 chars
-def removeDuplicates(self, S: str) -> str: # O(n)
-    output = []
-    for ch in S:
-        if output and ch == output[-1]: output.pop()
-        else: output.append(ch)
-    return ''.join(output)
-
 # LC1209. Remove All Adjacent Duplicates in String II - k duplicates, dupe string
 def removeDuplicates(self, s, k):  # O(n)
     stack = [['#', 0]]  # 0 for ignoring when joining at the last
@@ -66,8 +66,6 @@ def removeDuplicates(self, s, k):  # O(n)
             if stack[-1][1] == k: stack.pop()  # remove this group
         else: stack.append([c, 1])  # char and count
     return ''.join(c * cnt for c, cnt in stack)
-
-
 
 # LC459. Repeated Substring Pattern - repeat string
 def repeatedSubstringPattern(self, s: str) -> bool:  # O(n^2)

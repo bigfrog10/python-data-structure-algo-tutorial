@@ -1,9 +1,4 @@
 
-# LC2187. Minimum Time to Complete Trips
-def minimumTime(self, time: List[int], totalTrips: int) -> int:
-    m = min(time) * totalTrips  ## O(logm)
-    return bisect_left(range(1, m), totalTrips, key= lambda x: sum(x // t for t in time)) + 1
-
 # LC1891. Cutting Ribbons
 def maxLength(self, ribbons: List[int], k: int) -> int:  # O(log(min(totl // k, maxl)))
     totl, maxl = sum(ribbons), max(ribbons)
@@ -14,6 +9,15 @@ def maxLength(self, ribbons: List[int], k: int) -> int:  # O(log(min(totl // k, 
         if sum(x // mid for x in ribbons) >= k: lo = mid
         else: hi = mid - 1
     return lo
+
+# LC162. Find Peak Element - return peak index, array peak element
+def findPeakElement(self, nums: List[int]) -> int: # logn
+    left, right = 0, len(nums)-1
+    while left < right:
+        mid = (left + right) // 2
+        if nums[mid] > nums[mid+1]: right = mid  # decreasing, so peak is on the other side
+        else: left = mid + 1
+    return left
 
 # LC1011. Capacity To Ship Packages Within D Days
 def shipWithinDays(self, weights: List[int], D: int) -> int:  # O(nlog(sum - max))
@@ -29,29 +33,10 @@ def shipWithinDays(self, weights: List[int], D: int) -> int:  # O(nlog(sum - max
         else: right = midw
     return left
 
-# LC1231. Divide Chocolate
-def maximizeSweetness(self, A, K):
-    left, right = 1, sum(A) // (K + 1)
-    while left < right:
-        mid = (left + right + 1) // 2
-        cur = cuts = 0
-        for a in A: ## doing cuts now
-            cur += a
-            if cur >= mid:
-                cuts += 1
-                cur = 0
-        if cuts > K: left = mid
-        else: right = mid - 1
-    return right
-
-# LC162. Find Peak Element - return peak index, array peak element
-def findPeakElement(self, nums: List[int]) -> int: # logn
-    left, right = 0, len(nums)-1
-    while left < right:
-        mid = (left + right) // 2
-        if nums[mid] > nums[mid+1]: right = mid  # decreasing, so peak is on the other side
-        else: left = mid + 1
-    return left
+# LC2187. Minimum Time to Complete Trips
+def minimumTime(self, time: List[int], totalTrips: int) -> int:
+    m = min(time) * totalTrips  ## O(logm)
+    return bisect_left(range(1, m), totalTrips, key= lambda x: sum(x // t for t in time)) + 1
 
 # LC410. Split Array Largest Sum
 def splitArray(self, nums: List[int], m: int) -> int:
@@ -67,6 +52,49 @@ def splitArray(self, nums: List[int], m: int) -> int:
         if count > m: l = mid + 1
         else: r = mid
     return l
+
+# LC2071. Maximum Number of Tasks You Can Assign - with pills
+def maxTaskAssign(self, tasks: List[int], workers: List[int], pills: int, strength: int) -> int:
+    from sortedcontainers import SortedList  # O(nlogn * logn)
+    tasks.sort()  # sort once, small to large
+    workers.sort()
+    def check_valid(ans):  # can finish "ans" tasks or not
+        _tasks = SortedList(tasks[:ans])  # weakest tasks
+        _workers = workers[-ans:]  # strongest workers
+        remain_pills = pills
+        for worker in _workers:  # O(n)
+            task = _tasks[0]
+            # the worker can finish the min task without pill, just move on
+            if worker >= task: _tasks.pop(0)  # log(n)
+            elif remain_pills and worker + strength >= task:
+                # the worker cannot finish the min task without pill, but can solve it with pill
+                # remove the max task that the strengthened worker can finish instead
+                remove_task_idx = _tasks.bisect_right(worker + strength)
+                _tasks.pop(remove_task_idx - 1)
+                remain_pills -= 1
+            else: return False
+        return True
+    lo, hi = 0, min(len(workers), len(tasks))  #  O(logn)
+    while lo < hi:
+        mid = (lo + hi + 1) // 2
+        if check_valid(mid): lo = mid
+        else: hi = mid - 1
+    return lo
+
+# LC1231. Divide Chocolate
+def maximizeSweetness(self, A, K):
+    left, right = 1, sum(A) // (K + 1)
+    while left < right:
+        mid = (left + right + 1) // 2
+        cur = cuts = 0
+        for a in A: ## doing cuts now
+            cur += a
+            if cur >= mid:
+                cuts += 1
+                cur = 0
+        if cuts > K: left = mid
+        else: right = mid - 1
+    return right
 
 # LC719. Find K-th Smallest Pair Distance - kth pair distance
 def smallestDistancePair(self, nums: List[int], k: int) -> int:

@@ -1,5 +1,5 @@
 
-# LC1344. Angle Between Hands of a Clock
+# LC1344. Angle Between Hands of a Clock - clock angles
 def angleClock(self, hour: int, minutes: int) -> float:
     hour_angle = (hour % 12 + minutes / 60) * 30  # 30 is hour angle 360 / 12
     minutes_angle = minutes * 6  # 6 is minute angle 360 / 60

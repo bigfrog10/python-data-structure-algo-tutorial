@@ -56,7 +56,7 @@ def findBuildings(self, heights: List[int]) -> List[int]:  # O(n)
     res.reverse()
     return res
 
-# LC339. Nested List Weight Sum - top elem has less weight
+# LC339. Nested List Weight Sum - top elem has less weight , use dfs
 def depthSum(self, nestedList: List[NestedInteger]) -> int:  # O(all ints) time, O(D) space
     def dfs(nested_list, depth):
         total = 0
@@ -66,7 +66,7 @@ def depthSum(self, nestedList: List[NestedInteger]) -> int:  # O(all ints) time,
         return total
     return dfs(nestedList, 1)
 
-# LC364. Nested List Weight Sum II - top elem has more weight
+# LC364. Nested List Weight Sum II - top elem has more weight, accumu bfs
 def depthSumInverse(self, nestedList: List[NestedInteger]) -> int:
     queue = nestedList  ## O(n), n = total number of elements
     res, s2, q1 = 0, 0, []  # return, level sum, level queue
@@ -418,7 +418,7 @@ def minIncrementForUnique(self, nums: List[int]) -> int: # O(n)
             ans += x - dups.pop() # get dup fill in this slot
     return ans
 
-# LC179. Largest Number - after re-arrange array ints
+# LC179. Largest Number - after re-arrange array ints, re-arrange elem
 def largestNumber(self, num):  # O(nlogn)
     num = [str(x) for x in num]
     cmp = lambda x, y: (x > y) - (x < y)  # standard comparator

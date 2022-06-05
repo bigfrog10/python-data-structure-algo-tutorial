@@ -15,11 +15,11 @@ def minWindow(self, S: str, T: str) -> str: # 2 pointers, fast
         if res == "" or len(res) > end - start: res = S[start:end]
 
 # LC76. Minimum Window Substring, min window has all chars in target string
-def minWindow(self, s, t):
-    need, missing = collections.Counter(t), len(t)  # count downs
+def minWindow(self, s, t):  # O(|t| + |s|)
+    need, missing = collections.Counter(t), len(t)  # count downs, O(|t|)
     i = 0
     I, J = 0, float('inf')
-    for j, c in enumerate(s, 1):  # starting index is 1, window is s[i:j]
+    for j, c in enumerate(s, 1):  # starting index is 1, window is s[i:j], O(|s|)
         missing -= need[c] > 0
         need[c] -= 1
         if missing == 0:  # we found a window that has all t chars
@@ -30,7 +30,7 @@ def minWindow(self, s, t):
     return '' if J == float('inf') else s[I:J]
 
 # LC392. Is Subsequence
-def isSubsequence(self, s: str, t: str) -> bool:
+def isSubsequence(self, s: str, t: str) -> bool:  # O(|t|)
     LEFT_BOUND, RIGHT_BOUND = len(s), len(t)
     p_left = p_right = 0
     while p_left < LEFT_BOUND and p_right < RIGHT_BOUND:

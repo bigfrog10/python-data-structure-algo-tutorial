@@ -1,36 +1,4 @@
 
-# LC2102. Sequentially Ordinal Rank Tracker
-from sortedcontainers import SortedList
-
-class SORTracker:  # all O(logn)
-    def __init__(self):
-        self.sortedList = SortedList()
-        self.i = 0
-    def add(self, name: str, score: int) -> None:
-        self.sortedList.add([-score, name])
-    def get(self) -> str:
-        ans = self.sortedList[self.i][1]
-        self.i += 1
-        return ans
-
-# LC855. Exam Room - set apart from each oterh
-class ExamRoom:
-    def __init__(self, n: int):
-        self.N, self.L = n, []
-    def seat(self) -> int:  # O(n)
-        N, L = self.N, self.L
-        if not L: res = 0
-        else:
-            d, res = L[0], 0
-            for a, b in zip(L, L[1:]): # find largest distance between each interval
-                if (b - a) // 2 > d:
-                    d, res = (b - a) // 2, (b + a) // 2
-            if N - 1 - L[-1] > d: res = N - 1
-        bisect.insort(L, res)  # O(n)
-        return res
-    def leave(self, p: int) -> None:  # O(n)
-        self.L.remove(p)
-
 # LC380. Insert Delete GetRandom O(1), RandomizedSet, top100
 import random
 class RandomizedSet:
@@ -78,14 +46,46 @@ class RandomizedCollection: # 93%, fast
     def getRandom(self) -> int:
         return random.choice(self.values)
 
+# LC2102. Sequentially Ordinal Rank Tracker
+from sortedcontainers import SortedList
+
+class SORTracker:  # all O(logn)
+    def __init__(self):
+        self.sortedList = SortedList()
+        self.i = 0
+    def add(self, name: str, score: int) -> None:
+        self.sortedList.add([-score, name])
+    def get(self) -> str:
+        ans = self.sortedList[self.i][1]
+        self.i += 1
+        return ans
+
+# LC855. Exam Room - set apart from each oterh
+class ExamRoom:
+    def __init__(self, n: int):
+        self.N, self.L = n, []
+    def seat(self) -> int:  # O(n)
+        N, L = self.N, self.L
+        if not L: res = 0
+        else:
+            d, res = L[0], 0
+            for a, b in zip(L, L[1:]): # find largest distance between each interval
+                if (b - a) // 2 > d:
+                    d, res = (b - a) // 2, (b + a) // 2
+            if N - 1 - L[-1] > d: res = N - 1
+        bisect.insort(L, res)  # O(n)
+        return res
+    def leave(self, p: int) -> None:  # O(n)
+        self.L.remove(p)
+
 # LC211. Design Add and Search Words Data Structure
 class WordDictionary:  # much faster
     def __init__(self): self.trie = {}
     def addWord(self, word: str) -> None:
         node = self.trie
-        for ch in word: node = node.setdefault(ch, {})
+        for ch in word: node = node.setdefault(ch, {})  # O(len(word))
         node['$'] = True  # mark end of word
-    def search(self, word: str) -> bool:
+    def search(self, word: str) -> bool:  # O(len(word)) if no ., otherwise, O(N * 26^M), M=len(word), N is # of keys
         def search_in_node(word, node) -> bool: # recursion on dot
             for i, ch in enumerate(word):
                 if ch in node: node = node[ch]  # char found, go down
@@ -281,7 +281,7 @@ class SnapshotArray(object):  # This copies only relevant changes
 # LC706. Design HashMap
 
 
-# LC284. Peeking Iterator
+# LC284. Peeking Iterator, peek iterator
 class PeekingIterator:
     def __init__(self, iterator):
         self.i = iterator

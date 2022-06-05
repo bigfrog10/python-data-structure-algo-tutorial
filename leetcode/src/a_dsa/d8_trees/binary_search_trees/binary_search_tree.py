@@ -37,6 +37,22 @@ def closestValue(self, root: Optional[TreeNode], target: float) -> int: # O(H)
         root = root.left if target < root.val else root.right
     return closest
 
+# LC333. Largest BST Subtree
+def largestBSTSubtree(self, root: TreeNode) -> int:
+    highest = 0
+    def find(node):  # post order, bottom up
+        nonlocal highest
+        if not node: return float('inf'), float('-inf'), 0
+        lmin, lmax, lnum = find(node.left)
+        rmin, rmax, rnum = find(node.right)
+        n = float('-inf')  # to indicate this is not a bst
+        if lmax < node.val < rmin:  # this is a bst
+            n = lnum + rnum + 1
+            highest = max(n, highest)
+        return min(node.val, lmin), max(node.val, rmax), n
+    find(root)
+    return highest
+
 # LC1305. All Elements in Two Binary Search Trees - merge trees, 2 bst, return sorted elem list
 def getAllElements(self, root1: TreeNode, root2: TreeNode) -> List[int]:
     stack1, stack2, output = [], [], []  # O(m + n)
@@ -56,22 +72,6 @@ def getAllElements(self, root1: TreeNode, root2: TreeNode) -> List[int]:
             output.append(root2.val)
             root2 = root2.right
     return output
-
-# LC333. Largest BST Subtree
-def largestBSTSubtree(self, root: TreeNode) -> int:
-    highest = 0
-    def find(node):  # post order, bottom up
-        nonlocal highest
-        if not node: return float('inf'), float('-inf'), 0
-        lmin, lmax, lnum = find(node.left)
-        rmin, rmax, rnum = find(node.right)
-        n = float('-inf')  # to indicate this is not a bst
-        if lmax < node.val < rmin:  # this is a bst
-            n = lnum + rnum + 1
-            highest = max(n, highest)
-        return min(node.val, lmin), max(node.val, rmax), n
-    find(root)
-    return highest
 
 # LC98. Validate Binary Search Tree
 def isValidBST(self, root: TreeNode) -> bool:

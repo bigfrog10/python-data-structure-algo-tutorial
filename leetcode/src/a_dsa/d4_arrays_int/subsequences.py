@@ -1,4 +1,17 @@
 
+# LC416. Partition Equal Subset Sum  - backpack
+def canPartition(self, nums: List[int]) -> bool:  # sequence, not continuous subset
+    n, total = len(nums), sum(nums)  # O(n * total)
+    if total % 2 != 0: return False
+    @lru_cache(maxsize=None)
+    def dfs(idx: int, subset_sum: int) -> bool:
+        if subset_sum == 0: return True
+        if idx == n-1 or subset_sum < 0: return False
+        # include this element, or skip this element
+        result = dfs(idx + 1, subset_sum - nums[idx + 1]) or dfs(idx + 1, subset_sum)
+        return result
+    return dfs(0, total // 2)
+
 # LC1218. Longest Arithmetic Subsequence of Given Difference
 def longestSubsequence(self, arr: List[int], diff: int) -> int:
     res = {}  # array value -> longest length of arithmetic seq, fast
@@ -80,15 +93,4 @@ def longestConsecutive(self, nums: List[int]) -> int:  # O(n)
         maxc = max(maxc, j)
     return maxc
 
-# LC416. Partition Equal Subset Sum  - backpack
-def canPartition(self, nums: List[int]) -> bool:  # sequence, not continuous subset
-    n, total = len(nums), sum(nums)  # O(n * total)
-    if total % 2 != 0: return False
-    @lru_cache(maxsize=None)
-    def dfs(idx: int, subset_sum: int) -> bool:
-        if subset_sum == 0: return True
-        if idx == n-1 or subset_sum < 0: return False
-        # include this element, or skip this element
-        result = dfs(idx + 1, subset_sum - nums[idx + 1]) or dfs(idx + 1, subset_sum)
-        return result
-    return dfs(0, total // 2)
+

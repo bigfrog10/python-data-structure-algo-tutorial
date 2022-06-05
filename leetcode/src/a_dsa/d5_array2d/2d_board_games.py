@@ -1,5 +1,28 @@
 from collections import deque
 
+# LC489. Robot Room Cleaner
+def cleanRoom(self, robot):  # O(open cells)
+    def go_back():
+        robot.turnRight()
+        robot.turnRight()  # turn back
+        robot.move()
+        robot.turnRight()
+        robot.turnRight()  # turn to original dir
+    def clean_cell(cell, cf):
+        visited.add(cell)
+        robot.clean()
+        for i in range(4):
+            new_d = (cf + i) % 4  # e.g., facing right needs to start from 2nd index
+            new_cell = (cell[0] + directions[new_d][0], cell[1] + directions[new_d][1])
+            if not new_cell in visited and robot.move():
+                clean_cell(new_cell, new_d)
+                go_back()
+            robot.turnRight()  # turn the robot following chosen direction : clockwise
+    # going clockwise : 0: 'up', 1: 'right', 2: 'down', 3: 'left'
+    directions = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+    visited = set()
+    clean_cell((0, 0), 0)
+
 # LC1730. Shortest Path to Get Food
 def getFood(self, grid: List[List[str]]) -> int:  # O(mn)
     rows, cols = len(grid), len(grid[0])
@@ -193,29 +216,6 @@ def knightDialer(self, N):  # O(logn)
         M = M * M % mod
         N //= 2
     return int(np.sum(res)) % mod
-
-# LC489. Robot Room Cleaner
-def cleanRoom(self, robot):  # O(open cells)
-    def go_back():
-        robot.turnRight()
-        robot.turnRight()  # turn back
-        robot.move()
-        robot.turnRight()
-        robot.turnRight()  # turn to original dir
-    def clean_cell(cell, cf):
-        visited.add(cell)
-        robot.clean()
-        for i in range(4):
-            new_d = (cf + i) % 4  # e.g., facing right needs to start from 2nd index
-            new_cell = (cell[0] + directions[new_d][0], cell[1] + directions[new_d][1])
-            if not new_cell in visited and robot.move():
-                clean_cell(new_cell, new_d)
-                go_back()
-            robot.turnRight()  # turn the robot following chosen direction : clockwise
-    # going clockwise : 0: 'up', 1: 'right', 2: 'down', 3: 'left'
-    directions = [(-1, 0), (0, 1), (1, 0), (0, -1)]
-    visited = set()
-    clean_cell((0, 0), 0)
 
 # LC419. Battleships in a Board
 def countBattleships(self, board: List[List[str]]) -> int:

@@ -1,4 +1,67 @@
 
+# # LC408. Valid Word Abbreviation
+def validWordAbbreviation(self, word, abbr):
+    # turn "i12iz4n" to "i.{12}iz.{4}n$"
+    pattern = re.sub('([1-9]\d*)', r'.{\1}', abbr) + '$'
+    return bool(re.match(pattern, word))
+def validWordAbbreviation(self, word: str, abbr: str) -> bool:
+    wl = len(word)
+    i, n = 0, "0"  # i is index in word
+    for c in abbr:
+        if c.isdigit():
+            if n == c: return False  # don't allow abbr starts with 0
+            n += c  # accumulate digit, "02"
+        else:  # letter
+            i += int(n)  # add counts for previous letter
+            n = '0'  # reset counts to 0
+            if i >= wl or word[i] != c: return False  # core logic
+            i += 1  # move to next char
+    return i + int(n) == wl
+
+# LC767. Reorganize String - rearrange chars
+def reorganizeString(self, s: str) -> str:
+    if not s: return ""  # O(n) there is no sort
+    n, counts = len(s), Counter(s)
+    maxk, maxc = None, -1
+    for k, c in counts.items(): # only max matters
+        if c > maxc: maxk, maxc = k, c
+    if maxc > (n+1) // 2: return ""  # we could have ababa
+    res = [''] * n
+    res[:maxc*2:2] = [maxk] * maxc
+    # to continue fill in lower count chars. "bfrbs", if more lower freq chars
+    i = maxc*2 if maxc * 2 < n else 1
+    for k, c in counts.items():
+        if k == maxk: continue
+        for j in range(c):
+            res[i] = k
+            i += 2
+            if i >= n: i = 1 # revert back to index 1 to fill odd
+    return ''.join(res)
+
+# LC1055. Shortest Way to Form String
+def shortestWay(self, source, target):
+    idxs = defaultdict(list)
+    for i, c in enumerate(source): idxs[c].append(i)
+    result, i = 0, 0  # i: next index of source to check
+    for c in target:  # O(nlogm)
+        if c not in idxs: return -1  # cannot make target if char not in source
+        j = bisect.bisect_left(idxs[c], i)  # index in idxs[c] that is >= i
+        if j == len(idxs[c]):           # wrap around to beginning of source
+            result += 1
+            j = 0
+        i = idxs[c][j] + 1              # next index in source
+    return result if i == 0 else result + 1     # add 1 for partial source
+
+# LC71. Simplify Path -  file paths, canonical path
+def simplifyPath(self, path: str) -> str:  # O(n) runtime and space
+    stack = []
+    for folder in path.split('/'):
+        if not folder or folder == '.': continue  # skip this
+        elif folder == '..':
+            if stack: stack.pop()  # go to parent
+        else: stack.append(folder)
+    return '/' + '/'.join(stack)
+
 # LC2262. Total Appeal of A String
 def appealSum(self, s: str) -> int:
     last = {}
@@ -40,34 +103,8 @@ def uniqueLetterString(self, s: str) -> int:
         res += (len(s) - j) * (j - k)
     return res % (10**9 + 7)
 
-# LC71. Simplify Path -  file paths, canonical path
-def simplifyPath(self, path: str) -> str:  # O(n) runtime and space
-    stack = []
-    for folder in path.split('/'):
-        if not folder or folder == '.': continue  # skip this
-        elif folder == '..':
-            if stack: stack.pop()  # go to parent
-        else: stack.append(folder)
-    return '/' + '/'.join(stack)
 
-# LC408. Valid Word Abbreviation
-def validWordAbbreviation(self, word, abbr):
-    # turn "i12iz4n" to "i.{12}iz.{4}n$"
-    pattern = re.sub('([1-9]\d*)', r'.{\1}', abbr) + '$'
-    return bool(re.match(pattern, word))
-def validWordAbbreviation(self, word: str, abbr: str) -> bool:
-    wl = len(word)
-    i, n = 0, "0"  # i is index in word
-    for c in abbr:
-        if c.isdigit():
-            if n == c: return False  # don't allow abbr starts with 0
-            n += c  # accumulate digit, "02"
-        else:  # letter
-            i += int(n)  # add counts for previous letter
-            n = '0'  # reset counts to 0
-            if i >= wl or word[i] != c: return False  # core logic
-            i += 1  # move to next char
-    return i + int(n) == wl
+
 
 # LC681. Next Closest Time
 def nextClosestTime(self, time: str) -> str:
@@ -114,21 +151,8 @@ def shiftingLetters(self, s: str, shifts: List[int]) -> str:
         X = (X - shifts[i]) % 26
     return "".join(ans)
 
-# LC1055. Shortest Way to Form String
-def shortestWay(self, source, target):
-    idxs = defaultdict(list)
-    for i, c in enumerate(source): idxs[c].append(i)
-    result, i = 0, 0  # i: next index of source to check
-    for c in target:  # O(nlogm)
-        if c not in idxs: return -1  # cannot make target if char not in source
-        j = bisect.bisect_left(idxs[c], i)  # index in idxs[c] that is >= i
-        if j == len(idxs[c]):           # wrap around to beginning of source
-            result += 1
-            j = 0
-        i = idxs[c][j] + 1              # next index in source
-    return result if i == 0 else result + 1     # add 1 for partial source
 
-# LC161. One Edit Distance
+# LC161. One Edit Distance, return true if so
 def isOneEditDistance(self, s, t):  # O(n) time and space
     if s == t: return False
     i = 0
@@ -267,25 +291,7 @@ def convert(self, s: str, numRows: int) -> str:
         cur_row += down
     return ''.join(rows)
 
-# LC767. Reorganize String - rearrange chars
-def reorganizeString(self, s: str) -> str:
-    if not s: return ""  # O(n) there is no sort
-    n, counts = len(s), Counter(s)
-    maxk, maxc = None, -1
-    for k, c in counts.items(): # only max matters
-        if c > maxc: maxk, maxc = k, c
-    if maxc > (n+1) // 2: return ""  # we could have ababa
-    res = [''] * n
-    res[:maxc*2:2] = [maxk] * maxc
-    # to continue fill in lower count chars. "bfrbs", if more lower freq chars
-    i = maxc*2 if maxc * 2 < n else 1
-    for k, c in counts.items():
-        if k == maxk: continue
-        for j in range(c):
-            res[i] = k
-            i += 2
-            if i >= n: i = 1 # revert back to index 1 to fill odd
-    return ''.join(res)
+
 
 # LC97. Interleaving String
 def isInterleave(self, s1: str, s2: str, s3: str) -> bool: # O(nm)

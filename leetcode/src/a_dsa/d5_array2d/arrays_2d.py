@@ -1,4 +1,18 @@
 
+# LC1868. Product of Two Run-Length Encoded Arrays
+def findRLEArray(self, encoded1: List[List[int]], encoded2: List[List[int]]) -> List[List[int]]:
+    res, l, r = [], 0, 0   # O(n + m), counts of unique numbers
+    while encoded1[-1][-1] != 0:
+        prod = encoded1[l][0] * encoded2[r][0]
+        low = min(encoded1[l][1], encoded2[r][1])
+        if res and res[-1][0] == prod: res[-1][1] += low  # extend freq if same value
+        else: res.append([prod, low])
+        encoded1[l][1] -= low  # minus the finished range
+        encoded2[r][1] -= low
+        if encoded1[l][1] == 0: l += 1
+        if encoded2[r][1] == 0: r += 1
+    return res
+
 # LC815. Bus Routes
 def numBusesToDestination(self, routes, S, T): # BFS on stops
     stop2routes = collections.defaultdict(set)
@@ -36,7 +50,7 @@ def restoreArray(self, adjacentPairs: List[List[int]]) -> List[int]:
 
 # LC983. Minimum Cost For Tickets - ticket cost
 def mincostTickets(self, days, costs):   # O(len(days))
-    durations = [1, 7, 30]
+    durations = [1, 7, 30]  # 2, 7, 5
     N = len(days)
     @lru_cache(None)
     def dp(i): # How much money to do days[i]+
@@ -58,20 +72,6 @@ def mincostTickets(self, days: List[int], costs: List[int]) -> int:  # O(max(dur
         else: return dp(i + 1) # wait for next day if we don't travel today
     # print(dp.cache_info())
     return dp(days[0])
-
-# LC1868. Product of Two Run-Length Encoded Arrays
-def findRLEArray(self, encoded1: List[List[int]], encoded2: List[List[int]]) -> List[List[int]]:
-    res, l, r = [], 0, 0   # O(n + m), counts of unique numbers
-    while encoded1[-1][-1] != 0:
-        prod = encoded1[l][0] * encoded2[r][0]
-        low = min(encoded1[l][1], encoded2[r][1])
-        if res and res[-1][0] == prod: res[-1][1] += low  # extend freq if same value
-        else: res.append([prod, low])
-        encoded1[l][1] -= low  # minus the finished range
-        encoded2[r][1] -= low
-        if encoded1[l][1] == 0: l += 1
-        if encoded2[r][1] == 0: r += 1
-    return res
 
 # LC406. Queue Reconstruction by Height - people height
 def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:  # O(nlogn)

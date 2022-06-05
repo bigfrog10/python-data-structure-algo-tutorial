@@ -53,7 +53,7 @@ def getAverages(self, nums: List[int], k: int) -> List[int]:
     for i, x in enumerate(nums):
         rsm += x
         if i >= r: rsm -= nums[i-r]  # i is 0 index based
-        if i+1 >= r: ans[i-k] = rsm // r  # i is 0 index based, i+1 is no. of elementsF
+        if i+1 >= r: ans[i-k] = rsm // r  # i is 0 index based, i+1 is no. of elements
     return ans
 
 # LC11. Container With Most Water

@@ -15,7 +15,7 @@ def mergeTwoLists(self, l1, l2):
 
 # LC23. Merge k Sorted Lists, top100
 def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-    lstlen = len(lists)  # O(Nlogk)
+    lstlen = len(lists)  ## O(Nlogk)
     jump = 1
     while jump < lstlen:  # logk
         for i in range(0, lstlen - jump, jump * 2):   # O(all nodes)

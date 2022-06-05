@@ -1,4 +1,14 @@
 
+# LC791. Custom Sort String
+def customSortString(self, order: str, s: str) -> str:  # O(s + t) time and O(t) space
+    count = collections.Counter(s)
+    ans = []
+    for c in order:
+        ans.append(c * count[c])
+        count[c] = 0  # remove this char for next for-loop
+    for c in count: ans.append(c * count[c])
+    return "".join(ans)
+
 # LC953. Verifying an Alien Dictionary
 from typing import List
 def isAlienSorted(self, words: List[str], order: str) -> bool:  # O(total chars in words)
@@ -57,15 +67,7 @@ def alienOrder(self, words: List[str]) -> str:  # O(total word lengths)
             if degrees[n] == 0: queue.append(n)
     return ans if len(ans) == len(degrees) else ""  # cyclic ordering
 
-# LC791. Custom Sort String
-def customSortString(self, order: str, s: str) -> str:  # O(s + t) time and O(t) space
-    count = collections.Counter(s)
-    ans = []
-    for c in order:
-        ans.append(c * count[c])
-        count[c] = 0  # remove this char for next for-loop
-    for c in count: ans.append(c * count[c])
-    return "".join(ans)
+
 
 # LC451. Sort Characters By Frequency - sort by freq
 def frequencySort(self, s: str) -> str:  # O(n), not nlogn, using bucket sort

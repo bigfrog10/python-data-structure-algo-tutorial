@@ -1,4 +1,28 @@
 
+# LC827. Making A Large Island
+def largestIsland(self, grid: List[List[int]]) -> int: # O(n^2) runtime and space
+    if not grid or not grid[0]: return 0
+    n = len(grid)
+    def dfs(r, c, gid):  # get island size
+        ret, grid[r][c] = 1, gid  # mark islands by numbers
+        for x, y in ((r-1, c), (r+1, c), (r, c-1), (r, c+1)):
+            if 0 <= x < n and 0 <= y < n and grid[x][y] == 1: ret += dfs(x, y, gid)
+        return ret
+    islands, gid = {}, 2  # 0 for water, 1 for island, so we start with 2
+    for r, c in product(range(n), range(n)):  # find each island size
+        if grid[r][c] == 1:  # unexplored island
+            islands[gid] = dfs(r, c, gid)
+            gid += 1
+    ret = max(islands.values() or [0])  # in case all land no water
+    for r, c in product(range(n), range(n)):
+        if grid[r][c] == 0:  # go through each water
+            seen = set()  # this is to filter out repetitive islands from differnt landings
+            for x, y in ((r-1, c), (r+1, c), (r, c-1), (r, c+1)):
+                if 0 <= x < n and 0 <= y < n and grid[x][y] > 1: seen.add(grid[x][y])
+            expand = sum(islands[p] for p in seen) + 1
+            ret = max(ret, expand)
+    return ret
+
 # LC200. Number of Islands
 from itertools import product
 def numIslands(self, board: List[List[str]]) -> int:
@@ -42,29 +66,16 @@ def numIslands2(self, m, n, positions):
         counts.append(count)
     return counts
 
-# LC827. Making A Large Island
-def largestIsland(self, grid: List[List[int]]) -> int: # O(n^2) runtime and space
-    if not grid or not grid[0]: return 0
-    n = len(grid)
-    def dfs(r, c, gid):  # get island size
-        ret, grid[r][c] = 1, gid  # mark islands by numbers
-        for x, y in ((r-1, c), (r+1, c), (r, c-1), (r, c+1)):
-            if 0 <= x < n and 0 <= y < n and grid[x][y] == 1: ret += dfs(x, y, gid)
-        return ret
-    islands, gid = {}, 2  # 0 for water, 1 for island, so we start with 2
-    for r, c in product(range(n), range(n)):  # find each island size
-        if grid[r][c] == 1:  # unexplored island
-            islands[gid] = dfs(r, c, gid)
-            gid += 1
-    ret = max(islands.values() or [0])  # in case all land no water
-    for r, c in product(range(n), range(n)):
-        if grid[r][c] == 0:  # go through each water
-            seen = set()  # this is to filter out repetitive islands from differnt landings
-            for x, y in ((r-1, c), (r+1, c), (r, c-1), (r, c+1)):
-                if 0 <= x < n and 0 <= y < n and grid[x][y] > 1: seen.add(grid[x][y])
-            expand = sum(islands[p] for p in seen) + 1
-            ret = max(ret, expand)
-    return ret
+# LC463. Island Perimeter
+def islandPerimeter(self, grid: List[List[int]]) -> int:  # O(mn), O(1)
+    rows, cols = len(grid), len(grid[0])
+    result = 0
+    for r, c in itertools.product(range(rows), range(cols)):
+        if grid[r][c] == 1:
+            result += 4
+            if r > 0 and grid[r-1][c] == 1: result -= 2  # remove borders between
+            if c > 0 and grid[r][c-1] == 1: result -= 2
+    return result
 
 # LC934. Shortest Bridge
 def shortestBridge(self, A: List[List[int]]) -> int:
@@ -110,16 +121,7 @@ def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
         for j in range(m): amax = max(amax, dfs(i, j))
     return amax
 
-# LC463. Island Perimeter
-def islandPerimeter(self, grid: List[List[int]]) -> int:  # O(mn), O(1)
-    rows, cols = len(grid), len(grid[0])
-    result = 0
-    for r, c in itertools.product(range(rows), range(cols)):
-        if grid[r][c] == 1:
-            result += 4
-            if r > 0 and grid[r-1][c] == 1: result -= 2  # remove borders between
-            if c > 0 and grid[r][c-1] == 1: result -= 2
-    return result
+
 
 
 

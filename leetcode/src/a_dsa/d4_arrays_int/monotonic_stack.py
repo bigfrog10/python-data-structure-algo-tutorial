@@ -1,4 +1,49 @@
 
+# LC1944. Number of Visible People in a Queue
+def canSeePersonsCount(self, heights: List[int]) -> List[int]:  # O(n)
+    stack, res = [], [0] * len(heights)  # decreasing mono stack
+    for i, v in enumerate(heights):
+        while stack and v >= heights[stack[-1]]: res[stack.pop()] += 1  # pop() can see v
+        if stack: res[stack[-1]] += 1  # -1 can see v
+        stack.append(i)
+    return res
+
+# LC739. Daily Temperatures
+def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+    n = len(temperatures)
+    answer, hottest = [0] * n, 0  # O(n) runtime, O(1) space
+    for curr_day in range(n)[::-1]:
+        current_temp = temperatures[curr_day]
+        if current_temp >= hottest:
+            hottest = current_temp
+            continue  # the answer is 0, no need to go further.
+        days = 1
+        while current_temp >= temperatures[curr_day + days]:
+            # this is the "days" jump to shrink the while total to N for the for loop
+            days += answer[curr_day + days]  # accu through valley
+        answer[curr_day] = days
+    return answer
+def dailyTemperatures(self, T: List[int]) -> List[int]:
+    ret, stack = [0] * len(T), []  # monotonic stack, decreasing
+    for i in reversed(range(len(T))):
+        while stack and T[i] >= T[stack[-1]]: stack.pop()
+        if stack: ret[i] = stack[-1] - i
+        stack.append(i)
+    return ret
+
+# LC735. Asteroid Collision
+def asteroidCollision(self, asteroids):
+    ans = []  # decreasing stack
+    for new in asteroids:
+        while ans and new < 0 < ans[-1]:
+            if ans[-1] < -new:
+                ans.pop()
+                continue
+            elif ans[-1] == -new: ans.pop()
+            break
+        else: ans.append(new)
+    return ans
+
 # LC1950. Maximum of Minimum Values in All Subarrays - minmax of all subarrays
 def findMaximums(self, nums: List[int]) -> List[int]:
     stack = []
@@ -49,50 +94,10 @@ def sumSubarrayMins(self, arr: List[int]) -> int:  # O(n)
         stack.append(i)
     return res % (10**9 + 7)
 
-# LC739. Daily Temperatures
-def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-    n = len(temperatures)
-    answer, hottest = [0] * n, 0  # O(n) runtime, O(1) space
-    for curr_day in range(n)[::-1]:
-        current_temp = temperatures[curr_day]
-        if current_temp >= hottest:
-            hottest = current_temp
-            continue  # the answer is 0, no need to go further.
-        days = 1
-        while current_temp >= temperatures[curr_day + days]:
-            # this is the "days" jump to shrink the while total to N for the for loop
-            days += answer[curr_day + days]  # accu through valley
-        answer[curr_day] = days
-    return answer
-def dailyTemperatures(self, T: List[int]) -> List[int]:
-    ret, stack = [0] * len(T), []  # monotonic stack, decreasing
-    for i in reversed(range(len(T))):
-        while stack and T[i] >= T[stack[-1]]: stack.pop()
-        if stack: ret[i] = stack[-1] - i
-        stack.append(i)
-    return ret
 
-# LC1944. Number of Visible People in a Queue
-def canSeePersonsCount(self, heights: List[int]) -> List[int]:  # O(n)
-    stack, res = [], [0] * len(heights)  # decreasing mono stack
-    for i, v in enumerate(heights):
-        while stack and v >= heights[stack[-1]]: res[stack.pop()] += 1  # pop() can see v
-        if stack: res[stack[-1]] += 1  # -1 can see v
-        stack.append(i)
-    return res
 
-# LC735. Asteroid Collision
-def asteroidCollision(self, asteroids):
-    ans = []  # decreasing stack
-    for new in asteroids:
-        while ans and new < 0 < ans[-1]:
-            if ans[-1] < -new:
-                ans.pop()
-                continue
-            elif ans[-1] == -new: ans.pop()
-            break
-        else: ans.append(new)
-    return ans
+
+
 
 # LC962. Maximum Width Ramp
 def maxWidthRamp(self, A):
@@ -141,7 +146,7 @@ def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
     return [d.get(x, -1) for x in nums1]
 
 # LC503. Next Greater Element II - circular array
-def nextGreaterElements(self, nums):  # best solution
+def nextGreaterElements(self, nums):  # O(n) time and space
     n = len(nums)
     ret = [-1] * n
     stack = nums[::-1]  # reverse this for comparison

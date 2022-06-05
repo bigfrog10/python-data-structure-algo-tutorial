@@ -1,5 +1,5 @@
 
-# LC314. Binary Tree Vertical Order Traversal - Just column info
+# LC314. Binary Tree Vertical Order Traversal - Just column info - bt vertical
 def verticalOrder(self, root: TreeNode) -> List[List[int]]:  # O(n)
     if root is None: return []
     queue, columnTable = collections.deque([(root, 0)]), collections.defaultdict(list)
@@ -83,7 +83,7 @@ def connect(self, root: 'Node') -> 'Node':  # This is better written
             if node.right: Q.append(node.right)
     return root
 
-# LC117. Populating Next Right Pointers in Each Node II
+# LC117. Populating Next Right Pointers in Each Node II - general solution
 def connect(self, root: 'Node') -> 'Node':
     res = root
     while root:

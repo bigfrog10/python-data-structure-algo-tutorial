@@ -6,6 +6,24 @@ class TreeNode:
         self.left = left
         self.right = right
 
+# LC958. Check Completeness of a Binary Tree
+def isCompleteTree(self, root):  # O(N) time and O(H) space
+    def dfs(root):
+        if not root: return 0
+        l, r = dfs(root.left), dfs(root.right)
+        if l & (l + 1) == 0 and l / 2 <= r <= l:
+            return l + r + 1
+        if r & (r + 1) == 0 and r <= l <= r * 2 + 1:
+            return l + r + 1
+        return -1
+    return dfs(root) > 0
+def isCompleteTree(self, root: Optional[TreeNode]) -> bool:  # O(N) time and space
+    bfs, i = [root], 0
+    while bfs[i]:  # on exit, i is the first None we see.
+        bfs.extend([bfs[i].left, bfs[i].right])
+        i += 1
+    return not any(bfs[i:])  # we shouldn't have any non None after i
+
 # LC545. Boundary of Binary Tree
 def boundaryOfBinaryTree(self, root: Optional[TreeNode]) -> List[int]:  # O(n) runtime, O(n) space(stack recursion)
     def left_bound(root):
@@ -88,23 +106,7 @@ def inorderTraversal(self, root):
 
 
 
-# LC958. Check Completeness of a Binary Tree
-def isCompleteTree(self, root):  # O(N) time and O(H) space
-    def dfs(root):
-        if not root: return 0
-        l, r = dfs(root.left), dfs(root.right)
-        if l & (l + 1) == 0 and l / 2 <= r <= l:
-            return l + r + 1
-        if r & (r + 1) == 0 and r <= l <= r * 2 + 1:
-            return l + r + 1
-        return -1
-    return dfs(root) > 0
-def isCompleteTree(self, root: Optional[TreeNode]) -> bool:  # O(N) time and space
-    bfs, i = [root], 0
-    while bfs[i]:  # on exit, i is the first None we see.
-        bfs.extend([bfs[i].left, bfs[i].right])
-        i += 1
-    return not any(bfs[i:])  # we shouldn't have any non None after i
+
 
 # LC1361. Validate Binary Tree Nodes
 def validateBinaryTreeNodes(self, n: int, leftChild: List[int], rightChild: List[int]) -> bool: # slower
@@ -249,8 +251,6 @@ def findClosestLeaf(self, root: TreeNode, k: int) -> int:  # O(n)
                     seen.add(nei)
                     queue.append(nei)
 
-
-
 # LC863. All Nodes Distance K in Binary Tree
 def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:  # O(n) time
     adj = collections.defaultdict(list)  # create graph, O(V) space
@@ -273,3 +273,5 @@ def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:  # O
         else: res.append(node.val)  # ==k, no more recursion, so won't > k
     dfs2(target, 0)
     return res
+
+

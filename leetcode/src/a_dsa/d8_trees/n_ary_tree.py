@@ -1,4 +1,20 @@
 
+# LC1522. Diameter of N-Ary Tree - path = edges
+def diameter(self, root: 'Node') -> int:
+    ret = 0  # root itself, in case there is no child
+    def dfs(node):  # return number of edges
+        nonlocal ret  # edges
+        if not node: return 0
+        max1 = max2 = 0
+        for child in node.children:
+            depth = dfs(child)
+            if max1 < depth: max1, max2 = depth, max1
+            elif max2 < depth: max2 = depth
+        ret = max(ret, max1 + max2)  # edges
+        return max(max1, max2) + 1  # 1 is this node-to-child edge
+    dfs(root)
+    return ret
+
 # LC582. Kill Process
 def killProcess(self, pid: List[int], ppid: List[int], kill: int) -> List[int]:
     d = collections.defaultdict(list)
@@ -50,21 +66,7 @@ class Codec:
         kv = json.loads(data)
         return dict_to_node(kv)
 
-# LC1522. Diameter of N-Ary Tree - path = edges
-def diameter(self, root: 'Node') -> int:
-    ret = 0  # root itself, in case there is no child
-    def dfs(node):  # return number of edges
-        nonlocal ret  # edges
-        if not node: return 0
-        max1 = max2 = 0
-        for child in node.children:
-            depth = dfs(child)
-            if max1 < depth: max1, max2 = depth, max1
-            elif max2 < depth: max2 = depth
-        ret = max(ret, max1 + max2)  # edges
-        return max(max1, max2) + 1  # 1 is this node-to-child edge
-    dfs(root)
-    return ret
+
 
 # LC1245. Tree Diameter - given graph edges
 def treeDiameter(self, edges: List[List[int]]) -> int:

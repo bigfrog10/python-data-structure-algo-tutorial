@@ -1,4 +1,30 @@
 
+# LC125. Valid Palindrome - ignore non alphanumeric, check is or not
+def isPalindrome(self, s: str) -> bool:  # O(n)
+    i, j = 0, len(s) - 1  #
+    while i < j:
+        while i < j and not s[i].isalnum(): i += 1
+        while i < j and not s[j].isalnum(): j -= 1
+        if s[i].lower() != s[j].lower(): return False
+        i += 1
+        j -= 1
+    return True
+
+# LC647. Palindromic Substrings - return counts of these
+def countSubstrings(self, s: str) -> int:  # O(n^2)
+    def expand(i, j):  # O(n) for the call
+        cnt = 0
+        while i >= 0 and j < len(s) and s[i] == s[j]:
+            cnt += 1
+            i -= 1
+            j += 1
+        return cnt
+    total = 0
+    for i in range(len(s)):  # O(n) for the loop
+        total += expand(i, i)  # odd expansion from center
+        total += expand(i, i+1)  # even expansion from double center
+    return total
+
 # LC1400. Construct K Palindrome Strings
 def canConstruct(self, s: str, k: int) -> bool:
     if k > len(s): return False
@@ -16,17 +42,6 @@ def nearestPalindromic(self, n: str) -> str:
         candidates.add(i + [i, i[:-1]][l & 1][::-1])
     candidates.discard(n)
     return min(candidates, key=lambda x: (abs(int(x) - int(n)), int(x)))
-
-# LC125. Valid Palindrome - ignore non alphanumeric, check is or not
-def isPalindrome(self, s: str) -> bool:  # O(n)
-    i, j = 0, len(s) - 1  #
-    while i < j:
-        while i < j and not s[i].isalnum(): i += 1
-        while i < j and not s[j].isalnum(): j -= 1
-        if s[i].lower() != s[j].lower(): return False
-        i += 1
-        j -= 1
-    return True
 
 # LC680. Valid Palindrome II - deleting at most one character
 def validPalindrome(self, s: str) -> bool:  # O(n)
@@ -57,6 +72,12 @@ def isValidPalindrome(self, s: str, k: int) -> bool:  # O(n^2) time and space
         else: return min(drop(i+1, j), drop(i, j-1)) + 1
     return drop(0, len(s)-1) <= k
 
+# LC266. Palindrome Permutation - if any permuatation can be a palindrome
+def canPermutePalindrome(self, s: str) -> bool:  # O(n) runtime, O(1) space
+    counts = Counter(s)
+    odd_count = sum(1 for k, v in counts.items() if v % 2 != 0)
+    return odd_count < 2
+
 # LC336. Palindrome Pairs - of a word list
 def palindromePairs(self, words: List[str]) -> List[List[int]]:  # O(nk^2)
     lookup = {w:i for i,w in enumerate(words)}
@@ -72,27 +93,6 @@ def palindromePairs(self, words: List[str]) -> List[List[int]]:  # O(nk^2)
             if j != len(w) and pos == rev_pos and rev_pre != w and rev_pre in lookup:
                 res.append([i, lookup[rev_pre]])
     return res
-
-# LC647. Palindromic Substrings - return counts of these
-def countSubstrings(self, s: str) -> int:  # O(n^2)
-    def expand(i, j):  # O(n) for the call
-        cnt = 0
-        while i >= 0 and j < len(s) and s[i] == s[j]:
-            cnt += 1
-            i -= 1
-            j += 1
-        return cnt
-    total = 0
-    for i in range(len(s)):  # O(n) for the loop
-        total += expand(i, i)  # odd expansion from center
-        total += expand(i, i+1)  # even expansion from double center
-    return total
-
-# LC266. Palindrome Permutation - if any permuatation can be a palindrome
-def canPermutePalindrome(self, s: str) -> bool:  # O(n) runtime, O(1) space
-    counts = Counter(s)
-    odd_count = sum(1 for k, v in counts.items() if v % 2 != 0)
-    return odd_count < 2
 
 # LC267. Palindrome Permutation II - return all such permutations
 def generatePalindromes(self, s: str) -> List[str]:

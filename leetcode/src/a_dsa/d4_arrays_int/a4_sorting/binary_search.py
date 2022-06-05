@@ -73,7 +73,7 @@ def firstBadVersion(self, n):
         else: start = mid + 1  # start side is after good
     return start
 
-# LC540. Single Element in a Sorted Array - find it in log time
+# LC540. Single Element in a Sorted Array - of double elements, find it in log time
 def singleNonDuplicate(self, nums: List[int]) -> int:  # simplest and fast
     lo, hi = 0, len(nums) - 1
     while lo < hi:

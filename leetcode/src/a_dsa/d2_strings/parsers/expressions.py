@@ -18,28 +18,6 @@ def addOperators(self, num: str, target: int) -> List[str]:
     dfs(0, '', 0, None)
     return res
 
-# LC224. Basic Calculator - with +-()
-def calculate(self, s):  # O(n) time and space
-    res, stack = 0, []
-    num, sign = 0, 1
-    for ss in s:
-        if ss.isdigit():
-            num = 10 * num + int(ss)
-        elif ss in ["-", "+"]:
-            res += sign * num
-            num = 0
-            sign = 1 if ss == '+' else -1
-        elif ss == "(":
-            stack.append(res)
-            stack.append(sign)
-            sign, res = 1, 0
-        elif ss == ")":
-            res += sign * num   # expr inside ')'
-            res *= stack.pop()  # old sign before '(', -(3) shows we can't combine res and sign first
-            res += stack.pop()  # old res before '('
-            num = 0
-    return res + num * sign
-
 # LC227. Basic Calculator II  # only +-*/, no parenth
 def calculate(self, s: str) -> int:  # O(n) runtime but O(1) space,
     val = res = 0
@@ -74,6 +52,28 @@ def calculate(self, s: str) -> int:  # O(n) runtime and space
             else: stack.append(int(stack.pop() / num))  # use int for negative
             num, op = 0, s[i]
     return sum(stack)
+
+# LC224. Basic Calculator - with +-()
+def calculate(self, s):  # O(n) time and space
+    res, stack = 0, []
+    num, sign = 0, 1
+    for ss in s:
+        if ss.isdigit():
+            num = 10 * num + int(ss)
+        elif ss in ["-", "+"]:
+            res += sign * num
+            num = 0
+            sign = 1 if ss == '+' else -1
+        elif ss == "(":
+            stack.append(res)
+            stack.append(sign)
+            sign, res = 1, 0
+        elif ss == ")":
+            res += sign * num   # expr inside ')'
+            res *= stack.pop()  # old sign before '(', -(3) shows we can't combine res and sign first
+            res += stack.pop()  # old res before '('
+            num = 0
+    return res + num * sign
 
 # LC772. Basic Calculator III - +-*/()
 def calculate(self, s: str) -> int:

@@ -1,6 +1,19 @@
 from typing import List
 import heapq
 
+# LC636. Exclusive Time of Functions, jobs, process time, cpu single thread
+def exclusiveTime(self, n, logs):  # O(n) runtime and space
+    res, stack = [0] * n, []
+    for log in logs:
+        log = log.split(":")
+        if log[1] == "start": stack.append([int(log[2]), 0])  # 0 means no time spent on this yet.
+        else:  # end
+            start = stack.pop()
+            time = int(log[2]) - start[0] + 1  # time spent on this pid
+            res[int(log[0])] += time - start[1]  # add exclusive time, no child time.
+            if stack: stack[-1][1] += time  # update parent time
+    return res
+
 # LC56. Merge Intervals - remove overlaps of a list
 def merge(self, intervals: List[List[int]]) -> List[List[int]]:
     intervals.sort(key=lambda x: x[0])
@@ -9,6 +22,18 @@ def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         if not merged or merged[-1][1] < interval[0]: merged.append(interval)  # no overlap
         else: merged[-1][1] = max(merged[-1][1], interval[1])
     return merged
+
+# LC986. Interval List Intersections - of 2 lists of intervals
+def intervalIntersection(self, firstList: List[List[int]], secondList: List[List[int]]) -> List[List[int]]:
+    ret = []  # O(m + n)
+    i = j = 0
+    while i < len(firstList) and j < len(secondList):
+        left = max(firstList[i][0], secondList[j][0])
+        right = min(firstList[i][1], secondList[j][1])
+        if left <= right: ret.append((left, right))  # add intersection
+        if firstList[i][1] < secondList[j][1]: i += 1  # move short end
+        else: j += 1
+    return ret
 
 # LC252. Meeting Rooms
 def canAttendMeetings(self, intervals: List[List[int]]) -> bool:
@@ -27,6 +52,16 @@ def minMeetingRooms(self, intervals: List[List[int]]) -> int:
             heapq.heappop(rooms) # remove and replace with current end time
         heapq.heappush(rooms, intv[1])  # we sort heap by end time
     return len(rooms)
+
+# LC1288. Remove Covered Intervals
+def removeCoveredIntervals(self, intervals: List[List[int]]) -> int:
+    intervals.sort(key = lambda x: (x[0], -x[1]))
+    count = prev_end = 0
+    for _, end in intervals:
+        if end > prev_end:  # if current interval is not covered by the previous one
+            count += 1
+            prev_end = end
+    return count
 
 # LC370. Range Addition
 def getModifiedArray(self, length: int, updates: List[List[int]]) -> List[int]:
@@ -59,17 +94,7 @@ def minTransfers(self, transactions: List[List[int]]) -> int:  # O(2^N)
         balances[v] -= z
     return dfs(tuplify({k: v for k, v in balances.items() if v}))
 
-# LC986. Interval List Intersections - of 2 lists of intervals
-def intervalIntersection(self, firstList: List[List[int]], secondList: List[List[int]]) -> List[List[int]]:
-    ret = []  # O(m + n)
-    i = j = 0
-    while i < len(firstList) and j < len(secondList):
-        left = max(firstList[i][0], secondList[j][0])
-        right = min(firstList[i][1], secondList[j][1])
-        if left <= right: ret.append((left, right))  # add intersection
-        if firstList[i][1] < secondList[j][1]: i += 1  # move short end
-        else: j += 1
-    return ret
+
 
 # LC759. Employee Free Time
 class Interval:
@@ -87,18 +112,6 @@ def employeeFreeTime(self, schedule: '[[Interval]]') -> '[Interval]':  # O(nlogm
         prev = max(prev, a.end)
     return ans
 
-# LC636. Exclusive Time of Functions, jobs, process time, cpu single thread
-def exclusiveTime(self, n, logs):  # O(n) runtime and space
-    res, stack = [0] * n, []
-    for log in logs:
-        log = log.split(":")
-        if log[1] == "start": stack.append([int(log[2]), 0])  # 0 means no time spent on this yet.
-        else:  # end
-            start = stack.pop()
-            time = int(log[2]) - start[0] + 1  # time spent on this pid
-            res[int(log[0])] += time - start[1]  # add exclusive time, no child time.
-            if stack: stack[-1][1] += time  # update parent time
-    return res
 
 
 
@@ -114,15 +127,7 @@ def scheduleCourse(self, A: List[List[int]]) -> int:  # nlogn
             start += heapq.heappop(pq)
     return len(pq)
 
-# LC1288. Remove Covered Intervals
-def removeCoveredIntervals(self, intervals: List[List[int]]) -> int:
-    intervals.sort(key = lambda x: (x[0], -x[1]))
-    count = prev_end = 0
-    for _, end in intervals:
-        if end > prev_end:  # if current interval is not covered by the previous one
-            count += 1
-            prev_end = end
-    return count
+
 
 
 
@@ -248,7 +253,7 @@ class RangeModule:
         if mkey < left: self.starts[mkey] = left
         if mval > right: self.starts[right] = mval
 
-# LC57. Insert Interval
+# LC57. Insert Interval - nonoverlapping insert, interval insert
 def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
     s, e = newInterval[0], newInterval[1]  # O(n)
     left = [i for i in intervals if i[1] < s]

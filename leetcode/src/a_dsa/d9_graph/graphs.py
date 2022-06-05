@@ -1,6 +1,57 @@
 from typing import List
 from collections import defaultdict
 
+# LC133. Clone Graph
+def cloneGraph(self, node: 'Node') -> 'Node':  # O(V + E) runtime, O(V) space
+    if not node: return None
+    exist2new = {} # v is unique, new node references
+    def dfs(node):
+        if node in exist2new: return exist2new[node]
+        nn = Node(node.val)
+        exist2new[node] = nn
+        for ne in node.neighbors:
+            nn.neighbors.append(dfs(ne))
+        return nn
+    nr = dfs(node)
+    return nr
+
+# LC2076. Process Restricted Friend Requests
+def friendRequests(self, n: int, restrictions: List[List[int]], requests: List[List[int]]) -> List[bool]:
+    parents, ranks = [i for i in range(n)], [1] * n  ## much faster (N + Mlog*N)
+    forbidden = collections.defaultdict(set)
+    for i, j in restrictions:
+        forbidden[i].add(j)
+        forbidden[j].add(i)
+
+    def find(i):
+        if i != parents[i]: parents[i] = find(parents[i])
+        return parents[i]
+
+    def union(p1, p2):
+        if ranks[p1] >= ranks[p2]:
+            parents[p2] = p1
+            ranks[p1] += ranks[p2]
+        else:
+            parents[p1] = p2
+            ranks[p2] += ranks[p1]
+            p1, p2 = p2, p1
+
+        forbidden[p1] |= forbidden[p2]
+        for i in forbidden[p2]:
+            forbidden[i].remove(p2)
+            forbidden[i].add(p1)
+        del forbidden[p2]
+
+    ans = []
+    for i, j in requests:  # m requests on n object, takes O(N + Mlog*N), log* is almost constant
+        p1, p2 = find(i), find(j)
+        if p1 == p2: ans.append(True)
+        elif p2 in forbidden[p1]: ans.append(False)
+        else:
+            union(p1, p2)
+            ans.append(True)
+    return ans
+
 # LC399. Evaluate Division
 def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
     graph = defaultdict(dict)  # O(mn)
@@ -59,21 +110,10 @@ class UnionFind:  ## M union and find operations on N objects takes O(N + M lg* 
             self.value[pu] = w * vv / vu
             self.rank[pv] += self.rank[pu]
 
+
+
 # LC1579. Remove Max Number of Edges to Keep Graph Fully Traversable
 
-# LC133. Clone Graph
-def cloneGraph(self, node: 'Node') -> 'Node':  # O(V + E) runtime, O(V) space
-    if not node: return None
-    exist2new = {} # v is unique, new node references
-    def dfs(node):
-        if node in exist2new: return exist2new[node]
-        nn = Node(node.val)
-        exist2new[node] = nn
-        for ne in node.neighbors:
-            nn.neighbors.append(dfs(ne))
-        return nn
-    nr = dfs(node)
-    return nr
 
 # LC785. Is Graph Bipartite?
 def isBipartite(self, graph: List[List[int]]) -> bool:  # O(V + E)
@@ -91,44 +131,6 @@ def isBipartite(self, graph: List[List[int]]) -> bool:  # O(V + E)
                 # if child and parent have same color,
                 elif color[nei] == color[node]: return False
     return True
-
-# LC2076. Process Restricted Friend Requests
-def friendRequests(self, n: int, restrictions: List[List[int]], requests: List[List[int]]) -> List[bool]:
-    parents, ranks = [i for i in range(n)], [1] * n  # much faster
-    forbidden = collections.defaultdict(set)
-    for i, j in restrictions:
-        forbidden[i].add(j)
-        forbidden[j].add(i)
-
-    def find(i):
-        if i != parents[i]: parents[i] = find(parents[i])
-        return parents[i]
-
-    def union(p1, p2):
-        if ranks[p1] >= ranks[p2]:
-            parents[p2] = p1
-            ranks[p1] += ranks[p2]
-        else:
-            parents[p1] = p2
-            ranks[p2] += ranks[p1]
-            p1, p2 = p2, p1
-
-        forbidden[p1] |= forbidden[p2]
-        for i in forbidden[p2]:
-            forbidden[i].remove(p2)
-            forbidden[i].add(p1)
-        del forbidden[p2]
-
-    ans = []
-    for i, j in requests:  # m requests on n object, takes O(N + Mlog*N), log* is almost constant
-        p1, p2 = find(i), find(j)
-        if p1 == p2: ans.append(True)
-        elif p2 in forbidden[p1]: ans.append(False)
-        else:
-            union(p1, p2)
-            ans.append(True)
-    return ans
-
 
 # LC323. Number of Connected Components in an Undirected Graph
 def countComponents(self, n, edges):

@@ -1,3 +1,98 @@
+# LC1091. Shortest Path in Binary Matrix - 01 matrix
+def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:  # O(n) runtime and space
+    if not grid or grid[0][0] != 0: return -1
+    n, que, visited = len(grid), deque([(0, 0, 1)]), set()  # x, y, steps
+    while que:  # BFS
+        i, j, steps = que.popleft()
+        if i == n-1 and j == n-1: return steps
+        if (i, j) in visited: continue
+        visited.add((i, j))
+        for x, y in (-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1):
+            ni, nj = i + x, j + y
+            if 0 <= ni < n and 0 <= nj < n and grid[ni][nj] == 0 and (ni, nj) not in visited:
+                que.append((ni, nj, steps+1))
+    return -1
+
+# LC317. Shortest Distance from All Buildings
+def shortestDistance(self, grid):
+    if not grid or not grid[0]: return -1  # O(n^2 * m^2)
+    n, m = len(grid), len(grid[0])
+    # 0 for distance, 1 for counts/buildings
+    matrix = [[[0, 0] for _ in range(m)] for _ in range(n)]
+    def bfs(start, blds):
+        q = [(start, 0)]  # 0 is the distance.
+        while q:  # BFS for distance
+            po, distance = q.pop(0)
+            for dp in (-1, 0), (1, 0), (0, 1), (0, -1):
+                i, j = po[0] + dp[0], po[1] + dp[1]
+                if 0 <= i <n and 0 <= j < m and matrix[i][j][1] == blds:
+                    if grid[i][j] == 0:
+                        matrix[i][j][0] += distance + 1
+                        matrix[i][j][1] = blds + 1  # reachable to all blds
+                        q.append(([i, j], distance+1))
+    blds = 0  # count how many building we have visited
+    for i, j in product(range(n), range(m)):  # O(mn)
+        if grid[i][j] == 1:  # loop through buildings
+            bfs([i, j], blds)
+            blds += 1
+    res = float('inf')
+    for i, j in product(range(len(matrix)), range(len(matrix[0]))):
+        if matrix[i][j][1] == blds: res = min(res, matrix[i][j][0])
+    return res if res != float('inf') else -1
+
+# LC778. Swim in Rising Water
+def swimInWater(self, grid: List[List[int]]) -> int:  # O(N^2log(N^2)) time, O(N^2) space
+    N = len(grid)
+    pq, seen = [(grid[0][0], 0, 0)], {(0, 0)}
+    ans = 0
+    while pq: # DFS, O(N^2)
+        d, r, c = heapq.heappop(pq)
+        ans = max(ans, d)
+        if r == c == N-1: return ans
+        for cr, cc in (r-1, c), (r+1, c), (r, c-1), (r, c+1):
+            if N > cr >= 0 <= cc < N and (cr, cc) not in seen:
+                heapq.heappush(pq, (grid[cr][cc], cr, cc))  # log
+                seen.add((cr, cc))
+
+# LC286. Walls and Gates - distance from gates
+def wallsAndGates(self, rooms: List[List[int]]) -> None:  # O(mn)
+    WALL, GATE, EMPTY = -1, 0, 2147483647  # given
+    q = [(i, j) for i, row in enumerate(rooms) for j, r in enumerate(row) if r == GATE]  # all gates
+    for i, j in q:
+        for I, J in (i+1, j), (i-1, j), (i, j+1), (i, j-1):
+            if 0 <= I < len(rooms) and 0 <= J < len(rooms[0]) and rooms[I][J] == EMPTY:
+                rooms[I][J] = rooms[i][j] + 1
+                q.append((I, J))
+
+# LC1559. Detect Cycles in 2D Grid
+def containsCycle(self, grid: List[List[str]]) -> bool:  # O(mn)
+    m, n = len(grid), len(grid[0])
+    visited = set()
+    def dfs(node, parent):
+        if node in visited: return True
+        visited.add(node)
+        nx,ny = node
+        for cx, cy in [nx+1,ny], [nx-1, ny],[nx,ny+1], [nx,ny-1]:
+            if m > cx >= 0 <= cy < n and grid[cx][cy] == grid[nx][ny] and (cx,cy) != parent:
+                if dfs((cx, cy), node): return True
+        return False
+    return any((i,j) not in visited and dfs((i, j), (i, j)) for i, j in product(range(m), range(n)))
+
+# LC1102. Path With Maximum Minimum Value - minmax search
+def maximumMinimumPath(self, A: List[List[int]]) -> int:  # Time: O(MN log MN), space O(MN)
+    R, C = len(A), len(A[0])  # Dijkstra
+    maxHeap = [(-A[0][0], 0, 0)]
+    seen = [[0 for _ in range(C)] for _ in range(R)]
+    seen[0][0] = 1
+    while maxHeap:  # some low level point touched but not expanded
+        val, x, y = heapq.heappop(maxHeap)
+        if x == R - 1 and y == C - 1:  return -val
+        for dx, dy in (0, 1), (1, 0), (0, -1), (-1, 0):
+            nx, ny = x + dx, y + dy
+            if 0 <= nx < R and 0 <= ny < C and not seen[nx][ny]:
+                seen[nx][ny] = 1
+                heapq.heappush(maxHeap, (max(val, -A[nx][ny]), nx, ny))
+    return -1
 
 # LC1263. Minimum Moves to Move a Box to Their Target Location - move box
 def minPushBox(self, grid: List[List[str]]) -> int:  # faster BFS, O((mn)^2)
@@ -31,20 +126,7 @@ def minPushBox(self, grid: List[List[str]]) -> int:  # faster BFS, O((mn)^2)
                     q.append((pushes + 1,new_box,box))
     return -1
 
-# LC1091. Shortest Path in Binary Matrix - 01 matrix
-def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:  # O(n) runtime and space
-    if not grid or grid[0][0] != 0: return -1
-    n, que, visited = len(grid), deque([(0, 0, 1)]), set()  # x, y, steps
-    while que:  # BFS
-        i, j, steps = que.popleft()
-        if i == n-1 and j == n-1: return steps
-        if (i, j) in visited: continue
-        visited.add((i, j))
-        for x, y in (-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1):
-            ni, nj = i + x, j + y
-            if 0 <= ni < n and 0 <= nj < n and grid[ni][nj] == 0 and (ni, nj) not in visited:
-                que.append((ni, nj, steps+1))
-    return -1
+
 
 # LC329. Longest Increasing Path in a Matrix
 import functools # 100%
@@ -60,62 +142,10 @@ def longestIncreasingPath(self, matrix):
         return ret + 1  # add this cell
     return max(dfs(x, y) for x in range(M) for y in range(N))
 
-# LC317. Shortest Distance from All Buildings
-def shortestDistance(self, grid):
-    if not grid or not grid[0]: return -1  # O(n^2 * m^2)
-    n, m = len(grid), len(grid[0])
-    # 0 for distance, 1 for counts/buildings
-    matrix = [[[0, 0] for _ in range(m)] for _ in range(n)]
-    def bfs(start, blds):
-        q = [(start, 0)]  # 0 is the distance.
-        while q:  # BFS for distance
-            po, distance = q.pop(0)
-            for dp in (-1, 0), (1, 0), (0, 1), (0, -1):
-                i, j = po[0] + dp[0], po[1] + dp[1]
-                if 0 <= i <n and 0 <= j < m and matrix[i][j][1] == blds:
-                    if grid[i][j] == 0:
-                        matrix[i][j][0] += distance + 1
-                        matrix[i][j][1] = blds + 1  # reachable to all blds
-                        q.append(([i, j], distance+1))
-    blds = 0  # count how many building we have visited
-    for i, j in product(range(n), range(m)):  # O(mn)
-        if grid[i][j] == 1:  # loop through buildings
-            bfs([i, j], blds)
-            blds += 1
-    res = float('inf')
-    for i, j in product(range(len(matrix)), range(len(matrix[0]))):
-        if matrix[i][j][1] == blds: res = min(res, matrix[i][j][0])
-    return res if res != float('inf') else -1
 
-# LC1102. Path With Maximum Minimum Value - minmax search
-def maximumMinimumPath(self, A: List[List[int]]) -> int:  # Time: O(MN log MN), space O(MN)
-    R, C = len(A), len(A[0])  # Dijkstra
-    maxHeap = [(-A[0][0], 0, 0)]
-    seen = [[0 for _ in range(C)] for _ in range(R)]
-    seen[0][0] = 1
-    while maxHeap:  # some low level point touched but not expanded
-        val, x, y = heapq.heappop(maxHeap)
-        if x == R - 1 and y == C - 1:  return -val
-        for dx, dy in (0, 1), (1, 0), (0, -1), (-1, 0):
-            nx, ny = x + dx, y + dy
-            if 0 <= nx < R and 0 <= ny < C and not seen[nx][ny]:
-                seen[nx][ny] = 1
-                heapq.heappush(maxHeap, (max(val, -A[nx][ny]), nx, ny))
-    return -1
 
-# LC1559. Detect Cycles in 2D Grid
-def containsCycle(self, grid: List[List[str]]) -> bool:  # O(mn)
-    m, n = len(grid), len(grid[0])
-    visited = set()
-    def dfs(node, parent):
-        if node in visited: return True
-        visited.add(node)
-        nx,ny = node
-        for cx, cy in [nx+1,ny], [nx-1, ny],[nx,ny+1], [nx,ny-1]:
-            if m > cx >= 0 <= cy < n and grid[cx][cy] == grid[nx][ny] and (cx,cy) != parent:
-                if dfs((cx, cy), node): return True
-        return False
-    return any((i,j) not in visited and dfs((i, j), (i, j)) for i, j in product(range(m), range(n)))
+
+
 
 # LC296. Best Meeting Point
 def minTotalDistance(self, grid: List[List[int]]) -> int:  # O(mn)
@@ -136,29 +166,9 @@ def minTotalDistance(self, grid: List[List[int]]) -> int:  # O(mn)
         return sumd
     return min_dist(rows) + min_dist(cols)  # Manhattan distance
 
-# LC778. Swim in Rising Water
-def swimInWater(self, grid: List[List[int]]) -> int:  # O(N^2log(N^2)) time, O(N^2) space
-    N = len(grid)
-    pq, seen = [(grid[0][0], 0, 0)], {(0, 0)}
-    ans = 0
-    while pq: # DFS, O(N^2)
-        d, r, c = heapq.heappop(pq)
-        ans = max(ans, d)
-        if r == c == N-1: return ans
-        for cr, cc in (r-1, c), (r+1, c), (r, c-1), (r, c+1):
-            if N > cr >= 0 <= cc < N and (cr, cc) not in seen:
-                heapq.heappush(pq, (grid[cr][cc], cr, cc))  # log
-                seen.add((cr, cc))
 
-# LC286. Walls and Gates - distance from gates
-def wallsAndGates(self, rooms: List[List[int]]) -> None:  # O(mn)
-    WALL, GATE, EMPTY = -1, 0, 2147483647  # given
-    q = [(i, j) for i, row in enumerate(rooms) for j, r in enumerate(row) if r == GATE]  # all gates
-    for i, j in q:
-        for I, J in (i+1, j), (i-1, j), (i, j+1), (i, j-1):
-            if 0 <= I < len(rooms) and 0 <= J < len(rooms[0]) and rooms[I][J] == EMPTY:
-                rooms[I][J] = rooms[i][j] + 1
-                q.append((I, J))
+
+
 
 # LC417. Pacific Atlantic Water Flow
 def pacificAtlantic(self, matrix: List[List[int]]) -> List[List[int]]:  # O(nm)
@@ -295,7 +305,7 @@ def cherryPickup(self, grid: List[List[int]]) -> int:
     return ret
 
 # LC490. The Maze - soccer ball
-def hasPath(self, maze: List[List[int]], start: List[int], destination: List[int]) -> bool:
+def hasPath(self, maze: List[List[int]], start: List[int], destination: List[int]) -> bool:  # O(mn)
     q, visited = deque([start]), set()  # BFS super
     while q:
         i, j = q.popleft()

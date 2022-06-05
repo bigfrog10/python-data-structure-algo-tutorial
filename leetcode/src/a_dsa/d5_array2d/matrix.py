@@ -1,5 +1,106 @@
 from typing import List
 import itertools
+
+# LC498. Diagonal Traverse
+def findDiagonalOrder(self, matrix):  # O(mn)
+    if not matrix: return []
+    m, n = len(matrix), len(matrix[0])
+    ret = []
+    row = col = 0
+    for _ in range(m * n):
+        ret.append(matrix[row][col])
+        if (row + col) % 2 == 0:  # start from row, move up
+            if col == n - 1: row += 1  # hit right, move down
+            elif row == 0: col += 1  # hit top, move right
+            else:  # the order of if-else check is significant
+                row -= 1
+                col += 1
+        else:  # start from col, move down
+            if row == m - 1: col += 1  # hit bottom, move right
+            elif col == 0: row += 1  # hit left, move down
+            else:
+                row += 1
+                col -= 1
+    return ret
+
+# LC1428. Leftmost Column with at Least a One - sorted 01 matrix
+def leftMostColumnWithOne(self, binaryMatrix: 'BinaryMatrix') -> int:  # O(n + m), diagonal
+    rows, cols = binaryMatrix.dimensions()
+    row, col = 0, cols - 1  # upper right corner
+    while row < rows and col >= 0:
+        if binaryMatrix.get(row, col) == 0: row += 1  # move down
+        else: col -= 1  # move left
+    # If we never left the last column, it must have been all 0's.
+    return col + 1 if col != cols - 1 else -1
+
+# LC766. Toeplitz Matrix
+def isToeplitzMatrix(self, matrix):  # O(mn) runtime, O(1) space, has follow ups
+    return all(r == 0 or c == 0 or matrix[r-1][c-1] == val
+               for r, row in enumerate(matrix)
+               for c, val in enumerate(row))
+def isToeplitzMatrix(self, m):
+    return all(r1[:-1] == r2[1:] for r1,r2 in zip(m, m[1:]))
+
+# LC1424. Diagonal Traverse II
+def findDiagonalOrder(self, A):
+    res = defaultdict(list)
+    for i, r in enumerate(A):
+        for j, a in enumerate(r): res[i + j].append(a)
+    return [a for _, r in res.items() for a in reversed(r)]
+
+# LC311. Sparse Matrix Multiplication
+def multiply(self, A: List[List[int]], B: List[List[int]]) -> List[List[int]]:
+    if not A or not A[0] or not B or not B[0]: return [[]]
+    def get_none_zero(A):
+        n, m, res = len(A), len(A[0]), []
+        for i, j in itertools.product(range(n), range(m)):
+            if A[i][j] != 0: res.append((i, j, A[i][j]))  # we should model sparse matrix like this
+        return res  # this list should use smaller space than the matrix
+    sparse_A, sparse_B = get_none_zero(A), get_none_zero(B)
+    n, m, k = len(A), len(A[0]), len(B[0])
+    C = [[0] * k for _ in range(n)]
+    for i, j, val_A in sparse_A:
+        for x, y, val_B in sparse_B:
+            if j == x: C[i][y] += val_A * val_B
+    return C
+
+# LC378. Kth Smallest Element in a Sorted Matrix
+def kthSmallest(self, matrix: List[List[int]], k: int) -> int:  # O(klogk) time and O(k) space
+    m, n = len(matrix), len(matrix[0])  # For general, the matrix need not be a square
+    minHeap = []  # val, r, c
+    for r in range(min(k, m)): heappush(minHeap, (matrix[r][0], r, 0))
+    ans = -1  # any dummy value
+    for i in range(k):
+        ans, r, c = heappop(minHeap)
+        if c+1 < n: heappush(minHeap, (matrix[r][c + 1], r, c + 1))
+    return ans
+def kthSmallest(self, matrix, k):
+    m, n = len(matrix), len(matrix[0])  # For general, the matrix need not be a square
+    def countLessOrEqual(x):
+        cnt = 0
+        c = n - 1  # start with the rightmost column
+        for r in range(m):
+            while c >= 0 and matrix[r][c] > x: c -= 1  # decrease column until matrix[r][c] <= x
+            cnt += (c + 1)
+        return cnt
+    left, right = matrix[0][0], matrix[-1][-1]
+    ans = -1
+    while left <= right:
+        mid = (left + right) // 2
+        if countLessOrEqual(mid) >= k:
+            ans = mid
+            right = mid - 1  # try to looking for a smaller value in the left side
+        else:
+            left = mid + 1  # try to looking for a bigger value in the right side
+    return ans
+
+# LC2033. Minimum Operations to Make a Uni-Value Grid - uni value, univalue
+def minOperations(self, grid: List[List[int]], x: int) -> int:
+    vals = list(itertools.chain(*grid))  # flatting matrix to array - [[2,4],[6,8]] ->  [2,4,6,8]
+    if len(set(val % x for val in vals)) > 1: return -1  # if we have 2 diff residues, can't do it.
+    median = heapq.nlargest((len(vals)+1) // 2, vals)[-1]  # O(N) possible via "quick select", return 6 for 8, 6
+    return sum(abs(val - median)//x for val in vals)
+
 # LC1861. Rotating the Box - stones, obstacles
 def rotateTheBox(self, box: List[List[str]]) -> List[List[str]]:
     for row in box:
@@ -11,16 +112,6 @@ def rotateTheBox(self, box: List[List[str]]) -> List[List[str]]:
                 row[bottom], row[j] = row[j], row[bottom]
                 bottom -= 1
     return zip(*box[::-1])               # rotate array, or list(...)
-
-# LC1428. Leftmost Column with at Least a One - sorted 01 matrix
-def leftMostColumnWithOne(self, binaryMatrix: 'BinaryMatrix') -> int:  # O(n + m), diagonal
-    rows, cols = binaryMatrix.dimensions()
-    row, col = 0, cols - 1  # upper right corner
-    while row < rows and col >= 0:
-        if binaryMatrix.get(row, col) == 0: row += 1  # move down
-        else: col -= 1  # move left
-    # If we never left the last column, it must have been all 0's.
-    return col + 1 if col != cols - 1 else -1
 
 # LC1878. Get Biggest Three Rhombus Sums in a Grid
 def getBiggestThree(self, grid):  # O(C), C number of cells
@@ -77,44 +168,7 @@ def orderOfLargestPlusSign(self, N: int, mines: List[List[int]]) -> int:  # O(N^
             if res < grid[i][j]: res = grid[i][j]
     return res
 
-# LC498. Diagonal Traverse
-def findDiagonalOrder(self, matrix):  # O(mn)
-    if not matrix: return []
-    m, n = len(matrix), len(matrix[0])
-    ret = []
-    row = col = 0
-    for _ in range(m * n):
-        ret.append(matrix[row][col])
-        if (row + col) % 2 == 0:  # start from row, move up
-            if col == n - 1: row += 1  # hit right, move down
-            elif row == 0: col += 1  # hit top, move right
-            else:  # the order of if-else check is significant
-                row -= 1
-                col += 1
-        else:  # start from col, move down
-            if row == m - 1: col += 1  # hit bottom, move right
-            elif col == 0: row += 1  # hit left, move down
-            else:
-                row += 1
-                col -= 1
-    return ret
-
-# LC1424. Diagonal Traverse II
-def findDiagonalOrder(self, A):
-    res = defaultdict(list)
-    for i, r in enumerate(A):
-        for j, a in enumerate(r): res[i + j].append(a)
-    return [a for _, r in res.items() for a in reversed(r)]
-
-# LC766. Toeplitz Matrix
-def isToeplitzMatrix(self, matrix):  # O(mn) runtime, O(1) space, has follow ups
-    return all(r == 0 or c == 0 or matrix[r-1][c-1] == val
-               for r, row in enumerate(matrix)
-               for c, val in enumerate(row))
-def isToeplitzMatrix(self, m):
-    return all(r1[:-1] == r2[1:] for r1,r2 in zip(m, m[1:]))
-
-# LC74. Search a 2D Matrix - matrix binary search elem in matrix
+# LC74. Search a 2D Matrix - matrix binary search elem in matrix, matrix bs
 def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:  # O(log(mn))
     if not matrix: return False
     m, n = len(matrix), len(matrix[0])
@@ -180,35 +234,7 @@ def numSubmatrixSumTarget(self, A, target):
                 c[cur] += 1
     return res
 
-# LC378. Kth Smallest Element in a Sorted Matrix
-def kthSmallest(self, matrix: List[List[int]], k: int) -> int:  # O(klogk) time and O(k) space
-    m, n = len(matrix), len(matrix[0])  # For general, the matrix need not be a square
-    minHeap = []  # val, r, c
-    for r in range(min(k, m)): heappush(minHeap, (matrix[r][0], r, 0))
-    ans = -1  # any dummy value
-    for i in range(k):
-        ans, r, c = heappop(minHeap)
-        if c+1 < n: heappush(minHeap, (matrix[r][c + 1], r, c + 1))
-    return ans
-def kthSmallest(self, matrix, k):
-    m, n = len(matrix), len(matrix[0])  # For general, the matrix need not be a square
-    def countLessOrEqual(x):
-        cnt = 0
-        c = n - 1  # start with the rightmost column
-        for r in range(m):
-            while c >= 0 and matrix[r][c] > x: c -= 1  # decrease column until matrix[r][c] <= x
-            cnt += (c + 1)
-        return cnt
-    left, right = matrix[0][0], matrix[-1][-1]
-    ans = -1
-    while left <= right:
-        mid = (left + right) // 2
-        if countLessOrEqual(mid) >= k:
-            ans = mid
-            right = mid - 1  # try to looking for a smaller value in the left side
-        else:
-            left = mid + 1  # try to looking for a bigger value in the right side
-    return ans
+
 
 # LC542. 01 Matrix - distance to 0
 def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:  # O(rc)
@@ -230,28 +256,8 @@ def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:  # O(rc)
 
     return mat
 
-# LC311. Sparse Matrix Multiplication
-def multiply(self, A: List[List[int]], B: List[List[int]]) -> List[List[int]]:
-    if not A or not A[0] or not B or not B[0]: return [[]]
-    def get_none_zero(A):
-        n, m, res = len(A), len(A[0]), []
-        for i, j in itertools.product(range(n), range(m)):
-            if A[i][j] != 0: res.append((i, j, A[i][j]))  # we should model sparse matrix like this
-        return res  # this list should use smaller space than the matrix
-    sparse_A, sparse_B = get_none_zero(A), get_none_zero(B)
-    n, m, k = len(A), len(A[0]), len(B[0])
-    C = [[0] * k for _ in range(n)]
-    for i, j, val_A in sparse_A:
-        for x, y, val_B in sparse_B:
-            if j == x: C[i][y] += val_A * val_B
-    return C
 
-# LC2033. Minimum Operations to Make a Uni-Value Grid - uni value, univalue
-def minOperations(self, grid: List[List[int]], x: int) -> int:
-    vals = list(itertools.chain(*grid))  # flatting matrix to array - [[2,4],[6,8]] ->  [2,4,6,8]
-    if len(set(val % x for val in vals)) > 1: return -1  # if we have 2 diff residues, can't do it.
-    median = heapq.nlargest((len(vals)+1) // 2, vals)[-1]  # O(N) possible via "quick select"
-    return sum(abs(val - median)//x for val in vals)
+
 
 # LC73. Set Matrix Zeroes
 def setZeroes(self, matrix):

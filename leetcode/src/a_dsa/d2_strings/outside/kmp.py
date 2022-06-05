@@ -3,6 +3,7 @@
 # Good example: https://web.stanford.edu/class/cs97si/10-string-algorithms.pdf
 # This has a lot of other algorithms.
 # https://www.youtube.com/watch?v=EL4ZbRF587g
+# https://www.toutiao.com/article/7100531067098153502/
 
 def kmp_pi(s: str):
     # return the length of the longest *proper* prefix of s which is also a suffix.

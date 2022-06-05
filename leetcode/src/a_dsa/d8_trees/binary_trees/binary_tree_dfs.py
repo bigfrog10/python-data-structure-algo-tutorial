@@ -1,20 +1,4 @@
 
-# LC655. Print Binary Tree - O(n)
-def printTree(self, root: TreeNode) -> List[List[str]]:
-    def get_height(node):
-        return 0 if not node else 1 + max(get_height(node.left), get_height(node.right))
-    def update_output(node, row, left, right):
-        if not node: return
-        mid = (left + right) // 2
-        self.output[row][mid] = str(node.val)
-        update_output(node.left, row + 1 , left, mid - 1)
-        update_output(node.right, row + 1 , mid + 1, right)
-    height = get_height(root)
-    width = 2 ** height - 1
-    self.output = [[''] * width for i in range(height)]
-    update_output(node=root, row=0, left=0, right=width - 1)
-    return self.output
-
 # LC543. Diameter of Binary Tree - binary tree diameter
 def diameterOfBinaryTree(self, root: TreeNode) -> int:
     diameter = 0
@@ -42,7 +26,39 @@ def equalToDescendants(self, root: Optional[TreeNode]) -> int:
     traverse(root)
     return output
 
-# LC101. Symmetric Tree
+# LC1740. Find Distance in a Binary Tree - distance in binary tree
+def findDistance(self, root: TreeNode, p: int, q: int) -> int:
+    ans = 0
+    def fn(node):  # Traverse the tree post-order.
+        nonlocal ans
+        if not node: return False, -inf
+        ltf, lv = fn(node.left)
+        rtf, rv = fn(node.right)
+        if node.val in (p, q) or ltf and rtf:
+            if ltf: ans += lv + 1
+            if rtf: ans += rv + 1
+            return True, 0
+        return ltf or rtf, max(lv, rv) + 1
+    fn(root)
+    return ans
+
+# LC655. Print Binary Tree - O(n)
+def printTree(self, root: TreeNode) -> List[List[str]]:
+    def get_height(node):
+        return 0 if not node else 1 + max(get_height(node.left), get_height(node.right))
+    def update_output(node, row, left, right):
+        if not node: return
+        mid = (left + right) // 2
+        self.output[row][mid] = str(node.val)
+        update_output(node.left, row + 1 , left, mid - 1)
+        update_output(node.right, row + 1 , mid + 1, right)
+    height = get_height(root)
+    width = 2 ** height - 1
+    self.output = [[''] * width for i in range(height)]
+    update_output(node=root, row=0, left=0, right=width - 1)
+    return self.output
+
+# LC101. Symmetric Tree - mirror tree, tree mirror
 def isSymmetric(self, root: TreeNode) -> bool:
     def is_mirror(n1, n2):  # return if mirrored
         if n1 is None and n2 is None: return True
@@ -88,21 +104,7 @@ def binaryTreePaths(self, root: TreeNode) -> List[str]:
     dfs(root, '')
     return ret
 
-# LC1740. Find Distance in a Binary Tree - distance in binary tree
-def findDistance(self, root: TreeNode, p: int, q: int) -> int:
-    ans = 0
-    def fn(node):  # Traverse the tree post-order.
-        nonlocal ans
-        if not node: return False, -inf
-        ltf, lv = fn(node.left)
-        rtf, rv = fn(node.right)
-        if node.val in (p, q) or ltf and rtf:
-            if ltf: ans += lv + 1
-            if rtf: ans += rv + 1
-            return True, 0
-        return ltf or rtf, max(lv, rv) + 1
-    fn(root)
-    return ans
+
 
 # LC104. Maximum Depth of Binary Tree
 def maxDepth(self, root: TreeNode) -> int:
@@ -117,8 +119,6 @@ def maxDepth(self, root):
             stack.append((current_depth + 1, root.left))
             stack.append((current_depth + 1, root.right))
     return depth
-
-
 
 # LC250. Count Univalue Subtrees
 def countUnivalSubtrees(self, root: TreeNode) -> int:

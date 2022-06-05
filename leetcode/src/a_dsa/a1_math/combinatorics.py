@@ -17,14 +17,14 @@ def nextPermutation(self, nums: List[int]) -> None:  # O(n)
 
 # LC1053. Previous Permutation With One Swap
 def prevPermOpt1(self, arr: List[int]) -> List[int]:
-    n = len(arr)
-    idx = n-2  # looking for the first peak index inside from right
-    while idx >= 0 and arr[idx] <= arr[idx+1]: idx -= 1
+    n = len(arr)  # [1,9,4,6,7]
+    idx = n-2  # looking for the first rise index inside from right
+    while idx >= 0 and arr[idx] <= arr[idx+1]: idx -= 1  # idx = 1 for 9 > 4
     if idx >= 0:  # Otherwise, we have increasing series, just return
         midx = idx + 1  # now find max < arr[idx], swap with that
-        for i in range(midx+1, n):  # max != arr[idx], otherwise no change in swap
+        for i in range(midx, n):  # max != arr[idx], otherwise no change in swap
             if arr[idx] > arr[i]:
-                if arr[i] > arr[midx]: midx = i
+                if arr[i] > arr[midx]: midx = i  # midx=4 for 9 is max so hit end
             else: break
         arr[idx], arr[midx] = arr[midx], arr[idx]
     return arr

@@ -87,7 +87,7 @@ def isValid(self, s: str) -> bool:
             else: return False # no suppose to have other chars
     return len(stack) == 0
 
-# LC1963. Minimum Number of Swaps to Make the String Balanced - parenthesis
+# LC1963. Minimum Number of Swaps to Make the String Balanced - parenthesis '[] balance'
 def minSwaps(self, s: str) -> int:
     balance = max_bal = 0
     for c in s:
@@ -150,11 +150,11 @@ def longestValidParentheses(self, s: str) -> int:  # O(n) time and O(1) space
         elif left >= right: left = right = 0
     return maxl
 
-# LC678. Valid Parenthesis String - with *
+# LC678. Valid Parenthesis String - paretnh with *, par with *, par *
 def checkValidString(self, s):  # greedy
     cmin = cmax = 0  # smallest and largest possible number of (, or how many ) expected
     for i in s:
         cmax += - 1 if i == ")" else cmax + 1  # treat * as (
-        cmin = cmin + 1 if i == '(' else max(cmin - 1, 0)
+        cmin = cmin + 1 if i == '(' else max(cmin - 1, 0)  # treat * as )
         if cmax < 0: return False  # too many (
     return cmin == 0
