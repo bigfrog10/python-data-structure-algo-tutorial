@@ -1,4 +1,23 @@
 
+# LC895. Maximum Frequency Stack - max freq stack  mfs
+class FreqStack(object): # This is O(1) operations
+    def __init__(self):
+        self.maxf = 0 # This is the trick to keep O(1)
+        self.v2f = collections.defaultdict(int)
+        self.f2v = collections.defaultdict(list)
+    def push(self, x):
+        # we don't delete x from current freq, this maintains the stack order.
+        f = self.v2f[x] + 1
+        self.v2f[x] = f
+        self.f2v[f].append(x)
+        self.maxf = max(self.maxf, f)
+    def pop(self):
+        x = self.f2v[self.maxf].pop()
+        if not self.f2v[self.maxf]:  #if that's the only max element in frequency decrease by 1
+            self.maxf -= 1 # this is true because of the line below, i.e., freq dec by 1
+        # we don't need to reinsert x with lower frequency, it's already there.
+        self.v2f[x] -= 1
+        return x
 # LC622. Design Circular Queue - RingBuffer
 class MyCircularQueue: # array based, O(1) for all ops
     def __init__(self, k: int):  # double linked list
@@ -128,24 +147,7 @@ class MaxStack:  # use a stack and sorted container: all ops are at most log(n)
             self.values.append((v, oldmax))
         return maxv
 
-# LC895. Maximum Frequency Stack
-class FreqStack(object): # This is O(1) operations
-    def __init__(self):
-        self.maxf = 0  # This is the trick to keep O(1)
-        self.v2f = collections.defaultdict(int)
-        self.f2v = collections.defaultdict(list)
-    def push(self, x):
-        # we don't delete x from current freq, this maintains the stack order.
-        self.v2f[x] += 1
-        self.f2v[self.v2f[x]].append(x)
-        self.maxf = max(self.maxf, self.v2f[x])
-    def pop(self):
-        x = self.f2v[self.maxf].pop()
-        if not self.f2v[self.maxf]:  #if that's the only max element in frequency decrease by 1
-            self.maxf -= 1 # this is true because of the line below, i.e., freq dec by 1
-        # we don't need to reinsert x with lower frequency, it's already there.
-        self.v2f[x] -= 1
-        return x
+
 
 # LC225. Implement Stack using Queues
 import collections

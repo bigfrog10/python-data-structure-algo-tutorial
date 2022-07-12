@@ -5,7 +5,7 @@ class LRUCache:
         self.values = collections.OrderedDict()
     def get(self, key: int) -> int:  # O(1)
         if key not in self.values: return -1
-        self.values.move_to_end(key)  # O(1)
+        self.values.move_to_end(key)  # O(1)  # last is new, first is old
         return self.values[key]
     def put(self, key: int, value: int) -> None:  # O(1)
         if key in self.values: self.values.move_to_end(key) # update

@@ -1,4 +1,22 @@
 
+# LC1302. Deepest Leaves Sum
+def deepestLeavesSum(self, root: Optional[TreeNode]) -> int:
+    q = [root]
+    while q:
+        pre, q = q, [child for p in q for child in [p.left, p.right] if child]
+    return sum(node.val for node in pre)
+
+# LC199. Binary Tree Right Side View
+def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+    if not root: return []  ## O(n) time and O(H) space
+    ret = []
+    def dfs(node, depth):
+        if depth == len(ret): ret.append(node.val)
+        for n in [node.right, node.left]:
+            if n: dfs(n, depth+1)
+    dfs(root, 0)
+    return ret
+
 # LC314. Binary Tree Vertical Order Traversal - Just column info - bt vertical
 def verticalOrder(self, root: TreeNode) -> List[List[int]]:  # O(n)
     if root is None: return []
@@ -13,16 +31,7 @@ def verticalOrder(self, root: TreeNode) -> List[List[int]]:  # O(n)
         max_column = max(max_column, column)
     return [columnTable[x] for x in range(min_column, max_column + 1)]
 
-# LC199. Binary Tree Right Side View
-def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
-    if not root: return []  ## O(n) time and O(H) space
-    ret = []
-    def dfs(node, depth):
-        if depth == len(ret): ret.append(node.val)
-        for n in [node.right, node.left]:
-            if n: dfs(n, depth+1)
-    dfs(root, 0)
-    return ret
+
 
 # LC662. Maximum Width of Binary Tree - row max width
 def widthOfBinaryTree(self, root: TreeNode) -> int:

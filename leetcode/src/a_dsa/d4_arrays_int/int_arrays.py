@@ -3,6 +3,96 @@ from collections import Counter
 import math
 import functools
 
+# LC349. Intersection of Two Arrays - return unique elems
+def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+    set1 = set(nums1)
+    set2 = set(nums2)
+    return list(set2 & set1)
+
+# LC275. H-Index II
+def hIndex(self, citations: List[int]) -> int:  # O(logn)
+    n = len(citations)
+    left, right = 0, n  # n-1 does not work for 1 element array
+    while left < right:  # sorted in asc, so we use n - i for larger citations
+        mid = left + (right - left) // 2
+        if citations[mid] < n - mid: left = mid + 1
+        else: right = mid
+    return n - left
+
+# LC2094. Finding 3-Digit Even Numbers - 3 digit even
+def findEvenNumbers(self, digits: List[int]) -> List[int]:
+    counts = collections.Counter(digits)
+    res = []
+    for i in range(100, 1000, 2):
+        checker = defaultdict(int)
+        d = i
+        while d > 0:
+            checker[d % 10] += 1
+            d = d // 10
+        if all(checker[x] <= counts[x] for x in checker.keys()):
+            res.append(i)
+    return res
+
+# LC697. Degree of an Array - array degree, max freq
+def findShortestSubArray(self, nums: List[int]) -> int:
+    dt = collections.defaultdict(list)
+    for i, v in enumerate(nums): dt[v].append(i)
+    degree = max(len(v) for v in dt.values())
+    return min(dt[k][-1] - dt[k][0] + 1 for k in dt if len(dt[k]) == degree)
+
+# LC1207. Unique Number of Occurrences
+def uniqueOccurrences(self, arr: List[int]) -> bool:
+    c = collections.Counter(arr)
+    return len(c) == len(set(c.values()))
+
+# LC455. Assign Cookies
+def findContentChildren(self, g: List[int], s: List[int]) -> int:  # O(NlogN+MlogM)
+    i, j, g, s = 0, 0, sorted(g), sorted(s)
+    while i < len(g) and j < len(s):
+        i += g[i] <= s[j]
+        j += 1
+    return i
+
+# LC238. Product of Array Except Self, top100
+def productExceptSelf(self, nums: List[int]) -> List[int]:  # O(n) time and O(1) space
+    length = len(nums)
+    ret = [0] * length
+    ret[0] = 1
+    for i in range(1, length): ret[i] = nums[i - 1] * ret[i - 1]
+    tmp = 1
+    for i in reversed(range(length)):
+        ret[i] = ret[i] * tmp
+        tmp *= nums[i]
+    return ret
+
+# LC849. Maximize Distance to Closest Person - max distance between seats
+def maxDistToClosest(self, seats: List[int]) -> int:
+    res, last, n = 0, -1, len(seats)
+    for i in range(n):
+        if seats[i]:
+            res = max(res, i if last < 0 else (i - last) // 2)
+            last = i
+    return max(res, n - last - 1)
+
+# LC179. Largest Number - after re-arrange array ints, re-arrange elem, array re-arrange
+def largestNumber(self, num):  # O(nlogn)
+    num = [str(x) for x in num]
+    cmp = lambda x, y: (x > y) - (x < y)  # standard comparator
+    custcmp = lambda a, b: cmp(b + a, a + b)  # specific to this problem
+    num.sort(key = functools.cmp_to_key(custcmp))
+    return ''.join(num).lstrip('0') or '0'
+
+# LC904. Fruit Into Baskets - Find out the longest length of subarrays with at most 2 different numbers
+# https://leetcode.com/problems/fruit-into-baskets/discuss/170745/Problem%3A-Longest-Subarray-With-2-Elements
+def totalFruit(self, fruits: List[int]) -> int:
+    res = cur = count_b = a = b = 0
+    for c in fruits:
+        cur = cur + 1 if c in (a, b) else count_b + 1
+        count_b = count_b + 1 if c == b else 1
+        if b != c: a, b = b, c
+        res = max(res, cur)
+    return res
+
 # LC755. Pour Water
 def pourWater(self, heights: List[int], volume: int, k: int) -> List[int]:  # O(n + V)
     N = len(heights)
@@ -16,6 +106,83 @@ def pourWater(self, heights: List[int], volume: int, k: int) -> List[int]:  # O(
             j -= 1
         heights[j] += 1
     return heights
+
+
+# LC532. K-diff Pairs in an Array - k diff pairs
+def findPairs(self, nums: List[int], k: int) -> int:  # O(n) time and space
+    result = 0
+    counter = Counter(nums)
+    for x in counter:
+        if k > 0 and x + k in counter: result += 1
+        elif k == 0 and counter[x] > 1: result += 1
+    return result
+
+# LC220. Contains Duplicate III
+def containsNearbyAlmostDuplicate(self, nums: List[int], k: int, t: int) -> bool:  # O(n) time and space
+    n = len(nums)
+    d = {}  # d is buckets
+    w = t + 1  # because the problem states at most t, so we have to use interval [0, t]
+    for i in range(n):
+        m = nums[i] // w
+        if m in d: return True
+        if m - 1 in d and abs(nums[i] - d[m - 1]) < w: return True
+        if m + 1 in d and abs(nums[i] - d[m + 1]) < w: return True
+        d[m] = nums[i]
+        if i >= k: del d[nums[i - k] // w]  # O(min(n, k)) space
+    return False
+
+# LC229. Majority Element II
+def majorityElement(self, nums: List[int]) -> List[int]:  # O(n) time and O(1) space
+    ctr = collections.Counter()
+    for n in nums:
+        ctr[n] += 1
+        if len(ctr) == 3:
+            ctr -= collections.Counter(set(ctr))
+    return [n for n in ctr if nums.count(n) > len(nums)/3]
+
+# LC322. Coin Change - least number of coins to sum up to target
+def coinChange(self, coins: List[int], amount: int) -> int:
+    if amount == 0:  return 0 # 680 ms, it also is O(c^(amount / min(coins))), c is num of coins, power is height
+    coins.sort(reverse=True) # we try to put larger coins to reduce numbers of coins
+    queue, visited = deque([(0, 0)]), {0}
+    while queue:
+        for _ in range(len(queue)): # BFS
+            amt, count = queue.popleft()
+            for coin in coins:
+                namt, nc = amt + coin, count + 1
+                if namt == amount: return nc
+                elif namt < amount and namt not in visited:
+                    visited.add(namt)
+                    queue.append((namt, nc))
+    return -1
+
+# LC518. Coin Change 2 - return # of combinations
+def change(self, amount: int, coins: List[int]) -> int:  # O(amount) space
+    if not coins: return 1 if amount == 0 else 0  # time O(amount * len(coins))
+    dp = [1] + [0] * amount  # 1 is for 0 amount and no coins
+    for c in coins:
+        for i in range(c, amount+1): dp[i] += dp[i-c]
+    return dp[amount]
+def change1(self, amount: int, coins: List[int]) -> int:  # O(amount * len(coins)) knapsack problem
+    coins.sort(reverse=True)  # make it much faster, but not necessary
+    @lru_cache(maxsize=None)
+    def f(i, amount):  # having i is to remove double count, (2, 1, 1), (1, 2, 1), (1,1,2)
+        if amount == 0: return 1
+        if amount < 0 or i >= len(coins): return 0
+        return f(i, amount-coins[i]) + f(i+1, amount)
+    return f(0, amount)
+
+# LC1431. Kids With the Greatest Number of Candies
+def kidsWithCandies(self, candies: List[int], extraCandies: int) -> List[bool]:
+    gauge = max(candies) - extraCandies
+    return [candy >= gauge for candy in candies]
+
+# LC746. Min Cost Climbing Stairs
+def minCostClimbingStairs(self, cost: List[int]) -> int:  # O(n) time and O(1) space
+    go1 = go2 = 0
+    for i in range(2, len(cost) + 1):
+        go1, go2 = min(go1 + cost[i - 1], go2 + cost[i - 2]), go1
+    return go1
 
 # LC926. Flip String to Monotone Increasing - 01
 def minFlipsMonoIncr(self, s: str) -> int:  # O(n) and O(1)
@@ -79,17 +246,7 @@ def depthSumInverse(self, nestedList: List[NestedInteger]) -> int:
             queue, q1 = q1, []
     return res
 
-# LC238. Product of Array Except Self, top100
-def productExceptSelf(self, nums: List[int]) -> List[int]:
-    length = len(nums)
-    ret = [0] * length
-    ret[0] = 1
-    for i in range(1, length): ret[i] = nums[i - 1] * ret[i - 1]
-    tmp = 1
-    for i in reversed(range(length)):
-        ret[i] = ret[i] * tmp
-        tmp *= nums[i]
-    return ret
+
 
 # LC2214. Minimum Health to Beat Game
 def minimumHealth(self, damage: List[int], armor: int) -> int:
@@ -162,25 +319,17 @@ def maxSumDivThree(self, nums: List[int]) -> int:
     return dp[0]
 
 # LC274. H-Index
-def hIndex(self, citations: List[int]) -> int:  # O(n), better than sorting O(nlogn)
+def hIndex(self, citations: List[int]) -> int:  # O(n) time and space, better than sorting O(nlogn)
     n = len(citations)  # Counting without sorting
     papers = [0] * (n+1)
     for c in citations: papers[min(n, c)] += 1  # how many papers has this citation count
     sumc = 0
     for i in reversed(range(n+1)):
-        sumc += papers[i]  # accumulate from end
+        sumc += papers[i]  # accumulate from end, sumc is the number of papers having at least i citations.
         if sumc >= i: return i  # has at least i citations for all right side together
     return 0
 
-# LC275. H-Index II
-def hIndex(self, citations: List[int]) -> int:  # O(logn)
-    n = len(citations)
-    left, right = 0, n  # n-1 does not work for 1 element array
-    while left < right:  # sorted in asc, so we use n - i for larger citations
-        mid = left + (right - left) // 2
-        if citations[mid] < n - mid: left = mid + 1
-        else: right = mid
-    return n - left
+
 
 # LC1547. Minimum Cost to Cut a Stick
 def minCost(self, n: int, cuts: List[int]) -> int:  # O(n^3)
@@ -198,14 +347,7 @@ def minCost(self, n: int, cuts: List[int]) -> int:  # O(n^3)
     res = cost(0, n)
     return res
 
-# LC532. K-diff Pairs in an Array
-def findPairs(self, nums: List[int], k: int) -> int:
-    result = 0
-    counter = Counter(nums)
-    for x in counter:
-        if k > 0 and x + k in counter: result += 1
-        elif k == 0 and counter[x] > 1: result += 1
-    return result
+
 
 # LC765. Couples Holding Hands
 def minSwapsCouples(self, row):  # O(n)
@@ -238,20 +380,6 @@ def addToArrayForm(self, num: List[int], k: int) -> List[int]:
     for i in range(len(num) - 1, -1, -1):
         k, num[i] = divmod(num[i] + k, 10)  # treat k as carry
     return [int(i) for i in str(k)] + num if k else num
-
-# LC442. Find All Duplicates in an Array
-def findDuplicates(self, nums: List[int]) -> List[int]:  # run it again to restore
-    res = []
-    for x in nums:
-        if nums[abs(x)-1] < 0: res.append(abs(x))
-        else: nums[abs(x)-1] *= -1
-    return res
-
-# LC349. Intersection of Two Arrays - return unique elems
-def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
-    set1 = set(nums1)
-    set2 = set(nums2)
-    return list(set2 & set1)
 
 # LC189. Rotate Array
 def rotate(self, nums: List[int], k: int) -> None:
@@ -297,37 +425,7 @@ def summaryRanges(self, nums: List[int]) -> List[str]:
             pointer = i+1
     return ans
 
-# LC322. Coin Change - least number of coins to sum up to target
-def coinChange(self, coins: List[int], amount: int) -> int:
-    if amount == 0:  return 0 # 680 ms, it also is O(c^(amount / min(coins))), c is num of coins, power is height
-    coins.sort(reverse=True) # we try to put larger coins to reduce numbers of coins
-    queue, visited = deque([(0, 0)]), {0}
-    while queue:
-        for _ in range(len(queue)): # BFS
-            amt, count = queue.popleft()
-            for coin in coins:
-                namt, nc = amt + coin, count + 1
-                if namt == amount: return nc
-                elif namt < amount and namt not in visited:
-                    visited.add(namt)
-                    queue.append((namt, nc))
-    return -1
 
-# LC518. Coin Change 2
-def change(self, amount: int, coins: List[int]) -> int:  # O(amount) space
-    if not coins: return 1 if amount == 0 else 0  # O(amount * len(coins))
-    dp = [1] + [0] * amount  # 1 is for 0 amount and no coins
-    for c in coins:
-        for i in range(c, amount+1): dp[i] += dp[i-c]
-    return dp[amount]
-def change1(self, amount: int, coins: List[int]) -> int:  # O(amount * len(coins)) knapsack problem
-    coins.sort(reverse=True)  # make it much faster, but not necessary
-    @lru_cache(maxsize=None)
-    def f(i, amount):  # having i is to remove double count, (2, 1, 1), (1, 2, 1), (1,1,2)
-        if amount == 0: return 1
-        if amount < 0 or i >= len(coins): return 0
-        return f(i, amount-coins[i]) + f(i+1, amount)
-    return f(0, amount)
 
 # LC628. Maximum Product of Three Numbers
 def maximumProduct(self, nums: List[int]) -> int:
@@ -418,13 +516,7 @@ def minIncrementForUnique(self, nums: List[int]) -> int: # O(n)
             ans += x - dups.pop() # get dup fill in this slot
     return ans
 
-# LC179. Largest Number - after re-arrange array ints, re-arrange elem
-def largestNumber(self, num):  # O(nlogn)
-    num = [str(x) for x in num]
-    cmp = lambda x, y: (x > y) - (x < y)  # standard comparator
-    custcmp = lambda a, b: cmp(b + a, a + b)  # specific to this problem
-    num.sort(key = functools.cmp_to_key(custcmp))
-    return ''.join(num).lstrip('0') or '0'
+
 
 # LC775. Global and Local Inversions
 def isIdealPermutation(self, A):
@@ -473,7 +565,7 @@ def reversePairs(self, nums: List[int]) -> int:
         count += k
     return count
 
-# LC1470. Shuffle the Array
+# LC1470. Shuffle the Array - merge alternatively
 def shuffle(self, nums: List[int], n: int) -> List[int]:
     res = [0] * (2*n)
     res[::2] = nums[:n]
@@ -492,12 +584,7 @@ def fizzBuzz(self, n: int) -> List[str]:
         else: res.append(str(i))
     return res
 
-# LC697. Degree of an Array
-def findShortestSubArray(self, nums: List[int]) -> int:
-    dt = collections.defaultdict(list)
-    for i, v in enumerate(nums): dt[v].append(i)
-    degree = max(len(v) for v in dt.values())
-    return min(dt[k][-1] - dt[k][0] + 1 for k in dt if len(dt[k]) == degree)
+
 
 # LC350. Intersection of Two Arrays II - same elems appear multiple times, use bag
 def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:  # O(n + m)

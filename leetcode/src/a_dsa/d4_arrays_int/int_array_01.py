@@ -16,3 +16,14 @@ def minSwaps(self, data: List[int]) -> int:  # O(n) and O(1)
         # record the maximum number of 1's in the window
         max_one = max(max_one, cnt_one)
     return ones - max_one
+
+# LC525. Contiguous Array - longest subarray with equal # of 1 and 0, 01 array
+def findMaxLength(self, nums: List[int]) -> int:  # O(n) time and space
+    c2i = {} # store value to index, cache
+    maxlen = count = 0
+    for i, n in enumerate(nums):
+        count += 1 if n else -1
+        if count == 0: maxlen = max(maxlen, i+1)  # balanced from 0 to i
+        if count in c2i: maxlen = max(maxlen, i - c2i[count])
+        else: c2i[count] = i  # do this on first occurrence for longest cases
+    return maxlen

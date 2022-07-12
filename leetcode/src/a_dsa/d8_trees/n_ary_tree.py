@@ -1,4 +1,30 @@
 
+# LC428. Serialize and Deserialize N-ary Tree
+class Codec:
+    def serialize(self, root: 'Node') -> str:
+        if not root: return ''
+        def node_to_json(node):
+            ret = f'"{node.val}":['
+            for child in node.children:
+                ret += node_to_json(child) + ','
+            if ret[-1] == ',': ret = ret[:-1]
+            ret += ']'
+            ret = '{' + ret + '}'
+            return ret
+        ret = node_to_json(root)
+        return ret
+    def deserialize(self, data: str) -> 'Node':
+        if not data: return None
+        def dict_to_node(kvs): #DFS
+            if kvs is None: return None  # base case
+            for k, v in kvs.items():
+                tn = Node(int(k), [])
+                for value in v:
+                    tn.children.append(dict_to_node(value))
+                return tn
+        kv = json.loads(data)
+        return dict_to_node(kv)
+
 # LC1522. Diameter of N-Ary Tree - path = edges
 def diameter(self, root: 'Node') -> int:
     ret = 0  # root itself, in case there is no child
@@ -40,31 +66,7 @@ def construct(self, grid: List[List[int]]) -> 'Node':
 
     return build(0, 0, len(grid)-1, len(grid[0]) - 1)
 
-# LC428. Serialize and Deserialize N-ary Tree
-class Codec:
-    def serialize(self, root: 'Node') -> str:
-        if not root: return ''
-        def node_to_json(node):
-            ret = f'"{node.val}":['
-            for child in node.children:
-                ret += node_to_json(child) + ','
-            if ret[-1] == ',': ret = ret[:-1]
-            ret += ']'
-            ret = '{' + ret + '}'
-            return ret
-        ret = node_to_json(root)
-        return ret
-    def deserialize(self, data: str) -> 'Node':
-        if not data: return None
-        def dict_to_node(kvs): #DFS
-            if kvs is None: return None  # base case
-            for k, v in kvs.items():
-                tn = Node(int(k), [])
-                for value in v:
-                    tn.children.append(dict_to_node(value))
-                return tn
-        kv = json.loads(data)
-        return dict_to_node(kv)
+
 
 
 

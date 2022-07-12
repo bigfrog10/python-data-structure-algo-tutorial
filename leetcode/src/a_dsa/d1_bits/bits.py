@@ -1,6 +1,33 @@
 from typing import List
 import math
 
+# LC1009. Complement of Base 10 Integer
+# LC476. Number Complement
+def bitwiseComplement(self, N: int) -> int:
+    if N == 0: return 1
+    todo, bit = N, 1
+    while todo:
+        N = N ^ bit  # flip current bit
+        bit = bit << 1  # prepare for the next run
+        todo = todo >> 1
+    return N
+
+# LC201. Bitwise AND of Numbers Range - and all nums in [m, n]
+def rangeBitwiseAnd(self, m: int, n: int) -> int: # O(1) since n jumps
+    while m < n: n = n & (n - 1);  # erase uncommon part: m and n: xxx1000000, xxx0111111
+    return n
+def rangeBitwiseAnd(self, m: int, n: int) -> int:
+    # https://leetcode.com/problems/bitwise-and-of-numbers-range/discuss/593403/Bit-masks-no-loops
+    return (m & n & - (2 << math.floor(math.log2(n-m))) if m != n else m)
+
+# LC190. Reverse Bits
+def reverseBits(self, n: int) -> int:
+    ret = 0
+    for shift in range(31, -1, -1):
+        ret += (n & 1) << shift
+        n >>= 1
+    return ret
+
 # LC393. UTF-8 Validation
 # Char. number range  |        UTF-8 octet sequence
 #       (hexadecimal)    |              (binary)
@@ -29,13 +56,6 @@ def totalHammingDistance(self, nums: List[int]) -> int:  # O(n), better than n^2
     # every pair of (0, 1) contributes 1 to the distance
     return sum(b.count('0') * b.count('1') for b in zipped)  # constant time
 
-# LC201. Bitwise AND of Numbers Range
-def rangeBitwiseAnd(self, m: int, n: int) -> int: # O(1) since n jumps
-    while m < n: n = n & (n - 1);  # erase uncommon part: m and n: xxx1000000, xxx0111111
-    return n
-def rangeBitwiseAnd(self, m: int, n: int) -> int:
-    # https://leetcode.com/problems/bitwise-and-of-numbers-range/discuss/593403/Bit-masks-no-loops
-    return (m & n & - (2 << math.floor(math.log2(n-m))) if m != n else m)
 
 # LC191. Number of 1 Bits, Hamming distance
 def hammingWeight(self, n: int) -> int:
@@ -76,13 +96,7 @@ def subarrayBitwiseORs(self, arr: List[int]) -> int:
         res |= cur
     return len(res)
 
-# LC190. Reverse Bits
-def reverseBits(self, n: int) -> int:
-    ret = 0
-    for shift in range(31, -1, -1):
-        ret += (n & 1) << shift
-        n >>= 1
-    return ret
+
 
 # LC957. Prison Cells After N Days
 def prisonAfterNDays(self, cells: List[int], N: int) -> List[int]:

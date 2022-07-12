@@ -1,6 +1,65 @@
 from typing import List
 import itertools
 
+# LC48. Rotate Image
+def rotate(self, A):
+    A[:] = zip(*A[::-1])
+def rotate(self, matrix: List[List[int]]) -> None:
+    # divide and conquer, outer borders, one layer at a time
+    def border_rotate(matrix, pi):  # i is the upper right corner, pivot index
+        h = len(matrix) - 2 * pi
+        if h == 0: return # False  # signal time to stop
+        hi = h - 1  # last index from pivot to the other corner
+        last = pi + hi # last index from pivot to the other corner - 1
+        for i in range(hi):  # we stop before the corner
+            tmp = matrix[pi][pi+i]  # upper left corner to tmp
+            matrix[pi][pi+i] = matrix[last - i][pi]  # lower left corner to upper left
+            matrix[last - i][pi] = matrix[last][last-i]  # lower right to lower left
+            matrix[last][last-i] = matrix[pi+i][last]  # upper right to lower right
+            matrix[pi+i][last] = tmp  # upper left, tmp, to upper right
+    for i in range(len(matrix) // 2):
+        border_rotate(matrix, i)
+def transpose(self, matrix):  # flip along diagonal
+    return zip(*matrix)
+
+
+
+# LC149. Max Points on a Line
+def maxPoints(self, points: List[List[int]]) -> int:  # O(n^2)
+    def gcd(m, n):
+        return m if not n else gcd(n, m%n)
+    def getslope(p1, p2):
+        dx = p1[0] - p2[0]
+        dy = p1[1] - p2[1]
+        if dx == 0: return (p1[0], 0)
+        if dy == 0: return (0, p1[1])
+        d = gcd(dx, dy)
+        return (dx//d, dy//d)
+    res = 0
+    for i in range(len(points)):
+        d, maxi = defaultdict(lambda:0), 0
+        p1 = points[i]
+        for j in range(i+1, len(points)):
+            slope = getslope(p1, points[j])
+            d[slope] += 1
+            maxi = max(maxi, d[slope])
+        res = max(res, 1 + maxi)  # 1 is to count ith point
+    return res
+
+# LC632. Smallest Range Covering Elements from K Lists
+def smallestRange(self, A): # O(nlogk)
+    pq = [(row[0], i, 0) for i, row in enumerate(A)] # push 1st element from each list
+    heapq.heapify(pq) # (value, row, column)
+    ans = -1e9, 1e9
+    right = max(row[0] for row in A)
+    while pq:
+        left, i, j = heapq.heappop(pq)
+        if right - left < ans[1] - ans[0]: ans = left, right # track ans
+        if j + 1 == len(A[i]): return ans # the min row reached end
+        v = A[i][j+1] # replace minimal value with next one in same list
+        right = max(right, v)
+        heapq.heappush(pq, (v, i, j+1))
+
 # LC498. Diagonal Traverse
 def findDiagonalOrder(self, matrix):  # O(mn)
     if not matrix: return []
@@ -168,7 +227,7 @@ def orderOfLargestPlusSign(self, N: int, mines: List[List[int]]) -> int:  # O(N^
             if res < grid[i][j]: res = grid[i][j]
     return res
 
-# LC74. Search a 2D Matrix - matrix binary search elem in matrix, matrix bs
+# LC74. Search a 2D Matrix - matrix binary search elem in matrix, matrix bs, search 2d, search matrix
 def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:  # O(log(mn))
     if not matrix: return False
     m, n = len(matrix), len(matrix[0])
@@ -180,42 +239,6 @@ def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:  # O(log(m
         elif target < pivot_element: right = pivot_idx - 1
         else: left = pivot_idx + 1
     return False
-
-# LC939. Minimum Area Rectangle
-def minAreaRect(self, points: List[List[int]]) -> int:  # O(n^2)
-    res, seen = float('inf'), set()
-    for x1, y1 in points:
-        for x2, y2 in seen:
-            if (x1, y2) in seen and (x2, y1) in seen:
-                area = abs(x1 - x2) * abs(y1 - y2)
-                if area: res = min(area, res)
-        seen.add((x1, y1))
-    return res if res < float('inf') else 0
-
-# LC963. Minimum Area Rectangle II
-def minAreaFreeRect(self, points: List[List[int]]) -> float:  # O(n^2)
-    def distSquare(x1,y1,x2,y2): return (x1-x2)**2 + (y1-y2)**2
-    def dist(x1,y1,x2,y2): return sqrt((x1-x2)**2 + (y1-y2)**2)
-    def midPos(x1,y1,x2,y2): return ((x1+x2)/2,(y1+y2)/2)
-
-    linesMap = defaultdict(list) # (len, mid of p1 and p2) => [(p1,p2)], grouping
-    N = len(points)
-    for i in range(N):
-        for j in range(i + 1, N):
-            l = distSquare(*points[i], *points[j])
-            m = midPos(*points[i], *points[j])
-            linesMap[(l, m)].append((i,j))
-    minArea = float("inf")
-    for lines in linesMap.values():
-        if len(lines) < 2: continue
-        M = len(lines)
-        for i in range(M): # try all pairs of lines
-            for j in range(i + 1, M):
-                p1, p2, p3 = points[lines[i][0]], points[lines[j][0]], points[lines[j][1]]
-                d1, d2 = dist(*p1, *p2), dist(*p1, *p3)
-                minArea = min(minArea, d1 * d2)
-                print(p1, points[lines[i][1]],  p2, p3, minArea)
-    return minArea if minArea != float("inf") else 0
 
 # LC1074. Number of Submatrices That Sum to Target - area sum to target
 def numSubmatrixSumTarget(self, A, target):
@@ -256,9 +279,6 @@ def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:  # O(rc)
 
     return mat
 
-
-
-
 # LC73. Set Matrix Zeroes
 def setZeroes(self, matrix):
     m, n = len(matrix), len(matrix[0])
@@ -272,26 +292,6 @@ def setZeroes(self, matrix):
     # Set the zeros for the first row
     if firstRowHasZero: matrix[0] = [0] * n
 
-# LC54. Spiral Matrix, top100 - return elems in spiral
-def spiralOrder(self, matrix):
-    res = []
-    while matrix:
-        res.extend(matrix.pop(0))
-        # zip rows to columns, flattern each column, reverse order
-        matrix = [*zip(*matrix)][::-1]
-    return res
-# [[1,2,3],[4,5,6],[7,8,9]] ->  [(6, 9), (5, 8), (4, 7)] ->  [(8, 7), (5, 4)] -> [(4,), (5,)] -> [(5,)]
-def spiralOrder(self, matrix):
-    result = []
-    while matrix and matrix[0]:
-        if matrix[0]: result += matrix.pop(0)
-        if matrix and matrix[0]:
-            for row in matrix: result.append(row.pop())
-        if matrix and matrix[-1]: result += matrix.pop()[::-1]
-        if matrix and matrix[0]:
-            for row in matrix[::-1]: result.append(row.pop(0))
-    return result
-
 # LC661. Image Smoother
 def imageSmoother(self, img: List[List[int]]) -> List[List[int]]:  # O(mn)
     m, n = len(img), len(img[0])
@@ -303,24 +303,7 @@ def imageSmoother(self, img: List[List[int]]) -> List[List[int]]:  # O(mn)
             res[x][y] = sum(neighbors) // len(neighbors)
     return res
 
-# LC48. Rotate Image
-def rotate(self, A):
-    A[:] = zip(*A[::-1])
-def rotate(self, matrix: List[List[int]]) -> None:
-    # divide and conquer, outer borders, one layer at a time
-    def border_rotate(matrix, pi):  # i is the upper right corner, pivot index
-        h = len(matrix) - 2 * pi
-        if h == 0: return # False  # signal time to stop
-        hi = h - 1  # last index from pivot to the other corner
-        last = pi + hi # last index from pivot to the other corner - 1
-        for i in range(hi):  # we stop before the corner
-            tmp = matrix[pi][pi+i]  # upper left corner to tmp
-            matrix[pi][pi+i] = matrix[last - i][pi]  # lower left corner to upper left
-            matrix[last - i][pi] = matrix[last][last-i]  # lower right to lower left
-            matrix[last][last-i] = matrix[pi+i][last]  # upper right to lower right
-            matrix[pi+i][last] = tmp  # upper left, tmp, to upper right
-    for i in range(len(matrix) // 2):
-        border_rotate(matrix, i)
+
 
 # LC1329. Sort the Matrix Diagonally
 def diagonalSort(self, mat: List[List[int]]) -> List[List[int]]:
@@ -364,19 +347,7 @@ def findPeakGrid(self, mat: List[List[int]]) -> List[int]:  # O(m + n)
         return quad_search(s0, e0, s1, e1)  # drill down
     return quad_search(0, m, 0, n)
 
-# LC632. Smallest Range Covering Elements from K Lists
-def smallestRange(self, A): # O(nlogk)
-    pq = [(row[0], i, 0) for i, row in enumerate(A)] # push 1st element from each list
-    heapq.heapify(pq) # (value, row, column)
-    ans = -1e9, 1e9
-    right = max(row[0] for row in A)
-    while pq:
-        left, i, j = heapq.heappop(pq)
-        if right - left < ans[1] - ans[0]: ans = left, right # track ans
-        if j + 1 == len(A[i]): return ans # the min row reached end
-        v = A[i][j+1] # replace minimal value with next one in same list
-        right = max(right, v)
-        heapq.heappush(pq, (v, i, j+1))
+
 
 # LC221. Maximal Square
 def maximalSquare(self, matrix: List[List[str]]) -> int: # DP
@@ -443,24 +414,25 @@ def countShips(self, sea, P, Q):  # P - topRight, Q - bottomLeft
         res += self.countShips(sea, Point(P.x, my), Point(mx + 1, Q.y))
     return res
 
-# LC149. Max Points on a Line
-def maxPoints(self, points: List[List[int]]) -> int:
-    def helper(currentPoint, points):
-        slopes,duplicates,ans = {},0,0
-        x1, y1 = currentPoint
-        for x2, y2 in points:
-            if x1 == x2 and y1 == y2: duplicates += 1
-            else: # else find the slop and add in dic
-                slope = (x2 - x1) / (y2 - y1) if y2 != y1 else 'inf'
-                count = slopes.get(slope, 0) + 1
-                slopes[slope] = count
-                ans = max(ans, count)
-        return ans + 1 + duplicates
-    ans = 0
-    while points:
-        currentPoint = points.pop()
-        ans = max(ans, helper(currentPoint, points))
-    return ans
+# LC54. Spiral Matrix, top100 - return elems in spiral
+def spiralOrder(self, matrix):
+    res = []
+    while matrix:
+        res.extend(matrix.pop(0))
+        # zip rows to columns, flattern each column, reverse order
+        matrix = [*zip(*matrix)][::-1]
+    return res
+# [[1,2,3],[4,5,6],[7,8,9]] ->  [(6, 9), (5, 8), (4, 7)] ->  [(8, 7), (5, 4)] -> [(4,), (5,)] -> [(5,)]
+def spiralOrder(self, matrix):
+    result = []
+    while matrix and matrix[0]:
+        if matrix[0]: result += matrix.pop(0)
+        if matrix and matrix[0]:
+            for row in matrix: result.append(row.pop())
+        if matrix and matrix[-1]: result += matrix.pop()[::-1]
+        if matrix and matrix[0]:
+            for row in matrix[::-1]: result.append(row.pop(0))
+    return result
 
 # LC59. Spiral Matrix II  generate
 def generateMatrix(self, n): # this is python 3 version

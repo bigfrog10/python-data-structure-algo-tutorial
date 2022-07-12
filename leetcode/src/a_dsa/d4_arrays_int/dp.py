@@ -91,14 +91,14 @@ def minDistance(self, houses: List[int], k: int) -> int:
         return min(dfs(i, x, 1) + dfs(x+1, j, k-1) for x in range(i, j) or [inf])
     return dfs(0, len(houses)-1, k)
 
-# LC312. Burst Balloons
-def maxCoins(self, nums: List[int]) -> int:
+# LC312. Burst Balloons - return max coins collected
+def maxCoins(self, nums: List[int]) -> int:  # O(n^3) time, O(n^2) space
     nums = [1] + nums + [1]
     @lru_cache(maxsize=None)
-    def dp(left, right): # max coins within (left, right), exclusive
+    def dp(left, right): # max coins within (left, right), exclusive,  O(n^2)
         if left + 1 == right: return 0
         # add each balloon on the interval and return the maximum score
-        return max(dp(left, i) + nums[left] * nums[i] * nums[right] +
+        return max(dp(left, i) + nums[left] * nums[i] * nums[right] +  # O(n)
                    dp(i, right) for i in range(left+1, right))
     res = dp(0, len(nums)-1)
     print(dp.cache_info())

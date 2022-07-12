@@ -1,3 +1,14 @@
+
+# LC12. Integer to Roman
+def intToRoman(self, num: int) -> str:
+    integer = { 1000: "M", 900: "CM", 500: "D", 400: "CD", 100: "C",
+        90: "XC", 50: "L", 40: "XL", 10: "X", 9: "IX", 5: "V", 4: "IV", 1: "I"}
+    s = ""
+    for k, v in integer.items():  # insertion order
+        d, num = divmod(num, k)
+        s += d*v
+    return s
+
 # LC8. String to Integer (atoi)
 def myAtoi(self, s: str) -> int:
     s = s.strip()
@@ -10,23 +21,13 @@ def myAtoi(self, s: str) -> int:
         i += 1
     return max(-2**31, min(sign * ret, 2**31-1))
 
-# LC12. Integer to Roman
-def intToRoman(self, num: int) -> str:
-    integer = { 1000: "M", 900: "CM", 500: "D", 400: "CD", 100: "C",
-        90: "XC", 50: "L", 40: "XL", 10: "X", 9: "IX", 5: "V", 4: "IV", 1: "I"}
-    s = ""
-    for k, v in integer.items():  # insertion order
-        d, num = divmod(num, k)
-        s += d*v
-    return s
-
 # LC13. Roman to Integer
 def romanToInt(self, s: str) -> int:
     values = { "I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
     total = values.get(s[-1])
     for i in reversed(range(len(s) - 1)):
         if values[s[i]] < values[s[i + 1]]: total -= values[s[i]]
-        else: total += values[s[i]] # right most is always add
+        else: total += values[s[i]]  # right most is always add
     return total
 
 # LC273. Integer to English Words

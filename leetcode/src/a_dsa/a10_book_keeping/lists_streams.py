@@ -1,4 +1,17 @@
 
+# LC295. Find Median from Data Stream, top100
+class MedianFinder:
+    def __init__(self):
+        self.heaps = [], []  # max heap from smalls, min heap from larges
+    def addNum(self, num: int) -> None:
+        small, large = self.heaps
+        heappush(small, -heappushpop(large, num))
+        if len(large) < len(small): heappush(large, -heappop(small))
+    def findMedian(self) -> float:
+        small, large = self.heaps
+        if len(large) > len(small): return float(large[0])
+        return (large[0] - small[0]) / 2.0
+
 # LC1865. Finding Pairs With a Certain Sum
 class FindSumPairs:
     def __init__(self, nums1: List[int], nums2: List[int]):
@@ -44,19 +57,6 @@ class MovingAverage:
             self.mv = self.mv + (val - v) / size
         else: self.mv = sum(queue) / len(queue)
         return self.mv
-
-# LC295. Find Median from Data Stream, top100
-class MedianFinder:
-    def __init__(self):
-        self.heaps = [], []  # max heap from smalls, min heap from larges
-    def addNum(self, num: int) -> None:
-        small, large = self.heaps
-        heappush(small, -heappushpop(large, num))
-        if len(large) < len(small): heappush(large, -heappop(small))
-    def findMedian(self) -> float:
-        small, large = self.heaps
-        if len(large) > len(small): return float(large[0])
-        return (large[0] - small[0]) / 2.0
 
 # LC703. Kth Largest Element in a Stream
 class KthLargest:

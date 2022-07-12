@@ -24,7 +24,7 @@ def hasCycle(self, head: ListNode) -> bool:
         if hare == turtle: return True
     return False
 
-# LC142. Linked List Cycle II
+# LC142. Linked List Cycle II - cycle start point
 def detectCycle(self, head: ListNode) -> ListNode:
     hare = turtle = head
     while hare and hare.next:  # travel n cycles plus arc C1

@@ -1,4 +1,74 @@
 
+# LC1111. Maximum Nesting Depth of Two Valid Parentheses Strings
+def maxDepthAfterSplit(self, seq: str) -> List[int]:
+    A = B = 0 # max opens for 2 groups
+    res = [0] * len(seq) # we split into sequences, not continuous subarrays
+    for i, c in enumerate(seq):
+        v = 1 if c == '(' else -1
+        if (v > 0) == (A < B): A += v
+        else:
+            B += v
+            res[i] = 1
+    return res
+def maxDepthAfterSplit(self, seq: str) -> List[int]:
+    depth = 0
+    ans = list()
+    for c in seq:
+        if c == "(":
+            ans.append(depth % 2)
+            depth += 1
+        else:
+            depth -= 1
+            ans.append(depth % 2)
+    return ans
+
+# LC22. Generate Parentheses
+def generateParenthesis(self, n: int) -> List[str]:
+    ret = {'()'}
+    for _ in range(n-1):
+        ret = {s[:i] + '()' + s[i:] for s in ret for i in range(len(s))}
+    return ret
+
+# LC20. Valid Parentheses - {} () []
+def isValid(self, s: str) -> bool:
+    PAIRS = {'(': ')', '{': '}', '[': ']'}
+    stack = []  # to store unprocessed
+    for idx, c in enumerate(s):
+        if c in PAIRS.keys(): stack.append(c) # open parentheses
+        else:  # closed parentheses
+            if len(stack) == 0: return False # ) has no (
+            if PAIRS[stack[-1]] == c: stack.pop() # matched
+            else: return False # no suppose to have other chars
+    return len(stack) == 0
+
+# LC32. Longest Valid Parentheses - longest substring
+def longestValidParentheses(self, s: str) -> int:  # O(n) time and space
+    stack, longest = [0], 0  # track current length and its max
+    for c in s:
+        if c == "(": stack.append(0)
+        else:  # )
+            if len(stack) > 1:
+                val = stack.pop()
+                stack[-1] += val + 2
+                longest = max(longest, stack[-1])
+            else: stack = [0]  # get unmatched ), restart
+    return longest
+def longestValidParentheses(self, s: str) -> int:  # O(n) time and O(1) space
+    n = len(s)
+    maxl = left = right = 0
+    for c in s:  # from left to right
+        if c == '(': left += 1
+        else: right += 1
+        if left == right: maxl = max(maxl, 2 * right)
+        elif left < right: left = right = 0  # start over with new
+    left = right = 0
+    for c in s[::-1]:
+        if c == '(': left += 1
+        else: right += 1
+        if left == right: maxl = max(maxl, 2 * left)
+        elif left >= right: left = right = 0
+    return maxl
+
 # LC1249. Minimum Remove to Make Valid Parentheses - with letters, return one string result
 def minRemoveToMakeValid(self, s: str) -> str:  # O(n) runtime and space
     stack, remove = [], []  # find all indices to remove
@@ -52,12 +122,7 @@ def maxDepth(self, s: str) -> int:
         if c == ')': cur -= 1
     return res
 
-# LC22. Generate Parentheses
-def generateParenthesis(self, n: int) -> List[str]:
-    ret = {'()'}
-    for _ in range(n-1):
-        ret = {s[:i] + '()' + s[i:] for s in ret for i in range(len(s))}
-    return ret
+
 
 # LC1541. Minimum Insertions to Balance a Parentheses String - unbalanced ( to ))
 def minInsertions(self, s: str) -> int:
@@ -75,17 +140,7 @@ def minInsertions(self, s: str) -> int:
                 close_needed += 2  # no need to track the last invalid
     return open_missing + close_missing + close_needed
 
-# LC20. Valid Parentheses - {} () []
-def isValid(self, s: str) -> bool:
-    PAIRS = {'(': ')', '{': '}', '[': ']'}
-    stack = []  # to store unprocessed
-    for idx, c in enumerate(s):
-        if c in PAIRS.keys(): stack.append(c) # open parentheses
-        else:  # closed parentheses
-            if len(stack) == 0: return False # ) has no (
-            if PAIRS[stack[-1]] == c: stack.pop() # matched
-            else: return False # no suppose to have other chars
-    return len(stack) == 0
+
 
 # LC1963. Minimum Number of Swaps to Make the String Balanced - parenthesis '[] balance'
 def minSwaps(self, s: str) -> int:
@@ -122,33 +177,7 @@ def diffWaysToCompute(self, expression: str) -> List[int]:
         return res
     return diff_ways(expression)
 
-# LC32. Longest Valid Parentheses - longest substring
-def longestValidParentheses(self, s: str) -> int:  # O(n) time and space
-    stack, longest = [0], 0  # track current length and its max
-    for c in s:
-        if c == "(": stack.append(0)
-        else:  # )
-            if len(stack) > 1:
-                val = stack.pop()
-                stack[-1] += val + 2
-                longest = max(longest, stack[-1])
-            else: stack = [0]  # get unmatched ), restart
-    return longest
-def longestValidParentheses(self, s: str) -> int:  # O(n) time and O(1) space
-    n = len(s)
-    maxl = left = right = 0
-    for c in s:  # from left to right
-        if c == '(': left += 1
-        else: right += 1
-        if left == right: maxl = max(maxl, 2 * right)
-        elif left < right: left = right = 0  # start over with new
-    left = right = 0
-    for c in s[::-1]:
-        if c == '(': left += 1
-        else: right += 1
-        if left == right: maxl = max(maxl, 2 * left)
-        elif left >= right: left = right = 0
-    return maxl
+
 
 # LC678. Valid Parenthesis String - paretnh with *, par with *, par *
 def checkValidString(self, s):  # greedy

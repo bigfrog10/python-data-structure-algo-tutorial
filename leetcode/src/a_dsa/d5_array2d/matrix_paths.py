@@ -1,3 +1,19 @@
+
+# LC1463. Cherry Pickup II
+def cherryPickup(self, grid: List[List[int]]) -> int:  # O(m n^2) time and space
+    m, n = len(grid), len(grid[0])
+    @lru_cache(None)
+    def dp(row, col1, col2):  # O(m n^2)
+        if col1 < 0 or col1 >= n or col2 < 0 or col2 >= n: return -inf
+        result = grid[row][col1]
+        if col1 != col2: result += grid[row][col2]
+        if row != m-1:
+            result += max(dp(row+1, new_col1, new_col2)
+                          for new_col1 in [col1, col1+1, col1-1]
+                          for new_col2 in [col2, col2+1, col2-1])
+        return result
+    return dp(0, 0, n-1)
+
 # LC1091. Shortest Path in Binary Matrix - 01 matrix
 def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:  # O(n) runtime and space
     if not grid or grid[0][0] != 0: return -1
@@ -319,3 +335,18 @@ def hasPath(self, maze: List[List[int]], start: List[int], destination: List[int
                 visited.add((ni,nj))
                 q.append((ni,nj))
     return False
+
+# LC120. Triangle - min sum tree path
+def minimumTotal(self, triangle: List[List[int]]) -> int:  # O(n^2) time and O(n) space
+    f = [0] * (len(triangle) + 1)  # extra 0 - just to unify below min()
+    for row in triangle[::-1]:
+        for i in range(len(row)):
+            f[i] = row[i] + min(f[i], f[i + 1])
+    return f[0]
+
+# LC931. Minimum Falling Path Sum
+def minFallingPathSum(self, A):  # O(n^2) time and O(n) space
+    dp = A[0]
+    for row in A[1:]:
+        dp = [value + min(dp[c], dp[max(c - 1, 0)], dp[min(len(A) - 1, c + 1)]) for c, value in enumerate(row)]
+    return min(dp)

@@ -1,4 +1,15 @@
 
+# LC1696. Jump Game VI
+def maxResult(self, nums: List[int], k: int) -> int:  # O(n) time and O(k) space
+    n, score = len(nums), nums[0]
+    dq = deque([(0, score)])
+    for i in range(1, n):
+        while dq and dq[0][0] < i-k: dq.popleft()  # pop out the old index
+        score = dq[0][1] + nums[i]
+        while dq and dq[-1][1] <= score: dq.pop()  # pop out the smaller value
+        dq.append((i, score))
+    return score
+
 # LC1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
 # https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/discuss/609771/JavaC%2B%2BPython-Deques-O(N)
 def longestSubarray(self, nums: List[int], limit: int) -> int:  # O(n)

@@ -1,4 +1,15 @@
 
+# LC1010. Pairs of Songs With Total Durations Divisible by 60
+def numPairsDivisibleBy60(self, time: List[int]) -> int:  # O(n) time and O(1) space
+    counts = [0] * 60  # O(1) space
+    ret = 0
+    for t in time:
+        t %= 60
+        if t == 0: ret += counts[0]
+        else: ret += counts[60-t]
+        counts[t] += 1
+    return ret
+
 # LC724. Find Pivot Index - break array to left and right with equal sum
 def pivotIndex(self, nums: List[int]) -> int:
     S, leftsum = sum(nums), 0
@@ -116,13 +127,4 @@ def sumOddLengthSubarrays(self, A):  # O(n)
         res += ((i + 1) * (n - i) + 1) // 2 * a  # +1 for ceiling
     return res
 
-# LC1010. Pairs of Songs With Total Durations Divisible by 60
-def numPairsDivisibleBy60(self, time: List[int]) -> int:
-    counts = [0] * 60
-    ret = 0
-    for t in time:
-        t %= 60
-        if t == 0: ret += counts[0]
-        else: ret += counts[60-t]
-        counts[t] += 1
-    return ret
+

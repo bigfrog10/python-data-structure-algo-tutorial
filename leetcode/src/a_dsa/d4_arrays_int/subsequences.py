@@ -1,5 +1,5 @@
 
-# LC416. Partition Equal Subset Sum  - backpack
+# LC416. Partition Equal Subset Sum  - Knapsack
 def canPartition(self, nums: List[int]) -> bool:  # sequence, not continuous subset
     n, total = len(nums), sum(nums)  # O(n * total)
     if total % 2 != 0: return False

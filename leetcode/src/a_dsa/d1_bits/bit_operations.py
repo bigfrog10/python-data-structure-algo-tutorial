@@ -39,6 +39,18 @@ def addBinary(self, a: str, b: str) -> str:
         x, y = x ^ y, (x & y) << 1
     return f'{x:0b}'
 
+# LC2235. Add Two Integers
+def sum1(self, num1: int, num2: int) -> int:
+    mask = 0xFFFFFFFF
+    while num2 != 0:
+        num1, num2 = (num1 ^ num2) & mask, ((num1 & num2) << 1) & mask # sum w/o carry over .vs. carry over.
+    return num1 if num1 < 0x80000000 else ~(num1 ^ mask)
+def sum1(self, num1: int, num2: int, m=0xFFFF) -> int:
+    """ O(1)TS """
+    while num2 & m:
+        num1, num2 = num1 ^ num2, (num1 & num2) << 1
+    return num1 if num2 < m else num1 & m
+
 # LC29. Divide Two Integers
 def divide(self, A, B):  # logn
     if A == -2147483648 and B == -1: return 2147483647  # overflow  # -2^31

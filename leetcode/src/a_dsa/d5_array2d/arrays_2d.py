@@ -1,4 +1,16 @@
 
+# LC373. Find K Pairs with Smallest Sums - similar to 378
+def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
+    min_heap, res = [], []  # O(klogk)
+    for i in range(min(len(nums1), k)): heapq.heappush(min_heap, (nums1[i] + nums2[0], i, 0))
+    while min_heap and len(res) < k:
+        _, i, j = heapq.heappop(min_heap)
+        res.append([nums1[i], nums2[j]])
+        # all rows first elem are in heap, j+1 results shifting to right
+        if j + 1 < len(nums2): heapq.heappush(min_heap, (nums1[i] + nums2[j + 1], i, j + 1))
+    return res
+# https://leetcode.com/problems/find-k-pairs-with-smallest-sums/discuss/84577/O(k)-solution
+
 # LC1868. Product of Two Run-Length Encoded Arrays
 def findRLEArray(self, encoded1: List[List[int]], encoded2: List[List[int]]) -> List[List[int]]:
     res, l, r = [], 0, 0   # O(n + m), counts of unique numbers
@@ -157,16 +169,7 @@ def getOrder(self, tasks: List[List[int]]) -> List[int]:  # O(nlogn)
         elif i < n: time = tasks[i][0]
     return res
 
-# LC373. Find K Pairs with Smallest Sums - similar to 378
-def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
-    min_heap, res = [], []  # O(klogk)
-    for i in range(min(len(nums1), k)): heapq.heappush(min_heap, (nums1[i] + nums2[0], i, 0))
-    while min_heap and len(res) < k:
-        _, i, j = heapq.heappop(min_heap)
-        res.append([nums1[i], nums2[j]])
-        # all rows first elem are in heap, j+1 results shifting to right
-        if j + 1 < len(nums2): heapq.heappush(min_heap, (nums1[i] + nums2[j + 1], i, j + 1))
-    return res
+
 
 # LC1376. Time Needed to Inform All Employees
 def numOfMinutes(self, n, headID, manager, informTime):

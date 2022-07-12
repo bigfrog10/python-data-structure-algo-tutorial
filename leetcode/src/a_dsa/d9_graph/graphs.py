@@ -1,6 +1,23 @@
 from typing import List
 from collections import defaultdict
 
+# LC785. Is Graph Bipartite?
+def isBipartite(self, graph: List[List[int]]) -> bool:  # O(V + E)
+    color = {}  # like seen in other cases
+    for node in range(len(graph)):  # go through each node
+        if node in color: continue
+        stack = [node]  # DFS
+        color[node] = 0  # paint color, component start
+        while stack:
+            node = stack.pop()
+            for nei in graph[node]:
+                if nei not in color:
+                    stack.append(nei)
+                    color[nei] = color[node] ^ 1
+                # if child and parent have same color,
+                elif color[nei] == color[node]: return False
+    return True
+
 # LC133. Clone Graph
 def cloneGraph(self, node: 'Node') -> 'Node':  # O(V + E) runtime, O(V) space
     if not node: return None
@@ -115,22 +132,7 @@ class UnionFind:  ## M union and find operations on N objects takes O(N + M lg* 
 # LC1579. Remove Max Number of Edges to Keep Graph Fully Traversable
 
 
-# LC785. Is Graph Bipartite?
-def isBipartite(self, graph: List[List[int]]) -> bool:  # O(V + E)
-    color = {}  # like seen in other cases
-    for node in range(len(graph)):  # go through each node
-        if node in color: continue
-        stack = [node]  # DFS
-        color[node] = 0  # paint color, component start
-        while stack:
-            node = stack.pop()
-            for nei in graph[node]:
-                if nei not in color:
-                    stack.append(nei)
-                    color[nei] = color[node] ^ 1
-                # if child and parent have same color,
-                elif color[nei] == color[node]: return False
-    return True
+
 
 # LC323. Number of Connected Components in an Undirected Graph
 def countComponents(self, n, edges):

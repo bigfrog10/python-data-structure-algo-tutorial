@@ -125,7 +125,7 @@ def threeSumSmaller(self, nums: List[int], target: int) -> int:  # O(n^2)
     return counts
 
 # LC18. 4Sum - return all quadruplets sum to target
-def fourSum(self, nums: List[int], target: int) -> List[List[int]]:  # O(n^(k-1))
+def fourSum(self, nums: List[int], target: int) -> List[List[int]]:  # O(n^(k-1)) k = 4 time, O(n) space
     def kSum(nums: List[int], target: int, k: int) -> List[List[int]]:
         res = []
         if not nums: return res

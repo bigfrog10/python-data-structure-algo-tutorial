@@ -1,4 +1,80 @@
 
+# LC1446. Consecutive Characters - power of a string - same chars
+def maxPower(self, s: str) -> int:
+    count = max_count = 0  # similar to 485
+    previous = None
+    for c in s:
+        if c == previous: count += 1
+        else:
+            max_count = max(max_count, count)
+            previous = c
+            count = 1
+    return max(max_count, count)
+
+# LC97. Interleaving String
+def isInterleave(self, s1: str, s2: str, s3: str) -> bool:  # O(nm) time and space, space can be O(n)
+    if len(s1) + len(s2) != len(s3): return False
+    m, n = len(s1), len(s2)
+    @lru_cache(None)
+    def dp(i, j):
+        if i == m and j == n: return True  # Found a valid match
+        ans = False
+        if i < m and s1[i] == s3[i+j]:  # Case match s1[i] with s3[i+j]
+            ans |= dp(i + 1, j)
+        if j < n and s2[j] == s3[i+j]:  # Case match s2[j] with s3[i+j]
+            ans |= dp(i, j + 1)
+        return ans
+    return dp(0, 0)
+
+# LC796. Rotate String
+def rotateString(self, A: str, B: str) -> bool:  # O(n^2)
+    return len(A) == len(B) and B in A + A
+
+# LC784. Letter Case Permutation
+def letterCasePermutation(self, s: str) -> List[str]:  # O(2^n), n is # of letters
+    ans = [""]
+    for c in s:
+        ans = [x + cc for x in ans for cc in {c, c.swapcase()}]
+    return ans
+
+# LC567. Permutation in String - string permutation check - s1 is a permutation substring of s2
+def checkInclusion(self, s1, s2):  # O(|s1|) time and O(1) space (26 chars as keys)
+    d1, d2 = Counter(s1), Counter(s2[:len(s1)])
+    for start in range(len(s1), len(s2)):
+        if d1 == d2: return True
+        d2[s2[start]] += 1
+        d2[s2[start-len(s1)]] -= 1
+        if d2[s2[start-len(s1)]] == 0:
+            del d2[s2[start-len(s1)]]
+    return d1 == d2
+
+# LC383. Ransom Note
+def canConstruct(self, ransomNote, magazine):  # O(m+n)
+    return not collections.Counter(ransomNote) - collections.Counter(magazine)
+def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+    magazine_counts = collections.Counter(magazine)
+    ransom_note_counts = collections.Counter(ransomNote)
+    for char, count in ransom_note_counts.items():
+        if magazine_counts[char] < count: return False
+    return True
+
+# LC71. Simplify Path -  file paths, canonical path
+def simplifyPath(self, path: str) -> str:  # O(n) runtime and space
+    stack = []
+    for folder in path.split('/'):
+        if not folder or folder == '.': continue  # skip this
+        elif folder == '..':
+            if stack: stack.pop()  # go to parent
+        else: stack.append(folder)
+    return '/' + '/'.join(stack)
+
+# LC389. Find the Difference
+def findTheDifference(self, s: str, t: str) -> str:  # O(n) time and O(1) space
+    c = 0
+    for cs in s: c ^= ord(cs) #ord is ASCII value
+    for ct in t: c ^= ord(ct)
+    return chr(c) #chr = convert ASCII into character
+
 # # LC408. Valid Word Abbreviation
 def validWordAbbreviation(self, word, abbr):
     # turn "i12iz4n" to "i.{12}iz.{4}n$"
@@ -52,15 +128,7 @@ def shortestWay(self, source, target):
         i = idxs[c][j] + 1              # next index in source
     return result if i == 0 else result + 1     # add 1 for partial source
 
-# LC71. Simplify Path -  file paths, canonical path
-def simplifyPath(self, path: str) -> str:  # O(n) runtime and space
-    stack = []
-    for folder in path.split('/'):
-        if not folder or folder == '.': continue  # skip this
-        elif folder == '..':
-            if stack: stack.pop()  # go to parent
-        else: stack.append(folder)
-    return '/' + '/'.join(stack)
+
 
 # LC2262. Total Appeal of A String
 def appealSum(self, s: str) -> int:
@@ -245,7 +313,7 @@ def reverseVowels(self, s):
     return ''.join(s)
 
 # LC72. Edit Distance - between 2 words
-def minDistance(self, word1: str, word2: str) -> int:  # O(mn)
+def minDistance(self, word1: str, word2: str) -> int:  # O(mn) time and space
     @lru_cache(None)  # O(mn) runtime and space
     def levenshtein(i, j):  # distance of word1[:i] and word2[:j]
         if i == 0: return j  # Need to insert j chars
@@ -254,7 +322,7 @@ def minDistance(self, word1: str, word2: str) -> int:  # O(mn)
         # delete or replace
         return min(levenshtein(i-1, j), levenshtein(i, j-1), levenshtein(i-1, j-1)) + 1
     return levenshtein(len(word1), len(word2))
-def minDistance(self, word1: str, word2: str) -> int:
+def minDistance(self, word1: str, word2: str) -> int:  # O(mn) time and O(n) space
     # In the above, recursion relies only previous row, so we could save space
     n, m = len(word1), len(word2)
     if n == 0 or m == 0: return max(n, m)
@@ -293,16 +361,7 @@ def convert(self, s: str, numRows: int) -> str:
 
 
 
-# LC97. Interleaving String
-def isInterleave(self, s1: str, s2: str, s3: str) -> bool: # O(nm)
-    if len(s3) != len(s1) + len(s2): return False
-    @lru_cache(None) # without this, it's O(2^(m+n))
-    def match_char(s1,s2,s3):
-        if not s1: return s2 == s3
-        if not s2: return s1 == s3
-        return (s1[0] == s3[0] and match_char(s1[1:],s2,s3[1:])) or \
-               (s2[0] == s3[0] and match_char(s1, s2[1:],s3[1:]))
-    return match_char(s1,s2,s3)
+
 
 # LC942. DI String Match
 def diStringMatch(self, s: str) -> List[int]:
@@ -411,16 +470,7 @@ def partitionLabels(self, s: str) -> List[int]: # O(n) time and space
             start = i+1
     return ret
 
-# LC567. Permutation in String - s1 is a permutation of substring of s2
-def checkInclusion(self, s1, s2):
-    d1, d2 = Counter(s1), Counter(s2[:len(s1)])
-    for start in range(len(s1), len(s2)):
-        if d1 == d2: return True
-        d2[s2[start]] += 1
-        d2[s2[start-len(s1)]] -= 1
-        if d2[s2[start-len(s1)]] == 0:
-            del d2[s2[start-len(s1)]]
-    return d1 == d2
+
 
 # LC1156. Swap For Longest Repeated Character Substring
 def maxRepOpt1(self, S):

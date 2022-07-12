@@ -1,4 +1,41 @@
 
+# LC722. Remove Comments
+def removeComments(self, source):
+    return filter(None, re.sub('//.*|/\*(.|\n)*?\*/', '', '\n'.join(source)).split('\n'))
+def removeComments(self, source: List[str]) -> List[str]:
+    in_comment, output = False, []
+    for s in source:
+        if not in_comment: code = ""
+        i = 0
+        while i < len(s):
+            if i != len(s) - 1 and s[i] + s[i+1] == "//" and not in_comment:
+                break # skip comment line
+            if i != len(s) - 1 and s[i] + s[i+1] == "/*" and not in_comment:
+                in_comment = True
+                i += 2
+                continue
+            if i != len(s) - 1 and s[i] + s[i+1] == "*/" and in_comment:
+                in_comment = False
+                i += 2
+                continue
+            if not in_comment:
+                code += s[i]
+            i += 1
+        if code != "" and not in_comment:
+            output.append(code)
+    return output
+
+# LC474. Ones and Zeroes - knapsack 0/1 1s and 0s and 1s
+def findMaxForm(self, strs: List[str], m: int, n: int) -> int:  # O(mnk) time and space, k: len of strs
+    xy = [[s.count("0"), s.count("1")] for s in strs]
+    @lru_cache(None)
+    def dp(zeros, ones, idx):
+        if zeros < 0 or ones < 0: return -float("inf")
+        if idx == len(strs): return 0
+        x, y = xy[idx]
+        return max(1 + dp(zeros-x, ones-y, idx + 1), dp(zeros, ones, idx + 1))
+    return dp(m, n, 0)
+
 # LC721. Accounts Merge - emails merge  - account merge
 def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
     graph = defaultdict(list)  # build graph for emails
@@ -24,6 +61,7 @@ def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
     return ret
 
 # LC621. Task Scheduler - with cooling period
+# https://leetcode.com/problems/task-scheduler/solution/
 def leastInterval(self, tasks: List[str], n: int) -> int:
     freqs = [0] * 26  # frequencies of the tasks
     for t in tasks: freqs[ord(t) - ord('A')] += 1

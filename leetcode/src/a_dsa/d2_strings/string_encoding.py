@@ -1,4 +1,43 @@
 
+# LC443. String Compression
+def compress(self, chars: List[str]) -> int:  # O(n) time and O(1) space, chars gets shrinked
+    st = i = 0
+    while i < len(chars):
+        while i < len(chars) and chars[i] == chars[st]: i += 1
+        if i - st == 1:  st = i # single diff char, leave it alone
+        else:
+            count = str(i - st)
+            chars[st + 1 : i] = count
+            i = st = st + len(count) + 1  # skip spaces used by count
+    return len(chars)
+
+# LC394. Decode String - expand copies
+def decodeString(self, s: str) -> str:  # O(n*k) time, k is max coeff; O(|s| - parenth)
+    stack = []
+    curr, k = "", 0
+    for char in s:  # O(n)
+        if char == "[":
+            stack.append((curr, k))
+            curr, k = "", 0
+        elif char == "]":
+            last_string, last_k = stack.pop()
+            curr = last_string + last_k * curr  # O(k)
+        elif char.isdigit(): k = k * 10 + int(char)
+        else: curr += char
+    return curr
+
+# LC91. Decode Ways, decode 12 to 1,2 and 12
+def numDecodings(self, s: str) -> int:  # Best, fast and short
+    @lru_cache(maxsize=None)
+    def walk(idx):
+        if idx == len(s): return 1
+        if s[idx] == '0': return 0
+        if idx == len(s) - 1: return 1  # This has to be after above check, case: '0'
+        ret = walk(idx + 1)
+        if int(s[idx: idx+2]) <= 26: ret += walk(idx + 2)
+        return ret
+    return walk(0)
+
 # LC2060. Check if an Original String Exists Given Two Encoded Strings
 def possiblyEquals(self, s1: str, s2: str) -> bool:
     def comb(s):  # Return possible length
@@ -26,17 +65,7 @@ def possiblyEquals(self, s1: str, s2: str) -> bool:
         return False
     return fn(0, 0, 0)  # diff < 0, means s1 has wild chars, > 0 means s2 has wild chars
 
-# LC91. Decode Ways, decode 12 to 1,2 and 12
-def numDecodings(self, s: str) -> int:  # Best, fast and short
-    @lru_cache(maxsize=None)
-    def walk(idx):
-        if idx == len(s): return 1
-        if s[idx] == '0': return 0
-        if idx == len(s) - 1: return 1  # This has to be after above check, case: '0'
-        ret = walk(idx + 1)
-        if int(s[idx: idx+2]) <= 26: ret += walk(idx + 2)
-        return ret
-    return walk(0)
+
 
 # LC471. Encode String with Shortest Length
 @functools.lru_cache(None)
@@ -68,20 +97,7 @@ def encode(self, s: str) -> str:  # O(n^2)
         return smallest
     return mincode(s)
 
-# LC394. Decode String - expand copies
-def decodeString(self, s: str) -> str:
-    stack = []
-    curr, k = "", 0
-    for char in s:
-        if char == "[":
-            stack.append((curr, k))
-            curr, k = "", 0
-        elif char == "]":
-            last_string, last_k = stack.pop()
-            curr = last_string + last_k * curr
-        elif char.isdigit(): k = k * 10 + int(char)
-        else: curr += char
-    return curr
+
 
 # LC271. Encode and Decode Strings
 class Codec:
@@ -100,28 +116,3 @@ class Codec:
     def decode(self, s):
         return [t.replace('||', '|') for t in s.split(' | ')[:-1]]  # -1 ignores last empty
 
-# LC443. String Compression
-def compress(self, chars: List[str]) -> int:  # chars gets shrinked
-    st = i = 0
-    while i < len(chars):
-        while i < len(chars) and chars[i] == chars[st]: i += 1
-        if i - st == 1:  st = i # single diff char, leave it alone
-        else:
-            count = str(i - st)
-            chars[st + 1 : i] = count
-            i = st = st + len(count) + 1  # skip spaces used by count
-    return len(chars)
-def compress(self, chars: List[str]) -> int:
-    st = i = j = 0
-    while i < len(chars):
-        while i < len(chars) and chars[i] == chars[st]: i += 1
-        chars[j] = chars[st]
-        j += 1  # skip char
-        if i - st == 1:
-            st = i # single diff char, leave it alone
-        else:
-            count = str(i - st)
-            chars[j:j+len(count)] = count
-            j += len(count)
-            st = i
-    return j  # chars size is not changed, only end index returned.

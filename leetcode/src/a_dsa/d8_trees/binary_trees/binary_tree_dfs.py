@@ -1,4 +1,25 @@
 
+# LC508. Most Frequent Subtree Sum
+def findFrequentTreeSum(self, root: Optional[TreeNode]) -> List[int]:  # O(n) time and space
+    if root is None: return []
+    count = collections.Counter()
+    def dfs(node):
+        if node is None: return 0
+        s = node.val + dfs(node.left) + dfs(node.right)
+        count[s] += 1
+        return s
+    dfs(root)
+    maxCount = max(count.values())
+    return [s for s in count if count[s] == maxCount]
+
+# LC690. Employee Importance
+def getImportance(self, employees: List['Employee'], query_id: int) -> int:
+    emap = {e.id: e for e in employees}  ## O(n) time and space
+    def dfs(eid):
+        e = emap[eid]
+        return e.importance + sum(dfs(sid) for sid in e.subordinates)
+    return dfs(query_id)
+
 # LC543. Diameter of Binary Tree - binary tree diameter
 def diameterOfBinaryTree(self, root: TreeNode) -> int:
     diameter = 0

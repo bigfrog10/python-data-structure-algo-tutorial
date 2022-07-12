@@ -3,6 +3,51 @@ class ListNode:
         self.val = val
         self.next = next
 
+# LC86. Partition List - separate by given x, similar to odd/even
+def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
+    before = before_head = ListNode(0)
+    after = after_head = ListNode(0)
+    while head:
+        if head.val < x:
+            before.next = head
+            before = before.next
+        else:
+            after.next = head
+            after = after.next
+        head = head.next
+    after.next = None
+    before.next = after_head.next
+    return before_head.next
+
+# LC160. Intersection of Two Linked Lists
+def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+    pA, pB = headA, headB  # O(m + n)
+    while pA != pB:
+        pA = headB if pA is None else pA.next
+        pB = headA if pB is None else pB.next
+    return pA
+
+# LC328. Odd Even Linked List
+def oddEvenList(self, head: ListNode) -> ListNode:
+    if not head: return head
+    odd_walker = head  # condition leans on even, so code is simpler.
+    even_head = even_walker = head.next
+    while even_walker and even_walker.next:
+        odd_walker.next = even_walker.next  # jump next node to next next
+        odd_walker = odd_walker.next
+        even_walker.next = odd_walker.next
+        even_walker = even_walker.next
+    odd_walker.next = even_head
+    return head
+
+# LC876. Middle of the Linked List
+def middleNode(self, head: ListNode) -> ListNode:
+    slow = fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+    return slow
+
 # LC138. Copy List with Random Pointer  # BBG
 def copyRandomList(self, head: 'Node') -> 'Node':
     if not head: return None
@@ -23,18 +68,7 @@ def copyRandomList(self, head: 'Node') -> 'Node':
         nwalker = nwalker.next
     return new_head
 
-# LC328. Odd Even Linked List
-def oddEvenList(self, head: ListNode) -> ListNode:
-    if not head: return head
-    odd_walker = head  # condition leans on even, so code is simpler.
-    even_head = even_walker = head.next
-    while even_walker and even_walker.next:
-        odd_walker.next = even_walker.next  # jump next node to next next
-        odd_walker = odd_walker.next
-        even_walker.next = odd_walker.next
-        even_walker = even_walker.next
-    odd_walker.next = even_head
-    return head
+
 
 # LC1265. Print Immutable Linked List in Reverse
 def printLinkedListInReverse(self, head: 'ImmutableListNode') -> None:  # O(n) in runtime and space
@@ -76,7 +110,7 @@ def printLinkedListInReverse(self, head: 'ImmutableListNode') -> None:  # O(n) r
     while blocks:
         printLinkedListInReverseDirect(blocks.pop(), block_size)
 
-# LC2. Add Two Numbers, top100 - link list reverse order
+# LC2. Add Two Numbers - link list reverse order
 def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
     result = result_tail = ListNode(0)
     carry = 0
@@ -110,13 +144,7 @@ def addTwoNumbers(self, l1, l2):
         rl2 = rl2.next if rl2 else None
     return reverse_list(res.next)
 
-# LC160. Intersection of Two Linked Lists
-def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
-    pA, pB = headA, headB  # O(m + n)
-    while pA != pB:
-        pA = headB if pA is None else pA.next
-        pB = headA if pB is None else pB.next
-    return pA
+
 
 # LC1290. Convert Binary Number in a Linked List to Integer
 def getDecimalValue(self, head: ListNode) -> int:
@@ -146,13 +174,7 @@ def swapNodes(self, head: ListNode, k: int) -> ListNode:
     first.val, slow.val = slow.val, first.val
     return head
 
-# LC876. Middle of the Linked List
-def middleNode(self, head: ListNode) -> ListNode:
-    slow = fast = head
-    while fast and fast.next:
-        slow = slow.next
-        fast = fast.next.next
-    return slow
+
 
 # LC369. Plus One Linked List
 def plusOne(self, head: ListNode) -> ListNode:
@@ -168,7 +190,7 @@ def plusOne(self, head: ListNode) -> ListNode:
         new.next = head
         node = head
         head = new
-    while node:
+    while node:  # change all 9's to zero
         node.val = 0
         node = node.next
     return head

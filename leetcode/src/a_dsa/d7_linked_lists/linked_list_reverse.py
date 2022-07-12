@@ -17,6 +17,31 @@ def reverseBetween(self, head, m, n):
     start.next = pre  # point start to new head
     return dummy.next
 
+# LC24. Swap Nodes in Pairs - reverse pair
+def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    prev = dummy = ListNode(None, head)
+    while head and head.next:
+        prev.next, head.next = head.next, head.next.next
+        prev.next.next = head
+        prev, head = head, head.next
+    return dummy.next
+
+# LC25. Reverse Nodes in k-Group
+def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
+    n, curr = 0, head  # find size
+    while curr:
+        n += 1
+        curr = curr.next
+    dummy = nhead = ListNode()  # the new list to insert to, nhead is previous
+    ntail = None  # store temp head for next
+    for _ in range(n//k):
+        ntail = head  # the save the position for later jumping to
+        for _ in range(k):
+            head.next, nhead.next, head = nhead.next, head, head.next  # insert at nhead
+        nhead = ntail  # move insertion point to the right by k steps
+    ntail.next = head  # for last remainder connection
+    return dummy.next
+
 # LC2130. Maximum Twin Sum of a Linked List
 def pairSum(self, head: Optional[ListNode]) -> int:
     fast, rev = head, None # use head as slow
@@ -46,31 +71,6 @@ def isPalindrome(self, head):
         head, head.next, rev = rev, head, rev.next  # restore head to original
         tail = tail.next  # 2, 3, 2, 1, then 1, 2,3,2,1
     return isPali
-
-# LC24. Swap Nodes in Pairs - reverse pair
-def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
-    prev = dummy = ListNode(None, head)
-    while head and head.next:
-        prev.next, head.next = head.next, head.next.next
-        prev.next.next = head
-        prev, head = head, head.next
-    return dummy.next
-
-# LC25. Reverse Nodes in k-Group
-def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
-    n, curr = 0, head  # find size
-    while curr:
-        n += 1
-        curr = curr.next
-    dummy = nhead = ListNode()  # the new list to insert to, nhead is previous
-    ntail = None  # store temp head for next
-    for _ in range(n//k):
-        ntail = head  # the save the position for later jumping to
-        for _ in range(k):
-            head.next, nhead.next, head = nhead.next, head, head.next  # insert at nhead
-        nhead = ntail  # move insertion point to the right by k steps
-    ntail.next = head  # for last remainder connection
-    return dummy.next
 
 # LC143. Reorder List - odd + <even reverse>
 def reorderList(self, head: ListNode) -> None:

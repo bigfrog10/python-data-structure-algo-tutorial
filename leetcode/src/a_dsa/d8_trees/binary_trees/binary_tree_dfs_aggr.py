@@ -62,14 +62,14 @@ def hasPathSum(self, root: TreeNode, targetSum: int) -> bool:  # O(n) both
                dfs(node.right, target - node.val)
     return dfs(root, targetSum)
 
-# LC113. Path Sum II - tree return all paths
-def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:  # O(n^2)
+# LC113. Path Sum II - tree return all paths with sum target
+def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:  # O(n^2) time
     res = [] # since we need historic info, we backtrack
-    def dfs(node, target, path):  # O(n)
+    def dfs(node, target, path):  # O(n) space and time
         if not node: return False
         if node.val == target:
             if not node.left and not node.right:  # leaf
-                res.append(path + [node.val]) # this is a copy, O(n)
+                res.append(path + [node.val]) # this is a copy, O(n) time
         path.append(node.val)
         dfs(node.left, target - node.val, path)
         dfs(node.right, target - node.val, path)

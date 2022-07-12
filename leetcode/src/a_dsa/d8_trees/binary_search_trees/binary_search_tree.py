@@ -1,7 +1,49 @@
+# useful tree tools: https://leetcode.com/problems/recover-binary-search-tree/discuss/32539/Tree-Deserializer-and-Visualizer-for-Python
+# https://leetcode.com/problems/binary-tree-inorder-traversal/discuss/148939/CPP-Morris-Traversal
+
+# LC99. Recover Binary Search Tree
+# https://leetcode.com/problems/recover-binary-search-tree/discuss/187407/Python-short-and-slick-solution-(108ms-beats-100)-both-stack-and-Morris-versions
+def recoverTree(self, root: Optional[TreeNode]) -> None:  # O(n) time and O(1) space, Morris traversal
+    cur, node, cands = root, TreeNode(-float("inf")), []
+    while cur:
+        if cur.left:
+            pre = cur.left
+            while pre.right and pre.right != cur:
+                pre = pre.right
+            if not pre.right:
+                pre.right = cur
+                cur = cur.left
+            else:
+                pre.right = None
+                if cur.val < node.val:
+                    cands += [node, cur]
+                node = cur
+                cur = cur.right
+        else:
+            if cur.val < node.val:
+                cands += [node, cur]
+            node = cur
+            cur = cur.right
+    cands[0].val, cands[-1].val = cands[-1].val, cands[0].val
+def recoverTree(self, root: Optional[TreeNode]) -> None:
+    x = y = pred = None
+    stack = []
+    while stack or root: # we visited each node twice, push & pop, so O(N)
+        while root:
+            stack.append(root)
+            root = root.left
+        root = stack.pop() # check
+        if pred and root.val < pred.val:
+            x = root
+            if y is None: y = pred  # [1,3,null,null,2] to go further
+            else: break # here we find them
+        pred = root
+        root = root.right # check right side
+    x.val, y.val = y.val, x.val
 
 # LC938. Range Sum of BST - works for count, average as well
-def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
-    ret = 0  # O(n)
+def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int: # O(n) time and space
+    ret = 0
     def dfs(node):
         nonlocal ret
         if not node: return
@@ -11,6 +53,25 @@ def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
         if node.val < high: dfs(node.right)
     dfs(root)
     return ret
+
+# LC95. Unique Binary Search Trees II - structure unique - return all of them
+def generateTrees(self, n: int) -> List[Optional[TreeNode]]:  # O(n * catalan number), O(4^n)
+    def trees(first, last):  # g(n) = sum [g(i-1) * g(n-i)] i=1..n, g(0) = g(1) = 1 Catalan number Gn
+        return [TreeNode(root, left, right)
+                for root in range(first, last+1)
+                for left in trees(first, root-1)
+                for right in trees(root+1, last)] or [None]
+    return trees(1, n)
+
+# LC235. Lowest Common Ancestor of a Binary Search Tree - lca
+def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+    while root:
+        if p.val < root.val > q.val:
+            root = root.left
+        elif p.val > root.val < q.val:
+            root = root.right
+        else:
+            return root
 
 # LC173. Binary Search Tree Iterator
 class BSTIterator:
@@ -133,24 +194,9 @@ def inorderSuccessor(self, node: 'Node') -> 'Node':
     while node.parent and node == node.parent.right: node = node.parent
     return node.parent  # first left
 
-# LC235. Lowest Common Ancestor of a Binary Search Tree - lca
-def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-    while root:
-        if p.val < root.val > q.val:
-            root = root.left
-        elif p.val > root.val < q.val:
-            root = root.right
-        else:
-            return root
 
-# LC95. Unique Binary Search Trees II
-def generateTrees(self, n: int) -> List[Optional[TreeNode]]:  # O(n * catalan number), O(4^n)
-    def trees(first, last):  # g(n) = sum [g(i-1) * g(n-i)] i=1..n, g(0) = g(1) = 1
-        return [TreeNode(root, left, right)
-                for root in range(first, last+1)
-                for left in trees(first, root-1)
-                for right in trees(root+1, last)] or [None]
-    return trees(1, n)
+
+
 
 # LC669. Trim a Binary Search Tree - keep nodes with given range
 def trimBST(self, root: Optional[TreeNode], low: int, high: int) -> Optional[TreeNode]:
@@ -343,19 +389,4 @@ class Codec:
         inorder.reverse()
         return build(None)
 
-# LC99. Recover Binary Search Tree
-def recoverTree(self, root: Optional[TreeNode]) -> None:
-    x = y = pred = None
-    stack = []
-    while stack or root: # we visited each node twice, push & pop, so O(N)
-        while root:
-            stack.append(root)
-            root = root.left
-        root = stack.pop() # check
-        if pred and root.val < pred.val:
-            x = root
-            if y is None: y = pred  # [1,3,null,null,2] to go further
-            else: break # here we find them
-        pred = root
-        root = root.right # check right side
-    x.val, y.val = y.val, x.val
+

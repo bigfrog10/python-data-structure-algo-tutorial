@@ -1,5 +1,5 @@
 
-# LC33. Search in Rotated Sorted Array - return index
+# LC33. Search in Rotated Sorted Array - return index, distinct values
 def search(self, nums: List[int], target: int) -> int:  # O(logn)
     start, end = 0, len(nums) - 1
     while start <= end:
@@ -13,7 +13,7 @@ def search(self, nums: List[int], target: int) -> int:  # O(logn)
             else: end = mid - 1
     return -1
 
-# LC81. Search in Rotated Sorted Array II - check if num is in array
+# LC81. Search in Rotated Sorted Array II - check if num is in array, dupe values
 def search(self, nums: List[int], target: int) -> bool:  # O(n) worst case
     start, end = 0, len(nums) - 1
     while start <= end:

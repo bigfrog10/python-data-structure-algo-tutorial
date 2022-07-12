@@ -1,6 +1,14 @@
 from typing import List
 import math
 
+# LC17. Letter Combinations of a Phone Number - phone letter combo
+def letterCombinations(self, digits):
+    dict = {'2':"abc", '3':"def",  '4':"ghi", '5':"jkl",
+            '6':"mno", '7':"pqrs", '8':"tuv", '9':"wxyz"}
+    cmb = [''] if digits else []
+    for d in digits: cmb = [p + q for p in cmb for q in dict[d]]
+    return cmb
+
 # LC31. Next Permutation
 def nextPermutation(self, nums: List[int]) -> None:  # O(n)
     if not nums: return
@@ -14,6 +22,14 @@ def nextPermutation(self, nums: List[int]) -> None:  # O(n)
         idx1 = next((i-1 for i in range(idx+1, n) if nums[i] <= nums[idx]), n-1)
         nums[idx], nums[idx1] = nums[idx1], nums[idx]  # swap
         nums[idx+1:] = reversed(nums[idx+1:])
+
+# LC118. Pascal's Triangle
+def generate(self, numRows):
+    row, res = [1], []
+    for n in range(numRows):
+        res.append(row)
+        row = [1] + [row[i] + row[i+1] for i in range(n)] + [1]
+    return res
 
 # LC1053. Previous Permutation With One Swap
 def prevPermOpt1(self, arr: List[int]) -> List[int]:
@@ -61,13 +77,7 @@ def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:  # O(n * 2^n)
     backtrack(0, [])
     return ans  # [[],[1],[1,2],[1,2,2],[2],[2,2]]
 
-# LC17. Letter Combinations of a Phone Number, top100 -
-def letterCombinations(self, digits):
-    dict = {'2':"abc", '3':"def",  '4':"ghi", '5':"jkl",
-            '6':"mno", '7':"pqrs", '8':"tuv", '9':"wxyz"}
-    cmb = [''] if digits else []
-    for d in digits: cmb = [p + q for p in cmb for q in dict[d]]
-    return cmb
+
 
 # LC46. Permutations
 def permute(nums: List[int]) -> List[List[int]]:  # O(n!) & O(n!)
@@ -126,13 +136,7 @@ def combine(self, n: int, k: int) -> List[List[int]]:  # O(k * C^k_n)
         nums[j] += 1
     return output
 
-# LC118. Pascal's Triangle
-def generate(self, numRows):
-    row, res = [1], []
-    for n in range(numRows):
-        res.append(row)
-        row = [1] + [row[i] + row[i+1] for i in range(n)] + [1]
-    return res
+
 
 # LC920. Number of Music Playlists
 def numMusicPlaylists(self, N, L, K):

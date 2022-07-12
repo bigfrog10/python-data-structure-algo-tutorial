@@ -1,4 +1,29 @@
 
+# LC1011. Capacity To Ship Packages Within D Days
+def shipWithinDays(self, weights: List[int], D: int) -> int:  # O(nlog(sum - max))
+    left, right = max(weights), sum(weights)
+    while left < right:  # O(log(right - left)
+        midw, days, currw = (left + right) // 2, 1, 0
+        for w in weights:  # O(n)
+            if currw + w > midw:
+                days += 1
+                currw = 0
+            currw += w
+        if days > D: left = midw + 1
+        else: right = midw
+    return left
+
+# LC875. Koko Eating Bananas
+def minEatingSpeed(self, piles: List[int], h: int) -> int:
+    left, right = 1, max(piles)  # we start 1 because we want min value
+    while left < right:
+        mid = left + (right - left) // 2
+        # ceiling = (x - 1) // q + 1
+        counts = sum((p-1) // mid + 1 for p in piles)
+        if counts > h: left = mid + 1  # we split too much, so try to split less
+        else: right = mid  # we reduce this to get min
+    return left
+
 # LC1891. Cutting Ribbons
 def maxLength(self, ribbons: List[int], k: int) -> int:  # O(log(min(totl // k, maxl)))
     totl, maxl = sum(ribbons), max(ribbons)
@@ -19,26 +44,14 @@ def findPeakElement(self, nums: List[int]) -> int: # logn
         else: left = mid + 1
     return left
 
-# LC1011. Capacity To Ship Packages Within D Days
-def shipWithinDays(self, weights: List[int], D: int) -> int:  # O(nlog(sum - max))
-    left, right = max(weights), sum(weights)
-    while left < right:  # O(log(right - left)
-        midw, days, currw = (left + right) // 2, 1, 0
-        for w in weights:  # O(n)
-            if currw + w > midw:
-                days += 1
-                currw = 0
-            currw += w
-        if days > D: left = midw + 1
-        else: right = midw
-    return left
+
 
 # LC2187. Minimum Time to Complete Trips
 def minimumTime(self, time: List[int], totalTrips: int) -> int:
     m = min(time) * totalTrips  ## O(logm)
     return bisect_left(range(1, m), totalTrips, key= lambda x: sum(x // t for t in time)) + 1
 
-# LC410. Split Array Largest Sum
+# LC410. Split Array Largest Sum - split into m parts
 def splitArray(self, nums: List[int], m: int) -> int:
     l, r = max(nums), sum(nums)
     while l < r:
@@ -113,16 +126,7 @@ def smallestDistancePair(self, nums: List[int], k: int) -> int:
         else: high = mid
     return low
 
-# LC875. Koko Eating Bananas
-def minEatingSpeed(self, piles: List[int], h: int) -> int:
-    left, right = 1, max(piles)  # we start 1 because we want min value
-    while left < right:
-        mid = left + (right - left) // 2
-        # ceiling = (x - 1) // q + 1
-        counts = sum((p-1) // mid + 1 for p in piles)
-        if counts > h: left = mid + 1  # we split too much, so try to split less
-        else: right = mid  # we reduce this to get min
-    return left
+
 
 # LC1395. Count Number of Teams - team of 3 solders, increasing or descreasing ratings
 from sortedcontainers import SortedList

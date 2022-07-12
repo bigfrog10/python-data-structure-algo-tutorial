@@ -1,4 +1,27 @@
 
+# LC772. Basic Calculator III - +-*/()
+def calculate(self, s: str) -> int:  # O(n) time and space
+    stack, sign, num = [], '+', 0  # stack for () and sign in front
+    for i, c in enumerate(s + '+'):
+        if c.isdigit(): num = num * 10 + int(c)
+        elif c == '(':
+            stack.append(sign)  # save history
+            stack.append(c)
+            sign = '+'
+        elif c in '+-*/)':
+            if sign == '+': stack.append(num)
+            elif sign == '-': stack.append(-num)
+            elif sign == '*': stack.append(stack.pop() * num)
+            elif sign == '/': stack.append(int(stack.pop() / num))
+            if c == ')':
+                num, item = 0, stack.pop()  # num is used afterward
+                while item != '(':
+                    num += item
+                    item = stack.pop()
+                sign = stack.pop()
+            else: sign, num = c, 0 # this is for +-*/
+    return sum(stack)
+
 # LC282. Expression Add Operators  - return all results *** 4 cards to 24 game
 def addOperators(self, num: str, target: int) -> List[str]:
     n, res = len(num), []
@@ -75,28 +98,7 @@ def calculate(self, s):  # O(n) time and space
             num = 0
     return res + num * sign
 
-# LC772. Basic Calculator III - +-*/()
-def calculate(self, s: str) -> int:
-    stack, sign, num = [], '+', 0  # stack for () and sign in front
-    for i, c in enumerate(s + '+'):
-        if c.isdigit(): num = num * 10 + int(c)
-        elif c == '(':
-            stack.append(sign)  # save history
-            stack.append(c)
-            sign = '+'
-        elif c in '+-*/)':
-            if sign == '+': stack.append(num)
-            elif sign == '-': stack.append(-num)
-            elif sign == '*': stack.append(stack.pop() * num)
-            elif sign == '/': stack.append(int(stack.pop() / num))
-            if c == ')':
-                num, item = 0, stack.pop()  # num is used afterward
-                while item != '(':
-                    num += item
-                    item = stack.pop()
-                sign = stack.pop()
-            else: sign, num = c, 0 # this is for +-*/
-    return sum(stack)
+
 
 # LC494. Target Sum - with plus minus +- operators - ints expression built for target
 def findTargetSumWays(self, nums: List[int], S: int) -> int:

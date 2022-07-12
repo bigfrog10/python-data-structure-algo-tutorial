@@ -1,4 +1,52 @@
 
+# LC1061. Lexicographically Smallest Equivalent String - union find
+def smallestEquivalentString(self, s1: str, s2: str, baseStr: str) -> str:
+    ##  M union or find sequences on N objects takes O(N + N * log*N), O(N) space
+    parents = {c:c for c in string.ascii_lowercase}
+    ranks = {c:1 for c in string.ascii_lowercase}
+
+    def find(char):
+        res = char
+        while res != parents[res]:
+            parents[res] = parents[parents[res]]
+            res = parents[res]
+        return res
+    def union(char1, char2):
+        p1, p2 = find(char1), find(char2)
+        if p1 == p2: return 0
+        if ord(p1) <= ord(p2):
+            ranks[p1] += ranks[p2]
+            parents[p2] = p1
+        else:
+            ranks[p2] += ranks[p1]
+            parents[p1] = p2
+    for char1, char2 in zip(s1, s2):
+        union(char1, char2)
+    res = ""
+    for char in baseStr:
+        res += find(char)
+    return res
+
+# LC451. Sort Characters By Frequency - sort by freq
+def frequencySort(self, s: str) -> str:  # O(n), not nlogn, using bucket sort
+    if not s: return s
+    counts = collections.Counter(s)  # Determine the frequency of each character.
+    max_freq = max(counts.values())
+    buckets = [[] for _ in range(max_freq + 1)]  # count -> char list
+    for c, i in counts.items(): buckets[i].append(c)  # Bucket sort the characters by frequency.
+    res = []
+    for i in range(len(buckets))[::-1]:
+        for c in buckets[i]: res.append(c * i)
+    return "".join(res)
+def frequencySort(self, s: str) -> str:  # O(nlogn) time and O(n) space
+    counts = collections.Counter(s)  # Count up the occurances.
+    string_builder = []
+    for letter, freq in counts.most_common():
+        # letter * freq makes freq copies of letter.
+        # e.g. "a" * 4 -> "aaaa"
+        string_builder.append(letter * freq)
+    return "".join(string_builder)
+
 # LC791. Custom Sort String
 def customSortString(self, order: str, s: str) -> str:  # O(s + t) time and O(t) space
     count = collections.Counter(s)
@@ -69,17 +117,7 @@ def alienOrder(self, words: List[str]) -> str:  # O(total word lengths)
 
 
 
-# LC451. Sort Characters By Frequency - sort by freq
-def frequencySort(self, s: str) -> str:  # O(n), not nlogn, using bucket sort
-    if not s: return s
-    counts = collections.Counter(s)  # Determine the frequency of each character.
-    max_freq = max(counts.values())
-    buckets = [[] for _ in range(max_freq + 1)]  # count -> char list
-    for c, i in counts.items(): buckets[i].append(c)  # Bucket sort the characters by frequency.
-    res = []
-    for i in range(len(buckets))[::-1]:
-        for c in buckets[i]: res.append(c * i)
-    return "".join(res)
+
 
 # LC1985. Find the Kth Largest Integer in the Array - find kth largest
 def kthLargestNumber(self, nums: List[str], k: int) -> str:  # O(nlogk)

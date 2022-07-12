@@ -1,4 +1,53 @@
 
+# LC53. Maximum Subarray   - max sum amount all subarrays
+def maxSubArray(self, nums: List[int]) -> int:
+    total = max_total = nums[0]
+    for i in range(1, len(nums)):
+        total += nums[i]
+        # if the total is not worth to keep, start a new total
+        # we can also add code to keep track the start index.
+        total = max(total, nums[i])
+        max_total = max(max_total, total)  # this is our goal.
+    return max_total
+
+# LC1658. Minimum Operations to Reduce X to Zero - reduce to zero
+def minOperations(self, nums: List[int], x: int) -> int:  # O(n) time and O(1) space - O(1) space is excellent
+    # This problem is equivalent to finding the longest subarray whose sum is == totalSum - x
+    target = sum(nums) - x
+    if target < 0: return -1
+    res, cur, start = -1, 0, 0
+    for end in range(len(nums)):
+        cur += nums[end]
+        while cur > target and start <= end:
+            cur -= nums[start]
+            start += 1
+        if cur == target:
+            res = max(res, end - start + 1)
+    return len(nums) - res if res > -1 else -1
+
+# LC325. Maximum Size Subarray Sum Equals k
+def maxSubArrayLen(self, nums: List[int], k: int) -> int:  # O(n) time and space
+    maxl, cumu, cache = 0, 0, dict()  # cumu -> index
+    for i, v in enumerate(nums):
+        cumu += v
+        if cumu == k: maxl = max(maxl, i+1)
+        elif cumu - k in cache:  # middle subarray
+            maxl = max(maxl, i - cache[cumu - k])
+        if cumu not in cache: cache[cumu] = i  # maintain earliest index
+    return maxl
+
+# LC209. Minimum Size Subarray Sum - min size with sum target, all positives
+def minSubArrayLen(self, s: int, nums: List[int]) -> int:  # 2 pointers , O(n) time and O(1) space
+    total = left = 0 # since all numbers are positive, this works.
+    result = len(nums) + 1
+    for right, n in enumerate(nums):
+        total += n
+        while total >= s:
+            result = min(result, right - left + 1)
+            total -= nums[left]
+            left += 1
+    return result if result <= len(nums) else 0
+
 # LC560. Subarray Sum Equals K - total count of subarrays whose sum equals to k
 from typing import List
 def subarraySum(self, nums: List[int], k: int) -> int:
@@ -23,16 +72,8 @@ def checkSubarraySum(self, nums: List[int], k: int) -> bool:
         else: sd[summ] = i
     return False
 
-# LC325. Maximum Size Subarray Sum Equals k
-def maxSubArrayLen(self, nums: List[int], k: int) -> int:  # O(n) time and space
-    maxl, cumu, cache = 0, 0, dict()  # cumu -> index
-    for i, v in enumerate(nums):
-        cumu += v
-        if cumu == k: maxl = max(maxl, i+1)
-        elif cumu - k in cache:  # middle subarray
-            maxl = max(maxl, i - cache[cumu - k])
-        if cumu not in cache: cache[cumu] = i  # maintain earliest index
-    return maxl
+
+
 
 # LC974. Subarray Sums Divisible by K - return # of such sums
 def subarraysDivByK(self, A: List[int], K: int) -> int:
@@ -45,17 +86,6 @@ def subarraysDivByK(self, A: List[int], K: int) -> int:
     # so selecting 2 elements has C(C-1) / 2 possibilities.
     return sum(c * (c - 1) // 2 for c in counts.values())
 
-# LC209. Minimum Size Subarray Sum - min size with sum target, all positives
-def minSubArrayLen(self, s: int, nums: List[int]) -> int:  # 2 pointers
-    total = left = 0 # since all numbers are positive, this works.
-    result = len(nums) + 1
-    for right, n in enumerate(nums):
-        total += n
-        while total >= s:
-            result = min(result, right - left + 1)
-            total -= nums[left]
-            left += 1
-    return result if result <= len(nums) else 0
 
 # LC862. Shortest Subarray with Sum at Least K - could be negative
 def shortestSubarray(self, nums: List[int], k: int) -> int:  # O(n) in time and space
@@ -78,16 +108,7 @@ def splitArray(self, nums): # O(n^2)
 
     return any(split(nums[:j]) & split(nums[j+1:]) for j in range(3, len(nums)-3))
 
-# LC53. Maximum Subarray   - max sum amount all subarrays
-def maxSubArray(self, nums: List[int]) -> int:
-    total = max_total = nums[0]
-    for i in range(1, len(nums)):
-        total += nums[i]
-        # if the total is not worth to keep, start a new total
-        # we can also add code to keep track the start index.
-        total = max(total, nums[i])
-        max_total = max(max_total, total)  # this is our goal.
-    return max_total
+
 
 # LC643. Maximum Average Subarray I - max window average
 def findMaxAverage(self, nums: List[int], k: int) -> float:
@@ -131,16 +152,7 @@ def waysToPartition(self, nums: List[int], k: int) -> int:
         best = max(best, after_counts[k - x] + before_counts[x - k])
     return best
 
-# LC525. Contiguous Array - longest subarray with equal # of 1 and 0, 01 array
-def findMaxLength(self, nums: List[int]) -> int:
-    c2i = {} # store value to index, cache
-    maxlen = count = 0
-    for i, n in enumerate(nums):
-        count += 1 if n else -1
-        if count == 0: maxlen = max(maxlen, i+1)  # balanced from 0 to i
-        if count in c2i: maxlen = max(maxlen, i - c2i[count])
-        else: c2i[count] = i
-    return maxlen
+
 
 # LC152. Maximum Product Subarray
 def maxProduct(self, nums: List[int]) -> int:

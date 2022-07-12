@@ -8,7 +8,7 @@ def maxProfit(self, prices: List[int], fee: int) -> int:
         profit = max(profit, price - buy_price - fee)
     return profit
 
-# LC121. Best Time to Buy and Sell Stock, top100
+# LC121. Best Time to Buy and Sell Stock
 def maxProfit(self, prices: List[int]) -> int:
     t1_cost, t1_profit = float('inf'), 0
     for price in prices:
@@ -38,7 +38,7 @@ def maxProfit3(self, prices):
         t2_profit = max(t2_profit, price - t2_cost)
     return t2_profit
 
-# LC188. Best Time to Buy and Sell Stock IV
+# LC188. Best Time to Buy and Sell Stock IV - You may complete at most k transactions.
 def maxProfit4(self, k: int, prices: List[int]) -> int:
     if k == 0: return 0 # check problem 3 for the idea.
     if not prices: return 0

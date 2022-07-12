@@ -1,4 +1,67 @@
 
+# LC609. Find Duplicate File in System
+def findDuplicate(self, paths: List[str]) -> List[List[str]]:  # O(all chars) time and space
+    groups = defaultdict(list)
+    for s in paths:
+        segs = s.split(' ')
+        p = segs[0]
+        for i in range(1, len(segs)):
+            seg = segs[i]
+            psegs = seg.split('(')
+            c = psegs[1] # [:-1]  # remove ) at the end
+            groups[c].append(p + '/' + psegs[0])
+    ret = [gl for gl in groups.values() if len(gl) > 1]
+    return ret
+
+# LC14. Longest Common Prefix - lcp
+def longestCommonPrefix(self, strs):  # O(sum(len(str)))
+    if not strs: return ""
+    shortest = min(strs, key=len)
+    for i, ch in enumerate(shortest):
+        for other in strs:
+            if other[i] != ch: return shortest[:i]
+    return shortest
+
+# LC2042. Check if Numbers Are Ascending in a Sentence
+def areNumbersAscending(self, s: str) -> bool:
+    nums = [int(w) for w in s.split() if w.isdigit()]
+    return all(nums[i-1] < nums[i] for i in range(1, len(nums)))
+
+# LC30. Substring with Concatenation of All Words
+def findSubstring(self, s: str, words: List[str]) -> List[int]:  # O(numWords * len(s))
+    wordBag = Counter(words)   # count the freq of each word
+    wordLen, numWords = len(words[0]), len(words)
+    totalLen, res = wordLen*numWords, []
+    for i in range(len(s)-totalLen+1):   # scan through s
+        # For each i, determine if s[i:i+totalLen] is valid
+        seen = defaultdict(int)   # reset for each i
+        for j in range(i, i+totalLen, wordLen):
+            currWord = s[j:j+wordLen]
+            if currWord in wordBag:
+                seen[currWord] += 1
+                if seen[currWord] > wordBag[currWord]: break
+            else: break  # if not in wordBag
+        if seen == wordBag: res.append(i)  # store result
+    return res
+
+# LC151. Reverse Words in a String
+def reverseWords(self, s: str) -> str:
+    return " ".join(reversed(s.split()))
+
+# LC1048. Longest String Chain
+def longestStrChain(self, words: List[str]) -> int:  # O(L^2 * N) where L is max len of words, O(N) space
+    word_set = set(words)
+    @lru_cache(None)
+    def dfs(word):  # O(N)
+        t_max =1
+        for i in range(len(word)):  # L^2
+            tmp = word[:i] + word[i+1:]  # delete a letter, instead of inserting
+            if tmp in word_set: t_max = max(t_max, dfs(tmp)+1)
+        return t_max
+    result = 0
+    for word in word_set: result = max(dfs(word), result)
+    return result
+
 # LC249. Group Shifted Strings
 def groupStrings(self, strings: List[str]) -> List[List[str]]:
     def shash(s):
@@ -15,7 +78,7 @@ def groupStrings(self, strings: List[str]) -> List[List[str]]:
 
 # LC140. Word Break II - return all possible answer
 def wordBreak(self, s: str, wordDict):  #  we may have O(2^n) solutions, n=len(s)
-    word_set = set(wordDict)   # this line takes O(?) time
+    word_set = set(wordDict)   ## O(2^n + m) time and space, m = len(wordDict)
     @cache
     def dfs(s):
         if s == '': return []
@@ -42,7 +105,7 @@ def wordBreak(s: str, wordDict: List[str]) -> List[str]:
 
 # LC139. Word Break, top100 - return breakable or not
 def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-    wordset = set(wordDict)  ## O(n^3) n = len(s) + O(m), m is size of dict
+    wordset = set(wordDict)  ## O(n^3) n = len(s)     ### + O(m), m is size of dict
     @lru_cache  # O(n)
     def break_words(start: int):
         if start == len(s): return True
@@ -110,7 +173,7 @@ def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List
     return res
 
 # LC79. Word Search, top100 - search in 2d matrix
-def exist(self, board: List[List[str]], word: str) -> bool:  # O(h*w*3^wl)
+def exist(self, board: List[List[str]], word: str) -> bool:  # O(h * w * 3^wl), wl = len(word), space O(wl)
     if not board or not board[0]: return False
     h, w, wl = len(board), len(board[0]), len(word)
     def dfs(i, j, wi):
@@ -135,7 +198,7 @@ def exist(self, board: List[List[str]], word: str) -> bool:  # O(h*w*3^wl)
 
 # LC212. Word Search II - return all words
 def findWords(self, board: List[List[str]], words: List[str]) -> List[str]: # This is fast
-    trie, WORD_KEY = {}, '$'  # O(M4*3^(L-1)), M=cells, L=max(len(word) for words)
+    trie, WORD_KEY = {}, '$'  # O(M * 4 * 3^(L-1)), M=cells, L=max(len(word) for words)
     for word in words:  # space O(number of letters in trie)
         node = trie
         for letter in word: node = node.setdefault(letter, {})
@@ -321,33 +384,11 @@ def toGoatLatin(self, sentence: str) -> str:
     return ' '.join(ret)
 
 
-# LC14. Longest Common Prefix - lcp
-def longestCommonPrefix(self, strs):  # O(sum(len(str)))
-    if not strs: return ""
-    shortest = min(strs, key=len)
-    for i, ch in enumerate(shortest):
-        for other in strs:
-            if other[i] != ch: return shortest[:i]
-    return shortest
 
 
 
-# LC30. Substring with Concatenation of All Words
-def findSubstring(self, s: str, words: List[str]) -> List[int]:  # O(numWords * len(s))
-    wordBag = Counter(words)   # count the freq of each word
-    wordLen, numWords = len(words[0]), len(words)
-    totalLen, res = wordLen*numWords, []
-    for i in range(len(s)-totalLen+1):   # scan through s
-        # For each i, determine if s[i:i+totalLen] is valid
-        seen = defaultdict(int)   # reset for each i
-        for j in range(i, i+totalLen, wordLen):
-            currWord = s[j:j+wordLen]
-            if currWord in wordBag:
-                seen[currWord] += 1
-                if seen[currWord] > wordBag[currWord]: break
-            else: break  # if not in wordBag
-        if seen == wordBag: res.append(i)  # store result
-    return res
+
+
 
 # LC2023. Number of Pairs of Strings With Concatenation Equal to Target
 def numOfPairs(self, nums: List[str], target: str) -> int:
@@ -361,19 +402,7 @@ def numOfPairs(self, nums: List[str], target: str) -> int:
     return ans
 
 
-# LC609. Find Duplicate File in System
-def findDuplicate(self, paths: List[str]) -> List[List[str]]:
-    groups = defaultdict(list)
-    for s in paths:
-        segs = s.split(' ')
-        p = segs[0]
-        for i in range(1, len(segs)):
-            seg = segs[i]
-            psegs = seg.split('(')
-            c = psegs[1] # [:-1]  # remove ) at the end
-            groups[c].append(p + '/' + psegs[0])
-    ret = [gl for gl in groups.values() if len(gl) > 1]
-    return ret
+
 
 # LC1554. Strings Differ by One Character
 def differByOne(self, dict: List[str]) -> bool:  # O(mn)
@@ -419,9 +448,6 @@ def areSentencesSimilar(self, sentence1: List[str], sentence2: List[str], simila
         if w != v and (w,v) not in sets and (v,w) not in sets: return False
     return True
 
-# LC151. Reverse Words in a String
-def reverseWords(self, s: str) -> str:
-    return " ".join(reversed(s.split()))
 
 # LC557. Reverse Words in a String III
 def reverseWords(self, s: str) -> str:
@@ -449,27 +475,15 @@ def countCharacters(self, words: List[str], chars: str) -> int:
             suml += len(word)
     return suml
 
-# LC1048. Longest String Chain
-def longestStrChain(self, words: List[str]) -> int:
-    word_set = set(words)
-    @lru_cache(None)
-    def dfs(word):  # O(N) or O(L^2 * N) where L is max len of words
-        t_max =1
-        for i in range(len(word)):
-            tmp = word[:i] + word[i+1:]  # delete a letter, instead of inserting
-            if tmp in word_set: t_max = max(t_max, dfs(tmp)+1)
-        return t_max
-    result = 0
-    for word in word_set: result = max(dfs(word), result)
-    return result
+
 
 # LC1268. Search Suggestions System
-def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:  #  O(nlog(n))+O(mlog(n))
-    products.sort()
+def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:  # O(nlog(n))+O(mlog(n))
+    products.sort()  # O(nlogn)
     res, prefix, i = [], '', 0
-    for c in searchWord:
+    for c in searchWord:  # O(m)
         prefix += c
-        i = bisect.bisect_left(products, prefix, i)
+        i = bisect.bisect_left(products, prefix)#, i)  # O(logm)
         res.append([w for w in products[i:i + 3] if w.startswith(prefix)])
     return res
 # Or Trie

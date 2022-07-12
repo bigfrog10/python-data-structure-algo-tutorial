@@ -1,6 +1,71 @@
 from typing import List
 from collections import Counter
 
+# LC4. Median of Two Sorted Arrays, top100
+def findMedianSortedArrays(self, A, B):  # O(log(m+n))
+    l = len(A) + len(B)
+    if l % 2 == 1: return self.kth(A, B, l // 2)
+    else: return (self.kth(A, B, l // 2) + self.kth(A, B, l // 2 - 1)) / 2.
+def kth(self, a, b, k):
+    if not a: return b[k]
+    if not b: return a[k]
+    ia, ib = len(a) // 2 , len(b) // 2
+    ma, mb = a[ia], b[ib]
+
+    if ia + ib < k:  # when k is bigger than the sum of a and b's median indices
+        # if a's median is bigger than b's, b's first half doesn't include k
+        if ma > mb: return self.kth(a, b[ib + 1:], k - ib - 1)
+        else: return self.kth(a[ia + 1:], b, k - ia - 1)
+    else:  # when k is smaller than the sum of a and b's indices
+        # if a's median is bigger than b's, a's second half doesn't include k
+        if ma > mb: return self.kth(a[:ia], b, k)
+        else: return self.kth(a, b[:ib], k)
+def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+    # https://leetcode.com/problems/median-of-two-sorted-arrays/discuss/2481/Share-my-O(log(min(mn)))-solution-with-explanation
+    A, B = nums1, nums2  # O(log(min(m, n)))
+    m, n = len(A), len(B)
+    if m > n: A, B, m, n = B, A, n, m
+    if n == 0: raise ValueError
+    imin, imax, half_len = 0, m, (m + n + 1) // 2
+    while imin <= imax:
+        i = (imin + imax) // 2  # binary search
+        j = half_len - i  # condition 1: i+j = half_len, so break into 2 equal parts
+        if i < m and B[j-1] > A[i]: imin = i + 1  # i is too small, must increase it
+        elif i > 0 and A[i-1] > B[j]: imax = i - 1  # i is too big, must decrease it
+        else:  # i is perfect,
+            # condition 2: B[j-1] <= A[i] and A[i-1] <= B[j], so max(left) <= min(right)
+            if i == 0: max_of_left = B[j-1]
+            elif j == 0: max_of_left = A[i-1]
+            else: max_of_left = max(A[i-1], B[j-1])
+            if (m + n) % 2 == 1: return max_of_left  # the middle one
+            if i == m: min_of_right = B[j]
+            elif j == n: min_of_right = A[i]
+            else: min_of_right = min(A[i], B[j])
+            return (max_of_left + min_of_right) / 2.0  # no middle, so take average
+
+# LC881. Boats to Save People
+def numRescueBoats(self, people: List[int], limit: int) -> int:  # nlogn
+    people.sort()
+    i, j = 0, len(people) - 1
+    ans = 0
+    while i <= j:
+        ans += 1
+        if people[i] + people[j] <= limit:
+            i += 1
+        j -= 1
+    return ans
+
+# LC1909. Remove One Element to Make the Array Strictly Increasing
+def canBeIncreasing(self, nums: List[int]) -> bool:
+    cnt = 0
+    for i in range(1, len(nums)):
+        if nums[i] <= nums[i-1]:
+            if cnt > 0: return False
+            cnt += 1
+            if i > 1 and nums[i] <= nums[i-2]:
+                nums[i] = nums[i-1]  # case like [1,6,7,5,8]
+    return True
+
 # LC88. Merge Sorted Array - merge n2 to n1
 def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
     i, j, k = m-1, n-1, m+n-1  # start from backward
@@ -13,6 +78,7 @@ def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
             j -= 1
         k -= 1
     if j > -1: nums1[0:j+1] = nums2[0:j+1]
+
 
 # LC977. Squares of a Sorted Array
 def sortedSquares(self, nums: List[int]) -> List[int]: # O(n)
@@ -143,17 +209,6 @@ def checkPossibility(self, nums: List[int]) -> bool:
             removed = True
     return True
 
-# LC1909. Remove One Element to Make the Array Strictly Increasing
-def canBeIncreasing(self, nums: List[int]) -> bool:
-    cnt = 0
-    for i in range(1, len(nums)):
-        if nums[i] <= nums[i-1]:
-            if cnt > 0: return False
-            cnt += 1
-            if i > 1 and nums[i] <= nums[i-2]:
-                nums[i] = nums[i-1]  # case like [1,6,7,5,8]
-    return True
-
 # LC1387. Sort Integers by The Power Value
 def getKth(self, lo: int, hi: int, k: int) -> int:
     dic = {1:0}
@@ -167,48 +222,6 @@ def getKth(self, lo: int, hi: int, k: int) -> int:
     heapq.heapify(lst)
     for i in range(k): ans = heapq.heappop(lst)
     return ans[1]
-
-# LC4. Median of Two Sorted Arrays, top100
-def findMedianSortedArrays(self, A, B):  # O(log(m+n))
-    l = len(A) + len(B)
-    if l % 2 == 1: return self.kth(A, B, l // 2)
-    else: return (self.kth(A, B, l // 2) + self.kth(A, B, l // 2 - 1)) / 2.
-def kth(self, a, b, k):
-    if not a: return b[k]
-    if not b: return a[k]
-    ia, ib = len(a) // 2 , len(b) // 2
-    ma, mb = a[ia], b[ib]
-
-    if ia + ib < k:  # when k is bigger than the sum of a and b's median indices
-        # if a's median is bigger than b's, b's first half doesn't include k
-        if ma > mb: return self.kth(a, b[ib + 1:], k - ib - 1)
-        else: return self.kth(a[ia + 1:], b, k - ia - 1)
-    else:  # when k is smaller than the sum of a and b's indices
-        # if a's median is bigger than b's, a's second half doesn't include k
-        if ma > mb: return self.kth(a[:ia], b, k)
-        else: return self.kth(a, b[:ib], k)
-def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
-    # https://leetcode.com/problems/median-of-two-sorted-arrays/discuss/2481/Share-my-O(log(min(mn)))-solution-with-explanation
-    A, B = nums1, nums2  # O(log(min(m, n)))
-    m, n = len(A), len(B)
-    if m > n: A, B, m, n = B, A, n, m
-    if n == 0: raise ValueError
-    imin, imax, half_len = 0, m, (m + n + 1) // 2
-    while imin <= imax:
-        i = (imin + imax) // 2  # binary search
-        j = half_len - i  # condition 1: i+j = half_len, so break into 2 equal parts
-        if i < m and B[j-1] > A[i]: imin = i + 1  # i is too small, must increase it
-        elif i > 0 and A[i-1] > B[j]: imax = i - 1  # i is too big, must decrease it
-        else:  # i is perfect,
-            # condition 2: B[j-1] <= A[i] and A[i-1] <= B[j], so max(left) <= min(right)
-            if i == 0: max_of_left = B[j-1]
-            elif j == 0: max_of_left = A[i-1]
-            else: max_of_left = max(A[i-1], B[j-1])
-            if (m + n) % 2 == 1: return max_of_left  # the middle one
-            if i == m: min_of_right = B[j]
-            elif j == n: min_of_right = A[i]
-            else: min_of_right = min(A[i], B[j])
-            return (max_of_left + min_of_right) / 2.0  # no middle, so take average
 
 # LC1439. Find the Kth Smallest Sum of a Matrix With Sorted Rows
 def kthSmallest(self, mat: List[List[int]], k: int) -> int: # 300ms

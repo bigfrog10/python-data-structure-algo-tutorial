@@ -1,6 +1,60 @@
 import bisect
 from typing import List
 
+# LC35. Search Insert Position
+def searchInsert(self, nums: List[int], target: int) -> int:
+    left, right = 0, len(nums) - 1
+    while left <= right:
+        pivot = (left + right) // 2
+        if nums[pivot] == target: return pivot
+        if target < nums[pivot]: right = pivot - 1
+        else: left = pivot + 1
+    return left
+# return bisect.bisect_left(nums, target)
+
+# LC34. Find First and Last Position of Element in Sorted Array
+def searchRange(self, nums: List[int], target: int) -> List[int]:
+    if not nums or target < nums[0] or target > nums[-1]: return [-1, -1]
+    left, right = 0, len(nums) - 1
+    while left < right:  # search left
+        mid = left + (right - left) // 2
+        if nums[mid] < target: left = mid+1
+        else: right = mid  # we keep right side >= target
+    if nums[left] != target: return [-1, -1]
+    left1, right = left, len(nums) - 1  # search right
+    while left1 < right:
+        mid = left1 + (right - left1 + 1) // 2
+        if nums[mid] > target: right = mid - 1
+        else: left1 = mid
+    return [left, right]
+def searchRange1(self, nums: List[int], target: int) -> List[int]:
+    if not nums: return [-1, -1]
+    left = bisect.bisect_left(nums, target)  # the index of leftmost target
+    left = left if left < len(nums) and nums[left] == target else -1
+    if left == -1: return [-1, -1]
+    right = bisect.bisect(nums, target)  # the index right after target
+    return [left, right - 1]
+
+# LC540. Single Element in a Sorted Array - of double elements, find it in log time
+def singleNonDuplicate(self, nums: List[int]) -> int:  # simplest and fast
+    lo, hi = 0, len(nums) - 1
+    while lo < hi:
+        mid = lo + (hi - lo) // 2
+        if mid % 2 == 1: mid -= 1  # move to even case
+        if nums[mid] == nums[mid + 1]:  # means we have even numbers of left
+            lo = mid + 2  # so go to right to find the odd/single
+        else: hi = mid  # otherwise move to left.
+    return nums[lo]  # because hi is not equal
+
+# LC278. First Bad Version
+def firstBadVersion(self, n):
+    start, end = 1, n
+    while start < end:  # start == end after loop
+        mid = start + (end - start) // 2
+        if isBadVersion(mid): end = mid  # keep end side is bad
+        else: start = mid + 1  # start side is after good
+    return start
+
 # LC1539. Kth Missing Positive Number - from 1
 def findKthPositive(self, arr, k):  # O(logn)
     beg, end = 0, len(arr)
@@ -39,51 +93,6 @@ def findClosestElements(self, A, k, x): # O(logn + k)
         else: right = mid  # smaller element always wins when there is a tie
     return A[left:left + k]  # left = right
 
-# LC34. Find First and Last Position of Element in Sorted Array
-def searchRange(self, nums: List[int], target: int) -> List[int]:
-    if not nums or target < nums[0] or target > nums[-1]: return [-1, -1]
-    left, right = 0, len(nums) - 1
-    while left < right:  # search left
-        mid = left + (right - left) // 2
-        if nums[mid] < target: left = mid+1
-        else: right = mid  # we keep right side >= target
-    if nums[left] != target: return [-1, -1]
-    left1, right = left, len(nums) - 1  # search right
-    while left1 < right:
-        mid = left1 + (right - left1 + 1) // 2
-        if nums[mid] > target: right = mid - 1
-        else: left1 = mid
-    return [left, right]
-def searchRange1(self, nums: List[int], target: int) -> List[int]:
-    if not nums: return [-1, -1]
-    left = bisect.bisect_left(nums, target)  # the index of leftmost target
-    left = left if left < len(nums) and nums[left] == target else -1
-    if left == -1: return [-1, -1]
-    right = bisect.bisect(nums, target)  # the index right after target
-    return [left, right - 1]
-
-
-
-# LC278. First Bad Version
-def firstBadVersion(self, n):
-    start, end = 1, n
-    while start < end:  # start == end after loop
-        mid = start + (end - start) // 2
-        if isBadVersion(mid): end = mid  # keep end side is bad
-        else: start = mid + 1  # start side is after good
-    return start
-
-# LC540. Single Element in a Sorted Array - of double elements, find it in log time
-def singleNonDuplicate(self, nums: List[int]) -> int:  # simplest and fast
-    lo, hi = 0, len(nums) - 1
-    while lo < hi:
-        mid = lo + (hi - lo) // 2
-        if mid % 2 == 1: mid -= 1  # move to even case
-        if nums[mid] == nums[mid + 1]:  # means we have even numbers of left
-            lo = mid + 2  # so go to right to find the odd/single
-        else: hi = mid  # otherwise move to left.
-    return nums[lo]  # because hi is not equal
-
 # LC702. Search in a Sorted Array of Unknown Size
 def search(self, reader: 'ArrayReader', target: int) -> int:
     hi = 1
@@ -96,55 +105,8 @@ def search(self, reader: 'ArrayReader', target: int) -> int:
         else: return mid
     return -1
 
-# LC852. Peak Index in a Mountain Array
-def peakIndexInMountainArray(self, arr: List[int]) -> int:
-    lo, hi = 0, len(arr) - 1
-    while lo < hi:
-        mi = (lo + hi) // 2
-        if arr[mi] < arr[mi + 1]: lo = mi + 1
-        else: hi = mi
-    return lo
-
-# LC1095. Find in Mountain Array
-def findInMountainArray(self, target: int, mountain_arr: 'MountainArray') -> int:
-    A = mountain_arr
-    n = A.length()
-    # find index of peak
-    l, r = 0, n - 1
-    while l < r:
-        m = (l + r) // 2
-        if A.get(m) < A.get(m + 1):
-            l = peak = m + 1
-        else: r = m
-    # find target in the left of peak
-    l, r = 0, peak
-    while l <= r:
-        m = (l + r) // 2
-        if A.get(m) < target: l = m + 1
-        elif A.get(m) > target: r = m - 1
-        else: return m
-    # find target in the right of peak
-    l, r = peak, n - 1
-    while l <= r:
-        m = (l + r) // 2
-        if A.get(m) > target: l = m + 1
-        elif A.get(m) < target: r = m - 1
-        else: return m
-    return -1
-
-# LC35. Search Insert Position
-def searchInsert(self, nums: List[int], target: int) -> int:
-    left, right = 0, len(nums) - 1
-    while left <= right:
-        pivot = (left + right) // 2
-        if nums[pivot] == target: return pivot
-        if target < nums[pivot]: right = pivot - 1
-        else: left = pivot + 1
-    return left
-# return bisect.bisect_left(nums, target)
-
 # LC704. Binary Search
-def search(self, nums: List[int], target: int) -> int:
+def search(self, nums: List[int], target: int) -> int:  # O(logn)
     b, e = 0, len(nums)-1
     while b <= e:
         m = b + (e - b) // 2
@@ -152,20 +114,16 @@ def search(self, nums: List[int], target: int) -> int:
         elif nums[m] > target: e = m-1
         else: b = m+1
     return -1
-
-# LC362. Design Hit Counter
-class HitCounter:
-    def __init__(self):
-        self.data = []
-    def hit(self, timestamp: int) -> None:
-        self.data.append(timestamp)
-    def getHits(self, timestamp: int) -> int:
-        last = timestamp - 300
-        if last <= 0: return len(self.data)
-        idx = bisect.bisect(self.data, last)
-        ret = len(self.data) - idx
-        self.data = self.data[idx:]
-        return ret
+def search(self, nums: List[int], target: int) -> int:
+    idx = bisect.bisect(nums, target)  # from right
+    if idx > 0 and nums[idx-1] == target:
+        return idx-1
+    return -1
+def search(self, nums: List[int], target: int) -> int:
+    idx = bisect.bisect_left(nums, target)  # from left
+    if idx < len(nums) and nums[idx] == target:
+        return idx
+    return -1
 
 
 def closest(arr: list, target: int):

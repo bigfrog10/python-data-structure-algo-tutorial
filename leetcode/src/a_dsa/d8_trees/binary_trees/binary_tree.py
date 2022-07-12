@@ -6,6 +6,18 @@ class TreeNode:
         self.left = left
         self.right = right
 
+# LC814. Binary Tree Pruning
+def pruneTree(self, root: TreeNode) -> TreeNode:  # O(n) time and O(h) space
+    def prune(node):  # return true if all zeros
+        if not node: return True
+        lz = prune(node.left)
+        rz = prune(node.right)
+        if lz: node.left = None
+        if rz: node.right = None
+        return lz and rz and node.val == 0
+    z = prune(root)
+    return None if z else root
+
 # LC958. Check Completeness of a Binary Tree
 def isCompleteTree(self, root):  # O(N) time and O(H) space
     def dfs(root):
@@ -23,6 +35,49 @@ def isCompleteTree(self, root: Optional[TreeNode]) -> bool:  # O(N) time and spa
         bfs.extend([bfs[i].left, bfs[i].right])
         i += 1
     return not any(bfs[i:])  # we shouldn't have any non None after i
+
+# LC94. Binary Tree Inorder Traversal
+def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:  # O(n) time and O(1) space, Morris Traversal
+    curr = root
+    output =[]
+    while(curr):
+        if not curr.left:
+            output.append(curr.val)
+            curr = curr.right
+        else:
+            predecessor = curr.left  # find the inorder predecessor of the current node
+            while predecessor.right !=None and predecessor.right != curr:
+                predecessor = predecessor.right # go as right as possible
+            # Now check which out of 2 above condition it reached
+            if predecessor.right == None:
+                predecessor.right = curr
+                curr = curr.left
+            else:
+                # left subtree is already visited , so delete the link and then go to right subtree
+                predecessor.right = None
+                output.append(curr.val)
+                curr = curr.right
+    return output
+def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+    def inorder(root):  # recursive
+        return inorder(root.left) + [root.val] + inorder(root.right) if root else []
+    def preorder(root):
+        return [root.val] + preorder(root.left) + preorder(root.right) if root else []
+    def postorder(root):
+        return postorder(root.left) + postorder(root.right) + [root.val] if root else []
+    return inorder(root)
+def inorderTraversal(self, root):
+    ans, stack = [], []
+    while stack or root:  # iterative
+        if root:  # deal with left
+            stack.append(root)
+            root = root.left
+        else:
+            node = stack.pop()
+            ans.append(node.val)  # inorder, add after all left children
+            root = node.right  # deal with right
+    return ans
+
 
 # LC545. Boundary of Binary Tree
 def boundaryOfBinaryTree(self, root: Optional[TreeNode]) -> List[int]:  # O(n) runtime, O(n) space(stack recursion)
@@ -67,38 +122,8 @@ def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:  # O(n
     ret = [[n[1] for n in sorted(res[k])] for k in range(min_col, max_col + 1)]
     return ret
 
-# LC814. Binary Tree Pruning
-def pruneTree(self, root: TreeNode) -> TreeNode:
-    def prune(node):  # return true if all zeros
-        if not node: return True
-        lz = prune(node.left)
-        rz = prune(node.right)
-        if lz: node.left = None
-        if rz: node.right = None
-        return lz and rz and node.val == 0
-    z = prune(root)
-    return None if z else root
 
-# LC94. Binary Tree Inorder Traversal
-def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-    def inorder(root):  # recursive
-        return inorder(root.left) + [root.val] + inorder(root.right) if root else []
-    def preorder(root):
-        return [root.val] + preorder(root.left) + preorder(root.right) if root else []
-    def postorder(root):
-        return postorder(root.left) + postorder(root.right) + [root.val] if root else []
-    return inorder(root)
-def inorderTraversal(self, root):
-    ans, stack = [], []
-    while stack or root:  # iterative
-        if root:  # deal with left
-            stack.append(root)
-            root = root.left
-        else:
-            node = stack.pop()
-            ans.append(node.val)  # inorder, add after all left children
-            root = node.right  # deal with right
-    return ans
+
 
 # LC145. Binary Tree Postorder Traversal
 
@@ -187,7 +212,7 @@ def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
         return f'{node.val}: [{inorder(node.left)}, {inorder(node.right)}]'
     s, t = inorder(p), inorder(q)
     return s == t
-def isSameTree(self, p, q):
+def isSameTree(self, p, q):  # O(n) and O(h)
     if not p and not q: return True
     if not q or not p: return False
     if p.val != q.val: return False

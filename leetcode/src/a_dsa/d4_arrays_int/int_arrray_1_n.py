@@ -1,4 +1,22 @@
 
+# LC1920. Build Array from Permutation - array permute
+# https://leetcode.com/problems/build-array-from-permutation/discuss/1315926/Python-O(n)-Time-O(1)-Space-w-Full-Explanation
+def buildArray(self, nums: List[int]) -> List[int]:  # O(1) space
+    q = len(nums)
+    for i, c in enumerate(nums):
+        nums[i] += q * (nums[c] % q)
+    for i,_ in enumerate(nums):
+        nums[i] //= q
+    return nums
+
+# LC442. Find All Duplicates in an Array
+def findDuplicates(self, nums: List[int]) -> List[int]:  # run it again to restore
+    res = []
+    for x in nums:
+        if nums[abs(x)-1] < 0: res.append(abs(x))
+        else: nums[abs(x)-1] *= -1
+    return res
+
 # LC268. Missing Number - only one in [0, 1]
 def missingNumber(self, nums: List[int]) -> int:
     s = sum(nums)

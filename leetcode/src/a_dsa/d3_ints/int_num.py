@@ -1,4 +1,115 @@
 
+# LC400. Nth Digit
+def findNthDigit(self, n: int) -> int:  # O(logn) time since we go by digits
+    n -= 1  # index alignment
+    for digit in range(1, 11):  # loop groups 10-99, 100-999, ...
+        first = 10**(digit - 1)  # the first element in the groups, 1, 10, 100, 1000
+        # 9 * first - the size of the group. 9, 90, 900, 9000
+        k = 9 * first * digit  # total number of digits in this group, 1＊9, 2＊90, 3＊900, 4＊9000
+        # first + n/digits is the number contains nth digit - "digits" is the width of each num in this group
+        if n < k: return int(str(first + n // digit)[n % digit])  # first + .. is the number where the digit is
+        n -= k
+
+# LC233. Number of Digit One  # https://leetcode.com/problems/number-of-digit-one/
+# https://leetcode.com/submissions/detail/725602255/
+def countDigitOne(self, n: int) -> int:  # O(logn), see leetcode submission
+    res = 0
+    k = 1
+    while k <= n:
+        q, r = divmod(n, k)  # for kth digit from right
+        full = (q + 8) // 10 * k
+        partial = r + 1 if q % 10 == 1 else 0  # 0 because they are count as full above
+        res += full + partial
+        k *= 10
+    return res
+
+# LC1689. Partitioning Into Minimum Number Of Deci-Binary Numbers
+def minPartitions(self, n: str) -> int:  # max digit
+    return int(max(n))
+
+# LC1291. Sequential Digits - continuous digits
+def sequentialDigits(self, low: int, high: int) -> List[int]:  # O(len(high) - len(low))
+    n, sample = 10, "123456789"
+    nums = []
+    for length in range(len(str(low)), len(str(high)) + 1):
+        for start in range(n - length):
+            num = int(sample[start: start + length])
+            if num >= low and num <= high:
+                nums.append(num)
+    return nums
+
+# LC231. Power of Two
+def isPowerOfTwo(self, n: int) -> bool:
+    return n != 0 and n & (n-1) == 0
+
+# LC279. Perfect Squares - min squares sum to n
+def numSquares(self, n):
+    square_nums = [i * i for i in range(1, int(n**0.5)+1)]  # O(sqrt(n)) space and runtime
+    queue, level = {n}, 0
+    while queue:  # BFS
+        level += 1
+        next_queue = set()
+        for remainder in queue:  # construct the queue for the next level
+            for square_num in square_nums:
+                if remainder == square_num: return level  # find the node!
+                elif remainder < square_num: break  # overed, no need to go further, cut branches
+                else: next_queue.add(remainder - square_num)
+        queue = next_queue
+    return level
+
+# LC38. Count and Say
+def countAndSay(self, n):
+    s = '1'
+    for _ in range(n - 1):
+        s = ''.join(str(len(list(group))) + digit for digit, group in itertools.groupby(s))
+        print(s)
+    return s
+def countAndSay(self, n: int) -> str:
+    def say(s: str) -> str:
+        res = ''
+        tmp = None
+        count = 0
+        for c in s:
+            if tmp: # existing
+                if tmp == c: count += 1
+                else: # different char, so reset tmp and count
+                    res += str(count) + tmp
+                    tmp = c
+                    count = 1
+            else: # begining
+                tmp = c
+                count += 1
+        res += str(count) + tmp
+        return res
+    t = str(1) # start from 1
+    for i in range(0, n-1): t = say(t)
+    return t
+
+# LC7. Reverse Integer
+def reverse(self, x: int) -> int:
+    pos = x if x >= 0 else -x
+    res = 0
+    while pos > 0:
+        r = pos % 10
+        res = res * 10 + r
+        if res > 2**31-1 or res < -2**31: return 0
+        pos = pos // 10
+    return res if x > 0 else -res
+
+# LC93. Restore IP Addresses - chart in solution is interesting
+def restoreIpAddresses(self, s: str) -> List[str]:
+    res = []  # 3^3 possibilities, start or ., have only 3 possibility to put the next dot.
+    def add_dot(segs, start):
+        if len(segs) == 4:
+            if start == len(s): res.append('.'.join(segs))
+        else:  # < 4
+            for i in range(start, min(start+3, len(s))):
+                if s[start] == '0' and i > start: break
+                seg = s[start:i+1]
+                if 0 <= int(seg) < 256: add_dot(segs +[seg], i+1)
+    add_dot([], 0)
+    return res
+
 # LC50. Pow(x, n)
 def myPow(self, x: float, n: int) -> float:  # O(logn)
     if n < 0: n, x = -n, 1 / x
@@ -7,6 +118,26 @@ def myPow(self, x: float, n: int) -> float:  # O(logn)
         if n % 2 != 0: ret *= x
         x, n = x * x, n // 2
     return ret
+
+# LC69. Sqrt(x)
+def mySqrt(self, x: int) -> int:
+    if x == 0: return 0
+    if x < 4: return 1  # to ensure sqrt(x) < x / 2
+    left, right = 2, x // 2  # first 2 is sqrt(4)
+    while left <= right:
+        middle = left + (right - left) // 2
+        sqr = middle * middle
+        if sqr > x: right = middle - 1  # middle is tested in sqr
+        elif sqr < x: left = middle + 1
+        else: return middle
+    return right  # close to sqrt(x)
+def mySqrt(self, x: int) -> int:  # This is a new pattern
+    left, right = 0, x
+    while left < right:
+        mid = (left + right + 1) // 2
+        if mid * mid > x: right = mid - 1
+        else: left = mid
+    return left
 
 # LC670. Maximum Swap - swap digits in number to get max - swap max - max swap
 def maximumSwap(self, num: int) -> int:  # O(n)
@@ -145,44 +276,9 @@ def toHex(self, num: int) -> str:
         if num == 0: break
     return ''.join(result[::-1])
 
-# LC400. Nth Digit
-def findNthDigit(self, n: int) -> int:
-    n -= 1  # index alignment
-    for digit in range(1, 11):  # loop groups 10-99, 100-999, ...
-        first = 10**(digit - 1)  # the first element in the groups, 1, 10, 100, 1000
-        # 9 * first - the size of the group. 9, 90, 900, 9000
-        k = 9 * first * digit  # total number of digits in this group, 1＊9, 2＊90, 3＊900, 4＊9000
-        # first + n/digits is the number contains nth digit
-        if n < k: return int(str(first + n // digit)[n % digit])  # first + .. is the number where the digit is
-        n -= k
 
-# LC38. Count and Say
-def countAndSay(self, n):
-    s = '1'
-    for _ in range(n - 1):
-        s = ''.join(str(len(list(group))) + digit for digit, group in itertools.groupby(s))
-        print(s)
-    return s
-def countAndSay(self, n: int) -> str:
-    def say(s: str) -> str:
-        res = ''
-        tmp = None
-        count = 0
-        for c in s:
-            if tmp: # existing
-                if tmp == c: count += 1
-                else: # different char, so reset tmp and count
-                    res += str(count) + tmp
-                    tmp = c
-                    count = 1
-            else: # begining
-                tmp = c
-                count += 1
-        res += str(count) + tmp
-        return res
-    t = str(1) # start from 1
-    for i in range(0, n-1): t = say(t)
-    return t
+
+
 
 # LC367. Valid Perfect Square
 def isPerfectSquare(self, num: int) -> bool:
@@ -202,19 +298,7 @@ def isPerfectSquare(self, num: int) -> bool:
         x = (x + num // x) // 2  # x_next = x - f(x) / f'(x)
     return x * x == num
 
-# LC93. Restore IP Addresses - chart in solution is interesting
-def restoreIpAddresses(self, s: str) -> List[str]:
-    res = []  # 3^3 possibilities, start or ., have only 3 possibility to put the next dot.
-    def add_dot(segs, start):
-        if len(segs) == 4:
-            if start == len(s): res.append('.'.join(segs))
-        else:  # < 4
-            for i in range(start, min(start+3, len(s))):
-                if s[start] == '0' and i > start: break
-                seg = s[start:i+1]
-                if 0 <= int(seg) < 256: add_dot(segs +[seg], i+1)
-    add_dot([], 0)
-    return res
+
 
 # LC246. Strobogrammatic Number - if it is such a number
 def isStrobogrammatic(self, num: str) -> bool:
@@ -245,6 +329,11 @@ def findStrobogrammatic(self, n: int) -> List[str]:  # O(5^(n/2) * n)
     return ret
 
 # LC509. Fibonacci Number
+def fib(self, n: int) -> int:  # O(n) time and O(1) space
+    a, b = 0, 1
+    for _ in range(0, n):
+        a, b = b, a+b
+    return a
 def fib(self, n: int) -> int:
     @lru_cache(None)
     def calc(n):
@@ -252,18 +341,7 @@ def fib(self, n: int) -> int:
         return calc(n-1) + calc(n-2)
     return calc(n)
 
-# LC7. Reverse Integer
-def reverse(self, x: int) -> int:
-    pos = x if x >= 0 else -x
-    res = 0
-    while pos > 0:
-        r = pos % 10
-        res = res * 10 + r
-        if res > 2**31-1 or res < -2**31: return 0
-        pos = pos // 10
-    return res if x > 0 else -res
-
-# LC202. Happy Number
+# LC202. Happy Number - digit square sums
 def isHappy(self, n: int) -> bool:
     if n == 1: return True
     history = set()
@@ -282,22 +360,6 @@ def isUgly(self, num: int) -> bool:
         while num % p == 0 < num:
             num /= p
     return num == 1
-
-
-# LC279. Perfect Squares, top100. minimal -> BFS
-def numSquares(self, n):
-    square_nums = [i * i for i in range(1, int(n**0.5)+1)]  # O(sqrt(n)) space and runtime
-    queue, level = {n}, 0
-    while queue:  # BFS
-        level += 1
-        next_queue = set()
-        for remainder in queue:  # construct the queue for the next level
-            for square_num in square_nums:
-                if remainder == square_num: return level  # find the node!
-                elif remainder < square_num: break  # overed, no need to go further, cut branches
-                else: next_queue.add(remainder - square_num)
-        queue = next_queue
-    return level
 
 # LC402. Remove K Digits - int remove digits to get min
 def removeKdigits(self, num: str, k: int) -> str:
@@ -379,25 +441,7 @@ def countNumbersWithUniqueDigits(self, n: int) -> int:
 
 
 
-# LC69. Sqrt(x)
-def mySqrt(self, x: int) -> int:
-    if x == 0: return 0
-    if x < 4: return 1  # to ensure sqrt(x) < x / 2
-    left, right = 2, x // 2  # first 2 is sqrt(4)
-    while left <= right:
-        middle = left + (right - left) // 2
-        sqr = middle * middle
-        if sqr > x: right = middle - 1  # middle is tested in sqr
-        elif sqr < x: left = middle + 1
-        else: return middle
-    return right  # close to sqrt(x)
-def mySqrt(self, x: int) -> int:  # This is a new pattern
-    left, right = 0, x
-    while left < right:
-        mid = (left + right + 1) // 2
-        if mid * mid > x: right = mid - 1
-        else: left = mid
-    return left
+
 
 # LC343. Integer Break - 2 ** 3 < 3 ** 2, use derivative to know max x = e, break integer to factors
 def integerBreak(self, n: int) -> int:

@@ -1,12 +1,4 @@
 
-# LC1047. Remove All Adjacent Duplicates In String - remove duplicates with 2 chars
-def removeDuplicates(self, S: str) -> str: # O(n)
-    output = []
-    for ch in S:
-        if output and ch == output[-1]: output.pop()
-        else: output.append(ch)
-    return ''.join(output)
-
 # LC1044. Longest Duplicate Substring
 def longestDupSubstring(self, S):  # O(nlogn) runtime, O(n) space, hard - Rabin-Karp
     A = [ord(c) - ord('a') for c in S]
@@ -29,10 +21,20 @@ def longestDupSubstring(self, S):  # O(nlogn) runtime, O(n) space, hard - Rabin-
         else: hi = mi - 1
     return S[res:res + lo]
 
+# LC1209. Remove All Adjacent Duplicates in String II - k duplicates, dupe string
+def removeDuplicates(self, s, k):  # O(n)
+    stack = [['#', 0]]  # 0 for ignoring when joining at the last
+    for c in s:
+        if stack[-1][0] == c:
+            stack[-1][1] += 1
+            if stack[-1][1] == k: stack.pop()  # remove this group
+        else: stack.append([c, 1])  # char and count
+    return ''.join(c * cnt for c, cnt in stack)
+
 # LC316. Remove Duplicate Letters - dupe chars with smallest order
 def removeDuplicateLetters(self, s: str) -> str:  # O(n) time and O(1) space
     last_idx = {c: i for i, c in enumerate(s)}
-    stack, seen = [], set()  # O(26)
+    stack, seen = [], set()  # O(26) = O(1)
     for i, c in enumerate(s): # O(n)
         if c not in seen:  # keep only one inside
             # if stack's char is larger than current and it's not the last
@@ -42,6 +44,25 @@ def removeDuplicateLetters(self, s: str) -> str:  # O(n) time and O(1) space
             seen.add(c)
             stack.append(c)
     return ''.join(stack)
+
+# LC1047. Remove All Adjacent Duplicates In String - remove duplicates with 2 chars
+def removeDuplicates(self, S: str) -> str: # O(n)
+    output = []
+    for ch in S:
+        if output and ch == output[-1]: output.pop()
+        else: output.append(ch)
+    return ''.join(output)
+
+# LC3. Longest Substring Without Repeating Characters, top100
+def lengthOfLongestSubstring(self, s: str) -> int:
+    last = [-1] * 128  # used to track last index of every char. treat space for speed.
+    st, ans = 0, 0  # substring starting point and result
+    for idx, char in enumerate(s):
+        if last[ord(char)] != -1:  # showed before, start new
+            st = max(st, last[ord(char)] + 1)  # max across different chars, abba
+        ans = max(ans, idx - st + 1)
+        last[ord(char)] = idx  # update char's index
+    return ans
 
 # LC1081. Smallest Subsequence of Distinct Characters - same as above
 def removeDuplicateLetters(self, s: str) -> str:  # O(n)
@@ -57,15 +78,7 @@ def removeDuplicateLetters(self, s: str) -> str:  # O(n)
             stack.append(c)
     return ''.join(stack)
 
-# LC1209. Remove All Adjacent Duplicates in String II - k duplicates, dupe string
-def removeDuplicates(self, s, k):  # O(n)
-    stack = [['#', 0]]  # 0 for ignoring when joining at the last
-    for c in s:
-        if stack[-1][0] == c:
-            stack[-1][1] += 1
-            if stack[-1][1] == k: stack.pop()  # remove this group
-        else: stack.append([c, 1])  # char and count
-    return ''.join(c * cnt for c, cnt in stack)
+
 
 # LC459. Repeated Substring Pattern - repeat string
 def repeatedSubstringPattern(self, s: str) -> bool:  # O(n^2)
@@ -112,16 +125,7 @@ def lengthOfLongestSubstringKDistinct(self, s: str, k: int) -> int:
         ret = max(i - low + 1, ret)
     return ret
 
-# LC3. Longest Substring Without Repeating Characters, top100
-def lengthOfLongestSubstring(self, s: str) -> int:
-    last = [-1] * 128  # used to track last index of every char. treat space for speed.
-    st, ans = 0, 0  # substring starting point and result
-    for idx, char in enumerate(s):
-        if last[ord(char)] != -1:  # showed before, start new
-            st = max(st, last[ord(char)] + 1)  # max across different chars, abba
-        ans = max(ans, idx - st + 1)
-        last[ord(char)] = idx  # update char's index
-    return ans
+
 
 # LC159. Longest Substring with At Most Two Distinct Characters
 def lengthOfLongestSubstringTwoDistinct(self, s: str) -> int:

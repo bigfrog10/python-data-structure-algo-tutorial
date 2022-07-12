@@ -1,4 +1,18 @@
 
+# LC134. Gas Station - on a circle
+def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:  # O(n)
+    if not gas or not cost: return -1
+    total = current = 0
+    start_station = 0
+    for i, (g, c) in enumerate(zip(gas, cost)):
+        exp = g - c
+        total += exp  # accumulate total diff of gas - cost
+        current += exp
+        if current < 0:
+            current = 0
+            start_station = i+1
+    return start_station if total >= 0 else -1
+
 # LC1710. Maximum Units on a Truck
 def maximumUnits(self, boxTypes: List[List[int]], truckSize: int) -> int:
     boxes = sorted(boxTypes, key=lambda x: x[1], reverse=True)  # O(nlogn)
@@ -43,17 +57,7 @@ def minTaps(self, n: int, ranges: List[int]) -> int:
         step += 1
     return step
 
-# LC1024. Video Stitching
-def videoStitching(self, clips: List[List[int]], T: int) -> int:
-    maxv = max(c[1] for c in clips)
-    max_jumps = [0]*(maxv + 1)
-    for l,r in clips: max_jumps[l] = max(max_jumps[l], r)
-    res = lo = hi = 0  # it is then a jump game
-    while hi < T:
-        lo, hi = hi, max(max_jumps[lo:hi+1])
-        if hi <= lo: return -1
-        res += 1
-    return res
+
 
 # LC1306. Jump Game III  O(n)
 def canReach(self, arr: List[int], start: int) -> bool:  # O(n) runtime and space
@@ -93,19 +97,21 @@ def jump(self, nums: List[int]) -> int:
             current_jump_end = farthest
     return jumps
 
-# LC134. Gas Station, top100  # BBG
-def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
-    if not gas or not cost: return -1
-    total = current = 0
-    start_station = 0
-    for i, (g, c) in enumerate(zip(gas, cost)):
-        exp = g - c
-        total += exp  # accumulate total diff of gas - cost
-        current += exp
-        if current < 0:
-            current = 0
-            start_station = i+1
-    return start_station if total >= 0 else -1
+# LC818. Race Car
+def racecar(self, target):  # O(t logt)
+    @lru_cache(None)
+    def dp(t):
+        n = t.bit_length()
+        p1= 2 ** (n-1)
+        p2 = p1 * 2  # 2 ** n
+
+        if p2 - 1 == t: return n  # nA
+
+        res = dp(p2 - 1 - t) + n + 1  # nA R and then dp(p2-1-t) backward, i.e., we pass target and come back
+        for m in range(n-1):  # (n-1)A R and then m steps
+            res = min(res, dp(t - p1 + 2 ** m) + n + m + 1)
+        return res
+    return dp(target)
 
 
 

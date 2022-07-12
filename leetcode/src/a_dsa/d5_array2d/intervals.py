@@ -1,6 +1,71 @@
 from typing import List
 import heapq
 
+# LC798. Smallest Rotation with Highest Score - digit rotation small
+def bestRotation(self, nums: List[int]) -> int:  # O(n) time and space
+    N = len(nums)
+    bad = [0] * N
+    for i, x in enumerate(nums):
+        left, right = (i - x + 1) % N, (i + 1) % N  # # how many shifts are bad, not indices
+        bad[left] -= 1
+        bad[right] += 1
+        if left > right:
+            bad[0] -= 1
+    best = -N
+    ans = cur = 0
+    for i, score in enumerate(bad):
+        cur += score
+        if cur > best:
+            best = cur
+            ans = i
+    return ans
+
+# LC56. Merge Intervals - remove overlaps of a list
+def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+    intervals.sort(key=lambda x: x[0])  # O(nlogn)
+    merged = []
+    for interval in intervals:
+        if not merged or merged[-1][1] < interval[0]: merged.append(interval)  # no overlap
+        else: merged[-1][1] = max(merged[-1][1], interval[1])
+    return merged
+
+# LC1024. Video Stitching - greedy
+def videoStitching(self, clips: List[List[int]], T: int) -> int:  # O(Tn) time and O(T) space
+    maxv = max(c[1] for c in clips)
+    max_jumps = [0]*(maxv + 1)
+    for l,r in clips: max_jumps[l] = max(max_jumps[l], r)
+    res = lo = hi = 0  # it is then a jump game
+    while hi < T:
+        lo, hi = hi, max(max_jumps[lo:hi+1])
+        if hi <= lo: return -1
+        res += 1
+    return res
+def videoStitching(self, clips, T):  # O(nlogn) time and O(1) space
+    end, end2, res = -1, 0, 0
+    for i, j in sorted(clips):
+        if end2 >= T or i > end2: break
+        elif end < i <= end2:
+            res, end = res + 1, end2
+        end2 = max(end2, j)
+    return res if end2 >= T else -1
+
+# LC759. Employee Free Time
+class Interval:
+    def __init__(self, start: int = None, end: int = None):
+        self.start = start
+        self.end = end
+def employeeFreeTime(self, schedule: '[[Interval]]') -> '[Interval]':  # O(nlogm), m = # of employees
+    # merge to a single list and merge-sorted by start, O(n), not O(nlogn)
+    all_s = heapq.merge(*schedule, key=lambda x: x.start)
+    # [[[1,2],[5,6]],[[1,3]],[[4,10]]] to [[1, 2], [1, 3], [4, 10], [5, 6]]
+    ans = []
+    prev = next(all_s).end
+    while a := next(all_s, None):
+        if a.start > prev:
+            ans.append(Interval(prev, a.start))
+        prev = max(prev, a.end)
+    return ans
+
 # LC636. Exclusive Time of Functions, jobs, process time, cpu single thread
 def exclusiveTime(self, n, logs):  # O(n) runtime and space
     res, stack = [0] * n, []
@@ -14,14 +79,7 @@ def exclusiveTime(self, n, logs):  # O(n) runtime and space
             if stack: stack[-1][1] += time  # update parent time
     return res
 
-# LC56. Merge Intervals - remove overlaps of a list
-def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-    intervals.sort(key=lambda x: x[0])
-    merged = []
-    for interval in intervals:
-        if not merged or merged[-1][1] < interval[0]: merged.append(interval)  # no overlap
-        else: merged[-1][1] = max(merged[-1][1], interval[1])
-    return merged
+
 
 # LC986. Interval List Intersections - of 2 lists of intervals
 def intervalIntersection(self, firstList: List[List[int]], secondList: List[List[int]]) -> List[List[int]]:
@@ -35,7 +93,7 @@ def intervalIntersection(self, firstList: List[List[int]], secondList: List[List
         else: j += 1
     return ret
 
-# LC252. Meeting Rooms
+# LC252. Meeting Rooms - can attend all meetings?
 def canAttendMeetings(self, intervals: List[List[int]]) -> bool:
     si = sorted(intervals)  # sort by first element in asc order
     for i in range(len(si) - 1):
@@ -94,23 +152,13 @@ def minTransfers(self, transactions: List[List[int]]) -> int:  # O(2^N)
         balances[v] -= z
     return dfs(tuplify({k: v for k, v in balances.items() if v}))
 
+# LC1523. Count Odd Numbers in an Interval Range
+def countOdds(self, low: int, high: int) -> int:
+    return (high + 1) // 2 - low // 2
+    # the count of odd numbers between 1 and low - 1 is low // 2
+    # the count of odd numbers between 1 and high is (high + 1 ) // 2
 
 
-# LC759. Employee Free Time
-class Interval:
-    def __init__(self, start: int = None, end: int = None):
-        self.start = start
-        self.end = end
-def employeeFreeTime(self, schedule: '[[Interval]]') -> '[Interval]':  # O(nlogm), m = # of employees
-    # merge to a single list and merge-sorted by start, O(n), not O(nlogn)
-    all_s = heapq.merge(*schedule, key=lambda x: x.start)
-    ans = []
-    prev = next(all_s).end
-    while a := next(all_s, None):
-        if a.start > prev:
-            ans.append(Interval(prev, a.start))
-        prev = max(prev, a.end)
-    return ans
 
 
 
@@ -325,8 +373,6 @@ def findMinArrowShots(self, points: List[List[int]]) -> int:
             cnt += 1
             end = e
     return cnt
-
-
 
 # LC1854. Maximum Population Year
 def maximumPopulation(self, logs: List[List[int]]) -> int:  # O(n)

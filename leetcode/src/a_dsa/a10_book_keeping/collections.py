@@ -1,4 +1,35 @@
 
+# LC341. Flatten Nested List Iterator, space O(N + L), N # of integers, L # of lists
+class NestedIterator:
+    def __init__(self, nestedList: [NestedInteger]):  # O(N+L)
+        self.stack = list(reversed(nestedList))  # so pop() O(1)
+    def next(self) -> int:  # O(1) amortize
+        self.make_stack_top_an_integer()
+        return self.stack.pop().getInteger()
+    def hasNext(self) -> bool:  # O(1) amortize
+        self.make_stack_top_an_integer()
+        return len(self.stack) > 0
+    def make_stack_top_an_integer(self):  # amortize O(1) - O(1 + total lists/total integers)
+        # While the stack contains a nested list at the top...
+        while self.stack and not self.stack[-1].isInteger():
+            # Unpack the list at the top by putting its items onto
+            # the stack in reverse order.
+            self.stack.extend(reversed(self.stack.pop().getList()))
+
+# LC362. Design Hit Counter
+class HitCounter:
+    def __init__(self):
+        self.data = []
+    def hit(self, timestamp: int) -> None:
+        self.data.append(timestamp)
+    def getHits(self, timestamp: int) -> int:
+        last = timestamp - 300
+        if last <= 0: return len(self.data)
+        idx = bisect.bisect(self.data, last)
+        ret = len(self.data) - idx
+        self.data = self.data[idx:]
+        return ret
+
 # LC380. Insert Delete GetRandom O(1), RandomizedSet, top100
 import random
 class RandomizedSet:
@@ -20,6 +51,103 @@ class RandomizedSet:
         return True
     def getRandom(self) -> int:  # O(1), just values[random.randrange(len(values))]
         return random.choice(self.values)
+
+# LC642. Design Search Autocomplete System
+from collections import defaultdict
+class AutocompleteSystem:
+    def __init__(self, sentences: List[str], times: List[int]):
+        self.counts = defaultdict(int) # or use trie
+        for s, c in zip(sentences, times): self.counts[s] = c
+        self.ui = '' # user input
+        self.matches = []
+    def input(self, c: str) -> List[str]:
+        if c == '#':
+            self.counts[self.ui] += 1
+            self.ui = ''
+            self.matches = []
+            return []
+        if not self.ui: # new input
+            self.matches = [(-ct, s) for s, ct in self.counts.items() if s[0] == c]  # O(n)
+            self.matches.sort()  # O(nlogn)
+            self.matches = [s for _, s in self.matches]
+        else:
+            n = len(self.ui)
+            self.matches = [m for m in self.matches if len(m) > n and m[n] == c]
+        self.ui += c
+        return self.matches[:3]
+
+# LC1352. Product of the Last K Numbers
+class ProductOfNumbers:
+    def __init__(self):
+        self.A = [1]
+    def add(self, num: int) -> None:
+        if num == 0: self.A = [1]
+        else: self.A.append(self.A[-1] * num)
+    def getProduct(self, k: int) -> int:
+        if k >= len(self.A): return 0
+        return self.A[-1] // self.A[-k - 1]
+
+# LC706. Design HashMap
+class Bucket:
+    def __init__(self):
+        self.bucket = []
+    def get(self, key):
+        for (k, v) in self.bucket:
+            if k == key: return v
+        return -1
+    def update(self, key, value):
+        found = False
+        for i, kv in enumerate(self.bucket):
+            if key == kv[0]:
+                self.bucket[i] = (key, value)
+                found = True
+                break
+        if not found:
+            self.bucket.append((key, value))
+    def remove(self, key):
+        for i, kv in enumerate(self.bucket):
+            if key == kv[0]: del self.bucket[i]
+class MyHashMap:  # O(N / key_space) time and O(M + K), M: key size in map, K: # of buckets
+    def __init__(self):
+        self.key_space = 2069
+        self.hash_table = [Bucket() for i in range(self.key_space)]
+    def put(self, key: int, value: int) -> None:
+        hash_key = key % self.key_space
+        self.hash_table[hash_key].update(key, value)
+    def get(self, key: int) -> int:
+        hash_key = key % self.key_space
+        return self.hash_table[hash_key].get(key)
+    def remove(self, key: int) -> None:
+        hash_key = key % self.key_space
+        self.hash_table[hash_key].remove(key)
+
+# LC1146. Snapshot Array
+class SnapshotArray(object):  # This copies only relevant changes
+    def __init__(self, length):
+        self.dic = defaultdict(dict)
+        self.snap_id = 0
+    def set(self, index, val):  # O(1)
+        self.dic[self.snap_id][index] = val
+    def snap(self):
+        self.snap_id += 1
+        self.dic[self.snap_id] = self.dic[self.snap_id - 1].copy() # copy only set values
+        return self.snap_id -1
+    def get(self, index, snap_id): # O(1)
+        if index in self.dic[snap_id]: return self.dic[snap_id][index]
+        else: return 0
+class SnapshotArray:  # min space but extra log(snaps) for get
+    def __init__(self, n: int):  # O(n)
+        self.A = [[[-1, 0]] for _ in range(n)]
+        self.snap_id = 0
+    def set(self, index: int, val: int) -> None:  # O(1)
+        self.A[index].append([self.snap_id, val])
+    def snap(self) -> int:  # O(1)
+        self.snap_id += 1
+        return self.snap_id - 1
+    def get(self, index: int, snap_id: int) -> int:  # O(log(snaps))
+        # if modify several times, ids could be same ids, like 1, 2, 2, 2, 3. We want last2
+        i = bisect.bisect(self.A[index], [snap_id + 1]) - 1
+        return self.A[index][i][1]
 
 # LC381. Insert Delete GetRandom O(1) - Duplicates allowed
 class RandomizedCollection: # 93%, fast
@@ -45,6 +173,26 @@ class RandomizedCollection: # 93%, fast
         return True
     def getRandom(self) -> int:
         return random.choice(self.values)
+
+# LC211. Design Add and Search Words Data Structure
+class WordDictionary:  # much faster
+    def __init__(self): self.trie = {}
+    def addWord(self, word: str) -> None:
+        node = self.trie
+        for ch in word: node = node.setdefault(ch, {})  # O(len(word))
+        node['$'] = True  # mark end of word
+    def search(self, word: str) -> bool:  # O(len(word)) if no ., otherwise, O(N * 26^M), M=len(word), N is # of keys
+        def search_in_node(word, node) -> bool: # recursion on dot
+            for i, ch in enumerate(word):
+                if ch in node: node = node[ch]  # char found, go down
+                else:
+                    if ch == '.':  # we need to check all but $
+                        for x in node:
+                            if x != '$' and search_in_node(word[i + 1:], node[x]):
+                                return True
+                    return False
+            return '$' in node
+        return search_in_node(word, self.trie)
 
 # LC2102. Sequentially Ordinal Rank Tracker
 from sortedcontainers import SortedList
@@ -78,25 +226,7 @@ class ExamRoom:
     def leave(self, p: int) -> None:  # O(n)
         self.L.remove(p)
 
-# LC211. Design Add and Search Words Data Structure
-class WordDictionary:  # much faster
-    def __init__(self): self.trie = {}
-    def addWord(self, word: str) -> None:
-        node = self.trie
-        for ch in word: node = node.setdefault(ch, {})  # O(len(word))
-        node['$'] = True  # mark end of word
-    def search(self, word: str) -> bool:  # O(len(word)) if no ., otherwise, O(N * 26^M), M=len(word), N is # of keys
-        def search_in_node(word, node) -> bool: # recursion on dot
-            for i, ch in enumerate(word):
-                if ch in node: node = node[ch]  # char found, go down
-                else:
-                    if ch == '.':  # we need to check all but $
-                        for x in node:
-                            if x != '$' and search_in_node(word[i + 1:], node[x]):
-                                return True
-                    return False
-            return '$' in node
-        return search_in_node(word, self.trie)
+
 
 # LC676. Implement Magic Dictionary  - one mistake is allowed
 class MagicDictionary(object):
@@ -210,22 +340,7 @@ class Logger:
             return True
         else: return False
 
-# LC341. Flatten Nested List Iterator
-class NestedIterator:
-    def __init__(self, nestedList: [NestedInteger]):
-        self.stack = list(reversed(nestedList))  # so pop() O(1)
-    def next(self) -> int:
-        self.make_stack_top_an_integer()
-        return self.stack.pop().getInteger()
-    def hasNext(self) -> bool:
-        self.make_stack_top_an_integer()
-        return len(self.stack) > 0
-    def make_stack_top_an_integer(self):
-        # While the stack contains a nested list at the top...
-        while self.stack and not self.stack[-1].isInteger():
-            # Unpack the list at the top by putting its items onto
-            # the stack in reverse order.
-            self.stack.extend(reversed(self.stack.pop().getList()))
+
 
 # LC244. Shortest Word Distance II
 class WordDistance:
@@ -239,46 +354,9 @@ class WordDistance:
         self.memo[key] = min([abs(a - b) for a, b in itertools.product(self.d[word1], self.d[word2])])
         return self.memo[key]
 
-# LC642. Design Search Autocomplete System
-from collections import defaultdict
-class AutocompleteSystem:
-    def __init__(self, sentences: List[str], times: List[int]):
-        self.counts = defaultdict(int) # or use trie
-        for s, c in zip(sentences, times): self.counts[s] = c
-        self.ui = '' # user input
-        self.matches = []
-    def input(self, c: str) -> List[str]:
-        if c == '#':
-            self.counts[self.ui] += 1
-            self.ui = ''
-            self.matches = []
-            return []
-        if not self.ui: # new input
-            self.matches = [(-ct, s) for s, ct in self.counts.items() if s[0] == c]  # O(n)
-            self.matches.sort()  # O(nlogn)
-            self.matches = [s for _, s in self.matches]
-        else:
-            n = len(self.ui)
-            self.matches = [m for m in self.matches if len(m) > n and m[n] == c]
-        self.ui += c
-        return self.matches[:3]
 
-# LC1146. Snapshot Array
-class SnapshotArray(object):  # This copies only relevant changes
-    def __init__(self, length):
-        self.dic = defaultdict(dict)
-        self.snap_id = 0
-    def set(self, index, val):  # O(1)
-        self.dic[self.snap_id][index] = val
-    def snap(self):
-        self.snap_id += 1
-        self.dic[self.snap_id] = self.dic[self.snap_id - 1].copy() # copy only set values
-        return self.snap_id -1
-    def get(self, index, snap_id): # O(1)
-        if index in self.dic[snap_id]: return self.dic[snap_id][index]
-        else: return 0
 
-# LC706. Design HashMap
+
 
 
 # LC284. Peeking Iterator, peek iterator

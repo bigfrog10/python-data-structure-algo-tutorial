@@ -1,4 +1,61 @@
 
+# LC200. Number of Islands
+from itertools import product
+def numIslands(self, board: List[List[str]]) -> int:
+    if not board: return 0  # O(MN)
+    rows, cols = len(board), len(board[0])
+    seen = set()
+    def dfs(i, j):
+        seen.add((i, j))
+        for dx, dy in (1, 0), (-1, 0), (0, 1), (0, -1):
+            x, y = i + dx, j + dy
+            if 0 <= x < rows and 0 <= y < cols and board[i][j] == '1' and (x, y) not in seen:
+                dfs(x, y)
+    count = 0
+    for i, j in product(range(rows), range(cols)):
+        if board[i][j] == '1' and (i, j) not in seen:
+            count += 1
+            dfs(i, j)
+    return count
+
+# LC694. Number of Distinct Islands - transformations
+def numDistinctIslands(self, grid: List[List[int]]) -> int:
+    if not grid: return 0 # close to # 200
+    n, m = len(grid), len(grid[0])
+    seen = set()
+    def explore(r, c, xo, yo, shape):
+        if 0 <= r < n and 0 <= c < m and (r, c) not in seen and grid[r][c] != 0:
+            seen.add((r, c))
+            shape.add((r-xo, c-yo))
+            for x, y in (r+1, c), (r-1, c), (r, c+1), (r, c-1):
+                explore(x, y, xo, yo, shape)
+    shapes = set()
+    for i, j in product(range(n), range(m)):
+        if grid[i][j] == 1 and (i, j) not in seen:
+            shape = set()  # collection all island coordinates
+            explore(i, j, i, j, shape)
+            if shape: shapes.add(frozenset(shape))  # hash
+    return len(shapes)
+
+# LC695. Max Area of Island
+def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+    if not grid: return 0  # O(rows * columns)
+    n, m = len(grid), len(grid[0])
+    seen = set()
+    def dfs(i, j):
+        if grid[i][j] == 0 or (i, j) in seen: return 0
+        seen.add((i, j))
+        amax = 1
+        for d in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+            a, b = i + d[0], j + d[1]
+            if 0 <= a < n and 0 <= b < m and grid[a][b] != 0 and (a, b) not in seen:
+                amax += dfs(a, b)
+        return amax
+    amax = 0
+    for i in range(n):
+        for j in range(m): amax = max(amax, dfs(i, j))
+    return amax
+
 # LC827. Making A Large Island
 def largestIsland(self, grid: List[List[int]]) -> int: # O(n^2) runtime and space
     if not grid or not grid[0]: return 0
@@ -23,24 +80,7 @@ def largestIsland(self, grid: List[List[int]]) -> int: # O(n^2) runtime and spac
             ret = max(ret, expand)
     return ret
 
-# LC200. Number of Islands
-from itertools import product
-def numIslands(self, board: List[List[str]]) -> int:
-    if not board: return 0  # O(MN)
-    rows, cols = len(board), len(board[0])
-    seen = set()
-    def dfs(i, j):
-        seen.add((i, j))
-        for dx, dy in (1, 0), (-1, 0), (0, 1), (0, -1):
-            x, y = i + dx, j + dy
-            if 0 <= x < rows and 0 <= y < cols and board[i][j] == '1' and (x, y) not in seen:
-                dfs(x, y)
-    count = 0
-    for i, j in product(range(rows), range(cols)):
-        if board[i][j] == '1' and (i, j) not in seen:
-            count += 1
-            dfs(i, j)
-    return count
+
 
 # LC305. Number of Islands II - add land one by one - union find
 def numIslands2(self, m, n, positions):
@@ -102,49 +142,7 @@ def shortestBridge(self, A: List[List[int]]) -> int:
         queue = newq
         ans += 1
 
-# LC695. Max Area of Island
-def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
-    if not grid: return 0  # O(rows * columns)
-    n, m = len(grid), len(grid[0])
-    seen = set()
-    def dfs(i, j):
-        if grid[i][j] == 0 or (i, j) in seen: return 0
-        seen.add((i, j))
-        amax = 1
-        for d in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
-            a, b = i + d[0], j + d[1]
-            if 0 <= a < n and 0 <= b < m and grid[a][b] != 0 and (a, b) not in seen:
-                amax += dfs(a, b)
-        return amax
-    amax = 0
-    for i in range(n):
-        for j in range(m): amax = max(amax, dfs(i, j))
-    return amax
 
-
-
-
-
-
-
-# LC694. Number of Distinct Islands - transformations
-def numDistinctIslands(self, grid: List[List[int]]) -> int:
-    if not grid: return 0 # close to # 200
-    n, m = len(grid), len(grid[0])
-    seen = set()
-    def explore(r, c, xo, yo, shape):
-        if 0 <= r < n and 0 <= c < m and (r, c) not in seen and grid[r][c] != 0:
-            seen.add((r, c))
-            shape.add((r-xo, c-yo))
-            for x, y in (r+1, c), (r-1, c), (r, c+1), (r, c-1):
-                explore(x, y, xo, yo, shape)
-    shapes = set()
-    for i, j in product(range(n), range(m)):
-        if grid[i][j] == 1 and (i, j) not in seen:
-            shape = set()  # collection all island coordinates
-            explore(i, j, i, j, shape)
-            if shape: shapes.add(frozenset(shape))  # hash
-    return len(shapes)
 
 # LC711. Number of Distinct Islands II - transformers
 def numDistinctIslands2(self, grid: List[List[int]]) -> int:

@@ -1,4 +1,30 @@
 
+# LC894. All Possible Full Binary Trees
+def allPossibleFBT(self, n: int) -> List[Optional[TreeNode]]:
+    @functools.cache
+    def fbt(m):
+        if m == 1: return [TreeNode(0)]
+        res = []
+        for x in range(m):
+            y = m - 1 - x
+            for left in fbt(x):
+                for right in fbt(y):
+                    res.append(TreeNode(0, left, right))
+        return res
+    return fbt(n)
+
+# LC114. Flatten Binary Tree to Linked List - pre-order
+def flatten(self, root: Optional[TreeNode]) -> None:  # O(n), O(1)
+    node = root
+    while node:
+        if node.left:
+            rightmost = node.left
+            while rightmost.right:  # Find the rightmost node
+                rightmost = rightmost.right
+            rightmost.right = node.right  # predecessor
+            node.right, node.left = node.left, None
+        node = node.right  # This is original node.left
+
 # LC536. Construct Binary Tree from String
 def str2tree(self, s: str) -> Optional[TreeNode]:  # O(n)
     def build(iteri) -> TreeNode:  # works for pattern "num(a)(b))"
@@ -72,17 +98,7 @@ class CBTInserter:
     def get_root(self) -> Optional[TreeNode]:
         return self.tree[0]
 
-# LC114. Flatten Binary Tree to Linked List - pre-order
-def flatten(self, root: Optional[TreeNode]) -> None:  # O(n), O(1)
-    node = root
-    while node:
-        if node.left:
-            rightmost = node.left
-            while rightmost.right:  # Find the rightmost node
-                rightmost = rightmost.right
-            rightmost.right = node.right  # predecessor
-            node.right, node.left = node.left, None
-        node = node.right  # This is original node.left
+
 
 # LC105. Construct Binary Tree from Preorder and Inorder Traversal
 def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:

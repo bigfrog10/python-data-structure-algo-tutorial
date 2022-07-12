@@ -1,5 +1,50 @@
 from typing import List
 
+# LC992. Subarrays with K Different Integers - good subarrays
+# https://leetcode.com/problems/subarrays-with-k-different-integers/discuss/523136/JavaC%2B%2BPython-Sliding-Window
+def subarraysWithKDistinct(self, A: List[int], K: int) -> int:  # O(n) time and O(k) space
+    def atMostK(A, K): # we demand K diff ints
+        count = collections.Counter()
+        res = i = 0
+        for j in range(len(A)): # move right
+            if count[A[j]] == 0: K -= 1 # we don't have this char anymore
+            count[A[j]] += 1
+            while K < 0:
+                count[A[i]] -= 1
+                if count[A[i]] == 0: K += 1 # we need 1 more
+                i += 1  # left pointer move right
+            res += j - i + 1 # when k >= 0 # all substring starting j
+        return res
+    return atMostK(A, K) - atMostK(A, K - 1)
+
+# LC11. Container With Most Water
+def maxArea(self, height: List[int]) -> int:
+    i, j = 0, len(height) - 1
+    water = 0
+    while i < j:
+        water = max(water, (j - i) * min(height[i], height[j]))
+        if height[i] < height[j]: i += 1
+        else: j -= 1
+    return water
+
+# LC27. Remove Element - remove given value
+def removeElement(self, nums: List[int], val: int) -> int:
+    i = 0
+    for j in range(len(nums)):
+        if nums[j] != val:
+            nums[i] = nums[j]
+            i += 1
+    return i
+
+# LC283. Move Zeroes - to end
+def moveZeroes(self, nums: List[int]) -> None:
+    i = 0  # index for last nonzero from left, or move together
+    for j in range(len(nums)):  # we move nonzeor to back actually
+        if nums[j] != 0:  # if value is zero, j moves but i stays.
+            nums[i] = nums[j]
+            if i != j: nums[j] = 0
+            i += 1
+
 # LC1004. Max Consecutive Ones III - can flip <=k bits.
 def longestOnes(self, nums: List[int], K: int) -> int:
     left = 0
@@ -21,14 +66,7 @@ def medianSlidingWindow(self, nums: List[int], k: int) -> List[float]:  # O(nk)
         bisect.insort(window, b) # O(k)
     return medians
 
-# LC283. Move Zeroes
-def moveZeroes(self, nums: List[int]) -> None:
-    i = 0  # index for last nonzero from left, or move together
-    for j in range(len(nums)):  # we move nonzeor to back actually
-        if nums[j] != 0:  # if value is zero, j moves but i stays.
-            nums[i] = nums[j]
-            if i != j: nums[j] = 0
-            i += 1
+
 
 # LC42. Trapping Rain Water, top100
 def trap(self, heights: List[int]) -> int: # 2 pointers, O(n)
@@ -56,16 +94,6 @@ def getAverages(self, nums: List[int], k: int) -> List[int]:
         if i+1 >= r: ans[i-k] = rsm // r  # i is 0 index based, i+1 is no. of elements
     return ans
 
-# LC11. Container With Most Water
-def maxArea(self, height: List[int]) -> int:
-    i, j = 0, len(height) - 1
-    water = 0
-    while i < j:
-        water = max(water, (j - i) * min(height[i], height[j]))
-        if height[i] < height[j]: i += 1
-        else: j -= 1
-    return water
-
 # LC1248. Count Number of Nice Subarrays
 def numberOfSubarrays(self, nums: List[int], k: int) -> int:
     left = count = res = 0
@@ -80,21 +108,7 @@ def numberOfSubarrays(self, nums: List[int], k: int) -> int:
         res += count
     return res
 
-# LC992. Subarrays with K Different Integers
-def subarraysWithKDistinct(self, A: List[int], K: int) -> int:
-    def atMostK(A, K): # we demand K diff ints
-        count = collections.Counter()
-        res = i = 0
-        for j in range(len(A)): # move right
-            if count[A[j]] == 0: K -= 1 # we don't have this char anymore
-            count[A[j]] += 1
-            while K < 0:
-                count[A[i]] -= 1
-                if count[A[i]] == 0: K += 1 # we need 1 more
-                i += 1  # left pointer move right
-            res += j - i + 1 # when k >= 0 # all substring starting j
-        return res
-    return atMostK(A, K) - atMostK(A, K - 1)
+
 
 # LC611. Valid Triangle Number
 def triangleNumber(self, nums: List[int]) -> int:
@@ -109,5 +123,3 @@ def triangleNumber(self, nums: List[int]) -> int:
                 hi -= 1
             else: lo += 1
     return count
-
-
