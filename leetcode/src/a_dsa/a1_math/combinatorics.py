@@ -1,7 +1,7 @@
 from typing import List
 import math
 
-# LC17. Letter Combinations of a Phone Number - phone letter combo
+# LC17. Letter Combinations of a Phone Number - phone letter combo Time & Space: O(4^n)
 def letterCombinations(self, digits):
     dict = {'2':"abc", '3':"def",  '4':"ghi", '5':"jkl",
             '6':"mno", '7':"pqrs", '8':"tuv", '9':"wxyz"}
@@ -24,7 +24,7 @@ def nextPermutation(self, nums: List[int]) -> None:  # O(n)
         nums[idx+1:] = reversed(nums[idx+1:])
 
 # LC118. Pascal's Triangle
-def generate(self, numRows):
+def generate(self, numRows): # Time & Space: O(n^2)
     row, res = [1], []
     for n in range(numRows):
         res.append(row)
@@ -32,7 +32,22 @@ def generate(self, numRows):
     return res
 
 # LC1053. Previous Permutation With One Swap
-def prevPermOpt1(self, arr: List[int]) -> List[int]:
+def prevPermOpt1(self, arr: List[int]) -> List[int]: # Time: O(n) Space: O(1)
+    nums = arr.copy()
+    if not arr: return []
+    n = len(nums)
+    idx = next((i-1 for i in range(n)[::-1] if nums[i-1] > nums[i]), -1)
+    if idx == -1: return nums
+    # idx1 = next((i-1 for i in range(idx+1, n) if nums[i] >= nums[idx]), n-1)
+    idx1 = idx + 1
+    for i in range(idx1, n):
+        if arr[i] < arr[idx]:
+            if arr[i] > arr[idx1]: idx1 = i  # midx=4 for 9 is max so hit end
+        else: break
+    nums[idx], nums[idx1] = nums[idx1], nums[idx]
+    return nums
+
+    #
     n = len(arr)  # [1,9,4,6,7]
     idx = n-2  # looking for the first rise index inside from right
     while idx >= 0 and arr[idx] <= arr[idx+1]: idx -= 1  # idx = 1 for 9 > 4
@@ -51,6 +66,7 @@ def subsets(self, nums: List[int]) -> List[List[int]]:  # time and space O(2^N)
     ret = [[]]
     for num in nums: ret += [ss + [num] for ss in ret]  # add one digit at a time
     return ret
+
 def subsets(self, nums: List[int]) -> List[List[int]]:  # samiliar to LC90
     n, ans = len(nums), []
     def backTrack(start, cur_list):
@@ -136,13 +152,30 @@ def combine(self, n: int, k: int) -> List[List[int]]:  # O(k * C^k_n)
         nums[j] += 1
     return output
 
+def combine(self, n: int, k: int) -> List[List[int]]:
+    def backtrack(curr, first_num):
+        if len(curr) == k:
+            ans.append(curr[:])
+            return
+        need = k - len(curr)
+        remain = n - first_num + 1
+        available = remain - need
+        for num in range(first_num, first_num + available + 1):
+            curr.append(num)
+            backtrack(curr, num + 1)
+            curr.pop()
+    ans = []
+    backtrack([], 1)
+    return ans
+
 
 
 # LC920. Number of Music Playlists
 def numMusicPlaylists(self, N, L, K):
     @lru_cache(None)
     def dp(i, j): # num of playlists of length i that has exactly j unique songs
-        if i == 0: return +(j == 0)
+        if i == 0:
+            return +(j == 0)
         ans = dp(i-1, j-1) * (N-j+1) # jth song is new song, N - (j-1) ways
         ans += dp(i-1, j) * max(j-K, 0) # already have j songs, wait K
         return ans % (10**9+7)

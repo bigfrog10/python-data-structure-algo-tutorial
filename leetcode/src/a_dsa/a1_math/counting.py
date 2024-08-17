@@ -7,7 +7,7 @@ def angleClock(self, hour: int, minutes: int) -> float:
     return min(diff, 360 - diff)
 
 # LC204. Count Primes
-def countPrimes(self, n: int) -> int:
+def countPrimes(self, n: int) -> int: # Sieve of Eratosthenes
     import math
     if n <= 2: return 0
     if n == 3: return 1
