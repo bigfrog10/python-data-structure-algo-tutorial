@@ -9,20 +9,6 @@ def letterCombinations(self, digits):
     for d in digits: cmb = [p + q for p in cmb for q in dict[d]]
     return cmb
 
-# LC31. Next Permutation
-def nextPermutation(self, nums: List[int]) -> None:  # O(n)
-    if not nums: return
-    n = len(nums)
-    if n == 1: return
-    # from back, find the first value such that value < right, 1, 8, 4, 7, 6, 5, 3, 1 => 4 (idx=2)
-    idx = next((i-1 for i in range(n)[::-1] if nums[i-1] < nums[i]), -1)
-    if idx == -1: nums.reverse()
-    else:
-        # find the value such that prev > value > next, find 5 (idx=5)
-        idx1 = next((i-1 for i in range(idx+1, n) if nums[i] <= nums[idx]), n-1)
-        nums[idx], nums[idx1] = nums[idx1], nums[idx]  # swap
-        nums[idx+1:] = reversed(nums[idx+1:])
-
 # LC118. Pascal's Triangle
 def generate(self, numRows): # Time & Space: O(n^2)
     row, res = [1], []
@@ -31,34 +17,6 @@ def generate(self, numRows): # Time & Space: O(n^2)
         row = [1] + [row[i] + row[i+1] for i in range(n)] + [1]
     return res
 
-# LC1053. Previous Permutation With One Swap
-def prevPermOpt1(self, arr: List[int]) -> List[int]: # Time: O(n) Space: O(1)
-    nums = arr.copy()
-    if not arr: return []
-    n = len(nums)
-    idx = next((i-1 for i in range(n)[::-1] if nums[i-1] > nums[i]), -1)
-    if idx == -1: return nums
-    # idx1 = next((i-1 for i in range(idx+1, n) if nums[i] >= nums[idx]), n-1)
-    idx1 = idx + 1
-    for i in range(idx1, n):
-        if arr[i] < arr[idx]:
-            if arr[i] > arr[idx1]: idx1 = i  # midx=4 for 9 is max so hit end
-        else: break
-    nums[idx], nums[idx1] = nums[idx1], nums[idx]
-    return nums
-
-    #
-    n = len(arr)  # [1,9,4,6,7]
-    idx = n-2  # looking for the first rise index inside from right
-    while idx >= 0 and arr[idx] <= arr[idx+1]: idx -= 1  # idx = 1 for 9 > 4
-    if idx >= 0:  # Otherwise, we have increasing series, just return
-        midx = idx + 1  # now find max < arr[idx], swap with that
-        for i in range(midx, n):  # max != arr[idx], otherwise no change in swap
-            if arr[idx] > arr[i]:
-                if arr[i] > arr[midx]: midx = i  # midx=4 for 9 is max so hit end
-            else: break
-        arr[idx], arr[midx] = arr[midx], arr[idx]
-    return arr
 
 # LC78. Subsets  - unique elem
 def subsets(self, nums: List[int]) -> List[List[int]]:  # time and space O(2^N)
@@ -100,6 +58,18 @@ def permute(nums: List[int]) -> List[List[int]]:  # O(n!) & O(n!)
         ans = [each[:i] + [num] + each[i:] for each in ans for i in range(len(each)+1)]
     return ans
 
+# LC47. Permutations II
+def permuteUnique(self, nums: List[int]) -> List[List[int]]:  # O(n!), T(n) = n*T(n-1) + O(n)
+    ans = [[]]  # best case is when all numbers are the same, while worst case is when all numbers are distinct
+    for n in nums:
+        new_ans = []
+        for p in ans:
+            for i in range(len(p)+1):
+                new_ans.append(p[:i] + [n] + p[i:])
+                if i < len(p) and p[i] == n: break  # we insert dups only from left side.
+        ans = new_ans
+    return ans
+
 # LC60. Permutation Sequence - return kth permutation
 def getPermutation(self, n: int, k: int) -> str: # O(n^2) due to pop(i)
     nums = list(map(str, range(1, n+1)))  # '1', '2', ..., 'n'
@@ -112,17 +82,48 @@ def getPermutation(self, n: int, k: int) -> str: # O(n^2) due to pop(i)
     ans += ''.join(nums)
     return ans
 
-# LC47. Permutations II
-def permuteUnique(self, nums: List[int]) -> List[List[int]]:  # O(n!), T(n) = n*T(n-1) + O(n)
-    ans = [[]]  # best case is when all numbers are the same, while worst case is when all numbers are distinct
-    for n in nums:
-        new_ans = []
-        for p in ans:
-            for i in range(len(p)+1):
-                new_ans.append(p[:i] + [n] + p[i:])
-                if i < len(p) and p[i] == n: break  # we insert dups only from left side.
-        ans = new_ans
-    return ans
+# LC31. Next Permutation
+def nextPermutation(self, nums: List[int]) -> None:  # O(n)
+    if not nums: return
+    n = len(nums)
+    if n == 1: return
+    # from back, find the first value such that value < right, 1, 8, 4, 7, 6, 5, 3, 1 => 4 (idx=2)
+    idx = next((i-1 for i in range(n)[::-1] if nums[i-1] < nums[i]), -1)
+    if idx == -1: nums.reverse()
+    else:
+        # find the value such that prev > value > next, find 5 (idx=5)
+        idx1 = next((i-1 for i in range(idx+1, n) if nums[i] <= nums[idx]), n-1)
+        nums[idx], nums[idx1] = nums[idx1], nums[idx]  # swap
+        nums[idx+1:] = reversed(nums[idx+1:])
+
+# LC1053. Previous Permutation With One Swap
+def prevPermOpt1(self, arr: List[int]) -> List[int]: # Time: O(n) Space: O(1)
+    nums = arr.copy()
+    if not arr: return []
+    n = len(nums)
+    idx = next((i-1 for i in range(n)[::-1] if nums[i-1] > nums[i]), -1)
+    if idx == -1: return nums
+    # idx1 = next((i-1 for i in range(idx+1, n) if nums[i] >= nums[idx]), n-1)
+    idx1 = idx + 1
+    for i in range(idx1, n):
+        if arr[i] < arr[idx]:
+            if arr[i] > arr[idx1]: idx1 = i  # midx=4 for 9 is max so hit end
+        else: break
+    nums[idx], nums[idx1] = nums[idx1], nums[idx]
+    return nums
+
+    #
+    n = len(arr)  # [1,9,4,6,7]
+    idx = n-2  # looking for the first rise index inside from right
+    while idx >= 0 and arr[idx] <= arr[idx+1]: idx -= 1  # idx = 1 for 9 > 4
+    if idx >= 0:  # Otherwise, we have increasing series, just return
+        midx = idx + 1  # now find max < arr[idx], swap with that
+        for i in range(midx, n):  # max != arr[idx], otherwise no change in swap
+            if arr[idx] > arr[i]:
+                if arr[i] > arr[midx]: midx = i  # midx=4 for 9 is max so hit end
+            else: break
+        arr[idx], arr[midx] = arr[midx], arr[idx]
+    return arr
 
 # LC77. Combinations
 def combine(self, n, k):
@@ -166,16 +167,14 @@ def combine(self, n: int, k: int) -> List[List[int]]:
     backtrack([], 1)
     return ans
 
-
-
 # LC920. Number of Music Playlists
 def numMusicPlaylists(self, N, L, K):
     @lru_cache(None)
-    def dp(i, j): # num of playlists of length i that has exactly j unique songs
+    def dp(i, j): # num of possible playlists of length i that has exactly j unique songs
         if i == 0:
             return +(j == 0)
-        ans = dp(i-1, j-1) * (N-j+1) # jth song is new song, N - (j-1) ways
-        ans += dp(i-1, j) * max(j-K, 0) # already have j songs, wait K
+        ans = dp(i-1, j-1) * (N-j+1) # N-j+1: the number of new songs we can add to the playlist
+        ans += dp(i-1, j) * max(j-K, 0) # number of old songs we can play
         return ans % (10**9+7)
     return dp(L, N)
 

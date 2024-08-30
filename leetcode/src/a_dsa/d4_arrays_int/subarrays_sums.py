@@ -1,4 +1,17 @@
 
+# LC2958. Length of Longest Subarray With at Most K Frequency
+def maxSubarrayLength(self, nums: List[int], k: int) -> int:
+    n, left, result = len(nums), 0, 0
+    freq = defaultdict(int)
+    for right in range(n):
+        freq[nums[right]] += 1
+        while freq[nums[right]] > k:  # backout
+            freq[nums[left]] -= 1
+            left += 1
+        result = max(result, right - left + 1)
+    return result
+
+
 # LC53. Maximum Subarray   - max sum amount all subarrays
 def maxSubArray(self, nums: List[int]) -> int:
     total = max_total = nums[0]

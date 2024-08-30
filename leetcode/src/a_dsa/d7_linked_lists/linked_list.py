@@ -3,6 +3,21 @@ class ListNode:
         self.val = val
         self.next = next
 
+# LC1171. Remove Zero Sum Consecutive Nodes from Linked List
+def removeZeroSumSublists(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    dummy, ans = ListNode(0, head), 0
+    dict_ = {ans:dummy}
+    while head:   # O(n)
+        ans += head.val
+        dict_[ans] = head  # if we same ans, this overrides before.
+        head = head.next
+    head, ans = dummy, 0
+    while head:
+        ans += head.val
+        head.next = dict_[ans].next  # remove/override the node.
+        head = head.next
+    return dummy.next
+
 # LC86. Partition List - separate by given x, similar to odd/even
 def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
     before = before_head = ListNode(0)

@@ -1,3 +1,12 @@
+# LC422. Valid Word Square
+def validWordSquare(self, words: List[str]) -> bool:
+    n = len(words)
+    for i in range(n):
+        for j in range(len(words[i])):  # word in words may not have same length
+            try:
+                if words[i][j] != words[j][i]: return False
+            except: return False
+    return True
 
 # LC722. Remove Comments
 def removeComments(self, source):
