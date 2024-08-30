@@ -2,46 +2,24 @@ from typing import List
 from collections import Counter
 
 # LC4. Median of Two Sorted Arrays, top100
-def findMedianSortedArrays(self, A, B):  # O(log(m+n))
-    l = len(A) + len(B)
-    if l % 2 == 1: return self.kth(A, B, l // 2)
-    else: return (self.kth(A, B, l // 2) + self.kth(A, B, l // 2 - 1)) / 2.
-def kth(self, a, b, k):
-    if not a: return b[k]
-    if not b: return a[k]
-    ia, ib = len(a) // 2 , len(b) // 2
-    ma, mb = a[ia], b[ib]
-
-    if ia + ib < k:  # when k is bigger than the sum of a and b's median indices
-        # if a's median is bigger than b's, b's first half doesn't include k
-        if ma > mb: return self.kth(a, b[ib + 1:], k - ib - 1)
-        else: return self.kth(a[ia + 1:], b, k - ia - 1)
-    else:  # when k is smaller than the sum of a and b's indices
-        # if a's median is bigger than b's, a's second half doesn't include k
-        if ma > mb: return self.kth(a[:ia], b, k)
-        else: return self.kth(a, b[:ib], k)
 def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
-    # https://leetcode.com/problems/median-of-two-sorted-arrays/discuss/2481/Share-my-O(log(min(mn)))-solution-with-explanation
-    A, B = nums1, nums2  # O(log(min(m, n)))
-    m, n = len(A), len(B)
-    if m > n: A, B, m, n = B, A, n, m
-    if n == 0: raise ValueError
-    imin, imax, half_len = 0, m, (m + n + 1) // 2
-    while imin <= imax:
-        i = (imin + imax) // 2  # binary search
-        j = half_len - i  # condition 1: i+j = half_len, so break into 2 equal parts
-        if i < m and B[j-1] > A[i]: imin = i + 1  # i is too small, must increase it
-        elif i > 0 and A[i-1] > B[j]: imax = i - 1  # i is too big, must decrease it
-        else:  # i is perfect,
-            # condition 2: B[j-1] <= A[i] and A[i-1] <= B[j], so max(left) <= min(right)
-            if i == 0: max_of_left = B[j-1]
-            elif j == 0: max_of_left = A[i-1]
-            else: max_of_left = max(A[i-1], B[j-1])
-            if (m + n) % 2 == 1: return max_of_left  # the middle one
-            if i == m: min_of_right = B[j]
-            elif j == n: min_of_right = A[i]
-            else: min_of_right = min(A[i], B[j])
-            return (max_of_left + min_of_right) / 2.0  # no middle, so take average
+    m, n = len(nums1), len(nums2)  # O(log(min(m,n))) time and O(1) space
+    if m > n: return self.findMedianSortedArrays(nums2, nums1)
+    left, right = 0, m  # bisect on smaller array
+    while left <= right:  # search for partitionA so that
+        partitionA = (left + right) // 2  # so right side may have 1 extra element
+        partitionB = (m + n + 1) // 2 - partitionA
+        maxLeftA = float("-inf") if partitionA == 0 else nums1[partitionA - 1]
+        minRightA = float("inf") if partitionA == m else nums1[partitionA]
+        maxLeftB = float("-inf") if partitionB == 0 else nums2[partitionB - 1]
+        minRightB = float("inf") if partitionB == n else nums2[partitionB]
+        if maxLeftA <= minRightB and maxLeftB <= minRightA:
+            if (m + n) % 2 == 0:
+                return (max(maxLeftA, maxLeftB) + min(minRightA, minRightB)) / 2
+            else:
+                return max(maxLeftA, maxLeftB)
+        elif maxLeftA > minRightB: right = partitionA - 1
+        else: left = partitionA + 1
 
 # LC881. Boats to Save People
 def numRescueBoats(self, people: List[int], limit: int) -> int:  # nlogn

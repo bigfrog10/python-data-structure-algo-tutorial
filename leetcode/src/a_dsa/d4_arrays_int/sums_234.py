@@ -1,6 +1,6 @@
 
 # LC1. Two Sum, top100 - 2sum
-def twoSum(self, nums, target):
+def twoSum(self, nums, target):  # O(n) time and space
     cache = {}
     for i, num in enumerate(nums):
         diff = target - num

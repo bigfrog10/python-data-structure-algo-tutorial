@@ -5,29 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29b13a08-5760-41f7-8cea-fc198b3bbcb2" name="Default Changelist" comment="re-org">
-      <change afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_arrays_dfs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iml" beforeDir="false" afterPath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/python-data-structure-algo-tutorial.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/python-data-structure-algo-tutorial.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" beforeDir="false" afterPath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sql/joins.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../sql/joins.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/a1_math/combinatorics.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/a1_math/combinatorics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d1_bits/bits.md" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d1_bits/bits.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/string_sorting.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/string_sorting.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/strings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/strings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d3_ints/int_num.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d3_ints/int_num.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/array_rotated.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/array_rotated.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/binary_search.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/binary_search.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/sorting.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/sorting.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/dp.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/dp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/greedy.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/greedy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_array_01.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_array_01.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_arrays.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_arrays.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/subsequences.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/subsequences.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/2d_board_games.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/2d_board_games.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/arrays_2d.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/arrays_2d.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/islands.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/islands.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree_dfs.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree_dfs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/arrays.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/arrays.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/sums_234.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/sums_234.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,6 +49,9 @@
         <option name="mavenHomeTypeForPersistence" value="CUSTOM" />
       </MavenGeneralSettings>
     </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="2" />
@@ -431,7 +414,7 @@
       <workItem from="1655653942973" duration="59860000" />
       <workItem from="1656386678937" duration="75717000" />
       <workItem from="1721585035866" duration="1075000" />
-      <workItem from="1724812784341" duration="50173000" />
+      <workItem from="1724812784341" duration="64589000" />
     </task>
     <task id="LOCAL-00001" summary="update 2 sites">
       <created>1639271849713</created>
@@ -524,7 +507,23 @@
       <option name="project" value="LOCAL" />
       <updated>1654441307221</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="re-org">
+      <option name="closed" value="true" />
+      <created>1724984058606</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1724984058606</updated>
+    </task>
+    <task id="LOCAL-00015" summary="re-org">
+      <option name="closed" value="true" />
+      <created>1725023394630</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1725023394630</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -540,9 +539,9 @@
     <MESSAGE value="update algos with runtime and space" />
     <MESSAGE value="2nd round" />
     <MESSAGE value="fb out" />
-    <MESSAGE value="re-org" />
     <MESSAGE value="2022" />
-    <option name="LAST_COMMIT_MESSAGE" value="2022" />
+    <MESSAGE value="re-org" />
+    <option name="LAST_COMMIT_MESSAGE" value="re-org" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
