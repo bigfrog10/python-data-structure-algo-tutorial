@@ -44,6 +44,7 @@ def validUtf8(self, data: List[int]) -> bool:
             skip += 1
             mask >>= 1
         if skip == 1 or skip > 4: return False  # only 0xxx, 110x, 1110, 11110 are valid
+
         if any(not x & 1 << 7 or x & 1 << 6 for x in data[i+1:i+skip]):
             return False  # 2nd byte has 10xx
         i += max(1, skip)
@@ -125,3 +126,6 @@ def prisonAfterNDays(self, cells: List[int], N: int) -> List[int]:
 def poorPigs(self, buckets: int, minutesToDie: int, minutesToTest: int) -> int:
     states = minutesToTest // minutesToDie + 1
     return math.ceil(math.log(buckets) / math.log(states))
+
+    # x pigs could test 2^x buckets
+    # states^x >= buckets

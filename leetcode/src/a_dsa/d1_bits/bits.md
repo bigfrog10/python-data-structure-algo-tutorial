@@ -1,15 +1,15 @@
 
-2's compliment:
+### 2's compliment:
 ```-x = ~x + 1```
 
-XOR
+### XOR
 ```a ^ b = 0 if a == b else 1 ```
 
 Properties:  
 ```
 n ^ n = 0
 n ^ 0 = n
-n ^ 1 = n-1 if n is odd or n+1 if n is even
+n ^ 1 = n-1 if n is odd or n+1 if n is even (operates on last bit)
 ```
 
 ### Right Most Bit 
