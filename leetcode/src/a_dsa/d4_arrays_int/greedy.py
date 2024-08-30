@@ -1,3 +1,24 @@
+# 995. Minimum Number of K Consecutive Bit Flips  k flip
+def minKBitFlips(self, nums: List[int], k: int) -> int:
+    n = len(nums)  # Length of the input list
+    flip_queue = collections.deque()  # Queue to keep track of flips
+    flipped = 0  # Current flip state
+    result = 0  # Total number of flips
+    for i, num in enumerate(nums):
+        if i >= k: # Remove the effect of the oldest flip if it's out of the current window
+            flipped ^= flip_queue[0]
+        if flipped == nums[i]:  # If the current bit is 0 (i.e., it needs to be flipped), 1==1 0 == 0
+            if i + k > n: # If we cannot flip a subarray starting at index i
+                return -1
+            flip_queue.append(1) # Add a flip at this position
+            flipped ^= 1  # Toggle the flipped state
+            result += 1  # Increment the flip count
+        else:
+            flip_queue.append(0)
+
+        if len(flip_queue) > k: # Remove the oldest flip effect if the queue is longer than k
+            flip_queue.popleft()
+    return result
 
 # LC134. Gas Station - on a circle
 def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:  # O(n)

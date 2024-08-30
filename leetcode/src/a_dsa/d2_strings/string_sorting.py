@@ -1,3 +1,8 @@
+# LC1657. Determine if Two Strings Are Close
+def closeStrings(self, word1: str, word2: str) -> bool:
+    c1, c2 = Counter(word1), Counter(word2)  # O(m+n)
+    # size is 26
+    return sorted(c1.values()) == sorted(c2.values()) and sorted(c1.keys()) == sorted(c2.keys())
 
 # LC1061. Lexicographically Smallest Equivalent String - union find
 def smallestEquivalentString(self, s1: str, s2: str, baseStr: str) -> str:

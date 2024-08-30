@@ -93,8 +93,6 @@ def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:  # O(n * 2^n)
     backtrack(0, [])
     return ans  # [[],[1],[1,2],[1,2,2],[2],[2,2]]
 
-
-
 # LC46. Permutations
 def permute(nums: List[int]) -> List[List[int]]:  # O(n!) & O(n!)
     ans = [[]]
@@ -186,7 +184,7 @@ from itertools import combinations
 def combinationSum3(self, k: int, n: int) -> List[List[int]]:
     return [c for c in combinations(range(1, 10), k) if sum(c) == n]
 
-def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+def combinationSum3(self, k: int, n: int) -> List[List[int]]: # O(9!*k/(9-k)!)
     self.ans = []
     def dfs(start, sol, k, n):
         if k == 0 and n == 0:

@@ -3,6 +3,50 @@ from collections import Counter
 import math
 import functools
 
+# LC2970. Count the Number of Incremovable Subarrays I
+def incremovableSubarrayCount(self, nums: List[int]) -> int: # O(n^4)
+    n, count = len(nums), 0
+    for left in range(n):
+        for right in range(left, n):
+            A = nums[0:left] + nums[right+1:]  # we could remove this, but more complex
+            valid=True
+            for k in range(len(A)-1):
+                if A[k] >= A[k+1]:
+                    valid=False
+                    break
+            if valid: count+=1
+    return count
+
+# LC2972. Count the Number of Incremovable Subarrays II
+def incremovableSubarrayCount(self, nums: List[int]) -> int:
+    nums = [0]+nums+[float('inf')]
+    n = len(nums)  # [1,2,5,2,9,2,4,7,8,9]
+    for i in range(n-1):
+        if nums[i] >= nums[i+1]: break  # i = 2
+    else: return (n-2)*(n-1)//2
+
+    for j in range(n-1, 0, -1):
+        if nums[j-1] >= nums[j]: break  # j = 5
+
+    l, r, res = 0, j, 0
+    while l <= i:  # O(n^2) or O(nlogn
+        # while r < n and nums[l] >= nums[r]: r += 1  # need strictly increasing  O(n)
+        r = bisect.bisect_right(nums, nums[l], lo=j)  # suppose to be fast, but slow, O(logn)
+        print(f'r={r}')
+        res += n - r # from r to n
+        l += 1
+    return res
+
+
+# LC1826. Faulty Sensor
+def badSensor(self, sensor1: List[int], sensor2: List[int]) -> int:
+    n = len(sensor1)
+    for i in range(n - 1):
+        if sensor1[i] != sensor2[i]:
+            if sensor2[i] != sensor1[i + 1]: return 1
+            elif sensor1[i] != sensor2[i + 1]: return 2
+    return -1
+
 # LC349. Intersection of Two Arrays - return unique elems
 def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
     set1 = set(nums1)

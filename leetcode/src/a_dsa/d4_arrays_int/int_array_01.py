@@ -27,3 +27,15 @@ def findMaxLength(self, nums: List[int]) -> int:  # O(n) time and space
         if count in c2i: maxlen = max(maxlen, i - c2i[count])
         else: c2i[count] = i  # do this on first occurrence for longest cases
     return maxlen
+
+# 330. Patching Array
+def minPatches(self, nums: List[int], n: int) -> int:
+    miss, added, index = 1, 0, 0
+    while miss <= n:  #O(n)
+        if index < len(nums) and nums[index] <= miss:
+            miss += nums[index]  # cover (1, miss) with new miss
+            index += 1
+        else:
+            miss += miss  # cover (1, 2*miss)
+            added += 1  # need new number
+    return added

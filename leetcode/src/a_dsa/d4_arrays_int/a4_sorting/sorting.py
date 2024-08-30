@@ -1,4 +1,16 @@
 
+# 2824. Count Pairs Whose Sum is Less than Target
+def countPairs(self, nums: List[int], target: int) -> int:
+    ns = sorted(nums)  # O(nlogn)
+    count = left = 0
+    right = len(nums) - 1
+    while left < right:
+        if ns[left] + ns[right] < target:
+            count += right - left
+            left += 1
+        else: right -= 1
+    return count
+
 # LC912. Sort an Array
 def sortArray(self, nums: List[int]) -> List[int]:  # bucket sort, O(n)
     bucket = [0]*100001

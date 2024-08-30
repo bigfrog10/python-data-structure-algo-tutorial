@@ -1,3 +1,11 @@
+# 1768. Merge Strings Alternately
+def mergeAlternately(self, word1: str, word2: str) -> str:
+    result = []
+    n = max(len(word1), len(word2))
+    for i in range(n):
+        if i < len(word1): result += word1[i]
+        if i < len(word2): result += word2[i]
+    return "".join(result)
 
 # LC1446. Consecutive Characters - power of a string - same chars
 def maxPower(self, s: str) -> int:

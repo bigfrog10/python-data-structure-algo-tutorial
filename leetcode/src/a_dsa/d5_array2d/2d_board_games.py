@@ -1,5 +1,41 @@
 from collections import deque
 
+# 1778. Shortest Path in a Hidden Grid
+def findShortestPath(self, master: 'GridMaster') -> int:
+    can_move = set() # need to build graph first, for bfs. Otherwise TLE.
+    directions = {'U':(-1, 0, 'D'), 'D':(1, 0, 'U'), 'L':(0, 1, 'R'), 'R':(0, -1, 'L')}
+    target = None
+    def build_graph(x, y):
+        if master.isTarget():
+            nonlocal target
+            target = (x, y)
+            return
+        can_move.add((x, y))
+        for direction in directions:
+            dx, dy, revert_direction = directions[direction]
+            nx, ny = x + dx, y + dy
+            if (nx, ny) not in can_move and master.canMove(direction):
+                master.move(direction)
+                build_graph(nx, ny)
+                master.move(revert_direction)
+    build_graph(0, 0)
+    if target is None: return -1
+
+    queue, level = [(0, 0)], 0 # bfs
+    visited = set(queue)
+    while queue:
+        next_queue = queue
+        queue = []
+        level += 1
+        for x, y in next_queue:
+            for next_node in [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]:
+                if next_node == target: return level
+                if next_node not in can_move or next_node in visited: continue
+                visited.add(next_node)
+                queue.append(next_node)
+    return -1
+
+
 # LC489. Robot Room Cleaner
 def cleanRoom(self, robot):  # O(open cells)
     def go_back():

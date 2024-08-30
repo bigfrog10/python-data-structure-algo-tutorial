@@ -1,4 +1,43 @@
 
+# LC3030. Find the Grid of Region Average
+def resultGrid(self, image: List[List[int]], threshold: int) -> List[List[int]]:
+    m, n = len(image), len(image[0])
+    grid = [[[0, 0] for _ in range(n)] for _ in range(m)]
+    for i, j in product(range(m-2), range(n-2)):  # O(mn)
+        s = 0
+        for ii, jj in product(range(i, i+3), range(j, j+3)):
+            if (ii < i+2 and abs(image[ii+1][jj] - image[ii][jj]) > threshold or
+                    jj < j+2 and abs(image[ii][jj+1] - image[ii][jj]) > threshold):
+                break  # not a region
+            s += image[ii][jj]
+        else:  # without break
+            s //= 9
+            for ii, jj in product(range(i, i+3), range(j, j+3)):
+                grid[ii][jj][0] += s
+                grid[ii][jj][1] += 1
+
+    for i, j in product(range(m), range(n)):
+        if grid[i][j][1]:
+            image[i][j] = grid[i][j][0] // grid[i][j][1]
+    return image
+
+# LC2397. Maximum Rows Covered by Columns
+def maximumRows(self, matrix: List[List[int]], numSelect: int) -> int:
+    n,m = len(matrix),len(matrix[0])
+    ans = 0
+    def check(state,row,rowIncludedCount):
+        if sum(state) > numSelect: return
+        if row==n:
+            nonlocal ans
+            ans = max(ans, rowIncludedCount)
+            return
+        check(state[::], row+1, rowIncludedCount)  # skip this row
+        for j in range(m):
+            if matrix[row][j]==1: state[j] = 1
+        check(state, row+1, rowIncludedCount+1)  # count in this row
+    check([0]*m, 0, 0)
+    return ans
+
 # LC373. Find K Pairs with Smallest Sums - similar to 378
 def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
     min_heap, res = [], []  # O(klogk)

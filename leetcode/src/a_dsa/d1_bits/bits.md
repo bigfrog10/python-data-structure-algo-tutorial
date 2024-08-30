@@ -35,9 +35,10 @@ Both ```x & (-x)``` and ```x ^ ( x & (x-1) )``` gives the right most bit
 For given x, to get MSB we fill 1's to x by n | (n >> 2 ** i) for i in 0 ... 6
 ```
 def msb(n):
+    if n == 0: return 0
     for i in range(6): # for 64 bits
         n = n | (n >> 2 ** i)
-    return (n+1) >> 1
+    return (n+1) >> 1  # since n now has all 1's starting with msb.
 ```
 
 x = x ^ 1 ^ 1  # flip

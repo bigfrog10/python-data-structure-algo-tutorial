@@ -1,5 +1,17 @@
 -- https://www.guru99.com/joins.html
 
+-- 1581. Customer Who Visited but Did Not Make Any Transactions
+SELECT
+    customer_id,
+    COUNT(*) AS count_no_trans
+FROM
+    Visits AS v
+        LEFT JOIN Transactions AS t ON v.visit_id = t.visit_id
+WHERE
+    t.visit_id IS NULL
+GROUP BY
+    customer_id
+
 -- LC175. Combine Two Tables
 SELECT a.FirstName, a.LastName, b.City, b.State
 FROM Person a LEFT OUTER JOIN Address b ON a.PersonId = b.PersonId

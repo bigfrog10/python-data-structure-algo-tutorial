@@ -1,4 +1,34 @@
 
+#LC256. Paint House
+def minCost(self, costs: List[List[int]]) -> int:
+    costs = costs.copy()  # O(n) space and time
+    for n in reversed(range(len(costs) - 1)):
+        # Total cost of painting nth house red.
+        costs[n][0] += min(costs[n + 1][1], costs[n + 1][2])
+        # Total cost of painting nth house green.
+        costs[n][1] += min(costs[n + 1][0], costs[n + 1][2])
+        # Total cost of painting nth house blue.
+        costs[n][2] += min(costs[n + 1][0], costs[n + 1][1])
+
+    if len(costs) == 0: return 0
+    return min(costs[0]) # Return the minimum in the first row.
+
+# LC265. Paint House II
+def minCostII(self, costs: List[List[int]]) -> int:
+    n, k = len(costs), len(costs[0])
+    if n == 0: return 0
+    import copy
+    costs = copy.deepcopy(costs)
+    for house in range(1, n):
+        for color in range(k):
+            best = math.inf
+            for previous_color in range(k):
+                if color == previous_color: continue
+                best = min(best, costs[house - 1][previous_color])
+            costs[house][color] += best
+    return min(costs[-1])
+
+
 # 2 state recursion
 # LC198. House Robber
 def rob(self, nums: List[int]) -> int:

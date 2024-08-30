@@ -1,3 +1,12 @@
+# 633. Sum of Square Numbers
+def judgeSquareSum(self, c: int) -> bool:
+    a = 0
+    while a * a <= c:  # O(sqrt(c))
+        b = (c - a * a) ** 0.5  # sqrt takes logc?
+        if b == int(b):
+            return True
+        a += 1
+    return False
 
 # LC400. Nth Digit
 def findNthDigit(self, n: int) -> int:  # O(logn) time since we go by digits

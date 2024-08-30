@@ -1,4 +1,15 @@
 
+# 404. Sum of Left Leaves
+def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
+    def dfs(node, isLeft):
+        if node:
+            if isLeft and not node.left and not node.right:
+                return node.val
+            return dfs(node.left, True) + dfs(node.right, False)
+        return 0
+
+    return dfs(root, False)
+
 # LC508. Most Frequent Subtree Sum
 def findFrequentTreeSum(self, root: Optional[TreeNode]) -> List[int]:  # O(n) time and space
     if root is None: return []

@@ -1,7 +1,7 @@
-
-# LC200. Number of Islands
 from itertools import product
-def numIslands(self, board: List[List[str]]) -> int:
+# LC200. Number of Islands
+
+def numIslands(self, board: List[List[str]]) -> int:  # O(MN) time and space
     if not board: return 0  # O(MN)
     rows, cols = len(board), len(board[0])
     seen = set()
@@ -250,3 +250,36 @@ def countSubIslands(self, grid1: List[List[int]], grid2: List[List[int]]) -> int
             res &= dfs(i + di, j + dj)
         return res  # 0 or 1
     return sum(dfs(i, j) for i in range(n) for j in range(m) if grid2[i][j])
+
+
+# 959. Regions Cut By Slashes
+def findUp(self, node):  # O((n+1)² * α((n+1)²)) time, O(α(n+1)²) space, inverse Ackermann function
+    if node == self.p[node]: return node
+    self.p[node] = self.findUp(self.p[node])
+    return self.p[node]
+
+def dsu(self, n1, n2):
+    up1 = self.findUp(n1)
+    up2 = self.findUp(n2)
+    if up1 == up2: self.cnt += 1  # after connect circles, a new region is born
+    else: self.p[up2] = up1  # setup new parent
+
+def regionsBySlashes(self, grid):
+    n = len(grid)
+    nn = n + 1
+    self.p = list(range(nn * nn))  # parent
+    self.cnt = 0
+
+    for i in range(nn):
+        for j in range(nn):
+            if i == 0 or j == 0 or i == n or j == n:  # all boundaries
+                self.dsu(0, i * nn + j)
+
+    for i in range(n):
+        for j in range(n):
+            if grid[i][j] == '/':
+                self.dsu((i + 1) * nn + j, i * nn + (j + 1))
+            elif grid[i][j] != ' ':
+                self.dsu(i * nn + j, (i + 1) * nn + (j + 1))
+
+    return self.cnt

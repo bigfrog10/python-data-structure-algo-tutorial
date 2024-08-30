@@ -1,4 +1,22 @@
 
+# 3201. Find the Maximum Length of Valid Subsequence I
+def maximumLength(self, nums: List[int]) -> int:  # subsequence is not continuous subarray.
+    count, end = [0, 0], [0, 0]  # O(1) space and O(n) time
+    for n in nums:
+        count[n % 2] += 1  # all 0's and all 1's
+        end[n % 2] = end[1 - n % 2] + 1  # all 10's and 01's
+    return max(max(count), max(end))
+
+# 3202. Find the Maximum Length of Valid Subsequence II
+def maximumLength(self, nums: List[int], k: int) -> int:
+    res = 0
+    for v in range(k):  # Enumearet the sub sum v = (sub[0] + sub[1]) % k
+        dp = [0] * k  # dp[a % k] means the longest of subarray ending with a % k
+        for a in nums:
+            dp[a % k] = dp[(v - a) % k] + 1  # a can be the next element after (v - a) % k
+        res = max(res, max(dp))
+    return res
+
 # LC416. Partition Equal Subset Sum  - Knapsack
 def canPartition(self, nums: List[int]) -> bool:  # sequence, not continuous subset
     n, total = len(nums), sum(nums)  # O(n * total)

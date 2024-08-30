@@ -6,7 +6,22 @@ class TreeNode:
         self.left = left
         self.right = right
 
-# LC814. Binary Tree Pruning
+# 2265. Count Nodes Equal to Average of Subtree
+def averageOfSubtree(self, root: TreeNode) -> int:
+    res = 0
+    def dfs(node, total, num_nodes):
+        if not node: return 0, 0
+        left_total, left_nn = dfs(node.left, total, num_nodes)
+        right_total, right_nn = dfs(node.right, total, num_nodes)
+        this_total = left_total + right_total + node.val
+        this_nn = left_nn + right_nn + 1
+        if this_total // this_nn == node.val:
+            nonlocal res
+            res += 1
+        return this_total, this_nn
+    dfs(root, 0, 0)
+    return res
+    # LC814. Binary Tree Pruning
 def pruneTree(self, root: TreeNode) -> TreeNode:  # O(n) time and O(h) space
     def prune(node):  # return true if all zeros
         if not node: return True

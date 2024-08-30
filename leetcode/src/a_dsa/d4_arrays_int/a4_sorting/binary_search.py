@@ -1,6 +1,19 @@
 import bisect
 from typing import List
 
+# LC1552. Magnetic Force Between Two Balls
+def maxDistance(self, position: List[int], m: int) -> int:
+    def f(d):
+        balls = 0
+        y=-math.inf
+        for x in position:
+            if x-y >= d:
+                y = x
+                balls += 1
+        return balls < m
+    position = sorted(position)
+    return bisect.bisect_left(range(position[-1]), 1, key=f)-1
+
 # LC35. Search Insert Position
 def searchInsert(self, nums: List[int], target: int) -> int:
     left, right = 0, len(nums) - 1
