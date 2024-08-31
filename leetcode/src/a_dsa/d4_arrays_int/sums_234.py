@@ -68,14 +68,14 @@ def threeSumClosest(self, nums: List[int], target: int) -> int:  # O(n^2)
 # https://leetcode.com/problems/3sum-closest/discuss/778177/Python3-%3A-Runtime%3A-52-ms-faster-than-99.77
 
 # LC15. 3Sum - return all distinct tuples
-def threeSum(self, nums):  # shorter and quicker 90%, O(n^2)
-    nums.sort()
+def threeSum(self, nums):  # shorter and quicker 90%, O(n^2) in time, O(n) in space
+    nums.sort()  # need to copy this, O(n)
     n, res = len(nums), []
     for i in range(n-2):
         if nums[i] > 0: break  # then all 3 are > 0 and sum > 0, so can't be 0
         if i > 0 and nums[i] == nums[i-1]: continue  # dupes
         l, r = i+1, n-1
-        while l < r:
+        while l < r:  # need this loop after 1st result, -1, 0, 0, 0, 0, 1
             s = nums[i] + nums[l] + nums[r]
             if s < 0: l +=1
             elif s > 0: r -= 1

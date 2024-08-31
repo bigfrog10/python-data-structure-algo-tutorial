@@ -96,13 +96,11 @@ def countAndSay(self, n: int) -> str:
 
 # LC7. Reverse Integer
 def reverse(self, x: int) -> int:
-    pos = x if x >= 0 else -x
-    res = 0
+    pos, res = x if x >= 0 else -x, 0
     while pos > 0:
-        r = pos % 10
+        pos, r = divmod(pos, 10)
         res = res * 10 + r
-        if res > 2**31-1 or res < -2**31: return 0
-        pos = pos // 10
+        if res > 2**31-1: return 0
     return res if x > 0 else -res
 
 # LC93. Restore IP Addresses - chart in solution is interesting

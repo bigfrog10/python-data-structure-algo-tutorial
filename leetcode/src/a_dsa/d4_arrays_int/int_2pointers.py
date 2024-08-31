@@ -18,9 +18,8 @@ def subarraysWithKDistinct(self, A: List[int], K: int) -> int:  # O(n) time and 
     return atMostK(A, K) - atMostK(A, K - 1)
 
 # LC11. Container With Most Water
-def maxArea(self, height: List[int]) -> int:
-    i, j = 0, len(height) - 1
-    water = 0
+def maxArea(self, height: List[int]) -> int:  # O(n) time and O(1) space
+    i, j, water = 0, len(height) - 1, 0
     while i < j:
         water = max(water, (j - i) * min(height[i], height[j]))
         if height[i] < height[j]: i += 1

@@ -27,6 +27,9 @@ def isPalindrome(self, s: str) -> bool:  # O(n)
     return True
 
 # LC5. Longest Palindromic Substring
+# https://leetcode.com/problems/longest-palindromic-substring/solutions/5433321/manacher-s-algorithm-explained-building-off-of-the-expand-around-center-approach/
+# https://leetcode.com/problems/longest-palindromic-substring/solutions/4212241/98-55-manacher-s-algorithm/
+# https://cp-algorithms.com/string/manacher.html
 def longestPalindrome1(self, s): # similar, slower, O(n^2)
     def find_diameter(left, right):  # O(n)
         while 0 <= left and right < len(s) and s[left] == s[right]:
@@ -37,6 +40,22 @@ def longestPalindrome1(self, s): # similar, slower, O(n^2)
     for i in range(len(s)):  # O(n)
         res = max(find_diameter(i, i), find_diameter(i, i+1), res, key=len)
     return res
+def longestPalindrome(self, s: str) -> str:  # O(n) time and space, Manacher's Algorithm
+    if len(s) <= 1: return s
+    Max_Len, Max_Str = 1, s[0]
+    s = '#' + '#'.join(s) + '#' # all palindromes have odd length
+    dp = [0 for _ in range(len(s))]  # radius for center i
+    center = right = 0
+    for i in range(len(s)):
+        if i < right:  # cache this info, so while loop below can be skipped.
+            dp[i] = min(right-i, dp[2*center-i])  # 2*center-i is mirror of i around center
+        while i-dp[i]-1 >= 0 and i+dp[i]+1 < len(s) and s[i-dp[i]-1] == s[i+dp[i]+1]:
+            dp[i] += 1  # expand the radius, i+ dp[i] + 1 < n -> 2 loops < O(n)
+        if i+dp[i] > right:  # update
+            center, right = i, i+dp[i]  # push right further to the right
+        if dp[i] > Max_Len:
+            Max_Len, Max_Str = dp[i], s[i-dp[i]:i+dp[i]+1].replace('#','')
+    return Max_Str
 
 # LC516. Longest Palindromic Subsequence - return length
 def longestPalindromeSubseq(self, s: str) -> int: # O(n^2) time and space

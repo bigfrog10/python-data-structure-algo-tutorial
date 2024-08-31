@@ -5,23 +5,23 @@ import itertools
 def rotate(self, A):
     A[:] = zip(*A[::-1])
 def rotate(self, matrix: List[List[int]]) -> None:
-    # divide and conquer, outer borders, one layer at a time
-    def border_rotate(matrix, pi):  # i is the upper right corner, pivot index
-        h = len(matrix) - 2 * pi
-        if h == 0: return # False  # signal time to stop
-        hi = h - 1  # last index from pivot to the other corner
-        last = pi + hi # last index from pivot to the other corner - 1
-        for i in range(hi):  # we stop before the corner
-            tmp = matrix[pi][pi+i]  # upper left corner to tmp
-            matrix[pi][pi+i] = matrix[last - i][pi]  # lower left corner to upper left
-            matrix[last - i][pi] = matrix[last][last-i]  # lower right to lower left
-            matrix[last][last-i] = matrix[pi+i][last]  # upper right to lower right
-            matrix[pi+i][last] = tmp  # upper left, tmp, to upper right
-    for i in range(len(matrix) // 2):
-        border_rotate(matrix, i)
+    n = len(matrix)
+    for i in range(n//2): matrix[i], matrix[~i] = matrix[~i], matrix[i]
+    for i,j in itertools.combinations(range(n), 2):  # flip around diagonal
+        matrix[j][i], matrix[i][j] = matrix[i][j], matrix[j][i]
+def rotate(self, matrix: List[List[int]]) -> None:  # right clockwise by 90 degrees
+    n = len(matrix[0])
+    for i in range(n // 2 + n % 2):
+        for j in range(n // 2):
+            tmp = matrix[n - 1 - j][i]
+            matrix[n - 1 - j][i] = matrix[n - 1 - i][n - j - 1]
+            matrix[n - 1 - i][n - j - 1] = matrix[j][n - 1 - i]
+            matrix[j][n - 1 - i] = matrix[i][j]
+            matrix[i][j] = tmp
 def transpose(self, matrix):  # flip along diagonal
     return zip(*matrix)
-
+def reflect(self, matrix):  # flip from left to right
+    return [matrix[i][::-1] for i in range(len(matrix))]
 
 
 # LC149. Max Points on a Line
