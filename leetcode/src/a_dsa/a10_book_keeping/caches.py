@@ -2,7 +2,7 @@
 class LRUCache:
     def __init__(self, capacity: int): # use ordered dict, language specific
         self.capacity = capacity
-        self.values = collections.OrderedDict()
+        self.values = collections.OrderedDict()  # ordered by first insert
     def get(self, key: int) -> int:  # O(1)
         if key not in self.values: return -1
         self.values.move_to_end(key)  # O(1)  # last is new, first is old

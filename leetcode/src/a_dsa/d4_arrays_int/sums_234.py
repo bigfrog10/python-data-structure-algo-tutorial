@@ -1,7 +1,7 @@
 
 # LC1. Two Sum, top100 - 2sum
 def twoSum(self, nums, target):  # O(n) time and space
-    cache = {}
+    cache = {}  # value -> index, which is returned
     for i, num in enumerate(nums):
         diff = target - num
         if diff in cache: return [cache[diff], i]
@@ -69,12 +69,11 @@ def threeSumClosest(self, nums: List[int], target: int) -> int:  # O(n^2)
 
 # LC15. 3Sum - return all distinct tuples
 def threeSum(self, nums):  # shorter and quicker 90%, O(n^2)
-    n = len(nums)
     nums.sort()
-    res = []
+    n, res = len(nums), []
     for i in range(n-2):
         if nums[i] > 0: break  # then all 3 are > 0 and sum > 0, so can't be 0
-        if i > 0 and nums[i] == nums[i-1]: continue
+        if i > 0 and nums[i] == nums[i-1]: continue  # dupes
         l, r = i+1, n-1
         while l < r:
             s = nums[i] + nums[l] + nums[r]
@@ -84,8 +83,7 @@ def threeSum(self, nums):  # shorter and quicker 90%, O(n^2)
                 res.append((nums[i], nums[l], nums[r]))
                 while l < r and nums[l] == nums[l+1]: l += 1 # prevent dups
                 while l < r and nums[r] == nums[r-1]: r -= 1
-                l += 1
-                r -= 1
+                l, r = l+1, r-1
     return res
 def threeSum(self, nums: List[int]) -> List[List[int]]:
     def twoSum(i: int, res: List[List[int]]):

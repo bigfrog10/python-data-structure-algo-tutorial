@@ -1,4 +1,15 @@
 
+# LC768. Max Chunks To Make Sorted II
+def maxChunksToSorted(self, arr: List[int]) -> int:
+    stack = []
+    for a in arr:  # O(n) time and space
+        _max = a  # for-while = stack push and pop -> O(2n)
+        while stack and stack[-1] > a:
+            top = stack.pop()
+            _max = max(_max, top)
+        stack.append(_max)
+    return len(stack)
+
 # LC1642. Furthest Building You Can Reach - furthest jump furthest building
 def furthestBuilding(self, heights: List[int], bricks: int, ladders: int) -> int:
     heap = []   ## O(NlogK) time and O(k) space, k=len(ladders)
@@ -80,7 +91,7 @@ def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
         answer[curr_day] = days
     return answer
 def dailyTemperatures(self, T: List[int]) -> List[int]:
-    ret, stack = [0] * len(T), []  # monotonic stack, decreasing
+    ret, stack = [0] * len(T), []  # monotonic stack, decreasing  O(n) time and space
     for i in reversed(range(len(T))):
         while stack and T[i] >= T[stack[-1]]: stack.pop()
         if stack: ret[i] = stack[-1] - i

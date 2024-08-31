@@ -27,7 +27,7 @@ def transpose(self, matrix):  # flip along diagonal
 # LC149. Max Points on a Line
 def maxPoints(self, points: List[List[int]]) -> int:  # O(n^2)
     def gcd(m, n):
-        return m if not n else gcd(n, m%n)
+        return m if not n else gcd(n, m % n)
     def getslope(p1, p2):
         dx = p1[0] - p2[0]
         dy = p1[1] - p2[1]
