@@ -10,15 +10,12 @@ def twoSum(self, nums, target):  # O(n) time and space
 
 # LC167. Two Sum II - Input array is sorted 2sum
 def twoSum(self, numbers: List[int], target: int) -> List[int]:
-    # There is no O(logn) solution, so we shoot for O(n)
-    # The purpose is to use O(1) space, so take out the hashmap.
-    if not numbers or len(numbers) < 2: return None
-    lnth = len(numbers)
-    i, j = 0, lnth - 1
+    # O(n) time and O(1) space(take out cache)- there is no O(logn) solution
+    i, j = 0, len(numbers) - 1
     while i < j:
-        a, b = numbers[i], numbers[j]
-        if a + b < target: i += 1
-        elif a + b == target: return [i+1, j+1]
+        s = numbers[i] + numbers[j]
+        if s < target: i += 1
+        elif s == target: return [i+1, j+1]
         else: j -= 1
     return None
 

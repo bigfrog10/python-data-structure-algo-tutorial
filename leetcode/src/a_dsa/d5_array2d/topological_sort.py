@@ -20,7 +20,7 @@ def findOrder(self, numCourses, prerequisites): # O(V + E)
     G = [[] for i in range(n)] # g[i] needs i finished earlier
     degree = [0] * n
     for j, i in prerequisites:
-        G[i].append(j)
+        G[i].append(j)  # take i first then take j
         degree[j] += 1
     bfs = [i for i in range(n) if degree[i] == 0]
     for i in bfs:

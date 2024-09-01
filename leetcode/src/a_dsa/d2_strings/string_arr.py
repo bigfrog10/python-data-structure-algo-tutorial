@@ -85,9 +85,10 @@ def leastInterval(self, tasks: List[str], n: int) -> int:
     frequencies = [0] * 26  # frequencies of the tasks
     for t in tasks: frequencies[ord(t) - ord('A')] += 1
     f_max = max(frequencies)  # max frequency
-    n_max = frequencies.count(f_max)  # count the most frequent tasks
+    n_max = frequencies.count(f_max)  # count of how many most-frequent tasks
     # at least len(tasks) if no repeat. with repeat we need extra cooling
-    # (n+1) tasks in each group with cooling, (f_max-1) groups, last group is n_max
+    # (n+1) tasks in each group with cooling, (f_max-1) groups,
+    # -1 is for last group, and it is n_max without need of cooling
     return max(len(tasks), (f_max - 1) * (n + 1) + n_max)
 
 # LC387. First Unique Character in a String

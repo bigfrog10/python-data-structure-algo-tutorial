@@ -33,12 +33,11 @@ def generateParenthesis(self, n: int) -> List[str]:
 def isValid(self, s: str) -> bool:
     PAIRS = {'(': ')', '{': '}', '[': ']'}
     stack = []  # to store unprocessed
-    for idx, c in enumerate(s):
+    for c in s:
         if c in PAIRS.keys(): stack.append(c) # open parentheses
         else:  # closed parentheses
-            if len(stack) == 0: return False # ) has no (
-            if PAIRS[stack[-1]] == c: stack.pop() # matched
-            else: return False # no suppose to have other chars
+            if len(stack) != 0 and PAIRS[stack[-1]] == c: stack.pop() # matched
+            else: return False # no suppose to have other chars or ) has no (
     return len(stack) == 0
 
 # LC32. Longest Valid Parentheses - longest substring

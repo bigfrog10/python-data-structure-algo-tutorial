@@ -7,8 +7,8 @@ def compress(self, chars: List[str]) -> int:  # O(n) time and O(1) space, chars 
         if i - st == 1:  st = i # single diff char, leave it alone
         else:
             count = str(i - st)
-            chars[st + 1 : i] = count
-            i = st = st + len(count) + 1  # skip spaces used by count
+            chars[st + 1 : i] = count  # after char then add count
+            i = st = st + 1 + len(count)  # skip spaces used by count
     return len(chars)
 
 # LC394. Decode String - expand copies

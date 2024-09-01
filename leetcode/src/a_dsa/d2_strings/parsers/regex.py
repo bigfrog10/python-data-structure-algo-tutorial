@@ -31,7 +31,7 @@ def isMatch(self, s: str, p: str) -> bool:  # O(len(s)*len(p)) due to dp, but su
 def isMatch(self, s: str, p: str) -> bool:  # O(mn)
     @functools.lru_cache(maxsize=None)
     def walk(i, j):  # DFS, O(mn)
-        if i == len(s) and j == len(p): return True
+        if i == len(s) and j == len(p): return True  # end
         if i == len(s): return p[j:] == '*' * (len(p) - j)
         if j == len(p): return False
         if p[j] == '*': return walk(i, j+1) or walk(i+1, j)

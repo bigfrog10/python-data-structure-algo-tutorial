@@ -5,12 +5,18 @@ def topKFrequent(self, words: List[str], k: int) -> List[str]:  # O(n)
     return heapq.nsmallest(k, freqs.keys(), lambda w: (-freqs[w], w))
 
 # LC215. Kth Largest Element in an Array, top100
+def findKthLargest(self, nums: List[int], k: int) -> int:  # O(n⋅logk)
+    heap = []  # min heap
+    for num in nums:
+        heapq.heappush(heap, num)
+        if len(heap) > k:  # heap[0] is the smallest
+            heapq.heappop(heap)
+    return heap[0]
 def findKthLargest(self, nums: List[int], k: int) -> int:  # average O(n)
     # on average, we reduce by n/2, so add up to 1*n
     # worst case, we reduce by 1, so n-1, n-2, ..., so add up to n^2.
     def partition(nums, left, right):  # bisect right
-        target = nums[right]
-        i = left
+        i, target = left, nums[right]
         for j in range(left, right):
             if nums[j] <= target:
                 if i != j: nums[i], nums[j] = nums[j], nums[i]

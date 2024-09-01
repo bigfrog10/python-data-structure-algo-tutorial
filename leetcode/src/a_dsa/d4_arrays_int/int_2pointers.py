@@ -65,8 +65,6 @@ def medianSlidingWindow(self, nums: List[int], k: int) -> List[float]:  # O(nk)
         bisect.insort(window, b) # O(k)
     return medians
 
-
-
 # LC42. Trapping Rain Water, top100
 def trap(self, heights: List[int]) -> int: # 2 pointers, O(n)
     if not heights: return 0
