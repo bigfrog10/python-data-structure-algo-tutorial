@@ -367,10 +367,6 @@ def convert(self, s: str, numRows: int) -> str:
         cur_row += down
     return ''.join(rows)
 
-
-
-
-
 # LC942. DI String Match
 def diStringMatch(self, s: str) -> List[int]:
     lo, hi = 0, len(s)
@@ -384,37 +380,53 @@ def diStringMatch(self, s: str) -> List[int]:
             hi -= 1
     return ans + [lo]
 
-# LC28. Implement strStr() - index of needle in hay, KMP
+# LC28. Implement strStr() - index of needle in hay, KMP Find the index of the first occurrence in a string
 def strStr(self, haystack: str, needle: str) -> int:
     if not needle: return 0  # '' or None
     if not haystack: return -1  # order matters, needle is not empty
     h_len, n_len = len(haystack), len(needle)
     for i in range(h_len - n_len + 1):
-        if needle == haystack[i:i+n_len]: return i  # O(n^2)
+        if needle == haystack[i:i+n_len]: return i  # O(nm)
     return -1
 def strStr(self, haystack: str, needle: str) -> int:  # KMP, O(m + n)
-    def createNeedleSuffixArr(needle):
-        result = [0]*len(needle)
-        i, j = 1, 0
+    def kmp(needle):
+        pie = [0]*len(needle)
+        i, j = 1, 0  # i start at 1
         while i < len(needle):
             if needle[i] == needle[j]:
-                result[i] = j + 1
-                i += 1
-                j += 1
-            elif j > 0: j = result[j-1]
+                pie[i] = j + 1
+                i, j = i+1, j+1
+            elif j > 0: j = pie[j-1]
             else: i += 1
-        return result
+        return pie
     if not needle: return 0
     if not haystack or len(haystack) < len(needle): return -1
-    needleArr = createNeedleSuffixArr(needle)
+    lps = kmp(needle)
     i = j = 0
     while i < len(haystack) and j < len(needle):
         if haystack[i] == needle[j]:
-            i += 1
-            j += 1
-        elif j > 0: j = needleArr[j-1]
-        else: i += 1
+            i, j = i+1, j+1
+        elif j > 0: j = lps[j-1]  # no match, then roll back j first, if possible.
+        else: i += 1  # if can't roll back j, then forward i
     return i - j if j == len(needle) else -1
+def strStr(self, haystack: str, needle: str) -> int:  # KMP O(n+h)
+    n, h = len(needle), len(haystack)
+    i, j, nxt = 1, 0, [-1] + [0]*n
+    # -1 is for moving j back. Otherwise, need more code
+    # see https://www.youtube.com/watch?v=V5-7GzOfADQ
+    while i < n:
+        if j == -1 or needle[i] == needle[j]:
+            i, j = i+1, j+1
+            nxt[i] = j
+        else: j = nxt[j]
+    i = j = 0
+    while i < h and j < n:
+        if j == -1 or haystack[i] == needle[j]:
+            i, j = i+1, j+1
+        else: j = nxt[j]
+    return i-j if j == n else -1
+# https://blog.seancoughlin.me/find-the-index-of-the-first-occurrence-in-a-string-naive-and-kmp-solutions
+
 
 # LC1071. Greatest Common Divisor of Strings
 def gcdOfStrings(self, str1: str, str2: str) -> str:

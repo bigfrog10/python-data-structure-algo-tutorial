@@ -56,28 +56,27 @@ def hasPathSum(self, root: TreeNode, targetSum: int) -> bool:  # O(n) both
     def dfs(node, target):  # DFS since we are asked if exists a path
         if not node: return False
         if node.val == target:
-            if node.left is None and node.right is None: # This is to check leaf
+            if not node.left and not node.right: # This is to check leaf
                 return True  # Terminal step
-        return dfs(node.left, target - node.val) or\
-               dfs(node.right, target - node.val)
+        return dfs(node.left, target - node.val) or dfs(node.right, target - node.val)
     return dfs(root, targetSum)
 
 # LC113. Path Sum II - tree return all paths with sum target
 def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:  # O(n^2) time
     res = [] # since we need historic info, we backtrack
-    def dfs(node, target, path):  # O(n) space and time
+    def dfs(node, target, paths):  # O(n) space and time
         if not node: return False
         if node.val == target:
             if not node.left and not node.right:  # leaf
-                res.append(path + [node.val]) # this is a copy, O(n) time
-        path.append(node.val)
-        dfs(node.left, target - node.val, path)
-        dfs(node.right, target - node.val, path)
-        path.pop() # backtrack
+                res.append(paths + [node.val]) # this is a copy, O(n) time
+        paths.append(node.val)
+        dfs(node.left, target - node.val, paths)
+        dfs(node.right, target - node.val, paths)
+        paths.pop() # backtrack
     dfs(root, targetSum, [])
     return res
 
-# LC437. Path Sum III -  return num of all paths sum=target count tree path sum
+# LC437. Path Sum III -  return num of all paths sum=target, no need to start from root or end at leaves.
 def pathSum(self, root: TreeNode, target: int) -> int:  # O(n) time and space
     count, cusum_counts = 0, defaultdict(int)
     def path_sum_count(node, curr_sum):

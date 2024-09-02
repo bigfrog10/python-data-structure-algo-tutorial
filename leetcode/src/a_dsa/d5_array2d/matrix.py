@@ -26,25 +26,17 @@ def reflect(self, matrix):  # flip from left to right
 
 # LC149. Max Points on a Line
 def maxPoints(self, points: List[List[int]]) -> int:  # O(n^2)
-    def gcd(m, n):
-        return m if not n else gcd(n, m % n)
-    def getslope(p1, p2):
-        dx = p1[0] - p2[0]
-        dy = p1[1] - p2[1]
-        if dx == 0: return (p1[0], 0)
-        if dy == 0: return (0, p1[1])
-        d = gcd(dx, dy)
-        return (dx//d, dy//d)
-    res = 0
-    for i in range(len(points)):
-        d, maxi = defaultdict(lambda:0), 0
-        p1 = points[i]
-        for j in range(i+1, len(points)):
-            slope = getslope(p1, points[j])
-            d[slope] += 1
-            maxi = max(maxi, d[slope])
-        res = max(res, 1 + maxi)  # 1 is to count ith point
-    return res
+    points.sort()
+    slope, res = defaultdict(int), 0
+    for i, (x1, y1) in enumerate(points):
+        slope.clear()
+        for x2, y2 in points[i + 1:]:
+            dx, dy = x2 - x1, y2 - y1  # this is where we need sort
+            g = gcd(dx, dy)
+            m = (dx // g, dy // g)
+            slope[m] += 1
+            res = max(res, slope[m])
+    return res + 1  # plus the 1st point
 
 # LC632. Smallest Range Covering Elements from K Lists
 def smallestRange(self, A): # O(nlogk)
@@ -354,13 +346,14 @@ def maximalSquare(self, matrix: List[List[str]]) -> int: # DP
     if not matrix: return 0
     rows, cols = len(matrix), len(matrix[0])
     # DP(i, j) is the largest side of all squares ended at (i, j)
-    dp = collections.defaultdict(int)
+    dp = collections.defaultdict(int)  # O(mn)
     max_len = 0 # track this
     for i, j in itertools.product(range(rows), range(cols)):
         if matrix[i][j] == '1':
-            dp[i+1, j+1] = min([dp[i+1, j], dp[i, j+1], dp[i, j]]) + 1
+            dp[i+1, j+1] = min([dp[i+1, j], dp[i, j+1], dp[i, j]]) + 1  # weakest link
             max_len = max(max_len, dp[i+1, j+1])
     return max_len ** 2
+# https://leetcode.com/problems/maximal-square/?envType=company&envId=apple&favoriteSlug=apple-six-months
 
 # LC240. Search a 2D Matrix II - zigzag search
 def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:

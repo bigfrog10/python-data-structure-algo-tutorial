@@ -330,14 +330,13 @@ def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
 # LC41. First Missing Positive, top100
 def firstMissingPositive(self, nums: List[int]) -> int:  # O(1) space
     n = len(nums)
-    for i, v in enumerate(nums):
-        if v <= 0: nums[i] = n+1  # zero out negatives
-    for v in nums:
-        i = abs(v) - 1
-        if i < n: nums[i] = -abs(nums[i])
-    for i, v in enumerate(nums):
-        if v > 0: return i+1
-    return n+1
+    seen = [False] * (n + 1)  # Array for lookup
+    for num in nums: # Mark the elements from nums in the lookup array
+        if 0 < num <= n: seen[num] = True
+    for i in range(1, n + 1): # Iterate through integers 1 to n
+        if not seen[i]: return i # return smallest missing positive integer
+    # If seen contains all elements 1 to n, the smallest missing positive number is n + 1
+    return n + 1
 
 # LC219. Contains Duplicate II - duplicates within index range k
 def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:  # O(n) time and O(k) space

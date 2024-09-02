@@ -25,18 +25,18 @@ def searchInsert(self, nums: List[int], target: int) -> int:
     return left
 # return bisect.bisect_left(nums, target)
 
-# LC34. Find First and Last Position of Element in Sorted Array
+# LC34. Find First and Last Position of Element in Sorted Array  starting and ending position
 def searchRange(self, nums: List[int], target: int) -> List[int]:
     if not nums or target < nums[0] or target > nums[-1]: return [-1, -1]
     left, right = 0, len(nums) - 1
     while left < right:  # search left
-        mid = left + (right - left) // 2
+        mid = (right + left) // 2
         if nums[mid] < target: left = mid+1
         else: right = mid  # we keep right side >= target
     if nums[left] != target: return [-1, -1]
     left1, right = left, len(nums) - 1  # search right
     while left1 < right:
-        mid = left1 + (right - left1 + 1) // 2
+        mid = (right + left1 + 1) // 2
         if nums[mid] > target: right = mid - 1
         else: left1 = mid
     return [left, right]
@@ -122,11 +122,14 @@ def search(self, reader: 'ArrayReader', target: int) -> int:
 def search(self, nums: List[int], target: int) -> int:  # O(logn)
     b, e = 0, len(nums)-1
     while b <= e:
-        m = b + (e - b) // 2
+        m = (e + b) // 2
         if nums[m] == target: return m
         elif nums[m] > target: e = m-1
         else: b = m+1
     return -1
+def search(self, nums: List[int], target: int) -> int:
+    a = bisect.bisect(nums, target)
+    return a-1 if nums[a-1] == target else -1
 def search(self, nums: List[int], target: int) -> int:
     idx = bisect.bisect(nums, target)  # from right
     if idx > 0 and nums[idx-1] == target:

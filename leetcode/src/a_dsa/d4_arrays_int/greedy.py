@@ -103,6 +103,7 @@ def canJump(self, nums: List[int]) -> bool:  # greedy, O(n)
     target = len(nums) - 1 # we start from end go backward to front.
     for i in range(len(nums) - 2, -1, -1):
         if i + nums[i] >= target: target = i # find earliest i such that
+        # don't check "else" because even this is not true, i-1 could be true
     return target == 0 # we can reach target from i, and repeat this process to 1st.
 
 # LC45. Jump Game II

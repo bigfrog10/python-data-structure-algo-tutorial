@@ -34,6 +34,7 @@ def combinationSum(self, candidates, target):  # fastest
         if remain == 0:
             result.append(stack)
             return
+        elif remain < 0: return
         for item in candidates:
             if item > remain: break
             if stack and item < stack[-1]: continue  # smallers are done already.

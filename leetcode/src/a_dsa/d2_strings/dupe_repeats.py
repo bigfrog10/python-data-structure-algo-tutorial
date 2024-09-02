@@ -60,7 +60,7 @@ def lengthOfLongestSubstring(self, s: str) -> int:
     for idx, char in enumerate(s):
         if last[ord(char)] != -1:  # showed before, start new
             st = max(st, last[ord(char)] + 1)  # max across different chars, abba
-        ans = max(ans, idx - st + 1)
+        ans = max(ans, idx - st + 1)  # +1 needed, otherwise " " will fail
         last[ord(char)] = idx  # update char's index
     return ans
 

@@ -1,6 +1,6 @@
 from itertools import product
-# LC200. Number of Islands
 
+# LC200. Number of Islands
 def numIslands(self, board: List[List[str]]) -> int:  # O(MN) time and space
     if not board: return 0  # O(MN)
     rows, cols = len(board), len(board[0])

@@ -1,14 +1,14 @@
 # LC218. The Skyline Problem
 import heapq
-def getSkyline(self, buildings):
-    events = [(L, -H, R) for L, R, H in buildings]
-    events += list({(R, 0, 0) for _, R, _ in buildings})
-    events.sort()
-    res, hp = [[0, 0]], [(0, float("inf"))]
+def getSkyline(self, buildings):  # O(nlogn)
+    events = [(L, -H, R) for L, R, H in buildings] # -H for heap operations
+    events += list({(R, 0, 0) for _, R, _ in buildings})  # to pop finished buildings
+    events.sort()  # O(nlogn)
+    res, hp = [[0, 0]], [(0, float("inf"))]  # hp: -H, R
     for x, negH, R in events:
         while x >= hp[0][1]: heapq.heappop(hp)  # pop up finished buildings
         if negH: heapq.heappush(hp, (negH, R))  # start of a new building
-        # record new height: [0][0] is max height
+        # record new height: [0][0] is max height, if there is a change of height
         if res[-1][1] != -hp[0][0]:  res += [x, -hp[0][0]],
     return res[1:]
 

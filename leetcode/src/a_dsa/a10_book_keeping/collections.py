@@ -24,11 +24,9 @@ class HitCounter:
         self.data.append(timestamp)
     def getHits(self, timestamp: int) -> int:
         last = timestamp - 300
-        if last <= 0: return len(self.data)
         idx = bisect.bisect(self.data, last)
-        ret = len(self.data) - idx
         self.data = self.data[idx:]
-        return ret
+        return len(self.data)
 
 # LC380. Insert Delete GetRandom O(1), RandomizedSet, top100
 import random

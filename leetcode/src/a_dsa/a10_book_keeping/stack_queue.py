@@ -69,9 +69,7 @@ class MinStack:
     def __init__(self):
         self.values = []  # list end is stack top
     def push(self, x: int) -> None:
-        if self.values:
-            t = self.values[-1]
-            mv = (x, min(x, t[1]))  # maintain current min
+        if self.values: mv = (x, min(x, self.values[-1][1]))  # maintain current min
         else:  mv = (x, x)
         self.values.append(mv)
     def pop(self) -> None: self.values.pop()

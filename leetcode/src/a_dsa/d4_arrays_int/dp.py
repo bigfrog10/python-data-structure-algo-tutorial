@@ -53,7 +53,7 @@ def rob(self, nums):  # O(n)
 # LC213. House Robber II
 def rob(self, nums: List[int]) -> int:  # O(n)
     def rob_street(nums):
-        dp1, dp2 = 0, 0
+        dp1, dp2 = 0, 0  # prev loot and current loot
         for num in nums:
             dp1, dp2 = dp2, max(dp1 + num, dp2)
         return dp2

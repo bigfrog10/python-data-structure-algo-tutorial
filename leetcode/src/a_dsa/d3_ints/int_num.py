@@ -139,9 +139,9 @@ def mySqrt(self, x: int) -> int:
         else: return middle
     return right  # close to sqrt(x)
 def mySqrt(self, x: int) -> int:  # This is a new pattern
-    left, right = 0, x
+    left, right = 0, x  # O(logn)
     while left < right:
-        mid = (left + right + 1) // 2
+        mid = (left + right + 1) // 2  # works only for integers
         if mid * mid > x: right = mid - 1
         else: left = mid
     return left

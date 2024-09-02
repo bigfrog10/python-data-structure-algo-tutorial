@@ -367,7 +367,7 @@ def gameOfLife(self, board: List[List[int]]) -> None: # 1 bit for old, 1 bit for
 
 
 
-# LC909. Snakes and Ladders
+# LC909. Snakes and Ladders  snake ladder
 def snakesAndLadders(self, board: List[List[int]]) -> int:
     n = len(board)
     def coord(order):

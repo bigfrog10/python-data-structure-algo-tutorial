@@ -178,19 +178,17 @@ def exist(self, board: List[List[str]], word: str) -> bool:  # O(h * w * 3^wl), 
     h, w, wl = len(board), len(board[0]), len(word)
     def dfs(i, j, wi):
         if board[i][j] != word[wi]: return False
+        if wi+1 == wl: return True
         board[i][j] = ord(board[i][j]) ^ 256
-        exist = wi+1 == wl
-        if exist: return exist
         for x, y in [(i+1, j), (i-1, j), (i, j+1), (i, j-1)]:
             if 0 <= x < h and 0 <= y < w:
-                exist = exist or dfs(x, y, wi+1)
-                if exist: return exist
+                if dfs(x, y, wi+1): return True
         board[i][j] = chr(board[i][j] ^ 256)  # backout
-        return exist
-    bls = set()  # precheck board has all letters from word,
-    for row in board: bls.update(row)  # this makes the test faster 5% -> 74%
-    wls = set(word)
-    if len(wls - bls) > 0: return False
+        return False
+    # bls = set()  # precheck board has all letters from word,
+    # for row in board: bls.update(row)  # this makes the test faster 5% -> 74%
+    # wls = set(word)
+    # if len(wls - bls) > 0: return False
     for i in range(h):
         for j in range(w):
             if dfs(i, j, 0): return True
@@ -383,13 +381,6 @@ def toGoatLatin(self, sentence: str) -> str:
         ret.append(w)
     return ' '.join(ret)
 
-
-
-
-
-
-
-
 # LC2023. Number of Pairs of Strings With Concatenation Equal to Target
 def numOfPairs(self, nums: List[str], target: str) -> int:
     freq = Counter(nums)
@@ -397,11 +388,9 @@ def numOfPairs(self, nums: List[str], target: str) -> int:
     for k, v in freq.items():
         if target.startswith(k):
             suffix = target[len(k):]
-            ans += v * freq[suffix]
+            ans += v * freq[suffix]  # num of k * num of suffix
             if k == suffix: ans -= freq[suffix]  # together, n^2 - n when prefix = suffix
     return ans
-
-
 
 
 # LC1554. Strings Differ by One Character
