@@ -1,8 +1,8 @@
 
 # LC3030. Find the Grid of Region Average
 def resultGrid(self, image: List[List[int]], threshold: int) -> List[List[int]]:
-    m, n = len(image), len(image[0])  # O(n^2)
-    grid = [[[0, 0] for _ in range(n)] for _ in range(m)]
+    m, n = len(image), len(image[0])  # O(n^2) time and space
+    grid = [[[0, 0] for _ in range(n)] for _ in range(m)]  # sum & count, for average later
     for i, j in product(range(m-2), range(n-2)):  # O(mn)
         s = 0
         for ii, jj in product(range(i, i+3), range(j, j+3)):
@@ -11,7 +11,7 @@ def resultGrid(self, image: List[List[int]], threshold: int) -> List[List[int]]:
                 break  # not a region
             s += image[ii][jj]
         else:  # without break
-            s //= 9
+            s //= 9  # region 3 X 3 average
             for ii, jj in product(range(i, i+3), range(j, j+3)):
                 grid[ii][jj][0] += s
                 grid[ii][jj][1] += 1
