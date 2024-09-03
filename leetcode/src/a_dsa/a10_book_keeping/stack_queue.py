@@ -46,7 +46,7 @@ class MyCircularQueue: # array based, O(1) for all ops
     def isEmpty(self) -> bool: return self.count == 0
     def isFull(self) -> bool: return self.count == self.capacity
 
-# LC232. Implement Queue using Stacks
+# LC232. Implement Queue using Stacks   queue from stack to queue
 class MyQueue:
     def __init__(self):  # amortized O(1) - O(1) average for n operations
         self.stack1 = []

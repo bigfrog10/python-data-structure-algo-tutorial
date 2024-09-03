@@ -123,12 +123,12 @@ def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         return False
     return dfs(s)
 
-# LC472. Concatenated Words
+# LC472. Concatenated Words   concat words
 def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
     word_set = set(words)
     def check(word):  # could use cache here
-        n = len(word)
-        for i in range(1, n):
+        n = len(word)  # Check if current word can be made from smaller words
+        for i in range(1, n):  # O(m^2), longest word
             if word[i:] not in word_set: continue
             # so now word[i:] in word_set
             if word[:i] in word_set: return True # so both part are words

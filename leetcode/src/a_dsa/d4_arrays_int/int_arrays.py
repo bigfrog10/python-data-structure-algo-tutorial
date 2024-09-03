@@ -329,14 +329,18 @@ def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
     return False
 
 # LC41. First Missing Positive, top100
-def firstMissingPositive(self, nums: List[int]) -> int:  # O(1) space
+def firstMissingPositive(self, nums: List[int]) -> int:  # O(n) time O(1) space
+    # https://leetcode.com/problems/first-missing-positive/solutions/4926146/unveiling-the-ultimate-strategy-100-user-beating-solution/?envType=company&envId=apple&favoriteSlug=apple-six-months
     n = len(nums)
-    seen = [False] * (n + 1)  # Array for lookup
-    for num in nums: # Mark the elements from nums in the lookup array
-        if 0 < num <= n: seen[num] = True
-    for i in range(1, n + 1): # Iterate through integers 1 to n
-        if not seen[i]: return i # return smallest missing positive integer
-    # If seen contains all elements 1 to n, the smallest missing positive number is n + 1
+    b = False
+    for i in range(n):
+        if nums[i] == 1: b = True  # mark whether 1 shows up
+        if nums[i] > n or nums[i] <= 0: nums[i] = 1  #
+    if not b: return 1
+    for i in range(n):  # change value to negative
+        if nums[abs(nums[i]) - 1] > 0: nums[abs(nums[i]) - 1] *= -1
+    for i in range(n):
+        if nums[i] > 0: return i + 1
     return n + 1
 
 # LC219. Contains Duplicate II - duplicates within index range k
@@ -367,7 +371,7 @@ def hIndex(self, citations: List[int]) -> int:  # O(n) time and space, better th
     n = len(citations)  # Counting without sorting
     papers = [0] * (n+1)
     for c in citations: papers[min(n, c)] += 1  # how many papers has this citation count
-    sumc = 0
+    sumc = 0  # number of papers with at least i citations
     for i in reversed(range(n+1)):
         sumc += papers[i]  # accumulate from end, sumc is the number of papers having at least i citations.
         if sumc >= i: return i  # has at least i citations for all right side together
@@ -453,7 +457,7 @@ def isNStraightHand(self, hand: List[int], groupSize: int) -> bool:
     if len(hand) % groupSize != 0: return False
     c = Counter(hand)
     for i in sorted(c):  # O(nlogn), sort by key
-        if c[i] == 0: continue
+        if c[i] == 0: continue  # count is zero, so ignore
         cnt = c[i]
         for j in range(groupSize):
             c[i + j] -= cnt

@@ -39,3 +39,26 @@ def minPatches(self, nums: List[int], n: int) -> int:
             miss += miss  # cover (1, 2*miss)
             added += 1  # need new number
     return added
+
+
+# LC2625. Flatten Deeply Nested Array
+def flatten(arr: list, n):
+    if n == 0: return arr
+    res = []
+    for a in arr:
+        if isinstance(a, list):
+            b = flatten(a, n-1)
+            res.extend(b)
+        else: res.append(a)
+    return res
+
+# LC565 Array Nesting
+def arrayNesting(self, nums: List[int]) -> int: # O(n) tinme and O(1) space
+    res = 0
+    for i in range(len(nums)):
+        cnt = 0
+        while nums[i] >= 0:  # 2 loops still check every element once.
+            nums[i], cnt, i = -nums[i] - 1, cnt + 1, nums[i]
+        res = max(res, cnt)
+        if res > len(nums): return res # works without this too, optimization
+    return res

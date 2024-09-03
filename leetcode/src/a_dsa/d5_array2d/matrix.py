@@ -23,6 +23,9 @@ def transpose(self, matrix):  # flip along diagonal
 def reflect(self, matrix):  # flip from left to right
     return [matrix[i][::-1] for i in range(len(matrix))]
 
+# LC867. Transpose Matrix
+def transpose(self, matrix: List[List[int]]) -> List[List[int]]:
+    return zip(*matrix)
 
 # LC149. Max Points on a Line
 def maxPoints(self, points: List[List[int]]) -> int:  # O(n^2)

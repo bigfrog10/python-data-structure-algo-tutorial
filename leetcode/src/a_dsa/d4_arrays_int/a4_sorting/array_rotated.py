@@ -36,7 +36,7 @@ def search(self, nums: List[int], target: int) -> bool:  # O(n) worst case
             start += 1  # can't use mid, since it could jump out of range due to rotation
     return False
 
-# LC153. Find Minimum in Rotated Sorted Array - unique elements
+# LC153. Find Minimum in Rotated Sorted Array - unique elements  min rotate
 def findMin(self, nums: List[int]) -> int:  # O(log)
     start, end = 0, len(nums) - 1
     while start < end:

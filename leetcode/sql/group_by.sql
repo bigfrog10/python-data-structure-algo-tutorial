@@ -2,6 +2,21 @@
 
 -- noinspection SqlDialectInspectionForFile
 
+-- LC1174. Immediate Food Delivery II
+Select round(avg(order_date = customer_pref_delivery_date)*100, 2) as immediate_percentage
+from Delivery
+where (customer_id, order_date) in (
+    Select customer_id, min(order_date)
+    from Delivery
+    group by customer_id
+);
+
+-- LC1251. Average Selling Price
+SELECT p.product_id, IFNULL(ROUND(SUM(units*price)/SUM(units),2),0) AS average_price
+FROM Prices p LEFT JOIN UnitsSold u
+ON p.product_id = u.product_id AND u.purchase_date BETWEEN start_date AND end_date
+group by product_id
+
 -- LC1699. Number of Calls Between Two Persons
 SELECT
     CASE WHEN from_id > to_id THEN to_id ELSE from_id END AS person1,

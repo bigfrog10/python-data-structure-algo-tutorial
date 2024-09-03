@@ -63,7 +63,7 @@ def generateTrees(self, n: int) -> List[Optional[TreeNode]]:  # O(n * catalan nu
                 for right in trees(root+1, last)] or [None]
     return trees(1, n)
 
-# LC235. Lowest Common Ancestor of a Binary Search Tree - lca
+# LC235. Lowest Common Ancestor of a Binary Search Tree - lca bst
 def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
     while root:
         if p.val < root.val > q.val:

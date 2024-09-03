@@ -339,7 +339,7 @@ def hasPath(self, maze: List[List[int]], start: List[int], destination: List[int
 # LC120. Triangle - min sum tree path
 def minimumTotal(self, triangle: List[List[int]]) -> int:  # O(n^2) time and O(n) space
     f = [0] * (len(triangle) + 1)  # extra 0 - just to unify below min()
-    for row in triangle[::-1]:
+    for row in triangle[::-1]:  # dp from back to front
         for i in range(len(row)):
             f[i] = row[i] + min(f[i], f[i + 1])
     return f[0]

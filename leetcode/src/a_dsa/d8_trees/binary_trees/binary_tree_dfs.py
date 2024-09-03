@@ -138,7 +138,7 @@ def binaryTreePaths(self, root: TreeNode) -> List[str]:
 
 
 
-# LC104. Maximum Depth of Binary Tree
+# LC104. Maximum Depth of Binary Tree  max depth
 def maxDepth(self, root: TreeNode) -> int:
     if not root: return 0
     return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))

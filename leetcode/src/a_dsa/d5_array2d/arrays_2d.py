@@ -31,7 +31,7 @@ def maximumRows(self, matrix: List[List[int]], numSelect: int) -> int:
             nonlocal ans
             ans = max(ans, rowIncludedCount)
             return
-        check(state[::], row+1, rowIncludedCount)  # skip this row
+        check(state[:], row+1, rowIncludedCount)  # skip this row
         for j in range(m):
             if matrix[row][j]==1: state[j] = 1
         check(state, row+1, rowIncludedCount+1)  # count in this row

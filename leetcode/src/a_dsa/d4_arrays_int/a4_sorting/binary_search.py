@@ -52,7 +52,7 @@ def searchRange1(self, nums: List[int], target: int) -> List[int]:
 def singleNonDuplicate(self, nums: List[int]) -> int:  # simplest and fast
     lo, hi = 0, len(nums) - 1
     while lo < hi:
-        mid = lo + (hi - lo) // 2
+        mid = (hi + lo) // 2
         if mid % 2 == 1: mid -= 1  # move to even case
         if nums[mid] == nums[mid + 1]:  # means we have even numbers of left
             lo = mid + 2  # so go to right to find the odd/single

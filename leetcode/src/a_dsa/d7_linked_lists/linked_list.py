@@ -5,7 +5,7 @@ class ListNode:
 
 # LC1171. Remove Zero Sum Consecutive Nodes from Linked List
 def removeZeroSumSublists(self, head: Optional[ListNode]) -> Optional[ListNode]:
-    dummy, ans = ListNode(0, head), 0
+    dummy, ans = ListNode(0, head), 0  # O(n) time and space
     dict_ = {ans:dummy}
     while head:   # O(n)
         ans += head.val
@@ -217,8 +217,8 @@ def rotateRight(self, head: ListNode, k: int) -> ListNode:
     while last.next:
         last = last.next
         L += 1
-    last.next = head
+    last.next = head  # make the list a circle
     for _ in range(L - k % L): last = last.next
     dummy = last.next # new head
-    last.next = None
+    last.next = None  # set new tail to None
     return dummy

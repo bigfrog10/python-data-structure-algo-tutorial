@@ -45,10 +45,10 @@ def rob(self, nums: List[int]) -> int:
     print(robbing.cache_info())
     return ret
 def rob(self, nums):  # O(n)
-    dp1, dp2 = 0, 0 # rob current house, or skip current
+    prevRob , currRob  = 0, 0 # rob current house, or skip current
     for num in nums:
-        dp1, dp2 = dp2, max(dp1 + num, dp2)
-    return dp2
+        prevRob , currRob  = currRob , max(prevRob  + num, currRob)
+    return currRob
 
 # LC213. House Robber II
 def rob(self, nums: List[int]) -> int:  # O(n)

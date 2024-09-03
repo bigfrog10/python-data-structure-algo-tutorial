@@ -142,8 +142,8 @@ def lengthOfLongestSubstringTwoDistinct(self, s: str) -> int:
 
 # LC424. Longest Repeating Character Replacement
 def characterReplacement(self, s: str, k: int) -> int:
-    maxf = res = 0
-    count = collections.Counter()
+    maxf = res = 0  # sliding window of size res
+    count = collections.Counter()  # counts within the window
     for i in range(len(s)):  # sliding window size maxf + k
         count[s[i]] += 1
         maxf = max(maxf, count[s[i]])

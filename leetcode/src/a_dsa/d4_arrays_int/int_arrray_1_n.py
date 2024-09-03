@@ -30,11 +30,24 @@ def missingNumber(self, nums):
     return missing
 
 # LC448. Find All Numbers Disappeared in an Array - missing in [1, n]
-def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
+def findDisappearedNumbers(self, nums: List[int]) -> List[int]:  # O(n)
     for i in range(len(nums)):
         index = abs(nums[i]) - 1
         nums[index] = - abs(nums[index])
     return [i + 1 for i in range(len(nums)) if nums[i] > 0]
+def findDisappearedNumbers(self, nums: List[int]) -> List[int]:  # to restore originals
+    n1 = nums[:]
+    for i in range(len(nums)):
+        index = abs(nums[i]) - 1
+        nums[index] = - abs(nums[index])
+    res = [i + 1 for i in range(len(nums)) if nums[i] > 0]
+    for i in range(len(nums)):
+        index = abs(nums[i]) - 1
+        nums[index] = abs(nums[index])
+    for i in range(len(n1)):
+        if n1[i] != nums[i]:
+            raise Exception(f'{n1[i]} {nums[i]}')
+    return res
 
 # LC287. Find the Duplicate Number - only 1 dupe, could be >1 copy
 def findDuplicate(self, nums: List[int]) -> int:  # O(1) space and O(n) time
