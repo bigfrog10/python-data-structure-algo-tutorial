@@ -41,7 +41,7 @@ def minPatches(self, nums: List[int], n: int) -> int:
     return added
 
 
-# LC2625. Flatten Deeply Nested Array
+# LC2625. Flatten Deeply Nested Array        flatten nested
 def flatten(arr: list, n):
     if n == 0: return arr
     res = []

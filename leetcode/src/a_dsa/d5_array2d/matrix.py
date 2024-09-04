@@ -222,7 +222,7 @@ def orderOfLargestPlusSign(self, N: int, mines: List[List[int]]) -> int:  # O(N^
             if res < grid[i][j]: res = grid[i][j]
     return res
 
-# LC74. Search a 2D Matrix - matrix binary search elem in matrix, matrix bs, search 2d, search matrix
+# LC74. Search a 2D Matrix - matrix binary search elem in matrix, matrix bs, search 2d search matrix
 def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:  # O(log(mn))
     if not matrix: return False
     m, n = len(matrix), len(matrix[0])
@@ -344,7 +344,7 @@ def findPeakGrid(self, mat: List[List[int]]) -> List[int]:  # O(m + n)
 
 
 
-# LC221. Maximal Square
+# LC221. Maximal Square  max square
 def maximalSquare(self, matrix: List[List[str]]) -> int: # DP
     if not matrix: return 0
     rows, cols = len(matrix), len(matrix[0])
@@ -358,7 +358,7 @@ def maximalSquare(self, matrix: List[List[str]]) -> int: # DP
     return max_len ** 2
 # https://leetcode.com/problems/maximal-square/?envType=company&envId=apple&favoriteSlug=apple-six-months
 
-# LC240. Search a 2D Matrix II - zigzag search
+# LC240. Search a 2D Matrix II - zigzag search 2d matrix
 def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
     if not matrix: return False
     h, w = len(matrix), len(matrix[0])

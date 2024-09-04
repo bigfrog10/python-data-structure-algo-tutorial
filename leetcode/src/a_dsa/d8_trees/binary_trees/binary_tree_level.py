@@ -134,7 +134,7 @@ def minDepth(self, root: Optional[TreeNode]) -> int:
         row = [child for node in row for child in (node.left, node.right) if child]
     return res
 
-# LC102. Binary Tree Level Order Traversal
+# LC102. Binary Tree Level Order Traversal bt level traversal
 def levelOrder(self, root):
     if not root: return []
     ans, level = [], [root]

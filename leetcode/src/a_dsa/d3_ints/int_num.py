@@ -128,6 +128,14 @@ def myPow(self, x: float, n: int) -> float:  # O(logn)
 
 # LC69. Sqrt(x)
 def mySqrt(self, x: int) -> int:
+    left, right = 0, x
+    while left <= right:
+        mid = (left + right) // 2
+        if mid * mid < x: left = mid + 1
+        elif mid * mid > x: right = mid -1
+        else: return mid
+    return right
+def mySqrt(self, x: int) -> int:
     if x == 0: return 0
     if x < 4: return 1  # to ensure sqrt(x) < x / 2
     left, right = 2, x // 2  # first 2 is sqrt(4)

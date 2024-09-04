@@ -29,13 +29,12 @@ def incremovableSubarrayCount(self, nums: List[int]) -> int:
     # every number starts from the insert idx represents a solution: [0...i, k...n-1]
     # including the right empty array, [0...i, ]
     while i >= 0:
-        curr = nums[i]
-        k = bisect.bisect(nums, curr, lo=j)
-        res += (n-k+1)
+        k = bisect.bisect(nums, nums[i], lo=j)
+        res += n-k+1
         i -= 1
     # when left array becomes empty, each number in right array also represents a solution
     # [, j...n-1] including [,], the empty left and empty right
-    res += (n-j+1)
+    res += n-j+1
     return res
 
 
@@ -190,15 +189,14 @@ def coinChange(self, coins: List[int], amount: int) -> int:
     if amount == 0:  return 0 # 680 ms, it also is O(c^(amount / min(coins))), c is num of coins, power is height
     coins.sort(reverse=True) # we try to put larger coins to reduce numbers of coins
     queue, visited = deque([(0, 0)]), {0}
-    while queue:
-        for _ in range(len(queue)): # BFS
-            amt, count = queue.popleft()
-            for coin in coins:
-                namt, nc = amt + coin, count + 1
-                if namt == amount: return nc
-                elif namt < amount and namt not in visited:
-                    visited.add(namt)
-                    queue.append((namt, nc))
+    while queue:  # BFS
+        amt, count = queue.popleft()
+        for coin in coins:
+            namt, nc = amt + coin, count + 1
+            if namt == amount: return nc
+            elif namt < amount and namt not in visited:
+                visited.add(namt)
+                queue.append((namt, nc))
     return -1
 
 # LC518. Coin Change 2 - return # of combinations
@@ -352,6 +350,13 @@ def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:  # O(n) time
         if len(showed) == k: showed.remove(nums[idx - k])
         showed.add(v)
     return False
+def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+    if k == 0: return False
+    cache = {}
+    for idx, v in enumerate(nums):
+        if v in cache and idx - cache[v] <= k: return True
+        cache[v] = idx
+    return False
 
 # LC1262. Greatest Sum Divisible by Three
 def maxSumDivThree(self, nums: List[int]) -> int:
@@ -472,8 +477,6 @@ def summaryRanges(self, nums: List[int]) -> List[str]:
             ans.append(str(nums[pointer]) + '->' + str(n) if nums[pointer] != n else str(n))
             pointer = i+1
     return ans
-
-
 
 # LC628. Maximum Product of Three Numbers
 def maximumProduct(self, nums: List[int]) -> int:

@@ -58,7 +58,7 @@ def checkInclusion(self, s1, s2):  # O(|s1|) time and O(1) space (26 chars as ke
 
 # LC383. Ransom Note
 def canConstruct(self, ransomNote, magazine):  # O(m+n)
-    return not collections.Counter(ransomNote) - collections.Counter(magazine)
+    return len(collections.Counter(ransomNote) - collections.Counter(magazine)) == 0
 def canConstruct(self, ransomNote: str, magazine: str) -> bool:
     magazine_counts = collections.Counter(magazine)
     ransom_note_counts = collections.Counter(ransomNote)
@@ -380,7 +380,7 @@ def diStringMatch(self, s: str) -> List[int]:
             hi -= 1
     return ans + [lo]
 
-# LC28. Implement strStr() - index of needle in hay, KMP Find the index of the first occurrence in a string
+# LC28. Implement strStr() - index of needle in hay, KMP LPS KMP Find the index of the first occurrence in a string
 def strStr(self, haystack: str, needle: str) -> int:
     if not needle: return 0  # '' or None
     if not haystack: return -1  # order matters, needle is not empty
@@ -396,8 +396,8 @@ def strStr(self, haystack: str, needle: str) -> int:  # KMP, O(m + n)
             if needle[i] == needle[j]:
                 pie[i] = j + 1
                 i, j = i+1, j+1
-            elif j > 0: j = pie[j-1]
-            else: i += 1
+            elif j > 0: j = pie[j-1]  # if not equal, if we can move j, then move it.
+            else: i += 1  # if we can't move j, then move i
         return pie
     if not needle: return 0
     if not haystack or len(haystack) < len(needle): return -1

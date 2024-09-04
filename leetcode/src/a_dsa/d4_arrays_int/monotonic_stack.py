@@ -47,7 +47,7 @@ def largestRectangleArea(self, heights: List[int]) -> int:  # O(n) runtime and s
         stack.append(i)
     return ans
 
-# LC85. Maximal Rectangle
+# LC85. Maximal Rectangle  max rectangle
 def maximalRectangle(self, matrix):  # O(mn) time and O(n) space
     # https://leetcode.com/problems/largest-rectangle-in-histogram/discuss/28917/AC-Python-clean-solution-using-stack-76ms
     if not matrix or not matrix[0]: return 0

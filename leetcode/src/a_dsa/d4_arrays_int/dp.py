@@ -69,7 +69,7 @@ def deleteAndEarn(self, nums: List[int]) -> int:  # O(n)
         prev, curr = curr, max(prev + n*c[n], curr)
     return curr
 
-# LC70. Climbing Stairs
+# LC70. Climbing Stairs   climb stairs
 def climbStairs(self, n: int) -> int:
     # a is the number of ways to reach the current step, b is the number of ways to reach the next step
     a = b = 1  # step 0, ground, backtrack from the formula below for step 1 and 2

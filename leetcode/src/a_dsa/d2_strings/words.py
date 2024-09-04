@@ -381,7 +381,7 @@ def toGoatLatin(self, sentence: str) -> str:
         ret.append(w)
     return ' '.join(ret)
 
-# LC2023. Number of Pairs of Strings With Concatenation Equal to Target
+# LC2023. Number of Pairs of Strings With Concatenation Equal to Target concat to target
 def numOfPairs(self, nums: List[str], target: str) -> int:
     freq = Counter(nums)
     ans = 0
@@ -391,7 +391,6 @@ def numOfPairs(self, nums: List[str], target: str) -> int:
             ans += v * freq[suffix]  # num of k * num of suffix
             if k == suffix: ans -= freq[suffix]  # together, n^2 - n when prefix = suffix
     return ans
-
 
 # LC1554. Strings Differ by One Character
 def differByOne(self, dict: List[str]) -> bool:  # O(mn)

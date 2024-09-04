@@ -7,7 +7,7 @@ def lowestCommonAncestor1(self, p: 'Node', q: 'Node') -> 'Node':
         p2 = p2.parent if p2.parent else p
     return p1
 
-# LC236. Lowest Common Ancestor of a Binary Tree - normal node, in the tree  LCA
+# LC236. Lowest Common Ancestor of a Binary Tree - normal node, in the tree  LCA  lca bt
 def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
     def dfs(node, p, q):  ## O(n) time and space
         if not node: return None
@@ -18,7 +18,7 @@ def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -
         return left or right  # carry the not None node
     return dfs(root, p, q)
 
-# LC1644. Lowest Common Ancestor of a Binary Tree II, normal node, might not be in tree
+# LC1644. Lowest Common Ancestor of a Binary Tree II, normal node, might not be in tree  lca bt
 def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
     res = None
     def dfs(node):  # return how many matches

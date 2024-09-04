@@ -210,7 +210,7 @@ def plusOne(self, head: ListNode) -> ListNode:
         node = node.next
     return head
 
-# LC61. Rotate List
+# LC61. Rotate List  rotate link list
 def rotateRight(self, head: ListNode, k: int) -> ListNode:
     if not head or not k: return head
     last, L = head, 1

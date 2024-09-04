@@ -51,7 +51,7 @@ def sum1(self, num1: int, num2: int, m=0xFFFF) -> int:
         num1, num2 = num1 ^ num2, (num1 & num2) << 1
     return num1 if num2 < m else num1 & m
 
-# LC29. Divide Two Integers
+# LC29. Divide Two Integers  div 2 int
 def divide(self, A, B):  # logn
     if A == -2147483648 and B == -1: return 2147483647  # overflow  # -2^31
     a, b, res = abs(A), abs(B), 0

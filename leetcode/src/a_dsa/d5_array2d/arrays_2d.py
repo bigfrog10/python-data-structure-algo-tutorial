@@ -21,7 +21,7 @@ def resultGrid(self, image: List[List[int]], threshold: int) -> List[List[int]]:
             image[i][j] = grid[i][j][0] // grid[i][j][1]
     return image
 
-# LC2397. Maximum Rows Covered by Columns
+# LC2397. Maximum Rows Covered by Columns  max rows
 def maximumRows(self, matrix: List[List[int]], numSelect: int) -> int:
     n,m = len(matrix),len(matrix[0])
     ans = 0

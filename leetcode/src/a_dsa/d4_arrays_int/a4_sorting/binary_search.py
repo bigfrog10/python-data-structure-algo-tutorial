@@ -120,6 +120,14 @@ def search(self, reader: 'ArrayReader', target: int) -> int:
 
 # LC704. Binary Search
 def search(self, nums: List[int], target: int) -> int:  # O(logn)
+    b, e = 0, len(nums)
+    while b < e:
+        m = (e + b) // 2
+        if nums[m] == target: return m
+        elif nums[m] > target: e = m
+        else: b = m+1
+    return -1
+def search(self, nums: List[int], target: int) -> int:  # O(logn)
     b, e = 0, len(nums)-1
     while b <= e:
         m = (e + b) // 2
