@@ -6,7 +6,7 @@ def check(self, nums: List[int]) -> bool:
         if nums[i] > nums[(i+1) % n]: count += 1
     return count <= 1
 
-# LC33. Search in Rotated Sorted Array - return index, distinct values
+# LC33. Search in Rotated Sorted Array - return index, distinct values   search rotated array
 def search(self, nums: List[int], target: int) -> int:  # O(logn)
     start, end = 0, len(nums) - 1
     while start <= end:
@@ -33,7 +33,7 @@ def search(self, nums: List[int], target: int) -> bool:  # O(n) worst case
             if nums[mid] < target <= nums[end]: start = mid + 1
             else: end = mid - 1
         else:  # equal and not target, could use a while. This is O(n)
-            start += 1  # can't use mid, since it could jump out of range due to rotation
+            start += 1  # can't use mid, since it could jump out of range due to rotation, 1,0,1,1,1 with target 0
     return False
 
 # LC153. Find Minimum in Rotated Sorted Array - unique elements  min rotate

@@ -37,7 +37,7 @@ def addBinary(self, a: str, b: str) -> str:
     x, y = int(a, 2), int(b, 2)
     while y:
         x, y = x ^ y, (x & y) << 1
-    return f'{x:0b}'
+    return f'{x:b}'
 
 # LC2235. Add Two Integers
 def sum1(self, num1: int, num2: int) -> int:

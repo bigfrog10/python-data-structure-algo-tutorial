@@ -278,6 +278,7 @@ def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:  # O(rc)
 def setZeroes(self, matrix):
     m, n = len(matrix), len(matrix[0])
     firstRowHasZero = not all(matrix[0])  # First row has zero?
+    # first column's zero is marked by c[0][0]
     for i in range(1, m):  # Use first row/column as marker, scan the matrix
         for j in range(n):
             if matrix[i][j] == 0: matrix[0][j] = matrix[i][0] = 0

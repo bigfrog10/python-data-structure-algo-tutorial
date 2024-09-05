@@ -12,7 +12,7 @@ def maxSubarrayLength(self, nums: List[int], k: int) -> int:
     return result
 
 
-# LC53. Maximum Subarray   - max sum amount all subarrays
+# LC53. Maximum Subarray   - max sum amount all subarrays  max subarray
 def maxSubArray(self, nums: List[int]) -> int:
     total = max_total = nums[0]
     for i in range(1, len(nums)):
@@ -61,7 +61,7 @@ def minSubArrayLen(self, s: int, nums: List[int]) -> int:  # 2 pointers , O(n) t
             left += 1
     return result if result <= len(nums) else 0
 
-# LC560. Subarray Sum Equals K - total count of subarrays whose sum equals to k
+# LC560. Subarray Sum Equals K - total count of subarrays whose sum equals to k  subsum k
 from typing import List
 def subarraySum(self, nums: List[int], k: int) -> int:
     count = cusum = 0  # O(n)
