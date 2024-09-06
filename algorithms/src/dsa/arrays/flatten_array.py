@@ -6,8 +6,7 @@ def flatten(arr: list, n):
         if isinstance(a, list):
             b = flatten(a, n-1)
             res.extend(b)
-        else:
-            res.append(a)
+        else: res.append(a)
     return res
 
 m = [1, 2, 3, [4, 5, 6], [7, 8, [9, 10, 11], 12], [13, 14, 15]]
