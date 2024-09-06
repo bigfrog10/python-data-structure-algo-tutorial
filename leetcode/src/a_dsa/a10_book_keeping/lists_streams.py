@@ -1,5 +1,5 @@
 
-# LC295. Find Median from Data Stream, top100
+# LC295. Find Median from Data Stream, top100  median stream
 class MedianFinder:
     def __init__(self):
         self.heaps = [], []  # max heap from smalls, min heap from larges

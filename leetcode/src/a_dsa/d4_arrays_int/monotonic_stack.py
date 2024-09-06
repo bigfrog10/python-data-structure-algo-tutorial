@@ -5,9 +5,8 @@ def maxChunksToSorted(self, arr: List[int]) -> int:
     for a in arr:  # O(n) time and space
         _max = a  # for-while = stack push and pop -> O(2n)
         while stack and stack[-1] > a:
-            top = stack.pop()
-            _max = max(_max, top)
-        stack.append(_max)
+            _max = max(_max, stack.pop())
+        stack.append(_max)  # these can be sorted in 1 block
     return len(stack)
 
 # LC1642. Furthest Building You Can Reach - furthest jump furthest building

@@ -1,5 +1,20 @@
 from collections import deque
 
+# LC2596. Check Knight Tour Configuration
+def checkValidGrid(self, grid: List[List[int]]) -> bool:
+    n = len(grid)
+    arr = [None] * (n*n)
+    for row in range(n):
+        for col in range(n): arr[grid[row][col]] = (row, col)
+    pos = arr[0]
+    if pos != (0, 0): return False
+    for i in range(1, n*n):
+        a = abs(pos[0] - arr[i][0])
+        b = abs(pos[1] - arr[i][1])
+        if a == 1 and b == 2 or a == 2 and b == 1: pos = arr[i]
+        else: return False
+    return True
+
 # 1778. Shortest Path in a Hidden Grid
 def findShortestPath(self, master: 'GridMaster') -> int:
     can_move = set() # need to build graph first, for bfs. Otherwise TLE.
@@ -180,7 +195,7 @@ def maxKilledEnemies(self, grid):  # O(mn) time and O(n) space
     return result
 
 
-# LC1197. Minimum Knight Moves
+# LC1197. Minimum Knight Moves  min knight move
 def minKnightMoves(self, x: int, y: int) -> int:  # O(x*y)
     @lru_cache(None)
     def dp(x,y):  # O(x*y) in cache

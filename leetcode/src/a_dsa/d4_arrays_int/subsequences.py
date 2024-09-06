@@ -1,5 +1,18 @@
 
-# 3201. Find the Maximum Length of Valid Subsequence I
+# LC673. Number of Longest Increasing Subsequence  LIS number
+def findNumberOfLIS(self, nums: List[int]) -> int:
+    if not nums: return 0  # O(n^2) time and O(n) space
+    n = len(nums)
+    m, dp, cnt = 0, [1] * n, [1] * n  # dp[i] = length of LIS at i.
+    for i in range(n):
+        for j in range(i):
+            if nums[j] < nums[i]:
+                if dp[i] < dp[j]+1: dp[i], cnt[i] = dp[j]+1, cnt[j]
+                elif dp[i] == dp[j]+1: cnt[i] += cnt[j] # add nums[i]
+        m = max(m, dp[i])  # m is the max length of longest increasing sequences
+    return sum(c for l, c in zip(dp, cnt) if l == m)
+
+# LC3201. Find the Maximum Length of Valid Subsequence I
 def maximumLength(self, nums: List[int]) -> int:  # subsequence is not continuous subarray.
     count, end = [0, 0], [0, 0]  # O(1) space and O(n) time
     for n in nums:
@@ -88,7 +101,7 @@ def increasingTriplet(self, nums: List[int]) -> bool:
         else: return True
     return False
 
-# LC300. Longest Increasing Subsequence
+# LC300. Longest Increasing Subsequence  LIS length
 def lengthOfLIS(self, nums: List[int]) -> int:  # O(nlogn) runtime, O(n) space
     hist = []  # hist[i] smallest ending element in strictly increasing sequence of length i
     for e in nums:

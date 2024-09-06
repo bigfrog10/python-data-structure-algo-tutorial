@@ -44,10 +44,9 @@ def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:  # O(n * 2^n)
         ans.append(solution[:])  # copy
         for j in range(i, len(nums)):
             # We can re-use numbers, but not at this position and same previous premutation
-            if j > i and nums[j] == nums[j-1]: continue
-            solution.append(nums[j])
-            backtrack(j+1, solution)  # go down 1 element and then backout to empty
-            solution.pop()
+            if j > i and nums[j] == nums[j-1]:
+                continue  # only when i==j, we take dupes
+            backtrack(j+1, solution + [nums[j]])  # go down 1 element and then backout to empty
     backtrack(0, [])
     return ans  # [[],[1],[1,2],[1,2,2],[2],[2,2]]
 

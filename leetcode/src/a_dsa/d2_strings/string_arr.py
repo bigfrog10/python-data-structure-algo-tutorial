@@ -1,3 +1,12 @@
+
+
+# LC893. Groups of Special-Equivalent Strings
+def numSpecialEquivGroups(self, words: List[str]) -> int:
+    groups = set()
+    for word in words:
+        groups.add((''.join(sorted(word[1::2])), ''.join(sorted(word[::2]))))
+    return len(groups)
+
 # LC422. Valid Word Square
 def validWordSquare(self, words: List[str]) -> bool:
     n = len(words)
@@ -90,6 +99,19 @@ def leastInterval(self, tasks: List[str], n: int) -> int:
     # (n+1) tasks in each group with cooling, (f_max-1) groups,
     # -1 is for last group, and it is n_max without need of cooling
     return max(len(tasks), (f_max - 1) * (n + 1) + n_max)
+
+# LC2365. Task Scheduler II
+def taskSchedulerII(self, tasks: List[int], space: int) -> int:
+    start_day = {task:0 for task in tasks}
+    day = 0
+    for task in tasks:
+        day += 1
+        # if the current day is too early to complete the task,
+        # fast forward the day to the earliest day you can.
+        if day < start_day[task]: day = start_day[task]
+        # update the earliest day you can complete the task.
+        start_day[task] = day + space + 1
+    return day
 
 # LC387. First Unique Character in a String
 def firstUniqChar(self, s: str) -> int:

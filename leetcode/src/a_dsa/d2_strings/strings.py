@@ -1,3 +1,21 @@
+
+# 2452. Words Within Two Edits of Dictionary
+def twoEditWords(self, queries: List[str], dictionary: List[str]) -> List[str]:
+    def is_valid(query, word):
+        count = 0
+        for i in range(len(word)):
+            if word[i] != query[i]:
+                count += 1
+                if count > 2: return False
+        return True
+    res = []
+    for query in queries:
+        for word in dictionary:
+            if is_valid(query, word):
+                res.append(query)
+                break
+    return res
+
 # 1768. Merge Strings Alternately
 def mergeAlternately(self, word1: str, word2: str) -> str:
     result = []

@@ -1,4 +1,12 @@
 
+# LC750. Number Of Corner Rectangles
+def countCornerRectangles(self, grid: List[List[int]]) -> int:
+    def count(row1, row2):  # one number, one mask, how many common 1's
+        num_ones = (row1 & row2).bit_count()
+        return num_ones * (num_ones - 1) // 2
+    rows = [int(''.join(map(str, row)), 2) for row in grid]
+    return sum(count(row1, rows[j]) for i, row1 in enumerate(rows) for j in range(i + 1, len(rows)))
+
 # LC3030. Find the Grid of Region Average
 def resultGrid(self, image: List[List[int]], threshold: int) -> List[List[int]]:
     m, n = len(image), len(image[0])  # O(n^2) time and space

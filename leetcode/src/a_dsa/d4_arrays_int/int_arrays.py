@@ -266,7 +266,7 @@ def findBuildings(self, heights: List[int]) -> List[int]:  # O(n)
     res.reverse()
     return res
 
-# LC339. Nested List Weight Sum - top elem has less weight , use dfs
+# LC339. Nested List Weight Sum - top elem has less weight , use dfs  nested sum
 def depthSum(self, nestedList: List[NestedInteger]) -> int:  # O(all ints) time, O(D) space
     def dfs(nested_list, depth):
         total = 0
@@ -478,7 +478,7 @@ def summaryRanges(self, nums: List[int]) -> List[str]:
             pointer = i+1
     return ans
 
-# LC628. Maximum Product of Three Numbers
+# LC628. Maximum Product of Three Numbers  prod 3 num
 def maximumProduct(self, nums: List[int]) -> int:
     max1 = max2 = max3 = float('-inf')  # 1 > 2 > 3
     min1 = min2 = float('inf')  # 1 < 2, to deal with negative numbers
