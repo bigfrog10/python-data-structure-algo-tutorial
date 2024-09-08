@@ -1,4 +1,25 @@
 
+# LC1947. Maximum Compatibility Score Sum
+def maxCompatibilitySum1(self, students: List[List[int]], mentors: List[List[int]]) -> int:
+    m = len(students)  # O(m * 2^m)
+    n = len(students[0])
+    # accelerate a bit by precomputing the compatibilities
+    compats = [[0]*m for _ in range(m)]
+    for i in range(m):
+        for j in range(m):
+            compats[i][j] = sum(a == b for a, b in zip(students[i], mentors[j]))
+    ans = 0
+    @cache
+    def max_comp(i, mavail: int) -> int:
+        if i == m: return 0
+        res = 0
+        for j in range(m):
+            mask = 1 << j
+            if mavail ^ mask:
+                res = max(res, compats[i][j] + max_comp(i+1, mavail ^ mask))
+        return res
+    return max_comp(0, 0)
+
 # LC750. Number Of Corner Rectangles
 def countCornerRectangles(self, grid: List[List[int]]) -> int:
     def count(row1, row2):  # one number, one mask, how many common 1's

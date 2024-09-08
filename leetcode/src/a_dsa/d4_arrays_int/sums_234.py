@@ -43,6 +43,19 @@ def twoSumLessThanK(self, nums: List[int], k: int) -> int:  # O(n), counting sor
             lo += 1
     return answer
 
+# LC170. Two Sum III - Data structure design   2sum3
+class TwoSum:
+    def __init__(self):
+        self.counters = Counter()
+    def add(self, number: int) -> None:
+        self.counters[number] += 1
+    def find(self, value: int) -> bool:
+        for w in self.counters.keys():
+            d = value - w
+            if d != w and d in self.counters: return True
+            if d == w and self.counters[w] > 1: return True
+        return False
+
 # LC1877. Minimize Maximum Pair Sum in Array
 def minPairSum(self, nums: List[int]) -> int:
     nums.sort()

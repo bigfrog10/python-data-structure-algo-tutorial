@@ -102,12 +102,11 @@ def canAttendMeetings(self, intervals: List[List[int]]) -> bool:
 
 # LC253. Meeting Rooms II - min # of conf rooms asked
 def minMeetingRooms(self, intervals: List[List[int]]) -> int:
-    if not intervals: return 0
     intervals.sort()  # greedy, sort intervals by starting time. O(nlogn)
     rooms = []  # end times
     for intv in intervals:
         if rooms and rooms[0] <= intv[0]: # if earliest end time < this start time
-            heapq.heappop(rooms) # remove and replace with current end time
+            heapq.heappop(rooms)  # remove and replace with current end time
         heapq.heappush(rooms, intv[1])  # we sort heap by end time
     return len(rooms)
 

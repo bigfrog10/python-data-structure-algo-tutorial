@@ -24,9 +24,9 @@ def maxDepthAfterSplit(self, seq: str) -> List[int]:
 
 # LC22. Generate Parentheses
 def generateParenthesis(self, n: int) -> List[str]:
-    ret = {'()'}
-    for _ in range(n-1):
-        ret = {s[:i] + '()' + s[i:] for s in ret for i in range(len(s))}
+    ret = {''}
+    for _ in range(n):
+        ret = {s[:i] + '()' + s[i:] for s in ret for i in range(len(s)+1)}
     return ret
 
 # LC20. Valid Parentheses - {} () []

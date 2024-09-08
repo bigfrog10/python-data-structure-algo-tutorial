@@ -1,6 +1,48 @@
 from collections import Counter, defaultdict, deque
 import heapq
 
+# LC1928. Minimum Cost to Reach Destination in Time
+def minCost(self, maxTime: int, edges: List[List[int]], passingFees: List[int]) -> int:
+    g = defaultdict(list)
+    for e in edges:
+        g[e[0]].append((e[1], e[2]))  # start, end, time
+        g[e[1]].append((e[0], e[2]))
+    n = len(passingFees)
+    times = {}  # time to get to this city
+    pq = [(passingFees[0], 0, 0)]  # fee, city, time
+    while pq:  # Dijkstra
+        cost, node, time = heapq.heappop(pq)
+        if time > maxTime: continue
+        if node == n-1: return cost
+        for nbor, trip in g[node]:
+            new_time = time + trip
+            if nbor not in times or (new_time < times[nbor] and new_time <= maxTime):
+                heapq.heappush(pq, (passingFees[nbor]+cost, nbor, new_time))
+                times[nbor] = new_time
+    return -1
+
+# LC1810 Minimum Path Cost in a hidden grid
+def findShortestPath(self, master: 'GridMaster') -> int:  # O(NM)
+    directions = {'U': (-1, 0), 'D': (1, 0), 'L': (0, -1), 'R': (0, 1)}
+    opposite = {'L': 'R', 'R': 'L', 'D': 'U', 'U': 'D'}
+    costs, target = {(0, 0): 0}, []
+    def dfs(y_, x_):  # DFS the grid and collect costs
+        if master.isTarget(): target.extend([y_, x_])
+        for d, (dy, dx) in directions.items():
+            if (y := y_ + dy, x := x_ + dx) not in costs and master.canMove(d):
+                costs.update({(y, x): master.move(d)})
+                dfs(y, x)
+                master.move(opposite[d])
+    dfs(0, 0)
+    heap = [(0, 0, 0)]
+    while heap:  # Dijkstra traversal for find optimal path
+        dist, y, x = heapq.heappop(heap)
+        if [y, x] == target: return dist
+        if costs.pop((y, x), None) is not None:
+            for kid in ((y + 1, x), (y - 1, x), (y, x + 1), (y, x - 1)):
+                if kid in costs: heapq.heappush(heap, (dist + costs.get(kid), *kid))
+    return -1
+
 # LC1514. Path with Maximum Probability  graph path max prob  Dijkstra
 def maxProbability(self, n: int, edges: List[List[int]], succProb: List[float], start_node: int, end_node: int) -> float:
     graph = defaultdict(list)

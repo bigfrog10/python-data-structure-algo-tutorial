@@ -1,4 +1,13 @@
 
+# LC2303. Calculate Amount Paid in Taxes
+def calculateTax(self, brackets: List[List[int]], income: int) -> float:
+    ans = prev = 0
+    for hi, pct in brackets:
+        hi = min(hi, income)
+        ans += (hi - prev) * pct / 100
+        prev = hi
+    return ans
+
 # LC1151. Minimum Swaps to Group All 1's Together
 def minSwaps(self, data: List[int]) -> int:  # O(n) and O(1)
     ones = sum(data)

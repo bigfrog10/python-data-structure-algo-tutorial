@@ -1,4 +1,19 @@
 
+# LC1236. Web Crawler
+def crawl(self, startUrl: str, htmlParser: 'HtmlParser') -> List[str]:
+    def get_hostname(url):
+        return url.split('/')[2]  # "http:", "", "example.org"
+    start_hostname = get_hostname(startUrl)
+    visited = set()
+    def dfs(url, htmlParser):
+        visited.add(url)
+        for next_url in htmlParser.getUrls(url):
+            if get_hostname(next_url) == start_hostname and next_url not in visited:
+                # if start_hostname in next_url and next_url not in visited:  # faster
+                dfs(next_url, htmlParser)
+    dfs(startUrl, htmlParser)
+    return visited
+
 # LC428. Serialize and Deserialize N-ary Tree
 class Codec:
     def serialize(self, root: 'Node') -> str:

@@ -392,7 +392,7 @@ def snakesAndLadders(self, board: List[List[int]]) -> int:
         return x, y
     queue, visited = deque([(1, 0)]), set()  # order, steps
     maxs = n * n
-    while queue: # BFS to get min
+    while queue:  # BFS to get min
         x, s = queue.popleft()
         if x == maxs: return s
         if x in visited: continue

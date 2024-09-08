@@ -47,11 +47,11 @@ def findMin(self, nums: List[int]) -> int:  # O(log)
 
 # LC154. Find Minimum in Rotated Sorted Array II - contains dupes
 def findMin(self, nums: List[int]) -> int:  # O(n)
-    low, high = 0, len(nums)-1
-    while high > low:
-        pivot = low + (high - low) // 2
-        if nums[pivot] < nums[high]: high = pivot  # we want eliminate higher values
-        elif nums[pivot] > nums[high]: low = pivot + 1  # pivot is on left higher values
-        else: high -= 1  # have to go slowly since min could be between
-                         # the 'low' and 'high' index converge to the inflection point.
-    return nums[low]
+    start, end = 0, len(nums) - 1
+    while start < end:
+        mid = (end + start) // 2
+        if nums[mid] < nums[end]: end = mid  # we want eliminate higher values
+        elif nums[mid] > nums[end]: start = mid + 1  # pivot is on left higher values
+        else: end -= 1  # have to go slowly since min could be between
+        # the 'low' and 'high' index converge to the inflection point.
+    return nums[start]
