@@ -14,7 +14,7 @@ def maxSubarrayLength(self, nums: List[int], k: int) -> int:
 
 # LC53. Maximum Subarray   - max sum amount all subarrays  max subarray
 def maxSubArray(self, nums: List[int]) -> int:
-    total = max_total = nums[0]
+    total = max_total = nums[0]  # don't use 0 for both, because of [-1]
     for i in range(1, len(nums)):
         total += nums[i]
         # if the total is not worth to keep, start a new total

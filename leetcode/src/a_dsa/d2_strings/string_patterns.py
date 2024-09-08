@@ -22,6 +22,6 @@ def wordPatternMatch(self, pattern: str, s: str) -> bool:  # n*C(n, m) or O(n^m)
 
 # LC290. Word Pattern - pattern char to word
 def wordPattern(self, pattern: str, string: str) -> bool:
-    s = list(pattern)
+    s = pattern
     t = string.split()
     return len(set(zip(s, t))) == len(set(s)) == len(set(t)) and len(s) == len(t)

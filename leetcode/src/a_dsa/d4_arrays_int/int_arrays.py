@@ -326,7 +326,7 @@ def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
         idx += 2 if idx + 2 < m else 1  # case [1, 0, 0]
     return False
 
-# LC41. First Missing Positive, top100
+# LC41. First Missing Positive, top100   1st missing positive
 def firstMissingPositive(self, nums: List[int]) -> int:  # O(n) time O(1) space
     # https://leetcode.com/problems/first-missing-positive/solutions/4926146/unveiling-the-ultimate-strategy-100-user-beating-solution/?envType=company&envId=apple&favoriteSlug=apple-six-months
     n = len(nums)
@@ -335,11 +335,12 @@ def firstMissingPositive(self, nums: List[int]) -> int:  # O(n) time O(1) space
         if nums[i] == 1: b = True  # mark whether 1 shows up
         if nums[i] > n or nums[i] <= 0: nums[i] = 1  #
     if not b: return 1
-    for i in range(n):  # change value to negative
+    for i in range(n):   # change value [1, n] to negative, so -1 to [0, n-1]
         if nums[abs(nums[i]) - 1] > 0: nums[abs(nums[i]) - 1] *= -1
     for i in range(n):
         if nums[i] > 0: return i + 1
     return n + 1
+# to restore original values, shift negatives by -2n, keep >= n as is
 
 # LC219. Contains Duplicate II - duplicates within index range k
 def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:  # O(n) time and O(k) space

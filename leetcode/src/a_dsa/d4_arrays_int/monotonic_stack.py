@@ -1,4 +1,16 @@
 
+# LC2289. Steps to Make Array Non-decreasing
+def totalSteps(self, nums: List[int]) -> int:
+    res,stack = 0, []
+    for i in range(len(nums)-1,-1,-1):
+        cur = 0  # number of rounds to remove nums
+        while stack and nums[stack[-1][0]]<nums[i]:
+            _,v = stack.pop()  # eat this number
+            cur=max(cur+1,v)
+        res = max(res,cur)
+        stack.append([i,cur])
+    return res
+
 # LC768. Max Chunks To Make Sorted II
 def maxChunksToSorted(self, arr: List[int]) -> int:
     stack = []
