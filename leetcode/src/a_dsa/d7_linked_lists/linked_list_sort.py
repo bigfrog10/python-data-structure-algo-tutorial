@@ -7,7 +7,7 @@ def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:  # O(nlogn)
         fast, slow = fast.next.next, slow.next
     start = slow.next
     slow.next = None
-    l, r = self.sortList(head), self.sortList(start)
+    l, r = self.sortList(head), self.sortList(start)  # merge sort
     return self.merge(l, r)
 def merge(self, l, r):
     dummy = p = ListNode(0)
@@ -42,3 +42,37 @@ def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
             lists[i] = self.mergeTwoLists(lists[i], lists[i + jump])  ## use above method
         jump *= 2
     return lists[0] if lstlen > 0 else None
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -224,19 +224,17 @@ def findWords(self, board: List[List[str]], words: List[str]) -> List[str]: # Th
 
 # LC68. Text Justification
 def fullJustify(self, words: List[str], maxWidth: int) -> List[str]:
-    ans = []
-    line, width = [], 0
-    for word in words:
-        if width + len(line) + len(word) > maxWidth:  # len(line) spaces
-            n, k = divmod(maxWidth - width, max(1, len(line)-1))
-            for i in range(max(1, len(line)-1)):
-                line[i] += " " * (n + (i < k))  # add space after word
-            ans.append("".join(line))
+    res, line, width = [], [], 0  # O(len(words) * avg(len(w))) time, O(maxWidth) space
+    for w in words:
+        if width + len(line) + len(w) > maxWidth:  # len(line) spaces between words
+            m = len(line) - 1 or 1 # if only 1 word in this line
+            for i in range(maxWidth - width): line[i % m] += ' '  # add ' ' to each word
+            res.append(''.join(line))
             line, width = [], 0
-        line.append(word)
-        width += len(word)
-    ans.append(" ".join(line).ljust(maxWidth))
-    return ans
+        line.append(w)
+        width += len(w)
+    res.append(" ".join(line).ljust(maxWidth))  # last line
+    return res
 
 # LC616. Add Bold Tag in String, same as LC758.
 def addBoldTag(self, s: str, dict1: List[str]) -> str:  # O(len(s) * len(words)) time and O(len(s)) space

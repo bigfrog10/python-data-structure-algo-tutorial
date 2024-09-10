@@ -51,7 +51,7 @@ def resultGrid(self, image: List[List[int]], threshold: int) -> List[List[int]]:
     return image
 
 # LC2397. Maximum Rows Covered by Columns  max rows
-def maximumRows(self, matrix: List[List[int]], numSelect: int) -> int:
+def maximumRows(self, matrix: List[List[int]], numSelect: int) -> int:  # O(m) space, O(2^n * m) time
     n,m = len(matrix),len(matrix[0])
     ans = 0
     def check(state,row,rowIncludedCount):

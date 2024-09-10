@@ -55,14 +55,17 @@ def removeDuplicates(self, S: str) -> str: # O(n)
 
 # LC3. Longest Substring Without Repeating Characters, top100
 def lengthOfLongestSubstring(self, s: str) -> int:
-    last = [-1] * 128  # used to track last index of every char. treat space for speed.
-    st, ans = 0, 0  # substring starting point and result
-    for idx, char in enumerate(s):
-        if last[ord(char)] != -1:  # showed before, start new
-            st = max(st, last[ord(char)] + 1)  # max across different chars, abba
-        ans = max(ans, idx - st + 1)  # +1 needed, otherwise " " will fail
-        last[ord(char)] = idx  # update char's index
-    return ans
+    chars = Counter()
+    res = left = 0
+    for right in range(len(s)):
+        r = s[right]
+        chars[r] += 1  # step 1. modify counter with condition
+        while chars[r] > 1:  # step 2. if invalid, make it valid again
+            chars[s[left]] -= 1
+            left += 1
+        res = max(res, right - left + 1)  # step 3. update result
+    return res
+# https://leetcode.com/problems/minimum-window-substring/
 
 # LC1081. Smallest Subsequence of Distinct Characters - same as above
 def removeDuplicateLetters(self, s: str) -> str:  # O(n)

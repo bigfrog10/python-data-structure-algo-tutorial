@@ -1,4 +1,65 @@
 
+# LC173. Binary Search Tree Iterator   bst iterator
+# O(n) time in constructor, O(n) space
+class BSTIterator:
+    def __init__(self, root: Optional[TreeNode]):
+        self.arr = []
+        self.curr_index = 0
+        self.in_order(root)
+        print(self.arr)
+    def in_order(self, root):
+        if not root:
+            return
+        self.in_order(root.left)
+        self.arr.append(root.val)
+        self.in_order(root.right)
+    def next(self) -> int:
+        val = self.arr[self.curr_index]
+        self.curr_index+=1
+        return val
+    def hasNext(self) -> bool:
+        return self.curr_index<=len(self.arr)-1
+
+# LC1586. Binary Search Tree Iterator II  bst iterator 2
+class BSTIterator:
+    def __init__(self, root: Optional[TreeNode]):  # O(n) init, O(1) elsewhere. O(n) space
+        self.nodes = []
+        self.i = -1
+        def inorder(root):
+            if root is None: return
+            inorder(root.left)
+            self.nodes.append(root.val)
+            inorder(root.right)
+        inorder(root)
+    def hasNext(self) -> bool:
+        return self.i < len(self.nodes) - 1
+    def next(self) -> int:
+        self.i += 1
+        return self.nodes[self.i]
+    def hasPrev(self) -> bool:
+        return self.i > 0
+    def prev(self) -> int:
+        self.i -= 1
+        return self.nodes[self.i] if self.i >= 0 else self.nodes[0]
+# https://leetcode.com/problems/binary-search-tree-iterator-ii/solutions/5060896/python3-beats-100-2024/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
+
+
+# LC1357. Apply Discount Every n Orders   discount n order
+class Cashier:
+    def __init__(self, n: int, discount: int, products: List[int], prices: List[int]):
+        self.n = n
+        self.discount = discount
+        self.num_customers = 0
+        self.product_prices = {pid: price for pid, price in zip(products, prices)}
+    def getBill(self, product: List[int], amount: List[int]) -> float:
+        bill = 0
+        self.num_customers += 1
+        for pid, amount in zip(product, amount):
+            bill += amount * (self.product_prices[pid])
+        if self.num_customers % self.n == 0:
+            bill *= ((100 - self.discount) / 100)
+        return bill
+
 # LC341. Flatten Nested List Iterator, space O(N + L), N # of integers, L # of lists
 class NestedIterator:
     def __init__(self, nestedList: [NestedInteger]):  # O(N+L)

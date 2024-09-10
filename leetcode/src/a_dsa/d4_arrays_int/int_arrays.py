@@ -97,7 +97,7 @@ def findContentChildren(self, g: List[int], s: List[int]) -> int:  # O(NlogN+Mlo
         j += 1
     return i
 
-# LC238. Product of Array Except Self, top100
+# LC238. Product of Array Except Self, top100  prod array
 def productExceptSelf(self, nums: List[int]) -> List[int]:  # O(n) time and O(1) space
     length = len(nums)
     ret = [0] * length
@@ -289,7 +289,19 @@ def depthSumInverse(self, nestedList: List[NestedInteger]) -> int:
             queue, q1 = q1, []
     return res
 
-
+# LC2149. Rearrange Array Elements by Sign
+def rearrangeArray(self, nums: List[int]) -> List[int]:
+    n = len(nums)
+    ans = [0] * n
+    pos_index, neg_index = 0, 1
+    for i in range(n):
+        if nums[i] > 0:
+            ans[pos_index] = nums[i]
+            pos_index += 2
+        else:
+            ans[neg_index] = nums[i]
+            neg_index += 2
+    return ans
 
 # LC2214. Minimum Health to Beat Game
 def minimumHealth(self, damage: List[int], armor: int) -> int:

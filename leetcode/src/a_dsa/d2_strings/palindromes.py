@@ -26,7 +26,7 @@ def isPalindrome(self, s: str) -> bool:  # O(n)
         j -= 1
     return True
 
-# LC5. Longest Palindromic Substring long pali sub
+# LC5. Longest Palindromic Substring long pali sub  lo ps
 # https://leetcode.com/problems/longest-palindromic-substring/solutions/5433321/manacher-s-algorithm-explained-building-off-of-the-expand-around-center-approach/
 # https://leetcode.com/problems/longest-palindromic-substring/solutions/4212241/98-55-manacher-s-algorithm/
 # https://cp-algorithms.com/string/manacher.html
@@ -95,12 +95,11 @@ def countSubstrings(self, s: str) -> int:  # O(n^2)
     return total
 
 # LC680. Valid Palindrome II - deleting at most one character
-def validPalindrome(self, s: str) -> bool:  # O(n)
+def validPalindrome(self, s: str) -> bool:  # O(n) time and O(1) space
     n, i = len(s), 0
     while i < n / 2 and s[i] == s[~i]: i += 1  # ~i = -i-1, bitwise negative
-    s = s[i:n - i]  # n - i = ~i + 1
-    # remove left or right char
-    return s[1:] == s[1:][::-1] or s[:-1] == s[:-1][::-1]
+    # check ignoring 1st or last char
+    return s[i+1:n-i] == s[i+1:n-i][::-1] or s[i:n-i-1] == s[i:n-i-1][::-1]
 
 # LC131. Palindrome Partitioning
 def partition(self, s: str) -> List[List[str]]:  # O(N * 2^N), when all substrings are palindrome, e.g., 'a'*N

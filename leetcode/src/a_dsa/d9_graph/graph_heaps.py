@@ -1,6 +1,34 @@
 from collections import Counter, defaultdict, deque
 import heapq
 
+# LC1976. Number of Ways to Arrive at Destination  intersections and roads
+def countPaths(self, n: int, roads: List[List[int]]) -> int:
+    adj = [[] for _ in range(n)]  # O(M * logN), M = N*(N-1)/2 # of roads
+    for u, v, w in roads:  # Step 1️⃣: Build the adjacency list for the graph
+        adj[u].append([v, w])  # from u to v takes w time
+        adj[v].append([u, w])  # space is O(V + E) = O(N + M)
+    ways = [0] * n  # Step 2️⃣: Initialize arrays to store number of ways
+    ways[0] = 1
+    dis = [float("inf")] * n  # shortest travel time to index city
+    dis[0] = 0  # start from city 0
+    heap = [(0, 0)]  # # Step 3️⃣: Min-heap to store (current time, city)
+    while heap:
+        time, city = heapq.heappop(heap)
+        # This line reduce O(V^3) to O(V^2)
+        if dis[city] < time: continue  # if there is a better time, ignore this one
+        # Explore all neighbors of the current city
+        for neighbor, travel_time in adj[city]:
+            new_time = time + travel_time
+            if new_time == dis[neighbor]:  # Case 1️⃣: found another way with same shortest time
+                ways[neighbor] = (ways[neighbor] + ways[city]) % 1_000_000_007
+            elif new_time < dis[neighbor]:  # Case 2️⃣: found a shorter time to reach the neighbor
+                dis[neighbor] = new_time
+                heapq.heappush(heap, (new_time, neighbor))
+                ways[neighbor] = ways[city]
+    return ways[n-1]
+# https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
+
+
 # LC1928. Minimum Cost to Reach Destination in Time
 def minCost(self, maxTime: int, edges: List[List[int]], passingFees: List[int]) -> int:
     g = defaultdict(list)

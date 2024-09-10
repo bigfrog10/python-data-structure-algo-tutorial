@@ -1,6 +1,29 @@
 import bisect
 from typing import List
 
+# LC1482. Minimum Number of Days to Make m Bouquets
+def minDays(self, bloomDay: List[int], m: int, k: int) -> int:  #  O(NlogD)
+    if m * k > len(bloomDay): return -1
+    start, end = 0, max(bloomDay)
+    minDays = -1
+    while start <= end:
+        mid = (start + end) // 2
+        if self.get_num_of_bouquets(bloomDay, mid, k) >= m:
+            minDays = mid
+            end = mid - 1
+        else: start = mid + 1
+    return minDays
+def get_num_of_bouquets(self, bloomDay, mid, k):
+    num_of_bouquets = count = 0
+    for day in bloomDay:
+        # If the flower is bloomed, add to the set. Else reset the count.
+        if day <= mid: count += 1
+        else: count = 0  # restart counting, need continuous k
+        if count == k:
+            num_of_bouquets += 1
+            count = 0
+    return num_of_bouquets
+
 # LC1552. Magnetic Force Between Two Balls
 def maxDistance(self, position: List[int], m: int) -> int:
     def f(d):

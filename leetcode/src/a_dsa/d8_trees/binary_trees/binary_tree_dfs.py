@@ -1,5 +1,19 @@
 
-# 404. Sum of Left Leaves
+# LC1379. Find a Corresponding Node of a Binary Tree in a Clone of That Tree  bt clone
+def getTargetCopy(self, original: TreeNode, cloned: TreeNode, target: TreeNode) -> TreeNode:
+    self.ans = None
+    def dfs(o: TreeNode, c: TreeNode):
+        if self.ans: return
+        if o:
+            if o is target:
+                self.ans = c
+                return
+            dfs(o.left, c.left)
+            dfs(o.right, c.right)
+    dfs(original, cloned)
+    return self.ans
+
+# LC404. Sum of Left Leaves
 def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
     def dfs(node, isLeft):
         if node:

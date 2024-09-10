@@ -8,7 +8,7 @@ def twoSum(self, nums, target):  # O(n) time and space
         else: cache[num] = i
     return None
 
-# LC167. Two Sum II - Input array is sorted 2sum
+# LC167. Two Sum II - Input array is sorted 2sum sorted
 def twoSum(self, numbers: List[int], target: int) -> List[int]:
     # O(n) time and O(1) space(take out cache)- there is no O(logn) solution
     i, j = 0, len(numbers) - 1
