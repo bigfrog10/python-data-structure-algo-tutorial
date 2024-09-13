@@ -70,7 +70,7 @@ def largestIsland(self, grid: List[List[int]]) -> int: # O(n^2) runtime and spac
         if grid[r][c] == 1:  # unexplored island
             islands[gid] = dfs(r, c, gid)
             gid += 1
-    ret = max(islands.values() or [0])  # in case all land no water
+    ret = max(islands.values() or [0])  # in case all land no water, max island size so far.
     for r, c in product(range(n), range(n)):
         if grid[r][c] == 0:  # go through each water
             seen = set()  # this is to filter out repetitive islands from differnt landings
@@ -253,33 +253,30 @@ def countSubIslands(self, grid1: List[List[int]], grid2: List[List[int]]) -> int
 
 
 # 959. Regions Cut By Slashes
-def findUp(self, node):  # O((n+1)² * α((n+1)²)) time, O(α(n+1)²) space, inverse Ackermann function
-    if node == self.p[node]: return node
-    self.p[node] = self.findUp(self.p[node])
-    return self.p[node]
-
-def dsu(self, n1, n2):
-    up1 = self.findUp(n1)
-    up2 = self.findUp(n2)
-    if up1 == up2: self.cnt += 1  # after connect circles, a new region is born
-    else: self.p[up2] = up1  # setup new parent
-
-def regionsBySlashes(self, grid):
+def regionsBySlashes(self, grid: List[str]) -> int:  # O(n^2) time and space
     n = len(grid)
-    nn = n + 1
-    self.p = list(range(nn * nn))  # parent
-    self.cnt = 0
-
-    for i in range(nn):
-        for j in range(nn):
-            if i == 0 or j == 0 or i == n or j == n:  # all boundaries
-                self.dsu(0, i * nn + j)
-
-    for i in range(n):
-        for j in range(n):
-            if grid[i][j] == '/':
-                self.dsu((i + 1) * nn + j, i * nn + (j + 1))
-            elif grid[i][j] != ' ':
-                self.dsu(i * nn + j, (i + 1) * nn + (j + 1))
-
-    return self.cnt
+    m = 3*n
+    mat = [[0] * m for _ in range(m)]  # need 3 rather than 2 because //
+    for i, j in product(range(n), range(n)):
+        r, c = 3 * i, 3 * j
+        if grid[i][j] == "/":
+            mat[r][c+2] = 1
+            mat[r+1][c+1] = 1
+            mat[r+2][c] = 1
+        elif grid[i][j] == "\\":
+            mat[r][c] = 1
+            mat[r+1][c+1] = 1
+            mat[r+2][c+2] = 1
+    def dfs(mat, i, j):
+        if not (0 <= i < m and 0 <= j < m) or mat[i][j] == 1:
+            return
+        mat[i][j] = 1
+        for x, y in (i+1, j), (i-1, j), (i, j+1), (i, j-1):
+            dfs(mat, x, y)
+    count = 0  # count number of islands
+    for i, j in product(range(m), range(m)):
+        if mat[i][j] == 0:
+            count += 1
+            dfs(mat, i, j)
+    return count
+# https://leetcode.com/problems/regions-cut-by-slashes/solutions/5614788/simple-approach-using-expanded-grid-with-flood-fill-for-counting-regions/?envType=company&envId=facebook&favoriteSlug=facebook-three-months

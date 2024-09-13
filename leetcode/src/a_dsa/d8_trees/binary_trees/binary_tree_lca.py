@@ -1,5 +1,5 @@
 
-# LC1650. Lowest Common Ancestor of a Binary Tree III - has parent, given 2 nodes. tree LCA
+# LC1650. Lowest Common Ancestor of a Binary Tree III - has parent, given 2 nodes. tree LCA  lca bt
 def lowestCommonAncestor1(self, p: 'Node', q: 'Node') -> 'Node':
     p1, p2 = p, q  # O(1) space, but goes a + b + c, still O(2h)
     while p1 != p2:

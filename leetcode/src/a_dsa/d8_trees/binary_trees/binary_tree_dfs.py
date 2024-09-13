@@ -45,10 +45,10 @@ def getImportance(self, employees: List['Employee'], query_id: int) -> int:
         return e.importance + sum(dfs(sid) for sid in e.subordinates)
     return dfs(query_id)
 
-# LC543. Diameter of Binary Tree - binary tree diameter
+# LC543. Diameter of Binary Tree - binary tree diameter  bt diameter
 def diameterOfBinaryTree(self, root: TreeNode) -> int:
     diameter = 0
-    def path_max(node):  # DFS
+    def path_max(node):  # DFS, return depth
         nonlocal diameter
         if not node: return 0
         left = path_max(node.left)
@@ -136,7 +136,7 @@ def flipEquiv(self, root1: TreeNode, root2: TreeNode) -> bool: # O(min(#nodes))
     return (self.flipEquiv(root1.left, root2.left) and self.flipEquiv(root1.right, root2.right) or
             self.flipEquiv(root1.left, root2.right) and self.flipEquiv(root1.right, root2.left))
 
-# LC257. Binary Tree Paths - return all root-leaf paths
+# LC257. Binary Tree Paths - return all root-leaf paths  bt paths
 def binaryTreePaths(self, root: TreeNode) -> List[str]:
     ret = []
     def dfs(node, path):
@@ -152,7 +152,7 @@ def binaryTreePaths(self, root: TreeNode) -> List[str]:
 
 
 
-# LC104. Maximum Depth of Binary Tree  max depth
+# LC104. Maximum Depth of Binary Tree  bt max depth
 def maxDepth(self, root: TreeNode) -> int:
     if not root: return 0
     return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))

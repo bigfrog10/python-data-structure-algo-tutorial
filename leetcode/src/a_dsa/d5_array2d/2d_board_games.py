@@ -1,5 +1,26 @@
 from collections import deque
 
+# LC688. Knight Probability in Chessboard   nite prob
+def knightProbability(self, n: int, k: int, row: int, column: int) -> float:
+    moves = ((1, 2), (1, -2), (-1, 2), (-1, -2), (2, 1), (2, -1), (-2, 1), (-2, -1))
+    @cache  # O(k * n^2) time and space
+    def dp(m, i, j):  # prob at (i, j) on board at step m
+        if not (0 <= i < n and 0 <= j < n): return 0
+        if m == 0: return 1
+        return sum(dp(m - 1, i + _i, j + _j) for _i, _j in moves) / 8
+    return dp(k, row, column)
+
+# LC576. Out of Boundary Paths
+def findPaths(self, m: int, n: int, maxMove: int, startRow: int, startColumn: int) -> int:
+    MOD = 10**9 + 7
+    @cache  # O(mn * maxMove) time, O(mn) time. N:
+    def f(i, j, c):
+        if not (0 <= i < m and 0 <= j < n): return 1
+        elif c:
+            return sum(f(i+q,j,c-1) + f(i,j+q,c-1) for q in (-1,1))%MOD
+        return 0  # if c=0, return 0
+    return f(startRow, startColumn, maxMove)
+
 # LC2596. Check Knight Tour Configuration
 def checkValidGrid(self, grid: List[List[int]]) -> bool:
     n = len(grid)
@@ -16,7 +37,7 @@ def checkValidGrid(self, grid: List[List[int]]) -> bool:
     return True
 
 # 1778. Shortest Path in a Hidden Grid
-def findShortestPath(self, master: 'GridMaster') -> int:
+def findShortestPath(self, master: 'GridMaster') -> int:  # O(area)
     can_move = set() # need to build graph first, for bfs. Otherwise TLE.
     directions = {'U':(-1, 0, 'D'), 'D':(1, 0, 'U'), 'L':(0, 1, 'R'), 'R':(0, -1, 'L')}
     target = None
@@ -53,7 +74,7 @@ def findShortestPath(self, master: 'GridMaster') -> int:
 
 # LC489. Robot Room Cleaner
 def cleanRoom(self, robot):  # O(open cells)
-    def go_back():
+    def go_back():  # backout one step
         robot.turnRight()
         robot.turnRight()  # turn back
         robot.move()
@@ -63,10 +84,11 @@ def cleanRoom(self, robot):  # O(open cells)
         visited.add(cell)
         robot.clean()
         for i in range(4):
-            new_d = (cf + i) % 4  # e.g., facing right needs to start from 2nd index
-            new_cell = (cell[0] + directions[new_d][0], cell[1] + directions[new_d][1])
+            new_cf = (cf + i) % 4  # e.g., facing right needs to start from 2nd index
+            new_d = directions[new_cf]
+            new_cell = (cell[0] + new_d[0], cell[1] + new_d[1])
             if not new_cell in visited and robot.move():
-                clean_cell(new_cell, new_d)
+                clean_cell(new_cell, new_cf)
                 go_back()
             robot.turnRight()  # turn the robot following chosen direction : clockwise
     # going clockwise : 0: 'up', 1: 'right', 2: 'down', 3: 'left'

@@ -107,18 +107,18 @@ def validWordAbbreviation(self, word, abbr):
     pattern = re.sub('([1-9]\d*)', r'.{\1}', abbr) + '$'
     return bool(re.match(pattern, word))
 def validWordAbbreviation(self, word: str, abbr: str) -> bool:
-    wl = len(word)
-    i, n = 0, "0"  # i is index in word
-    for c in abbr:
-        if c.isdigit():
-            if n == c: return False  # don't allow abbr starts with 0
-            n += c  # accumulate digit, "02"
-        else:  # letter
-            i += int(n)  # add counts for previous letter
-            n = '0'  # reset counts to 0
-            if i >= wl or word[i] != c: return False  # core logic
-            i += 1  # move to next char
-    return i + int(n) == wl
+    m, n = len(word), len(abbr)
+    i = j = 0
+    while i < m and j < n:
+        if word[i] != abbr[j]:
+            if abbr[j].isdigit():
+                if int(abbr[j]) == 0: return False
+                prev_j = j
+                while j < n and abbr[j].isdigit(): j += 1
+                i += int(abbr[prev_j:j])
+            else: return False
+        else: i, j = i+1, j+1
+    return i == m and j == n
 
 # LC767. Reorganize String - rearrange chars
 def reorganizeString(self, s: str) -> str:
@@ -398,7 +398,8 @@ def diStringMatch(self, s: str) -> List[int]:
             hi -= 1
     return ans + [lo]
 
-# LC28. Implement strStr() - index of needle in hay, KMP LPS KMP Find the index of the first occurrence in a string
+# LC28. Find the index of the first occurrence in a string - index of needle in hay,
+# KMP LPS KMP Find the index of the first occurrence in a string
 def strStr(self, haystack: str, needle: str) -> int:
     if not needle: return 0  # '' or None
     if not haystack: return -1  # order matters, needle is not empty

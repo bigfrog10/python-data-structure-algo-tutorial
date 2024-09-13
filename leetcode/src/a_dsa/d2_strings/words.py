@@ -85,9 +85,9 @@ def wordBreak(self, s: str, wordDict):  #  we may have O(2^n) solutions, n=len(s
         output = []
         if s in word_set: output.append(s) # one of solutions
         for i in range(len(s) - 1):
-            if s[: i + 1] in word_set:  # substring takes n
-                tmp = dfs(s[i + 1: ])  # tmp is like ['a b', 'ab']
-                for x in tmp: output.append(s[: i + 1] + ' ' + x)
+            if s[:i+1] in word_set:  # substring takes n
+                tmp = dfs(s[i+1:])  # tmp is like ['a b', 'ab']
+                for x in tmp: output.append(s[:i+1] + ' ' + x)
         return output
     res = dfs(s)
     return res
@@ -379,7 +379,7 @@ def toGoatLatin(self, sentence: str) -> str:
         ret.append(w)
     return ' '.join(ret)
 
-# LC2023. Number of Pairs of Strings With Concatenation Equal to Target concat to target  concat equal
+# LC2023. Number of Pairs of Strings With Concatenation Equal to Target concat to target  pair concat equal
 def numOfPairs(self, nums: List[str], target: str) -> int:
     freq = Counter(nums)
     ans = 0
@@ -387,7 +387,7 @@ def numOfPairs(self, nums: List[str], target: str) -> int:
         if target.startswith(k):
             suffix = target[len(k):]
             ans += v * freq[suffix]  # num of k * num of suffix
-            if k == suffix: ans -= freq[suffix]  # together, n^2 - n when prefix = suffix
+            if k == suffix: ans -= v  # together, n^2 - n when prefix = suffix
     return ans
 
 # LC1554. Strings Differ by One Character

@@ -8,7 +8,7 @@ def twoSum(self, nums, target):  # O(n) time and space
         else: cache[num] = i
     return None
 
-# LC167. Two Sum II - Input array is sorted 2sum sorted
+# LC167. Two Sum II - Input array is sorted 2sum sorted  2sum ii
 def twoSum(self, numbers: List[int], target: int) -> List[int]:
     # O(n) time and O(1) space(take out cache)- there is no O(logn) solution
     i, j = 0, len(numbers) - 1
@@ -72,7 +72,7 @@ def threeSumClosest(self, nums: List[int], target: int) -> int:  # O(n^2)
             if abs(target - sum1) < abs(diff):
                 diff = target - sum1
             if sum1 < target: lo += 1
-            else: hi -= 1
+            else: hi -= 1  # after while, hi = lo
         if diff == 0: break
     return target - diff
 # https://leetcode.com/problems/3sum-closest/discuss/778177/Python3-%3A-Runtime%3A-52-ms-faster-than-99.77

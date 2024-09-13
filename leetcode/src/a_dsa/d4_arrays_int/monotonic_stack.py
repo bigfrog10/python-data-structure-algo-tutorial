@@ -193,7 +193,7 @@ def largestRectangleArea(self, heights: List[int]) -> int:  # O(n) runtime and s
         stack.append(i)
     return ans
 
-# LC496. Next Greater Element I - first greater on right, 2 arrays
+# LC496. Next Greater Element I - first greater on right, 2 arrays  1st greater
 def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
     st, d = [], {}  # O(len(nums2)) runtime and space
     for n in nums2:

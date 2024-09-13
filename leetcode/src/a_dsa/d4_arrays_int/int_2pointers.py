@@ -1,5 +1,20 @@
 from typing import List
 
+# LC977. Squares of a Sorted Array
+def sortedSquares(self, nums: List[int]) -> List[int]:  # O(n) time, O(1) space
+    n = len(nums)
+    result = [0] * n
+    left, right = 0, n-1
+    for i in reversed(range(n)):
+        if abs(nums[left]) < abs(nums[right]):
+            square = nums[right]
+            right -= 1
+        else:
+            square = nums[left]
+            left += 1
+        result[i] = square * square
+    return result
+
 # LC992. Subarrays with K Different Integers - good subarrays
 # https://leetcode.com/problems/subarrays-with-k-different-integers/discuss/523136/JavaC%2B%2BPython-Sliding-Window
 def subarraysWithKDistinct(self, A: List[int], K: int) -> int:  # O(n) time and O(k) space
@@ -45,14 +60,23 @@ def moveZeroes(self, nums: List[int]) -> None:
             i += 1
 
 # LC1004. Max Consecutive Ones III - can flip <=k bits.
+def longestOnes(self, nums: List[int], k: int) -> int:
+    left = zero_count =max_length = 0
+    for right in range(len(nums)):
+        if nums[right] == 0: zero_count += 1
+        while zero_count > k:
+            if nums[left] == 0: zero_count -= 1
+            left += 1
+        max_length = max(max_length, right - left + 1)
+    return max_length
 def longestOnes(self, nums: List[int], K: int) -> int:
     left = 0
     for right in range(len(nums)):
-        K -= 1 - nums[right]
+        K -= 1 - nums[right]  # only when it's 0, k is changed.
         if K < 0:
             K += 1 - nums[left]
             left += 1
-    return len(nums) - left  # len(A) - left, include both left and right
+    return len(nums) - left  # len(nums) = right + 1
 # https://leetcode.com/problems/max-consecutive-ones-iii/discuss/247564/javacpython-sliding-window/379427?page=3
 
 # LC480. Sliding Window Median

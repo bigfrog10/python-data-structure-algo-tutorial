@@ -70,7 +70,7 @@ def employeeFreeTime(self, schedule: '[[Interval]]') -> '[Interval]':  # O(nlogm
 def exclusiveTime(self, n, logs):  # O(n) runtime and space
     res, stack = [0] * n, []
     for log in logs:
-        log = log.split(":")
+        log = log.split(":")  # function id, start/end, timestamp
         if log[1] == "start": stack.append([int(log[2]), 0])  # 0 means no time spent on this yet.
         else:  # end
             start = stack.pop()

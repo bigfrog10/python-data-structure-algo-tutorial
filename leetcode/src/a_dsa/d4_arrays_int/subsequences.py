@@ -118,7 +118,7 @@ def longestConsecutive(self, nums: List[int]) -> int:  # O(n)
     hashed = set(nums)  # overall O(n)
     maxc = 0
     for i in nums:  # O(n)
-        if i-1 in hashed: continue  # find new start of a series
+        if i-1 in hashed: continue  # find new start of a series - this cuts runtime to O(n)
         j = 1
         while i + j in hashed: j += 1  # this builds only once for the for loop
         maxc = max(maxc, j)

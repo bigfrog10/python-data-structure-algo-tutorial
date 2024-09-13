@@ -6,7 +6,7 @@ def deepestLeavesSum(self, root: Optional[TreeNode]) -> int:
         pre, q = q, [child for p in q for child in [p.left, p.right] if child]
     return sum(node.val for node in pre)
 
-# LC199. Binary Tree Right Side View
+# LC199. Binary Tree Right Side View   bt right
 def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
     if not root: return []  ## O(n) time and O(H) space
     ret = []

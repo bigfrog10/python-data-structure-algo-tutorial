@@ -19,7 +19,7 @@ def constructDistancedSequence(self, n: int) -> List[int]:  # O(n!) time, O(n) s
     if dfs(0): return A
     return []
 
-# LC3040. Maximum Number of Operations With the Same Score II
+# LC3040. Maximum Number of Operations With the Same Score II  max ops
 def maxOperations(self, nums: List[int]) -> int:  # O(n^2) time and space
     @lru_cache(None)
     def dfs(score: int, lo = 0, hi = len(nums) - 1) -> int:  # operations with this score

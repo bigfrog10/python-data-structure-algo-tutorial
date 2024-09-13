@@ -100,7 +100,7 @@ def numSubarrayProductLessThanK(self, nums: List[int], k: int) -> int:
         while prod >= k:
             prod //= nums[left]
             left += 1
-        ans += right - left + 1
+        ans += right - left + 1  # all subarrasy ends at nums[right]
     return ans
 
 # LC1480. Running Sum of 1d Array

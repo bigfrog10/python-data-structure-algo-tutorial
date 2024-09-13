@@ -60,7 +60,7 @@ def longestPalindrome(self, s: str) -> str:  # O(n) time and space, Manacher's A
 # LC516. Longest Palindromic Subsequence - return length
 def longestPalindromeSubseq(self, s: str) -> int: # O(n^2) time and space
     @lru_cache(None)
-    def solve(b, e): # begin and end of the string
+    def solve(b, e): # begin and end of the string, max len of pali seq
         if b > e: return 0
         if b == e: return 1
         if s[b] == s[e]: return 2 + solve(b+1, e-1)
@@ -79,7 +79,7 @@ def longestPalindromeSubseq(self, s):  # O(n) space and O(n^2) time
             pre = tmp
     return dp[0]
 
-# LC647. Palindromic Substrings - return counts of these
+# LC647. Palindromic Substrings - return counts of these  count pali sub
 def countSubstrings(self, s: str) -> int:  # O(n^2)
     def expand(i, j):  # O(n) for the call
         cnt = 0

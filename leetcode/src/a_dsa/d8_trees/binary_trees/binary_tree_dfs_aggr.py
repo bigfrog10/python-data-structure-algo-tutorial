@@ -21,10 +21,10 @@ def longestConsecutive(self, root: Optional[TreeNode]) -> int:  # O(n) time and 
         return max(length, dfs(node.left, node, length), dfs(node.right, node, length))
     return dfs(root, None, 0)
 
-# LC124. Binary Tree Maximum Path Sum - max path sum
+# LC124. Binary Tree Maximum Path Sum - bt max path sum
 def maxPathSum(self, root: TreeNode) -> int:  # O(V) time, O(H) space
     max_sum = float('-inf')
-    def path_max(node):
+    def path_max(node):  # max path sum for all paths start from here
         nonlocal max_sum
         if not node: return 0
         left = max(path_max(node.left), 0)  # 0 means we don't chose this path

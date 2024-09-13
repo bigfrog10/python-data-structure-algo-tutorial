@@ -1,5 +1,6 @@
-# LC218. The Skyline Problem
 import heapq
+
+# LC218. The Skyline Problem
 def getSkyline(self, buildings):  # O(nlogn)
     events = [(L, -H, R) for L, R, H in buildings] # -H for heap operations
     events += list({(R, 0, 0) for _, R, _ in buildings})  # to pop finished buildings

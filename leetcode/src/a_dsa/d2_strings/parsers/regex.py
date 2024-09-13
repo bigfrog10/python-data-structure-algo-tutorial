@@ -1,13 +1,13 @@
 
-# LC10. Regular Expression Matching, top100 - * repeating
+# LC10. Regular Expression Matching, top100 - * repeating   re exp match
 def isMatch(self, text, pattern): # O(nm)
     @functools.lru_cache(None)
-    def dp(i, j):
+    def dp(i, j):  # text index i, pattern index j
         if j == len(pattern): ans = i == len(text)
         else:
             first_match = i < len(text) and pattern[j] in {text[i], '.'}
             if j+1 < len(pattern) and pattern[j+1] == '*':
-                ans = dp(i, j+2) or first_match and dp(i+1, j)
+                ans = dp(i, j+2) or first_match and dp(i+1, j)  # and first
             else: ans = first_match and dp(i+1, j+1)
         return ans
     return dp(0, 0)

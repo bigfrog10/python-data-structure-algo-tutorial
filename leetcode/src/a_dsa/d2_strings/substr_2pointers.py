@@ -14,20 +14,25 @@ def minWindow(self, S: str, T: str) -> str: # 2 pointers, fast
             start = S.rfind(c, first, start)  # T in [first, start]
         if res == "" or len(res) > end - start: res = S[start:end]
 
-# LC76. Minimum Window Substring, min window has all chars in target string
-def minWindow(self, s, t):  # O(|t| + |s|)
-    need, missing = collections.Counter(t), len(t)  # count downs, O(|t|)
-    i = 0
-    I, J = 0, float('inf')
-    for j, c in enumerate(s, 1):  # starting index is 1, window is s[i:j], O(|s|)
-        missing -= need[c] > 0
-        need[c] -= 1
-        if missing == 0:  # we found a window that has all t chars
-            while i < j and need[s[i]] < 0:  # catchup until 0
-                need[s[i]] += 1
-                i += 1
-            if j - i <= J - I: I, J = i, j
-    return '' if J == float('inf') else s[I:J]
+# LC76. Minimum Window Substring, min window has all chars in target string min win subs
+def minWindow(self, s: str, t: str) -> str:
+    if not s or not t or len(s) < len(t): return ""
+    counts, included = [0] * 128, len(t)  # counts of each char
+    for char in t: counts[ord(char)] += 1  # t counter
+    start = end = 0
+    start_index, min_len = 0, float('inf')  # compute these 2
+    while end < len(s):
+        if counts[ord(s[end])] > 0: included -= 1  # only relevant to t
+        counts[ord(s[end])] -= 1
+        end += 1
+        while included == 0:
+            if end - start < min_len:
+                start_index = start
+                min_len = end - start
+            if counts[ord(s[start])] == 0: included += 1
+            counts[ord(s[start])] += 1
+            start += 1
+    return "" if min_len == float('inf') else s[start_index:start_index + min_len]
 
 # LC392. Is Subsequence
 def isSubsequence(self, s: str, t: str) -> bool:  # O(|t|)

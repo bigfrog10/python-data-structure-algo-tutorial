@@ -17,7 +17,7 @@ def findDuplicates(self, nums: List[int]) -> List[int]:  # run it again to resto
         else: nums[abs(x)-1] *= -1
     return res
 
-# LC268. Missing Number - only one in [0, 1]
+# LC268. Missing Number - only one in [0, n]
 def missingNumber(self, nums: List[int]) -> int:
     s = sum(nums)
     n = len(nums)

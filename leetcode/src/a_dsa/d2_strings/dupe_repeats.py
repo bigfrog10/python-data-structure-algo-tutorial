@@ -1,4 +1,17 @@
 
+# LC424. Longest Repeating Character Replacement  char replacement
+def lengthOfLongestSubstring(self, s: str) -> int:
+    chars = Counter()
+    res = left = 0
+    for right in range(len(s)):
+        r = s[right]
+        chars[r] += 1  # step 1. modify counter with condition
+        while chars[r] > 1:  # step 2. if invalid, make it valid again
+            chars[s[left]] -= 1
+            left += 1
+        res = max(res, right - left + 1)  # step 3. update result
+    return res
+
 # LC1044. Longest Duplicate Substring
 def longestDupSubstring(self, S):  # O(nlogn) runtime, O(n) space, hard - Rabin-Karp
     A = [ord(c) - ord('a') for c in S]
@@ -143,13 +156,28 @@ def lengthOfLongestSubstringTwoDistinct(self, s: str) -> int:
         ret = max(i - low + 1, ret)
     return ret
 
-# LC424. Longest Repeating Character Replacement  char replacement
-def characterReplacement(self, s: str, k: int) -> int:
-    maxf = res = 0  # sliding window of size res
-    count = collections.Counter()  # counts within the window
-    for i in range(len(s)):  # sliding window size maxf + k
-        count[s[i]] += 1
-        maxf = max(maxf, count[s[i]])
-        if res < maxf + k: res += 1  # to deal with 2 separate segments, AABBBAA
-        else: count[s[i - res]] -= 1  # we can't replace >k chars, so shrink window
-    return res
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -21,7 +21,8 @@ def averageOfSubtree(self, root: TreeNode) -> int:
         return this_total, this_nn
     dfs(root, 0, 0)
     return res
-    # LC814. Binary Tree Pruning
+
+# LC814. Binary Tree Pruning
 def pruneTree(self, root: TreeNode) -> TreeNode:  # O(n) time and O(h) space
     def prune(node):  # return true if all zeros
         if not node: return True
@@ -33,7 +34,7 @@ def pruneTree(self, root: TreeNode) -> TreeNode:  # O(n) time and O(h) space
     z = prune(root)
     return None if z else root
 
-# LC958. Check Completeness of a Binary Tree
+# LC958. Check Completeness of a Binary Tree    bt complete
 def isCompleteTree(self, root):  # O(N) time and O(H) space
     def dfs(root):
         if not root: return 0
@@ -50,49 +51,6 @@ def isCompleteTree(self, root: Optional[TreeNode]) -> bool:  # O(N) time and spa
         bfs.extend([bfs[i].left, bfs[i].right])
         i += 1
     return not any(bfs[i:])  # we shouldn't have any non None after i
-
-# LC94. Binary Tree Inorder Traversal
-def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:  # O(n) time and O(1) space, Morris Traversal
-    curr = root
-    output =[]
-    while(curr):
-        if not curr.left:
-            output.append(curr.val)
-            curr = curr.right
-        else:
-            predecessor = curr.left  # find the inorder predecessor of the current node
-            while predecessor.right !=None and predecessor.right != curr:
-                predecessor = predecessor.right # go as right as possible
-            # Now check which out of 2 above condition it reached
-            if predecessor.right == None:
-                predecessor.right = curr
-                curr = curr.left
-            else:
-                # left subtree is already visited , so delete the link and then go to right subtree
-                predecessor.right = None
-                output.append(curr.val)
-                curr = curr.right
-    return output
-def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-    def inorder(root):  # recursive
-        return inorder(root.left) + [root.val] + inorder(root.right) if root else []
-    def preorder(root):
-        return [root.val] + preorder(root.left) + preorder(root.right) if root else []
-    def postorder(root):
-        return postorder(root.left) + postorder(root.right) + [root.val] if root else []
-    return inorder(root)
-def inorderTraversal(self, root):
-    ans, stack = [], []
-    while stack or root:  # iterative
-        if root:  # deal with left
-            stack.append(root)
-            root = root.left
-        else:
-            node = stack.pop()
-            ans.append(node.val)  # inorder, add after all left children
-            root = node.right  # deal with right
-    return ans
-
 
 # LC545. Boundary of Binary Tree
 def boundaryOfBinaryTree(self, root: Optional[TreeNode]) -> List[int]:  # O(n) runtime, O(n) space(stack recursion)
@@ -140,12 +98,114 @@ def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:  # O(n
 
 
 
-# LC145. Binary Tree Postorder Traversal
+# LC145. Binary Tree Postorder Traversal  bt postorder
+def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+    nums=[]  # O(n) time, O(h) space
+    def dfs(root):
+        if root==None: return None
+        dfs(root.left)
+        dfs(root.right)
+        nums.append(root.val)
+    dfs(root)
+    return nums
+def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:  # Morris
+    res = []
+    while root:
+        if not root.right:
+            res.append(root.val)
+            root = root.left
+        else:
+            prev = root.right
+            while prev.left and prev.left is not root: prev = prev.left
+            if prev.left is root:
+                prev.left = None
+                root = root.left
+            else:
+                res.append(root.val)
+                prev.left = root
+                root = root.right
+    res.reverse()
+    return res
 
 # LC144. Binary Tree Preorder Traversal
+def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+    ret = []
+    def dfs(node):
+        if not node: return
+        ret.append(node.val)
+        dfs(node.left)
+        dfs(node.right)
+    dfs(root)
+    return ret
+def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:  # morris
+    node, output = root, []
+    while node:
+        if not node.left:
+            output.append(node.val)
+            node = node.right
+        else:
+            predecessor = node.left
+            while predecessor.right and predecessor.right is not node:
+                predecessor = predecessor.right
+            if not predecessor.right:
+                output.append(node.val)
+                predecessor.right = node
+                node = node.left
+            else:
+                predecessor.right = None
+                node = node.right
+    return output
 
-
-
+# LC94. Binary Tree Inorder Traversal
+def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+    res = []
+    def dfs(currentNode):
+        if not currentNode: return
+        dfs(currentNode.left)
+        res.append(currentNode.val)
+        dfs(currentNode.right)
+    dfs(root)
+    return res
+def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+    def inorder(root):  # recursive
+        return inorder(root.left) + [root.val] + inorder(root.right) if root else []
+    def preorder(root):
+        return [root.val] + preorder(root.left) + preorder(root.right) if root else []
+    def postorder(root):
+        return postorder(root.left) + postorder(root.right) + [root.val] if root else []
+    return inorder(root)
+def inorderTraversal(self, root):
+    ans, stack = [], []
+    while stack or root:  # iterative
+        if root:  # deal with left
+            stack.append(root)
+            root = root.left
+        else:
+            node = stack.pop()
+            ans.append(node.val)  # inorder, add after all left children
+            root = node.right  # deal with right
+    return ans
+def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:  # O(n) time and O(1) space, Morris Traversal
+    curr = root
+    output =[]
+    while(curr):
+        if not curr.left:
+            output.append(curr.val)
+            curr = curr.right
+        else:
+            predecessor = curr.left  # find the inorder predecessor of the current node
+            while predecessor.right !=None and predecessor.right != curr:
+                predecessor = predecessor.right # go as right as possible
+            # Now check which out of 2 above condition it reached
+            if predecessor.right == None:
+                predecessor.right = curr
+                curr = curr.left
+            else:
+                # left subtree is already visited , so delete the link and then go to right subtree
+                predecessor.right = None
+                output.append(curr.val)
+                curr = curr.right
+    return output
 
 
 # LC1361. Validate Binary Tree Nodes

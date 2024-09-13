@@ -1,4 +1,18 @@
 
+# LC2210. Count Hills and Valleys in an Array
+def countHillValley(self, nums: List[int]) -> int:
+    count, trend = 0, 0  # trend 1 for up, 0 flat, -1 down
+    for i in range(1, len(nums)):
+        if nums[i] > nums[i-1]:
+            if trend == -1:  # previously down
+                count += 1  # valley
+            trend = 1  # now change to up
+        elif nums[i] < nums[i-1]:
+            if trend == 1:  # previously up
+                count += 1
+            trend = -1
+    return count
+
 # LC2303. Calculate Amount Paid in Taxes
 def calculateTax(self, brackets: List[List[int]], income: int) -> float:
     ans = prev = 0
@@ -27,15 +41,15 @@ def minSwaps(self, data: List[int]) -> int:  # O(n) and O(1)
     return ones - max_one
 
 # LC525. Contiguous Array - longest subarray with equal # of 1 and 0, 01 array
-def findMaxLength(self, nums: List[int]) -> int:  # O(n) time and space
-    c2i = {} # store value to index, cache
-    maxlen = count = 0
-    for i, n in enumerate(nums):
-        count += 1 if n else -1
-        if count == 0: maxlen = max(maxlen, i+1)  # balanced from 0 to i
-        if count in c2i: maxlen = max(maxlen, i - c2i[count])
-        else: c2i[count] = i  # do this on first occurrence for longest cases
-    return maxlen
+def findMaxLength(self, nums: List[int]) -> int:
+    val2idx = {}  # O(n) time and space
+    cumu = max_len = 0
+    for i, num in enumerate(nums):
+        cumu += 1 if num == 1 else -1  # so we look for 0 when #0 = #1
+        if cumu == 0: max_len = i + 1  # balanced from 0 to i
+        elif cumu in val2idx: max_len = max(max_len, i - val2idx[cumu])
+        else: val2idx[cumu] = i  # do this on first occurrence for longest cases
+    return max_len
 
 # 330. Patching Array
 def minPatches(self, nums: List[int], n: int) -> int:
@@ -61,7 +75,7 @@ def flatten(arr: list, n):
         else: res.append(a)
     return res
 
-# LC565 Array Nesting
+# LC565 Array Nesting   interloop
 def arrayNesting(self, nums: List[int]) -> int: # O(n) tinme and O(1) space
     res = 0
     for i in range(len(nums)):
@@ -71,3 +85,20 @@ def arrayNesting(self, nums: List[int]) -> int: # O(n) tinme and O(1) space
         res = max(res, cnt)
         if res > len(nums): return res # works without this too, optimization
     return res
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

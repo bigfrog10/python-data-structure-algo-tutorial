@@ -180,7 +180,7 @@ def majorityElement(self, nums: List[int]) -> List[int]:  # O(n) time and O(1) s
     ctr = collections.Counter()
     for n in nums:
         ctr[n] += 1
-        if len(ctr) == 3:
+        if len(ctr) == 3:  # There can be at most two majority elements which are more than ⌊n/3⌋ times.
             ctr -= collections.Counter(set(ctr))
     return [n for n in ctr if nums.count(n) > len(nums)/3]
 
@@ -320,7 +320,7 @@ def beautifulArray(self, n: int) -> List[int]:
         res = [i * 2 - 1 for i in res] + [i * 2 for i in res]
     return [i for i in res if i <= n]
 
-# LC1460. Make Two Arrays Equal by Reversing Sub-arrays - reverse array
+# LC1460. Make Two Arrays Equal by Reversing Sub-arrays - reverse array  2 arrays equal
 def canBeEqual(self, target: List[int], arr: List[int]) -> bool:
     return collections.Counter(target) == collections.Counter(arr)
 

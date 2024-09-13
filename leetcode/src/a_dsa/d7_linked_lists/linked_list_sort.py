@@ -31,7 +31,7 @@ def mergeTwoLists(self, l1, l2):
             curr.next = l2
             l2 = l2.next
         curr = curr.next
-    curr.next = l1 if l1 else l2  # left over
+    curr.next = l1 or l2  # left over
     return head.next
 
 # LC23. Merge k Sorted Lists, top100

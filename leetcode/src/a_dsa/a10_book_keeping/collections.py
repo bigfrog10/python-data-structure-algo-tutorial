@@ -8,8 +8,7 @@ class BSTIterator:
         self.in_order(root)
         print(self.arr)
     def in_order(self, root):
-        if not root:
-            return
+        if not root: return
         self.in_order(root.left)
         self.arr.append(root.val)
         self.in_order(root.right)
@@ -18,7 +17,7 @@ class BSTIterator:
         self.curr_index+=1
         return val
     def hasNext(self) -> bool:
-        return self.curr_index<=len(self.arr)-1
+        return self.curr_index < len(self.arr)
 
 # LC1586. Binary Search Tree Iterator II  bst iterator 2
 class BSTIterator:

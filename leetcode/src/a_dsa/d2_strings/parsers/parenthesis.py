@@ -68,7 +68,7 @@ def longestValidParentheses(self, s: str) -> int:  # O(n) time and O(1) space
         elif left >= right: left = right = 0
     return maxl
 
-# LC1249. Minimum Remove to Make Valid Parentheses - with letters, return one string result
+# LC1249. Minimum Remove to Make Valid Parentheses - with letters, return one string result  min remove
 def minRemoveToMakeValid(self, s: str) -> str:  # O(n) runtime and space
     stack, remove = [], []  # find all indices to remove
     for i, c in enumerate(s):
@@ -85,7 +85,7 @@ def minRemoveToMakeValid(self, s: str) -> str:  # O(n) runtime and space
     ret += s[idx:]  # add leftover
     return ret
 
-# LC921. Minimum Add to Make Parentheses Valid - return num of operations
+# LC921. Minimum Add to Make Parentheses Valid - return num of operations   min add paren
 def minAddToMakeValid(self, S: str) -> int:  # O(n)
     left = bal = 0  # bal = # of '(' - # of ')'
     for s in S:

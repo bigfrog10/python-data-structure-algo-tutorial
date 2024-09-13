@@ -56,7 +56,7 @@ def splitArray(self, nums: List[int], m: int) -> int:
     l, r = max(nums), sum(nums)
     while l < r:
         mid = (l + r) // 2
-        count, cur = 1, 0
+        count, cur = 1, 0  # 1 is for last part
         for n in nums:
             cur += n
             if cur > mid:

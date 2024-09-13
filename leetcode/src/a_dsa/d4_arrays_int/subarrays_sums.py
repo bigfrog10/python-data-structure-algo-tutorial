@@ -14,8 +14,8 @@ def maxSubarrayLength(self, nums: List[int], k: int) -> int:
 
 # LC53. Maximum Subarray   - max sum amount all subarrays  max subarray
 def maxSubArray(self, nums: List[int]) -> int:
-    total = max_total = nums[0]  # don't use 0 for both, because of [-1]
-    for i in range(1, len(nums)):
+    total, max_total = 0, -inf
+    for i in range(len(nums)):
         total += nums[i]
         # if the total is not worth to keep, start a new total
         # we can also add code to keep track the start index.
@@ -49,7 +49,7 @@ def maxSubArrayLen(self, nums: List[int], k: int) -> int:  # O(n) time and space
         if cumu not in cache: cache[cumu] = i  # maintain earliest index
     return maxl
 
-# LC209. Minimum Size Subarray Sum - min size with sum target, all positives
+# LC209. Minimum Size Subarray Sum - min size with sum target, all positives  min size with sub sum >= target
 def minSubArrayLen(self, s: int, nums: List[int]) -> int:  # 2 pointers , O(n) time and O(1) space
     total = left = 0 # since all numbers are positive, this works.
     result = len(nums) + 1
@@ -61,7 +61,7 @@ def minSubArrayLen(self, s: int, nums: List[int]) -> int:  # 2 pointers , O(n) t
             left += 1
     return result if result <= len(nums) else 0
 
-# LC560. Subarray Sum Equals K - total count of subarrays whose sum equals to k  subsum k
+# LC560. Subarray Sum Equals K - total count of subarrays whose sum equals to k  subsum k sub arr sum k
 from typing import List
 def subarraySum(self, nums: List[int], k: int) -> int:
     count = cusum = 0  # O(n)
@@ -73,7 +73,19 @@ def subarraySum(self, nums: List[int], k: int) -> int:
         counts[cusum] += 1
     return count
 
-# LC523. Continuous Subarray Sum - if exist s.t. sum to multiple of k
+# LC930. Binary Subarrays With Sum   target              subsum target
+def numSubarraysWithSum(self, nums: List[int], k: int) -> int:
+    count = cusum = 0  # O(n)
+    counts = collections.defaultdict(int)
+    for i in range(len(nums)):
+        cusum += nums[i]
+        if cusum == k: count += 1
+        if cusum - k in counts: count += counts[cusum - k]
+        counts[cusum] += 1
+    return count
+
+
+# LC523. Continuous Subarray Sum - if exist s.t. sum to multiple of k  cont sub sum
 def checkSubarraySum(self, nums: List[int], k: int) -> bool:
     if not nums: return False
     summ, sd = 0, {0: -1}  # [2,4,3] 6, we need -1 for 2-element requirement

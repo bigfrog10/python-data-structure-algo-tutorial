@@ -56,7 +56,7 @@ def smallestRange(self, A): # O(nlogk)
         heapq.heappush(pq, (v, i, j+1))
 
 # LC498. Diagonal Traverse
-def findDiagonalOrder(self, matrix):  # O(mn)
+def findDiagonalOrder(self, matrix):  # O(mn) time, O(1) space
     if not matrix: return []
     m, n = len(matrix), len(matrix[0])
     ret = []
@@ -457,3 +457,20 @@ def spiralMatrixIII(self, R, C, r0, c0):
         step_size += 1
         sign *= -1
     return coordinates
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

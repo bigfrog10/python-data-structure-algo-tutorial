@@ -18,7 +18,7 @@ def removeZeroSumSublists(self, head: Optional[ListNode]) -> Optional[ListNode]:
         head = head.next
     return dummy.next
 
-# LC86. Partition List - separate by given x, similar to odd/even
+# LC86. Partition List - separate by given x, similar to odd/even  part linked
 def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
     before = before_head = ListNode(0)
     after = after_head = ListNode(0)
@@ -34,7 +34,7 @@ def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
     before.next = after_head.next
     return before_head.next
 
-# LC160. Intersection of Two Linked Lists
+# LC160. Intersection of Two Linked Lists  x 2 linked list
 def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
     pA, pB = headA, headB  # O(m + n)
     while pA != pB:
@@ -63,7 +63,7 @@ def middleNode(self, head: ListNode) -> ListNode:
         fast = fast.next.next
     return slow
 
-# LC138. Copy List with Random Pointer  # BBG
+# LC138. Copy List with Random Pointer
 def copyRandomList(self, head: 'Node') -> 'Node':
     if not head: return None
     walker = head  # weave in copies
@@ -222,3 +222,21 @@ def rotateRight(self, head: ListNode, k: int) -> ListNode:
     dummy = last.next # new head
     last.next = None  # set new tail to None
     return dummy
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

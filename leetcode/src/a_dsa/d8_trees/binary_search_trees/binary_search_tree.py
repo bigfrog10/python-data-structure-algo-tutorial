@@ -41,7 +41,7 @@ def recoverTree(self, root: Optional[TreeNode]) -> None:
         root = root.right # check right side
     x.val, y.val = y.val, x.val
 
-# LC938. Range Sum of BST - works for count, average as well
+# LC938. Range Sum of BST - works for count, average as well  range sum bst
 def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int: # O(n) time and space
     ret = 0
     def dfs(node):
@@ -134,7 +134,7 @@ def getAllElements(self, root1: TreeNode, root2: TreeNode) -> List[int]:
             root2 = root2.right
     return output
 
-# LC98. Validate Binary Search Tree
+# LC98. Validate Binary Search Tree  validate bst
 def isValidBST(self, root: TreeNode) -> bool:
     def validate(node, low=-math.inf, high=math.inf):
         if not node: return True

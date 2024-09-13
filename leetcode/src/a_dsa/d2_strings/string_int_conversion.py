@@ -14,8 +14,7 @@ def myAtoi(self, s: str) -> int:
     s = s.strip()
     if len(s) == 0: return 0
     sign = -1 if s[0] == '-' else 1
-    if s[0] in ['-', '+']: s = s[1:]
-    ret, i = 0, 0
+    ret, i = 0, 1 if s[0] in ['-', '+'] else 0
     while i < len(s) and s[i].isdigit():
         ret = ret*10 + ord(s[i]) - ord('0')
         i += 1
@@ -57,3 +56,21 @@ def titleToNumber(self, s: str) -> int:
     res = 0
     for c in s: res = res * 26 + converter[c]
     return res
+
+# LC168. Excel Sheet Column Title
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

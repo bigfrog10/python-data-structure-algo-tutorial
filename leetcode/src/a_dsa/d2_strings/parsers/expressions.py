@@ -22,22 +22,22 @@ def calculate(self, s: str) -> int:  # O(n) time and space
             else: sign, num = c, 0 # this is for +-*/
     return sum(stack)
 
-# LC282. Expression Add Operators  - return all results *** 4 cards to 24 game
+# LC282. Expression Add Operators  - return all results *** 4 cards to 24 game  exp add
 def addOperators(self, num: str, target: int) -> List[str]:
-    n, res = len(num), []
+    n, res = len(num), []  # O(4^n) (3 operators plus no-op)
     def dfs(idx, expr, cur, last):  # cur is the current value, last is last value
         if idx == n:
             if cur == target: res.append(expr)
             return
         for i in range(idx + 1, n + 1):  # n+1 because we have num[idx:i]
             s, x = num[idx:i], int(num[idx:i])  # s could '0'
-            if last == None: dfs(i, s, x, x)
+            if last is None: dfs(i, s, x, x)
             else:
                 dfs(i, expr + "+" + s, cur + x, x)
                 dfs(i, expr + "-" + s, cur - x, -x)
                 # This is to handle 1 + 2 * 3, we need to backout 2 and add 2 * 3.
                 dfs(i, expr + "*" + s, cur - last + last*x, last*x)
-            if num[idx] == '0': break  # after idx+1 we break out otherwise we have 00
+            if num[idx] == '0': break  # after idx+1 we break out otherwise we have 05
     dfs(0, '', 0, None)
     return res
 
@@ -51,9 +51,9 @@ def calculate(self, s: str) -> int:  # O(n) runtime but O(1) space,
             while i < n and s[i].isdigit():
                 num = num * 10 + int(s[i])
                 i += 1
-            if op == '+': val = num
+            if op == '+': val = num  # previous operator
             elif op == "-": val = -num
-            elif op == "*": val *= num
+            elif op == "*": val *= num  # it's a factor, not a term
             elif op == "/": val = int(val / num)
         elif s[i] in '+-*/':
             if s[i] in '+-':  # it's a term, not a factor for */
@@ -84,7 +84,7 @@ def calculate(self, s):  # O(n) time and space
         if ss.isdigit():
             num = 10 * num + int(ss)
         elif ss in ["-", "+"]:
-            res += sign * num
+            res += sign * num  # finish previous term
             num = 0
             sign = 1 if ss == '+' else -1
         elif ss == "(":

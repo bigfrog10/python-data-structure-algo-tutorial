@@ -59,7 +59,7 @@ def customSortString(self, order: str, s: str) -> str:  # O(s + t) time and O(t)
     for c in order:
         ans.append(c * count[c])
         count[c] = 0  # remove this char for next for-loop
-    for c in count: ans.append(c * count[c])
+    for c in count: ans.append(c * count[c])  # c not in order
     return "".join(ans)
 
 # LC953. Verifying an Alien Dictionary

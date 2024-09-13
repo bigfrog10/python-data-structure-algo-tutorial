@@ -1,14 +1,14 @@
 from typing import List
 from collections import Counter
 
-# LC4. Median of Two Sorted Arrays, top100   median 2 sorted arrays
+# LC4. Median of Two Sorted Arrays, top100   median 2 sorted arrays  median of 2 sorted array
 def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
     m, n = len(nums1), len(nums2)  # O(log(min(m,n))) time and O(1) space
     if m > n: return self.findMedianSortedArrays(nums2, nums1)
     left, right = 0, m  # bisect on smaller array
     while left <= right:  # search for partitionA so that
         partitionA = (left + right) // 2  # so right side may have 1 extra element
-        partitionB = (m + n + 1) // 2 - partitionA
+        partitionB = (m + n + 1) // 2 - partitionA  # +1 needed the middle num of m+n when odd.
         maxLeftA = float("-inf") if partitionA == 0 else nums1[partitionA - 1]
         minRightA = float("inf") if partitionA == m else nums1[partitionA]
         maxLeftB = float("-inf") if partitionB == 0 else nums2[partitionB - 1]
@@ -82,7 +82,7 @@ def removeDuplicates(self, nums: List[int]) -> int:
             nums[i] = nums[j]
     return i+1
 
-# LC80. Remove Duplicates from Sorted Array II - keep 2 same values, in place change
+# LC80. Remove Duplicates from Sorted Array II - keep 2 same values, in place change  remove dupe 2
 def removeDuplicates(self, nums: List[int]) -> int:
     j, count = 1, 1
     for i in range(1, len(nums)):
@@ -121,13 +121,13 @@ def arraysIntersection(self, arr1: List[int], arr2: List[int], arr3: List[int]) 
 
 # LC825. Friends Of Appropriate Ages
 def numFriendRequests(self, ages: List[int]) -> int:  # O(n), prefix sum problem
-    buckets = [0] * 121  # 120 is given
+    buckets = [0] * 121  # age 120 is given
     for a in ages: buckets[a] += 1  # bucket count
     res = 0
     for i in range(1, len(buckets)):
-        cnt = buckets[i]
+        cnt = buckets[i]  # number of people with aga i
         buckets[i] += buckets[i-1]  # cumu sum
-        if not cnt: continue
+        if not cnt: continue  # conditions are: other age > i's age > other age // 2 + 7
         mid = i // 2 + 7  # requirement 1
         if mid >= i: continue
         res += cnt * (buckets[i] - buckets[mid] - 1)  # minus self
@@ -135,15 +135,12 @@ def numFriendRequests(self, ages: List[int]) -> int:  # O(n), prefix sum problem
 
 # LC163. Missing Ranges
 def findMissingRanges(self, nums: List[int], lower: int, upper: int) -> List[str]:  # O(n), O(1)
-    def formatRange(lower, upper):
-        if lower == upper: return str(lower)
-        else: return str(lower) + "->" + str(upper)
     res = []
     prev = lower - 1
     for i in range(len(nums) + 1):
         curr = nums[i] if i < len(nums) else upper + 1
         if prev + 1 <= curr - 1: # there is a gap
-            res.append(formatRange(prev + 1, curr - 1))
+            res.append([prev + 1, curr - 1])
         prev = curr
     return res
 

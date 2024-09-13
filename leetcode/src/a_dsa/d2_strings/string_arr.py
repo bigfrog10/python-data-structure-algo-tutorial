@@ -56,12 +56,11 @@ def findMaxForm(self, strs: List[str], m: int, n: int) -> int:  # O(mnk) time an
 
 # LC721. Accounts Merge - emails merge  - account merge
 def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
-    graph = defaultdict(list)  # build graph for emails
-    for acct in accounts:  ## O(MlogM), M total number of emails
+    graph = defaultdict(list)  # build graph for emails  n = len(accounts), k=max(len(account))
+    for acct in accounts:  ## O(MlogM), M total number of emails M=nk, one account with all emails
         for email in acct[2:]:
-            graph[acct[1]].append(email)
+            graph[acct[1]].append(email)  # space is O(nk)
             graph[email].append(acct[1])
-    seen = set()
     def dfs(i):  # to cllect all relevant emails
         tmp = {i}
         for j in graph[i]:
@@ -69,7 +68,7 @@ def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
                 seen.add(j)
                 tmp |= dfs(j)
         return tmp
-    ret = []
+    seen, ret = set(), []
     for acct in accounts:
         for email in acct[1:]:
             if email not in seen:
@@ -91,7 +90,7 @@ def leastInterval(self, tasks: List[str], n: int) -> int:
     idle_time = max(0, idle_time)
     return idle_time + len(tasks)
 def leastInterval(self, tasks: List[str], n: int) -> int:
-    frequencies = [0] * 26  # frequencies of the tasks
+    frequencies = [0] * 26  # frequencies of the tasks. Only max freq matters
     for t in tasks: frequencies[ord(t) - ord('A')] += 1
     f_max = max(frequencies)  # max frequency, e.g., A, B with max 3, so 3 returned
     n_max = frequencies.count(f_max)  # count of how many tasks with most-frequent, such as A, B
