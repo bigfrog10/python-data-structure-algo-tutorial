@@ -38,7 +38,7 @@ def minOperations(self, nums: List[int], x: int) -> int:  # O(n) time and O(1) s
             res = max(res, end - start + 1)
     return len(nums) - res if res > -1 else -1
 
-# LC325. Maximum Size Subarray Sum Equals k
+# LC325. Maximum Size Subarray Sum Equals k   max size sub sum k
 def maxSubArrayLen(self, nums: List[int], k: int) -> int:  # O(n) time and space
     maxl, cumu, cache = 0, 0, dict()  # cumu -> index
     for i, v in enumerate(nums):
@@ -192,25 +192,18 @@ def maxProduct(self, nums: List[int]) -> int:
         max_all = max(max_all, curr_max)
     return max_all
 
-# LC689. Maximum Sum of 3 Non-Overlapping Subarrays
+# LC689. Maximum Sum of 3 Non-Overlapping Subarrays    max sum of 3 non
 def maxSumOfThreeSubarrays(self, nums: List[int], k: int) -> List[int]:  # O(n)
-    bestSeq, best2Seq, best3Seq = 0, [0, k], [0, k, k*2]
-    seqSum, seq2Sum, seq3Sum = sum(nums[0:k]), sum(nums[k:k*2]), sum(nums[k*2:k*3])
-    # Sums of combined best windows
-    best1Sum, best2Sum, best3Sum = seqSum, seqSum + seq2Sum, seqSum + seq2Sum + seq3Sum
-    seqIndex, seq2Index, seq3Index = 1, k + 1, k*2 + 1  # Current window positions
-    while seq3Index <= len(nums) - k:
-        # Update the three sliding windows
-        seqSum += - nums[seqIndex - 1] + nums[seqIndex + k - 1]
-        seq2Sum += - nums[seq2Index - 1] + nums[seq2Index + k - 1]
-        seq3Sum += - nums[seq3Index - 1] + nums[seq3Index + k - 1]
-        if seqSum > best1Sum:  # Update best single window
-            bestSeq, best1Sum = seqIndex, seqSum
-        if seq2Sum + best1Sum > best2Sum:  # Update best two windows
-            best2Seq, best2Sum = [bestSeq, seq2Index], seq2Sum + best1Sum
-        if seq3Sum + best2Sum > best3Sum:  # Update best three windows
-            best3Seq, best3Sum = best2Seq + [seq3Index], seq3Sum + best2Sum
-        seqIndex += 1  # Update the current positions
-        seq2Index += 1
-        seq3Index += 1
-    return best3Seq
+    def maxSumOfThreeSubarrays(self, nums: List[int], k: int) -> List[int]:
+        acc = list(accumulate(nums, initial = 0))  # O(n) time and space
+        sm1 = sm2 = sm3 = 0  # maximum of 1st subarray, 1st 2 subarray, 1st 3 subarrays
+        for i, (a0,a1,a2,a3) in enumerate(zip(acc, acc[k:], acc[2*k:], acc[3*k:])):
+            if a1 - a0 > sm1:
+                sm1, idx1 = a1 - a0, i
+            if a2 - a1 > sm2 - sm1:
+                sm2, idx2 = sm1 + a2 - a1, (idx1, i+k)
+            if a3 - a2 > sm3 - sm2:
+                sm3, idx3 = sm2 + a3 - a2, (*idx2, i+2*k)
+        return idx3
+# https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/solutions/4041034/python-3-10-lines-prefix-sum-zip-t-s-100-98/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
+

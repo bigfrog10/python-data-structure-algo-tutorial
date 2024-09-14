@@ -50,7 +50,7 @@ def longestSubsequence(self, arr: List[int], diff: int) -> int:
         res[num] = res[num - diff] + 1 if (num - diff) in res else 1
     return max(res.values())
 
-# LC674. Longest Continuous Increasing Subsequence - this is really continuous subarray, not sequences
+# LC674. Longest Continuous Increasing Subsequence - max subarray increasing  max increasing subarray
 def findLengthOfLCIS(self, nums: List[int]) -> int:
     ans = anchor = 0
     for i in range(len(nums)):

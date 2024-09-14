@@ -196,31 +196,24 @@ def getBiggestThree(self, grid):  # O(C), C number of cells
     return sorted(heap)[::-1]
 
 # LC764. Largest Plus Sign
-def orderOfLargestPlusSign(self, N: int, mines: List[List[int]]) -> int:  # O(N^2)
-    grid = [[N] * N for i in range(N)]
-
-    for m in mines: grid[m[0]][m[1]] = 0
-
-    for i in range(N):
-        l, r, u, d = 0, 0, 0, 0
-        for j, k in zip(range(N), reversed(range(N))):
+def orderOfLargestPlusSign(self, n: int, mines: List[List[int]]) -> int:  # O(n^2)
+    grid = [[n] * n for _ in range(n)]  # max plus size for plus sign centered at (i,j)
+    for x, y in mines: grid[x][y] = 0
+    for i in range(n):
+        l, r, u, d = 0, 0, 0, 0  # how far can reach in each direction
+        for j in range(n):
+            # set counters
             l = l + 1 if grid[i][j] != 0 else 0
-            if l < grid[i][j]:
-                grid[i][j] = l
-            r = r + 1 if grid[i][k] != 0 else 0
-            if r < grid[i][k]:
-                grid[i][k] = r
+            r = r + 1 if grid[i][n-j-1] != 0 else 0
             u = u + 1 if grid[j][i] != 0 else 0
-            if u < grid[j][i]:
-                grid[j][i] = u
-            d = d + 1 if grid[k][i] != 0 else 0
-            if d < grid[k][i]:
-                grid[k][i] = d
-    res = 0
-    for i in range(N):
-        for j in range(N):
-            if res < grid[i][j]: res = grid[i][j]
-    return res
+            d = d + 1 if grid[n-j-1][i] != 0 else 0
+
+            grid[i][j] = min(grid[i][j], l)
+            grid[i][n-j-1] = min(grid[i][n-j-1], r)
+            grid[j][i] = min(grid[j][i], u)
+            grid[n-j-1][i] = min(grid[n-j-1][i], d)
+    return max(map(max, grid))
+# https://leetcode.com/problems/largest-plus-sign/solutions/4204626/764-memory-beats-91-40-solution-with-step-by-step-explanation/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
 
 # LC74. Search a 2D Matrix - matrix binary search elem in matrix, matrix bs, search 2d search matrix
 def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:  # O(log(mn))

@@ -24,7 +24,7 @@ def maxCompatibilitySum1(self, students: List[List[int]], mentors: List[List[int
 def countCornerRectangles(self, grid: List[List[int]]) -> int:
     def count(row1, row2):  # one number, one mask, how many common 1's
         num_ones = (row1 & row2).bit_count()
-        return num_ones * (num_ones - 1) // 2
+        return num_ones * (num_ones - 1) // 2  # combinations of 2 1's(columns)
     rows = [int(''.join(map(str, row)), 2) for row in grid]
     return sum(count(row1, rows[j]) for i, row1 in enumerate(rows) for j in range(i + 1, len(rows)))
 

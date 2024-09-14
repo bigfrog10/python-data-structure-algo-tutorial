@@ -1,15 +1,15 @@
 
-# LC424. Longest Repeating Character Replacement  char replacement
-def lengthOfLongestSubstring(self, s: str) -> int:
-    chars = Counter()
-    res = left = 0
-    for right in range(len(s)):
-        r = s[right]
-        chars[r] += 1  # step 1. modify counter with condition
-        while chars[r] > 1:  # step 2. if invalid, make it valid again
-            chars[s[left]] -= 1
-            left += 1
-        res = max(res, right - left + 1)  # step 3. update result
+# LC424. Longest Repeating Character Replacement              char replacement
+def characterReplacement(self, s: str, k: int) -> int:
+    freqs = Counter()
+    start = max_freq = res = 0
+    for end in range(len(s)):
+        freqs[s[end]] += 1
+        max_freq = max(max_freq, freqs[s[end]])
+        while max_freq + k < end - start + 1:
+            freqs[s[start]] -= 1
+            start += 1
+        res = max(res, end - start + 1)
     return res
 
 # LC1044. Longest Duplicate Substring

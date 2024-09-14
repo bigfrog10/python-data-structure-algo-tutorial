@@ -26,7 +26,7 @@ def isPalindrome(self, s: str) -> bool:  # O(n)
         j -= 1
     return True
 
-# LC5. Longest Palindromic Substring long pali sub  lo ps
+# LC5. Longest Palindromic Substring                 long pali sub  lo ps
 # https://leetcode.com/problems/longest-palindromic-substring/solutions/5433321/manacher-s-algorithm-explained-building-off-of-the-expand-around-center-approach/
 # https://leetcode.com/problems/longest-palindromic-substring/solutions/4212241/98-55-manacher-s-algorithm/
 # https://cp-algorithms.com/string/manacher.html

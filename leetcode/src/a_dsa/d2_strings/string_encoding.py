@@ -10,6 +10,20 @@ def compress(self, chars: List[str]) -> int:  # O(n) time and O(1) space, chars 
             chars[st + 1 : i] = count  # after char then add count
             i = st = st + 1 + len(count)  # skip spaces used by count
     return len(chars)
+def compress(self, chars: List[str]) -> int:
+    i = res = 0
+    while i < len(chars):
+        glen = 1
+        while (i + glen < len(chars) and chars[i + glen] == chars[i]):
+            glen += 1
+        chars[res] = chars[i]
+        res += 1
+        if glen > 1:
+            str_repr = str(glen)
+            chars[res:res+len(str_repr)] = list(str_repr)
+            res += len(str_repr)
+        i += glen
+    return res
 
 # LC394. Decode String - expand copies
 def decodeString(self, s: str) -> str:  # O(n*k) time, k is max coeff; O(|s| - parenth)

@@ -51,6 +51,7 @@ def findMaxForm(self, strs: List[str], m: int, n: int) -> int:  # O(mnk) time an
         if zeros < 0 or ones < 0: return -float("inf")
         if idx == len(strs): return 0
         x, y = xy[idx]
+        # include or not include the idx-th string in xy
         return max(1 + dp(zeros-x, ones-y, idx + 1), dp(zeros, ones, idx + 1))
     return dp(m, n, 0)
 

@@ -218,7 +218,7 @@ def numTrees(self, n: int) -> int:  # O(4^n / n^(3/2)), Catalan numbers G_n
         for j in range(1, i+1): G[i] += G[j-1] * G[i-j]
     return G[n]
 
-# LC450. Delete Node in a BST
+# LC450. Delete Node in a BST      delete node bst delete node
 def deleteNode(self, root, key):  # O(H)
     def DFS(node, target):
         if not node: return None
@@ -228,9 +228,9 @@ def deleteNode(self, root, key):  # O(H)
                 while l and l.right: l = l.right  # find predecessor
                 l.right = node.right  # predecessor next to node.right
                 return node.left
-            else: return node.right  # node is removed
+            else: return node.right  # node is removed after assign
         elif target > node.val: node.right = DFS(node.right, target)
-        else: node.left = DFS(node.left, target)
+        else: node.left = DFS(node.left, target)  # node is removed
         return node
     return DFS(root, key)
 

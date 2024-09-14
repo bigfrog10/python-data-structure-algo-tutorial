@@ -276,7 +276,7 @@ def depthSum(self, nestedList: List[NestedInteger]) -> int:  # O(all ints) time,
         return total
     return dfs(nestedList, 1)
 
-# LC364. Nested List Weight Sum II - top elem has more weight, accumu bfs
+# LC364. Nested List Weight Sum II - top elem has more weight, accumu bfs  nested sum
 def depthSumInverse(self, nestedList: List[NestedInteger]) -> int:
     queue = nestedList  ## O(n), n = total number of elements
     res, s2, q1 = 0, 0, []  # return, level sum, level queue
@@ -556,7 +556,7 @@ def containsDuplicate(self, nums: List[int]) -> bool:
 def containsDuplicate(self, nums):
     return len(set(nums)) < len(nums)
 
-# LC485. Max Consecutive Ones
+# LC485. Max Consecutive Ones   mac count 1
 def findMaxConsecutiveOnes(self, nums: List[int]) -> int:
     count = max_count = 0
     for num in nums:

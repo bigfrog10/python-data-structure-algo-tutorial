@@ -35,7 +35,7 @@ def maxDistance(self, position: List[int], m: int) -> int:
                 balls += 1
         return balls < m
     position = sorted(position) # O(n) space, O(nlogn) time
-    return bisect.bisect_left(range(position[-1]), 1, key=f)-1
+    return bisect.bisect_left(range(position[-1]), 1, key=f) - 1
 
 # LC35. Search Insert Position
 def searchInsert(self, nums: List[int], target: int) -> int:

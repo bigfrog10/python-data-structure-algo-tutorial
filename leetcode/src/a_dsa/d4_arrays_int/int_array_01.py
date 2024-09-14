@@ -1,4 +1,15 @@
 
+# LC486. Predict the Winner
+def predictTheWinner(self, nums: List[int]) -> bool:
+    n = len(nums)
+    @cache
+    def maxDiff(left, right):
+        if left == right: return nums[left]
+        score_by_left = nums[left] - maxDiff(left + 1, right)
+        score_by_right = nums[right] - maxDiff(left, right - 1)
+        return max(score_by_left, score_by_right)
+    return maxDiff(0, n - 1) >= 0
+
 # LC2210. Count Hills and Valleys in an Array
 def countHillValley(self, nums: List[int]) -> int:
     count, trend = 0, 0  # trend 1 for up, 0 flat, -1 down
@@ -52,9 +63,9 @@ def findMaxLength(self, nums: List[int]) -> int:
     return max_len
 
 # 330. Patching Array
-def minPatches(self, nums: List[int], n: int) -> int:
+def minPatches(self, nums: List[int], n: int) -> int:  # O(m + logn), m = times to incr index
     miss, added, index = 1, 0, 0
-    while miss <= n:  #O(n)
+    while miss <= n:  #O(n)  # O(logn) since we doulbe miss
         if index < len(nums) and nums[index] <= miss:
             miss += nums[index]  # cover (1, miss) with new miss
             index += 1
@@ -63,6 +74,19 @@ def minPatches(self, nums: List[int], n: int) -> int:
             added += 1  # need new number
     return added
 
+# same as above
+# LC2952. Minimum Number of Coins to be Added
+def minimumAddedCoins(self, coins: List[int], target: int) -> int:
+    coins = sorted(coins)
+    miss, added, index = 1, 0, 0
+    while miss <= target:  # O(logn) since we doulbe miss
+        if index < len(coins) and coins[index] <= miss:  # miss is covered
+            miss += coins[index]  # cover (1, miss) with new miss
+            index += 1
+        else:  # patch miss to the array
+            miss += miss  # cover (1, 2*miss)
+            added += 1  # need new number, patch
+    return added
 
 # LC2625. Flatten Deeply Nested Array        flatten nested
 def flatten(arr: list, n):
