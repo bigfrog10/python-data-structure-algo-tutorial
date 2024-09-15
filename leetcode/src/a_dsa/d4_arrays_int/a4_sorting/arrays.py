@@ -94,7 +94,7 @@ def removeDuplicates(self, nums: List[int]) -> int:
             j += 1
     return j
 
-# LC896. Monotonic Array
+# LC896. Monotonic Array        mono array
 def isMonotonic(self, A: List[int]) -> bool:
     increasing = decreasing = True  # so all equals is true
     for i in range(len(A)-1):
@@ -156,13 +156,13 @@ def relativeSortArray(self, arr1: List[int], arr2: List[int]) -> List[int]:
     arr1.sort(key=lambda x: aord.get(x, maxv+x))
     return arr1
 
-# LC905. Sort Array By Parity - move even to front, odd to back
+# LC905. Sort Array By Parity - move even to front, odd to back   sort even odd  sort odd even
 def sortArrayByParity(self, nums: List[int]) -> List[int]:
-    i, j = 0, len(nums) - 1
-    while i < j:
-        if nums[i] % 2 > nums[j] % 2: nums[i], nums[j] = nums[j], nums[i]
-        if nums[i] % 2 == 0: i += 1
-        if nums[j] % 2 == 1: j -= 1
+    i = 0
+    for j in range(len(nums)):
+        if nums[j] % 2 == 0:
+            nums[i], nums[j] = nums[j], nums[i]
+            i += 1
     return nums
 
 # LC1331. Rank Transform of an Array

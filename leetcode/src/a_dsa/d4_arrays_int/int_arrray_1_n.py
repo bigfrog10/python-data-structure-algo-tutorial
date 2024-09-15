@@ -49,7 +49,7 @@ def findDisappearedNumbers(self, nums: List[int]) -> List[int]:  # to restore or
             raise Exception(f'{n1[i]} {nums[i]}')
     return res
 
-# LC287. Find the Duplicate Number - only 1 dupe, could be >1 copy
+# LC287. Find the Duplicate Number - only 1 dupe, could be >1 copy   dupe num >1
 def findDuplicate(self, nums: List[int]) -> int:  # O(1) space and O(n) time
     for num in nums:  # repeating number could repeat many times
         if nums[abs(num)] < 0:  # 1, 3, 4, 2, 2 -> 1, -3, -4, -2, -2

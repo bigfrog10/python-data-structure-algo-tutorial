@@ -134,7 +134,7 @@ def getAllElements(self, root1: TreeNode, root2: TreeNode) -> List[int]:
             root2 = root2.right
     return output
 
-# LC98. Validate Binary Search Tree  validate bst
+# LC98. Validate Binary Search Tree  validate bst  valid bst
 def isValidBST(self, root: TreeNode) -> bool:
     def validate(node, low=-math.inf, high=math.inf):
         if not node: return True

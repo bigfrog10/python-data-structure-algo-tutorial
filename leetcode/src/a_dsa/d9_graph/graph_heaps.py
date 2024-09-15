@@ -73,7 +73,7 @@ def findShortestPath(self, master: 'GridMaster') -> int:  # O(NM)
 
 # LC1514. Path with Maximum Probability  graph path max prob  Dijkstra
 def maxProbability(self, n: int, edges: List[List[int]], succProb: List[float], start_node: int, end_node: int) -> float:
-    graph = defaultdict(list)
+    graph = defaultdict(list)  # O(V) space, O(V*E) time
     for i, (u, v) in enumerate(edges):
         graph[u].append((v, succProb[i]))
         graph[v].append((u, succProb[i]))

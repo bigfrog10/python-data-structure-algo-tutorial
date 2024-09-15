@@ -57,13 +57,13 @@ def pairSum(self, head: Optional[ListNode]) -> int:
         tail = tail.next  # 2, 3, 2, 1, then 1, 2,3,2,1
     return res
 
-# LC234. Palindrome Linked List
+# LC234. Palindrome Linked List  pali linked list
 def isPalindrome(self, head):
     fast, rev = head, None # use head as slow
     while fast and fast.next:  # 1, 2, 3, 2, 1    1, 2, 3, 4, 2, 1
         fast = fast.next.next
-        rev, rev.next, head = head, rev, head.next
-    # head = 3 2 1, tail = 2 1   head = 3 2 1, tail = 4 2 1
+        rev, head, rev.next = head, head.next, rev
+    # head = 3 2 1, rev = 2 1   rev = 3 2 1, head = 4 2 1, fast=last or None
     tail = head.next if fast else head  # fast none when list is even
     isPali = True
     while rev:

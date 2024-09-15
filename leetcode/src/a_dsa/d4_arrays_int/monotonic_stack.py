@@ -87,26 +87,27 @@ def canSeePersonsCount(self, heights: List[int]) -> List[int]:  # O(n)
     return res
 
 # LC739. Daily Temperatures
-def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-    n = len(temperatures)
+def dailyTemperatures(self, T: List[int]) -> List[int]:
+    n = len(T)
     answer, hottest = [0] * n, 0  # O(n) runtime, O(1) space
-    for curr_day in range(n)[::-1]:
-        current_temp = temperatures[curr_day]
+    for curr_day in range(n)[::-1]:  # from backward is to reuse tail results
+        current_temp = T[curr_day]
         if current_temp >= hottest:
             hottest = current_temp
             continue  # the answer is 0, no need to go further.
         days = 1
-        while current_temp >= temperatures[curr_day + days]:
+        while current_temp >= T[curr_day + days]:
             # this is the "days" jump to shrink the while total to N for the for loop
             days += answer[curr_day + days]  # accu through valley
         answer[curr_day] = days
     return answer
 def dailyTemperatures(self, T: List[int]) -> List[int]:
     ret, stack = [0] * len(T), []  # monotonic stack, decreasing  O(n) time and space
-    for i in reversed(range(len(T))):
-        while stack and T[i] >= T[stack[-1]]: stack.pop()
-        if stack: ret[i] = stack[-1] - i
-        stack.append(i)
+    for curr_day, curr_temp in enumerate(T):
+        while stack and curr_temp > T[stack[-1]]:
+            prev_day = stack.pop()
+            ret[prev_day] = curr_day - prev_day
+        stack.append(curr_day)
     return ret
 
 # LC735. Asteroid Collision

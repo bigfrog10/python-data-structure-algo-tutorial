@@ -67,7 +67,7 @@ def removeDuplicates(self, S: str) -> str: # O(n)
     return ''.join(output)
 
 # LC3. Longest Substring Without Repeating Characters, top100
-def lengthOfLongestSubstring(self, s: str) -> int:
+def lengthOfLongestSubstring(self, s: str) -> int:  # O(n) time, O(26) space for sliding window
     chars = Counter()
     res = left = 0
     for right in range(len(s)):

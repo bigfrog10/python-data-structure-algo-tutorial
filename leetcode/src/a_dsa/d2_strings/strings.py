@@ -55,11 +55,12 @@ def isInterleave(self, s1: str, s2: str, s3: str) -> bool:  # O(nm) time and spa
 # LC796. Rotate String
 def rotateString(self, A: str, B: str) -> bool:  # O(n^2)
     return len(A) == len(B) and B in A + A
+    # find b in A+A can be done in O(n)
 
 # LC784. Letter Case Permutation
 def letterCasePermutation(self, s: str) -> List[str]:  # O(2^n), n is # of letters
     ans = [""]
-    for c in s:
+    for c in s:  # for non letters, such as numbers, c.swapcase() is none
         ans = [x + cc for x in ans for cc in {c, c.swapcase()}]
     return ans
 
@@ -381,7 +382,7 @@ def convert(self, s: str, numRows: int) -> str:
     for c in s:
         rows[cur_row] += c
         if cur_row == 0 or cur_row == numRows-1:
-            down *= -1
+            down *= -1  # hit boundary and revert back
         cur_row += down
     return ''.join(rows)
 
@@ -447,7 +448,13 @@ def strStr(self, haystack: str, needle: str) -> int:  # KMP O(n+h)
 # https://blog.seancoughlin.me/find-the-index-of-the-first-occurrence-in-a-string-naive-and-kmp-solutions
 
 
-# LC1071. Greatest Common Divisor of Strings
+# LC1071. Greatest Common Divisor of Strings  gcd string
+def gcdOfStrings(self, str1: str, str2: str) -> str:
+    # make sure that str1 and str2 must have `Greatest Common Divisor`
+    if str1 + str2 != str2 + str1: return ''
+    sz1, sz2 = len(str1), len(str2)
+    lgcd = math.gcd(sz1, sz2)
+    return str1[:lgcd]
 def gcdOfStrings(self, str1: str, str2: str) -> str:
     # make sure that str1 and str2 must have `Greatest Common Divisor`
     if str1 + str2 != str2 + str1: return ''

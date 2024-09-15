@@ -40,6 +40,7 @@ def numMovesStonesII(self, stones: List[int]) -> List[int]:
         # j - i + 1 is already stored stones in the sliding window
         else: low = min(low, n - (j - i + 1))
     return [low, high]
+# https://leetcode.com/problems/moving-stones-until-consecutive-ii/solutions/1488487/python-sliding-window-with-detailed-expalanation/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
 # https://leetcode.com/problems/moving-stones-until-consecutive-ii/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
 # https://leetcode.com/problems/moving-stones-until-consecutive-ii/solutions/3071375/clean-python-8-lines-high-speed-o-n-time-o-1-space-beats-96-9-with-explanation/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
 # https://leetcode.com/problems/moving-stones-until-consecutive-ii/?envType=company&envId=facebook&favoriteSlug=facebook-three-months

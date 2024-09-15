@@ -19,7 +19,7 @@ def removeElements(self, head: ListNode, val: int) -> ListNode:
         curr = curr.next
     return sentinel.next
 
-# LC83. Remove Duplicates from Sorted List - keep one dupe copy
+# LC83. Remove Duplicates from Sorted List - keep one dupe copy  remove dupe
 def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
     curr = head
     while curr and curr.next:
@@ -27,7 +27,7 @@ def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
         else: curr = curr.next
     return head
 
-# LC82. Remove Duplicates from Sorted List II - remove all dupes
+# LC82. Remove Duplicates from Sorted List II - remove all dupes  remove dupe
 def deleteDuplicates(self, head: ListNode) -> ListNode:  # O(n)
     prev = dummy = ListNode(-1, head)
     while head:

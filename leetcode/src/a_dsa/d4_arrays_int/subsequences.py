@@ -105,15 +105,13 @@ def increasingTriplet(self, nums: List[int]) -> bool:
 def lengthOfLIS(self, nums: List[int]) -> int:  # O(nlogn) runtime, O(n) space
     hist = []  # hist[i] smallest ending element in strictly increasing sequence of length i
     for e in nums:
-        if not hist: hist.append(e)
-        elif e > hist[-1]: hist.append(e)
-        else:
-            # find index for smallest n such that n >= e
+        if not hist or e > hist[-1]: hist.append(e)
+        else:  # find index for smallest n such that n >= e
             idx = bisect.bisect_left(hist, e)
             hist[idx] = e  # replace it with e
     return len(hist)
 
-# LC128. Longest Consecutive Sequence
+# LC128. Longest Consecutive Sequence    long consec
 def longestConsecutive(self, nums: List[int]) -> int:  # O(n)
     hashed = set(nums)  # overall O(n)
     maxc = 0

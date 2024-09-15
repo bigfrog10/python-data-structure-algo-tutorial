@@ -57,7 +57,7 @@ def permute(nums: List[int]) -> List[List[int]]:  # O(n!) & O(n!)
         ans = [each[:i] + [num] + each[i:] for each in ans for i in range(len(each)+1)]
     return ans
 
-# LC47. Permutations II
+# LC47. Permutations II  has dupes   perm dupe
 def permuteUnique(self, nums: List[int]) -> List[List[int]]:  # O(n!), T(n) = n*T(n-1) + O(n)
     ans = [[]]  # best case is when all numbers are the same, while worst case is when all numbers are distinct
     for n in nums:
@@ -95,7 +95,7 @@ def nextPermutation(self, nums: List[int]) -> None:  # O(n)
         nums[idx], nums[idx1] = nums[idx1], nums[idx]  # swap
         nums[idx+1:] = reversed(nums[idx+1:])
 
-# LC1053. Previous Permutation With One Swap
+# LC1053. Previous Permutation With One Swap    prev permutation
 def prevPermOpt1(self, arr: List[int]) -> List[int]: # Time: O(n) Space: O(1)
     nums = arr.copy()
     if not arr: return []

@@ -1,3 +1,15 @@
+
+# LC745. Prefix and Suffix Search
+class WordFilter:
+    def __init__(self, words: List[str]):
+        self.dct = {}
+        for i in range(len(words)):  # O(n * L^2)
+            for j in range(len(words[i])):
+                for k in reversed(range(len(words[i]))):
+                    self.dct[(words[i][:j+1], words[i][k:])] = i
+    def f(self, prefix: str, suffix: str) -> int:
+        return self.dct.get((prefix, suffix), -1)
+
 # LC146. LRU Cache, top100
 class LRUCache:
     def __init__(self, capacity: int): # use ordered dict, language specific

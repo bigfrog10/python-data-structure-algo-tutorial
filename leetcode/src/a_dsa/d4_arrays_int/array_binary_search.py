@@ -17,9 +17,8 @@ def shipWithinDays(self, weights: List[int], D: int) -> int:  # O(nlog(sum - max
 def minEatingSpeed(self, piles: List[int], h: int) -> int:
     left, right = 1, max(piles)  # we start 1 because we want min value
     while left < right:
-        mid = left + (right - left) // 2
-        # ceiling = (x - 1) // q + 1
-        counts = sum((p-1) // mid + 1 for p in piles)
+        mid = (right + left) // 2  # eating speed k
+        counts = sum((p-1) // mid + 1 for p in piles)  # ceiling = (x - 1) // q + 1
         if counts > h: left = mid + 1  # we split too much, so try to split less
         else: right = mid  # we reduce this to get min
     return left

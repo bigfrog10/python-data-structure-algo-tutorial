@@ -118,7 +118,7 @@ def islandPerimeter(self, grid: List[List[int]]) -> int:  # O(mn), O(1)
     return result
 
 # LC934. Shortest Bridge
-def shortestBridge(self, A: List[List[int]]) -> int:
+def shortestBridge(self, A: List[List[int]]) -> int:  # O(n^2) time and space
     m, n = len(A), len(A[0])
     i, j = next((i, j) for i in range(m) for j in range(n) if A[i][j])
     stack, seen = [(i, j)], set()
@@ -128,7 +128,6 @@ def shortestBridge(self, A: List[List[int]]) -> int:
         for ii, jj in (i-1, j), (i, j-1), (i, j+1), (i+1, j):
             if 0 <= ii < m and 0 <= jj < n and A[ii][jj] and (ii, jj) not in seen:
                 stack.append((ii, jj))
-                seen.add((ii, jj))
     ans = 0  # shortest distance, also levels to BFS
     queue = list(seen)
     while queue:  # bfs on second island
@@ -141,6 +140,7 @@ def shortestBridge(self, A: List[List[int]]) -> int:
                     seen.add((ii, jj))
         queue = newq
         ans += 1
+    return ans
 
 
 

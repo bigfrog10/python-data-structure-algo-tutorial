@@ -32,7 +32,7 @@ def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -
     dfs(root)
     return res
 
-# LC1123. Lowest Common Ancestor of Deepest Leaves
+# LC1123. Lowest Common Ancestor of Deepest Leaves         lca deep leaves
 def lcaDeepestLeaves(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
     def dfs(node):  #  O(n)
         if not node: return 0, None

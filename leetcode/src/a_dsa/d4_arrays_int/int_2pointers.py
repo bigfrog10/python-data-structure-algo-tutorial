@@ -41,7 +41,7 @@ def maxArea(self, height: List[int]) -> int:  # O(n) time and O(1) space
         else: j -= 1
     return water
 
-# LC27. Remove Element - remove given value
+# LC27. Remove Element - remove given value  remove value
 def removeElement(self, nums: List[int], val: int) -> int:
     i = 0
     for j in range(len(nums)):

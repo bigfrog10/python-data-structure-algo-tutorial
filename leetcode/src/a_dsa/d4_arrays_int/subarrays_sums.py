@@ -61,7 +61,7 @@ def minSubArrayLen(self, s: int, nums: List[int]) -> int:  # 2 pointers , O(n) t
             left += 1
     return result if result <= len(nums) else 0
 
-# LC560. Subarray Sum Equals K - total count of subarrays whose sum equals to k  subsum k sub arr sum k
+# LC560. Subarray Sum Equals K - total count of subarrays whose sum equals to k  subsum k sub arr sum k  sub sum k
 from typing import List
 def subarraySum(self, nums: List[int], k: int) -> int:
     count = cusum = 0  # O(n)

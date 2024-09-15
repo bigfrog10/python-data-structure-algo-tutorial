@@ -185,7 +185,7 @@ def countUnivalSubtrees(self, root: TreeNode) -> int:
 def minCameraCover(self, root: TreeNode) -> int:
     # 0: not covered: 1: covered but not has a camera on it; 2: a camera on it.
     self.sum=0
-    def dfs(node):
+    def dfs(node):  # node covered by what type
         if not node: return 1
         l = dfs(node.left)
         r = dfs(node.right)

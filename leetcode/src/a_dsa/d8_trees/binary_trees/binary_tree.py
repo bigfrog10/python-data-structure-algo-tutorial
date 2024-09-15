@@ -186,31 +186,24 @@ def inorderTraversal(self, root):
             root = node.right  # deal with right
     return ans
 def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:  # O(n) time and O(1) space, Morris Traversal
-    curr = root
-    output =[]
-    while(curr):
-        if not curr.left:
-            output.append(curr.val)
-            curr = curr.right
-        else:
-            predecessor = curr.left  # find the inorder predecessor of the current node
-            while predecessor.right !=None and predecessor.right != curr:
-                predecessor = predecessor.right # go as right as possible
-            # Now check which out of 2 above condition it reached
-            if predecessor.right == None:
-                predecessor.right = curr
-                curr = curr.left
-            else:
-                # left subtree is already visited , so delete the link and then go to right subtree
-                predecessor.right = None
-                output.append(curr.val)
-                curr = curr.right
-    return output
+    curr, res = root, []  # O(n) time and O(1) space, Morris Traversal
+    while curr is not None:
+        if curr.left is None:
+            res.append(curr.val)
+            curr = curr.right  # move to next right node
+        else:  # has a left subtree
+            pre = curr.left   # find the inorder predecessor of the current node
+            while pre.right: pre = pre.right # find rightmost
+            pre.right = curr  # put curr after the pre node
+            temp = curr  # store curr node
+            curr = curr.left  # move curr to the top of the new tree
+            temp.left = None  # original curr left be None, avoid infinite loops
+    return res
 
 
-# LC1361. Validate Binary Tree Nodes
+# LC1361. Validate Binary Tree Nodes   valid bt nodes
 def validateBinaryTreeNodes(self, n: int, leftChild: List[int], rightChild: List[int]) -> bool: # slower
-    indegree = [0] * n  # Topological sort  O(n)
+    indegree = [0] * n  # Topological sort  O(n)  how many parents a child has
     for left, right in zip(leftChild, rightChild):
         if left > -1: indegree[left] += 1
         if right > -1: indegree[right] += 1
@@ -223,7 +216,7 @@ def validateBinaryTreeNodes(self, n: int, leftChild: List[int], rightChild: List
             if child == -1: continue  # no child
             indegree[child] -= 1
             if indegree[child] == 0: queue.append(child)
-    return sum(indegree) == 0
+    return sum(indegree) == 0  # all children are processed
 
 # LC572. Subtree of Another Tree
 def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:  # O(mn)
@@ -307,19 +300,19 @@ def countNodes(self, root): # O((logn)^2)
     else: # right is complete
         return pow(2, rightDepth) + self.countNodes(root.left)
 
-# LC654. Maximum Binary Tree - root is max among children
+# LC654. Maximum Binary Tree - root is max among children     max bt
 def constructMaximumBinaryTree(self, nums: List[int]) -> Optional[TreeNode]:
     stack = []
     for x in nums:
         n = TreeNode(x)
-        while stack and x > stack[-1].val:
+        while stack and x > stack[-1].val:  # mono decreasing stack
             n.left = stack.pop()
         if stack:
             stack[-1].right = n
         stack.append(n)
     return stack[0]
 
-# LC998. Maximum Binary Tree II
+# LC998. Maximum Binary Tree II  max bt
 def insertIntoMaxTree(self, root, val):
     if root and root.val > val:
         root.right = self.insertIntoMaxTree(root.right, val)

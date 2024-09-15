@@ -133,6 +133,20 @@ def threeSumSmaller(self, nums: List[int], target: int) -> int:  # O(n^2)
     return counts
 
 # LC18. 4Sum - return all quadruplets sum to target
+def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+    pairs = collections.defaultdict(list)
+    for i in range(len(nums)):
+        for j in range(i+1, len(nums)):
+            pairs[nums[i]+nums[j]].append((i, j))
+    res = set()
+    for s, ps in pairs.items():
+        for a, b in ps:
+            if target - s in pairs:
+                for k,v in pairs[target-s]:
+                    if a != k and a != v and b != k and b != v:
+                        ans = sorted([nums[i] for i in [a,b,k,v]])
+                        res.add(tuple(ans))
+    return res
 def fourSum(self, nums: List[int], target: int) -> List[List[int]]:  # O(n^(k-1)) k = 4 time, O(n) space
     def kSum(nums: List[int], target: int, k: int) -> List[List[int]]:
         res = []
@@ -150,6 +164,7 @@ def fourSum(self, nums: List[int], target: int) -> List[List[int]]:  # O(n^(k-1)
         lo, hi = 0, len(nums) - 1
         while (lo < hi):
             curr_sum = nums[lo] + nums[hi]
+            # to avoid dupes
             if curr_sum < target or (lo > 0 and nums[lo] == nums[lo - 1]): lo += 1
             elif curr_sum > target or (hi < len(nums) - 1 and nums[hi] == nums[hi + 1]):
                 hi -= 1

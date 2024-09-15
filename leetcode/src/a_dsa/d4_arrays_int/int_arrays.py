@@ -3,6 +3,23 @@ from collections import Counter
 import math
 import functools
 
+# LC801 Minimum Swaps To Make Sequences Increasing      swap 2 arrays increasing
+def minSwap(self, A: List[int], B: List[int]) -> int:
+    ans = sm = lg = mx = 0
+    for x, y in zip(A, B):
+        # need to reduce
+        if mx < min(x, y): # prev max < current min
+            ans += min(sm, lg) # treat so far subarray independent of the rest
+            sm = lg = 0
+        mx = max(x, y)
+        if x < y: sm += 1 # count "x < y"
+        elif x > y: lg += 1 # count "x > y"
+    return ans + min(sm, lg)
+# https://leetcode.com/problems/minimum-swaps-to-make-sequences-increasing/solutions/932390/python3-two-counters/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
+# with if block, this is wrong [0,3,4,9,10]  [2,3,7,5,6], the two 3's are equal
+# https://leetcode.com/problems/minimum-swaps-to-make-sequences-increasing/solutions/3835800/python-3-o-n-time-o-1-space-detailed-explanation/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
+
+
 # LC2970. Count the Number of Incremovable Subarrays I
 def incremovableSubarrayCount(self, nums: List[int]) -> int: # O(n^3) time and O(1) space
     n, ans = len(nums), 0
@@ -163,7 +180,7 @@ def findPairs(self, nums: List[int], k: int) -> int:  # O(n) time and space
 
 # LC220. Contains Duplicate III
 def containsNearbyAlmostDuplicate(self, nums: List[int], k: int, t: int) -> bool:  # O(n) time and space
-    n = len(nums)
+    n = len(nums)  # bucket sort
     d = {}  # d is buckets
     w = t + 1  # because the problem states at most t, so we have to use interval [0, t]
     for i in range(n):
@@ -441,11 +458,11 @@ def plusOne(self, digits: List[int]) -> List[int]:
 def sumOfUnique(self, nums: List[int]) -> int:
     return sum(a for a, c in collections.Counter(nums).items() if c == 1)
 
-# LC989. Add to Array-Form of Integer - array + integer
+# LC989. Add to Array-Form of Integer - array + integer   add int form  add int array form
 def addToArrayForm(self, num: List[int], k: int) -> List[int]:
     for i in range(len(num) - 1, -1, -1):
         k, num[i] = divmod(num[i] + k, 10)  # treat k as carry
-    return [int(i) for i in str(k)] + num if k else num
+    return [int(i) for i in str(k)] + num if k else num  # else k=0
 
 # LC189. Rotate Array
 def rotate(self, nums: List[int], k: int) -> None:

@@ -48,9 +48,9 @@ def oddEvenList(self, head: ListNode) -> ListNode:
     odd_walker = head  # condition leans on even, so code is simpler.
     even_head = even_walker = head.next
     while even_walker and even_walker.next:
-        odd_walker.next = even_walker.next  # jump next node to next next
+        odd_walker.next = even_walker.next  # move odd
         odd_walker = odd_walker.next
-        even_walker.next = odd_walker.next
+        even_walker.next = odd_walker.next  # move even
         even_walker = even_walker.next
     odd_walker.next = even_head
     return head

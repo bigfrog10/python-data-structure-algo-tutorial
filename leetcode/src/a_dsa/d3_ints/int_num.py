@@ -117,7 +117,7 @@ def restoreIpAddresses(self, s: str) -> List[str]:
     add_dot([], 0)
     return res
 
-# LC50. Pow(x, n)
+# LC50. Pow(x, n)  - power n
 def myPow(self, x: float, n: int) -> float:  # O(logn)
     if n < 0: n, x = -n, 1 / x
     ret = 1
