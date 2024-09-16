@@ -58,7 +58,7 @@ def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
     if j > -1: nums1[0:j+1] = nums2[0:j+1]
 
 
-# LC977. Squares of a Sorted Array
+# LC977. Squares of a Sorted Array   square sort array
 def sortedSquares(self, nums: List[int]) -> List[int]: # O(n)
     n = len(nums)
     result = [0] * n
@@ -200,14 +200,22 @@ def getKth(self, lo: int, hi: int, k: int) -> int:
 
 # LC1439. Find the Kth Smallest Sum of a Matrix With Sorted Rows
 def kthSmallest(self, mat: List[List[int]], k: int) -> int: # 300ms
-    dp = mat[0][:min(k,len(mat[0]))]
-    for l in mat[1:]:
-        tmp = []
-        for i in dp:
-            for j in l:
-                tmp += [i+j]
-        dp = sorted(tmp)[:min(k,len(tmp))]
-    return dp[-1]
+    def function(nums1,nums2):  # combine 2 rows
+        stack, visited, res = [(nums1[0]+nums2[0],0,0)], set(), []
+        while stack:
+            total, i, j = heapq.heappop(stack)
+            res.append(total)
+            if len(res) == k: break
+            if i+1 < len(nums1) and (i+1,j) not in visited:
+                heapq.heappush(stack, (nums1[i+1] + nums2[j], i+1, j))
+                visited.add((i+1,j))
+            if j+1 < len(nums2) and (i,j+1) not in visited:
+                heapq.heappush(stack, (nums1[i] + nums2[j+1], i, j+1))
+                visited.add((i,j+1))
+        return res
+    result = mat[0]
+    for row in mat[1:]: result = function(result, row)
+    return result[-1]
 
 # LC969. Pancake Sorting
 def pancakeSort(self, arr: List[int]) -> List[int]:

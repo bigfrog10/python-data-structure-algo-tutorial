@@ -122,12 +122,13 @@ def multiply(self, A: List[List[int]], B: List[List[int]]) -> List[List[int]]:
 def kthSmallest(self, matrix: List[List[int]], k: int) -> int:  # O(klogk) time and O(k) space
     m, n = len(matrix), len(matrix[0])  # For general, the matrix need not be a square
     minHeap = []  # val, r, c
-    for r in range(min(k, m)): heappush(minHeap, (matrix[r][0], r, 0))
+    for r in range(min(k, m)):  # x = min(k, m), space O(x), time O(x + klogx)
+        heappush(minHeap, (matrix[r][0], r, 0))  # need location to get next cell
     ans = -1  # any dummy value
     for i in range(k):
-        ans, r, c = heappop(minHeap)
+        ans, r, c = heappop(minHeap)  # find min pointer and move it
         if c+1 < n: heappush(minHeap, (matrix[r][c + 1], r, c + 1))
-    return ans
+    return ans  # find kth smallest in m sorted lists
 def kthSmallest(self, matrix, k):
     m, n = len(matrix), len(matrix[0])  # For general, the matrix need not be a square
     def countLessOrEqual(x):
@@ -250,22 +251,20 @@ def numSubmatrixSumTarget(self, A, target):
 # LC542. 01 Matrix - distance to 0
 def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:  # O(rc)
     m, n = len(mat), len(mat[0])
-
     for r in range(m):
         for c in range(n):
-            if mat[r][c] > 0:
+            if mat[r][c] > 0:  # reuse top and left
                 top = mat[r - 1][c] if r > 0 else math.inf
                 left = mat[r][c - 1] if c > 0 else math.inf
                 mat[r][c] = min(top, left) + 1
-
     for r in range(m - 1, -1, -1):
         for c in range(n - 1, -1, -1):
             if mat[r][c] > 0:
                 bottom = mat[r + 1][c] if r < m - 1 else math.inf
                 right = mat[r][c + 1] if c < n - 1 else math.inf
                 mat[r][c] = min(mat[r][c], bottom + 1, right + 1)
-
     return mat
+# https://leetcode.com/problems/01-matrix/solutions/5676804/simple-solution-with-diagrams-in-video-javascript-c-java-python/?envType=company&envId=apple&favoriteSlug=apple-more-than-six-months
 
 # LC73. Set Matrix Zeroes
 def setZeroes(self, matrix):

@@ -252,7 +252,6 @@ def minPathSum(self, grid: List[List[int]]) -> int:
 def uniquePaths(self, m: int, n: int) -> int:
     return math.comb(m+n-2, n-1)  # select n-1 from m+n-2
 def uniquePaths(self, m, n):
-    if not m or not n: return 0
     cur = [1] * n  # first row
     for i in range(1, m):  # previous row + current row, 1st cell is always 1.
         for j in range(1, n): cur[j] += cur[j-1]  # previous cur[j] + current cur[j-1]

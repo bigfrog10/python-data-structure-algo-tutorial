@@ -86,7 +86,7 @@ def singleNonDuplicate(self, nums: List[int]) -> int:  # simplest and fast
 def firstBadVersion(self, n):
     start, end = 1, n
     while start < end:  # start == end after loop
-        mid = start + (end - start) // 2
+        mid = (end + start) // 2
         if isBadVersion(mid): end = mid  # keep end side is bad
         else: start = mid + 1  # start side is after good
     return start

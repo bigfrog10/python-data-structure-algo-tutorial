@@ -33,7 +33,7 @@ def verticalOrder(self, root: TreeNode) -> List[List[int]]:  # O(n)
 
 
 
-# LC662. Maximum Width of Binary Tree - row max width
+# LC662. Maximum Width of Binary Tree - row max width bt max level width
 def widthOfBinaryTree(self, root: TreeNode) -> int:
     width = 0
     level = [(1, root)]

@@ -305,24 +305,24 @@ def countBattleships(self, board: List[List[str]]) -> int:
 
 # LC51. N-Queens - n queens
 def solveNQueens(self, n: int) -> List[List[str]]:
-    res, board = [], [] # O(n!)
+    res, board = [], [] # O(n!) time and O(n^2) space
     cols, diag, off_diag = set(), set(), set()
     def backtrack(i):  # recursion on rows
         if i == n:
-            res.append(list(board))
+            res.append(list(board))  # copy, answer to return
             return
         for j in range(n):
             if j not in cols and j-i not in diag and j+i not in off_diag:
                 cols.add(j)  # order is not significant, these 4 steps are independent.
                 diag.add(j-i)
                 off_diag.add(j+i)
-                board.append(j)
+                board.append(j) # ith row, jth column
                 backtrack(i+1)  # recursion
                 board.pop()  # backout
                 off_diag.remove(j+i)
                 diag.remove(j-i)
                 cols.remove(j)
-    backtrack(0)
+    backtrack(0)  # backtrack on rows
     res1 = [['.' * col + 'Q' + '.'*(n - col - 1) for col in board] for board in res]
     return res1
 

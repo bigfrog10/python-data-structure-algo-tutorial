@@ -9,13 +9,15 @@ def buildArray(self, nums: List[int]) -> List[int]:  # O(1) space
         nums[i] //= q
     return nums
 
-# LC442. Find All Duplicates in an Array
+# LC442. Find All Duplicates in an Array  dupes in array
 def findDuplicates(self, nums: List[int]) -> List[int]:  # run it again to restore
-    res = []
-    for x in nums:
-        if nums[abs(x)-1] < 0: res.append(abs(x))
-        else: nums[abs(x)-1] *= -1
-    return res
+    ans = []
+    for num in nums:
+        if nums[abs(num) - 1 ] < 0: # Already Marked --> Repeated Guy
+            ans.append(abs(num))
+        else: # Not Marked
+            nums[ abs(num) - 1 ] = - (nums[ abs(num) - 1 ])
+    return ans
 
 # LC268. Missing Number - only one in [0, n]
 def missingNumber(self, nums: List[int]) -> int:

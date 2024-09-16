@@ -297,13 +297,12 @@ def toHex(self, num: int) -> str:
 
 # LC367. Valid Perfect Square
 def isPerfectSquare(self, num: int) -> bool:
-    if num == 1: return True
-    left, right = 2, num // 2
+    left, right = 1, num
     while left <= right:
-        x = left + (right - left) // 2
-        guess_squared = x * x
-        if guess_squared == num: return True
-        if guess_squared > num: right = x - 1
+        x = (right + left) // 2
+        sq = x * x
+        if sq == num: return True
+        if sq > num: right = x - 1
         else: left = x + 1
     return False
 def isPerfectSquare(self, num: int) -> bool:

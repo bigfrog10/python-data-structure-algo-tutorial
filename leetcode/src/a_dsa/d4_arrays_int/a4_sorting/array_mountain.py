@@ -8,13 +8,12 @@ def peakIndexInMountainArray(self, arr: List[int]) -> int:
         else: hi = mi
     return lo
 
-# LC1095. Find in Mountain Array
+# LC1095. Find in Mountain Array  for given target    find target index    mount find target  mount peak
 def findInMountainArray(self, target: int, mountain_arr: 'MountainArray') -> int:
-    A = mountain_arr
+    A = mountain_arr  # O(logn) time and O(1) space
     n = A.length()
-    # find index of peak
     l, r = 0, n - 1
-    while l < r:
+    while l < r: # find index of peak
         m = (l + r) // 2
         if A.get(m) < A.get(m + 1):
             l = peak = m + 1

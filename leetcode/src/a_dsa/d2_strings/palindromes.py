@@ -101,9 +101,9 @@ def validPalindrome(self, s: str) -> bool:  # O(n) time and O(1) space
     # check ignoring 1st or last char
     return s[i+1:n-i] == s[i+1:n-i][::-1] or s[i:n-i-1] == s[i:n-i-1][::-1]
 
-# LC131. Palindrome Partitioning
-def partition(self, s: str) -> List[List[str]]:  # O(N * 2^N), when all substrings are palindrome, e.g., 'a'*N
-    n = len(s)
+# LC131. Palindrome Partitioning   pali partition
+def partition(self, s: str) -> List[List[str]]:
+    n = len(s)  # O(N * 2^N), when all substrings are palindrome, e.g., 'a'*N
     @functools.lru_cache(None)
     def dfs(start):
         if start == n: return [[]]

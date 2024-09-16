@@ -21,12 +21,12 @@ def reverseBetween(self, head, m, n):
 def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
     prev = dummy = ListNode(None, head)
     while head and head.next:
-        prev.next, head.next = head.next, head.next.next
-        prev.next.next = head
-        prev, head = head, head.next
+        prev.next, head.next = head.next, head.next.next  # point to next new
+        prev.next.next = head  # reverse next
+        prev, head = head, head.next  # move forward
     return dummy.next
 
-# LC25. Reverse Nodes in k-Group
+# LC25. Reverse Nodes in k-Group  k at a time
 def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
     n, curr = 0, head  # find size
     while curr:
@@ -76,12 +76,12 @@ def isPalindrome(self, head):
 def reorderList(self, head: ListNode) -> None:
     if not head: return
     slow = fast = head  # in 1->2->3->4->5->6 find 4
-    while fast and fast.next:  # slow is the middle node
+    while fast and fast.next:  # slow 4 5 6
         slow, fast = slow.next, fast.next.next
-    prev, curr = None, slow  # reverse the second half, prev is new head
-    while curr:  # convert 1->2->3->4->5->6 into 1->2->3->4 and 6->5->4
+    prev, curr = None, slow  # reverse
+    while curr:  # convert 4 5 6 to 6->5->4
         curr.next, prev, curr = prev, curr, curr.next
-    first, second = head, prev  # merge two sorted linked lists
+    first, second = head, prev  # prev: 6 5 4, head: 1 2 3 4
     while second.next:  # merge 1->2->3->4 and 6->5->4 into 1->6->2->5->3->4
         first.next, first = second, first.next
         second.next, second = first, second.next

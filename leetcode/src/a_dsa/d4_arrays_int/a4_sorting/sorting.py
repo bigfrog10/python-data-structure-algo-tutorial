@@ -20,25 +20,25 @@ def sortArray(self, nums: List[int]) -> List[int]:  # bucket sort, O(n)
         ans.extend([i]*x)
     return ans
 
-def sortArray(self, nums: List[int]) -> List[int]:  # merge sort
+def sortArray(self, nums: List[int]) -> List[int]:  # O(nlogn) time, O(n) space
+    def merge(left, right):  # merge sort
+        res = []
+        i = j = 0
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                res.append(left[i])
+                i += 1
+            else:
+                res.append(right[j])
+                j += 1
+        res.extend(left[i:])  # remaining, only one of these used
+        res.extend(right[j:])
+        return res
     n = len(nums)
-    if n > 1:
-        list1 = self.sortArray(nums[:n//2])
-        list2 = self.sortArray(nums[n//2:])
-        nums = self.merge(list1, list2)
-    return nums
-def merge(self, list1, list2):
-    sorted_list = []
-    while list1 and list2:
-        if list1[0] <= list2[0]:
-            sorted_list.append(list1.pop(0))
-        else:
-            sorted_list.append(list2.pop(0))
-    if not list1:
-        sorted_list.extend(list2)
-    if not list2:
-        sorted_list.extend(list1)
-    return sorted_list
+    if n == 1: return nums
+    list1 = self.sortArray(nums[:n//2])
+    list2 = self.sortArray(nums[n//2:])
+    return merge(list1, list2)
 
 def sortArray(self, N: List[int]) -> List[int]:  # quick sort
     def quicksort(A, I, J):

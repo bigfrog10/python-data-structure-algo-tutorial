@@ -147,7 +147,7 @@ def ladderLength(self, beginWord, endWord, wordList):  # BFS, O(m^2 * len(wordLi
         word, length = queue.popleft()
         if word == endWord: return length
         for i in range(len(word)):  # O(m)
-            for c in 'abcdefghijklmnopqrstuvwxyz':
+            for c in string.ascii_lowercase:  # 'abcdefghijklmnopqrstuvwxyz':
                 next_word = word[:i] + c + word[i+1:]  # O(m)
                 if next_word in wordList:
                     wordList.remove(next_word)  # this is the key, BFS doesn't look back

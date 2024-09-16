@@ -250,7 +250,7 @@ def mergeTrees(self, t1: TreeNode, t2: TreeNode) -> TreeNode:
     t1.right = self.mergeTrees(t1.right, t2.right)
     return t1
 
-# LC110. Balanced Binary Tree - check whether it's balanced
+# LC110. Balanced Binary Tree - check whether it's balanced bt balanced
 def isBalanced(self, root: TreeNode) -> bool:
     def dfs(node):
         if not node: return True, 0  # is balanced, depth
@@ -273,7 +273,7 @@ def rob(self, root: Optional[TreeNode]) -> int:
         return [rob, not_rob]
     return max(helper(root))
 
-# LC100. Same Tree
+# LC100. Same Tree     bt same tree
 def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
     def inorder(node):
         if not node: return 'none'

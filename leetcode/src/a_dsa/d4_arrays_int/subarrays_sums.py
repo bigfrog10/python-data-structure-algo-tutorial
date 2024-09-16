@@ -179,7 +179,7 @@ def waysToPartition(self, nums: List[int], k: int) -> int:
 
 
 
-# LC152. Maximum Product Subarray
+# LC152. Maximum Product Subarray - pos/negative numbers  max prod sub array   max prod array
 def maxProduct(self, nums: List[int]) -> int:
     if not nums: return 0
     max_all = curr_max = curr_min = nums[0]

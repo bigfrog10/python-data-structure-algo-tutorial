@@ -135,10 +135,11 @@ def maxDistToClosest(self, seats: List[int]) -> int:
             last = i
     return max(res, n - last - 1)
 
-# LC179. Largest Number - after re-arrange array ints, re-arrange elem, array re-arrange
+# LC179. Largest Number - after re-arrange array ints, re-arrange elem, array re-arrange  x + y > y + x
 def largestNumber(self, num):  # O(nlogn)
     num = [str(x) for x in num]
     cmp = lambda x, y: (x > y) - (x < y)  # standard comparator
+    # if b + a > a + b, then we choose b + a
     custcmp = lambda a, b: cmp(b + a, a + b)  # specific to this problem
     num.sort(key = functools.cmp_to_key(custcmp))
     return ''.join(num).lstrip('0') or '0'

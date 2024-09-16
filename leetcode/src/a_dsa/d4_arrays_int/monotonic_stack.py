@@ -21,7 +21,7 @@ def maxChunksToSorted(self, arr: List[int]) -> int:
         stack.append(_max)  # these can be sorted in 1 block
     return len(stack)
 
-# LC1642. Furthest Building You Can Reach - furthest jump furthest building
+# LC1642. Furthest Building You Can Reach - furthest jump furthest building  reach building
 def furthestBuilding(self, heights: List[int], bricks: int, ladders: int) -> int:
     heap = []   ## O(NlogK) time and O(k) space, k=len(ladders)
     for i in range(len(heights) - 1):
@@ -37,11 +37,11 @@ def furthestBuilding(self, heights: List[int], bricks: int, ladders: int) -> int
 # https://1e9.medium.com/monotonic-queue-notes-980a019d5793
 # LC456. 132 Pattern
 def find132pattern(self, nums: List[int]) -> bool:  # O(n) time and space
-    stack = []
+    stack = []  # decreasing
     mid = float('-inf')
-    for n in nums[::-1]:
+    for n in nums[::-1]:  # from end!!
         if n < mid: return True # this is smallest
-        while stack and stack[-1] < n:
+        while stack and n > stack[-1]:
             mid = stack.pop() # this n is largest
         stack.append(n)
     return False
@@ -162,16 +162,17 @@ def subArrayRanges(self, nums: List[int]) -> int:  # O(n) time and space
         s.append(i)
     return res
 
-# LC907. Sum of Subarray Minimums
-def sumSubarrayMins(self, arr: List[int]) -> int:  # O(n)
-    res, stack = 0, []  #  non-decreasing
+# LC907. Sum of Subarray Minimums    sum sub min
+def sumSubarrayMins(self, arr: List[int]) -> int:
+    res, stack = 0, []  # O(n) time and space
     A = [float('-inf')] + arr + [float('-inf')]
     for i, n in enumerate(A):
-        while stack and A[stack[-1]] > n:
+        while stack and n < A[stack[-1]]:  #  non-decreasing stack
             cur = stack.pop()
-            res += A[cur] * (i - cur) * (cur - stack[-1])  # right * left
+            # num of subarrays with A[cur] as minimum, right * left
+            res += A[cur] * (i - cur) * (cur - stack[-1])
         stack.append(i)
-    return res % (10**9 + 7)
+    return res % (10**9 + 7)  # have to do this at the end
 
 # LC962. Maximum Width Ramp
 def maxWidthRamp(self, A):

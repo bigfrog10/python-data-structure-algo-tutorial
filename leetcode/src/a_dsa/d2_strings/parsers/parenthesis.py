@@ -42,16 +42,14 @@ def isValid(self, s: str) -> bool:
 
 # LC32. Longest Valid Parentheses - longest substring
 def longestValidParentheses(self, s: str) -> int:  # O(n) time and space
-    stack, longest = [0], 0  # track current length and its max
-    for c in s:
-        if c == "(": stack.append(0)
+    res, stack = 0, [-1]
+    for i in range(len(s)):
+        if s[i] == "(": stack.append(i)
         else:  # )
-            if len(stack) > 1:
-                val = stack.pop()
-                stack[-1] += val + 2
-                longest = max(longest, stack[-1])
-            else: stack = [0]  # get unmatched ), restart
-    return longest
+            stack.pop()
+            if not stack: stack.append(i)
+            else: res = max(res, i - stack[-1])
+    return res
 def longestValidParentheses(self, s: str) -> int:  # O(n) time and O(1) space
     n = len(s)
     maxl = left = right = 0
@@ -178,11 +176,31 @@ def diffWaysToCompute(self, expression: str) -> List[int]:
 
 
 
-# LC678. Valid Parenthesis String - paretnh with *, par with *, par *
-def checkValidString(self, s):  # greedy
-    cmin = cmax = 0  # smallest and largest possible number of (, or how many ) expected
-    for i in s:
-        cmax += - 1 if i == ")" else cmax + 1  # treat * as (
-        cmin = cmin + 1 if i == '(' else max(cmin - 1, 0)  # treat * as )
-        if cmax < 0: return False  # too many (
-    return cmin == 0
+# LC678. Valid Parenthesis String - paretnh with *, par with *, par *  valid paren *
+def checkValidString(self, s):
+    n = len(s)  # O(n) time and O(1) space
+    open_count = close_count = 0
+    for i in range(n):  # Traverse the string from both ends simultaneously
+        if s[i] == '(' or s[i] == '*': open_count += 1
+        else: open_count -= 1
+        if s[n - 1 - i] == ')' or s[n - 1 - i] == '*': close_count += 1
+        else: close_count -= 1
+        if open_count < 0 or close_count < 0: return False
+    return True
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

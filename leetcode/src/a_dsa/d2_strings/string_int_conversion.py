@@ -58,7 +58,12 @@ def titleToNumber(self, s: str) -> int:
     return res
 
 # LC168. Excel Sheet Column Title
-
+def convertToTitle(self, columnNumber: int) -> str:
+    ans = ""
+    while columnNumber:
+        columnNumber, r = divmod(columnNumber-1, 26)
+        ans += chr(r + ord("A"))
+    return ans[::-1]
 
 
 

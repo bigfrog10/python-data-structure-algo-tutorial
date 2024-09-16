@@ -63,7 +63,7 @@ def minPairSum(self, nums: List[int]) -> int:
 
 # LC16. 3Sum Closest - find closest sum
 def threeSumClosest(self, nums: List[int], target: int) -> int:  # O(n^2)
-    diff = float('inf')
+    diff = float('inf')  # O(n^2) time, O(1) space
     nums.sort()  # O(nlogn), required by 2 pointers
     for i in range(len(nums)):  # O(n)
         lo, hi = i + 1, len(nums) - 1

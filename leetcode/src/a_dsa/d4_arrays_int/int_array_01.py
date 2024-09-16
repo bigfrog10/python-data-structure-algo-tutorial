@@ -1,9 +1,9 @@
 
 # LC486. Predict the Winner
-def predictTheWinner(self, nums: List[int]) -> bool:
+def predictTheWinner(self, nums: List[int]) -> bool:  # O(n^2) time and O(n) space
     n = len(nums)
-    @cache
-    def maxDiff(left, right):
+    @cache  # (O(n^2)
+    def maxDiff(left, right):  # he maximum score difference the current player can achieve.
         if left == right: return nums[left]
         score_by_left = nums[left] - maxDiff(left + 1, right)
         score_by_right = nums[right] - maxDiff(left, right - 1)
@@ -24,7 +24,7 @@ def countHillValley(self, nums: List[int]) -> int:
             trend = -1
     return count
 
-# LC2303. Calculate Amount Paid in Taxes
+# LC2303. Calculate Amount Paid in Taxes     tax calc
 def calculateTax(self, brackets: List[List[int]], income: int) -> float:
     ans = prev = 0
     for hi, pct in brackets:

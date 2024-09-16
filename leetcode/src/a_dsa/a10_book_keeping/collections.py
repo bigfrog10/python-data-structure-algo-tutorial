@@ -54,9 +54,9 @@ class Cashier:
         bill = 0
         self.num_customers += 1
         for pid, amount in zip(product, amount):
-            bill += amount * (self.product_prices[pid])
+            bill += amount * self.product_prices[pid]
         if self.num_customers % self.n == 0:
-            bill *= ((100 - self.discount) / 100)
+            bill *= (100.0 - self.discount) / 100.0
         return bill
 
 # LC341. Flatten Nested List Iterator, space O(N + L), N # of integers, L # of lists
@@ -101,7 +101,7 @@ class RandomizedSet:
         return True
     def remove(self, val: int) -> bool:  # O(1)
         if val not in self.index: return False
-        pos = self.index[val]
+        pos = self.index[val]  # index in values
         self.index[self.values[-1]] = self.index[val]
         del self.index[val]  # handle index
         self.values[pos] = self.values[-1]

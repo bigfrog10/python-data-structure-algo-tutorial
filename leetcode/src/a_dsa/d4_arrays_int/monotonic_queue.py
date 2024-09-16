@@ -28,22 +28,15 @@ def longestSubarray(self, nums: List[int], limit: int) -> int:  # O(n)
     return len(nums) - i
 
 # LC239. Sliding Window Maximum
-def maxSlidingWindow(self, nums: 'List[int]', k: 'int') -> 'List[int]':  # O(n)
-    n = len(nums)
-    if n == 0 or k == 0: return []
-    if k == 1: return nums
-    deq = collections.deque()
-    def clean_deque(i):
-        if deq and deq[0] == i - k: deq.popleft()  # remove indexes of elements not from sliding window
-        # remove from deq indexes of all elements
-        # which are smaller than current element nums[i]
+def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+    res =[]   # O(n) time, O(k) space
+    deq = collections.deque()  # store idxs, nums mono decreasing
+    for i in range(len(nums)):
+        if deq and deq[0] == i - k: deq.popleft()  # sliding out
         while deq and nums[i] > nums[deq[-1]]: deq.pop() # decreasing queue
-    output =[]
-    for i in range(n):
-        clean_deque(i)
         deq.append(i)
-        if i >= k-1: output.append(nums[deq[0]])
-    return output
+        if i >= k-1: res.append(nums[deq[0]])  # range is [0, k-1]
+    return res
 
 # LC1425. Constrained Subsequence Sum
 def constrainedSubsetSum(self, nums: List[int], k: int) -> int:
