@@ -41,7 +41,7 @@ def recoverTree(self, root: Optional[TreeNode]) -> None:
         root = root.right # check right side
     x.val, y.val = y.val, x.val
 
-# LC938. Range Sum of BST - works for count, average as well  range sum bst
+# LC938. Range Sum of BST - works for count, average as well  range sum bst range sum
 def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int: # O(n) time and space
     ret = 0
     def dfs(node):
@@ -104,7 +104,7 @@ def largestBSTSubtree(self, root: TreeNode) -> int:
     def find(node):  # post order, bottom up
         nonlocal highest
         if not node: return float('inf'), float('-inf'), 0
-        lmin, lmax, lnum = find(node.left)
+        lmin, lmax, lnum = find(node.left)  # left min, max, and number of nodes
         rmin, rmax, rnum = find(node.right)
         n = float('-inf')  # to indicate this is not a bst
         if lmax < node.val < rmin:  # this is a bst

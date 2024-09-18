@@ -1,5 +1,5 @@
 
-# LC1718. Construct the Lexicographically Largest Valid Sequence   lexi large
+# LC1718. Construct the Lexicographically Largest Valid Sequence   lexi large seq   lexi seq
 def constructDistancedSequence(self, n: int) -> List[int]:  # O(n!) time, O(n) space
     m = 2*n - 1
     A = [0] * m  # 0 means not

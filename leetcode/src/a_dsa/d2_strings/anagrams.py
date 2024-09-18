@@ -2,9 +2,7 @@
 # LC438. Find All Anagrams in a String
 def findAnagrams(self, s: str, p: str) -> List[int]:  # O(slen) time, O(1) space, plen <= 26 letters
     slen, plen = len(s), len(p)
-    if slen < plen: return []  # no enough chars
-    pcounts = Counter(p)  # anagram signature
-    scounts = Counter()  # accumulate and update counts along the way
+    scounts, pcounts = Counter(), Counter(p)  # accumulate and update counts along the way
     ret = []
     for i in range(slen):
         scounts[s[i]] += 1

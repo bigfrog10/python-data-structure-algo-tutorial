@@ -1,7 +1,11 @@
 
+# LC1773. Count Items Matching a Rule
+def countMatches(self, items: List[List[str]], ruleKey: str, ruleValue: str) -> int:
+    rule = {'type' : 0, 'color' : 1, 'name' : 2}
+    return sum(1 for item in items if item[rule[ruleKey]] == ruleValue)
+
 # LC173. Binary Search Tree Iterator   bst iterator
-# O(n) time in constructor, O(n) space
-class BSTIterator:
+class BSTIterator:  # O(n) time in constructor, O(n) space
     def __init__(self, root: Optional[TreeNode]):
         self.arr = []
         self.curr_index = 0
@@ -88,12 +92,12 @@ class HitCounter:
         self.data = self.data[idx:]
         return len(self.data)
 
-# LC380. Insert Delete GetRandom O(1), RandomizedSet, top100
+# LC380. Insert Delete GetRandom O(1), RandomizedSet, top100   random set
 import random
 class RandomizedSet:
     def __init__(self):
         self.values = []
-        self.index = {}  # value 2 positions
+        self.index = {}  # value 2 position
     def insert(self, val: int) -> bool: # O(1)
         if val in self.index: return False
         self.values.append(val)

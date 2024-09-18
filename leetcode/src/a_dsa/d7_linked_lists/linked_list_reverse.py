@@ -1,12 +1,12 @@
 
-# LC206. Reverse Linked List, top100
+# LC206. Reverse Linked List, top100  reverse list
 def reverseList(self, head: ListNode) -> ListNode:
     prev, curr = None, head
     while curr is not None:
         curr.next, prev, curr = prev, curr, curr.next
     return prev
 
-# LC92. Reverse Linked List II - reverse between 2 nodes
+# LC92. Reverse Linked List II - reverse between 2 nodes  reverse list
 def reverseBetween(self, head, m, n):
     dummy = start = ListNode(0, head)
     for _ in range(m-1): start = start.next  # move the  position before m
@@ -26,14 +26,13 @@ def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
         prev, head = head, head.next  # move forward
     return dummy.next
 
-# LC25. Reverse Nodes in k-Group  k at a time
+# LC25. Reverse Nodes in k-Group  k at a time   reverse k-group  reverse k group
 def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
     n, curr = 0, head  # find size
     while curr:
         n += 1
         curr = curr.next
     dummy = nhead = ListNode()  # the new list to insert to, nhead is previous
-    ntail = None  # store temp head for next
     for _ in range(n//k):
         ntail = head  # the save the position for later jumping to
         for _ in range(k):

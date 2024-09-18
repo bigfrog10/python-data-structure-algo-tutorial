@@ -81,7 +81,7 @@ def exclusiveTime(self, n, logs):  # O(n) runtime and space
 
 
 
-# LC986. Interval List Intersections - of 2 lists of intervals
+# LC986. Interval List Intersections - of 2 lists of intervals  interval intersaction
 def intervalIntersection(self, firstList: List[List[int]], secondList: List[List[int]]) -> List[List[int]]:
     ret = []  # O(m + n)
     i = j = 0

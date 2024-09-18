@@ -170,7 +170,7 @@ def pourWater(self, heights: List[int], volume: int, k: int) -> List[int]:  # O(
     return heights
 
 
-# LC532. K-diff Pairs in an Array - k diff pairs
+# LC532. K-diff Pairs in an Array - k diff pairs k diff
 def findPairs(self, nums: List[int], k: int) -> int:  # O(n) time and space
     result = 0
     counter = Counter(nums)
@@ -509,7 +509,7 @@ def summaryRanges(self, nums: List[int]) -> List[str]:
             pointer = i+1
     return ans
 
-# LC628. Maximum Product of Three Numbers  prod 3 num
+# LC628. Maximum Product of Three Numbers  max prod 3 num
 def maximumProduct(self, nums: List[int]) -> int:
     max1 = max2 = max3 = float('-inf')  # 1 > 2 > 3
     min1 = min2 = float('inf')  # 1 < 2, to deal with negative numbers

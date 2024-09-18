@@ -14,7 +14,7 @@ def compress(self, chars: List[str]) -> int:
     i = res = 0  # i is the counter to mark current progress
     while i < len(chars):
         glen = 1  # group length
-        while (i + glen < len(chars) and chars[i + glen] == chars[i]):
+        while i + glen < len(chars) and chars[i + glen] == chars[i]:
             glen += 1
         chars[res] = chars[i]  # group char
         res += 1

@@ -1,5 +1,5 @@
 
-# LC609. Find Duplicate File in System
+# LC609. Find Duplicate File in System  dupe file
 def findDuplicate(self, paths: List[str]) -> List[List[str]]:  # O(all chars) time and space
     groups = defaultdict(list)
     for s in paths:
@@ -127,7 +127,6 @@ def wordBreak(self, s: str, wordDict: List[str]) -> bool:
 def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
     word_set = set(words)  # O(N * M^2) time
     def check(word):  # could use cache here
-        n = len(word)  # Check if current word can be made from smaller words
         for i in range(1, n):  # O(m^2), longest word
             if word[i:] not in word_set: continue
             # so now word[i:] in word_set
@@ -369,7 +368,7 @@ def commonChars(self, words: List[str]) -> List[str]:  # O(all chars in words)
 
 # LC824 Goat Latin
 def toGoatLatin(self, sentence: str) -> str:
-    vowels = set(['a', 'e', 'i', 'o', 'u'])
+    vowels = set('aeiou')
     words = sentence.split(' ')
     ret = []
     for i, w in enumerate(words):
@@ -379,7 +378,7 @@ def toGoatLatin(self, sentence: str) -> str:
         ret.append(w)
     return ' '.join(ret)
 
-# LC2023. Number of Pairs of Strings With Concatenation Equal to Target concat to target  pair concat equal
+# LC2023. Number of Pairs of Strings With Concatenation Equal to Target num pair concat to target  pair concat equal
 def numOfPairs(self, nums: List[str], target: str) -> int:
     freq = Counter(nums)
     ans = 0

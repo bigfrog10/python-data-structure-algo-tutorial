@@ -1,6 +1,6 @@
 from typing import List
 
-# LC992. Subarrays with K Different Integers - good subarrays
+# LC992. Subarrays with K Different Integers - good subarrays  k diff   k-diff
 # https://leetcode.com/problems/subarrays-with-k-different-integers/discuss/523136/JavaC%2B%2BPython-Sliding-Window
 def subarraysWithKDistinct(self, A: List[int], K: int) -> int:  # O(n) time and O(k) space
     def atMostK(A, K): # we demand K diff ints
@@ -46,14 +46,14 @@ def moveZeroes(self, nums: List[int]) -> None:
 
 # LC1004. Max Consecutive Ones III - can flip <=k bits.
 def longestOnes(self, nums: List[int], k: int) -> int:
-    left = zero_count =max_length = 0
+    left = zeros = res = 0
     for right in range(len(nums)):
-        if nums[right] == 0: zero_count += 1
-        while zero_count > k:
-            if nums[left] == 0: zero_count -= 1
+        if nums[right] == 0: zeros += 1
+        while zeros > k:
+            if nums[left] == 0: zeros -= 1
             left += 1
-        max_length = max(max_length, right - left + 1)
-    return max_length
+        res = max(res, right - left + 1)
+    return res
 def longestOnes(self, nums: List[int], K: int) -> int:
     left = 0
     for right in range(len(nums)):

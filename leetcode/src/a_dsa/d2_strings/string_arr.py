@@ -1,4 +1,16 @@
 
+# LC1371. Find the Longest Substring Containing Vowels in Even Counts
+def findTheLongestSubstring(self, s: str) -> int:
+    voules = {'a': 1, 'e': 2, 'i': 4, 'o': 8, 'u': 16,}
+    idx = {0: -1,}  # last seen index, O(n) time, O(1) space
+    n = len(s)
+    res, musk = 0, 0
+    for i in range(n):
+        if s[i] in "aeiou": musk ^= voules[s[i]]
+        if musk in idx:  # 2 evens or 2 odd will work
+            res = max(res, i - idx[musk])
+        else: idx[musk] = i  # save it regardless even or odd
+    return res
 
 # LC893. Groups of Special-Equivalent Strings
 def numSpecialEquivGroups(self, words: List[str]) -> int:
@@ -102,7 +114,7 @@ def leastInterval(self, tasks: List[str], n: int) -> int:
 
 # LC2365. Task Scheduler II
 def taskSchedulerII(self, tasks: List[int], space: int) -> int:
-    start_day = {task:0 for task in tasks}
+    start_day = {task:0 for task in tasks}  # O(n) time space
     day = 0
     for task in tasks:
         day += 1

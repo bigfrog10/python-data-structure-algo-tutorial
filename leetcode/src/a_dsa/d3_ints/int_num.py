@@ -69,7 +69,7 @@ def numSquares(self, n):
 # LC38. Count and Say
 def countAndSay(self, n):
     s = '1'
-    for _ in range(n - 1):
+    for _ in range(n - 1):  # group is ['1', '1', '1']
         s = ''.join(str(len(list(group))) + digit for digit, group in itertools.groupby(s))
         print(s)
     return s
@@ -421,8 +421,8 @@ def isPalindrome(self, x: int) -> bool:  # O(logn)
     if x < 0 or (x > 0 and x % 10 == 0): return False  # 1 and 10 returns same in below
     rev = 0
     while x > rev:
-        rev = rev * 10 + x % 10
-        x = x // 10
+        x, q = divmod(x, 10)
+        rev = rev * 10 + q
     return x == rev or x == rev // 10
 
 # LC1067. Digit Count in Range

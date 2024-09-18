@@ -1,24 +1,18 @@
 
-# LC1947. Maximum Compatibility Score Sum
-def maxCompatibilitySum1(self, students: List[List[int]], mentors: List[List[int]]) -> int:
-    m = len(students)  # O(m * 2^m)
-    n = len(students[0])
-    # accelerate a bit by precomputing the compatibilities
-    compats = [[0]*m for _ in range(m)]
-    for i in range(m):
-        for j in range(m):
-            compats[i][j] = sum(a == b for a, b in zip(students[i], mentors[j]))
-    ans = 0
+# LC1947. Maximum Compatibility Score Sum  max compat score sum
+def maxCompatibilitySum(self, students: List[List[int]], mentors: List[List[int]]) -> int:
+    m, n = len(students), len(students[0])  # O(m^2 * 2^m)
     @cache
-    def max_comp(i, mavail: int) -> int:
-        if i == m: return 0
+    def dp(student: int, mentor: int) -> int:  # max score sum
+        if student == m: return 0  # all students assigned,
         res = 0
-        for j in range(m):
-            mask = 1 << j
-            if mavail ^ mask:
-                res = max(res, compats[i][j] + max_comp(i+1, mavail ^ mask))
+        for i in range(m):  # iterate all mentors
+            if mentor & (1 << i): continue  # mentor already assigned.
+            score = sum(1 for j in range(n) if students[student][j] == mentors[i][j])
+            res = max(res, score + dp(student + 1, mentor | (1 << i)))
         return res
-    return max_comp(0, 0)
+    return dp(0, 0)
+# https://leetcode.com/problems/maximum-compatibility-score-sum/solutions/5776782/python3-bitmask-dp-detailed-explanation/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
 
 # LC750. Number Of Corner Rectangles
 def countCornerRectangles(self, grid: List[List[int]]) -> int:
@@ -50,7 +44,7 @@ def resultGrid(self, image: List[List[int]], threshold: int) -> List[List[int]]:
             image[i][j] = grid[i][j][0] // grid[i][j][1]
     return image
 
-# LC2397. Maximum Rows Covered by Columns  max rows
+# LC2397. Maximum Rows Covered by Columns  max rows  max row covered
 def maximumRows(self, matrix: List[List[int]], numSelect: int) -> int:  # O(m) space, O(2^n * m) time
     n,m = len(matrix),len(matrix[0])
     ans = 0

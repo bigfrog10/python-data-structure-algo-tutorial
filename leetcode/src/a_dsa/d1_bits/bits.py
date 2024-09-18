@@ -58,7 +58,7 @@ def totalHammingDistance(self, nums: List[int]) -> int:  # O(n), better than n^2
     return sum(b.count('0') * b.count('1') for b in zipped)  # constant time
 
 
-# LC191. Number of 1 Bits, Hamming distance
+# LC191. Number of 1 Bits, Hamming distance   bit 1 in num    1 bit in num
 def hammingWeight(self, n: int) -> int:
     res = 0
     while n != 0:

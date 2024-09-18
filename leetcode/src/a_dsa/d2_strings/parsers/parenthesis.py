@@ -36,7 +36,7 @@ def isValid(self, s: str) -> bool:
     for c in s:
         if c in PAIRS.keys(): stack.append(c) # open parentheses
         else:  # closed parentheses
-            if len(stack) != 0 and PAIRS[stack[-1]] == c: stack.pop() # matched
+            if stack and PAIRS[stack[-1]] == c: stack.pop() # matched
             else: return False # no suppose to have other chars or ) has no (
     return len(stack) == 0
 
@@ -66,7 +66,7 @@ def longestValidParentheses(self, s: str) -> int:  # O(n) time and O(1) space
         elif left >= right: left = right = 0
     return maxl
 
-# LC1249. Minimum Remove to Make Valid Parentheses - with letters, return one string result  min remove
+# LC1249. Minimum Remove to Make Valid Parentheses - with letters, return one string result  min remove  min paren remove
 def minRemoveToMakeValid(self, s: str) -> str:  # O(n) runtime and space
     stack, remove = [], []  # find all indices to remove
     for i, c in enumerate(s):

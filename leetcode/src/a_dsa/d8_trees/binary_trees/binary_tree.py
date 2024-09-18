@@ -78,26 +78,6 @@ def boundaryOfBinaryTree(self, root: Optional[TreeNode]) -> List[int]:  # O(n) r
     right_bound(root.right)
     return ans
 
-# LC987. Vertical Order Traversal of a Binary Tree - sort in same position
-def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:  # O(nlog(n/w)
-    res = defaultdict(list) # column number to (row number, val)
-    min_col = max_col = 0  # track column range
-    def preorder(node, i, j):
-        nonlocal min_col, max_col
-        if not node: return
-        res[j].append((i, node.val))  # keep same cell values together
-        min_col = min(min_col, j)
-        max_col = max(max_col, j)
-        preorder(node.left, i+1, j-1)
-        preorder(node.right, i+1, j+1)
-    preorder(root, 0, 0)
-    # sort within cell
-    ret = [[n[1] for n in sorted(res[k])] for k in range(min_col, max_col + 1)]
-    return ret
-
-
-
-
 # LC145. Binary Tree Postorder Traversal  bt postorder
 def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
     nums=[]  # O(n) time, O(h) space

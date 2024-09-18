@@ -2,9 +2,10 @@
 def isNumber(self, s: str) -> bool:
     # Example:              +-     1 or 1. or 1.2 or .2   e +- 1
     # ? - 0 or 1 match, +: 1 or more, *: 0 or more
+    # r means raw string, \ is \
     regex = re.compile(r"^[+-]?((\d+\.?\d*)|(\d*\.?\d+))([eE][+-]?\d+)?$")
     return bool(regex.match(s.strip()))
-def isNumber(self, s: str) -> bool:
+def isNumber(self, s: str) -> bool:  # O(n) time, O(1) space
     s = s.strip()
     met_dot = met_e = met_digit = False
     for i, char in enumerate(s):

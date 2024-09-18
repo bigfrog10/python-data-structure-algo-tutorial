@@ -1,4 +1,38 @@
 
+# LC629. K inverse Pairs Array
+def kInversePairs(self, n: int, k: int) -> int:
+    # for k=0, dp=1, just 1..n    O(nk) time in loops, O(k) space
+    dp, mod = [1]+[0] * k, 1_000_000_007
+    # dp[j] is the number of permutations with j inverse pairs, for i numbers
+    for i in range(n):  # add a new number
+        tmp, sm = [], 0
+        for j in range(k + 1):
+            sm += dp[j]  # cumulative sum
+            if j >= i+1: sm -= dp[j-i-1]  # minus invalid pairs
+            sm %= mod
+            tmp.append(sm)
+        dp = tmp
+    return dp[k]
+def kInversePairs(self, n: int, k: int) -> int:
+    @cache  # works but time out  O(n * k)
+    def dp(n, k):  # dp(n, k) means arrays with length n and k inverse pairs
+        if k == 0: return 1
+        if n == 1 or k < 0: return 0
+        # dp(n, k-1): any k-1 pair, move n to left, is a k pair
+        # dp(n-1, k): put n at the end
+        # dp(n-1, k-n): overcount from #1, n at the beginning. dp(n - 1, k-1 - (n-1) )
+        return (dp(n, k-1) + dp(n-1, k) - dp(n-1, k-n)) % (10**9+7)
+    return dp(n, k)
+
+# LC2419. Longest Subarray With Maximum Bitwise AND    max bits subarray
+def longestSubarray(self, nums: List[int]) -> int:  # O(n) time, O(1) space
+    # max(nums) is the asked number. So we look for subarrays of max * m
+    j, max_val, res = - 1, max(nums), 0
+    for i, num in enumerate(nums):
+        if num != max_val: j = i
+        res = max(res, i - j)
+    return res
+
 # LC486. Predict the Winner
 def predictTheWinner(self, nums: List[int]) -> bool:  # O(n^2) time and O(n) space
     n = len(nums)
@@ -11,7 +45,7 @@ def predictTheWinner(self, nums: List[int]) -> bool:  # O(n^2) time and O(n) spa
     return maxDiff(0, n - 1) >= 0
 
 # LC2210. Count Hills and Valleys in an Array
-def countHillValley(self, nums: List[int]) -> int:
+def countHillValley(self, nums: List[int]) -> int:  # O(n) time, O(1) space
     count, trend = 0, 0  # trend 1 for up, 0 flat, -1 down
     for i in range(1, len(nums)):
         if nums[i] > nums[i-1]:
@@ -51,7 +85,7 @@ def minSwaps(self, data: List[int]) -> int:  # O(n) and O(1)
         max_one = max(max_one, cnt_one)
     return ones - max_one
 
-# LC525. Contiguous Array - longest subarray with equal # of 1 and 0, 01 array
+# LC525. Contiguous Array - longest subarray with equal # of 1 and 0, 01 array 01 equal
 def findMaxLength(self, nums: List[int]) -> int:
     val2idx = {}  # O(n) time and space
     cumu = max_len = 0

@@ -19,7 +19,7 @@ def palindromePairs(self, words: List[str]) -> List[List[int]]:  # O(nk^2)
 def isPalindrome(self, s: str) -> bool:  # O(n)
     i, j = 0, len(s) - 1  #
     while i < j:
-        while i < j and not s[i].isalnum(): i += 1
+        while i < j and not s[i].isalnum(): i += 1  # isalpha
         while i < j and not s[j].isalnum(): j -= 1
         if s[i].lower() != s[j].lower(): return False
         i += 1
@@ -135,7 +135,7 @@ def nearestPalindromic(self, n: str) -> str:
 
 
 
-# LC1216. Valid Palindrome III - k-palindrome - remove at most k chars
+# LC1216. Valid Palindrome III - k-palindrome - remove at most k chars  k pali  k-pali
 def isValidPalindrome(self, s: str, k: int) -> bool:  # O(n^2) time and O(n) space
     n = len(s)
     dp = [0] * n  # how many modifications we do for palindrome for j

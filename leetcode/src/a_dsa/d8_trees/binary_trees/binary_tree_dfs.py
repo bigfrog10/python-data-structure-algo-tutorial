@@ -55,11 +55,11 @@ def diameterOfBinaryTree(self, root: TreeNode) -> int:
         right = path_max(node.right)
         join = left + right  # path means edges, not nodes
         diameter = max(diameter, join)
-        return 1 + max(left, right)  # plus this node
+        return 1 + max(left, right)  # plus this edge
     path_max(root)
     return diameter
 
-# LC1973. Count Nodes Equal to Sum of Descendants - subnodes sum
+# LC1973. Count Nodes Equal to Sum of Descendants - sub nodes sum
 def equalToDescendants(self, root: Optional[TreeNode]) -> int:
     output = 0
     def traverse(node):  # return sum of this subtree

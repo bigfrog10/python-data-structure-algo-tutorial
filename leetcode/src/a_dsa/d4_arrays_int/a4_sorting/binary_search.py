@@ -35,7 +35,7 @@ def maxDistance(self, position: List[int], m: int) -> int:
                 balls += 1
         return balls < m
     position = sorted(position) # O(n) space, O(nlogn) time
-    return bisect.bisect_left(range(position[-1]), 1, key=f) - 1
+    return bisect.bisect_left(range(position[-1]), True, key=f) - 1
 
 # LC35. Search Insert Position
 def searchInsert(self, nums: List[int], target: int) -> int:
@@ -48,7 +48,7 @@ def searchInsert(self, nums: List[int], target: int) -> int:
     return left
 # return bisect.bisect_left(nums, target)
 
-# LC34. Find First and Last Position of Element in Sorted Array  starting and ending position
+# LC34. Find First and Last Position of Element in Sorted Array  starting and ending position  1st last position
 def searchRange(self, nums: List[int], target: int) -> List[int]:
     if not nums or target < nums[0] or target > nums[-1]: return [-1, -1]
     left, right = 0, len(nums) - 1

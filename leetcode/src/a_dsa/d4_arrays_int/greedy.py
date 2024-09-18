@@ -23,16 +23,16 @@ def minKBitFlips(self, nums: List[int], k: int) -> int:
 # LC134. Gas Station - on a circle
 def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:  # O(n)
     if not gas or not cost: return -1
-    total = current = 0
-    start_station = 0
+    total = curr = 0
+    ans = 0
     for i, (g, c) in enumerate(zip(gas, cost)):
         exp = g - c
         total += exp  # accumulate total diff of gas - cost
-        current += exp
-        if current < 0:
-            current = 0
-            start_station = i+1
-    return start_station if total >= 0 else -1
+        curr += exp
+        if curr < 0:
+            curr = 0
+            ans = i+1
+    return ans if total >= 0 else -1
 
 # LC1710. Maximum Units on a Truck
 def maximumUnits(self, boxTypes: List[List[int]], truckSize: int) -> int:

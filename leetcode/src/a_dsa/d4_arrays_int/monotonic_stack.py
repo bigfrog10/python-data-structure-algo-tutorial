@@ -1,14 +1,14 @@
 
 # LC2289. Steps to Make Array Non-decreasing
 def totalSteps(self, nums: List[int]) -> int:
-    res,stack = 0, []
+    res, stack = 0, []  # O(n) time space
     for i in range(len(nums)-1,-1,-1):
         cur = 0  # number of rounds to remove nums
-        while stack and nums[stack[-1][0]]<nums[i]:
-            _,v = stack.pop()  # eat this number
-            cur=max(cur+1,v)
-        res = max(res,cur)
-        stack.append([i,cur])
+        while stack and nums[stack[-1][0]] < nums[i]:
+            _, v = stack.pop()  # eat this number
+            cur = max(cur+1, v)
+        res = max(res, cur)
+        stack.append([i, cur])
     return res
 
 # LC768. Max Chunks To Make Sorted II
@@ -46,7 +46,7 @@ def find132pattern(self, nums: List[int]) -> bool:  # O(n) time and space
         stack.append(n)
     return False
 
-# LC84. Largest Rectangle in Histogram
+# LC84. Largest Rectangle in Histogram   large rect histo
 def largestRectangleArea(self, heights: List[int]) -> int:  # O(n) runtime and space
     heights.append(0)  # append 0 so heights[-1] is this 0 when stack has -1
     ans, stack = 0, [-1]  # stack for increasing height index
@@ -75,8 +75,6 @@ def maximalRectangle(self, matrix):  # O(mn) time and O(n) space
             stack.append(i)
     return ans
 
-
-
 # LC1944. Number of Visible People in a Queue
 def canSeePersonsCount(self, heights: List[int]) -> List[int]:  # O(n)
     stack, res = [], [0] * len(heights)  # decreasing mono stack
@@ -86,17 +84,17 @@ def canSeePersonsCount(self, heights: List[int]) -> List[int]:  # O(n)
         stack.append(i)
     return res
 
-# LC739. Daily Temperatures
+# LC739. Daily Temperatures   next greater element
 def dailyTemperatures(self, T: List[int]) -> List[int]:
     n = len(T)
-    answer, hottest = [0] * n, 0  # O(n) runtime, O(1) space
+    answer, hottest = [0] * n, 0  # O(n) runtime, O(1) space ( not count result)
     for curr_day in range(n)[::-1]:  # from backward is to reuse tail results
         current_temp = T[curr_day]
         if current_temp >= hottest:
             hottest = current_temp
             continue  # the answer is 0, no need to go further.
         days = 1
-        while current_temp >= T[curr_day + days]:
+        while current_temp >= T[curr_day + days]:  # Total run < N -> O(n)
             # this is the "days" jump to shrink the while total to N for the for loop
             days += answer[curr_day + days]  # accu through valley
         answer[curr_day] = days
@@ -139,23 +137,20 @@ def findMaximums(self, nums: List[int]) -> List[int]:
         res[i - 1] = max(res[i], res[i - 1])
     return res
 
-# LC2104. Sum of Subarray Ranges - see LC828
+# LC2104. Sum of Subarray Ranges - see LC828   sum sub range
 def subArrayRanges(self, nums: List[int]) -> int:  # O(n) time and space
-    res = 0
-    inf = float('inf')
-    A = [-inf] + nums + [-inf]
-    s = []
+    A = [-math.inf] + nums + [-math.inf]  # make sure stack has 1 elem
+    res, s = 0, []
     for i, x in enumerate(A):
-        while s and A[s[-1]] > x:
+        while s and A[s[-1]] > x: # stack increasing
             j = s.pop()
             k = s[-1]
             res -= A[j] * (i - j) * (j - k)
         s.append(i)
-
-    A = [inf] + nums + [inf]
+    A = [inf] + nums + [inf]  # use inf instead of -inf
     s = []
     for i, x in enumerate(A):
-        while s and A[s[-1]] < x:
+        while s and A[s[-1]] < x:  # stack decreasing
             j = s.pop()
             k = s[-1]
             res += A[j] * (i - j) * (j - k)
@@ -182,18 +177,6 @@ def maxWidthRamp(self, A):
     for j in range(len(A))[::-1]:
         while st and A[j] >= A[st[-1]]: res = max(res, j - st.pop())
     return res
-
-# LC84. Largest Rectangle in Histogram
-def largestRectangleArea(self, heights: List[int]) -> int:  # O(n) runtime and space
-    heights.append(0)  # append 0 so heights[-1] is this 0 when stack has -1
-    ans, stack = 0, [-1]  # stack for increasing height index
-    for i in range(len(heights)):  # last 0 will pop stack leftovers
-        while heights[i] < heights[stack[-1]]:
-            h = heights[stack.pop()]
-            w = i - stack[-1] - 1  # last pop use i always
-            ans = max(ans, h * w)
-        stack.append(i)
-    return ans
 
 # LC496. Next Greater Element I - first greater on right, 2 arrays  1st greater
 def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:

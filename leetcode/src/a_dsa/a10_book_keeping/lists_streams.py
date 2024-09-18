@@ -29,21 +29,20 @@ class FindSumPairs:
 class SparseVector:
     def __init__(self, nums: List[int]):
         self.pairs = []
-        for index, value in enumerate(nums):
-            if value != 0: self.pairs.append([index, value])
+        for i, v in enumerate(nums):  # pairs are sorted by i
+            if v != 0: self.pairs.append([i, v])
+    # Return the dotProduct of two sparse vectors
     def dotProduct(self, vec: 'SparseVector') -> int:
-        result = 0
-        p, q = 0, 0
+        p = q = result = 0
         while p < len(self.pairs) and q < len(vec.pairs):
             if self.pairs[p][0] == vec.pairs[q][0]:
                 result += self.pairs[p][1] * vec.pairs[q][1]
-                p += 1
-                q += 1
+                p, q = p+1, q+1
             elif self.pairs[p][0] < vec.pairs[q][0]: p += 1
             else: q += 1
         return result
 
-# LC346. Moving Average from Data Stream
+# LC346. Moving Average from Data Stream   mv data stream
 class MovingAverage:
     def __init__(self, size: int):
         self.size = size

@@ -22,7 +22,7 @@ def verticalOrder(self, root: TreeNode) -> List[List[int]]:  # O(n)
     if root is None: return []
     queue, columnTable = collections.deque([(root, 0)]), collections.defaultdict(list)
     min_column = max_column = 0  # track column range for last line
-    while queue:  # BFS
+    while queue:  # BFS so the cell list is in right order.
         node, column = queue.popleft()
         columnTable[column].append(node.val)
         if node.left: queue.append((node.left, column - 1))
@@ -31,7 +31,22 @@ def verticalOrder(self, root: TreeNode) -> List[List[int]]:  # O(n)
         max_column = max(max_column, column)
     return [columnTable[x] for x in range(min_column, max_column + 1)]
 
-
+# LC987. Vertical Order Traversal of a Binary Tree - sort in same position
+def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:  # O(nlog(n/w)
+    res = defaultdict(list) # column number to (row number, val)
+    min_col = max_col = 0  # track column range
+    def preorder(node, i, j):
+        nonlocal min_col, max_col
+        if not node: return
+        res[j].append((i, node.val))  # keep same cell values together
+        min_col = min(min_col, j)
+        max_col = max(max_col, j)
+        preorder(node.left, i+1, j-1)
+        preorder(node.right, i+1, j+1)
+    preorder(root, 0, 0)
+    # sort within cell
+    ret = [[n[1] for n in sorted(res[k])] for k in range(min_col, max_col + 1)]
+    return ret
 
 # LC662. Maximum Width of Binary Tree - row max width bt max level width
 def widthOfBinaryTree(self, root: TreeNode) -> int:
@@ -142,6 +157,24 @@ def levelOrder(self, root):
         ans.append([node.val for node in level])
         level = [kid for n in level for kid in (n.left, n.right) if kid]
     return ans
+
+# LC1609. Even Odd Tree
+def isEvenOddTree(self, root: Optional[TreeNode]) -> bool:
+    if not root: return True
+    is_incr = lambda arr: all(arr[i] < arr[i + 1] for i in range(len(arr) - 1))
+    is_decr = lambda arr: all(arr[i] > arr[i + 1] for i in range(len(arr) - 1))
+    is_even = lambda arr: all(arr[i] % 2 == 0 for i in range(len(arr)))
+    is_odd  = lambda arr: all(arr[i] % 2 == 1 for i in range(len(arr)))
+    ans, level, idx = [], [root], 1  # even idx
+    while level:
+        vals = [node.val for node in level]
+        if idx == 1 and (not is_incr(vals) or not is_odd(vals)):
+            return False
+        if idx == -1 and (not is_decr(vals) or not is_even(vals)):
+            return False
+        idx = -idx
+        level = [kid for n in level for kid in (n.left, n.right) if kid]
+    return True
 
 # LC1104. Path In Zigzag Labelled Binary Tree
 def pathInZigZagTree(self, label: int) -> List[int]:

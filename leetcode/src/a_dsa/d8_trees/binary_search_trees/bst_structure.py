@@ -6,12 +6,12 @@ def treeToDoublyList(self, root: 'Node') -> 'Node':  # O(n) time and O(1) space,
     curr = root
     while curr:
         if curr.left:
-            rightmost = curr.left # find predecessor
-            while rightmost.right: rightmost = rightmost.right
-            rightmost.right = curr  # predecessor to curr
+            rm = curr.left # find predecessor  # rightmost
+            while rm.right: rm = rm.right
+            rm.right = curr  # predecessor to curr
             tmp, curr = curr, curr.left
             tmp.left = None  # predecessor points to curr/tmp now, next else blcok set both dirs.
-        else:
+        else:  # right link is the double link
             curr.left, prev.right = prev, curr  # point to each other for the 1st node
             prev, curr = curr, curr.right
     prev.right = head.right  # link 1st and last nodes
@@ -65,14 +65,14 @@ def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:  # O(
     return convert(0, size - 1)
 
 # LC897. Increasing Order Search Tree - tree bst to linked list
-def increasingBST(self, root: TreeNode) -> TreeNode:  # O(n) runtime, O(H) space
-    def rearrange(node, tail):
+def increasingBST(self, root: TreeNode) -> TreeNode:  # O(n) runtime, O(H) space recursive calls
+    def dfs(node, tail):
         if not node: return tail
-        res = rearrange(node.left, node)  # left tree -> link list + root
+        res = dfs(node.left, node)  # left tree -> link list + root
         node.left = None
-        node.right = rearrange(node.right, tail)  # right tree -> link list + tail
+        node.right = dfs(node.right, tail)  # right tree -> link list + tail
         return res
-    return rearrange(root, None)
+    return dfs(root, None)
 
 # LC1008. Construct Binary Search Tree from Preorder Traversal
 def bstFromPreorder(self, preorder: List[int]) -> Optional[TreeNode]:

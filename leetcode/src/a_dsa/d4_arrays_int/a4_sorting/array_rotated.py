@@ -1,10 +1,7 @@
 # 1752. Check if Array Is Sorted and Rotated
 def check(self, nums: List[int]) -> bool:
-    count = 0
-    n = len(nums)
-    for i in range(n):  # O(n)
-        if nums[i] > nums[(i+1) % n]: count += 1
-    return count <= 1
+    n, count = len(nums), 0
+    return sum(1 if nums[i] > nums[(i+1) % n] else 0 for i in range(n)) <= 1
 
 # LC33. Search in Rotated Sorted Array - target index, distinct values   search rotated array
 def search(self, nums: List[int], target: int) -> int:  # O(logn)

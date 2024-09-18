@@ -93,7 +93,7 @@ def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
 # LC713. Subarray Product Less Than K - return # of such subarrays
 def numSubarrayProductLessThanK(self, nums: List[int], k: int) -> int:
     if k <= 1: return 0 # nums are positive, so there is no solution
-    prod = 1
+    prod = 1  # watch out for k=0 and k=1, array [0, 1], [1, 1]
     ans = left = 0
     for right, val in enumerate(nums):
         prod *= val

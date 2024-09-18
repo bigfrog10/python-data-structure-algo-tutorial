@@ -6,20 +6,20 @@ def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
     m, n = len(nums1), len(nums2)  # O(log(min(m,n))) time and O(1) space
     if m > n: return self.findMedianSortedArrays(nums2, nums1)
     left, right = 0, m  # bisect on smaller array
-    while left <= right:  # search for partitionA so that
-        partitionA = (left + right) // 2  # so right side may have 1 extra element
-        partitionB = (m + n + 1) // 2 - partitionA  # +1 needed the middle num of m+n when odd.
-        maxLeftA = float("-inf") if partitionA == 0 else nums1[partitionA - 1]
-        minRightA = float("inf") if partitionA == m else nums1[partitionA]
-        maxLeftB = float("-inf") if partitionB == 0 else nums2[partitionB - 1]
-        minRightB = float("inf") if partitionB == n else nums2[partitionB]
+    while left <= right:  # search for pA so that
+        pA = (left + right) // 2  # so right side may have 1 extra element
+        pB = (m + n + 1) // 2 - pA
+        maxLeftA = float("-inf") if pA == 0 else nums1[pA - 1]
+        minRightA = float("inf") if pA == m else nums1[pA]
+        maxLeftB = float("-inf") if pB == 0 else nums2[pB - 1]
+        minRightB = float("inf") if pB == n else nums2[pB]
         if maxLeftA <= minRightB and maxLeftB <= minRightA:
             if (m + n) % 2 == 0:
                 return (max(maxLeftA, maxLeftB) + min(minRightA, minRightB)) / 2
             else:
                 return max(maxLeftA, maxLeftB)
-        elif maxLeftA > minRightB: right = partitionA - 1
-        else: left = partitionA + 1
+        elif maxLeftA > minRightB: right = pA - 1
+        else: left = pA + 1
 
 # LC881. Boats to Save People
 def numRescueBoats(self, people: List[int], limit: int) -> int:  # nlogn
@@ -73,7 +73,7 @@ def sortedSquares(self, nums: List[int]) -> List[int]: # O(n)
         result[i] = square * square
     return result
 
-# LC26. Remove Duplicates from Sorted Array - in place change  remove dupe from sorted array
+# LC26. Remove Duplicates from Sorted Array - in place change  remove dupe from sorted array  remove dupe array
 def removeDuplicates(self, nums: List[int]) -> int:
     i = 0  # 2 pointers
     for j in range(1, len(nums)):
@@ -124,7 +124,7 @@ def numFriendRequests(self, ages: List[int]) -> int:  # O(n), prefix sum problem
     buckets = [0] * 121  # age 120 is given
     for a in ages: buckets[a] += 1  # bucket count
     res = 0
-    for i in range(1, len(buckets)):
+    for i in range(1, len(buckets)):  # i is age
         cnt = buckets[i]  # number of people with aga i
         buckets[i] += buckets[i-1]  # cumu sum
         if not cnt: continue  # conditions are: other age > i's age > other age // 2 + 7

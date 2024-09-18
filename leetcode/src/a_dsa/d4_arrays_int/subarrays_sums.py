@@ -12,7 +12,7 @@ def maxSubarrayLength(self, nums: List[int], k: int) -> int:
     return result
 
 
-# LC53. Maximum Subarray   - max sum amount all subarrays  max subarray
+# LC53. Maximum Subarray   - max sum in all subarrays  max subarray
 def maxSubArray(self, nums: List[int]) -> int:
     total, max_total = 0, -inf
     for i in range(len(nums)):
@@ -85,7 +85,7 @@ def numSubarraysWithSum(self, nums: List[int], k: int) -> int:
     return count
 
 
-# LC523. Continuous Subarray Sum - if exist s.t. sum to multiple of k  cont sub sum
+# LC523. Continuous Subarray Sum - if exist s.t. sum to multiple of k  cont sub sum mod k
 def checkSubarraySum(self, nums: List[int], k: int) -> bool:
     if not nums: return False
     summ, sd = 0, {0: -1}  # [2,4,3] 6, we need -1 for 2-element requirement

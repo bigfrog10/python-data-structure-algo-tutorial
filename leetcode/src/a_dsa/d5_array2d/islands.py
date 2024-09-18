@@ -56,9 +56,9 @@ def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
         for j in range(m): amax = max(amax, dfs(i, j))
     return amax
 
-# LC827. Making A Large Island
+# LC827. Making A Large Island  - larger island
 def largestIsland(self, grid: List[List[int]]) -> int: # O(n^2) runtime and space
-    if not grid or not grid[0]: return 0
+    if not grid or not grid[0]: return 0  # Or union find
     n = len(grid)
     def dfs(r, c, gid):  # get island size
         ret, grid[r][c] = 1, gid  # mark islands by numbers

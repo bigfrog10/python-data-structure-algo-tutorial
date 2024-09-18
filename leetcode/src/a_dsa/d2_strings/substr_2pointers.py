@@ -16,23 +16,25 @@ def minWindow(self, S: str, T: str) -> str: # 2 pointers, fast
 
 # LC76. Minimum Window Substring, min window has all chars in target string min win subs
 def minWindow(self, s: str, t: str) -> str:
-    if not s or not t or len(s) < len(t): return ""
-    counts, included = [0] * 128, len(t)  # counts of each char
-    for char in t: counts[ord(char)] += 1  # t counter
-    start = end = 0
-    start_index, min_len = 0, float('inf')  # compute these 2
-    while end < len(s):
-        if counts[ord(s[end])] > 0: included -= 1  # only relevant to t
-        counts[ord(s[end])] -= 1
-        end += 1
-        while included == 0:
-            if end - start < min_len:
-                start_index = start
-                min_len = end - start
-            if counts[ord(s[start])] == 0: included += 1
-            counts[ord(s[start])] += 1
-            start += 1
-    return "" if min_len == float('inf') else s[start_index:start_index + min_len]
+    if len(s) < len(t): return ''
+    tcount, matchCnt = Counter(t), 0,
+    resStart, resLen = 0, len(s) + 1
+    left = 0
+    for right, ch in enumerate(s):
+        if ch in tcount:
+            tcount[ch] -= 1
+            matchCnt += tcount[ch] == 0
+        while matchCnt == len(tcount):
+            # we found a smaller window, update result
+            curWindowLen = right - left + 1
+            if curWindowLen < resLen:
+                resStart, resLen = left, curWindowLen
+            removeCh = s[left]
+            left += 1
+            if removeCh in tcount:
+                matchCnt -= tcount[removeCh] == 0
+                tcount[removeCh] += 1
+    return s[resStart:resStart + resLen] if resLen <= len(s) else ''
 
 # LC392. Is Subsequence
 def isSubsequence(self, s: str, t: str) -> bool:  # O(|t|)

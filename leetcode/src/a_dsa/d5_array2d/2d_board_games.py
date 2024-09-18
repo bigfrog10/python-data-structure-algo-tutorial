@@ -23,7 +23,7 @@ def findPaths(self, m: int, n: int, maxMove: int, startRow: int, startColumn: in
 
 # LC2596. Check Knight Tour Configuration
 def checkValidGrid(self, grid: List[List[int]]) -> bool:
-    n = len(grid)
+    n = len(grid)   # O(n^2) time space
     arr = [None] * (n*n)
     for row in range(n):
         for col in range(n): arr[grid[row][col]] = (row, col)
@@ -37,36 +37,35 @@ def checkValidGrid(self, grid: List[List[int]]) -> bool:
     return True
 
 # 1778. Shortest Path in a Hidden Grid
-def findShortestPath(self, master: 'GridMaster') -> int:  # O(area)
-    can_move = set() # need to build graph first, for bfs. Otherwise TLE.
-    directions = {'U':(-1, 0, 'D'), 'D':(1, 0, 'U'), 'L':(0, 1, 'R'), 'R':(0, -1, 'L')}
+def findShortestPath(self, master: 'GridMaster') -> int:  # O(cells) time and space
+    visited = set() # need to build graph first, for bfs. Otherwise TLE.
+    directions = {'U':(0, -1, 'D'), 'D':(0, 1, 'U'), 'L':(-1, 0, 'R'), 'R':(1, 0, 'L')}
     target = None
     def build_graph(x, y):
         if master.isTarget():
             nonlocal target
             target = (x, y)
             return
-        can_move.add((x, y))
+        visited.add((x, y))
         for direction in directions:
             dx, dy, revert_direction = directions[direction]
             nx, ny = x + dx, y + dy
-            if (nx, ny) not in can_move and master.canMove(direction):
+            if (nx, ny) not in visited and master.canMove(direction):
                 master.move(direction)
                 build_graph(nx, ny)
                 master.move(revert_direction)
     build_graph(0, 0)
     if target is None: return -1
-
     queue, level = [(0, 0)], 0 # bfs
     visited = set(queue)
-    while queue:
+    while queue:  # bfs find min
         next_queue = queue
         queue = []
         level += 1
         for x, y in next_queue:
             for next_node in [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]:
                 if next_node == target: return level
-                if next_node not in can_move or next_node in visited: continue
+                if next_node not in visited or next_node in visited: continue
                 visited.add(next_node)
                 queue.append(next_node)
     return -1
@@ -421,7 +420,7 @@ def snakesAndLadders(self, board: List[List[int]]) -> int:
         visited.add(x)
         for i in range(6):
             move = x + i + 1
-            if move > maxs: continue
+            if move > maxs: continue  # cut branches
             x1, y1 = coord(move)
             if board[x1][y1] != -1: move = board[x1][y1]
             if move not in visited:

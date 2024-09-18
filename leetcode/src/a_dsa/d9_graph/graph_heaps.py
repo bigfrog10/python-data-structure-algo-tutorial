@@ -1,7 +1,7 @@
 from collections import Counter, defaultdict, deque
 import heapq
 
-# LC1976. Number of Ways to Arrive at Destination  intersections and roads
+# LC1976. Number of Ways to Arrive at Destination  - intersections and roads   num ways arrive
 def countPaths(self, n: int, roads: List[List[int]]) -> int:
     adj = [[] for _ in range(n)]  # O(M * logN), M = N*(N-1)/2 # of roads
     for u, v, w in roads:  # Step 1️⃣: Build the adjacency list for the graph
@@ -29,9 +29,9 @@ def countPaths(self, n: int, roads: List[List[int]]) -> int:
 # https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
 
 
-# LC1928. Minimum Cost to Reach Destination in Time
+# LC1928. Minimum Cost to Reach Destination in Time    min cost to reach dest
 def minCost(self, maxTime: int, edges: List[List[int]], passingFees: List[int]) -> int:
-    g = defaultdict(list)
+    g = defaultdict(list)  # Dijkstra  O(E * logV)
     for e in edges:
         g[e[0]].append((e[1], e[2]))  # start, end, time
         g[e[1]].append((e[0], e[2]))
@@ -49,9 +49,9 @@ def minCost(self, maxTime: int, edges: List[List[int]], passingFees: List[int]) 
                 times[nbor] = new_time
     return -1
 
-# LC1810 Minimum Path Cost in a hidden grid
-def findShortestPath(self, master: 'GridMaster') -> int:  # O(NM)
-    directions = {'U': (-1, 0), 'D': (1, 0), 'L': (0, -1), 'R': (0, 1)}
+# LC1810 Minimum Path Cost in a hidden grid    min path cost
+def findShortestPath(self, master: 'GridMaster') -> int:  # O(cells)
+    directions = {'U': (0, 1), 'D': (0, -1), 'L': (-1, 0), 'R': (1, 0)}
     opposite = {'L': 'R', 'R': 'L', 'D': 'U', 'U': 'D'}
     costs, target = {(0, 0): 0}, []
     def dfs(y_, x_):  # DFS the grid and collect costs

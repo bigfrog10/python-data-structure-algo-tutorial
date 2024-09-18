@@ -346,7 +346,7 @@ def maximalSquare(self, matrix: List[List[str]]) -> int: # DP
     max_len = 0 # track this
     for i, j in itertools.product(range(rows), range(cols)):
         if matrix[i][j] == '1':
-            dp[i+1, j+1] = min([dp[i+1, j], dp[i, j+1], dp[i, j]]) + 1  # weakest link
+            dp[i+1, j+1] = 1 + min([dp[i+1, j], dp[i, j+1], dp[i, j]])  # weakest link
             max_len = max(max_len, dp[i+1, j+1])
     return max_len ** 2
 # https://leetcode.com/problems/maximal-square/?envType=company&envId=apple&favoriteSlug=apple-six-months

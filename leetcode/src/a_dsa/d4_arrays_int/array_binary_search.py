@@ -36,14 +36,12 @@ def maxLength(self, ribbons: List[int], k: int) -> int:  # O(log(min(totl // k, 
 
 # LC162. Find Peak Element - return peak index, array peak element
 def findPeakElement(self, nums: List[int]) -> int: # logn
-    left, right = 0, len(nums)-1
+    left, right = 0, len(nums)-1  # need -1 to ensure below +1 inbound
     while left < right:
         mid = (left + right) // 2
         if nums[mid] > nums[mid+1]: right = mid  # decreasing, so peak is on the other side
         else: left = mid + 1
     return left
-
-
 
 # LC2187. Minimum Time to Complete Trips
 def minimumTime(self, time: List[int], totalTrips: int) -> int:

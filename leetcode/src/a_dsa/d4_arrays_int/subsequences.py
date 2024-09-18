@@ -1,4 +1,27 @@
 
+# LC2014. Longest Subsequence Repeated k Times  sub repeat k times
+def longestSubsequenceRepeatedK(self, s: str, k: int) -> str:
+    # ignore dupe chars, we have length roughly n/k. All sub seqs are 2^(n/k)
+    def check(s,t):  # O(2^(n/k)) time, O(n) space
+        # https://prosuncsedu.wordpress.com/2017/04/14/python-in-operator-with-iterator/
+        # https://leetcode.com/problems/longest-word-in-dictionary-through-deleting/solutions/99590/short-python-solutions/
+        # whether s is a sequence of t
+        t = iter(t)
+        return all(c in t for c in s)
+    count = Counter(s)
+    k_chars = [c for c in count.keys() if count[c]>=k]
+    k_chars.sort()
+    q = deque([''])
+    while q:
+        for _ in range(len(q)):
+            cur = q.popleft()
+            res = cur
+            for c in k_chars:
+                nxt = cur + c
+                if check(nxt * k, s): q.append(nxt)
+    return res
+# https://leetcode.com/problems/longest-subsequence-repeated-k-times/solutions/1471930/python-answer-is-not-so-long-explained/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
+
 # LC673. Number of Longest Increasing Subsequence  LIS number
 def findNumberOfLIS(self, nums: List[int]) -> int:
     if not nums: return 0  # O(n^2) time and O(n) space
@@ -12,7 +35,7 @@ def findNumberOfLIS(self, nums: List[int]) -> int:
         m = max(m, dp[i])  # m is the max length of longest increasing sequences
     return sum(c for l, c in zip(dp, cnt) if l == m)
 
-# LC3201. Find the Maximum Length of Valid Subsequence I
+# LC3201. Find the Maximum Length of Valid Subsequence I   max len seq max len
 def maximumLength(self, nums: List[int]) -> int:  # subsequence is not continuous subarray.
     count, end = [0, 0], [0, 0]  # O(1) space and O(n) time
     for n in nums:
@@ -20,7 +43,7 @@ def maximumLength(self, nums: List[int]) -> int:  # subsequence is not continuou
         end[n % 2] = end[1 - n % 2] + 1  # all 10's and 01's
     return max(max(count), max(end))
 
-# 3202. Find the Maximum Length of Valid Subsequence II
+# 3202. Find the Maximum Length of Valid Subsequence II    max len seq max len
 def maximumLength(self, nums: List[int], k: int) -> int:
     res = 0
     for v in range(k):  # Enumearet the sub sum v = (sub[0] + sub[1]) % k
@@ -121,5 +144,20 @@ def longestConsecutive(self, nums: List[int]) -> int:  # O(n)
         while i + j in hashed: j += 1  # this builds only once for the for loop
         maxc = max(maxc, j)
     return maxc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

@@ -1,5 +1,12 @@
 
-# 2452. Words Within Two Edits of Dictionary
+# LC3110. Score of a String
+def scoreOfString(self, s: str) -> int:
+    score = 0
+    for i in range(len(s) - 1):
+        score += abs(ord(s[i]) - ord(s[i + 1]))
+    return score
+
+# 2452. Words Within Two Edits of Dictionary  words within 2 edits
 def twoEditWords(self, queries: List[str], dictionary: List[str]) -> List[str]:
     def is_valid(query, word):
         count = 0
@@ -105,7 +112,7 @@ def findTheDifference(self, s: str, t: str) -> str:  # O(n) time and O(1) space
 # # LC408. Valid Word Abbreviation
 def validWordAbbreviation(self, word, abbr):
     # turn "i12iz4n" to "i.{12}iz.{4}n$"
-    pattern = re.sub('([1-9]\d*)', r'.{\1}', abbr) + '$'
+    pattern = '^' + re.sub('([1-9]\d*)', r'.{\1}', abbr) + '$'
     return bool(re.match(pattern, word))
 def validWordAbbreviation(self, word: str, abbr: str) -> bool:
     m, n = len(word), len(abbr)

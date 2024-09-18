@@ -3,6 +3,27 @@ class ListNode:
         self.val = val
         self.next = next
 
+# LC2807. Insert Greatest Common Divisors in Linked List    insert gcd
+def insertGreatestCommonDivisors(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    cur = head
+    while cur.next:
+        val = math.gcd(cur.val, cur.next.val)
+        cur.next = ListNode(val, cur.next)
+        cur = cur.next.next
+    return head
+
+    # LC1019. Next Greater Node In Linked List
+def nextLargerNodes(self, head: Optional[ListNode]) -> List[int]:
+    res, stack = [], []  # O(n) time and space
+    idx = 0
+    while head:
+        res.append(0)  # default if no greater
+        while stack and head.val > stack[-1][1]:
+            curr_id, _ = stack.pop()
+            res[curr_id] = head.val
+        stack.append([idx, head.val])
+        head, idx = head.next, idx+1
+    return res
 # LC1171. Remove Zero Sum Consecutive Nodes from Linked List
 def removeZeroSumSublists(self, head: Optional[ListNode]) -> Optional[ListNode]:
     dummy, ans = ListNode(0, head), 0  # O(n) time and space
@@ -77,9 +98,9 @@ def copyRandomList(self, head: 'Node') -> 'Node':
     new_head = nwalker = head.next  # seperate old and new
     walker = head
     while nwalker:
-        walker.next = nwalker.next
+        walker.next = nwalker.next  # get walker done
         walker = walker.next
-        nwalker.next = walker.next if walker else None
+        nwalker.next = walker.next if walker else None  # get nwalker done
         nwalker = nwalker.next
     return new_head
 

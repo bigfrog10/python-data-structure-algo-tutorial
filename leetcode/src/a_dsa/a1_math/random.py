@@ -1,4 +1,5 @@
-# LC528. Random Pick with Weight
+
+# LC528. Random Pick with Weight  random weights  rand pick weight
 class Solution:  # based on pdf
     def __init__(self, w: List[int]):
         self.samples = list(range(len(w)))
@@ -10,7 +11,7 @@ class Solution:  # based on pdf
         idx = bisect.bisect(self.cumusum, r)
         return self.samples[idx]
 
-# LC398. Random Pick Index - with dupe elements with same probability
+# LC398. Random Pick Index - with dupe elements with same probability rand pick index
 class Solution:
     def __init__(self, nums: List[int]):
         self.num2idx = defaultdict(list)
