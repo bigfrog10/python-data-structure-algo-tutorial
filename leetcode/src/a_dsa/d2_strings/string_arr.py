@@ -125,7 +125,7 @@ def taskSchedulerII(self, tasks: List[int], space: int) -> int:
         start_day[task] = day + space + 1
     return day
 
-# LC387. First Unique Character in a String
+# LC387. First Unique Character in a String  1st unique
 def firstUniqChar(self, s: str) -> int:
     count = collections.Counter(s)
     for idx, ch in enumerate(s):

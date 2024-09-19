@@ -385,7 +385,7 @@ def areAlmostEqual(self, s1: str, s2: str) -> bool:
 def convert(self, s: str, numRows: int) -> str:
     if numRows == 1: return s
     rows = [''] * numRows
-    cur_row, down = 0, -1
+    cur_row, down = 0, -1  # down
     for c in s:
         rows[cur_row] += c
         if cur_row == 0 or cur_row == numRows-1:
@@ -455,10 +455,10 @@ def strStr(self, haystack: str, needle: str) -> int:  # KMP O(n+h)
 # https://blog.seancoughlin.me/find-the-index-of-the-first-occurrence-in-a-string-naive-and-kmp-solutions
 
 
-# LC1071. Greatest Common Divisor of Strings  gcd string
+# LC1071. Greatest Common Divisor of Strings gcd string gcd string
 def gcdOfStrings(self, str1: str, str2: str) -> str:
     # make sure that str1 and str2 must have `Greatest Common Divisor`
-    if str1 + str2 != str2 + str1: return ''
+    if str1 + str2 != str2 + str1: return ''  # "AB", "CD"
     sz1, sz2 = len(str1), len(str2)
     lgcd = math.gcd(sz1, sz2)
     return str1[:lgcd]

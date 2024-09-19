@@ -43,7 +43,7 @@ def find132pattern(self, nums: List[int]) -> bool:  # O(n) time and space
         if n < mid: return True # this is smallest
         while stack and n > stack[-1]:
             mid = stack.pop() # this n is largest
-        stack.append(n)
+        stack.append(n)  # decreasing stack
     return False
 
 # LC84. Largest Rectangle in Histogram   large rect histo
@@ -87,18 +87,18 @@ def canSeePersonsCount(self, heights: List[int]) -> List[int]:  # O(n)
 # LC739. Daily Temperatures   next greater element
 def dailyTemperatures(self, T: List[int]) -> List[int]:
     n = len(T)
-    answer, hottest = [0] * n, 0  # O(n) runtime, O(1) space ( not count result)
-    for curr_day in range(n)[::-1]:  # from backward is to reuse tail results
-        current_temp = T[curr_day]
-        if current_temp >= hottest:
-            hottest = current_temp
-            continue  # the answer is 0, no need to go further.
+    ans, hottest = [0] * n, 0  # O(n) runtime, O(1) space
+    for currday in range(n)[::-1]:
+        tempr = T[currday]
+        if tempr >= hottest:
+            hottest = tempr
+            continue  # the ans is 0, no need to go further.
         days = 1
-        while current_temp >= T[curr_day + days]:  # Total run < N -> O(n)
+        while tempr >= T[currday + days]:
             # this is the "days" jump to shrink the while total to N for the for loop
-            days += answer[curr_day + days]  # accu through valley
-        answer[curr_day] = days
-    return answer
+            days += ans[currday + days]  # accu through valley
+        ans[currday] = days
+    return ans
 def dailyTemperatures(self, T: List[int]) -> List[int]:
     ret, stack = [0] * len(T), []  # monotonic stack, decreasing  O(n) time and space
     for curr_day, curr_temp in enumerate(T):

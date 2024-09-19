@@ -57,7 +57,7 @@ def pairSum(self, head: Optional[ListNode]) -> int:
     return res
 
 # LC234. Palindrome Linked List  pali linked list
-def isPalindrome(self, head):
+def isPalindrome(self, head: Optional[ListNode]) -> bool:  # O(n) time, O(1) space
     fast, rev = head, None # use head as slow
     while fast and fast.next:  # 1, 2, 3, 2, 1    1, 2, 3, 4, 2, 1
         fast = fast.next.next
@@ -70,6 +70,13 @@ def isPalindrome(self, head):
         head, head.next, rev = rev, head, rev.next  # restore head to original
         tail = tail.next  # 2, 3, 2, 1, then 1, 2,3,2,1
     return isPali
+def isPalindrome(self, head: ListNode) -> bool:
+    vals = []
+    current_node = head
+    while current_node is not None:
+        vals.append(current_node.val)
+        current_node = current_node.next
+    return vals == vals[::-1]
 
 # LC143. Reorder List - odd + <even reverse>
 def reorderList(self, head: ListNode) -> None:

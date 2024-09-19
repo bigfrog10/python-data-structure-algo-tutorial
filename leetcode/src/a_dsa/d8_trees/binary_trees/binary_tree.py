@@ -136,7 +136,7 @@ def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:  # morris
                 node = node.right
     return output
 
-# LC94. Binary Tree Inorder Traversal
+# LC94. Binary Tree Inorder Traversal  bt inorder
 def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
     res = []
     def dfs(currentNode):

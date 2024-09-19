@@ -139,7 +139,7 @@ def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
     return res
 
 # LC127. Word Ladder, return min # of words to transform
-def ladderLength(self, beginWord, endWord, wordList):  # BFS, O(m^2 * len(wordList))
+def ladderLength(self, beginWord, endWord, wordList):  # BFS, O(m * m)
     wordList = set(wordList)  # m = max word length
     queue = collections.deque([[beginWord, 1]])
     while queue:  # BFS since we look for shortest

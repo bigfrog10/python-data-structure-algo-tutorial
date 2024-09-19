@@ -130,6 +130,7 @@ def lengthOfLIS(self, nums: List[int]) -> int:  # O(nlogn) runtime, O(n) space
     for e in nums:
         if not hist or e > hist[-1]: hist.append(e)
         else:  # find index for smallest n such that n >= e
+            # stack pump not work for [0, 1, 0, 2, 3]
             idx = bisect.bisect_left(hist, e)
             hist[idx] = e  # replace it with e
     return len(hist)

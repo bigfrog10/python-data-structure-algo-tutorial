@@ -76,7 +76,7 @@ def sortedSquares(self, nums: List[int]) -> List[int]: # O(n)
 # LC26. Remove Duplicates from Sorted Array - in place change  remove dupe from sorted array  remove dupe array
 def removeDuplicates(self, nums: List[int]) -> int:
     i = 0  # 2 pointers
-    for j in range(1, len(nums)):
+    for j in range(len(nums)):
         if nums[j] != nums[i]:  # if equal, we keep going without doing anything.
             i += 1
             nums[i] = nums[j]

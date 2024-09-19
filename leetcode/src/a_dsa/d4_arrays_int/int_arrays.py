@@ -179,7 +179,7 @@ def findPairs(self, nums: List[int], k: int) -> int:  # O(n) time and space
         elif k == 0 and counter[x] > 1: result += 1
     return result
 
-# LC220. Contains Duplicate III
+# LC220. Contains Duplicate III - bounded by index diff and value diff
 def containsNearbyAlmostDuplicate(self, nums: List[int], k: int, t: int) -> bool:  # O(n) time and space
     n = len(nums)  # bucket sort
     d = {}  # d is buckets

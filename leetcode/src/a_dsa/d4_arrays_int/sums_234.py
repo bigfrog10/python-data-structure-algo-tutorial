@@ -134,7 +134,7 @@ def threeSumSmaller(self, nums: List[int], target: int) -> int:  # O(n^2)
 
 # LC18. 4Sum - return all quadruplets sum to target
 def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
-    pairs = collections.defaultdict(list)
+    pairs = collections.defaultdict(list)  # O(n^3) time and O(n^2) space
     for i in range(len(nums)):
         for j in range(i+1, len(nums)):
             pairs[nums[i]+nums[j]].append((i, j))
@@ -149,17 +149,17 @@ def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
     return res
 def fourSum(self, nums: List[int], target: int) -> List[List[int]]:  # O(n^(k-1)) k = 4 time, O(n) space
     def kSum(nums: List[int], target: int, k: int) -> List[List[int]]:
-        res = []
+        res = []  # O(n^(k-1)) time, O(n) space in recursive call
         if not nums: return res
-        average_value = target // k
+        average_value = target // k  # works without this, but faster
         if average_value < nums[0] or nums[-1] < average_value: return res
         if k == 2: return twoSum(nums, target)
         for i in range(len(nums)):
-            if i == 0 or nums[i - 1] != nums[i]:  # to avoid dupes
-                for subset in kSum(nums[i + 1:], target - nums[i], k - 1):  # we have k-2 n-loops
-                    res.append([nums[i]] + subset)
+            if i and nums[i - 1] == nums[i]: continue  # to avoid dupes
+            for subset in kSum(nums[i + 1:], target - nums[i], k - 1):  # we have k-2 n-loops
+                res.append([nums[i]] + subset)
         return res
-    def twoSum(nums: List[int], target: int) -> List[List[int]]:  # O(n)
+    def twoSum(nums: List[int], target: int) -> List[List[int]]:  # O(n) time, O(1) space
         res = []  # solution for sorted array
         lo, hi = 0, len(nums) - 1
         while (lo < hi):
@@ -170,8 +170,7 @@ def fourSum(self, nums: List[int], target: int) -> List[List[int]]:  # O(n^(k-1)
                 hi -= 1
             else:
                 res.append([nums[lo], nums[hi]])
-                lo += 1
-                hi -= 1
+                lo, hi = lo + 1, hi - 1
         return res
     nums.sort()
     return kSum(nums, target, 4)

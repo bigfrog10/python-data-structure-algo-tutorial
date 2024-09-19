@@ -17,7 +17,7 @@ def countPrimes(self, n: int) -> int: # Sieve of Eratosthenes
     for i in range(2, upper):
         if flag[i] == 0: continue # non prime
         else:
-            m = (n - i - 1) // i  # every step with i size, how may steps
+            m = (n - i - 1) // i  # every step with i size, how many steps
             flag[2*i::i] = [0] * m
     return sum(flag)
 

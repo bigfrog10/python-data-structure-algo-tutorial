@@ -105,11 +105,11 @@ def numSubarrayProductLessThanK(self, nums: List[int], k: int) -> int:
 
 # LC1480. Running Sum of 1d Array
 def runningSum(self, nums: List[int]) -> List[int]:
-    output = [nums[0]]
-    for i in range (1, len(nums)):
-        nums[i] += nums[i - 1]
-        output.append(nums[i])
-    return output
+    ans, to = [], 0
+    for n in nums:
+        to += n
+        ans.append(to)
+    return ans
 
 # LC1588. Sum of All Odd Length Subarrays
 def sumOddLengthSubarrays(self, arr: List[int]) -> int:

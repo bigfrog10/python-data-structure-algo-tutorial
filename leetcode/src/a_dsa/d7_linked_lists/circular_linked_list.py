@@ -16,7 +16,7 @@ def insert(self, head: 'Optional[Node]', insertVal: int) -> 'Node':
     curr.next = Node(insertVal, curr.next)  # insert between curr and curr.next
     return head
 
-# LC141. Linked List Cycle  # Floyd
+# LC141. Linked List Cycle  # Floyd hare turtle
 def hasCycle(self, head: ListNode) -> bool:
     hare = turtle = head
     while hare and hare.next:

@@ -76,7 +76,7 @@ def oddEvenList(self, head: ListNode) -> ListNode:
     odd_walker.next = even_head
     return head
 
-# LC876. Middle of the Linked List
+# LC876. Middle of the Linked List mid linked list
 def middleNode(self, head: ListNode) -> ListNode:
     slow = fast = head
     while fast and fast.next:
@@ -210,26 +210,18 @@ def swapNodes(self, head: ListNode, k: int) -> ListNode:
     first.val, slow.val = slow.val, first.val
     return head
 
-
-
 # LC369. Plus One Linked List
 def plusOne(self, head: ListNode) -> ListNode:
-    node, start = head, None
-    while node:
-        if node.val < 9: start = node
-        node = node.next
-    if start:
-        start.val += 1
-        node = start.next
-    else:
-        new = ListNode(1)
-        new.next = head
-        node = head
-        head = new
-    while node:  # change all 9's to zero
-        node.val = 0
-        node = node.next
-    return head
+    dummy = not_nine = ListNode(0, head)  # no leading 0
+    while head:  # get last not
+        if head.val != 9: not_nine = head
+        head = head.next
+    not_nine.val += 1  # add leading one if we have just 9
+    not_nine = not_nine.next  # 9 now
+    while not_nine:
+        not_nine.val = 0  # erase to 0
+        not_nine = not_nine.next
+    return dummy if dummy.val else dummy.next
 
 # LC61. Rotate List  rotate link list
 def rotateRight(self, head: ListNode, k: int) -> ListNode:

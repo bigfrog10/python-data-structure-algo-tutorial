@@ -144,7 +144,10 @@ def arrayNesting(self, nums: List[int]) -> int: # O(n) tinme and O(1) space
         if res > len(nums): return res # works without this too, optimization
     return res
 
-
+# LC1207. Unique Number of Occurrences
+def uniqueOccurrences(self, arr: List[int]) -> bool:
+    c = collections.Counter(arr)
+    return len(c) == len(set(c.values()))
 
 
 
