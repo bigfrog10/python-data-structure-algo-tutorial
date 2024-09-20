@@ -61,7 +61,7 @@ def divide(self, A, B):  # logn
             a -= b << x
     return res if (A > 0) == (B > 0) else -res
 
-# LC43. Multiply Strings
+# LC43. Multiply Strings  string time string
 def multiply(self, num1, num2):  # O(mn)
     res = [0]* (len(num1) + len(num2))
     for i, e1 in enumerate(reversed(num1)):

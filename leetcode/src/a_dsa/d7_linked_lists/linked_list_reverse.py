@@ -35,7 +35,7 @@ def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
     dummy = nhead = ListNode()  # the new list to insert to, nhead is previous
     for _ in range(n//k):
         ntail = head  # the save the position for later jumping to
-        for _ in range(k):
+        for _ in range(k):  # these are a circle
             head.next, nhead.next, head = nhead.next, head, head.next  # insert at nhead
         nhead = ntail  # move insertion point to the right by k steps
     ntail.next = head  # for last remainder connection

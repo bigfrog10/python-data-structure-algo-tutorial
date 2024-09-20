@@ -59,7 +59,7 @@ def rob(self, nums: List[int]) -> int:  # O(n)
         return dp2
     return max(nums[0] + rob_street(nums[2:-1]), rob_street(nums[1:]))
 
-# LC740. Delete and Earn
+# LC740. Delete and Earn  delete earn
 def deleteAndEarn(self, nums: List[int]) -> int:  # O(n)
     if not nums: return 0
     c = collections.Counter(nums)

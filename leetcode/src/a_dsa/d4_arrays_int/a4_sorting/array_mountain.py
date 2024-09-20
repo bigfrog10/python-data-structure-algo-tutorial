@@ -16,8 +16,9 @@ def findInMountainArray(self, target: int, mountain_arr: 'MountainArray') -> int
     while l < r: # find index of peak
         m = (l + r) // 2
         if A.get(m) < A.get(m + 1):
-            l = peak = m + 1
+            l = m + 1
         else: r = m
+    peak = l
     # find target in the left of peak
     l, r = 0, peak
     while l <= r:

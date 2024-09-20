@@ -201,12 +201,12 @@ def findWords(self, board: List[List[str]], words: List[str]) -> List[str]: # Th
         for letter in word: node = node.setdefault(letter, {})
         node[WORD_KEY] = word  # save word at the end
     rowNum, colNum = len(board), len(board[0])
-    matchedWords = []
+    res = []
     def dfs(row, col, parent):
         letter = board[row][col]
         currNode = parent[letter]
         word_match = currNode.pop(WORD_KEY, None)  # check end, cut branches
-        if word_match: matchedWords.append(word_match)
+        if word_match: res.append(word_match)
         board[row][col] = '#' # Before the EXPLORATION, mark the cell as visited, backtracking
         # Explore the neighbors in 4 directions, i.e. up, right, down, left
         for (dx, dy) in (-1, 0), (0, 1), (1, 0), (0, -1): # O(3^max(words))
@@ -215,11 +215,11 @@ def findWords(self, board: List[List[str]], words: List[str]) -> List[str]: # Th
                 dfs(nx, ny, currNode)
         board[row][col] = letter # End of EXPLORATION, we restore the cell
         # Optimization: incrementally remove the matched leaf node in Trie.
-        if not currNode: parent.pop(letter) # we pop'd WORD_KEY before
+        if not currNode: parent.pop(letter) # we pop'd WORD_KEY before, so empty now
     for row in range(rowNum): # O(nm)
         for col in range(colNum):# starting from each of the cells
             if board[row][col] in trie: dfs(row, col, trie)
-    return matchedWords
+    return res
 
 # LC68. Text Justification
 def fullJustify(self, words: List[str], maxWidth: int) -> List[str]:

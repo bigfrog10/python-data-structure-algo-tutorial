@@ -1,5 +1,5 @@
 
-# LC348. Design Tic-Tac-Toe
+# LC348. Design Tic-Tac-Toe   tic tac toe
 class TicTacToe:
     def __init__(self, n: int):
         self.row, self.col = [0] * n, [0] * n

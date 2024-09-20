@@ -1,5 +1,8 @@
 
-# LC692. Top K Frequent Words
+# LC692. Top K Frequent Words    k freq word
+def topKFrequent(self, words: List[str], k: int) -> List[str]:
+    count = collections.Counter(words)
+    return heapq.nlargest(k, count.keys(), key=count.get)
 def topKFrequent(self, words: List[str], k: int) -> List[str]:  # O(n)
     freqs = Counter(words)
     return heapq.nsmallest(k, freqs.keys(), lambda w: (-freqs[w], w))

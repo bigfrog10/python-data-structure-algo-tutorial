@@ -216,7 +216,7 @@ def orderOfLargestPlusSign(self, n: int, mines: List[List[int]]) -> int:  # O(n^
     return max(map(max, grid))
 # https://leetcode.com/problems/largest-plus-sign/solutions/4204626/764-memory-beats-91-40-solution-with-step-by-step-explanation/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
 
-# LC74. Search a 2D Matrix - matrix binary search elem in matrix, matrix bs, search 2d search matrix
+# LC74. Search a 2D Matrix - matrix binary search elem in matrix, matrix bs, search 2d matrix search matrix
 def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:  # O(log(mn))
     if not matrix: return False
     m, n = len(matrix), len(matrix[0])

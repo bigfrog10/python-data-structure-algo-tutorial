@@ -48,14 +48,13 @@ def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:  # O(n
     ret = [[n[1] for n in sorted(res[k])] for k in range(min_col, max_col + 1)]
     return ret
 
-# LC662. Maximum Width of Binary Tree - row max width bt max level width
+# LC662. Maximum Width of Binary Tree - row max width bt max level width  bt max wid
 def widthOfBinaryTree(self, root: TreeNode) -> int:
     width = 0
     level = [(1, root)]
     while level:
         width = max(width, level[-1][0] - level[0][0] + 1)  # last - first at the same level
-        level = [kid
-                 for number, node in level
+        level = [kid for number, node in level
                  for kid in enumerate((node.left, node.right), 2 * number) if kid[1]]
     return width
 

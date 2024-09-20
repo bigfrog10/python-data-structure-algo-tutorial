@@ -17,7 +17,23 @@ def search(self, nums: List[int], target: int) -> int:  # O(logn)
             else: end = mid - 1
     return -1
 
-# LC81. Search in Rotated Sorted Array II - check if num is in array, dupe values
+# LC81. Search in Rotated Sorted Array II - check if num is in array, dupe values  search rotated
+def search(self, nums: List[int], target: int) -> bool:
+    start, end = 0, len(nums) - 1
+    while start <= end:
+        while start < end and nums[start] == nums[start + 1]:
+            start += 1
+        while start < end and nums[end] == nums[end - 1]:
+            end -= 1
+        mid = (start + end) // 2  # now same as no-dupe case
+        if nums[mid] == target: return True
+        elif nums[mid] >= nums[start]:
+            if nums[start] <= target < nums[mid]: end = mid - 1
+            else: start = mid + 1  # cover 2 cases, target <> mid
+        else:  # if nums[mid] < nums[start]:
+            if nums[mid] < target <= nums[end]: start = mid + 1
+            else: end = mid - 1
+    return False
 def search(self, nums: List[int], target: int) -> bool:  # O(n) worst case
     start, end = 0, len(nums) - 1
     while start <= end:

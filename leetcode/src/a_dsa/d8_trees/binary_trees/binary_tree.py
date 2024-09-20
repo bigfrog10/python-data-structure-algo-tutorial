@@ -236,7 +236,7 @@ def isBalanced(self, root: TreeNode) -> bool:
         if not node: return True, 0  # is balanced, depth
         lb, lp = dfs(node.left)
         rb, rp = dfs(node.right)
-        return lb and rb and abs(lp-rp) <= 1, max(lp, rp)+1
+        return lb and rb and abs(lp-rp) <= 1, max(lp, rp) + 1
     bal, depth = dfs(root)
     return bal
 

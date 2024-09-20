@@ -210,7 +210,7 @@ def trimBST(self, root: Optional[TreeNode], low: int, high: int) -> Optional[Tre
             return node
     return trim(root)
 
-# LC96. Unique Binary Search Trees  # BBG
+# LC96. Unique Binary Search Trees unique bst
 def numTrees(self, n: int) -> int:  # O(4^n / n^(3/2)), Catalan numbers G_n
     G = [1, 1] + [0]*(n-1)  # g(i) number of unique trees with length i
     for i in range(2, n+1):  # O(n^2)

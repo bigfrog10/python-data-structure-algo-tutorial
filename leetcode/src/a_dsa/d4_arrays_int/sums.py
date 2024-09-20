@@ -90,17 +90,17 @@ def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
         return False
     return dfs(0)
 
-# LC713. Subarray Product Less Than K - return # of such subarrays
+# LC713. Subarray Product Less Than K - return # of such subarrays  prod < k
 def numSubarrayProductLessThanK(self, nums: List[int], k: int) -> int:
     if k <= 1: return 0 # nums are positive, so there is no solution
     prod = 1  # watch out for k=0 and k=1, array [0, 1], [1, 1]
     ans = left = 0
     for right, val in enumerate(nums):
         prod *= val
-        while prod >= k:
+        while prod >= k and left < right:
             prod //= nums[left]
             left += 1
-        ans += right - left + 1  # all subarrasy ends at nums[right]
+        if prod < k: ans += right - left + 1  # all subarrasy ends at nums[right]
     return ans
 
 # LC1480. Running Sum of 1d Array

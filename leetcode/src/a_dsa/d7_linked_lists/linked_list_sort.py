@@ -5,8 +5,7 @@ def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:  # O(nlogn)
     fast, slow = head.next, head
     while fast and fast.next:
         fast, slow = fast.next.next, slow.next
-    start = slow.next
-    slow.next = None
+    start, slow.next = slow.next, None
     l, r = self.sortList(head), self.sortList(start)  # merge sort
     return self.merge(l, r)
 def merge(self, l, r):

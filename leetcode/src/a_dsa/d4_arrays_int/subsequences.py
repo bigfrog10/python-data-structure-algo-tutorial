@@ -83,8 +83,8 @@ def findLengthOfLCIS(self, nums: List[int]) -> int:
 
 # LC1027. Longest Arithmetic Subsequence - las
 def longestArithSeqLength(self, A: List[int]) -> int:
-    n = len(A)
-    dp = {}  # dp[index][diff] the length of arithmetic sequence at index with difference diff.
+    n = len(A)  # O(n^2)
+    dp = {}  # dp[index][diff] the length of arithmetic sequence ends at index with difference diff.
     for i in range(n):
         for j in range(i + 1, n):  # O(n^2)
             diff = A[j] - A[i]  # accumulate counts for each diff over all indices

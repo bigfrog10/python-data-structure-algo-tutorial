@@ -58,20 +58,19 @@ def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
     if j > -1: nums1[0:j+1] = nums2[0:j+1]
 
 
-# LC977. Squares of a Sorted Array   square sort array
-def sortedSquares(self, nums: List[int]) -> List[int]: # O(n)
-    n = len(nums)
-    result = [0] * n
+# LC977. Squares of a Sorted Array   square sort array  square of sort
+def sortedSquares(self, nums: List[int]) -> List[int]:  # O(n) time, O(1) space
+    n, res = len(nums), []
     left, right = 0, n-1
-    for i in range(n)[::-1]:
+    while left <= right:
         if abs(nums[left]) < abs(nums[right]):
             square = nums[right]
             right -= 1
         else:
             square = nums[left]
             left += 1
-        result[i] = square * square
-    return result
+        res.append(square * square)
+    return reversed(res)
 
 # LC26. Remove Duplicates from Sorted Array - in place change  remove dupe from sorted array  remove dupe array
 def removeDuplicates(self, nums: List[int]) -> int:
@@ -84,15 +83,14 @@ def removeDuplicates(self, nums: List[int]) -> int:
 
 # LC80. Remove Duplicates from Sorted Array II - keep 2 same values, in place change  remove dupe 2
 def removeDuplicates(self, nums: List[int]) -> int:
-    j, count = 1, 1
-    for i in range(1, len(nums)):
-        if nums[i] == nums[i - 1]: count += 1
+    i = count = 1
+    for j in range(1, len(nums)):
+        if nums[j] == nums[j - 1]: count += 1
         else: count = 1
-
         if count <= 2:
-            nums[j] = nums[i]
-            j += 1
-    return j
+            nums[i] = nums[j]
+            i += 1
+    return i
 
 # LC896. Monotonic Array        mono array
 def isMonotonic(self, A: List[int]) -> bool:

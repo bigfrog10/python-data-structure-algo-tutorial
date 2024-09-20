@@ -144,24 +144,19 @@ def minPushBox(self, grid: List[List[str]]) -> int:  # faster BFS, O((mn)^2)
 
 
 
-# LC329. Longest Increasing Path in a Matrix
+# LC329. Longest Increasing Path in a Matrix  long incr paths
 import functools # 100%
 def longestIncreasingPath(self, matrix):
-    if not matrix or not matrix[0]: return 0
+    if not matrix or not matrix[0]: return 0  # O(mn) time space
     M, N = len(matrix), len(matrix[0])
     @functools.lru_cache(maxsize=None)
     def dfs(i, j):
-        ret, val = 0, matrix[i][j]
+        ret = 0
         for x, y in (i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1):
-            if 0 <= x < M and 0 <= y < N and val < matrix[x][y]:
+            if 0 <= x < M and 0 <= y < N and matrix[i][j] < matrix[x][y]:
                 ret = max(ret, dfs(x, y))
         return ret + 1  # add this cell
     return max(dfs(x, y) for x in range(M) for y in range(N))
-
-
-
-
-
 
 # LC296. Best Meeting Point
 def minTotalDistance(self, grid: List[List[int]]) -> int:  # O(mn)
@@ -252,7 +247,7 @@ def minPathSum(self, grid: List[List[int]]) -> int:  # O(mn) time, O(n) space
 def uniquePaths(self, m: int, n: int) -> int:
     return math.comb(m+n-2, n-1)  # select n-1 from m+n-2
 def uniquePaths(self, m, n):
-    cur = [1] * n  # first row
+    cur = [1] * n  # first row, only 1 way to each cell along this row
     for i in range(1, m):  # previous row + current row, 1st cell is always 1.
         for j in range(1, n): cur[j] += cur[j-1]  # previous cur[j] + current cur[j-1]
     return cur[-1]

@@ -33,11 +33,11 @@ def longestSubarray(self, nums: List[int]) -> int:  # O(n) time, O(1) space
         res = max(res, i - j)
     return res
 
-# LC486. Predict the Winner
+# LC486. Predict the Winner  player 1 win
 def predictTheWinner(self, nums: List[int]) -> bool:  # O(n^2) time and O(n) space
-    n = len(nums)
-    @cache  # (O(n^2)
-    def maxDiff(left, right):  # he maximum score difference the current player can achieve.
+    n = len(nums)  # O(n^2) time and space
+    @cache
+    def maxDiff(left, right):  # score diff between 2 players
         if left == right: return nums[left]
         score_by_left = nums[left] - maxDiff(left + 1, right)
         score_by_right = nums[right] - maxDiff(left, right - 1)

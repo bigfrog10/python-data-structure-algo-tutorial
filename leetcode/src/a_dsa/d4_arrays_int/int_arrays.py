@@ -344,17 +344,13 @@ def canBeEqual(self, target: List[int], arr: List[int]) -> bool:
 
 # LC605. Can Place Flowers
 def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
-    if not flowerbed and n > 0: return False
-    m = len(flowerbed)
-    idx = count = 0
-    while idx < m:
-        if flowerbed[idx] == 0:
-            if (idx == 0 or flowerbed[idx-1] == 0) and (idx == m -1 or flowerbed[idx+1] == 0):
-                flowerbed[idx] = 1
-                count += 1
-        if count >= n: return True
-        idx += 2 if idx + 2 < m else 1  # case [1, 0, 0]
-    return False
+    for i in range(len(flowerbed)):  # O(len(s)) time, O(1) space
+        left = i == 0 or flowerbed[i-1] == 0
+        right = i == len(flowerbed) - 1 or flowerbed[i+1] == 0
+        if left and right and flowerbed[i] == 0:
+            flowerbed[i] = 1
+            n -= 1
+    return n <= 0
 
 # LC41. First Missing Positive, top100   1st missing positive
 def firstMissingPositive(self, nums: List[int]) -> int:  # O(n) time O(1) space
@@ -545,9 +541,9 @@ def singleNumber(self, nums: List[int]) -> int:
     for i in nums: res ^= i
     return res
 
-# LC137. Single Number II
+# LC137. Single Number II  3 times except one
 def singleNumber(self, nums: List[int]) -> int:
-    seen_once = seen_twice = 0
+    seen_once = seen_twice = 0  # add all bits on ith, module 3, that's the loner
     for num in nums:
         # first appearance:
         # add num to seen_once
@@ -562,7 +558,8 @@ def singleNumber(self, nums: List[int]) -> int:
         # remove num from seen_twice
         seen_once = ~seen_twice & (seen_once ^ num)
         seen_twice = ~seen_once & (seen_twice ^ num)
-    return seen_once
+                                                      # [1, 0], 0th bit 1 seen odd times
+    return seen_once  # [2, 2, 3, 2] -> [2, 0], [0, 2], [1, 0], [3, 0] -> 3
 
 # LC217. Contains Duplicate
 def containsDuplicate(self, nums: List[int]) -> bool:

@@ -48,9 +48,9 @@ def minimumTime(self, time: List[int], totalTrips: int) -> int:
     m = min(time) * totalTrips  ## O(logm)
     return bisect_left(range(1, m), totalTrips, key= lambda x: sum(x // t for t in time)) + 1
 
-# LC410. Split Array Largest Sum - split into m parts
-def splitArray(self, nums: List[int], m: int) -> int:
-    l, r = max(nums), sum(nums)
+# LC410. Split Array Largest Sum - split into m parts  split largest sum split sum
+def splitArray(self, nums: List[int], m: int) -> int: # O(len(nums) * log(sum(nums))) time, O(1) space
+    l, r = max(nums), sum(nums)  # bisect on count of subarrays, which sum < mid
     while l < r:
         mid = (l + r) // 2
         count, cur = 1, 0  # 1 is for last part

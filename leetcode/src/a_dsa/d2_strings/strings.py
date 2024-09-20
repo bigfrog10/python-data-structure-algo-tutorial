@@ -71,15 +71,15 @@ def letterCasePermutation(self, s: str) -> List[str]:  # O(2^n), n is # of lette
         ans = [x + cc for x in ans for cc in {c, c.swapcase()}]
     return ans
 
-# LC567. Permutation in String - string permutation check - s1 is a permutation substring of s2
+# LC567. Permutation in String - string permutation check - s1 is a permutation substring of s2  permutation string
 def checkInclusion(self, s1, s2):  # O(|s1|) time and O(1) space (26 chars as keys)
-    d1, d2 = Counter(s1), Counter(s2[:len(s1)])
-    for start in range(len(s1), len(s2)):
+    d1, d2 = Counter(s1), Counter(s2[:len(s1)])  # O(1) space, 26 chars
+    for start in range(len(s1), len(s2)):  # O(len(s2) - len(s1)) time
         if d1 == d2: return True
         d2[s2[start]] += 1
-        d2[s2[start-len(s1)]] -= 1
-        if d2[s2[start-len(s1)]] == 0:
-            del d2[s2[start-len(s1)]]
+        k = s2[start-len(s1)]
+        d2[k] -= 1
+        if d2[k] == 0: del d2[k]
     return d1 == d2
 
 # LC383. Ransom Note
@@ -102,7 +102,7 @@ def simplifyPath(self, path: str) -> str:  # O(n) runtime and space
         else: stack.append(folder)
     return '/' + '/'.join(stack)
 
-# LC389. Find the Difference
+# LC389. Find the Difference    string add random char
 def findTheDifference(self, s: str, t: str) -> str:  # O(n) time and O(1) space
     c = 0
     for cs in s: c ^= ord(cs) #ord is ASCII value
@@ -349,13 +349,13 @@ def reverseVowels(self, s):
 # LC72. Edit Distance - between 2 words
 def minDistance(self, word1: str, word2: str) -> int:  # O(mn) time and space
     @lru_cache(None)  # O(mn) runtime and space
-    def levenshtein(i, j):  # distance of word1[:i] and word2[:j]
+    def lev(i, j):  # distance of word1[:i] and word2[:j]
         if i == 0: return j  # Need to insert j chars
         if j == 0: return i  # Need to delete i chars
-        if word1[i-1] == word2[j-1]: return levenshtein(i-1, j-1)
+        if word1[i-1] == word2[j-1]: return lev(i-1, j-1)
         # delete or replace
-        return min(levenshtein(i-1, j), levenshtein(i, j-1), levenshtein(i-1, j-1)) + 1
-    return levenshtein(len(word1), len(word2))
+        return min(lev(i-1, j), lev(i, j-1), lev(i-1, j-1)) + 1
+    return lev(len(word1), len(word2))
 def minDistance(self, word1: str, word2: str) -> int:  # O(mn) time and O(n) space
     # In the above, recursion relies only previous row, so we could save space
     n, m = len(word1), len(word2)
