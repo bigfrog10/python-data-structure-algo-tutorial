@@ -114,7 +114,7 @@ def numSubseq(self, nums: List[int], target: int) -> int:
             l += 1
     return res % mod
 
-# LC334. Increasing Triplet Subsequence
+# LC334. Increasing Triplet Subsequence  triple seq
 def increasingTriplet(self, nums: List[int]) -> bool:
     first_num, second_num = float("inf"), float("inf")
     for n in nums:

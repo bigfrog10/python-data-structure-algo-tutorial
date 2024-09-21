@@ -215,7 +215,7 @@ def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bo
     if is_same(root, subRoot): return True
     return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
 
-# LC226. Invert Binary Tree
+# LC226. Invert Binary Tree  invert bt
 def invertTree(self, root):
     if root is None: return None
     root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)

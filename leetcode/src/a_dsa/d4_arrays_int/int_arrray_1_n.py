@@ -9,7 +9,7 @@ def buildArray(self, nums: List[int]) -> List[int]:  # O(1) space
         nums[i] //= q
     return nums
 
-# LC442. Find All Duplicates in an Array  dupes in array  dupe in array
+# LC442. Find All Duplicates in an Array  dupes in array  dupe in array >1 dupes
 def findDuplicates(self, nums: List[int]) -> List[int]:  # run it again to restore
     ans = []
     for num in nums:

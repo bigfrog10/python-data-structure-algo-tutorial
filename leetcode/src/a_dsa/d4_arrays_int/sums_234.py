@@ -147,9 +147,9 @@ def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
                         ans = sorted([nums[i] for i in [a,b,k,v]])
                         res.add(tuple(ans))
     return res
-def fourSum(self, nums: List[int], target: int) -> List[List[int]]:  # O(n^(k-1)) k = 4 time, O(n) space
+def fourSum(self, nums: List[int], target: int) -> List[List[int]]:  # O(n^(k-1)) k = 4 time, O(n^2) space
     def kSum(nums: List[int], target: int, k: int) -> List[List[int]]:
-        res = []  # O(n^(k-1)) time, O(n) space in recursive call
+        res = []  # O(n^(k-1)) time, O(n^2) space in n recursive calls, each has O(n)
         if not nums: return res
         average_value = target // k  # works without this, but faster
         if average_value < nums[0] or nums[-1] < average_value: return res

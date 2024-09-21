@@ -40,16 +40,7 @@ def isValid(self, s: str) -> bool:
             else: return False # no suppose to have other chars or ) has no (
     return len(stack) == 0
 
-# LC32. Longest Valid Parentheses - longest substring
-def longestValidParentheses(self, s: str) -> int:  # O(n) time and space
-    res, stack = 0, [-1]
-    for i in range(len(s)):
-        if s[i] == "(": stack.append(i)
-        else:  # )
-            stack.pop()
-            if not stack: stack.append(i)
-            else: res = max(res, i - stack[-1])
-    return res
+# LC32. Longest Valid Parentheses - longest substring  long parentheses
 def longestValidParentheses(self, s: str) -> int:  # O(n) time and O(1) space
     n = len(s)
     maxl = left = right = 0
@@ -65,6 +56,16 @@ def longestValidParentheses(self, s: str) -> int:  # O(n) time and O(1) space
         if left == right: maxl = max(maxl, 2 * left)
         elif left >= right: left = right = 0
     return maxl
+def longestValidParentheses(self, s: str) -> int:  # O(n) time and space
+    res, stack = 0, [-1]
+    for i in range(len(s)):
+        if s[i] == "(": stack.append(i)
+        else:  # )
+            stack.pop()
+            if not stack: stack.append(i)
+            else: res = max(res, i - stack[-1])
+    return res
+
 
 # LC1249. Minimum Remove to Make Valid Parentheses - with letters, return one string result  min remove  min paren remove
 def minRemoveToMakeValid(self, s: str) -> str:  # O(n) runtime and space

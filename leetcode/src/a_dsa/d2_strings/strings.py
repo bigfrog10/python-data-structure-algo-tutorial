@@ -71,7 +71,7 @@ def letterCasePermutation(self, s: str) -> List[str]:  # O(2^n), n is # of lette
         ans = [x + cc for x in ans for cc in {c, c.swapcase()}]
     return ans
 
-# LC567. Permutation in String - string permutation check - s1 is a permutation substring of s2  permutation string
+# LC567. Permutation in String - string permutation check - s1 is a permutation substring of s2  permutation string permutation
 def checkInclusion(self, s1, s2):  # O(|s1|) time and O(1) space (26 chars as keys)
     d1, d2 = Counter(s1), Counter(s2[:len(s1)])  # O(1) space, 26 chars
     for start in range(len(s1), len(s2)):  # O(len(s2) - len(s1)) time
@@ -341,7 +341,7 @@ def reverseVowels(self, s):
     while l < r:
         while l <= r and s[l] not in vows: l += 1
         while l <= r and s[r] not in vows: r -= 1
-        if l > r: break
+        if l >= r: break
         s[l], s[r] = s[r], s[l]
         l, r = l + 1, r - 1
     return ''.join(s)

@@ -1,5 +1,5 @@
 
-# LC708. Insert into a Sorted Circular Linked List
+# LC708. Insert into a Sorted Circular Linked List  circular sorted
 def insert(self, head: 'Optional[Node]', insertVal: int) -> 'Node':
     if not head:  # corner case
         head = Node(insertVal)
@@ -16,7 +16,7 @@ def insert(self, head: 'Optional[Node]', insertVal: int) -> 'Node':
     curr.next = Node(insertVal, curr.next)  # insert between curr and curr.next
     return head
 
-# LC141. Linked List Cycle  # Floyd hare turtle
+# LC141. Linked List Cycle  # Floyd turtle hare turtle
 def hasCycle(self, head: ListNode) -> bool:
     hare = turtle = head
     while hare and hare.next:
@@ -24,7 +24,7 @@ def hasCycle(self, head: ListNode) -> bool:
         if hare == turtle: return True
     return False
 
-# LC142. Linked List Cycle II - cycle start point
+# LC142. Linked List Cycle II - cycle start point   turtle hare turtle
 def detectCycle(self, head: ListNode) -> ListNode:
     hare = turtle = head
     while hare and hare.next:  # travel n cycles plus arc C1

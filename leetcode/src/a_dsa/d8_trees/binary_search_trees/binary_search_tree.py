@@ -54,7 +54,7 @@ def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int: # O
     dfs(root)
     return ret
 
-# LC95. Unique Binary Search Trees II - structure unique - return all of them
+# LC95. Unique Binary Search Trees II - structure unique - return all of them  unique bst
 def generateTrees(self, n: int) -> List[Optional[TreeNode]]:  # O(n * catalan number), O(4^n)
     def trees(first, last):  # g(n) = sum [g(i-1) * g(n-i)] i=1..n, g(0) = g(1) = 1 Catalan number Gn
         return [TreeNode(root, left, right)

@@ -64,7 +64,7 @@ def badSensor(self, sensor1: List[int], sensor2: List[int]) -> int:
             elif sensor1[i] != sensor2[i + 1]: return 2
     return -1
 
-# LC349. Intersection of Two Arrays - return unique elems
+# LC349. Intersection of Two Arrays - return unique elems  array intersect array
 def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
     set1 = set(nums1)
     set2 = set(nums2)

@@ -124,7 +124,7 @@ def prevPermOpt1(self, arr: List[int]) -> List[int]: # Time: O(n) Space: O(1)
         arr[idx], arr[midx] = arr[midx], arr[idx]
     return arr
 
-# LC77. Combinations
+# LC77. Combinations  combos
 def combine(self, n, k):
     return list(itertools.combinations(range(1, n+1), k))
 # 4, 3: [[3],[4]], then  [[2,3],[2,4],[3,4]], and then [[1,2,3],[1,2,4],[1,3,4],[2,3,4]]

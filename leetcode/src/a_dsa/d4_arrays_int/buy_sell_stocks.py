@@ -4,8 +4,8 @@
 def maxProfit(self, prices: List[int], fee: int) -> int:
     buy_price, profit = inf, 0
     for price in prices:
-        buy_price = min(buy_price, price - profit)
-        profit = max(profit, price - buy_price - fee)
+        buy_price = min(buy_price, price - profit)  # effective buy prices
+        profit = max(profit, price - buy_price - fee)  # accumulate profit
     return profit
 
 # LC121. Best Time to Buy and Sell Stock

@@ -76,7 +76,7 @@ def oddEvenList(self, head: ListNode) -> ListNode:
     odd_walker.next = even_head
     return head
 
-# LC876. Middle of the Linked List mid linked list
+# LC876. Middle of the Linked List mid linked list  linked list mid linked
 def middleNode(self, head: ListNode) -> ListNode:
     slow = fast = head
     while fast and fast.next:

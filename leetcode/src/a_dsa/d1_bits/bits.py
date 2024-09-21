@@ -58,7 +58,7 @@ def totalHammingDistance(self, nums: List[int]) -> int:  # O(n), better than n^2
     return sum(b.count('0') * b.count('1') for b in zipped)  # constant time
 
 
-# LC191. Number of 1 Bits, Hamming distance   bit 1 in num    1 bit in num
+# LC191. Number of 1 Bits, Hamming distance   bit 1 in num 1 bit in num
 def hammingWeight(self, n: int) -> int:
     res = 0
     while n != 0:
@@ -66,7 +66,7 @@ def hammingWeight(self, n: int) -> int:
         n &= (n - 1)  # n & (n-1) erase least significant bit
     return res
 
-# LC260. Single Number III
+# LC260. Single Number III  2 nums show once, rest are twice
 def singleNumber(self, nums: List[int]) -> List[int]:
     bitmask = 0  # difference between two numbers (x and y) which were seen only once
     for num in nums: bitmask ^= num

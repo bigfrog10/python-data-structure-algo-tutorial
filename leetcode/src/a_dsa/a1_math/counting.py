@@ -10,7 +10,6 @@ def angleClock(self, hour: int, minutes: int) -> float:
 def countPrimes(self, n: int) -> int: # Sieve of Eratosthenes
     import math
     if n <= 2: return 0
-    if n == 3: return 1
     flag = [1] * n  # assume all primes
     flag[0] = flag[1] = 0  # non prime
     upper = math.ceil(math.sqrt(n))

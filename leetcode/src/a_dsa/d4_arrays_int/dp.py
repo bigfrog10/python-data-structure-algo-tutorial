@@ -31,6 +31,11 @@ def minCostII(self, costs: List[List[int]]) -> int:
 
 # 2 state recursion
 # LC198. House Robber
+def rob(self, nums):  # O(n)
+    prevRob , currRob  = 0, 0 # rob current house, or skip current
+    for num in nums:
+        prevRob , currRob  = currRob , max(prevRob  + num, currRob)
+    return currRob
 def rob(self, nums: List[int]) -> int:
     if not nums: return 0
     n = len(nums)
@@ -44,19 +49,14 @@ def rob(self, nums: List[int]) -> int:
     ret = robbing(0)
     print(robbing.cache_info())
     return ret
-def rob(self, nums):  # O(n)
-    prevRob , currRob  = 0, 0 # rob current house, or skip current
-    for num in nums:
-        prevRob , currRob  = currRob , max(prevRob  + num, currRob)
-    return currRob
 
 # LC213. House Robber II
 def rob(self, nums: List[int]) -> int:  # O(n)
     def rob_street(nums):
-        dp1, dp2 = 0, 0  # prev loot and current loot
-        for num in nums:
-            dp1, dp2 = dp2, max(dp1 + num, dp2)
-        return dp2
+        prevRob , currRob  = 0, 0 # prev loot and current loot
+        for num in nums: # rob current house, or skip current
+            prevRob , currRob  = currRob , max(prevRob  + num, currRob)
+        return currRob
     return max(nums[0] + rob_street(nums[2:-1]), rob_street(nums[1:]))
 
 # LC740. Delete and Earn  delete earn
