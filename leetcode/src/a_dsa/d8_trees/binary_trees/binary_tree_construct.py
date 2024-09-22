@@ -25,7 +25,7 @@ def flatten(self, root: Optional[TreeNode]) -> None:  # O(n), O(1)
             node.right, node.left = node.left, None
         node = node.right  # This is original node.left
 
-# LC536. Construct Binary Tree from String
+# LC536. Construct Binary Tree from String  max array
 def str2tree(self, s: str) -> Optional[TreeNode]:  # O(n)
     def build(iteri) -> TreeNode:  # works for pattern "num(a)(b))"
         num = ''

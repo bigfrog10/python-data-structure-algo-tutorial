@@ -109,7 +109,7 @@ def numRollsToTarget(self, d: int, f: int, target: int) -> int:
 # These 3 problems are same logic
 # LC1478. Allocate Mailboxes
 def minDistance(self, houses: List[int], k: int) -> int:
-    houses.sort()
+    houses.sort()  # O(n^2 * k)
     @lru_cache(None)
     def dfs(i, j, k): # place k boxes between i and j houses
         if k == j - i + 1: return 0 # 1 box for every house

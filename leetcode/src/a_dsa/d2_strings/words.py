@@ -378,7 +378,7 @@ def toGoatLatin(self, sentence: str) -> str:
         ret.append(w)
     return ' '.join(ret)
 
-# LC2023. Number of Pairs of Strings With Concatenation Equal to Target num pair concat to target  pair concat equal
+# LC2023. Number of Pairs of Strings With Concatenation Equal to Target num pair concat to target  pair concat equal string pair string
 def numOfPairs(self, nums: List[str], target: str) -> int:
     freq = Counter(nums)
     ans = 0

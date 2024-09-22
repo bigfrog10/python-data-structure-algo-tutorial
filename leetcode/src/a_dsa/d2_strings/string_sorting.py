@@ -1,4 +1,4 @@
-# LC1657. Determine if Two Strings Are Close
+# LC1657. Determine if Two Strings Are Close string close
 def closeStrings(self, word1: str, word2: str) -> bool:
     c1, c2 = Counter(word1), Counter(word2)  # O(m+n)
     # size is 26

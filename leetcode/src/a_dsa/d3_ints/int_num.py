@@ -52,12 +52,12 @@ def isPowerOfTwo(self, n: int) -> bool:
     return n != 0 and n & (n-1) == 0
 
 # LC279. Perfect Squares - min squares sum to n
-def numSquares(self, n):
+def numSquares(self, n):  # O(n * sqrt(n)
     square_nums = [i * i for i in range(1, int(n**0.5)+1)]  # O(sqrt(n)) space and runtime
     queue, level = {n}, 0
     while queue:  # BFS
         level += 1
-        next_queue = set()
+        next_queue = set()  # set cut branches
         for remainder in queue:  # construct the queue for the next level
             for square_num in square_nums:
                 if remainder == square_num: return level  # find the node!

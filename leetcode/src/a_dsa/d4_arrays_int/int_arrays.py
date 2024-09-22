@@ -230,6 +230,7 @@ def change1(self, amount: int, coins: List[int]) -> int:  # O(amount * len(coins
     def f(i, amount):  # having i is to remove double count, (2, 1, 1), (1, 2, 1), (1,1,2)
         if amount == 0: return 1
         if amount < 0 or i >= len(coins): return 0
+        # use this coin or move to next coin
         return f(i, amount-coins[i]) + f(i+1, amount)
     return f(0, amount)
 

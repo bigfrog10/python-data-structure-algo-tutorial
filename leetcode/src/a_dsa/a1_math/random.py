@@ -1,5 +1,5 @@
 
-# LC528. Random Pick with Weight  random weights  rand pick weight
+# LC528. Random Pick with Weight  random weights  rand pick weight rand weight
 class Solution:  # based on pdf
     def __init__(self, w: List[int]):
         self.samples = list(range(len(w)))

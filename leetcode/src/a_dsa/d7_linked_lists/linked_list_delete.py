@@ -33,7 +33,7 @@ def deleteDuplicates(self, head: ListNode) -> ListNode:  # O(n)
     while head:
         while head.next and head.val == head.next.val:
             head = head.next  # at the end, head is last dupe elem
-        if prev.next == head:prev = head  # no dupe
+        if prev.next == head: prev = head  # no dupe
         else:prev.next = head.next  # has dupe, skip them
         head = head.next
     return dummy.next

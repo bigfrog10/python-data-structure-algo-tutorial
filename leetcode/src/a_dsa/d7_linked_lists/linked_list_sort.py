@@ -19,7 +19,7 @@ def merge(self, l, r):
     p.next = l or r
     return dummy.next
 
-# LC21. Merge Two Sorted Lists   merge 2 sorted lists  merge sorted
+# LC21. Merge Two Sorted Lists   merge 2 sorted lists  merge sorted  merge list
 def mergeTwoLists(self, l1, l2):
     curr = head = ListNode(-1)
     while l1 and l2:

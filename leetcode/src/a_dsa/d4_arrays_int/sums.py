@@ -53,6 +53,7 @@ def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]
             # ignore duplicates
             if i > start and candidates[i] == candidates[i - 1]: continue
             if candidates[i] > target: break # so sum > target, not a solution
+            if path and candidates[i] < path[-1]: continue
             # we used i here, so next search starting from i+1
             combine_sum_2(i + 1, path + [candidates[i]], target - candidates[i])
     candidates.sort()
