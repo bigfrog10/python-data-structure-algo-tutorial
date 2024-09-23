@@ -25,13 +25,13 @@ class MyCircularQueue: # array based, O(1) for all ops
         self.count = 0  # how many elements in the queue
         self.headIndex = 0  # front element index
         # tail element index = (head + count - 1) % capa
-    def enQueue(self, value: int) -> bool:
+    def enQueue(self, value: int) -> bool:  # tail
         if self.count == self.capacity: return False
         tail = (self.headIndex + self.count) % self.capacity
         self.queue[tail] = value
         self.count += 1
         return True
-    def deQueue(self) -> bool:
+    def deQueue(self) -> bool:  # head
         if self.count == 0: return False
         self.headIndex = (self.headIndex + 1) % self.capacity
         self.count -= 1

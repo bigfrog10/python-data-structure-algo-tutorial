@@ -18,7 +18,7 @@ def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
                 return (max(maxLeftA, maxLeftB) + min(minRightA, minRightB)) / 2
             else:
                 return max(maxLeftA, maxLeftB)
-        elif maxLeftA > minRightB: right = pA - 1
+        elif maxLeftA > minRightB: right = pA - 1  # cut the smaller side
         else: left = pA + 1
 
 # LC881. Boats to Save People
@@ -44,7 +44,7 @@ def canBeIncreasing(self, nums: List[int]) -> bool:
                 nums[i] = nums[i-1]  # case like [1,6,7,5,8]
     return True
 
-# LC88. Merge Sorted Array - merge n2 to n1
+# LC88. Merge Sorted Array - merge n2 to n1  merge array
 def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
     i, j, k = m-1, n-1, m+n-1  # start from backward
     while i > -1 and j > -1:
@@ -58,7 +58,7 @@ def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
     if j > -1: nums1[0:j+1] = nums2[0:j+1]
 
 
-# LC977. Squares of a Sorted Array   square sort array  square of sort
+# LC977. Squares of a Sorted Array   square sort array  square of sort  square array
 def sortedSquares(self, nums: List[int]) -> List[int]:  # O(n) time, O(1) space
     n, res = len(nums), []
     left, right = 0, n-1

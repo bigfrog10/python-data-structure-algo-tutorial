@@ -11,9 +11,9 @@ def countPairs(self, nums: List[int], target: int) -> int:
         else: right -= 1
     return count
 
-# LC912. Sort an Array
+# LC912. Sort an Array  merge sort array
 def sortArray(self, nums: List[int]) -> List[int]:  # O(nlogn) time, O(n) space
-    def merge(left, right):  # merge sort
+    def merge(left, right):
         res = []
         i = j = 0
         while i < len(left) and j < len(right):

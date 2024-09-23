@@ -128,7 +128,7 @@ def validWordAbbreviation(self, word: str, abbr: str) -> bool:
         else: i, j = i+1, j+1
     return i == m and j == n
 
-# LC767. Reorganize String - rearrange chars
+# LC767. Reorganize String - rearrange chars  reorg string reorg chars
 def reorganizeString(self, s: str) -> str:
     if not s: return ""  # O(n) there is no sort
     n, counts = len(s), Counter(s)

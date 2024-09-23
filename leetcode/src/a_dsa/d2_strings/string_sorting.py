@@ -32,7 +32,7 @@ def smallestEquivalentString(self, s1: str, s2: str, baseStr: str) -> str:
         res += find(char)
     return res
 
-# LC451. Sort Characters By Frequency - sort by freq  sort char by freq
+# LC451. Sort Characters By Frequency - sort by freq  sort char by freq  sort freq
 def frequencySort(self, s: str) -> str:  # O(n), not nlogn, using bucket sort
     if not s: return s
     counts = collections.Counter(s)  # Determine the frequency of each character.

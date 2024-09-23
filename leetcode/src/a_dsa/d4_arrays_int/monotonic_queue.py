@@ -27,7 +27,7 @@ def longestSubarray(self, nums: List[int], limit: int) -> int:  # O(n)
             i += 1
     return len(nums) - i
 
-# LC239. Sliding Window Maximum
+# LC239. Sliding Window Maximum  slide win
 def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
     res =[]   # O(n) time, O(k) space
     deq = collections.deque()  # store idxs, nums mono decreasing

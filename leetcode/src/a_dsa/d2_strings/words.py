@@ -195,7 +195,7 @@ def exist(self, board: List[List[str]], word: str) -> bool:  # O(h * w * 3^wl), 
 
 # LC212. Word Search II - return all words
 def findWords(self, board: List[List[str]], words: List[str]) -> List[str]: # This is fast
-    trie, WORD_KEY = {}, '$'  # O(M * 4 * 3^(L-1)), M=cells, L=max(len(word) for words)
+    trie, WORD_KEY = {}, '$'  # O(M * N * 4 * 3^(L-1) + M*N), L=max(len(word) for words)
     for word in words:  # space O(number of letters in trie)
         node = trie
         for letter in word: node = node.setdefault(letter, {})

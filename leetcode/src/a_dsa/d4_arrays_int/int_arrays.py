@@ -308,7 +308,7 @@ def depthSumInverse(self, nestedList: List[NestedInteger]) -> int:
             queue, q1 = q1, []
     return res
 
-# LC2149. Rearrange Array Elements by Sign
+# LC2149. Rearrange Array Elements by Sign  rearr sign rearr array
 def rearrangeArray(self, nums: List[int]) -> List[int]:
     n = len(nums)
     ans = [0] * n
@@ -602,7 +602,7 @@ def minIncrementForUnique(self, nums: List[int]) -> int: # O(n)
 def isIdealPermutation(self, A):
     return all(abs(i-x) <= 1 for i,x in enumerate(A))
 
-# LC679. 24 Game
+# LC679. 24 Game card 24 card
 def judgePoint24(self, nums: List[int]) -> bool:
     if len(nums) == 1: return math.isclose(nums[0], 24)
     return any(self.judgePoint24([x] + rest)

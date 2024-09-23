@@ -139,7 +139,7 @@ def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
         for j in range(i+1, len(nums)):
             pairs[nums[i]+nums[j]].append((i, j))
     res = set()
-    for s, ps in pairs.items():
+    for s, ps in pairs.items():  # 3 loops here, so O(n^3)
         for a, b in ps:
             if target - s in pairs:
                 for k,v in pairs[target-s]:

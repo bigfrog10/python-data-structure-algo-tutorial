@@ -39,8 +39,8 @@ def numberToWords(self, num):
     def hundreds(num):
         if num == 0: return ""  # need this to prevent extra space in next line
         elif num < 20: return lessThan20[num] + " "
-        elif num < 100: return tens[num // 10] + " " + hundreds(num % 10)
-        else: return lessThan20[num // 100] + " Hundred " + hundreds(num % 100)
+        elif num < 100: return tens[num // 10] + " " + hundreds(num % 10)  # need end space
+        else: return lessThan20[num // 100] + " Hundred " + hundreds(num % 100)  # need end space
 
     if num == 0: return "Zero"
     ret = ''

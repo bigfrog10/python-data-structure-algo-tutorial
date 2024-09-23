@@ -40,7 +40,7 @@ def isValid(self, s: str) -> bool:
             else: return False # no suppose to have other chars or ) has no (
     return len(stack) == 0
 
-# LC32. Longest Valid Parentheses - longest substring  long parentheses
+# LC32. Longest Valid Parentheses - longest substring  long parentheses long valid parenth
 def longestValidParentheses(self, s: str) -> int:  # O(n) time and O(1) space
     n = len(s)
     maxl = left = right = 0

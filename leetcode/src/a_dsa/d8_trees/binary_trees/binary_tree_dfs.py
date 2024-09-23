@@ -104,7 +104,7 @@ def printTree(self, root: TreeNode) -> List[List[str]]:
     update_output(node=root, row=0, left=0, right=width - 1)
     return self.output
 
-# LC101. Symmetric Tree - mirror tree, tree mirror  bt sym
+# LC101. Symmetric Tree - mirror tree, tree mirror  bt sym bt
 def isSymmetric(self, root: TreeNode) -> bool:
     def is_mirror(n1, n2):  # return if mirrored
         if n1 is None and n2 is None: return True

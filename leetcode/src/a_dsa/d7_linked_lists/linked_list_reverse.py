@@ -65,7 +65,7 @@ def isPalindrome(self, head: Optional[ListNode]) -> bool:  # O(n) time, O(1) spa
     # head = 3 2 1, rev = 2 1   rev = 3 2 1, head = 4 2 1, fast=last or None
     tail = head.next if fast else head  # fast none when list is even
     isPali = True
-    while rev:
+    while rev and isPali:
         isPali = isPali and rev.val == tail.val
         head, head.next, rev = rev, head, rev.next  # restore head to original
         tail = tail.next  # 2, 3, 2, 1, then 1, 2,3,2,1

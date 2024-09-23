@@ -13,11 +13,11 @@ def compress(self, chars: List[str]) -> int:  # O(n) time and O(1) space, chars 
 def compress(self, chars: List[str]) -> int:
     i = res = 0  # i is the counter to mark current progress
     while i < len(chars):
+        chars[res] = chars[i]  # group char
+        res += 1
         glen = 1  # group length
         while i + glen < len(chars) and chars[i + glen] == chars[i]:
             glen += 1
-        chars[res] = chars[i]  # group char
-        res += 1
         if glen > 1:
             str_repr = str(glen)
             chars[res:res+len(str_repr)] = list(str_repr)

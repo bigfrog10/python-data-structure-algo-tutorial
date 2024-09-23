@@ -1,5 +1,5 @@
 
-# LC852. Peak Index in a Mountain Array
+# LC852. Peak Index in a Mountain Array  peak mount
 def peakIndexInMountainArray(self, arr: List[int]) -> int:
     lo, hi = 0, len(arr) - 1
     while lo < hi:
