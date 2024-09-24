@@ -91,3 +91,20 @@ def reorderList(self, head: ListNode) -> None:
     while second.next:  # merge 1->2->3->4 and 6->5->4 into 1->6->2->5->3->4
         first.next, first = second, first.next
         second.next, second = first, second.next
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -35,7 +35,7 @@ def incremovableSubarrayCount(self, nums: List[int]) -> int: # O(n^3) time and O
             ans += int(is_increasing)
     return ans
 
-# LC2972. Count the Number of Incremovable Subarrays II
+# LC2972. Count the Number of Incremovable Subarrays II  # O(nlogn)
 def incremovableSubarrayCount(self, nums: List[int]) -> int:
     n = len(nums)  # O(nlogn) time, O(1) space
     res, i, j = 0, 0, n-1

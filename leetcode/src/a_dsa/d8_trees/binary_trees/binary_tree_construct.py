@@ -42,28 +42,22 @@ def str2tree(self, s: str) -> Optional[TreeNode]:  # O(n)
 # LC297. Serialize and Deserialize Binary Tree
 class Codec:
     def serialize(self, root):
-        if not root: return ''
-        def node_to_json(node):
-            ret = f'"{node.val}":['
-            if node.left: ret += node_to_json(node.left) + ','
-            else: ret += 'null,'
-            if node.right: ret += node_to_json(node.right)
-            else: ret += 'null'
-            ret = '{' + ret + ']}'
-            return ret  # or we convert to dict and then str(dict)
-        ret = node_to_json(root)
-        return ret
+        def po(node):  # preorder
+            if node is None: return "#"
+            return f"{node.val},{po(node.left)},{po(node.right)}"
+        return po(root)
     def deserialize(self, data):
-        if not data: return []
-        def dict_to_node(kvs):
-            if kvs is None: return None
-            for k, v in kvs.items():
-                tn = TreeNode(int(k))
-                tn.left = dict_to_node(v[0])
-                tn.right = dict_to_node(v[1])
-                return tn
-        kv = json.loads(data)
-        return dict_to_node(kv)
+        def helper(it):
+            node_val = next(it)
+            if node_val == "#": return None
+            node = TreeNode(int(node_val))
+            node.left = helper(it)
+            node.right = helper(it)
+            return node
+        node_vals = data.split(",")
+        print(data)
+        it = iter(node_vals)
+        return helper(it)
 
 # LC1110. Delete Nodes And Return Forest - delete tree nodes
 def delNodes(self, root: Optional[TreeNode], to_delete: List[int]) -> List[TreeNode]:

@@ -364,29 +364,33 @@ def twoSumBSTs(self, root1: Optional[TreeNode], root2: Optional[TreeNode], targe
 
 # LC449. Serialize and Deserialize BST
 class Codec:
-    def serialize(self, root):
-        def preorder(node):
-            if node:
-                vals.append(str(node.val))
-                preorder(node.left)
-                preorder(node.right)
-        vals = []
-        preorder(root)
-        return ' '.join(vals)
-    def deserialize(self, data):
-        preorder = list(map(int, data.split()))
-        inorder = sorted(preorder)
-        return self.buildTree(preorder, inorder)
-    def buildTree(self, preorder, inorder):
-        def build(stop):
-            if inorder and inorder[-1] != stop:
-                root = TreeNode(preorder.pop())
-                root.left = build(root.val)
-                inorder.pop()
-                root.right = build(stop)
-                return root
-        preorder.reverse()
-        inorder.reverse()
-        return build(None)
+    def serialize(self, root: Optional[TreeNode]) -> str:
+        def postorder(root):
+            return postorder(root.left) + postorder(root.right) + [root.val] if root else []
+        return ' '.join(map(str, postorder(root)))
+    def deserialize(self, data: str) -> Optional[TreeNode]:
+        def parse(lower=float('-inf'), upper=float('inf')):
+            if not data or data[-1] < lower or data[-1] > upper:
+                return None
+            val = data.pop()
+            root = TreeNode(val)
+            root.right = parse(val, upper)
+            root.left = parse(lower, val)
+            return root
+        data = [int(x) for x in data.split(' ') if x]
+        return parse()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

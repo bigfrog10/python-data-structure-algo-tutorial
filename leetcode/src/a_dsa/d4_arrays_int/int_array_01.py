@@ -133,7 +133,7 @@ def flatten(arr: list, n):
         else: res.append(a)
     return res
 
-# LC565 Array Nesting   interloop
+# LC565 Array Nesting   interloop array loop
 def arrayNesting(self, nums: List[int]) -> int: # O(n) tinme and O(1) space
     res = 0
     for i in range(len(nums)):

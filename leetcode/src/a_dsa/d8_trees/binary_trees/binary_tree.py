@@ -253,7 +253,7 @@ def rob(self, root: Optional[TreeNode]) -> int:
         return [rob, not_rob]
     return max(helper(root))
 
-# LC100. Same Tree     bt same tree
+# LC100. Same Tree     bt same tree bt
 def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
     def inorder(node):
         if not node: return 'none'

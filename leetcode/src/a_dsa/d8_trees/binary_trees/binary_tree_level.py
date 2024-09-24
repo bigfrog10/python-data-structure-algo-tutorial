@@ -20,30 +20,30 @@ def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
 # LC314. Binary Tree Vertical Order Traversal - Just column info - bt vertical
 def verticalOrder(self, root: TreeNode) -> List[List[int]]:  # O(n)
     if root is None: return []
-    queue, columnTable = collections.deque([(root, 0)]), collections.defaultdict(list)
-    min_column = max_column = 0  # track column range for last line
+    queue, cols = collections.deque([(root, 0)]), collections.defaultdict(list)
+    min_col = max_col = 0  # track column range for last line
     while queue:  # BFS so the cell list is in right order.
-        node, column = queue.popleft()
-        columnTable[column].append(node.val)
-        if node.left: queue.append((node.left, column - 1))
-        if node.right: queue.append((node.right, column + 1))
-        min_column = min(min_column, column)
-        max_column = max(max_column, column)
-    return [columnTable[x] for x in range(min_column, max_column + 1)]
+        node, col = queue.popleft()
+        cols[col].append(node.val)
+        if node.left: queue.append((node.left, col - 1))
+        if node.right: queue.append((node.right, col + 1))
+        min_col = min(min_col, col)
+        max_col = max(max_col, col)
+    return [cols[x] for x in range(min_col, max_col + 1)]
 
 # LC987. Vertical Order Traversal of a Binary Tree - sort in same position
 def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:  # O(nlog(n/w)
     res = defaultdict(list) # column number to (row number, val)
     min_col = max_col = 0  # track column range
-    def preorder(node, i, j):
+    def dfs(node, i, j):  # preorder
         nonlocal min_col, max_col
         if not node: return
         res[j].append((i, node.val))  # keep same cell values together
         min_col = min(min_col, j)
         max_col = max(max_col, j)
-        preorder(node.left, i+1, j-1)
-        preorder(node.right, i+1, j+1)
-    preorder(root, 0, 0)
+        dfs(node.left, i+1, j-1)
+        dfs(node.right, i+1, j+1)
+    dfs(root, 0, 0)
     # sort within cell
     ret = [[n[1] for n in sorted(res[k])] for k in range(min_col, max_col + 1)]
     return ret

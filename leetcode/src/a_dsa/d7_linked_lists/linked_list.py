@@ -63,7 +63,7 @@ def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
         pB = headA if pB is None else pB.next
     return pA
 
-# LC328. Odd Even Linked List
+# LC328. Odd Even Linked List  even odd
 def oddEvenList(self, head: ListNode) -> ListNode:
     if not head: return head
     odd_walker = head  # condition leans on even, so code is simpler.

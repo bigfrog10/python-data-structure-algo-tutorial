@@ -182,7 +182,7 @@ def maxWidthRamp(self, A):
 def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
     st, d = [], {}  # O(len(nums2)) runtime and space
     for n in nums2:
-        while st and st[-1] < n: d[st.pop()] = n  # maintain decreasing stack
+        while st and st[-1] < n: d[st.pop()] = n  # maintain increasing stack
         st.append(n)
     return [d.get(x, -1) for x in nums1]
 
@@ -192,7 +192,8 @@ def nextGreaterElements(self, nums):  # O(n) time and space
     ret = [-1] * n
     stack = nums[::-1]  # reverse this for comparison
     for i in range(n)[::-1]:
-        while stack and stack[-1] <= nums[i]: stack.pop()  # maintain decreasing order
+        while stack and stack[-1] <= nums[i]: stack.pop()  # maintain increasing order
         if stack: ret[i] = stack[-1]  # this -1 number is larger than current
         stack.append(nums[i])  # in case this is the next greater
     return ret
+

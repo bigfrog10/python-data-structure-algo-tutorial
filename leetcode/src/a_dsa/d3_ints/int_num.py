@@ -479,6 +479,7 @@ def integerBreak(self, n: int) -> int:
     if n % 3 == 0: return 3**(n//3)
     if n % 3 == 1: return 3**(n//3 - 1) * 4
     if n % 3 == 2: return 3**(n//3) * 2
+# p ^ 3 < 3 ^ p
 
 # LC1025. Divisor Game # BBG
 def divisorGame(self, N: int) -> bool:

@@ -114,7 +114,7 @@ def numSubseq(self, nums: List[int], target: int) -> int:
             l += 1
     return res % mod
 
-# LC334. Increasing Triplet Subsequence  triple seq
+# LC334. Increasing Triplet Subsequence  triple seq  triplet seq
 def increasingTriplet(self, nums: List[int]) -> bool:
     first_num, second_num = float("inf"), float("inf")
     for n in nums:
@@ -124,7 +124,7 @@ def increasingTriplet(self, nums: List[int]) -> bool:
         else: return True
     return False
 
-# LC300. Longest Increasing Subsequence  LIS length
+# LC300. Longest Increasing Subsequence  LIS length  lis seq
 def lengthOfLIS(self, nums: List[int]) -> int:  # O(nlogn) runtime, O(n) space
     hist = []  # hist[i] smallest ending element in strictly increasing sequence of length i
     for e in nums:

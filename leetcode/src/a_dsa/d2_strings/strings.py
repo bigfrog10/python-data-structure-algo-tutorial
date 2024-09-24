@@ -115,16 +115,15 @@ def validWordAbbreviation(self, word, abbr):
     pattern = '^' + re.sub('([1-9]\d*)', r'.{\1}', abbr) + '$'
     return bool(re.match(pattern, word))
 def validWordAbbreviation(self, word: str, abbr: str) -> bool:
-    m, n = len(word), len(abbr)
+    m, n = len(word), len(abbr)  # O(m + n)
     i = j = 0
     while i < m and j < n:
         if word[i] != abbr[j]:
-            if abbr[j].isdigit():
-                if int(abbr[j]) == 0: return False
-                prev_j = j
-                while j < n and abbr[j].isdigit(): j += 1
-                i += int(abbr[prev_j:j])
-            else: return False
+            if not abbr[j].isdigit(): return False
+            if int(abbr[j]) == 0: return False
+            prev_j = j
+            while j < n and abbr[j].isdigit(): j += 1
+            i += int(abbr[prev_j:j])
         else: i, j = i+1, j+1
     return i == m and j == n
 
@@ -353,7 +352,7 @@ def minDistance(self, word1: str, word2: str) -> int:  # O(mn) time and space
         if i == 0: return j  # Need to insert j chars
         if j == 0: return i  # Need to delete i chars
         if word1[i-1] == word2[j-1]: return lev(i-1, j-1)
-        # delete or replace
+        # delete, insert, replace
         return min(lev(i-1, j), lev(i, j-1), lev(i-1, j-1)) + 1
     return lev(len(word1), len(word2))
 def minDistance(self, word1: str, word2: str) -> int:  # O(mn) time and O(n) space
