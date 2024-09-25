@@ -562,7 +562,7 @@ def singleNumber(self, nums: List[int]) -> int:
                                                       # [1, 0], 0th bit 1 seen odd times
     return seen_once  # [2, 2, 3, 2] -> [2, 0], [0, 2], [1, 0], [3, 0] -> 3
 
-# LC217. Contains Duplicate
+# LC217. Contains Duplicate  appear dupe
 def containsDuplicate(self, nums: List[int]) -> bool:
     showed = set()
     for i in nums:

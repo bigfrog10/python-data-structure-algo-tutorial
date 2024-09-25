@@ -77,7 +77,7 @@ def findDuplicate(self, nums):  # O(1) space and O(n) time, Floyd's Tortoise and
 def numIdenticalPairs(self, nums: List[int]) -> int:
     return sum([math.comb(n, 2) for n in collections.Counter(nums).values()])
 
-# LC368. Largest Divisible Subset
+# LC368. Largest Divisible Subset  largest subset divisible
 def largestDivisibleSubset(self, nums: List[int]) -> List[int]:
     nums.sort()  # O(n^2) time and O(n) space
     ans=[ [num] for num in nums]
