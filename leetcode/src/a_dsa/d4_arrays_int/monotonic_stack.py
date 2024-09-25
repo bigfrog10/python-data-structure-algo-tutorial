@@ -11,6 +11,16 @@ def totalSteps(self, nums: List[int]) -> int:
         stack.append([i, cur])
     return res
 
+# LC769. Max Chunks To Make Sorted
+def maxChunksToSorted(self, arr: List[int]) -> int:
+    max_so_far = arr[0]
+    count = 0
+    for i in range(len(arr)):
+        if max_so_far < arr[i]: max_so_far = arr[i]
+        if max_so_far == i: count += 1
+    return count
+# https://leetcode.com/problems/max-chunks-to-make-sorted/solutions/1225805/python-easy-sol-28ms-with-detailed-explanation/
+
 # LC768. Max Chunks To Make Sorted II
 def maxChunksToSorted(self, arr: List[int]) -> int:
     stack = []

@@ -204,8 +204,8 @@ def majorityElement(self, nums: List[int]) -> List[int]:  # O(n) time and O(1) s
 
 # LC322. Coin Change - least number of coins to sum up to target
 def coinChange(self, coins: List[int], amount: int) -> int:
-    if amount == 0:  return 0 # 680 ms, it also is O(c^(amount / min(coins))), c is num of coins, power is height
-    coins.sort(reverse=True) # we try to put larger coins to reduce numbers of coins
+    if amount == 0:  return 0  # O(amount * (coins)))
+    coins.sort(reverse=True)  # we try to put larger coins to reduce numbers of coins
     queue, visited = deque([(0, 0)]), {0}
     while queue:  # BFS
         amt, count = queue.popleft()

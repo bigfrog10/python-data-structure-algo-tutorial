@@ -29,7 +29,7 @@ def findMiddleIndex(self, nums: List[int]) -> int:
 # LC39. Combination Sum  # O(n^(target/min)) - return combos, can use elems multiple times comb sum
 def combinationSum(self, candidates, target):  # fastest
     candidates = sorted(candidates)  # small to large, cut branches
-    result = []  # O(n^(target/min cand), power is tree depth
+    result = []  # O(2^n * n) time, space is O(target * n), n = len(cand)
     def dfs(remain, stack): # stack is history
         if remain == 0:
             result.append(stack)
@@ -41,6 +41,7 @@ def combinationSum(self, candidates, target):  # fastest
             else: dfs(remain - item, stack + [item])
     dfs(target, [])
     return result
+# https://leetcode.com/problems/combination-sum/solutions/16502/a-general-approach-to-backtracking-questions-in-java-subsets-permutations-combination-sum-palindrome-partitioning/?envType=company&envId=apple&favoriteSlug=apple-six-months
 
 # LC40. Combination Sum II - could have dupes and use only once  combo sum 2 combo sum ii
 def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:

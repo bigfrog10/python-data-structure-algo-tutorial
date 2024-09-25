@@ -12,7 +12,7 @@ def maxSubarrayLength(self, nums: List[int], k: int) -> int:
     return result
 
 
-# LC53. Maximum Subarray   - max sum in all subarrays  max subarray
+# LC53. Maximum Subarray   - max sum in all subarrays  max subarray largest sum sub
 def maxSubArray(self, nums: List[int]) -> int:
     total, max_total = 0, -inf
     for i in range(len(nums)):
