@@ -1,8 +1,8 @@
 
-# LC426. Convert Binary Search Tree to Sorted Doubly Linked List, BST to double bst to link bst to doubl
+# LC426. Convert Binary Search Tree to Sorted Doubly Linked List, BST to double bst to link bst doubl
 def treeToDoublyList(self, root: 'Node') -> 'Node':  # O(n) time and O(1) space, Morris Traversal
     if not root: return root
-    prev = head = Node()
+    prev = dummy = Node()  # dummy.right is root eventually
     curr = root
     while curr:
         if curr.left:
@@ -11,12 +11,12 @@ def treeToDoublyList(self, root: 'Node') -> 'Node':  # O(n) time and O(1) space,
             rm.right = curr  # predecessor to curr
             tmp, curr = curr, curr.left
             tmp.left = None  # predecessor points to curr/tmp now, next else blcok set both dirs.
-        else:  # right link is the double link
+        else:
             curr.left, prev.right = prev, curr  # point to each other for the 1st node
             prev, curr = curr, curr.right
-    prev.right = head.right  # link 1st and last nodes
-    head.right.left = prev
-    return head.right
+    prev.right = dummy.right  # link 1st and last nodes
+    dummy.right.left = prev
+    return dummy.right
 def treeToDoublyList(self, root: 'Node') -> 'Node':  # O(n) runtime and space
     if not root: return None
     prev = dummy = Node(-1)  # dummy is head, stay there

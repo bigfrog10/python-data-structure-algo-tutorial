@@ -48,9 +48,8 @@ def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int: # O
         nonlocal ret
         if not node: return
         if low <= node.val <= high: ret += node.val
-        # if v < low, then all left children under v < low
-        if node.val > low: dfs(node.left)
-        if node.val < high: dfs(node.right)
+        if low < node.val: dfs(node.left)
+        if high > node.val: dfs(node.right)
     dfs(root)
     return ret
 

@@ -64,7 +64,7 @@ def longestOnes(self, nums: List[int], K: int) -> int:
     return len(nums) - left  # len(nums) = right + 1
 # https://leetcode.com/problems/max-consecutive-ones-iii/discuss/247564/javacpython-sliding-window/379427?page=3
 
-# LC480. Sliding Window Median  slide win
+# LC480. Sliding Window Median  slide win median
 def medianSlidingWindow(self, nums: List[int], k: int) -> List[float]:  # O(nk)
     window = sorted(nums[:k])
     medians = []

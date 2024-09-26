@@ -74,3 +74,23 @@ def maxSatisfied(self, customers: List[int], grumpy: List[int], minutes: int) ->
         max_satisfied = max(max_satisfied, satisfied)
     return max_satisfied
 
+# LC539. Minimum Time Difference  min time diff
+def findMinDifference(self, timePoints: List[str]) -> int:  # O(nlogn)
+    t = sorted(int(t[:2]) * 60 + int(t[-2:]) for t in timePoints)
+    t.append(t[0] + 1440)  # 1440 = 24 * 60, handle circular 1st and last
+    return min(b - a for a, b in zip(t, t[1:]))
+def findMinDifference(self, timePoints: List[str]) -> int:
+    day = 24 * 60  # 1440  # bucket sort, O(n)
+    bukt = [0] * day
+    for t in timePoints:
+        t = int(t[:2]) * 60 + int(t[-2:])
+        if bukt[t]: return 0  # same time before, so diff = 0
+        bukt[t] = 1
+    prev, first, ans=-1, -1, inf
+    for i in range(day):
+        if bukt[i] == 0: continue
+        if prev==-1: first=i
+        else: ans = min(ans, i-prev)
+        prev=i
+    ans = min(ans, day - (prev - first))  # to deal with circular, last - first
+    return ans

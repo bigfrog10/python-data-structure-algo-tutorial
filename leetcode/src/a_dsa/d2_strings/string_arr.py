@@ -1,5 +1,5 @@
 
-# LC1371. Find the Longest Substring Containing Vowels in Even Counts
+# LC1371. Find the Longest Substring Containing Vowels in Even Counts vowels even count vowel even count
 def findTheLongestSubstring(self, s: str) -> int:
     voules = {'a': 1, 'e': 2, 'i': 4, 'o': 8, 'u': 16,}
     idx = {0: -1,}  # last seen index, O(n) time, O(1) space

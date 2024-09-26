@@ -5,23 +5,21 @@ def countMatches(self, items: List[List[str]], ruleKey: str, ruleValue: str) -> 
     return sum(1 for item in items if item[rule[ruleKey]] == ruleValue)
 
 # LC173. Binary Search Tree Iterator   bst iterator
-class BSTIterator:  # O(n) time in constructor, O(n) space
+class BSTIterator:
     def __init__(self, root: Optional[TreeNode]):
-        self.arr = []
-        self.curr_index = 0
-        self.in_order(root)
-        print(self.arr)
-    def in_order(self, root):
-        if not root: return
-        self.in_order(root.left)
-        self.arr.append(root.val)
-        self.in_order(root.right)
+        self.stack = []  # stack has all elem once, so O(1) amortized
+        self._leftmost(root)   # space is O(h)
+    def _leftmost(self, node):
+        while node:
+            self.stack.append(node)
+            node = node.left
     def next(self) -> int:
-        val = self.arr[self.curr_index]
-        self.curr_index+=1
-        return val
+        node = self.stack.pop()
+        if node.right:
+            self._leftmost(node.right)
+        return node.val
     def hasNext(self) -> bool:
-        return self.curr_index < len(self.arr)
+        return len(self.stack) > 0
 
 # LC1586. Binary Search Tree Iterator II  bst iterator 2
 class BSTIterator:

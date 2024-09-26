@@ -89,7 +89,7 @@ def intervalIntersection(self, firstList: List[List[int]], secondList: List[List
         left = max(firstList[i][0], secondList[j][0])
         right = min(firstList[i][1], secondList[j][1])
         if left <= right: ret.append((left, right))  # add intersection
-        if firstList[i][1] < secondList[j][1]: i += 1  # move short end
+        if firstList[i][1] < secondList[j][1]: i += 1  # smaller start can enclose bigger start
         else: j += 1
     return ret
 

@@ -16,25 +16,23 @@ def minWindow(self, S: str, T: str) -> str: # 2 pointers, fast
 
 # LC76. Minimum Window Substring, min window has all chars in target string min win subs
 def minWindow(self, s: str, t: str) -> str:
-    if len(s) < len(t): return ''
-    tcount, matchCnt = Counter(t), 0,
-    resStart, resLen = 0, len(s) + 1
-    left = 0
-    for right, ch in enumerate(s):
-        if ch in tcount:
-            tcount[ch] -= 1
-            matchCnt += tcount[ch] == 0
-        while matchCnt == len(tcount):
-            # we found a smaller window, update result
-            curWindowLen = right - left + 1
-            if curWindowLen < resLen:
-                resStart, resLen = left, curWindowLen
-            removeCh = s[left]
-            left += 1
-            if removeCh in tcount:
-                matchCnt -= tcount[removeCh] == 0
-                tcount[removeCh] += 1
-    return s[resStart:resStart + resLen] if resLen <= len(s) else ''
+    n, m = len(s), len(t)
+    seen = defaultdict(int)  # faster than count
+    for c in t: seen[c] += 1
+    min_len, start = float('inf'), -1
+    l = count = 0
+    for r in range(n):
+        if seen[s[r]] > 0: count += 1
+        seen[s[r]] -= 1
+        while count == m:
+            if r - l + 1 < min_len:
+                min_len = r - l + 1
+                start = l
+            seen[s[l]] += 1   # reverse of before while
+            if seen[s[l]] > 0: count -= 1
+            l += 1
+    return "" if start == -1 else s[start:start + min_len]
+# https://leetcode.com/problems/minimum-window-substring/solutions/5822266/sliding-window-handling-edge-cases-explanation-relevant-test-cases/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
 
 # LC392. Is Subsequence
 def isSubsequence(self, s: str, t: str) -> bool:  # O(|t|)

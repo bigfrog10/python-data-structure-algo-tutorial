@@ -25,13 +25,13 @@ def verticalOrder(self, root: TreeNode) -> List[List[int]]:  # O(n)
     while queue:  # BFS so the cell list is in right order.
         node, col = queue.popleft()
         cols[col].append(node.val)
-        if node.left: queue.append((node.left, col - 1))
-        if node.right: queue.append((node.right, col + 1))
         min_col = min(min_col, col)
         max_col = max(max_col, col)
+        if node.left: queue.append((node.left, col - 1))
+        if node.right: queue.append((node.right, col + 1))
     return [cols[x] for x in range(min_col, max_col + 1)]
 
-# LC987. Vertical Order Traversal of a Binary Tree - sort in same position
+# LC987. Vertical Order Traversal of a Binary Tree - sort in same position  bt vertical sort
 def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:  # O(nlog(n/w)
     res = defaultdict(list) # column number to (row number, val)
     min_col = max_col = 0  # track column range

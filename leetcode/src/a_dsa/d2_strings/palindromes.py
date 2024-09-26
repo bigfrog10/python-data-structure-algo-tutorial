@@ -101,6 +101,13 @@ def validPalindrome(self, s: str) -> bool:  # O(n) time and O(1) space
     # check ignoring 1st or last char
     return s[i+1:n-i] == s[i+1:n-i][::-1] or s[i:n-i-1] == s[i:n-i-1][::-1]
 
+# LC2330. Valid Palindrome IV - change char twice
+def makePalindrome(self, s: str) -> bool:
+    count = 0
+    for i in range(len(s) // 2):
+        count += s[i] != s[~i]
+    return count < 3
+
 # LC131. Palindrome Partitioning   pali partition
 def partition(self, s: str) -> List[List[str]]:
     n = len(s)  # O(N * 2^N), when all substrings are palindrome, e.g., 'a'*N

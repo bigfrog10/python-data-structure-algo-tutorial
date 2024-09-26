@@ -31,7 +31,6 @@ class SparseVector:
         self.pairs = []
         for i, v in enumerate(nums):  # pairs are sorted by i
             if v != 0: self.pairs.append([i, v])
-    # Return the dotProduct of two sparse vectors
     def dotProduct(self, vec: 'SparseVector') -> int:
         p = q = result = 0
         while p < len(self.pairs) and q < len(vec.pairs):
