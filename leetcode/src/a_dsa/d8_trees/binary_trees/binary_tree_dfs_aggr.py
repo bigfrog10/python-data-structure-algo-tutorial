@@ -6,7 +6,8 @@ def sumNumbers(self, root: Optional[TreeNode]) -> int:  # O(n) runtime, O(h) spa
         nonlocal total
         if not node: return
         path_total = node.val + path_total * 10
-        if not node.left and not node.right: total += path_total
+        if not node.left and not node.right:
+            total += path_total
         else:
             dfs(node.left, path_total)
             dfs(node.right, path_total)
@@ -69,10 +70,10 @@ def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]: 
         if node.val == target:
             if not node.left and not node.right:  # leaf
                 res.append(paths + [node.val]) # this is a copy, O(n) time
-        paths.append(node.val)
+        paths.append(node.val)  # try this node
         dfs(node.left, target - node.val, paths)
         dfs(node.right, target - node.val, paths)
-        paths.pop() # backtrack
+        paths.pop() # backtrack, so we don't take this node
     dfs(root, targetSum, [])
     return res
 

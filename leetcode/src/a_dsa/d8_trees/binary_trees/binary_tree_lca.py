@@ -43,14 +43,15 @@ def lcaDeepestLeaves(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         return h1 + 1, node
     return dfs(root)[1]
 
-# LC865. Smallest Subtree with all the Deepest Nodes
+# LC865. Smallest Subtree with all the Deepest Nodes bt deepest subtree
 def subtreeWithAllDeepest(self, root: TreeNode) -> TreeNode:
     def deep(root):
         if not root: return 0, None  # depth, node
-        l, r = deep(root.left), deep(root.right)
-        if l[0] > r[0]: return l[0] + 1, l[1]
-        elif l[0] < r[0]: return r[0] + 1, r[1]
-        else: return l[0] + 1, root
+        ldepth, left = deep(root.left)
+        rdepth, right = deep(root.right)
+        if ldepth > rdepth: return ldepth+1, left
+        elif ldepth < rdepth: return rdepth+1, right
+        else: return ldepth+1, root
     return deep(root)[1]
 
 # LC2096. Step-By-Step Directions From a Binary Tree Node to Another - LR direction

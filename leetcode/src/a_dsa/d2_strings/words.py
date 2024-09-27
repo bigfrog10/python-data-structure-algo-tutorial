@@ -127,7 +127,7 @@ def wordBreak(self, s: str, wordDict: List[str]) -> bool:
 def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
     word_set = set(words)  # O(N * M^2) time
     def check(word):  # could use cache here
-        for i in range(1, n):  # O(m^2), longest word
+        for i in range(1, len(word)):  # O(m^2), longest word
             if word[i:] not in word_set: continue
             # so now word[i:] in word_set
             if word[:i] in word_set: return True # so both part are words

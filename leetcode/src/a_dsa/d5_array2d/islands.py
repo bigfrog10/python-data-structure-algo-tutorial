@@ -252,7 +252,7 @@ def countSubIslands(self, grid1: List[List[int]], grid2: List[List[int]]) -> int
     return sum(dfs(i, j) for i in range(n) for j in range(m) if grid2[i][j])
 
 
-# 959. Regions Cut By Slashes
+# 959. Regions Cut By Slashes   region slash
 def regionsBySlashes(self, grid: List[str]) -> int:  # O(n^2) time and space
     n = len(grid)
     m = 3*n
@@ -280,3 +280,13 @@ def regionsBySlashes(self, grid: List[str]) -> int:  # O(n^2) time and space
             dfs(mat, i, j)
     return count
 # https://leetcode.com/problems/regions-cut-by-slashes/solutions/5614788/simple-approach-using-expanded-grid-with-flood-fill-for-counting-regions/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
+
+
+
+
+
+
+
+
+
+

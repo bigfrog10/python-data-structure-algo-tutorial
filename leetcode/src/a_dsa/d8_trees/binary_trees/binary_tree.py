@@ -6,7 +6,7 @@ class TreeNode:
         self.left = left
         self.right = right
 
-# 2265. Count Nodes Equal to Average of Subtree
+# 2265. Count Nodes Equal to Average of Subtree bt avg subtree avg
 def averageOfSubtree(self, root: TreeNode) -> int:
     res = 0
     def dfs(node, total, num_nodes):
@@ -35,6 +35,17 @@ def pruneTree(self, root: TreeNode) -> TreeNode:  # O(n) time and O(h) space
     return None if z else root
 
 # LC958. Check Completeness of a Binary Tree    bt complete
+def isCompleteTree(self, root: Optional[TreeNode]) -> bool:
+    queue = deque([root])
+    prev_node = root
+    while queue:  # BFS
+        node = queue.popleft()
+        if node:
+            if not prev_node: return False  # found gap
+            queue.append(node.left)
+            queue.append(node.right)
+        prev_node = node
+    return True
 def isCompleteTree(self, root):  # O(N) time and O(H) space
     def dfs(root):
         if not root: return 0

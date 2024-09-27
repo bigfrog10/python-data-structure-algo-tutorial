@@ -16,7 +16,7 @@ def countPrimes(self, n: int) -> int: # Sieve of Eratosthenes
     for i in range(2, upper):
         if flag[i] == 0: continue # non prime
         else:
-            m = (n - i - 1) // i  # every step with i size, how many steps
+            m = (n - 1 - i) // i  # every step with i size, how many steps
             flag[2*i::i] = [0] * m
     return sum(flag)
 
@@ -33,3 +33,14 @@ def mostVisitedPattern(self, username: List[str], timestamp: List[int], website:
     return counters[0][0]  # list of (3-seq, count), so [0] is (3-seq, count), next 0 is 3-seq
 
 
+# LC386. Lexicographical Numbers
+def lexicalOrder(self, n: int) -> List[int]:
+    num, res = 1, []
+    for _ in range(n):  # Generate numbers from 1 to n
+        res.append(num)
+        if num * 10 <= n: num *= 10
+        else:
+            # Adjust the current number by moving up one digit
+            while num % 10 == 9 or num >= n: num //= 10
+            num += 1  # Increment the number
+    return res

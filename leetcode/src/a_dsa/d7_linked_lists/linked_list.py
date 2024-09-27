@@ -242,9 +242,9 @@ def splitListToParts(self, head: Optional[ListNode], k: int) -> List[Optional[Li
     while curr:  # find list length
         count += 1
         curr = curr.next
-    size, tail = divmod(count, k)
+    size, tail = divmod(count, k)  # 1, 2 = 5 / 3
     curr, result = head, []  # break into parts
-    for i in range(k):  # [1,2,3,4,5]
+    for i in range(k):  # [1,2,3,4,5]  k=3
         part_head = curr
         for j in range(size - 1 + (i < tail)):
             if curr: curr = curr.next  # at end, curr = [2,3,4,5]

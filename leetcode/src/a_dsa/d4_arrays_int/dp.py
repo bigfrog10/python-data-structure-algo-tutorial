@@ -14,19 +14,24 @@ def minCost(self, costs: List[List[int]]) -> int:
     return min(costs[0]) # Return the minimum in the first row.
 
 # LC265. Paint House II
-def minCostII(self, costs: List[List[int]]) -> int:
+def minCostII(self, costs: List[List[int]]) -> int:  # O(nk) time, O(1) space
+    def two_mins(values):  # values is a generator
+        ai = a = bi = b = None
+        for i, x in values:
+            if ai == None or x <= a:
+                bi, b = ai, a
+                ai, a = i, x
+            elif bi == None or x <= b:
+                bi, b = i, x
+        return ai, a, bi, b  # a smallest, b 2nd smallest
     n, k = len(costs), len(costs[0])
-    if n == 0: return 0
-    import copy
-    costs = copy.deepcopy(costs)
-    for house in range(1, n):
-        for color in range(k):
-            best = math.inf
-            for previous_color in range(k):
-                if color == previous_color: continue
-                best = min(best, costs[house - 1][previous_color])
-            costs[house][color] += best
-    return min(costs[-1])
+    ai, a, bi, b = two_mins(enumerate(costs[0]))
+    for i in range(1, n):
+        _ai, _a, _bi, _b = ai, a, bi, b
+        vs = ((j, costs[i][j] + (_a if j != _ai else _b)) for j in range(k))
+        ai, a, bi, b = two_mins(vs)
+    return a
+# https://leetcode.com/problems/paint-house-ii/solutions/2971844/python-clean-optimal-space-beats-97/
 
 
 # 2 state recursion

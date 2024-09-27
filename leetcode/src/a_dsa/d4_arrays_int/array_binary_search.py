@@ -1,9 +1,10 @@
 
-# LC1011. Capacity To Ship Packages Within D Days
-def shipWithinDays(self, weights: List[int], D: int) -> int:  # O(nlog(sum - max))
+# LC1011. Capacity To Ship Packages Within D Days   ship capacity
+def shipWithinDays(self, weights: List[int], D: int) -> int: # O(nlog(sum - max))
     left, right = max(weights), sum(weights)
     while left < right:  # O(log(right - left)
-        midw, days, currw = (left + right) // 2, 1, 0
+        midw = (left + right) // 2
+        days, currw = 1, 0
         for w in weights:  # O(n)
             if currw + w > midw:
                 days += 1

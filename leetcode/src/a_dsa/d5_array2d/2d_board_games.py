@@ -38,7 +38,7 @@ def checkValidGrid(self, grid: List[List[int]]) -> bool:
 
 # 1778. Shortest Path in a Hidden Grid
 def findShortestPath(self, master: 'GridMaster') -> int:  # O(cells) time and space
-    visited = set() # need to build graph first, for bfs. Otherwise TLE.
+    can_move = set() # need to build graph first, for bfs. Otherwise TLE.
     directions = {'U':(0, -1, 'D'), 'D':(0, 1, 'U'), 'L':(-1, 0, 'R'), 'R':(1, 0, 'L')}
     target = None
     def build_graph(x, y):
@@ -46,11 +46,11 @@ def findShortestPath(self, master: 'GridMaster') -> int:  # O(cells) time and sp
             nonlocal target
             target = (x, y)
             return
-        visited.add((x, y))
+        can_move.add((x, y))
         for direction in directions:
             dx, dy, revert_direction = directions[direction]
             nx, ny = x + dx, y + dy
-            if (nx, ny) not in visited and master.canMove(direction):
+            if (nx, ny) not in can_move and master.canMove(direction):
                 master.move(direction)
                 build_graph(nx, ny)
                 master.move(revert_direction)
@@ -58,14 +58,13 @@ def findShortestPath(self, master: 'GridMaster') -> int:  # O(cells) time and sp
     if target is None: return -1
     queue, level = [(0, 0)], 0 # bfs
     visited = set(queue)
-    while queue:  # bfs find min
-        next_queue = queue
-        queue = []
+    while queue:
         level += 1
+        next_queue, queue = queue, []
         for x, y in next_queue:
             for next_node in [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]:
                 if next_node == target: return level
-                if next_node not in visited or next_node in visited: continue
+                if next_node not in can_move or next_node in visited: continue
                 visited.add(next_node)
                 queue.append(next_node)
     return -1
@@ -294,11 +293,10 @@ def countBattleships(self, board: List[List[str]]) -> int:
     total = 0
     for i in range(len(board)):
         for j in range(len(board[0])):
-            if board[i][j] == 'X':
-                flag = 1
-                if j > 0 and board[i][j-1] == 'X': flag = 0  # ignore double count
-                if i > 0 and board[i-1][j] == 'X': flag = 0
-                total += flag
+            flag = board[i][j] == 'X'
+            if j > 0 and board[i][j-1] == 'X': flag = 0  # ignore double count
+            if i > 0 and board[i-1][j] == 'X': flag = 0
+            total += flag
     return total
 
 

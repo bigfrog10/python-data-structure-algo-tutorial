@@ -101,7 +101,7 @@ def isMonotonic(self, A: List[int]) -> bool:
         if not increasing and not decreasing: return False
     return True
 
-# LC1213. Intersection of Three Sorted Arrays - 3 sorted array
+# LC1213. Intersection of Three Sorted Arrays - 3 sorted array intersect 3 sorted
 def arraysIntersection(self, arr1: List[int], arr2: List[int], arr3: List[int]) -> List[int]:
     ans = []
     p1 = p2 = p3 = 0

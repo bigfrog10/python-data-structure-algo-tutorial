@@ -108,15 +108,12 @@ def canJump(self, nums: List[int]) -> bool:  # greedy, O(n)
 
 # LC45. Jump Game II
 def jump(self, nums: List[int]) -> int:
-    farthest = current_jump_end = jumps = 0
+    furthest = curr_end = jumps = 0
     for i in range(len(nums) - 1):
-        # we continuously find the how far we can reach in the current jump
-        farthest = max(farthest, i + nums[i])
-        # if we have come to the end of the current jump,
-        # we need to make another jump
-        if i == current_jump_end:
+        furthest = max(furthest, i + nums[i])
+        if i == curr_end:  # jump only when needed
             jumps += 1
-            current_jump_end = farthest
+            curr_end = furthest
     return jumps
 
 # LC818. Race Car

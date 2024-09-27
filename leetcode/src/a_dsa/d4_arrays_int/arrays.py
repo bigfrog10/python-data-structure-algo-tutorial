@@ -5,7 +5,7 @@ def construct2DArray(self, original: List[int], m: int, n: int) -> List[List[int
     if m * n != len(original): return []
     return [original[i:i+n] for i in range(0, m*n, n)]
 
-# LC2553. Separate the Digits in an Array
+# LC2553. Separate the Digits in an Array  separate digits
 def separateDigits(self, nums: List[int]) -> List[int]:
     return [int(i) for n in nums for i in str(n)]
 

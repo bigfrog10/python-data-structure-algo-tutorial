@@ -116,9 +116,9 @@ class RandomizedSet:
 from collections import defaultdict
 class AutocompleteSystem:
     def __init__(self, sentences: List[str], times: List[int]):
-        self.counts = defaultdict(int) # or use trie
+        self.counts = defaultdict(int)  # or use trie
         for s, c in zip(sentences, times): self.counts[s] = c
-        self.ui = '' # user input
+        self.ui = ''  # user input
         self.matches = []
     def input(self, c: str) -> List[str]:
         if c == '#':
@@ -190,7 +190,7 @@ class SnapshotArray(object):  # This copies only relevant changes
         self.dic[self.snap_id][index] = val
     def snap(self):
         self.snap_id += 1
-        self.dic[self.snap_id] = self.dic[self.snap_id - 1].copy() # copy only set values
+        self.dic[self.snap_id] = self.dic[self.snap_id - 1].copy()  # copy only set values
         return self.snap_id -1
     def get(self, index, snap_id): # O(1)
         if index in self.dic[snap_id]: return self.dic[snap_id][index]
@@ -234,7 +234,7 @@ class RandomizedCollection: # 93%, fast
     def getRandom(self) -> int:
         return random.choice(self.values)
 
-# LC211. Design Add and Search Words Data Structure
+# LC211. Design Add and Search Words Data Structure  word data structure
 class WordDictionary:  # much faster
     def __init__(self): self.trie = {}
     def addWord(self, word: str) -> None:

@@ -160,14 +160,13 @@ def isValidPalindrome(self, s: str, k: int) -> bool:  # O(n^2) time and space
         if i == j: return 0
         if i == j-1: return 0 if s[i] == s[j] else 1
         if s[i] == s[j]: return drop(i+1, j-1)
-        else: return min(drop(i+1, j), drop(i, j-1)) + 1
+        else: return 1 + min(drop(i+1, j), drop(i, j-1))
     return drop(0, len(s)-1) <= k
 
 # LC266. Palindrome Permutation - if any permuatation can be a palindrome  pali permu
 def canPermutePalindrome(self, s: str) -> bool:  # O(n) runtime, O(1) space
     counts = Counter(s)
-    odd_count = sum(1 for k, v in counts.items() if v % 2 != 0)
-    return odd_count < 2
+    return 2 > sum(v % 2 for v in counts.values())
 
 
 

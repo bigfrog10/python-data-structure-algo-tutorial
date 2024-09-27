@@ -75,7 +75,8 @@ def hIndex(self, citations: List[int]) -> int:  # O(logn)
     n = len(citations)
     left, right = 0, n  # n-1 does not work for 1 element array
     while left < right:  # sorted in asc, so we use n - i for larger citations
-        mid = left + (right - left) // 2
+        mid = (right + left) // 2
+        # n - mid papers have c[mid] >= n - mid citations
         if citations[mid] < n - mid: left = mid + 1
         else: right = mid
     return n - left
@@ -204,7 +205,7 @@ def majorityElement(self, nums: List[int]) -> List[int]:  # O(n) time and O(1) s
 
 # LC322. Coin Change - least number of coins to sum up to target
 def coinChange(self, coins: List[int], amount: int) -> int:
-    if amount == 0:  return 0  # O(amount * (coins)))
+    if amount == 0: return 0  # O(amount * (coins)))
     coins.sort(reverse=True)  # we try to put larger coins to reduce numbers of coins
     queue, visited = deque([(0, 0)]), {0}
     while queue:  # BFS
@@ -339,9 +340,10 @@ def beautifulArray(self, n: int) -> List[int]:
         res = [i * 2 - 1 for i in res] + [i * 2 for i in res]
     return [i for i in res if i <= n]
 
-# LC1460. Make Two Arrays Equal by Reversing Sub-arrays - reverse array  2 arrays equal
+# LC1460. Make Two Arrays Equal by Reversing Sub-arrays - reverse array  2 arrays equal  reverse array equal
 def canBeEqual(self, target: List[int], arr: List[int]) -> bool:
     return collections.Counter(target) == collections.Counter(arr)
+# ignore positions
 
 # LC605. Can Place Flowers
 def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:

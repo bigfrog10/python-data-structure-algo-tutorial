@@ -36,13 +36,11 @@ def minWindow(self, s: str, t: str) -> str:
 
 # LC392. Is Subsequence
 def isSubsequence(self, s: str, t: str) -> bool:  # O(|t|)
-    LEFT_BOUND, RIGHT_BOUND = len(s), len(t)
-    p_left = p_right = 0
-    while p_left < LEFT_BOUND and p_right < RIGHT_BOUND:
-        # move both pointers or just the right pointer
-        if s[p_left] == t[p_right]: p_left += 1
-        p_right += 1
-    return p_left == LEFT_BOUND
+    n, m = len(s), len(t)
+    sp = 0
+    for tp in range(m):
+        sp += sp < n and s[sp] == t[tp]
+    return sp == n
 def isSubsequence(self, s: str, t: str) -> bool:
     it = iter(t)
     return all(c in it for c in s)

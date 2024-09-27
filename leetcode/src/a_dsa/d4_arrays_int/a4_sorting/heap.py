@@ -43,7 +43,7 @@ def numPoints(self, A, r):
         res = max(res, sum((x - x0)**2 + (y - y0)**2 <= r * r + 0.00001 for x, y in A))
     return res
 
-    # LC1167. Minimum Cost to Connect Sticks
+# LC1167. Minimum Cost to Connect Sticks
 def connectSticks(self, sticks: List[int]) -> int:  # same idea, but much faster
     heapq.heapify(sticks) # O(nlogn)
     r = 0
@@ -54,5 +54,19 @@ def connectSticks(self, sticks: List[int]) -> int:  # same idea, but much faster
         heapq.heappush(sticks, c) # O(logn)
         r += c
     return r
+
+# LC857. Minimum Cost to Hire K Workers
+def mincostToHireWorkers(self, quality: List[int], wage: List[int], k: int) -> float:
+    ans = inf
+    heap, htotal = [], 0
+    for q, w in sorted(zip(quality, wage), key=lambda x: x[1]/x[0]):
+        htotal += q  # track total in the heap
+        heappush(heap, -q)
+        if len(heap) > k:
+            htotal += heappop(heap)  # on pop, q is removed from total
+        if len(heap) == k:  # find lowest ratio for all
+            ans = min(ans, htotal * w / q)  # min on ratio
+    return ans
+# https://leetcode.com/problems/minimum-cost-to-hire-k-workers/solutions/5141452/python3-solution/?envType=company&envId=facebook&favoriteSlug=facebook-six-months
 
 

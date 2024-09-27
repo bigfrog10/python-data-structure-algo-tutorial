@@ -28,7 +28,7 @@ def get_num_of_bouquets(self, bloomDay, mid, k):
 def maxDistance(self, position: List[int], m: int) -> int:
     def f(d):
         balls = 0
-        y=-math.inf
+        y = -math.inf
         for x in position:
             if x-y >= d:
                 y = x

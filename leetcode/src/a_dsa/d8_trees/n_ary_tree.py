@@ -117,7 +117,7 @@ def validTree(self, n: int, edges: List[List[int]]) -> bool:
         graph[e[0]].append(e[1])
         graph[e[1]].append(e[0])
     stack, seen = [0], {0}  # start from node 0
-    while stack: # DFS to check is fully connected
+    while stack:  # DFS to check is fully connected
         e = stack.pop()
         for ne in graph[e]:
             if ne not in seen:

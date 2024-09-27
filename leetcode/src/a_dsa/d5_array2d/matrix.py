@@ -77,7 +77,7 @@ def findDiagonalOrder(self, matrix):  # O(mn) time, O(1) space
                 col -= 1
     return ret
 
-# LC1428. Leftmost Column with at Least a One - sorted 01 matrix
+# LC1428. Leftmost Column with at Least a One - sorted 01 matrix leftmost one leftmost 1
 def leftMostColumnWithOne(self, binaryMatrix: 'BinaryMatrix') -> int:  # O(n + m), diagonal
     rows, cols = binaryMatrix.dimensions()
     row, col = 0, cols - 1  # upper right corner
@@ -304,7 +304,7 @@ def diagonalSort(self, mat: List[List[int]]) -> List[List[int]]:
         for j in range(m): mat[i][j] = d[i - j].pop()
     return mat
 
-# LC1901. Find a Peak Element II
+# LC1901. Find a Peak Element II  2d matrix
 def findPeakGrid(self, mat: List[List[int]]) -> List[int]:  # O(mlogn)
     top, bottom = 0, len(mat)-1
     while bottom > top:  # find row max
@@ -404,7 +404,7 @@ def countShips(self, sea, P, Q):  # P - topRight, Q - bottomLeft
     return res
 
 # LC54. Spiral Matrix, top100 - return elems in spiral
-def spiralOrder(self, matrix):
+def spiralOrder(self, matrix):  # O(mn) time
     res = []
     while matrix:
         res.extend(matrix.pop(0))
@@ -415,11 +415,12 @@ def spiralOrder(self, matrix):
 def spiralOrder(self, matrix):
     result = []
     while matrix and matrix[0]:
-        if matrix[0]: result += matrix.pop(0)
-        if matrix and matrix[0]:
+        if matrix[0]: result += matrix.pop(0)  # pop 1st row
+        if matrix and matrix[0]:  # pop last element
             for row in matrix: result.append(row.pop())
-        if matrix and matrix[-1]: result += matrix.pop()[::-1]
-        if matrix and matrix[0]:
+        if matrix: # pop last row
+            result += matrix.pop()[::-1]
+        if matrix and matrix[0]:  # pop 1st cell in each row reverse
             for row in matrix[::-1]: result.append(row.pop(0))
     return result
 
