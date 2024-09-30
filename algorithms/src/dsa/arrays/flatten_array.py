@@ -38,3 +38,8 @@ print(list(itertools.chain('0', 'abc')))
 a = 3
 b = 0
 print((a, b, b and a/b))
+
+t = 'ahbgdc'
+it = iter(t)
+for c in 'abc':
+    print(c in it)
