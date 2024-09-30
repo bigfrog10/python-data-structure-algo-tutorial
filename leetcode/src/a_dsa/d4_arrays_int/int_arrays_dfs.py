@@ -31,8 +31,8 @@ def maxOperations(self, nums: List[int]) -> int:  # O(n^2) time and space
     return max(dfs(sum(nums[: 2])), dfs(sum(nums[-2 :])), dfs(nums[0] + nums[-1]))
 
 # LC996. Number of Squareful Arrays
-def numSquarefulPerms(self, nums: List[int]) -> int:  # O(n!) time, O(n) space
-    self.count = 0
+def numSquarefulPerms(self, nums: List[int]) -> int:  # O(n!) time, O(n) space LC!
+    self.count = 0  # space should be O(n^2) because we copy arrays
     def dfs(arr, path):
         if not arr: self.count += 1
         for i in range(len(arr)):
@@ -41,3 +41,17 @@ def numSquarefulPerms(self, nums: List[int]) -> int:  # O(n!) time, O(n) space
                 dfs(arr[:i] + arr[i+1:], path + [arr[i]])
     dfs(sorted(nums), [])
     return self.count
+
+
+
+
+
+
+
+
+
+
+
+
+
+

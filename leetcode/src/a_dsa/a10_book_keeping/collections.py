@@ -147,7 +147,7 @@ class ProductOfNumbers:
         if k >= len(self.A): return 0
         return self.A[-1] // self.A[-k - 1]
 
-# LC706. Design HashMap
+# LC706. Design HashMap design
 class Bucket:
     def __init__(self):
         self.bucket = []

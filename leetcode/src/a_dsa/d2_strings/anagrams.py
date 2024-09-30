@@ -1,16 +1,16 @@
 
 # LC438. Find All Anagrams in a String  all p anagrams in s
-def findAnagrams(self, s: str, p: str) -> List[int]:  # O(slen) time, O(1) space, plen <= 26 letters
-    slen, plen = len(s), len(p)
-    scounts, pcounts = Counter(), Counter(p)  # accumulate and update counts along the way
-    ret = []
-    for i in range(slen):
-        scounts[s[i]] += 1
-        if i >= plen:
-            scounts[s[i-plen]] -= 1  # remove from left
-            if scounts[s[i-plen]] == 0: del scounts[s[i-plen]]
-        if pcounts == scounts: ret.append(i - plen + 1)  # this is whey we need del above
-    return ret
+def findAnagrams(self, st: str, ana: str): # O(n) time
+    d1, d2 = Counter(ana), Counter(st[:len(ana)])  # O(1) space, 26 chars
+    res = []
+    for start in range(len(ana), len(st)):
+        if d1 == d2:  res.append(start - len(ana))
+        d2[st[start]] += 1
+        k = st[start-len(ana)]
+        d2[k] -= 1
+        if d2[k] == 0: del d2[k]
+    if d1 == d2: res.append(len(st) - len(ana))
+    return res
 
 # LC49. Group Anagrams
 def groupAnagrams(self, strs: List[str]) -> List[List[str]]:  # O(len(strs)*max(len(strs)))

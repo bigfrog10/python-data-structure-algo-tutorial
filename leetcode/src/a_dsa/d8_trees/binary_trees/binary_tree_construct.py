@@ -49,7 +49,7 @@ class Codec:
     def deserialize(self, data):
         def helper(it):
             node_val = next(it)
-            if node_val == "#": return None
+            if node_val == "#": return None  # cut recursion
             node = TreeNode(int(node_val))
             node.left = helper(it)
             node.right = helper(it)

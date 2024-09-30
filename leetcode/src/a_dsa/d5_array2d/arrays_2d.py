@@ -22,7 +22,7 @@ def countCornerRectangles(self, grid: List[List[int]]) -> int:
     rows = [int(''.join(map(str, row)), 2) for row in grid]
     return sum(count(row1, rows[j]) for i, row1 in enumerate(rows) for j in range(i + 1, len(rows)))
 
-# LC3030. Find the Grid of Region Average
+# LC3030. Find the Grid of Region Average  image avg
 def resultGrid(self, image: List[List[int]], threshold: int) -> List[List[int]]:
     m, n = len(image), len(image[0])  # O(n^2) time and space
     grid = [[[0, 0] for _ in range(n)] for _ in range(m)]  # sum & count, for average later
@@ -44,7 +44,7 @@ def resultGrid(self, image: List[List[int]], threshold: int) -> List[List[int]]:
             image[i][j] = grid[i][j][0] // grid[i][j][1]
     return image
 
-# LC2397. Maximum Rows Covered by Columns  max rows  max row covered
+# LC2397. Maximum Rows Covered by Columns  max rows  max row covered  cover column
 def maximumRows(self, matrix: List[List[int]], numSelect: int) -> int:  # O(m) space, O(2^n * m) time
     n,m = len(matrix),len(matrix[0])
     ans = 0

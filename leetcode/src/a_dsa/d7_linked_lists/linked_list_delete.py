@@ -2,8 +2,7 @@
 
 # LC19. Remove Nth Node From End of List
 def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-    dummy = ListNode(0, head)  # handle k=0
-    first = second = dummy
+    first = second = dummy = ListNode(0, head)  # handle k=0
     for i in range(n+1): first = first.next  # +1 for dummy, after nth node in front.
     while first: first, second = first.next, second.next  # parent of nth node in back.
     second.next = second.next.next

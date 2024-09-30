@@ -40,7 +40,7 @@ def minCostII(self, costs: List[List[int]]) -> int:  # O(nk) time, O(1) space
 def rob(self, nums):  # O(n)
     prevRob , currRob  = 0, 0 # rob current house, or skip current
     for num in nums:
-        prevRob , currRob  = currRob , max(prevRob  + num, currRob)
+        prevRob , currRob  = currRob , max(prevRob + num, currRob)
     return currRob
 def rob(self, nums: List[int]) -> int:
     if not nums: return 0

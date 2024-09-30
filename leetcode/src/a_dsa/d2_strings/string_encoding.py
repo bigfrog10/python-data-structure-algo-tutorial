@@ -40,7 +40,7 @@ def decodeString(self, s: str) -> str:  # O(n*k) time, k is max coeff; O(|s| - p
         else: curr += char
     return curr
 
-# LC91. Decode Ways, decode 12 to 1,2 and 12
+# LC91. Decode Ways, decode 12 to 1,2 and 12  ways to decode
 def numDecodings(self, s: str) -> int:  # Best, fast and short
     @lru_cache(maxsize=None)
     def walk(idx):

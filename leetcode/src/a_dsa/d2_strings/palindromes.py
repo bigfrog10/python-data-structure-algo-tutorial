@@ -41,12 +41,13 @@ def longestPalindrome1(self, s): # similar, slower, O(n^2)
         res = max(find_diameter(i, i), find_diameter(i, i+1), res, key=len)
     return res
 def longestPalindrome(self, s: str) -> str:  # O(n) time and space, Manacher's Algorithm
-    if len(s) <= 1: return s
+    if not s: return s
     Max_Len, Max_Str = 1, s[0]
     s = '#' + '#'.join(s) + '#' # all palindromes have odd length
-    dp = [0 for _ in range(len(s))]  # radius for center i
+    n = len(s)
+    dp = [0] * n  # radius for center i
     center = right = 0
-    for i in range(len(s)):
+    for i in range(n):
         if i < right:  # cache this info, so while loop below can be skipped.
             dp[i] = min(right-i, dp[2*center-i])  # 2*center-i is mirror of i around center
         while i-dp[i]-1 >= 0 and i+dp[i]+1 < len(s) and s[i-dp[i]-1] == s[i+dp[i]+1]:

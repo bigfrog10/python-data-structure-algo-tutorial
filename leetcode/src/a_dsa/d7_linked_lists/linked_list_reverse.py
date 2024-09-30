@@ -8,13 +8,13 @@ def reverseList(self, head: ListNode) -> ListNode:
 
 # LC92. Reverse Linked List II - reverse between 2 nodes  reverse list
 def reverseBetween(self, head, m, n):
-    dummy = start = ListNode(0, head)
+    dummy = start = ListNode(0, head)  # 1 2 3 4 5, m = 2, n = 4
     for _ in range(m-1): start = start.next  # move the  position before m
-    pre, curr = None, start.next  # point to pre, right before cur
+    pre, curr = None, start.next  # curr = 2, start = 1
     for _ in range(n-m+1):  # reverse the defined part
         curr.next, pre, curr = pre, curr, curr.next
-    start.next.next = curr  # point old start to tail: curr = n+1
-    start.next = pre  # point start to new head
+    start.next.next = curr  # point old start to tail: curr = n+1 5
+    start.next = pre  # point start to new head, pre = 4 3 2
     return dummy.next
 
 # LC24. Swap Nodes in Pairs - reverse pair

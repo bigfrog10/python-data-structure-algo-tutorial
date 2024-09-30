@@ -32,29 +32,27 @@ def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:  # O(n) runtim
 # LC317. Shortest Distance from All Buildings
 def shortestDistance(self, grid):
     if not grid or not grid[0]: return -1  # O(n^2 * m^2)
-    n, m = len(grid), len(grid[0])
-    # 0 for distance, 1 for counts/buildings
-    matrix = [[[0, 0] for _ in range(m)] for _ in range(n)]
-    def bfs(start, blds):
-        q = [(start, 0)]  # 0 is the distance.
-        while q:  # BFS for distance
-            po, distance = q.pop(0)
-            for dp in (-1, 0), (1, 0), (0, 1), (0, -1):
-                i, j = po[0] + dp[0], po[1] + dp[1]
-                if 0 <= i <n and 0 <= j < m and matrix[i][j][1] == blds:
-                    if grid[i][j] == 0:
-                        matrix[i][j][0] += distance + 1
-                        matrix[i][j][1] = blds + 1  # reachable to all blds
-                        q.append(([i, j], distance+1))
-    blds = 0  # count how many building we have visited
-    for i, j in product(range(n), range(m)):  # O(mn)
-        if grid[i][j] == 1:  # loop through buildings
-            bfs([i, j], blds)
-            blds += 1
-    res = float('inf')
-    for i, j in product(range(len(matrix)), range(len(matrix[0]))):
-        if matrix[i][j][1] == blds: res = min(res, matrix[i][j][0])
-    return res if res != float('inf') else -1
+    m, n = len(grid), len(grid[0])
+    totalB = sum(grid[i][j]==1 for i in range(m) for j in range(n))  # number of buildings
+    ## do BFS from each building, and decrement all empty place for every building visit
+    ## when grid[i][j] == -totalB, it means that grid[i][j] are already visited from all buildings
+    dist = [[0]*n for i in range(m)]  # distances from buildings
+    def bfs(i, j, bIndex):  # mark distance from this building
+        queue = collections.deque([(i, j, 0)])
+        while queue:
+            i, j, d = queue.popleft()
+            for x, y in (i+1, j), (i-1, j), (i, j-1), (i, j+1):
+                if 0 <= x < m and 0 <= y < n and grid[x][y] == bIndex:
+                    dist[x][y] += d+1
+                    grid[x][y] -= 1
+                    queue.append((x, y, d+1))
+    bIndex = 0  # count how many building we have visited
+    for i, j in itertools.product(range(m), range(n)):
+        if grid[i][j]==1:  # loop through buildings
+            bfs(i, j, bIndex)
+            bIndex -= 1
+    res = [dist[i][j] for i in range(m) for j in range(n) if grid[i][j]+totalB==0]
+    return min(res) if res else -1
 
 # LC778. Swim in Rising Water
 def swimInWater(self, grid: List[List[int]]) -> int:  # O(N^2log(N^2)) time, O(N^2) space

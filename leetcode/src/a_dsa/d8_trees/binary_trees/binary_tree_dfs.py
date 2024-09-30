@@ -134,7 +134,7 @@ def flipEquiv(self, root1: TreeNode, root2: TreeNode) -> bool: # O(min(#nodes))
     return (self.flipEquiv(root1.left, root2.left) and self.flipEquiv(root1.right, root2.right) or
             self.flipEquiv(root1.left, root2.right) and self.flipEquiv(root1.right, root2.left))
 
-# LC257. Binary Tree Paths - return all root-leaf paths  bt paths
+# LC257. Binary Tree Paths - return all root-leaf paths  bt paths bt tree paths
 def binaryTreePaths(self, root: TreeNode) -> List[str]:
     ret = []
     def dfs(node, path):
