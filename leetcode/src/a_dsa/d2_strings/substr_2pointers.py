@@ -18,19 +18,19 @@ def minWindow(self, S: str, T: str) -> str: # 2 pointers, fast
 def minWindow(self, s: str, t: str) -> str:
     n, m = len(s), len(t)
     seen = defaultdict(int)  # faster than count
-    for c in t: seen[c] += 1
+    for c in t: seen[c] += 1  # how many copies we need
     min_len, start = float('inf'), -1
-    l = count = 0
+    left = count = 0
     for r in range(n):
         if seen[s[r]] > 0: count += 1
         seen[s[r]] -= 1
         while count == m:
-            if r - l + 1 < min_len:
-                min_len = r - l + 1
-                start = l
-            seen[s[l]] += 1   # reverse of before while
-            if seen[s[l]] > 0: count -= 1
-            l += 1
+            if r - left + 1 < min_len:
+                min_len = r - left + 1
+                start = left
+            seen[s[left]] += 1  # reverse of before while
+            if seen[s[left]] > 0: count -= 1
+            left += 1
     return "" if start == -1 else s[start:start + min_len]
 # https://leetcode.com/problems/minimum-window-substring/solutions/5822266/sliding-window-handling-edge-cases-explanation-relevant-test-cases/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
 

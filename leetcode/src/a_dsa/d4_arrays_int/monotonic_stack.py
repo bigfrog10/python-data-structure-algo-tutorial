@@ -1,9 +1,9 @@
 
-# LC2289. Steps to Make Array Non-decreasing
+# LC2289. Steps to Make Array Non-decreasing  array number of removes to increase  non decreasing
 def totalSteps(self, nums: List[int]) -> int:
     res, stack = 0, []  # O(n) time space
     for i in range(len(nums)-1,-1,-1):
-        cur = 0  # number of rounds to remove nums
+        cur = 0  # number of rounds to remove nums continuously
         while stack and nums[stack[-1][0]] < nums[i]:
             _, v = stack.pop()  # eat this number
             cur = max(cur+1, v)
@@ -152,32 +152,31 @@ def subArrayRanges(self, nums: List[int]) -> int:  # O(n) time and space
     A = [-math.inf] + nums + [-math.inf]  # make sure stack has 1 elem
     res, s = 0, []
     for i, x in enumerate(A):
-        while s and A[s[-1]] > x: # stack increasing
-            j = s.pop()
-            k = s[-1]
-            res -= A[j] * (i - j) * (j - k)
+        while s and x < A[s[-1]]: # stack increasing
+            j = s.pop()  # A[j] is smallest between i and s[-1]
+            res -= A[j] * (i - j) * (j - s[-1])
         s.append(i)
     A = [inf] + nums + [inf]  # use inf instead of -inf
     s = []
     for i, x in enumerate(A):
-        while s and A[s[-1]] < x:  # stack decreasing
+        while s and x > A[s[-1]]:  # stack decreasing
             j = s.pop()
-            k = s[-1]
-            res += A[j] * (i - j) * (j - k)
+            res += A[j] * (i - j) * (j - s[-1])
         s.append(i)
     return res
 
 # LC907. Sum of Subarray Minimums    sum sub min sum min
 def sumSubarrayMins(self, arr: List[int]) -> int:
     res, stack = 0, []  # O(n) time and space
-    A = [float('-inf')] + arr + [float('-inf')]
-    for i, n in enumerate(A):
-        while stack and n < A[stack[-1]]:  #  non-decreasing stack
+    arr = [float('-inf')] + arr + [float('-inf')]
+    for i, n in enumerate(arr):
+        while stack and n < arr[stack[-1]]:  #  non-decreasing stack
             cur = stack.pop()
             # num of subarrays with A[cur] as minimum, right * left
-            res += A[cur] * (i - cur) * (cur - stack[-1])
+            res += arr[cur] * (i - cur) * (cur - stack[-1])
+            res = res % (10**9 + 7)
         stack.append(i)
-    return res % (10**9 + 7)  # have to do this at the end
+    return res
 
 # LC962. Maximum Width Ramp
 def maxWidthRamp(self, A):

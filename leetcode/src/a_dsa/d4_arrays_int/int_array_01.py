@@ -27,13 +27,14 @@ def kInversePairs(self, n: int, k: int) -> int:
 # LC2419. Longest Subarray With Maximum Bitwise AND    max bits subarray
 def longestSubarray(self, nums: List[int]) -> int:  # O(n) time, O(1) space
     # max(nums) is the asked number. So we look for subarrays of max * m
-    j, max_val, res = - 1, max(nums), 0
+    max_val, res = max(nums), 0
+    j = -1
     for i, num in enumerate(nums):
         if num != max_val: j = i
         res = max(res, i - j)
     return res
 
-# LC486. Predict the Winner  player 1 win
+# LC486. Predict the Winner  player 1 win  player array sides
 def predictTheWinner(self, nums: List[int]) -> bool:  # O(n^2) time and O(n) space
     n = len(nums)  # O(n^2) time and space
     @cache
@@ -44,7 +45,7 @@ def predictTheWinner(self, nums: List[int]) -> bool:  # O(n^2) time and O(n) spa
         return max(score_by_left, score_by_right)
     return maxDiff(0, n - 1) >= 0
 
-# LC2210. Count Hills and Valleys in an Array
+# LC2210. Count Hills and Valleys in an Array hill and valley
 def countHillValley(self, nums: List[int]) -> int:  # O(n) time, O(1) space
     count, trend = 0, 0  # trend 1 for up, 0 flat, -1 down
     for i in range(1, len(nums)):
@@ -144,12 +145,39 @@ def arrayNesting(self, nums: List[int]) -> int: # O(n) tinme and O(1) space
         if res > len(nums): return res # works without this too, optimization
     return res
 
+# LC1913. Maximum Product Difference Between Two Pairs  diff 2 pairs
+def maxProductDifference(self, nums: List[int]) -> int:
+    big1 = big2 = 0  # avoid sorting, so this is O(n)
+    small1 = small2 = inf
+    for num in nums:
+        if num > big1: big1, big2 = num, big1
+        else: big2 = max(big2, num)
+        if num < small1: small1, small2 = num, small1
+        else: small2 = min(small2, num)
+    return big1 * big2 - small1 * small2
 
 
+# LC2439. Minimize Maximum of Array  min max array ops
+def minimizeArrayValue(self, nums: List[int]) -> int:
+    cumu = maxm = 0
+    for i, num in enumerate(nums, start=1):
+        cumu += num
+        # At each step, we can try to minimize the element by evenly placing
+        # the excess between the previous elements.
+        maxm = max(ceil(cumu / i), maxm)
+    return maxm
+    # https://leetcode.com/problems/minimize-maximum-of-array/solutions/2706521/JavaC++Python-Prefix-Sum-Average-O(n)/
 
-
-
-
+# LC413. Arithmetic Slices
+def numberOfArithmeticSlices(self, nums: List[int]) -> int:
+    ans = count = 0
+    for i in range(2, len(nums)):
+        if nums[i] - nums[i-1] == nums[i-1] - nums[i-2]:
+            count += 1
+        else:  # 1 + 2 +...+ count, 1 n-length subarray, 2 (n-1)-length...
+            ans += count * (count + 1) // 2  # subarrays
+            count = 0
+    return ans + count * (count + 1) // 2
 
 
 

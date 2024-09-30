@@ -10,12 +10,12 @@ def longestSubsequenceRepeatedK(self, s: str, k: int) -> str:
         return all(c in t for c in s)
     count = Counter(s)
     k_chars = [c for c in count.keys() if count[c]>=k]
-    k_chars.sort()
+    k_chars.sort()  # needed for lexicographically largest
     q = deque([''])
     while q:
         for _ in range(len(q)):
             cur = q.popleft()
-            res = cur
+            res = cur  # the last one is lexicographically largest
             for c in k_chars:
                 nxt = cur + c
                 if check(nxt * k, s): q.append(nxt)
@@ -53,17 +53,16 @@ def maximumLength(self, nums: List[int], k: int) -> int:
         res = max(res, max(dp))
     return res
 
-# LC416. Partition Equal Subset Sum  - Knapsack
+# LC416. Partition Equal Subset Sum  - Knapsack  partition sub partition sum
 def canPartition(self, nums: List[int]) -> bool:  # sequence, not continuous subset
     n, total = len(nums), sum(nums)  # O(n * total)
     if total % 2 != 0: return False
     @lru_cache(maxsize=None)
     def dfs(idx: int, subset_sum: int) -> bool:
         if subset_sum == 0: return True
-        if idx == n-1 or subset_sum < 0: return False
+        if idx == n or subset_sum < 0: return False
         # include this element, or skip this element
-        result = dfs(idx + 1, subset_sum - nums[idx + 1]) or dfs(idx + 1, subset_sum)
-        return result
+        return dfs(idx + 1, subset_sum - nums[idx]) or dfs(idx + 1, subset_sum)
     return dfs(0, total // 2)
 
 # LC1218. Longest Arithmetic Subsequence of Given Difference
@@ -73,7 +72,7 @@ def longestSubsequence(self, arr: List[int], diff: int) -> int:
         res[num] = res[num - diff] + 1 if (num - diff) in res else 1
     return max(res.values())
 
-# LC674. Longest Continuous Increasing Subsequence - max subarray increasing  max increasing subarray
+# LC674. Longest Continuous Increasing Subsequence - max subarray increasing  max increasing subarray max incr sub
 def findLengthOfLCIS(self, nums: List[int]) -> int:
     ans = anchor = 0
     for i in range(len(nums)):

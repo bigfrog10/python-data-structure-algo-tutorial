@@ -3,7 +3,7 @@ class ListNode:
         self.val = val
         self.next = next
 
-# LC2807. Insert Greatest Common Divisors in Linked List    insert gcd
+# LC2807. Insert Greatest Common Divisors in Linked List    insert gcd linked list
 def insertGreatestCommonDivisors(self, head: Optional[ListNode]) -> Optional[ListNode]:
     cur = head
     while cur.next:

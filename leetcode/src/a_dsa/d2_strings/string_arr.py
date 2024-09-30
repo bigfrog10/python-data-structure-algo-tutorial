@@ -14,9 +14,14 @@ def findTheLongestSubstring(self, s: str) -> int:
 
 # LC893. Groups of Special-Equivalent Strings
 def numSpecialEquivGroups(self, words: List[str]) -> int:
-    groups = set()
+    groups = set()  # O(nm) time and space, nm total chars
     for word in words:
-        groups.add((''.join(sorted(word[1::2])), ''.join(sorted(word[::2]))))
+        odd, even = [0] * 26, [0] * 26
+        for i, c in enumerate(word):
+            if i % 2: odd[ord(c) - ord('a')] += 1
+            else: even[ord(c) - ord('a')] += 1
+        groups.add((tuple(odd), tuple(even)))
+        # groups.add((''.join(sorted(word[1::2])), ''.join(sorted(word[::2]))))
     return len(groups)
 
 # LC422. Valid Word Square
@@ -90,29 +95,18 @@ def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
                 ret.append([acct[0]] + sorted(eg))  # O(nlogn), n = (accounts #) * max(email length)
     return ret
 
-# LC621. Task Scheduler - with cooling period
+# LC621. Task Scheduler - with cooling period, any order
 # https://leetcode.com/problems/task-scheduler/solution/
 def leastInterval(self, tasks: List[str], n: int) -> int:
     freqs = [0] * 26  # frequencies of the tasks
     for t in tasks: freqs[ord(t) - ord('A')] += 1
-    freqs.sort()
-    f_max = freqs.pop()  # pop is max
-    idle_time = (f_max - 1) * n  # -1 because there is no idle in the last section
-    while freqs and idle_time > 0:
-        idle_time -= min(f_max - 1, freqs.pop())
-    idle_time = max(0, idle_time)
-    return idle_time + len(tasks)
-def leastInterval(self, tasks: List[str], n: int) -> int:
-    frequencies = [0] * 26  # frequencies of the tasks. Only max freq matters
-    for t in tasks: frequencies[ord(t) - ord('A')] += 1
-    f_max = max(frequencies)  # max frequency, e.g., A, B with max 3, so 3 returned
-    n_max = frequencies.count(f_max)  # count of how many tasks with most-frequent, such as A, B
+    f_max = max(freqs)  # max frequency
+    n_max = freqs.count(f_max)  # how many tasks with this freq
     # at least len(tasks) if no repeat. with repeat we need extra cooling
-    # (n+1) tasks in each group with cooling, (f_max-1) groups,
-    # -1 is for last group, and it is n_max without need of cooling
+    # (n+1) tasks in each group with cooling, (f_max-1) groups, last group is n_max
     return max(len(tasks), (f_max - 1) * (n + 1) + n_max)
 
-# LC2365. Task Scheduler II
+# LC2365. Task Scheduler II complete in this order
 def taskSchedulerII(self, tasks: List[int], space: int) -> int:
     start_day = {task:0 for task in tasks}  # O(n) time space
     day = 0
@@ -120,8 +114,8 @@ def taskSchedulerII(self, tasks: List[int], space: int) -> int:
         day += 1
         # if the current day is too early to complete the task,
         # fast forward the day to the earliest day you can.
-        if day < start_day[task]: day = start_day[task]
-        # update the earliest day you can complete the task.
+        day = max(day, start_day[task])
+        # update the next start day of this type of task
         start_day[task] = day + space + 1
     return day
 

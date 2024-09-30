@@ -2,7 +2,7 @@
 # LC148. Sort List  merge sort list
 def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:  # O(nlogn)
     if not head or not head.next: return head
-    fast, slow = head.next, head
+    fast, slow = head.next, head  # head.next breaks even, [1, 2] to [1] and [2]
     while fast and fast.next:
         fast, slow = fast.next.next, slow.next
     start, slow.next = slow.next, None

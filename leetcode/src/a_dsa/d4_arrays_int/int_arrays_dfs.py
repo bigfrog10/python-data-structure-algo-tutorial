@@ -1,14 +1,14 @@
 
-# LC1718. Construct the Lexicographically Largest Valid Sequence   lexi large seq   lexi seq
+# LC1718. Construct the Lexicographically Largest Valid Sequence   lexi large seq lexi seq lexico largest
 def constructDistancedSequence(self, n: int) -> List[int]:  # O(n!) time, O(n) space
     m = 2*n - 1
     A = [0] * m  # 0 means not
     visited = set()
     def dfs(i):  # i is position in the array
-        if i == m: return all(A)
+        if i == m: return all(A)  # all assigned or not
         if A[i]: return dfs(i+1)  # occupied, move to next position
-        for v in range(n, 0, -1):
-            j = i if v == 1 else i + v  # there is only one 1.
+        for v in range(n, 0, -1):  # position from back
+            j = i if v == 1 else i + v  # there is only one 1, leave it last
             if j < m and not A[j] and v not in visited:
                 A[i] = A[j] = v
                 visited.add(v)

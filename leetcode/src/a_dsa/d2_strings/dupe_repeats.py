@@ -58,7 +58,7 @@ def removeDuplicateLetters(self, s: str) -> str:  # O(n) time and O(1) space
             stack.append(c)
     return ''.join(stack)
 
-# LC1047. Remove All Adjacent Duplicates In String - remove duplicates with 2 chars
+# LC1047. Remove All Adjacent Duplicates In String - remove duplicates with 2 chars remove adjacent
 def removeDuplicates(self, S: str) -> str: # O(n)
     output = []
     for ch in S:
@@ -130,16 +130,16 @@ def longestSubstring(self, s: str, k: int) -> int: # O(n)
 
 # LC340. Longest Substring with At Most K Distinct Characters
 def lengthOfLongestSubstringKDistinct(self, s: str, k: int) -> int:
-    d = {}  # O(1), k elements
-    low, ret = 0, 0
-    for i, c in enumerate(s):  # O(n)
-        d[c] = i
-        if len(d) > k:
-            low = min(d.values())  # O(k)
-            del d[s[low]]
-            low += 1
-        ret = max(i - low + 1, ret)
-    return ret
+    seen = Counter()  #  O(len(s)) time and O(k) space
+    ans = left = 0
+    for right in range(len(s)):
+        seen[s[right]] += 1
+        while len(seen) > k:
+            seen[s[left]] -= 1
+            if seen[s[left]] == 0: del seen[s[left]]
+            left += 1
+        ans = max(ans, right - left + 1)
+    return ans
 
 
 

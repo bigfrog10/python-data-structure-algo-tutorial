@@ -104,7 +104,7 @@ def findDiagonalOrder(self, A):
 
 # LC311. Sparse Matrix Multiplication
 def multiply(self, A: List[List[int]], B: List[List[int]]) -> List[List[int]]:
-    if not A or not A[0] or not B or not B[0]: return [[]]
+    if not A or not A[0] or not B or not B[0]: return [[]]  # O(m⋅k⋅n) time and O(mn) space
     def get_none_zero(A):
         n, m, res = len(A), len(A[0]), []
         for i, j in itertools.product(range(n), range(m)):
@@ -117,6 +117,14 @@ def multiply(self, A: List[List[int]], B: List[List[int]]) -> List[List[int]]:
         for x, y, val_B in sparse_B:
             if j == x: C[i][y] += val_A * val_B
     return C
+def multiply(self, mat1: List[List[int]], mat2: List[List[int]]) -> List[List[int]]:
+    ans = [[0] * len(mat2[0]) for _ in range(len(mat1))]
+    for ri, row in enumerate(mat1):
+        for ci, cell in enumerate(row):
+            if cell:
+                for k, c1 in enumerate(mat2[ci]):
+                    ans[ri][k] += cell * c1
+    return ans
 
 # LC378. Kth Smallest Element in a Sorted Matrix
 def kthSmallest(self, matrix: List[List[int]], k: int) -> int:  # O(klogk) time and O(k) space
@@ -196,7 +204,7 @@ def getBiggestThree(self, grid):  # O(C), C number of cells
 
     return sorted(heap)[::-1]
 
-# LC764. Largest Plus Sign
+# LC764. Largest Plus Sign  axis-aligned  axis aligned
 def orderOfLargestPlusSign(self, n: int, mines: List[List[int]]) -> int:  # O(n^2)
     grid = [[n] * n for _ in range(n)]  # max plus size for plus sign centered at (i,j)
     for x, y in mines: grid[x][y] = 0
@@ -256,7 +264,7 @@ def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:  # O(rc)
             if mat[r][c] > 0:  # reuse top and left
                 top = mat[r - 1][c] if r > 0 else math.inf
                 left = mat[r][c - 1] if c > 0 else math.inf
-                mat[r][c] = min(top, left) + 1
+                mat[r][c] = 1 + min(top, left)
     for r in range(m - 1, -1, -1):
         for c in range(n - 1, -1, -1):
             if mat[r][c] > 0:
@@ -343,7 +351,7 @@ def maximalSquare(self, matrix: List[List[str]]) -> int: # DP
     rows, cols = len(matrix), len(matrix[0])
     # DP(i, j) is the largest side of all squares ended at (i, j)
     dp = collections.defaultdict(int)  # O(mn)
-    max_len = 0 # track this
+    max_len = 0  # track this
     for i, j in itertools.product(range(rows), range(cols)):
         if matrix[i][j] == '1':
             dp[i+1, j+1] = 1 + min([dp[i+1, j], dp[i, j+1], dp[i, j]])  # weakest link

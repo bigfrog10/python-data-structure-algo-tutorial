@@ -1,7 +1,7 @@
 from typing import List
 import math
 
-# LC1009. Complement of Base 10 Integer
+# LC1009. Complement of Base 10 Integer  1's complement
 # LC476. Number Complement
 def bitwiseComplement(self, N: int) -> int:
     if N == 0: return 1
@@ -52,7 +52,7 @@ def validUtf8(self, data: List[int]) -> bool:
 
 # LC477. Total Hamming Distance
 def totalHammingDistance(self, nums: List[int]) -> int:  # O(n), better than n^2
-    # map takes n to create, zip takes 32 (32 bit)
+    # map takes n to create, zip takes 32 (32 bit)  vertical slices
     zipped = zip(*map('{:032b}'.format, nums))  # result 32 element array
     # every pair of (0, 1) contributes 1 to the distance
     return sum(b.count('0') * b.count('1') for b in zipped)  # constant time
@@ -129,3 +129,7 @@ def poorPigs(self, buckets: int, minutesToDie: int, minutesToTest: int) -> int:
 
     # x pigs could test 2^x buckets
     # states^x >= buckets
+
+# LC461. Hamming Distance
+def hammingDistance(self, x: int, y: int) -> int:
+    return bin(x^y)[2:].count("1")

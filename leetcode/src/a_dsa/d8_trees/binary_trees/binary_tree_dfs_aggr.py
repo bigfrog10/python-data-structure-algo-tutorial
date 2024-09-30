@@ -1,5 +1,5 @@
 
-# LC129. Sum Root to Leaf Numbers
+# LC129. Sum Root to Leaf Numbers  root to leaf sum  root leaf sum
 def sumNumbers(self, root: Optional[TreeNode]) -> int:  # O(n) runtime, O(h) space
     total = 0
     def dfs(node, path_total): # path related indicates DFS

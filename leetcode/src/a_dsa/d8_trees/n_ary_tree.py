@@ -40,7 +40,7 @@ class Codec:
         kv = json.loads(data)
         return dict_to_node(kv)
 
-# LC1522. Diameter of N-Ary Tree - path = edges
+# LC1522. Diameter of N-Ary Tree - path = edges  n-ary diameter n ary diameter n ary
 def diameter(self, root: 'Node') -> int:
     ret = 0  # root itself, in case there is no child
     def dfs(node):  # return number of edges

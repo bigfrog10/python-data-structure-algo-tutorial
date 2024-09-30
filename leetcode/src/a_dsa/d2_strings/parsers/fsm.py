@@ -1,4 +1,4 @@
-# LC65. Valid Number - double number format
+# LC65. Valid Number - double number format  valid double
 def isNumber(self, s: str) -> bool:
     # Example:              +-     1 or 1. or 1.2 or .2   e +- 1
     # ? - 0 or 1 match, +: 1 or more, *: 0 or more

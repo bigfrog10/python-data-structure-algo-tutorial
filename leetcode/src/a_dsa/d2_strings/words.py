@@ -83,7 +83,7 @@ def wordBreak(self, s: str, wordDict):  #  we may have O(2^n) solutions, n=len(s
     def dfs(s):
         if s == '': return []
         output = []
-        if s in word_set: output.append(s) # one of solutions
+        if s in word_set: output.append(s)  # one of solutions
         for i in range(len(s) - 1):
             if s[:i+1] in word_set:  # substring takes n
                 tmp = dfs(s[i+1:])  # tmp is like ['a b', 'ab']
@@ -93,6 +93,7 @@ def wordBreak(self, s: str, wordDict):  #  we may have O(2^n) solutions, n=len(s
     return res
 def wordBreak(s: str, wordDict: List[str]) -> List[str]:
     word_set = set(wordDict)  # O(2^len(s) + len(worddict),
+    @cache
     def dfs(s):
         output = []
         if s in word_set: output.append(s)  # one of solutions
@@ -114,9 +115,9 @@ def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         return False
     return break_words(0)
 def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-    wds = set(wordDict)
+    wds = set(wordDict)  # O(len(s) * len(wds) * avg(words)) time, O(n) space
     @lru_cache(None)
-    def dfs(s):
+    def dfs(s):  # recursion, O(n) space
         if s in wds: return True
         for w in wordDict:
             if s.startswith(w) and dfs(s[len(w):]): return True
@@ -343,9 +344,9 @@ def addBoldTag(self, s, dict):
             i += 1
     return final
 
-# LC691. Stickers to Spell Word - effectively this is bfs since we look for min.
+# LC691. Stickers to Spell Word - effectively this is bfs since we look for min. sticker spell sticker word
 def minStickers(self, stickers: List[str], target: str) -> int:
-    counters = [Counter(s) for s in stickers]  # O(S^T with lowers)
+    counters = [Counter(s) for s in stickers]  # O(2^T * n)
     @lru_cache(None)
     def dfs(target):  # target string to child nodes by apply stickers
         res = float('inf')

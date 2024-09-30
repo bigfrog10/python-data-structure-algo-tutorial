@@ -3,7 +3,7 @@ from collections import Counter
 import math
 import functools
 
-# LC801 Minimum Swaps To Make Sequences Increasing      swap 2 arrays increasing
+# LC801 Minimum Swaps To Make Sequences Increasing    min swap 2 arrays increasing
 def minSwap(self, A: List[int], B: List[int]) -> int:
     ans = sm = lg = mx = 0
     for x, y in zip(A, B):
@@ -12,7 +12,7 @@ def minSwap(self, A: List[int], B: List[int]) -> int:
             ans += min(sm, lg) # treat so far subarray independent of the rest
             sm = lg = 0
         mx = max(x, y)
-        if x < y: sm += 1 # count "x < y"
+        if x < y: sm += 1 # count "x < y"  count both cases to see which one is smaller
         elif x > y: lg += 1 # count "x > y"
     return ans + min(sm, lg)
 # https://leetcode.com/problems/minimum-swaps-to-make-sequences-increasing/solutions/932390/python3-two-counters/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
@@ -201,7 +201,7 @@ def majorityElement(self, nums: List[int]) -> List[int]:  # O(n) time and O(1) s
         ctr[n] += 1
         if len(ctr) == 3:  # There can be at most two majority elements which are more than ⌊n/3⌋ times.
             ctr -= collections.Counter(set(ctr))
-    return [n for n in ctr if nums.count(n) > len(nums)/3]
+    return [n for n in ctr if nums.count(n) > len(nums)/3]  # [3, 2, 3], 2 is not
 
 # LC322. Coin Change - least number of coins to sum up to target
 def coinChange(self, coins: List[int], amount: int) -> int:
@@ -625,9 +625,41 @@ def unhappyFriends(self, n: int, preferences: List[List[int]], pairs: List[List[
                 break
     return res
 
-# LC315. Count of Smaller Numbers After Self  # BBG hard
+# LC315. Count of Smaller Numbers After Self  smaller after me
 def countSmaller(self, nums: List[int]) -> List[int]:
-    sorted_arr = [] # O(nlogn)
+    from sortedcontainers import SortedList  # AVL tree implementation or red black tree
+    n = len(nums)
+    ans = [0] * n
+    x = SortedList()
+    for i, val in enumerate(reversed(nums)):  # O(n)
+        ans[n-i-1] = x.bisect_left(val)  # O(logn)
+        x.add(val)  # O(logn), in sorted order
+    return ans
+class BIT:  # Binary Indexed Tree (Fenwick Tree)
+    def __init__(self, n):
+        self.ans = [0] * (n+1)
+    def query(self, i):
+        total = 0
+        while i:
+            total += self.ans[i]
+            i -= i & -i
+        return total
+    def update(self, i, val):
+        while i < len(self.ans):
+            self.ans[i] += val # prefix sum
+            i += i & -i  # add rightmost bit to go up
+class Solution:
+    def countSmaller(self, nums):
+        n, answer = len(nums), []
+        dict1 = {j: i+1 for i, j in enumerate(sorted(nums))}
+        result = BIT(n)
+        for i in range(n-1,-1,-1):
+            answer.append(result.query(dict1[nums[i]]-1))
+            result.update(dict1[nums[i]], 1)
+        return answer[::-1]
+# https://leetcode.com/problems/range-sum-query-mutable/solutions/75753/Java-using-Binary-Indexed-Tree-with-clear-explanation/
+def countSmaller(self, nums: List[int]) -> List[int]:
+    sorted_arr = [] # O(nlogn) time and O(n) space
     rst = []
     for num in nums[::-1]:
         idx = bisect_left(sorted_arr, num)
@@ -636,15 +668,13 @@ def countSmaller(self, nums: List[int]) -> List[int]:
     return rst[::-1]
 
 # LC493. Reverse Pairs
-def reversePairs(self, nums: List[int]) -> int:
+def reversePairs(self, nums: List[int]) -> int:  # O(nlogn)
     import sortedcontainers
-    brr = sortedcontainers.SortedList(nums)
+    arr = sortedcontainers.SortedList()
     count = 0
-    # anything smaller before larger is discarded.
-    for i in range(len(nums)): # O(nlogn), loop is n, logn inside
-        brr.discard(nums[i])
-        k = brr.bisect_left((nums[i]+1)//2)
-        count += k
+    for i in reversed(range(len(nums))):
+        count += arr.bisect_left(nums[i])
+        arr.add(2*nums[i])
     return count
 
 # LC1470. Shuffle the Array - merge alternatively

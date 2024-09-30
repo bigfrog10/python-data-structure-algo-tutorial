@@ -14,7 +14,7 @@ def cherryPickup(self, grid: List[List[int]]) -> int:  # O(m n^2) time and space
         return result
     return dp(0, 0, n-1)
 
-# LC1091. Shortest Path in Binary Matrix - 01 matrix
+# LC1091. Shortest Path in Binary Matrix - 01 matrix  top left low right
 def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:  # O(n) runtime and space
     if not grid or grid[0][0] != 0: return -1
     n, que, visited = len(grid), deque([(0, 0, 1)]), set()  # x, y, steps
@@ -74,7 +74,7 @@ def swimInWater(self, grid: List[List[int]]) -> int:  # O(N^2log(N^2)) time, O(N
 def wallsAndGates(self, rooms: List[List[int]]) -> None:  # O(mn)
     WALL, GATE, EMPTY = -1, 0, 2147483647  # given
     q = [(i, j) for i, row in enumerate(rooms) for j, r in enumerate(row) if r == GATE]  # all gates
-    for i, j in q:
+    for i, j in q:  # leve travel
         for I, J in (i+1, j), (i-1, j), (i, j+1), (i, j-1):
             if 0 <= I < len(rooms) and 0 <= J < len(rooms[0]) and rooms[I][J] == EMPTY:
                 rooms[I][J] = rooms[i][j] + 1
@@ -144,7 +144,7 @@ def minPushBox(self, grid: List[List[str]]) -> int:  # faster BFS, O((mn)^2)
 
 
 
-# LC329. Longest Increasing Path in a Matrix  long incr paths long inc path  long incr path
+# LC329. Longest Increasing Path in a Matrix  long incr paths long inc path  long incr path matrix lip
 import functools # 100%
 def longestIncreasingPath(self, matrix):
     if not matrix or not matrix[0]: return 0  # O(mn) time space

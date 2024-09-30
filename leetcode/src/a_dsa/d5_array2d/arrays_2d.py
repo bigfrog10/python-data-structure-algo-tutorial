@@ -1,7 +1,7 @@
 
-# LC1947. Maximum Compatibility Score Sum  max compat score sum
+# LC1947. Maximum Compatibility Score Sum  max compat score sum student compat
 def maxCompatibilitySum(self, students: List[List[int]], mentors: List[List[int]]) -> int:
-    m, n = len(students), len(students[0])  # O(m^2 * 2^m)
+    m, n = len(students), len(students[0])  # O(m^2 * 2^m * n) time, O(m * 2^m) space
     @cache
     def dp(student: int, mentor: int) -> int:  # max score sum
         if student == m: return 0  # all students assigned,
@@ -73,7 +73,7 @@ def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[Lis
     return res
 # https://leetcode.com/problems/find-k-pairs-with-smallest-sums/discuss/84577/O(k)-solution
 
-# LC1868. Product of Two Run-Length Encoded Arrays
+# LC1868. Product of Two Run-Length Encoded Arrays  run length
 def findRLEArray(self, encoded1: List[List[int]], encoded2: List[List[int]]) -> List[List[int]]:
     res, l, r = [], 0, 0   # O(n + m), counts of unique numbers
     while encoded1[-1][-1] != 0:
@@ -122,8 +122,8 @@ def restoreArray(self, adjacentPairs: List[List[int]]) -> List[int]:
                 break
     return ans
 
-# LC983. Minimum Cost For Tickets - ticket cost
-def mincostTickets(self, days, costs):   # O(len(days))
+# LC983. Minimum Cost For Tickets - ticket cost min cost min ticket
+def mincostTickets(self, days, costs):   # O(len(days) * len(costs))
     durations = [1, 7, 30]  # 2, 7, 5
     N = len(days)
     @lru_cache(None)
@@ -266,7 +266,7 @@ def canFormArray(self, arr: List[int], pieces: List[List[int]]) -> bool:  # nlog
             i += 1
     return True
 
-# LC223. Rectangle Area - intersection of 2 rectangles
+# LC223. Rectangle Area - intersection of 2 rectangles  rect area
 def computeArea(self, A, B, C, D, E, F, G, H):  # AB lower left, CD upper right
     # overlap lower left is [max(A, E), max(B, F)], upper right is [min(C, G), min(D, H)]
     overlap = max(min(C,G) - max(A,E), 0) * max(min(D,H) - max(B,F), 0)

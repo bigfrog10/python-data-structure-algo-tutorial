@@ -33,7 +33,7 @@ def mostVisitedPattern(self, username: List[str], timestamp: List[int], website:
     return counters[0][0]  # list of (3-seq, count), so [0] is (3-seq, count), next 0 is 3-seq
 
 
-# LC386. Lexicographical Numbers
+# LC386. Lexicographical Numbers  lexico numbers
 def lexicalOrder(self, n: int) -> List[int]:
     num, res = 1, []
     for _ in range(n):  # Generate numbers from 1 to n
@@ -44,3 +44,25 @@ def lexicalOrder(self, n: int) -> List[int]:
             while num % 10 == 9 or num >= n: num //= 10
             num += 1  # Increment the number
     return res
+
+# LC1922. Count Good Numbers
+def countGoodNumbers(self, n: int) -> int:
+    # even places have 5 options(0, 2, 4, 6, 8)
+    # odd places have 4 options(2, 3, 5, or 7)
+    MOD = (10 ** 9) + 7
+    even_places = (n + 1) // 2
+    odd_places = n // 2
+    even_combos = pow(5, even_places, MOD)
+    odd_combos = pow(4, odd_places, MOD)
+    return (even_combos * odd_combos) % MOD
+
+
+
+
+
+
+
+
+
+
+

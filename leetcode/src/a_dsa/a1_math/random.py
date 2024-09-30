@@ -11,7 +11,7 @@ class Solution:  # based on pdf
         idx = bisect.bisect(self.cumusum, r)
         return self.samples[idx]
 
-# LC398. Random Pick Index - with dupe elements with same probability rand pick index
+# LC398. Random Pick Index - with dupe elements with same probability rand pick index rand index
 class Solution:
     def __init__(self, nums: List[int]):
         self.num2idx = defaultdict(list)

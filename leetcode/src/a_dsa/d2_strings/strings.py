@@ -1,22 +1,23 @@
 
-# LC3110. Score of a String
+# LC3110. Score of a String score
 def scoreOfString(self, s: str) -> int:
     score = 0
     for i in range(len(s) - 1):
         score += abs(ord(s[i]) - ord(s[i + 1]))
     return score
 
-# 2452. Words Within Two Edits of Dictionary  words within 2 edits
+# 2452. Words Within Two Edits of Dictionary  words within 2 edits word 2 edit
 def twoEditWords(self, queries: List[str], dictionary: List[str]) -> List[str]:
     def is_valid(query, word):
-        count = 0
-        for i in range(len(word)):
+        # return 2 >= sum(word[i] != query[i] for i in range(len(word)))
+        count = 0 # much faster
+        for i in range(len(word)):  # O(L)
             if word[i] != query[i]:
                 count += 1
                 if count > 2: return False
         return True
     res = []
-    for query in queries:
+    for query in queries:  # O(Q * D * L) in time, O(1) space
         for word in dictionary:
             if is_valid(query, word):
                 res.append(query)
@@ -72,11 +73,11 @@ def letterCasePermutation(self, s: str) -> List[str]:  # O(2^n), n is # of lette
     return ans
 
 # LC567. Permutation in String - string permutation check - s1 is a permutation substring of s2  permutation string permutation
-def checkInclusion(self, s1, s2):  # O(|s1|) time and O(1) space (26 chars as keys)
+def checkInclusion(self, s1, s2):  # O(|s1|) time and O(1) space (26 chars as keys) permutation string
     d1, d2 = Counter(s1), Counter(s2[:len(s1)])  # O(1) space, 26 chars
     for start in range(len(s1), len(s2)):  # O(len(s2) - len(s1)) time
         if d1 == d2: return True
-        d2[s2[start]] += 1
+        d2[s2[start]] += 1  # subarray has sam size len(s1) always
         k = s2[start-len(s1)]
         d2[k] -= 1
         if d2[k] == 0: del d2[k]
@@ -375,7 +376,7 @@ def minDistance(self, word1: str, word2: str) -> int:  # O(mn) time and O(n) spa
             prev = tmp
     return dp[-1]
 
-# LC1790. Check if One String Swap Can Make Strings Equal
+# LC1790. Check if One String Swap Can Make Strings Equal  string swap char
 def areAlmostEqual(self, s1: str, s2: str) -> bool:
     diff = [[x, y] for x, y in zip(s1, s2) if x != y]
     return not diff or len(diff) == 2 and diff[0][::-1] == diff[1]
@@ -550,3 +551,51 @@ def buddyStrings(self, A, B):
     if A == B and len(set(A)) < len(A): return True
     dif = [(a, b) for a, b in zip(A, B) if a != b]
     return len(dif) == 2 and dif[0] == dif[1][::-1]
+
+
+# LC420. Strong Password Checker
+def strongPasswordChecker(self, password: str) -> int:
+    ans = 0 if any([password[i].isdigit() for i in range(len(password))]) else 1
+    ans += 0 if any([password[i].islower() for i in range(len(password))]) else 1
+    ans += 0 if any([password[i].isupper() for i in range(len(password))]) else 1
+    if len(password) <  6:  return max(6 - len(password), ans)
+
+    g = [len(list(g)) for _, g in groupby(password)]
+    g = [r for r in g if r > 2]
+    if len(password) > 20:
+        g = [(r%3, r) for r in g]
+        heapify(g)
+        for i in range(len(password)-20):
+            if not g: break
+            _, r = heappop(g)
+            if r > 3: heappush(g, ((r-1)%3, r-1))
+        g = [r for _,r in g]
+    return max(ans, sum(r//3 for r in g)) + max(0, len(password)-20)
+# https://leetcode.com/problems/strong-password-checker/solutions/3220002/python-shortest-solution/?envType=company&envId=apple&favoriteSlug=apple-more-than-six-months
+def strongPasswordChecker(self, password: str) -> int:
+    digit = lower = upper = 1
+    for ch in password:
+        if ch.isdigit(): digit = 0
+        elif ch.islower(): lower = 0
+        elif ch.isupper(): upper = 0
+    missing = digit + lower + upper
+    reps = one = two = 0
+    i = 2
+    while i < len(password):
+        if password[i-2] == password[i-1] == password[i]:
+            sz = 3
+            while i+1 < len(password) and password[i] == password[i+1]:
+                sz += 1
+                i += 1
+            reps += sz // 3
+            if sz % 3 == 0: one += 1
+            elif sz % 3 == 1: two += 1
+        i += 1
+    if len(password) < 6: return max(missing, 6 - len(password))
+    elif len(password) <= 20: return max(missing, reps)
+    else:
+        dels = len(password) - 20
+        reps -= min(dels, one)
+        reps -= min(max(dels - one, 0), two * 2) // 2
+        reps -= max(dels - one - 2 * two, 0) // 3
+        return dels + max(missing, reps)

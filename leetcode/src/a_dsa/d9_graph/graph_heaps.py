@@ -1,28 +1,29 @@
 from collections import Counter, defaultdict, deque
 import heapq
 
-# LC1976. Number of Ways to Arrive at Destination  - intersections and roads   num ways arrive
+# LC1976. Number of Ways to Arrive at Destination - intersections and roads   num ways arrive intersection bi-drection
 def countPaths(self, n: int, roads: List[List[int]]) -> int:
-    adj = [[] for _ in range(n)]  # O(M * logN), M = N*(N-1)/2 # of roads
+    adj = [[] for _ in range(n)]  # O(ElogV) time, O(V + E) space
     for u, v, w in roads:  # Step 1️⃣: Build the adjacency list for the graph
         adj[u].append([v, w])  # from u to v takes w time
-        adj[v].append([u, w])  # space is O(V + E) = O(N + M)
+        adj[v].append([u, w])
     ways = [0] * n  # Step 2️⃣: Initialize arrays to store number of ways
     ways[0] = 1
-    dis = [float("inf")] * n  # shortest travel time to index city
-    dis[0] = 0  # start from city 0
+    ctime = [float("inf")] * n  # shortest travel time to index city
+    ctime[0] = 0  # start from city 0
     heap = [(0, 0)]  # # Step 3️⃣: Min-heap to store (current time, city)
     while heap:
         time, city = heapq.heappop(heap)
         # This line reduce O(V^3) to O(V^2)
-        if dis[city] < time: continue  # if there is a better time, ignore this one
+        if time > ctime[city]: continue  # there is a better time, ignore this one
         # Explore all neighbors of the current city
         for neighbor, travel_time in adj[city]:
             new_time = time + travel_time
-            if new_time == dis[neighbor]:  # Case 1️⃣: found another way with same shortest time
+            if new_time == ctime[neighbor]:  # Case 1️⃣: found another way with same shortest time
                 ways[neighbor] = (ways[neighbor] + ways[city]) % 1_000_000_007
-            elif new_time < dis[neighbor]:  # Case 2️⃣: found a shorter time to reach the neighbor
-                dis[neighbor] = new_time
+                # it's already explored, so skip this
+            elif new_time < ctime[neighbor]:  # Case 2️⃣: found a shorter time to reach the neighbor
+                ctime[neighbor] = new_time
                 heapq.heappush(heap, (new_time, neighbor))
                 ways[neighbor] = ways[city]
     return ways[n-1]
@@ -49,7 +50,7 @@ def minCost(self, maxTime: int, edges: List[List[int]], passingFees: List[int]) 
                 times[nbor] = new_time
     return -1
 
-# LC1810 Minimum Path Cost in a hidden grid    min path cost
+# LC1810 Minimum Path Cost in a hidden grid    min path cost  min cost   graph min cost
 def findShortestPath(self, master: 'GridMaster') -> int:  # O(cells)
     directions = {'U': (0, 1), 'D': (0, -1), 'L': (-1, 0), 'R': (1, 0)}
     opposite = {'L': 'R', 'R': 'L', 'D': 'U', 'U': 'D'}
@@ -148,18 +149,19 @@ def findItinerary(self, tickets: List[List[str]]) -> List[str]:  # O(ElogE)
 
 # LC787. Cheapest Flights Within K Stops - weighted graph
 def findCheapestPrice(self, n, flights, src, dst, K):  # O(E) runtime, O(E + V) space
-    if src == dst: return 0
-    d, seen = collections.defaultdict(list), collections.defaultdict(lambda: float('inf'))  # d is graph
+    #  O(E) runtime, O(E + V) space
+    d = collections.defaultdict(list)  # d is graph
     for u, v, p in flights: d[u] += [(v, p)]  # O(E) space
-    dque = deque([(src, -1, 0)])
+    dque = deque([(src, 0, 0)])
+    seen = [inf] * n
     while dque:  # O(E)
-        pos, k, cost = dque.popleft()
-        if pos == dst or k == K: continue
+        pos, k, cost = dque.popleft()  # k: stops not include start
+        if pos == dst or k == K+1: continue  # count start
         for nei, p in d[pos]:
-            if cost + p >= seen[nei]: continue
-            else:
-                seen[nei] = cost+p  # O(V) space
-                dque.append((nei, k+1, cost+p))
+            nc = cost + p
+            if nc < seen[nei]:
+                seen[nei] = nc  # O(V) space
+                dque.append((nei, k+1, nc))
     return seen[dst] if seen[dst] < float('inf') else -1
 
 # LC2065. Maximum Path Quality of a Graph

@@ -122,7 +122,7 @@ def connect(self, root: 'Node') -> 'Node':
         root = leftmost.next  # next level starting point
     return res
 
-# LC637. Average of Levels in Binary Tree
+# LC637. Average of Levels in Binary Tree bt level avg
 def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
     level, averages = [root], []
     while level:
@@ -171,7 +171,7 @@ def isEvenOddTree(self, root: Optional[TreeNode]) -> bool:
             return False
         if idx == -1 and (not is_decr(vals) or not is_even(vals)):
             return False
-        idx = -idx
+        idx = -idx  # even odd flip
         level = [kid for n in level for kid in (n.left, n.right) if kid]
     return True
 

@@ -171,7 +171,7 @@ def kthSmallest(self, root, k):  # O(n)
         return inorder(r.left) + [r.val] + inorder(r.right) if r else []
     return inorder(root)[k - 1]
 
-# LC285. Inorder Successor in BST
+# LC285. Inorder Successor in BST inorder
 def inorderSuccessor(self, root: 'TreeNode', p: 'TreeNode') -> 'TreeNode':
     successor = None
     while root:

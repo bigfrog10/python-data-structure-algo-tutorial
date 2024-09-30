@@ -117,7 +117,7 @@ def islandPerimeter(self, grid: List[List[int]]) -> int:  # O(mn), O(1)
             if c > 0 and grid[r][c-1] == 1: result -= 2
     return result
 
-# LC934. Shortest Bridge
+# LC934. Shortest Bridge connect 2 island
 def shortestBridge(self, A: List[List[int]]) -> int:  # O(n^2) time and space
     m, n = len(A), len(A[0])
     i, j = next((i, j) for i in range(m) for j in range(n) if A[i][j])
@@ -252,10 +252,10 @@ def countSubIslands(self, grid1: List[List[int]], grid2: List[List[int]]) -> int
     return sum(dfs(i, j) for i in range(n) for j in range(m) if grid2[i][j])
 
 
-# 959. Regions Cut By Slashes   region slash
+# 959. Regions Cut By Slashes   region slash region cut
 def regionsBySlashes(self, grid: List[str]) -> int:  # O(n^2) time and space
     n = len(grid)
-    m = 3*n
+    m = 3 * n
     mat = [[0] * m for _ in range(m)]  # need 3 rather than 2 because //
     for i, j in product(range(n), range(n)):
         r, c = 3 * i, 3 * j
@@ -267,17 +267,16 @@ def regionsBySlashes(self, grid: List[str]) -> int:  # O(n^2) time and space
             mat[r][c] = 1
             mat[r+1][c+1] = 1
             mat[r+2][c+2] = 1
-    def dfs(mat, i, j):
-        if not (0 <= i < m and 0 <= j < m) or mat[i][j] == 1:
-            return
-        mat[i][j] = 1
+    def dfs(i, j):
+        mat[i][j] = 1 # mark it as visited
         for x, y in (i+1, j), (i-1, j), (i, j+1), (i, j-1):
-            dfs(mat, x, y)
+            if 0 <= x < m and 0 <= y < m and mat[x][y] == 0:
+                dfs(x, y)
     count = 0  # count number of islands
     for i, j in product(range(m), range(m)):
         if mat[i][j] == 0:
             count += 1
-            dfs(mat, i, j)
+            dfs(i, j)
     return count
 # https://leetcode.com/problems/regions-cut-by-slashes/solutions/5614788/simple-approach-using-expanded-grid-with-flood-fill-for-counting-regions/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
 

@@ -41,20 +41,19 @@ def isValid(self, s: str) -> bool:
     return len(stack) == 0
 
 # LC32. Longest Valid Parentheses - longest substring  long parentheses long valid parenth
-def longestValidParentheses(self, s: str) -> int:  # O(n) time and O(1) space
-    n = len(s)
-    maxl = left = right = 0
+def longestValidParentheses(self, s: str) -> int:  # O(n) time, O(1) space
+    maxl = left = right = 0  # ())
     for c in s:  # from left to right
         if c == '(': left += 1
         else: right += 1
         if left == right: maxl = max(maxl, 2 * right)
         elif left < right: left = right = 0  # start over with new
-    left = right = 0
+    left = right = 0  # (()
     for c in s[::-1]:
         if c == '(': left += 1
         else: right += 1
         if left == right: maxl = max(maxl, 2 * left)
-        elif left >= right: left = right = 0
+        elif left > right: left = right = 0
     return maxl
 def longestValidParentheses(self, s: str) -> int:  # O(n) time and space
     res, stack = 0, [-1]
@@ -96,9 +95,9 @@ def minAddToMakeValid(self, S: str) -> int:  # O(n)
 
 # LC301. Remove Invalid Parentheses - with letters, return all results
 def removeInvalidParentheses(self, s): # O(2^n) return all possible results
-    def isvalid(s):  # O(n)
+    def isvalid(s):  # worst case is all (, e.g., ((((( -> valid below is ''
         ctr = 0
-        for c in s:
+        for c in s:  # O(n)
             if c == '(': ctr += 1
             elif c == ')': ctr -= 1
             if ctr < 0: return False

@@ -11,7 +11,7 @@ def separateDigits(self, nums: List[int]) -> List[int]:
 
 # LC554. Brick Wall
 def leastBricks(self, wall: List[List[int]]) -> int:
-    edge_counts = defaultdict(int)
+    edge_counts = defaultdict(int)  # O(nm) time, O(m) space
     for row in wall:
         edge_pos = 0
         for brick_width in row[:-1]:
@@ -19,7 +19,7 @@ def leastBricks(self, wall: List[List[int]]) -> int:
             edge_counts[edge_pos] += 1
     return len(wall) - max(edge_counts.values(), default=0)
 
-# LC1033. Moving Stones Until Consecutive
+# LC1033. Moving Stones Until Consecutive  move stone
 def numMovesStones(self, a: int, b: int, c: int) -> List[int]:
     x, y, z = sorted([a, b, c])
     if x + 1 == y == z - 1: min_steps = 0
@@ -28,7 +28,7 @@ def numMovesStones(self, a: int, b: int, c: int) -> List[int]:
     max_steps = z - x - 2
     return [min_steps, max_steps]
 
-# LC1040. Moving Stones Until Consecutive II
+# LC1040. Moving Stones Until Consecutive II move stone
 def numMovesStonesII(self, stones: List[int]) -> List[int]:
     stones.sort()  # O(nlogn) time and O(1) space
     i, n, low = 0, len(stones), len(stones)

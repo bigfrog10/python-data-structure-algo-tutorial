@@ -196,7 +196,7 @@ def maxProduct(self, nums: List[int]) -> int:
 def maxSumOfThreeSubarrays(self, nums: List[int], k: int) -> List[int]:  # O(n)
     def maxSumOfThreeSubarrays(self, nums: List[int], k: int) -> List[int]:
         acc = list(accumulate(nums, initial = 0))  # O(n) time and space
-        sm1 = sm2 = sm3 = 0  # maximum of 1st subarray, 1st 2 subarray, 1st 3 subarrays
+        sm1 = sm2 = sm3 = 0  # sum/maximum of 1st subarray, 1st 2 subarray, 1st 3 subarrays
         for i, (a0,a1,a2,a3) in enumerate(zip(acc, acc[k:], acc[2*k:], acc[3*k:])):
             if a1 - a0 > sm1:
                 sm1, idx1 = a1 - a0, i

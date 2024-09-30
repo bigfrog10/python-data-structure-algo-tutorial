@@ -35,7 +35,7 @@ def pruneTree(self, root: TreeNode) -> TreeNode:  # O(n) time and O(h) space
     return None if z else root
 
 # LC958. Check Completeness of a Binary Tree    bt complete
-def isCompleteTree(self, root: Optional[TreeNode]) -> bool:
+def isCompleteTree(self, root: Optional[TreeNode]) -> bool:  # O(N) time and space
     queue = deque([root])
     prev_node = root
     while queue:  # BFS
@@ -93,7 +93,7 @@ def boundaryOfBinaryTree(self, root: Optional[TreeNode]) -> List[int]:  # O(n) r
 def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
     nums=[]  # O(n) time, O(h) space
     def dfs(root):
-        if root==None: return None
+        if root == None: return None
         dfs(root.left)
         dfs(root.right)
         nums.append(root.val)
@@ -209,14 +209,7 @@ def validateBinaryTreeNodes(self, n: int, leftChild: List[int], rightChild: List
             if indegree[child] == 0: queue.append(child)
     return sum(indegree) == 0  # all children are processed
 
-# LC572. Subtree of Another Tree
-def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:  # O(mn)
-    def preorder(node):
-        if not node: return 'none'
-        return f'[root={node.val},l={preorder(node.left)},r={preorder(node.right)}]'
-    s1 = preorder(root)
-    s2 = preorder(subRoot)
-    return s1.find(s2) > -1
+# LC572. Subtree of Another Tree  bt subroot bt subtree
 def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:  # O(mn)
     def is_same(node1, node2):
         if not node1 or not node2: return node1 == node2
@@ -225,8 +218,15 @@ def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bo
     if not root: return False
     if is_same(root, subRoot): return True
     return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
+def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:  # O(mn)
+    def preorder(node):
+        if not node: return 'none'
+        return f'[root={node.val},l={preorder(node.left)},r={preorder(node.right)}]'
+    s1 = preorder(root)
+    s2 = preorder(subRoot)
+    return s1.find(s2) > -1
 
-# LC226. Invert Binary Tree  invert bt
+# LC226. Invert Binary Tree  bt invert bt
 def invertTree(self, root):
     if root is None: return None
     root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
@@ -293,7 +293,7 @@ def countNodes(self, root): # O((logn)^2)
 
 # LC654. Maximum Binary Tree - root is max among children     max bt
 def constructMaximumBinaryTree(self, nums: List[int]) -> Optional[TreeNode]:
-    stack = []
+    stack = []  # O(n) time and space
     for x in nums:
         n = TreeNode(x)
         while stack and x > stack[-1].val:  # mono decreasing stack
@@ -335,7 +335,7 @@ def findClosestLeaf(self, root: TreeNode, k: int) -> int:  # O(n)
                     seen.add(nei)
                     queue.append(nei)
 
-# LC863. All Nodes Distance K in Binary Tree
+# LC863. All Nodes Distance K in Binary Tree bt dist k
 def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:  # O(n) time
     adj = collections.defaultdict(list)  # create graph, O(V) space
     def dfs(node):

@@ -17,11 +17,11 @@ def minCost(self, costs: List[List[int]]) -> int:
 def minCostII(self, costs: List[List[int]]) -> int:  # O(nk) time, O(1) space
     def two_mins(values):  # values is a generator
         ai = a = bi = b = None
-        for i, x in values:
-            if ai == None or x <= a:
+        for i, x in values:  # find smallest and 2nd smallest
+            if ai == None or x < a:
                 bi, b = ai, a
                 ai, a = i, x
-            elif bi == None or x <= b:
+            elif bi == None or x < b:
                 bi, b = i, x
         return ai, a, bi, b  # a smallest, b 2nd smallest
     n, k = len(costs), len(costs[0])
@@ -32,6 +32,7 @@ def minCostII(self, costs: List[List[int]]) -> int:  # O(nk) time, O(1) space
         ai, a, bi, b = two_mins(vs)
     return a
 # https://leetcode.com/problems/paint-house-ii/solutions/2971844/python-clean-optimal-space-beats-97/
+# see approach 4 in editorial
 
 
 # 2 state recursion
@@ -69,7 +70,7 @@ def deleteAndEarn(self, nums: List[int]) -> int:  # O(n)
     if not nums: return 0
     c = collections.Counter(nums)
     m, M = min(nums), max(nums)
-    prev = curr = 0 # prev = skip current, curr = take current
+    prev = curr = 0  # prev = skip current, curr = take current
     for n in range(m, M+1):  # count sorting
         prev, curr = curr, max(prev + n*c[n], curr)
     return curr
@@ -171,5 +172,17 @@ def minDifficulty(self, jobDifficulty: List[int], d: int) -> int:  # O(nd)
     r = dp(d-1, n-1, 0)  # we use d-1 is to accommodate jidx < days condition
     return -1 if r == float('inf') else r
 
-
+# LC446. Arithmetic Slices II - Subsequence
+def numberOfArithmeticSlices(self, nums: List[int]) -> int:
+    n, ans = len(nums), 0
+    # dic[i][d]: the number of arithmetic subsequences that ends with nums[i] and diff d
+    dp = [defaultdict(int) for _ in range(n)]
+    for i in range(1, n):  # O(n^2) time and space
+        for j in range(i):
+            diff = nums[i] - nums[j]
+            dp[i][diff] += 1
+            if diff in dp[j]:
+                dp[i][diff] += dp[j][diff]  # extend j to i
+                ans += dp[j][diff]
+    return ans
 

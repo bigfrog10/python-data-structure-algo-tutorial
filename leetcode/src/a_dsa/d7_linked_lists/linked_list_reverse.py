@@ -58,7 +58,7 @@ def pairSum(self, head: Optional[ListNode]) -> int:
 
 # LC234. Palindrome Linked List  pali linked list
 def isPalindrome(self, head: Optional[ListNode]) -> bool:  # O(n) time, O(1) space
-    fast, rev = head, None # use head as slow
+    fast, rev = head, None  # use head as slow
     while fast and fast.next:  # 1, 2, 3, 2, 1    1, 2, 3, 4, 2, 1
         fast = fast.next.next
         rev, head, rev.next = head, head.next, rev

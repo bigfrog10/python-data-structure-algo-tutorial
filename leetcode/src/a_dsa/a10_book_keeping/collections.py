@@ -1,5 +1,5 @@
 
-# LC1773. Count Items Matching a Rule
+# LC1773. Count Items Matching a Rule  item match rule  rulekey rulevalue
 def countMatches(self, items: List[List[str]], ruleKey: str, ruleValue: str) -> int:
     rule = {'type' : 0, 'color' : 1, 'name' : 2}
     return sum(1 for item in items if item[rule[ruleKey]] == ruleValue)
@@ -54,9 +54,9 @@ class Cashier:
         self.product_prices = {pid: price for pid, price in zip(products, prices)}
     def getBill(self, product: List[int], amount: List[int]) -> float:
         bill = 0
-        self.num_customers += 1
         for pid, amount in zip(product, amount):
             bill += amount * self.product_prices[pid]
+        self.num_customers += 1
         if self.num_customers % self.n == 0:
             bill *= (100.0 - self.discount) / 100.0
         return bill
@@ -104,7 +104,7 @@ class RandomizedSet:
     def remove(self, val: int) -> bool:  # O(1)
         if val not in self.index: return False
         pos = self.index[val]  # index in values
-        self.index[self.values[-1]] = self.index[val]
+        self.index[self.values[-1]] = pos
         del self.index[val]  # handle index
         self.values[pos] = self.values[-1]
         self.values.pop()  # swap to last and remove
@@ -234,7 +234,7 @@ class RandomizedCollection: # 93%, fast
     def getRandom(self) -> int:
         return random.choice(self.values)
 
-# LC211. Design Add and Search Words Data Structure  word data structure
+# LC211. Design Add and Search Words Data Structure  word data structure  trie dot
 class WordDictionary:  # much faster
     def __init__(self): self.trie = {}
     def addWord(self, word: str) -> None:
@@ -242,17 +242,17 @@ class WordDictionary:  # much faster
         for ch in word: node = node.setdefault(ch, {})  # O(len(word))
         node['$'] = True  # mark end of word
     def search(self, word: str) -> bool:  # O(len(word)) if no ., otherwise, O(N * 26^M), M=len(word), N is # of keys
-        def search_in_node(word, node) -> bool: # recursion on dot
+        def find(word, node) -> bool: # recursion on dot
             for i, ch in enumerate(word):
                 if ch in node: node = node[ch]  # char found, go down
                 else:
                     if ch == '.':  # we need to check all but $
                         for x in node:
-                            if x != '$' and search_in_node(word[i + 1:], node[x]):
+                            if x != '$' and find(word[i + 1:], node[x]):
                                 return True
                     return False
             return '$' in node
-        return search_in_node(word, self.trie)
+        return find(word, self.trie)
 
 # LC2102. Sequentially Ordinal Rank Tracker
 from sortedcontainers import SortedList

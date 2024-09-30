@@ -182,3 +182,21 @@ def fourSumCount(self, A: List[int], B: List[int], C: List[int], D: List[int]) -
     ret = 0
     for i, j in itertools.product(C, D): ret += counts[-i-j]
     return ret
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -66,14 +66,14 @@ def calculate(self, s: str) -> int:  # O(n) runtime but O(1) space,
 def calculate(self, s: str) -> int:  # O(n) runtime and space
     num, op = 0, "+"
     stack = []
-    for i in range(len(s)):
-        if s[i].isdigit(): num = num * 10 + int(s[i])
-        if s[i] in "+-*/" or i == len(s) - 1:
+    for i, c in enumerate(s):
+        if c.isdigit(): num = num * 10 + int(c)
+        if c in "+-*/" or i == len(s) - 1:
             if op == "+": stack.append(num) # previous operation, not current
             elif op == "-": stack.append(-num)
             elif op == "*": stack.append(stack.pop() * num)
             else: stack.append(int(stack.pop() / num))  # use int for negative
-            num, op = 0, s[i]
+            num, op = 0, c
     return sum(stack)
 
 # LC224. Basic Calculator - with +-()

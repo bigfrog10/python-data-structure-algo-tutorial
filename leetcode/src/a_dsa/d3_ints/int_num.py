@@ -188,6 +188,19 @@ def kMirror(self, k: int, n: int) -> int:
         digits += 1
 
 # LC313. Super Ugly Number
+def nthSuperUglyNumber(self, n: int, primes: List[int]) -> int:
+    next_ugly = primes[:]  # same as ugly ii
+    increase = [1] * len(primes)
+    arr = [1]
+    for _ in range(1, n):
+        smallest = min(next_ugly)
+        arr.append(smallest)
+        for i in range(len(primes)):
+            if next_ugly[i] == smallest:
+                increase[i] += 1
+                next_ugly[i] = primes[i] * arr[increase[i] - 1]
+    print(arr)
+    return arr[-1]
 def nthSuperUglyNumber(self, n, primes):
     uglies = [1]
     merged = heapq.merge(*map(lambda p: (u*p for u in uglies), primes))
@@ -253,14 +266,13 @@ def fractionToDecimal(self, n, d): # 32ms, beats 100%
 
 # LC556. Next Greater Element III - almost same as next permutation
 def nextGreaterElement(self, n: int) -> int:
-    digits = list(str(n))
-    i = len(digits) - 1
-    while i-1 >= 0 and digits[i] <= digits[i-1]: i -= 1  # find first downward
-    if i == 0: return -1  # if no downward, return -1
-    j = i  # next find smallest larger
-    while j+1 < len(digits) and digits[j+1] > digits[i-1]: j += 1
-    digits[i-1], digits[j] = digits[j], digits[i-1]  # swap
-    digits[i:] = digits[i:][::-1]  # reverse
+    digits = list(str(n))  # same as next permutation
+    m = len(digits)
+    idx = next((i-1 for i in range(m)[::-1] if digits[i-1] < digits[i]), -1)
+    if idx == -1: return -1  # if no downward, return -1
+    idx1 = next((j-1 for j in range(idx+1, m) if digits[j] <= digits[idx]), m-1)
+    digits[idx], digits[idx1] = digits[idx1], digits[idx]  # swap
+    digits[idx+1:] = digits[idx+1:][::-1]  # reverse
     ret = int(''.join(digits))
     return ret if ret < 1 << 31 else -1
 
@@ -386,8 +398,8 @@ def nthUglyNumber(self, num: int) -> int:  # O(n) time and space
         if len(arr) == num: break
         for i in range(3):
             if next_ugly[i] == smallest:
+                next_ugly[i] = primes[i] * arr[increase[i]]
                 increase[i] += 1
-                next_ugly[i] = primes[i] * arr[increase[i] - 1]
     return arr[-1]
 # https://leetcode.com/problems/ugly-number-ii/solutions/5652689/easy-heap-dp-solution-beats-100/
 

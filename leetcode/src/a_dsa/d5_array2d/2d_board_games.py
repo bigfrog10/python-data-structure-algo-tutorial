@@ -21,52 +21,50 @@ def findPaths(self, m: int, n: int, maxMove: int, startRow: int, startColumn: in
         return 0  # if c=0, return 0
     return f(startRow, startColumn, maxMove)
 
-# LC2596. Check Knight Tour Configuration
+# LC2596. Check Knight Tour Configuration knight move  knight conf
 def checkValidGrid(self, grid: List[List[int]]) -> bool:
-    n = len(grid)   # O(n^2) time space
+    n = len(grid)  # O(n^2) time space
     arr = [None] * (n*n)
     for row in range(n):
         for col in range(n): arr[grid[row][col]] = (row, col)
-    pos = arr[0]
-    if pos != (0, 0): return False
+    if arr[0] != (0, 0): return False
     for i in range(1, n*n):
-        a = abs(pos[0] - arr[i][0])
-        b = abs(pos[1] - arr[i][1])
-        if a == 1 and b == 2 or a == 2 and b == 1: pos = arr[i]
-        else: return False
+        a = abs(arr[i][0] - arr[i-1][0])
+        b = abs(arr[i][1] - arr[i-1][1])
+        if not(a == 1 and b == 2 or a == 2 and b == 1): return False
     return True
 
 # 1778. Shortest Path in a Hidden Grid
 def findShortestPath(self, master: 'GridMaster') -> int:  # O(cells) time and space
-    can_move = set() # need to build graph first, for bfs. Otherwise TLE.
-    directions = {'U':(0, -1, 'D'), 'D':(0, 1, 'U'), 'L':(-1, 0, 'R'), 'R':(1, 0, 'L')}
+    moved = set() # need to build graph first, for bfs. Otherwise TLE.
+    dirs = {'U':(0, -1, 'D'), 'D':(0, 1, 'U'), 'L':(-1, 0, 'R'), 'R':(1, 0, 'L')}
     target = None
-    def build_graph(x, y):
+    def explore(x, y):
         if master.isTarget():
             nonlocal target
             target = (x, y)
             return
-        can_move.add((x, y))
-        for direction in directions:
-            dx, dy, revert_direction = directions[direction]
+        moved.add((x, y))
+        for d in dirs:
+            dx, dy, rdir = dirs[d]
             nx, ny = x + dx, y + dy
-            if (nx, ny) not in can_move and master.canMove(direction):
-                master.move(direction)
-                build_graph(nx, ny)
-                master.move(revert_direction)
-    build_graph(0, 0)
+            if (nx, ny) not in moved and master.canMove(d):
+                master.move(d)
+                explore(nx, ny)
+                master.move(rdir)
+    explore(0, 0)
     if target is None: return -1
     queue, level = [(0, 0)], 0 # bfs
     visited = set(queue)
     while queue:
         level += 1
-        next_queue, queue = queue, []
-        for x, y in next_queue:
-            for next_node in [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]:
-                if next_node == target: return level
-                if next_node not in can_move or next_node in visited: continue
-                visited.add(next_node)
-                queue.append(next_node)
+        nq, queue = queue, []
+        for x, y in nq:
+            for loc in [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]:
+                if loc == target: return level
+                if loc not in moved or loc in visited: continue
+                visited.add(loc)
+                queue.append(loc)
     return -1
 
 

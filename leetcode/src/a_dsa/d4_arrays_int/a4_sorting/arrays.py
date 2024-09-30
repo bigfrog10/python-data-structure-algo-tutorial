@@ -133,13 +133,11 @@ def numFriendRequests(self, ages: List[int]) -> int:  # O(n), prefix sum problem
 
 # LC163. Missing Ranges
 def findMissingRanges(self, nums: List[int], lower: int, upper: int) -> List[str]:  # O(n), O(1)
-    res = []
-    prev = lower - 1
-    for i in range(len(nums) + 1):
-        curr = nums[i] if i < len(nums) else upper + 1
-        if prev + 1 <= curr - 1: # there is a gap
-            res.append([prev + 1, curr - 1])
-        prev = curr
+    res=[]
+    for a in nums+[upper+1]:
+        if a > lower:
+            res.append([lower, a-1])
+        lower = a+1
     return res
 
 # LC1636. Sort Array by Increasing Frequency
@@ -197,22 +195,23 @@ def getKth(self, lo: int, hi: int, k: int) -> int:
     return ans[1]
 
 # LC1439. Find the Kth Smallest Sum of a Matrix With Sorted Rows
-def kthSmallest(self, mat: List[List[int]], k: int) -> int: # 300ms
-    def function(nums1,nums2):  # combine 2 rows
-        stack, visited, res = [(nums1[0]+nums2[0],0,0)], set(), []
+def kthSmallest(self, mat: List[List[int]], k: int) -> int:  # O(nklogk) time
+    def select(nums1,nums2):
+        res, visited = [], set()
+        stack = [(nums1[0] + nums2[0], 0, 0)]
         while stack:
             total, i, j = heapq.heappop(stack)
             res.append(total)
             if len(res) == k: break
-            if i+1 < len(nums1) and (i+1,j) not in visited:
+            if i+1 < len(nums1) and (i+1, j) not in visited:
                 heapq.heappush(stack, (nums1[i+1] + nums2[j], i+1, j))
-                visited.add((i+1,j))
+                visited.add((i+1, j))
             if j+1 < len(nums2) and (i,j+1) not in visited:
                 heapq.heappush(stack, (nums1[i] + nums2[j+1], i, j+1))
-                visited.add((i,j+1))
+                visited.add((i, j+1))
         return res
     result = mat[0]
-    for row in mat[1:]: result = function(result, row)
+    for row in mat[1:]: result = select(result, row)
     return result[-1]
 
 # LC969. Pancake Sorting
@@ -258,3 +257,20 @@ def findLeastNumOfUniqueInts(self, arr: List[int], k: int) -> int:
     return len(counts) - len(removals)
 
 # Merge 3 sorted arrays and remove duplicates
+def merge(arr1, arr2, arr3):
+    import math
+    res = []
+    i = j = k = 0
+    while i < len(arr1) or j < len(arr2) or k < len(arr3):
+        a = arr1[i] if i < len(arr1) else math.inf
+        b = arr2[j] if j < len(arr2) else math.inf
+        c = arr3[k] if k < len(arr3) else math.inf
+        mn = min(a, b, c)
+        if not res or res[-1] != mn: res.append(mn)
+        while i < len(arr1) and arr1[i] == mn: i += 1
+        while j < len(arr2) and arr2[j] == mn: j += 1
+        while k < len(arr3) and arr3[k] == mn: k += 1
+    return res
+
+print(merge([1, 3], [2, 4], [1, 5]))
+print(merge([1, 3], [2, 3, 4], [1, 2, 3, 4, 5]))
