@@ -71,7 +71,7 @@ def searchRange1(self, nums: List[int], target: int) -> List[int]:
     right = bisect.bisect(nums, target)  # the index right after target
     return [left, right - 1]
 
-# LC540. Single Element in a Sorted Array - of double elements, find it in log time single elem sorted
+# LC540. Single Element in a Sorted Array - of double elements, find it in log time single elem sorted single sorted
 def singleNonDuplicate(self, nums: List[int]) -> int:  # simplest and fast
     lo, hi = 0, len(nums) - 1
     while lo < hi:

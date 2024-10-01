@@ -63,14 +63,14 @@ def divide(self, A, B):  # logn
 
 # LC43. Multiply Strings  string time string
 def multiply(self, num1, num2):  # O(mn)
-    res = [0]* (len(num1) + len(num2))
+    res = [0] * (len(num1) + len(num2))
     for i, e1 in enumerate(reversed(num1)):
         for j, e2 in enumerate(reversed(num2)):
             res[i+j] += int(e1) * int(e2)  # multiply
             res[i+j+1] += res[i+j] // 10  # move carry to next
             res[i+j] %= 10   # remove carry from current
     while len(res) > 1 and res[-1] == 0: res.pop()  # if not used
-    return ''.join( map(str,res[::-1]) )
+    return ''.join( map(str, res[::-1]) )
 def multiply(self, num1, num2):
     if num1 == '0' or num2 == '0': return '0'
     x, y = int(num1), int(num2)

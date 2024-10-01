@@ -148,17 +148,17 @@ def printLinkedListInReverse(self, head: 'ImmutableListNode') -> None:  # O(n) r
 
 # LC2. Add Two Numbers - link list reverse order  add 2 number
 def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-    result = result_tail = ListNode(0)
+    heat = res = ListNode(0)
     carry = 0
     while l1 or l2 or carry:  # pattern
         val1 = (l1.val if l1 else 0)  # pattern
         val2 = (l2.val if l2 else 0)  # pattern
         carry, out = divmod(val1 + val2 + carry, 10)  # pattern
-        result_tail.next = ListNode(out)
-        result_tail = result_tail.next
+        res.next = ListNode(out)
+        res = res.next
         l1 = l1.next if l1 else None  # pattern
         l2 = l2.next if l2 else None  # pattern
-    return result.next
+    return heat.next
 
 # LC445. Add Two Numbers II
 def addTwoNumbers(self, l1, l2):

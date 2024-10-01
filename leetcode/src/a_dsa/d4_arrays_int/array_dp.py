@@ -11,3 +11,4 @@ def stoneGameII(self, piles):
             if score < min_score: min_score = score  # keep rival's minimal
         return a[i] - min_score  # keep us maximal
     return game(0, 1)
+

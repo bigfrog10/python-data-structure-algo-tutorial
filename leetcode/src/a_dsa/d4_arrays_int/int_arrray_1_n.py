@@ -9,7 +9,7 @@ def buildArray(self, nums: List[int]) -> List[int]:  # O(1) space
         nums[i] //= q
     return nums
 
-# LC442. Find All Duplicates in an Array  dupes in array  dupe in array >1 dupes  all dupe
+# LC442. Find All Duplicates in an Array  dupes in array  dupe in array >1 dupes  all dupe twice array
 def findDuplicates(self, nums: List[int]) -> List[int]:  # run it again to restore
     ans = []
     for num in nums:
@@ -77,10 +77,10 @@ def findDuplicate(self, nums):  # O(1) space and O(n) time, Floyd's Tortoise and
 def numIdenticalPairs(self, nums: List[int]) -> int:
     return sum([math.comb(n, 2) for n in collections.Counter(nums).values()])
 
-# LC368. Largest Divisible Subset  largest subset divisible
+# LC368. Largest Divisible Subset  largest subset divisible subset
 def largestDivisibleSubset(self, nums: List[int]) -> List[int]:
     nums.sort()  # O(n^2) time and O(n) space
-    ans=[ [num] for num in nums]
+    ans = [ [num] for num in nums]
     # if a divides all number in the set, then a's factor can be added
     # if h can be divided by the largest in the set, h can be added.
     for i in range(len(nums)):

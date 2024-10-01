@@ -60,7 +60,7 @@ def isInterleave(self, s1: str, s2: str, s3: str) -> bool:  # O(nm) time and spa
         return ans
     return dp(0, 0)
 
-# LC796. Rotate String
+# LC796. Rotate String shift string rotate
 def rotateString(self, A: str, B: str) -> bool:  # O(n^2)
     return len(A) == len(B) and B in A + A
     # find b in A+A can be done in O(n)
@@ -103,7 +103,7 @@ def simplifyPath(self, path: str) -> str:  # O(n) runtime and space
         else: stack.append(folder)
     return '/' + '/'.join(stack)
 
-# LC389. Find the Difference    string add random char
+# LC389. Find the Difference    string add random char string diff
 def findTheDifference(self, s: str, t: str) -> str:  # O(n) time and O(1) space
     c = 0
     for cs in s: c ^= ord(cs) #ord is ASCII value
@@ -145,7 +145,7 @@ def reorganizeString(self, s: str) -> str:
         for j in range(c):
             res[i] = k
             i += 2
-            if i >= n: i = 1 # revert back to index 1 to fill odd
+            if i >= n: i = 1  # revert back to index 1 to fill odd
     return ''.join(res)
 
 # LC1055. Shortest Way to Form String

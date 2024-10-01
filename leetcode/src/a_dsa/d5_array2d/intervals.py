@@ -1,6 +1,17 @@
 from typing import List
 import heapq
 
+# LC646. Maximum Length of Pair Chain
+def findLongestChain(self, pairs: List[List[int]]) -> int:
+    # greedy on finish time so we could squeeze more intervals to get max number of intervals
+    pairs.sort(key=lambda x: x[1]) #
+    count, curr = 0, float('-inf')
+    for left, right in pairs:
+        if curr < left:
+            curr = right
+            count += 1
+    return count
+
 # LC798. Smallest Rotation with Highest Score - digit rotation small
 def bestRotation(self, nums: List[int]) -> int:  # O(n) time and space
     N = len(nums)
@@ -24,9 +35,9 @@ def bestRotation(self, nums: List[int]) -> int:  # O(n) time and space
 def merge(self, intervals: List[List[int]]) -> List[List[int]]:
     intervals.sort(key=lambda x: x[0])  # O(nlogn)
     merged = []
-    for interval in intervals:
-        if not merged or merged[-1][1] < interval[0]: merged.append(interval)  # no overlap
-        else: merged[-1][1] = max(merged[-1][1], interval[1])
+    for intv in intervals:
+        if not merged or merged[-1][1] < intv[0]: merged.append(intv)  # no overlap
+        else: merged[-1][1] = max(merged[-1][1], intv[1])
     return merged
 
 # LC1024. Video Stitching - greedy

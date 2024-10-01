@@ -133,27 +133,13 @@ def threeSumSmaller(self, nums: List[int], target: int) -> int:  # O(n^2)
     return counts
 
 # LC18. 4Sum - return all quadruplets sum to target
-def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
-    pairs = collections.defaultdict(list)  # O(n^3) time and O(n^2) space
-    for i in range(len(nums)):
-        for j in range(i+1, len(nums)):
-            pairs[nums[i]+nums[j]].append((i, j))
-    res = set()
-    for s, ps in pairs.items():  # 3 loops here, so O(n^3)
-        for a, b in ps:
-            if target - s in pairs:
-                for k,v in pairs[target-s]:
-                    if a != k and a != v and b != k and b != v:
-                        ans = sorted([nums[i] for i in [a,b,k,v]])
-                        res.add(tuple(ans))
-    return res
 def fourSum(self, nums: List[int], target: int) -> List[List[int]]:  # O(n^(k-1)) k = 4 time, O(n^2) space
     def kSum(nums: List[int], target: int, k: int) -> List[List[int]]:
         res = []  # O(n^(k-1)) time, O(n^2) space in n recursive calls, each has O(n)
         if not nums: return res
+        if k == 2: return twoSum(nums, target)
         average_value = target // k  # works without this, but faster
         if average_value < nums[0] or nums[-1] < average_value: return res
-        if k == 2: return twoSum(nums, target)
         for i in range(len(nums)):
             if i and nums[i - 1] == nums[i]: continue  # to avoid dupes
             for subset in kSum(nums[i + 1:], target - nums[i], k - 1):  # we have k-2 n-loops
@@ -171,9 +157,24 @@ def fourSum(self, nums: List[int], target: int) -> List[List[int]]:  # O(n^(k-1)
             else:
                 res.append([nums[lo], nums[hi]])
                 lo, hi = lo + 1, hi - 1
+                # [-3,-2,-1,0,0,1,2,3] has [-3,0,0,3] and [-3,0,1,2]
         return res
     nums.sort()
     return kSum(nums, target, 4)
+def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+    pairs = collections.defaultdict(list)  # O(n^3) time and O(n^2) space
+    for i in range(len(nums)):
+        for j in range(i+1, len(nums)):
+            pairs[nums[i]+nums[j]].append((i, j))
+    res = set()
+    for s, ps in pairs.items():  # 3 loops here, so O(n^3)
+        for a, b in ps:
+            if target - s in pairs:
+                for k,v in pairs[target-s]:
+                    if a != k and a != v and b != k and b != v:
+                        ans = sorted([nums[i] for i in [a,b,k,v]])
+                        res.add(tuple(ans))
+    return res
 
 # LC454. 4Sum II - number of ways to add to target
 def fourSumCount(self, A: List[int], B: List[int], C: List[int], D: List[int]) -> int:

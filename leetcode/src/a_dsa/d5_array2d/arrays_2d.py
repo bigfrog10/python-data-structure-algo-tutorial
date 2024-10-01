@@ -267,6 +267,9 @@ def canFormArray(self, arr: List[int], pieces: List[List[int]]) -> bool:  # nlog
     return True
 
 # LC223. Rectangle Area - intersection of 2 rectangles  rect area
+def computeArea(self, ax1: int, ay1: int, ax2: int, ay2: int, bx1: int, by1: int, bx2: int, by2: int) -> int:
+    overlap = max(min(ax2, bx2) - max(ax1, bx1), 0) * max(min(ay2, by2) - max(ay1, by1), 0)
+    return (ax1 - ax2) * (ay1 - ay2) + (bx1 - bx2) * (by1 - by2) - overlap
 def computeArea(self, A, B, C, D, E, F, G, H):  # AB lower left, CD upper right
     # overlap lower left is [max(A, E), max(B, F)], upper right is [min(C, G), min(D, H)]
     overlap = max(min(C,G) - max(A,E), 0) * max(min(D,H) - max(B,F), 0)

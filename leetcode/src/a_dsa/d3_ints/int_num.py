@@ -53,7 +53,7 @@ def isPowerOfTwo(self, n: int) -> bool:
 
 # LC279. Perfect Squares - min squares sum to n
 def numSquares(self, n):  # O(n * sqrt(n)
-    square_nums = [i * i for i in range(1, int(n**0.5)+1)]  # O(sqrt(n)) space and runtime
+    square_nums = [i * i for i in range(1, int(n**0.5)+1)]  # O(sqrt(n)) space
     queue, level = {n}, 0
     while queue:  # BFS
         level += 1
@@ -491,7 +491,7 @@ def integerBreak(self, n: int) -> int:
     if n % 3 == 0: return 3**(n//3)
     if n % 3 == 1: return 3**(n//3 - 1) * 4
     if n % 3 == 2: return 3**(n//3) * 2
-# p ^ 3 < 3 ^ p
+# p ^ 3 < 3 ^ p for p > 3
 
 # LC1025. Divisor Game # BBG
 def divisorGame(self, N: int) -> bool:

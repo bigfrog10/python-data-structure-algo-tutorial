@@ -81,7 +81,7 @@ def solveSudoku(self, board): # fast, since no n so O(1)
         if not empties: return True
         r, c = empties.popleft()
         t = (r // 3, c // 3)
-        for dig in {"1", "2", "3", "4", "5", "6", "7", "8", "9"}:
+        for dig in "123456789":
             if dig not in rows[r] and dig not in cols[c] and dig not in triples[t]:
                 board[r][c] = dig
                 rows[r].add(dig)

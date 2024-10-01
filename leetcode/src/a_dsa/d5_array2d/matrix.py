@@ -4,7 +4,7 @@ import itertools
 # LC48. Rotate Image
 def rotate(self, A):
     A[:] = zip(*A[::-1])
-def rotate(self, matrix: List[List[int]]) -> None:
+def rotate(self, matrix: List[List[int]]) -> None:  # O(n^2)
     n = len(matrix)
     for i in range(n//2): matrix[i], matrix[~i] = matrix[~i], matrix[i]
     for i,j in itertools.combinations(range(n), 2):  # flip around diagonal
@@ -256,7 +256,7 @@ def numSubmatrixSumTarget(self, A, target):
 
 
 
-# LC542. 01 Matrix - distance to 0
+# LC542. 01 Matrix - distance to near 0
 def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:  # O(rc)
     m, n = len(mat), len(mat[0])
     for r in range(m):
@@ -420,13 +420,13 @@ def spiralOrder(self, matrix):  # O(mn) time
         matrix = [*zip(*matrix)][::-1]
     return res
 # [[1,2,3],[4,5,6],[7,8,9]] ->  [(6, 9), (5, 8), (4, 7)] ->  [(8, 7), (5, 4)] -> [(4,), (5,)] -> [(5,)]
-def spiralOrder(self, matrix):
+def spiralOrder(self, matrix):  # O(mn) time, O(1) space
     result = []
-    while matrix and matrix[0]:
+    while matrix:
         if matrix[0]: result += matrix.pop(0)  # pop 1st row
         if matrix and matrix[0]:  # pop last element
             for row in matrix: result.append(row.pop())
-        if matrix: # pop last row
+        if matrix:  # pop last row
             result += matrix.pop()[::-1]
         if matrix and matrix[0]:  # pop 1st cell in each row reverse
             for row in matrix[::-1]: result.append(row.pop(0))

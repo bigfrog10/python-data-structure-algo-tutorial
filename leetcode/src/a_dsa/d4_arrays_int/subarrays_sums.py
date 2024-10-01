@@ -133,8 +133,6 @@ def splitArray(self, nums): # O(n^2)
 
     return any(split(nums[:j]) & split(nums[j+1:]) for j in range(3, len(nums)-3))
 
-
-
 # LC643. Maximum Average Subarray I - max window average  max avg subarray
 def findMaxAverage(self, nums: List[int], k: int) -> float:
     best = window = sum(nums[:k])

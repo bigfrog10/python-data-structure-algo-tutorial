@@ -564,7 +564,7 @@ def singleNumber(self, nums: List[int]) -> int:
                                                       # [1, 0], 0th bit 1 seen odd times
     return seen_once  # [2, 2, 3, 2] -> [2, 0], [0, 2], [1, 0], [3, 0] -> 3
 
-# LC217. Contains Duplicate  appear dupe
+# LC217. Contains Duplicate  appear dupe contains dupe contain dupe
 def containsDuplicate(self, nums: List[int]) -> bool:
     showed = set()
     for i in nums:
@@ -625,7 +625,7 @@ def unhappyFriends(self, n: int, preferences: List[List[int]], pairs: List[List[
                 break
     return res
 
-# LC315. Count of Smaller Numbers After Self  smaller after me
+# LC315. Count of Smaller Numbers After Self  smaller after me smaller element to right
 def countSmaller(self, nums: List[int]) -> List[int]:
     from sortedcontainers import SortedList  # AVL tree implementation or red black tree
     n = len(nums)
@@ -677,7 +677,7 @@ def reversePairs(self, nums: List[int]) -> int:  # O(nlogn)
         arr.add(2*nums[i])
     return count
 
-# LC1470. Shuffle the Array - merge alternatively
+# LC1470. Shuffle the Array - merge alternatively  shuffle array
 def shuffle(self, nums: List[int], n: int) -> List[int]:
     res = [0] * (2*n)
     res[::2] = nums[:n]
@@ -717,3 +717,44 @@ def minCost(self, s: str, cost: List[int]) -> int:
         res += min(max_cost, cost[i]) # add min first, then update max next line
         max_cost = max(max_cost, cost[i]) # this ensures max is not added
     return res
+
+# LC1802. Maximum Value at a Given Index in a Bounded Array
+def maxValue(self, n: int, index: int, maxSum: int) -> int:
+    maxSum -= n  # this is the trick!!! get rid of 1s paddings
+    l, r = 0, maxSum
+    while l <= r:
+        m = (l + r) // 2
+        s = max(0, m - index - 1)
+        e = max(0, m - n + index)
+        # height of m triangles - left/right corner triangles
+        # these 2 corners are formed by boundaries
+        if m * m - s * (s + 1) // 2 - e * (e + 1) // 2 <= maxSum: l = m + 1
+        else: r = m - 1
+    return r + 1
+# https://leetcode.com/problems/maximum-value-at-a-given-index-in-a-bounded-array/solutions/3643443/python-binary-search-well-explained-deep-explanation-i-passed-hours-to-fully-understand/?envType=company&envId=apple&favoriteSlug=apple-more-than-six-months
+# https://leetcode.com/problems/maximum-value-at-a-given-index-in-a-bounded-array/?envType=company&envId=apple&favoriteSlug=apple-more-than-six-months
+
+# LC1732. Find the Highest Altitude
+def largestAltitude(self, gain: List[int]) -> int:
+    h = 0
+    mh = 0 # this is wrong, should -inf
+    for g in gain:
+        h += g
+        mh = max(mh, h)
+    return mh
+
+# LC1232. Check If It Is a Straight Line
+def checkStraightLine(self, coordinates: List[List[int]]) -> bool:
+    (x1, y1), (x2, y2) = coordinates[0], coordinates[1]
+    dy, dx = y2 - y1, x2 - x1
+    for x3, y3 in coordinates[2:]:
+        if dy * (x3 - x1) != (y3 - y1) * dx: return False
+    return True
+
+
+
+
+
+
+
+

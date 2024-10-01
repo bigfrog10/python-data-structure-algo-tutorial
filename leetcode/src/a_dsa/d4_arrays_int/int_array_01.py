@@ -145,7 +145,7 @@ def arrayNesting(self, nums: List[int]) -> int: # O(n) tinme and O(1) space
         if res > len(nums): return res # works without this too, optimization
     return res
 
-# LC1913. Maximum Product Difference Between Two Pairs  diff 2 pairs
+# LC1913. Maximum Product Difference Between Two Pairs  diff 2 pairs  prod diff
 def maxProductDifference(self, nums: List[int]) -> int:
     big1 = big2 = 0  # avoid sorting, so this is O(n)
     small1 = small2 = inf
@@ -168,7 +168,7 @@ def minimizeArrayValue(self, nums: List[int]) -> int:
     return maxm
     # https://leetcode.com/problems/minimize-maximum-of-array/solutions/2706521/JavaC++Python-Prefix-Sum-Average-O(n)/
 
-# LC413. Arithmetic Slices
+# LC413. Arithmetic Slices  number of subarrays
 def numberOfArithmeticSlices(self, nums: List[int]) -> int:
     ans = count = 0
     for i in range(2, len(nums)):

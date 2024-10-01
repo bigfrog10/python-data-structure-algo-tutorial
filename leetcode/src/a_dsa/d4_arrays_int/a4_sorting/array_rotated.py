@@ -68,3 +68,4 @@ def findMin(self, nums: List[int]) -> int:  # O(n)
         else: end -= 1  # have to go slowly since min could be between
         # the 'low' and 'high' index converge to the inflection point.
     return nums[start]
+

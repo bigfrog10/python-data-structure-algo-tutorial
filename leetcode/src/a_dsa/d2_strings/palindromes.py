@@ -50,7 +50,7 @@ def longestPalindrome(self, s: str) -> str:  # O(n) time and space, Manacher's A
     for i in range(n):
         if i < right:  # cache this info, so while loop below can be skipped.
             dp[i] = min(right-i, dp[2*center-i])  # 2*center-i is mirror of i around center
-        while i-dp[i]-1 >= 0 and i+dp[i]+1 < len(s) and s[i-dp[i]-1] == s[i+dp[i]+1]:
+        while i-dp[i]-1 >= 0 and i+dp[i]+1 < n and s[i-dp[i]-1] == s[i+dp[i]+1]:
             dp[i] += 1  # expand the radius, i+ dp[i] + 1 < n -> 2 loops < O(n)
         if i+dp[i] > right:  # update
             center, right = i, i+dp[i]  # push right further to the right

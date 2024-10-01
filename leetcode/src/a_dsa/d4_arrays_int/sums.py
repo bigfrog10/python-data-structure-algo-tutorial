@@ -36,7 +36,7 @@ def combinationSum(self, candidates, target):  # fastest
             return
         elif remain < 0: return
         for item in candidates:
-            if item > remain: break
+            if item > remain: return
             if stack and item < stack[-1]: continue  # smallers are done already.
             else: dfs(remain - item, stack + [item])
     dfs(target, [])
@@ -45,20 +45,20 @@ def combinationSum(self, candidates, target):  # fastest
 
 # LC40. Combination Sum II - could have dupes and use only once  combo sum 2 combo sum ii
 def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
-    result = [] # O(2^n)
-    def combine_sum_2(start, path, target):
+    c = candidates
+    c.sort()
+    result = []  # O(2^n)
+    def comb(start, path, target):
         if not target:
             result.append(path)
             return
-        for i in range(start, len(candidates)):
-            # ignore duplicates
-            if i > start and candidates[i] == candidates[i - 1]: continue
-            if candidates[i] > target: break # so sum > target, not a solution
-            if path and candidates[i] < path[-1]: continue
+        for i in range(start, len(c)):
+            if c[i] > target: break # so every coin > target
+            if i > start and c[i] == c[i - 1]: continue  # ignore duplicates
+            if path and c[i] < path[-1]: continue  # smaller are dealt already
             # we used i here, so next search starting from i+1
-            combine_sum_2(i + 1, path + [candidates[i]], target - candidates[i])
-    candidates.sort()
-    combine_sum_2(0, [], target)
+            comb(i + 1, path + [c[i]], target - c[i])
+    comb(0, [], target)
     return result
 
 # LC377. Combination Sum IV - return number of combinations
@@ -92,14 +92,14 @@ def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
         return False
     return dfs(0)
 
-# LC713. Subarray Product Less Than K - return # of such subarrays  prod < k
+# LC713. Subarray Product Less Than K - return # of such subarrays  prod < k prod less than
 def numSubarrayProductLessThanK(self, nums: List[int], k: int) -> int:
     if k <= 1: return 0 # nums are positive, so there is no solution
     prod = 1  # watch out for k=0 and k=1, array [0, 1], [1, 1]
     ans = left = 0
     for right, val in enumerate(nums):
         prod *= val
-        while prod >= k and left < right:
+        while prod >= k:
             prod //= nums[left]
             left += 1
         if prod < k: ans += right - left + 1  # all subarrasy ends at nums[right]

@@ -94,3 +94,20 @@ def findMinDifference(self, timePoints: List[str]) -> int:
         prev=i
     ans = min(ans, day - (prev - first))  # to deal with circular, last - first
     return ans
+
+# LC682. Baseball Game
+def calPoints(self, ops: List[str]) -> int:
+    if not ops: return 0
+    stack = []
+    for e in ops:
+        if e.isnumeric():
+            stack.append(int(e))
+        elif e.startswith('-') and e[1:].isnumeric():
+            stack.append(-int(e[1:]))
+        elif e == 'C':
+            stack.pop()
+        elif e == 'D':
+            stack.append(stack[-1] * 2)
+        elif e == '+':
+            stack.append(stack[-1] + stack[-2])
+    return sum(stack)

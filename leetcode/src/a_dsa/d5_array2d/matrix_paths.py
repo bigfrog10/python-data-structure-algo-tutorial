@@ -143,9 +143,9 @@ def minPushBox(self, grid: List[List[str]]) -> int:  # faster BFS, O((mn)^2)
 
 
 # LC329. Longest Increasing Path in a Matrix  long incr paths long inc path  long incr path matrix lip
-import functools # 100%
+import functools
 def longestIncreasingPath(self, matrix):
-    if not matrix or not matrix[0]: return 0  # O(mn) time space
+    if not matrix or not matrix[0]: return 0  # O(mn) space, O(3^n) time
     M, N = len(matrix), len(matrix[0])
     @functools.lru_cache(maxsize=None)
     def dfs(i, j):
