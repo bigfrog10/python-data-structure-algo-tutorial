@@ -86,8 +86,7 @@ def countSubstrings(self, s: str) -> int:  # O(n^2)
         cnt = 0
         while i >= 0 and j < len(s) and s[i] == s[j]:
             cnt += 1
-            i -= 1
-            j += 1
+            i, j = i-1, j+1  # expand, not shrink
         return cnt
     total = 0
     for i in range(len(s)):  # O(n) for the loop

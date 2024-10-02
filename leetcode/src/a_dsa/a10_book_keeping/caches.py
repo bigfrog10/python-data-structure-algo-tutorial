@@ -54,7 +54,7 @@ class LFUCache:
         self.f2kv[1][key] = value
         self.minf = 1
 
-# LC432. All O`one Data Structure - we need 2 markers, minf and max, string counters
+# LC432. All O`one Data Structure - all one allone  oone o one
 class Node(object):
     def __init__(self, val, prev=None, next=None):
         self.val = val # counter
@@ -72,7 +72,7 @@ class AllOne: # O(1) for all ops
         cur = self.key2node[key] # get curr count, key to freq
         cur.keys.discard(key)
         if cur.val + 1 == cur.next.val: new = cur.next
-        else:
+        else:  # create a new node for new frequency
             new = Node(cur.val + 1, cur, cur.next)
             new.prev.next = new.next.prev = new
         new.keys.add(key)
@@ -99,3 +99,5 @@ class AllOne: # O(1) for all ops
     def getMinKey(self) -> str:
         if not self.head.next.val: return ''
         return next(iter(self.head.next.keys))
+
+

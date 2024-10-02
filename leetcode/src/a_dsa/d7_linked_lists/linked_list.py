@@ -236,7 +236,7 @@ def rotateRight(self, head: ListNode, k: int) -> ListNode:
     last.next = None  # set new tail to None
     return dummy
 
-# LC725. Split Linked List in Parts
+# LC725. Split Linked List in Parts  partition linked list
 def splitListToParts(self, head: Optional[ListNode], k: int) -> List[Optional[ListNode]]:
     curr, count = head, 0  # O(n) time, O(1) space
     while curr:  # find list length
@@ -246,9 +246,9 @@ def splitListToParts(self, head: Optional[ListNode], k: int) -> List[Optional[Li
     curr, result = head, []  # break into parts
     for i in range(k):  # [1,2,3,4,5]  k=3
         part_head = curr
-        for j in range(size - 1 + (i < tail)):
+        for _ in range(size - 1 + (i < tail)):
             if curr: curr = curr.next  # at end, curr = [2,3,4,5]
-        if curr:  # cut tail
+        if curr:  # cut tail on size + 1
             curr.next, curr = None, curr.next  # now curr = [3,4,5]
         result.append(part_head)  # part_head = [1,2]
     return result

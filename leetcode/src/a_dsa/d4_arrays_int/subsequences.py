@@ -22,7 +22,7 @@ def longestSubsequenceRepeatedK(self, s: str, k: int) -> str:
     return res
 # https://leetcode.com/problems/longest-subsequence-repeated-k-times/solutions/1471930/python-answer-is-not-so-long-explained/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
 
-# LC673. Number of Longest Increasing Subsequence  LIS number
+# LC673. Number of Longest Increasing Subsequence  number LIS number
 def findNumberOfLIS(self, nums: List[int]) -> int:
     if not nums: return 0  # O(n^2) time and O(n) space
     n = len(nums)
@@ -53,7 +53,7 @@ def maximumLength(self, nums: List[int], k: int) -> int:
         res = max(res, max(dp))
     return res
 
-# LC416. Partition Equal Subset Sum  - Knapsack  partition sub partition sum
+# LC416. Partition Equal Subset Sum  - Knapsack  partition sub partition sum  subset equal sum
 def canPartition(self, nums: List[int]) -> bool:  # sequence, not continuous subset
     n, total = len(nums), sum(nums)  # O(n * total)
     if total % 2 != 0: return False

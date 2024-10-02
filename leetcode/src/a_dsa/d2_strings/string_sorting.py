@@ -97,7 +97,7 @@ def alienOrder(self, words: List[str]) -> str:  # O(total word lengths)
         for d in adj_list[c]:
             in_degree[d] -= 1
             if in_degree[d] == 0: queue.append(d)
-    if len(output) < len(in_degree): return ""  # cyclic ordering
+    if len(output) < len(in_degree): return ""  # cyclic ordering ["z","x","a","zb","zx"]
     return "".join(output)
 def alienOrder(self, words: List[str]) -> str:  # O(total word lengths)
     graph = defaultdict(list) # {c: [] for c in chars}

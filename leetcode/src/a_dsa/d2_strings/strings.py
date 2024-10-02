@@ -354,7 +354,7 @@ def minDistance(self, word1: str, word2: str) -> int:  # O(mn) time and space
         if j == 0: return i  # Need to delete i chars
         if word1[i-1] == word2[j-1]: return lev(i-1, j-1)
         # delete, insert, replace
-        return min(lev(i-1, j), lev(i, j-1), lev(i-1, j-1)) + 1
+        return 1 + min(lev(i-1, j), lev(i, j-1), lev(i-1, j-1))
     return lev(len(word1), len(word2))
 def minDistance(self, word1: str, word2: str) -> int:  # O(mn) time and O(n) space
     # In the above, recursion relies only previous row, so we could save space

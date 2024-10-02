@@ -78,7 +78,7 @@ def groupStrings(self, strings: List[str]) -> List[List[str]]:
 
 # LC140. Word Break II - return all possible answer
 def wordBreak(self, s: str, wordDict):  #  we may have O(2^n) solutions, n=len(s)
-    word_set = set(wordDict)   ## O(2^n + m) time and space, m = len(wordDict)
+    word_set = set(wordDict)  # O(2^n) time and space, n = len(s), every char is a word
     @cache
     def dfs(s):
         if s == '': return []
@@ -115,7 +115,7 @@ def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         return False
     return break_words(0)
 def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-    wds = set(wordDict)  # O(len(s) * len(wds) * avg(words)) time, O(n) space
+    wds = set(wordDict)  # O(len(s) * len(wds) * len(word)) time, O(n) space
     @lru_cache(None)
     def dfs(s):  # recursion, O(n) space
         if s in wds: return True
@@ -123,6 +123,7 @@ def wordBreak(self, s: str, wordDict: List[str]) -> bool:
             if s.startswith(w) and dfs(s[len(w):]): return True
         return False
     return dfs(s)
+# https://leetcode.com/problems/word-break/solutions/3616181/amortized-linear-o-k-m-solution-using-aho-corasick-automaton/
 
 # LC472. Concatenated Words   concat words
 def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
@@ -140,7 +141,7 @@ def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
     return res
 
 # LC127. Word Ladder, return min # of words to transform
-def ladderLength(self, beginWord, endWord, wordList):  # BFS, O(m * m)
+def ladderLength(self, beginWord, endWord, wordList):  # BFS, O(m^2 * n) time, O(mn) space
     wordList = set(wordList)  # m = max word length
     queue = collections.deque([[beginWord, 1]])
     while queue:  # BFS since we look for shortest
@@ -346,7 +347,7 @@ def addBoldTag(self, s, dict):
 
 # LC691. Stickers to Spell Word - effectively this is bfs since we look for min. sticker spell sticker word
 def minStickers(self, stickers: List[str], target: str) -> int:
-    counters = [Counter(s) for s in stickers]  # O(2^T * n)
+    counters = [Counter(s) for s in stickers]  # O(2^T * n * T)  t = len(target)
     @lru_cache(None)
     def dfs(target):  # target string to child nodes by apply stickers
         res = float('inf')

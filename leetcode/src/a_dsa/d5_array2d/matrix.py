@@ -412,6 +412,22 @@ def countShips(self, sea, P, Q):  # P - topRight, Q - bottomLeft
     return res
 
 # LC54. Spiral Matrix, top100 - return elems in spiral
+def spiralOrder(self, matrix: List[List[int]]) -> List[int]:  # O(mn)
+    m, n = len(matrix), len(matrix[0])
+    step = 1 # Start off going right/down vs left/up
+    i, j = 0, -1
+    output = []
+    while min(m,n) > 0:
+        for _ in range(n): # move horizontally
+            j += step
+            output.append(matrix[i][j])
+        m -= 1
+        for _ in range(m): # move vertically
+            i += step
+            output.append(matrix[i][j])
+        n -= 1
+        step *= -1 # flip dir
+    return output
 def spiralOrder(self, matrix):  # O(mn) time
     res = []
     while matrix:
@@ -446,18 +462,18 @@ def generateMatrix(self, n): # this is python 3 version
 # LC885. Spiral Matrix III
 def spiralMatrixIII(self, R, C, r0, c0):
     i, j = r0, c0
-    coordinates = [[r0, c0]]
+    res = [[r0, c0]]
     step_size, sign = 1, 1
-    while len(coordinates) < R*C:
+    while len(res) < R*C:
         for _ in range(step_size):
             j += sign # follow row
-            if 0 <= i < R and 0 <= j < C: coordinates.append([i, j])
+            if 0 <= i < R and 0 <= j < C: res.append([i, j])
         for _ in range(step_size):
             i += sign # follow column
-            if 0 <= i < R and 0 <= j < C: coordinates.append([i, j])
+            if 0 <= i < R and 0 <= j < C: res.append([i, j])
         step_size += 1
         sign *= -1
-    return coordinates
+    return res
 
 
 

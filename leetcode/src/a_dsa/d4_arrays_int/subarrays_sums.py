@@ -73,7 +73,7 @@ def subarraySum(self, nums: List[int], k: int) -> int:
         counts[cusum] += 1
     return count
 
-# LC930. Binary Subarrays With Sum   target              subsum target
+# LC930. Binary Subarrays With Sum   target   subsum target 01 array sum target
 def numSubarraysWithSum(self, nums: List[int], k: int) -> int:
     count = cusum = 0  # O(n)
     counts = collections.defaultdict(int)

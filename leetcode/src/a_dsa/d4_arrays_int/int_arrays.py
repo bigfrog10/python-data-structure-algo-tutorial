@@ -499,7 +499,7 @@ def isNStraightHand(self, hand: List[int], groupSize: int) -> bool:
             if c[i + j] < 0: return False
     return True
 
-# LC228. Summary Ranges
+# LC228. Summary Ranges number range
 def summaryRanges(self, nums: List[int]) -> List[str]:
     pointer, ans = 0, []
     for i, n in enumerate(nums):
@@ -751,8 +751,21 @@ def checkStraightLine(self, coordinates: List[List[int]]) -> bool:
         if dy * (x3 - x1) != (y3 - y1) * dx: return False
     return True
 
-
-
+# LC135. Candy
+def candy(self, ratings: List[int]) -> int:
+    ret, up, down, peak = 1, 0, 0, 0
+    for prev, curr in zip(ratings[:-1], ratings[1:]):
+        if prev < curr:
+            up, down, peak = up + 1, 0, up + 1
+            ret += 1 + up
+        elif prev == curr:
+            up = down = peak = 0
+            ret += 1
+        else:
+            up, down = 0, down + 1
+            ret += 1 + down - int(peak >= down)
+    return ret
+# https://leetcode.com/problems/candy/solutions/4037646/99-20-greedy-two-one-pass/
 
 
 

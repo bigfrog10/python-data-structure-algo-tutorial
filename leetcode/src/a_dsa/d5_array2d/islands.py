@@ -117,7 +117,7 @@ def islandPerimeter(self, grid: List[List[int]]) -> int:  # O(mn), O(1)
             if c > 0 and grid[r][c-1] == 1: result -= 2
     return result
 
-# LC934. Shortest Bridge connect 2 island
+# LC934. Shortest Bridge connect 2 island bridge
 def shortestBridge(self, A: List[List[int]]) -> int:  # O(n^2) time and space
     m, n = len(A), len(A[0])
     i, j = next((i, j) for i in range(m) for j in range(n) if A[i][j])

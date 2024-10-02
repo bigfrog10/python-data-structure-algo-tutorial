@@ -324,18 +324,12 @@ def isPerfectSquare(self, num: int) -> bool:
         x = (x + num // x) // 2  # x_next = x - f(x) / f'(x)
     return x * x == num
 
-
-
 # LC246. Strobogrammatic Number - if it is such a number
 def isStrobogrammatic(self, num: str) -> bool:
     # only 0, 1, 6, 8, 9 works. 6 and 9 are paired
     rotates = {'0': '0', '1': '1', '8': '8', '6': '9', '9': '6'}
-    left, right = 0, len(num)-1
-    while left <= right:
-        if num[left] not in rotates or rotates[num[left]] != num[right]:
-            return False
-        left += 1
-        right -= 1
+    for i in range((len(num)+1) // 2):
+        if num[~i] not in rotates or num[i] != rotates[num[~i]]: return False
     return True
 
 # LC247. Strobogrammatic Number II - return all results

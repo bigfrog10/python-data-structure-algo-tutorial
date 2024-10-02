@@ -120,7 +120,7 @@ def missingElement(self, nums: List[int], k: int) -> int:  # logn
     # kth missing number is greater than nums[left - 1] and less than nums[left]
     return nums[left - 1] + k - missing(left - 1) # k - missing(left-1) is the diff
 
-# LC658. Find K Closest Elements - arround x in the array
+# LC658. Find K Closest Elements - arround x in the array  k closest integer
 def findClosestElements(self, A, k, x): # O(logn + k)
     left, right = 0, len(A) - k
     while left < right:
