@@ -463,7 +463,7 @@ def generateMatrix(self, n): # this is python 3 version
 def spiralMatrixIII(self, R, C, r0, c0):
     i, j = r0, c0
     res = [[r0, c0]]
-    step_size, sign = 1, 1
+    step_size = sign = 1
     while len(res) < R*C:
         for _ in range(step_size):
             j += sign # follow row

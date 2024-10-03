@@ -14,10 +14,11 @@ def findNthDigit(self, n: int) -> int:  # O(logn) time since we go by digits
     for digit in range(1, 11):  # loop groups 10-99, 100-999, ...
         first = 10**(digit - 1)  # the first element in the groups, 1, 10, 100, 1000
         # 9 * first - the size of the group. 9, 90, 900, 9000
-        k = 9 * first * digit  # total number of digits in this group, 1＊9, 2＊90, 3＊900, 4＊9000
+        nums = 9 * first * digit  # total number of digits in this group, 1＊9, 2＊90, 3＊900, 4＊9000
+        # - each number in this group has "digit" digits, e.g., 11 has 2 digits
         # first + n/digits is the number contains nth digit - "digits" is the width of each num in this group
-        if n < k: return int(str(first + n // digit)[n % digit])  # first + .. is the number where the digit is
-        n -= k
+        if n < nums: return int(str(first + n // digit)[n % digit])  # first + .. is the number where the digit is
+        n -= nums
 
 # LC233. Number of Digit One  # https://leetcode.com/problems/number-of-digit-one/
 # https://leetcode.com/submissions/detail/725602255/

@@ -131,6 +131,17 @@ def triangleNumber(self, nums: List[int]) -> int:
 # LC1838. Frequency of the Most Frequent Element k operations
 def maxFrequency(self, nums: List[int], k: int) -> int:
     nums.sort()  # O(nlogn) time and O(1) space
+    ans = left = total = 0  # cumulative sum
+    for right in range(len(nums)):
+        target = nums[right]
+        total += target
+        while (right - left + 1) * target - total > k:
+            total -= nums[left]
+            left += 1
+        ans = max(ans, right - left + 1)
+    return ans
+def maxFrequency(self, nums: List[int], k: int) -> int:
+    nums.sort()  # O(nlogn) time and O(1) space
     left = total = 0  # cumulative sum
     for right in range(len(nums)):
         target = nums[right]

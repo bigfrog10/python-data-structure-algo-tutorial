@@ -34,7 +34,7 @@ def minWindow(self, s: str, t: str) -> str:
     return "" if start == -1 else s[start:start + min_len]
 # https://leetcode.com/problems/minimum-window-substring/solutions/5822266/sliding-window-handling-edge-cases-explanation-relevant-test-cases/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
 
-# LC392. Is Subsequence
+# LC392. Is Subsequence issubseq is subseq
 def isSubsequence(self, s: str, t: str) -> bool:  # O(|t|)
     n, m = len(s), len(t)
     sp = 0

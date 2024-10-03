@@ -198,3 +198,4 @@ def numTilings(self, n: int) -> int:
         if n <= 2: return n
         return (f(n - 1) + f(n - 2) + 2 * p(n - 1)) % MOD
     return f(n)
+

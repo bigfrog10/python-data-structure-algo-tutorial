@@ -185,8 +185,8 @@ def maxProduct(self, nums: List[int]) -> int:
         e = nums[i]
         emx = e * curr_max
         emn = e * curr_min
-        curr_max = max([e, emx, emn])  # we track both for +/-
-        curr_min = min([e, emx, emn])
+        curr_max = max(e, emx, emn)  # we track both for +/-
+        curr_min = min(e, emx, emn)
         max_all = max(max_all, curr_max)
     return max_all
 

@@ -154,7 +154,7 @@ def bstToGst(self, root: TreeNode) -> TreeNode:
     dfs(root)
     return root
 
-# LC230. Kth Smallest Element in a BST
+# LC230. Kth Smallest Element in a BST kth bst kth
 def kthSmallest(self, root: TreeNode, k: int) -> int:  # iterative
     stack = []  # O(H) space
     while True:  # O(H + k)

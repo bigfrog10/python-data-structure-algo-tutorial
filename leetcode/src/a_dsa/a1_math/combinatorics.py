@@ -129,6 +129,11 @@ def combine(self, n: int, k: int) -> List[List[int]]:  # O(k * C^k_n)
     for j in range(1, k+1)[::-1]:  # backward is much faster
         combs = [[i] + c for c in combs for i in range(j, c[0] if c else n+1)]
     return combs
+def combine(self, n: int, k: int) -> List[List[int]]:
+    combs = [[]]
+    for _ in range(k):
+        combs = [[i] + c for c in combs for i in range(1, c[0] if c else n+1)]
+    return combs
 
 # for 4, 3: [[1],[2],[3],[4]],  [[1,2],[1,3],[2,3],[1,4],[2,4],[3,4]]
 # and  [[1,2,3],[1,2,4],[1,3,4],[2,3,4]]

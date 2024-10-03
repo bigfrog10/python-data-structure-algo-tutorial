@@ -1,5 +1,26 @@
 
-# 2824. Count Pairs Whose Sum is Less than Target
+# LC948. Bag of Tokens
+def bagOfTokensScore(self, tokens: List[int], power: int) -> int:
+    score = 0
+    tokens.sort()  # O(nlogn) time
+    high, low = len(tokens) - 1, 0
+    while low <= high:
+        # When we have enough power, play lowest token face-up
+        if power >= tokens[low]:
+            score += 1
+            power -= tokens[low]
+            low += 1
+        # We don't have enough power to play a token face-up
+        # If there is at least one token remaining,
+        # and we have enough score, play highest token face-down
+        elif low < high and score > 0:
+            score -= 1
+            power += tokens[high]
+            high -= 1
+        else: return score
+    return score
+
+# LC2824. Count Pairs Whose Sum is Less than Target
 def countPairs(self, nums: List[int], target: int) -> int:
     ns = sorted(nums)  # O(nlogn)
     count = left = 0

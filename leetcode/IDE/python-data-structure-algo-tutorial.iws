@@ -7,33 +7,17 @@
     <list default="true" id="29b13a08-5760-41f7-8cea-fc198b3bbcb2" name="Default Changelist" comment="re-org">
       <change afterPath="$PROJECT_DIR$/../../algorithms/src/dsa/arrays/test1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" beforeDir="false" afterPath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d1_bits/bit_operations.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d1_bits/bit_operations.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/palindromes.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/palindromes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/strings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/strings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/a1_math/combinatorics.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/a1_math/combinatorics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/substr_2pointers.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/substr_2pointers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d3_ints/int_num.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d3_ints/int_num.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/array_rotated.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/array_rotated.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/binary_search.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/binary_search.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/array_binary_search.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/array_binary_search.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/array_dp.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/array_dp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/arrays.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/arrays.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/sorting.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/sorting.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/dp.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/dp.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_2pointers.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_2pointers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_array_01.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_array_01.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_arrays.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_arrays.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_arrray_1_n.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_arrray_1_n.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/subarrays_sums.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/subarrays_sums.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/sums.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/sums.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/sums_234.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/sums_234.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/2d_board_game_tic_tac_toe_sudoku.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/2d_board_game_tic_tac_toe_sudoku.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/arrays_2d.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/arrays_2d.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/intervals.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/intervals.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/matrix.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/matrix_paths.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/matrix_paths.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d7_linked_lists/linked_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d7_linked_lists/linked_list.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d7_linked_lists/linked_list_delete.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d7_linked_lists/linked_list_delete.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d7_linked_lists/linked_list_sort.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d7_linked_lists/linked_list_sort.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_search_trees/binary_search_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_search_trees/binary_search_tree.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_search_trees/bst_structure.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_search_trees/bst_structure.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -442,7 +426,7 @@
       <workItem from="1721585035866" duration="1075000" />
       <workItem from="1724812784341" duration="410351000" />
       <workItem from="1726054658636" duration="61785000" />
-      <workItem from="1726226850639" duration="406157000" />
+      <workItem from="1726226850639" duration="472715000" />
     </task>
     <task id="LOCAL-00001" summary="update 2 sites">
       <created>1639271849713</created>
@@ -534,22 +518,6 @@
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
       <updated>1654441307221</updated>
-    </task>
-    <task id="LOCAL-00014" summary="re-org">
-      <option name="closed" value="true" />
-      <created>1724984058606</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1724984058606</updated>
-    </task>
-    <task id="LOCAL-00015" summary="re-org">
-      <option name="closed" value="true" />
-      <created>1725023394630</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1725023394630</updated>
     </task>
     <task id="LOCAL-00016" summary="re-org">
       <option name="closed" value="true" />
@@ -823,7 +791,23 @@
       <option name="project" value="LOCAL" />
       <updated>1727719589264</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="re-org">
+      <option name="closed" value="true" />
+      <created>1727785881946</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1727785881947</updated>
+    </task>
+    <task id="LOCAL-00051" summary="re-org">
+      <option name="closed" value="true" />
+      <created>1727873313848</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1727873313848</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

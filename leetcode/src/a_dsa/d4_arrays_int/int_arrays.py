@@ -628,7 +628,7 @@ def unhappyFriends(self, n: int, preferences: List[List[int]], pairs: List[List[
 # LC315. Count of Smaller Numbers After Self  smaller after me smaller element to right
 def countSmaller(self, nums: List[int]) -> List[int]:
     from sortedcontainers import SortedList  # AVL tree implementation or red black tree
-    n = len(nums)
+    n = len(nums)  # O(nlogn) time, O(n) space
     ans = [0] * n
     x = SortedList()
     for i, val in enumerate(reversed(nums)):  # O(n)
