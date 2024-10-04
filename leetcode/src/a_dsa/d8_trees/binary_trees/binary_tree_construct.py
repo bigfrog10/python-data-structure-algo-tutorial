@@ -132,7 +132,7 @@ def constructFromPrePost(self, pre: List[int], post: List[int]) -> TreeNode:
         return root
     return construct(pre, post)
 
-# LC1367. Linked List in Binary Tree
+# LC1367. Linked List in Binary Tree  bt linked
 def isSubPath(self, head: ListNode, root: TreeNode) -> bool:
     def dfs(head, root):
         if not head: return True

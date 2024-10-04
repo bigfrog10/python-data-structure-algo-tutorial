@@ -25,7 +25,7 @@ def read(self, buf, n):
         count = read4(b)
         if count == 0: break
         bs = min(n - size, count)
-        buf[size:] = b[:bs]
+        buf[size:size+bs] = b[:bs]
         size += bs
     return min(size, n)
 

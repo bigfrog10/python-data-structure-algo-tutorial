@@ -1,4 +1,23 @@
 
+# LC2416. Sum of Prefix Scores of Strings
+def sumPrefixScores(self, words: List[str]) -> List[int]:
+    trie = {}
+    for w in words:
+        node = trie
+        for c in w:
+            node = node.setdefault(c, {})
+            node['$'] = node.get('$', 0) + 1
+    res = []
+    for w in words:
+        node = trie
+        total = 0
+        for c in w:
+            if c in node:
+                node = node[c]
+                total += node['$']
+        res.append(total)
+    return res
+
 # LC609. Find Duplicate File in System  dupe file
 def findDuplicate(self, paths: List[str]) -> List[List[str]]:  # O(all chars) time and space
     groups = defaultdict(list)

@@ -8,12 +8,12 @@ def deepestLeavesSum(self, root: Optional[TreeNode]) -> int:
 
 # LC199. Binary Tree Right Side View   bt right
 def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
-    if not root: return []  ## O(n) time and O(H) space
-    ret = []
+    ret = []  # O(n) time and O(H) space
     def dfs(node, depth):
+        if not node: return
         if depth == len(ret): ret.append(node.val)
-        for n in [node.right, node.left]:
-            if n: dfs(n, depth+1)
+        dfs(node.right, depth + 1)
+        dfs(node.left, depth + 1)
     dfs(root, 0)
     return ret
 

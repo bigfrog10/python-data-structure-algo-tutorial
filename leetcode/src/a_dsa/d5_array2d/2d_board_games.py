@@ -321,7 +321,27 @@ def solveNQueens(self, n: int) -> List[List[str]]:
     res1 = [['.' * col + 'Q' + '.'*(n - col - 1) for col in board] for board in res]
     return res1
 
-
+# LC52. N-Queens II
+def totalNQueens(self, n: int) -> int:
+    res, board = [], [] # O(n!) time and O(n^2) space
+    cols, diag, off_diag = set(), set(), set()
+    def backtrack(i):  # recursion on rows
+        if i == n:
+            res.append(list(board))  # copy, answer to return
+            return
+        for j in range(n):
+            if j not in cols and j-i not in diag and j+i not in off_diag:
+                cols.add(j)  # order is not significant, these 4 steps are independent.
+                diag.add(j-i)
+                off_diag.add(j+i)
+                board.append(j) # ith row, jth column
+                backtrack(i+1)  # recursion
+                board.pop()  # backout
+                off_diag.remove(j+i)
+                diag.remove(j-i)
+                cols.remove(j)
+    backtrack(0)  # backtrack on rows
+    return len(res)
 
 # LC1034. Coloring A Border
 def colorBorder(self, grid: List[List[int]], row: int, col: int, color: int) -> List[List[int]]:

@@ -86,9 +86,8 @@ def numSubarraysWithSum(self, nums: List[int], k: int) -> int:
 
 
 # LC523. Continuous Subarray Sum - if exist s.t. sum to multiple of k  cont sub sum mod k
-def checkSubarraySum(self, nums: List[int], k: int) -> bool:
-    if not nums: return False
-    summ, sd = 0, {0: -1}  # [2,4,3] 6, we need -1 for 2-element requirement
+def checkSubarraySum(self, nums: List[int], k: int) -> bool:  # O(n) time, space
+    summ, sd = 0, {0: -1}  # 0 is for cumulative case, e.g. [2,4,3] 6
     for i, n in enumerate(nums):
         summ += n
         if k != 0: summ = summ % k
@@ -96,9 +95,6 @@ def checkSubarraySum(self, nums: List[int], k: int) -> bool:
             if i - sd[summ] > 1: return True  # [0] 0 if we have =, it returns true but answer is false.
         else: sd[summ] = i
     return False
-
-
-
 
 # LC974. Subarray Sums Divisible by K - return # of such sums
 def subarraysDivByK(self, A: List[int], K: int) -> int:

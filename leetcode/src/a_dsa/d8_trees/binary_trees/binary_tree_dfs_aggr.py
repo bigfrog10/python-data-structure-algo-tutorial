@@ -22,7 +22,7 @@ def longestConsecutive(self, root: Optional[TreeNode]) -> int:  # O(n) time and 
         return max(length, dfs(node.left, node, length), dfs(node.right, node, length))
     return dfs(root, None, 0)
 
-# LC124. Binary Tree Maximum Path Sum - bt max path sum   bt path sum
+# LC124. Binary Tree Maximum Path Sum - bt max path sum   bt path sum bt
 def maxPathSum(self, root: TreeNode) -> int:  # O(V) time, O(H) space
     max_sum = float('-inf')
     def path_max(node):  # max path sum for all paths start from here to leaves
@@ -62,11 +62,11 @@ def hasPathSum(self, root: TreeNode, targetSum: int) -> bool:  # O(n) both
         return dfs(node.left, target - node.val) or dfs(node.right, target - node.val)
     return dfs(root, targetSum)
 
-# LC113. Path Sum II - tree return all paths with sum target
+# LC113. Path Sum II - tree return all paths with sum target bt path sum bt
 def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:  # O(n^2) time
     res = [] # since we need historic info, we backtrack
     def dfs(node, target, paths):  # O(n) space and time
-        if not node: return False
+        if not node: return
         if node.val == target:
             if not node.left and not node.right:  # leaf
                 res.append(paths + [node.val]) # this is a copy, O(n) time
