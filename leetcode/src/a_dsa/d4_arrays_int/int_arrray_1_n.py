@@ -1,5 +1,5 @@
 
-# LC1920. Build Array from Permutation - array permute
+# LC1920. Build Array from Permutation - array permute array permutation array 0-index
 # https://leetcode.com/problems/build-array-from-permutation/discuss/1315926/Python-O(n)-Time-O(1)-Space-w-Full-Explanation
 def buildArray(self, nums: List[int]) -> List[int]:  # O(1) space
     q = len(nums)

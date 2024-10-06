@@ -48,7 +48,7 @@ def searchInsert(self, nums: List[int], target: int) -> int:
     return left
 # return bisect.bisect_left(nums, target)
 
-# LC34. Find First and Last Position of Element in Sorted Array  starting and ending position  1st last position
+# LC34. Find First and Last Position of Element in Sorted Array  start and end position start end position
 def searchRange(self, nums: List[int], target: int) -> List[int]:
     if not nums or target < nums[0] or target > nums[-1]: return [-1, -1]
     left, right = 0, len(nums) - 1

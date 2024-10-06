@@ -5,7 +5,7 @@ def construct2DArray(self, original: List[int], m: int, n: int) -> List[List[int
     if m * n != len(original): return []
     return [original[i:i+n] for i in range(0, m*n, n)]
 
-# LC2553. Separate the Digits in an Array  separate digits
+# LC2553. Separate the Digits in an Array  separate digits break number
 def separateDigits(self, nums: List[int]) -> List[int]:
     return [int(i) for n in nums for i in str(n)]
 
@@ -46,7 +46,7 @@ def numMovesStonesII(self, stones: List[int]) -> List[int]:
 # https://leetcode.com/problems/moving-stones-until-consecutive-ii/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
 
 
-# LC1043. Partition Array for Maximum Sum
+# LC1043. Partition Array for Maximum Sum partition max sum
 def maxSumAfterPartitioning(self, arr: List[int], k: int) -> int:  # O(nk)
     n = len(arr)
     @cache

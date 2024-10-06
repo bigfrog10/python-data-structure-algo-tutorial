@@ -34,7 +34,7 @@ def checkValidGrid(self, grid: List[List[int]]) -> bool:
         if not(a == 1 and b == 2 or a == 2 and b == 1): return False
     return True
 
-# 1778. Shortest Path in a Hidden Grid
+# 1778. Shortest Path in a Hidden Grid min dist
 def findShortestPath(self, master: 'GridMaster') -> int:  # O(cells) time and space
     moved = set() # need to build graph first, for bfs. Otherwise TLE.
     dirs = {'U':(0, -1, 'D'), 'D':(0, 1, 'U'), 'L':(-1, 0, 'R'), 'R':(1, 0, 'L')}

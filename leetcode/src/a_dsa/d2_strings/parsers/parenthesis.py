@@ -95,7 +95,7 @@ def minAddToMakeValid(self, S: str) -> int:  # O(n)
             bal += 1  # diff needs +1 too
     return left + bal  # "(((" -> left=0, bal=3
 
-# LC301. Remove Invalid Parentheses - with letters, return all results
+# LC301. Remove Invalid Parentheses - with letters, return all results remove parenth
 def removeInvalidParentheses(self, s): # O(2^n) return all possible results
     def isvalid(s):  # worst case is all (, e.g., ((((( -> valid below is ''
         ctr = 0

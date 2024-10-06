@@ -56,7 +56,7 @@ class MovingAverage:
         else: self.mv = sum(queue) / len(queue)
         return self.mv
 
-# LC703. Kth Largest Element in a Stream
+# LC703. Kth Largest Element in a Stream  kth highest test score
 class KthLargest:
     def __init__(self, k: int, nums: List[int]):
         self.k = k

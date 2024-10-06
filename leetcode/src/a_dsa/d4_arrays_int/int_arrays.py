@@ -107,7 +107,7 @@ def uniqueOccurrences(self, arr: List[int]) -> bool:
     c = collections.Counter(arr)
     return len(c) == len(set(c.values()))
 
-# LC455. Assign Cookies
+# LC455. Assign Cookies awesome parent
 def findContentChildren(self, g: List[int], s: List[int]) -> int:  # O(NlogN+MlogM)
     i, j, g, s = 0, 0, sorted(g), sorted(s)
     while i < len(g) and j < len(s):
@@ -340,7 +340,7 @@ def beautifulArray(self, n: int) -> List[int]:
         res = [i * 2 - 1 for i in res] + [i * 2 for i in res]
     return [i for i in res if i <= n]
 
-# LC1460. Make Two Arrays Equal by Reversing Sub-arrays - reverse array  2 arrays equal  reverse array equal
+# LC1460. Make Two Arrays Equal by Reversing Sub-arrays - reverse array  2 arrays equal  reverse array equal reverse subarray
 def canBeEqual(self, target: List[int], arr: List[int]) -> bool:
     return collections.Counter(target) == collections.Counter(arr)
 # ignore positions
@@ -371,7 +371,7 @@ def firstMissingPositive(self, nums: List[int]) -> int:  # O(n) time O(1) space
     return n + 1
 # to restore original values, shift negatives by -2n, keep >= n as is
 
-# LC219. Contains Duplicate II - duplicates within index range k
+# LC219. Contains Duplicate II - duplicates within index range k distinct indices
 def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:  # O(n) time and O(k) space
     if k == 0: return False
     showed = set()  # if we have 2 same elements with k frame, then we are done.
@@ -501,11 +501,11 @@ def isNStraightHand(self, hand: List[int], groupSize: int) -> bool:
 
 # LC228. Summary Ranges number range
 def summaryRanges(self, nums: List[int]) -> List[str]:
-    pointer, ans = 0, []
+    left, ans = 0, []
     for i, n in enumerate(nums):
         if i == len(nums) - 1 or nums[i+1] - nums[i] > 1:
-            ans.append(str(nums[pointer]) + '->' + str(n) if nums[pointer] != n else str(n))
-            pointer = i+1
+            ans.append(str(nums[left]) + '->' + str(n) if nums[left] != n else str(n))
+            left = i+1
     return ans
 
 # LC628. Maximum Product of Three Numbers  max prod 3 num
@@ -538,7 +538,7 @@ def thirdMax(self, nums: List[int]) -> int:
             elif num > v[2]: v = [v[0], v[1], num]
     return max(nums) if float('-inf') in v else v[2]
 
-# LC136. Single Number - single nodupe in array
+# LC136. Single Number - single nodupe in array, others are 2
 def singleNumber(self, nums: List[int]) -> int:
     res = 0
     for i in nums: res ^= i
@@ -564,7 +564,7 @@ def singleNumber(self, nums: List[int]) -> int:
                                                       # [1, 0], 0th bit 1 seen odd times
     return seen_once  # [2, 2, 3, 2] -> [2, 0], [0, 2], [1, 0], [3, 0] -> 3
 
-# LC217. Contains Duplicate  appear dupe contains dupe contain dupe
+# LC217. Contains Duplicate  appear dupe contains dupe contain dupe at least twice
 def containsDuplicate(self, nums: List[int]) -> bool:
     showed = set()
     for i in nums:
@@ -574,7 +574,7 @@ def containsDuplicate(self, nums: List[int]) -> bool:
 def containsDuplicate(self, nums):
     return len(set(nums)) < len(nums)
 
-# LC485. Max Consecutive Ones   mac count 1
+# LC485. Max Consecutive Ones   max count 1 max 1 count
 def findMaxConsecutiveOnes(self, nums: List[int]) -> int:
     count = max_count = 0
     for num in nums:
@@ -751,7 +751,7 @@ def checkStraightLine(self, coordinates: List[List[int]]) -> bool:
         if dy * (x3 - x1) != (y3 - y1) * dx: return False
     return True
 
-# LC135. Candy
+# LC135. Candy alloc
 def candy(self, ratings: List[int]) -> int:
     n = len(ratings)
     candies = [1] * n

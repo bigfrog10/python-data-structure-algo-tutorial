@@ -147,7 +147,7 @@ def findMaximums(self, nums: List[int]) -> List[int]:
         res[i - 1] = max(res[i], res[i - 1])
     return res
 
-# LC2104. Sum of Subarray Ranges - see LC828   sum sub range
+# LC2104. Sum of Subarray Ranges - see LC828   sum sub range of a subarray range
 def subArrayRanges(self, nums: List[int]) -> int:  # O(n) time and space
     A = [-math.inf] + nums + [-math.inf]  # make sure stack has 1 elem
     res, s = 0, []

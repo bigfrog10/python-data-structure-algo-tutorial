@@ -365,9 +365,9 @@ def addBoldTag(self, s, dict):
 
 # LC691. Stickers to Spell Word - effectively this is bfs since we look for min. sticker spell sticker word
 def minStickers(self, stickers: List[str], target: str) -> int:
-    counters = [Counter(s) for s in stickers]  # O(2^T * n * T)  t = len(target)
+    counters = [Counter(s) for s in stickers]  # O(2^T * n * T)  t = len(target), checked
     @lru_cache(None)
-    def dfs(target):  # target string to child nodes by apply stickers
+    def dfs(target):  # return # of stickers, target string to child nodes by apply stickers
         res = float('inf')
         for sticker in counters:  # DFS on stickers/neighbours
             if target[0] not in sticker: continue  # to cut search branches

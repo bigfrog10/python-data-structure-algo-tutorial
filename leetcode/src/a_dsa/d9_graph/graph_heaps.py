@@ -30,7 +30,7 @@ def countPaths(self, n: int, roads: List[List[int]]) -> int:
 # https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
 
 
-# LC1928. Minimum Cost to Reach Destination in Time    min cost to reach dest
+# LC1928. Minimum Cost to Reach Destination in Time    min cost to reach dest min cost dist
 def minCost(self, maxTime: int, edges: List[List[int]], passingFees: List[int]) -> int:
     g = defaultdict(list)  # Dijkstra  O(E * logV)
     for e in edges:
@@ -47,7 +47,7 @@ def minCost(self, maxTime: int, edges: List[List[int]], passingFees: List[int]) 
             new_time = time + trip
             if nbor not in times or (new_time < times[nbor] and new_time <= maxTime):
                 heapq.heappush(pq, (passingFees[nbor]+cost, nbor, new_time))
-                times[nbor] = new_time
+                times[nbor] = new_time  # we need lesser new_time here
     return -1
 
 # LC1810 Minimum Path Cost in a hidden grid    min path cost  min cost   graph min cost

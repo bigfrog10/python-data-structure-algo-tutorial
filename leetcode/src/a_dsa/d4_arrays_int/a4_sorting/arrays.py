@@ -161,7 +161,7 @@ def sortArrayByParity(self, nums: List[int]) -> List[int]:
             i += 1
     return nums
 
-# LC1331. Rank Transform of an Array
+# LC1331. Rank Transform of an Array rank array
 def arrayRankTransform(self, arr: List[int]) -> List[int]:  # O(nlogn)
     rank = {}
     for a in sorted(arr):
@@ -196,7 +196,7 @@ def getKth(self, lo: int, hi: int, k: int) -> int:
 
 # LC1439. Find the Kth Smallest Sum of a Matrix With Sorted Rows
 def kthSmallest(self, mat: List[List[int]], k: int) -> int:  # O(nklogk) time
-    def select(nums1,nums2):
+    def select(nums1, nums2):
         res, visited = [], set()
         heap = [(nums1[0] + nums2[0], 0, 0)]
         while heap:

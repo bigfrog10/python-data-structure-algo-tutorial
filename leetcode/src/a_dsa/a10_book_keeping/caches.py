@@ -1,7 +1,7 @@
 
 # LC745. Prefix and Suffix Search  prefix suffix search
 class WordFilter:
-    def __init__(self, words: List[str]):  # O(n * L)
+    def __init__(self, words: List[str]):  # O(n * L^2) space
         self.dct = {}  # use prefix#suffix as trie paths
         for i in range(len(words)):
             for j in range(len(words[i])):

@@ -1,5 +1,5 @@
 
-# LC1011. Capacity To Ship Packages Within D Days   ship capacity
+# LC1011. Capacity To Ship Packages Within D Days   ship capacity conveyor
 def shipWithinDays(self, weights: List[int], D: int) -> int: # O(nlog(sum - max))
     left, right = max(weights), sum(weights)
     while left < right:  # O(log(right - left)

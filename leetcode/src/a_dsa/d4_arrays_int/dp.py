@@ -1,5 +1,5 @@
 
-# LC3043. Find the Length of the Longest Common Prefix length lcp
+# LC3043. Find the Length of the Longest Common Prefix length lcp length of numbers
 def longestCommonPrefix(self, arr1: List[int], arr2: List[int]) -> int:
     trie = {}  # O(m * log10m + n * log10n) time, O(m) space
     for num in arr1:

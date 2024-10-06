@@ -13,7 +13,7 @@ def getTargetCopy(self, original: TreeNode, cloned: TreeNode, target: TreeNode) 
     dfs(original, cloned)
     return self.ans
 
-# LC404. Sum of Left Leaves
+# LC404. Sum of Left Leaves  sum left lea
 def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:  # O(n) time and space
     def dfs(node, isLeft):
         if not node: return 0
@@ -57,7 +57,7 @@ def diameterOfBinaryTree(self, root: TreeNode) -> int:
     path_max(root)
     return diameter
 
-# LC1973. Count Nodes Equal to Sum of Descendants - sub nodes sum node = sum
+# LC1973. Count Nodes Equal to Sum of Descendants - sub nodes sum node = sum desc child sum child
 def equalToDescendants(self, root: Optional[TreeNode]) -> int:
     output = 0
     def traverse(node):  # return sum of this subtree

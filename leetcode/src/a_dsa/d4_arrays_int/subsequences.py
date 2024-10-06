@@ -72,7 +72,7 @@ def longestSubsequence(self, arr: List[int], diff: int) -> int:
         res[num] = res[num - diff] + 1 if (num - diff) in res else 1
     return max(res.values())
 
-# LC674. Longest Continuous Increasing Subsequence - long incr subarray
+# LC674. Longest Continuous Increasing Subsequence - long incr subarray cont incr subseq
 def findLengthOfLCIS(self, nums: List[int]) -> int:
     ans = anchor = 0
     for i in range(len(nums)):
@@ -123,7 +123,7 @@ def increasingTriplet(self, nums: List[int]) -> bool:
         else: return True
     return False
 
-# LC300. Longest Increasing Subsequence  LIS length  lis seq
+# LC300. Longest Increasing Subsequence  LIS length  lis seq  long incr seq
 def lengthOfLIS(self, nums: List[int]) -> int:  # O(nlogn) runtime, O(n) space
     hist = []  # hist[i] smallest ending element in strictly increasing sequence of length i
     for e in nums:

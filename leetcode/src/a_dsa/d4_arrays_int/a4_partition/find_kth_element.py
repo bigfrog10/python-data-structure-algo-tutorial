@@ -8,6 +8,9 @@ def topKFrequent(self, words: List[str], k: int) -> List[str]:  # O(n)
     return heapq.nsmallest(k, freqs.keys(), lambda w: (-freqs[w], w))
 
 # LC215. Kth Largest Element in an Array, top100
+def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+    count = collections.Counter(nums)  # O(nlogk)
+    return heapq.nlargest(k, count.keys(), key=count.get)
 def findKthLargest(self, nums: List[int], k: int) -> int:  # O(n⋅logk)
     heap = []  # min heap
     for num in nums:
@@ -15,6 +18,12 @@ def findKthLargest(self, nums: List[int], k: int) -> int:  # O(n⋅logk)
         if len(heap) > k:  # heap[0] is the smallest
             heapq.heappop(heap)
     return heap[0]
+def topKFrequent(self, nums, k):
+    bucket = [[] for _ in range(len(nums) + 1)]
+    Count = Counter(nums).items()
+    for num, freq in Count: bucket[freq].append(num)
+    flat_list = [item for sublist in bucket for item in sublist]
+    return flat_list[::-1][:k]
 def findKthLargest(self, nums: List[int], k: int) -> int:  # average O(n)
     # on average, we reduce by n/2, so add up to 1*n
     # worst case, we reduce by 1, so n-1, n-2, ..., so add up to n^2.

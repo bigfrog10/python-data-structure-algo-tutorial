@@ -41,6 +41,19 @@ def recoverTree(self, root: Optional[TreeNode]) -> None:
         root = root.right # check right side
     x.val, y.val = y.val, x.val
 
+# LC530. Minimum Absolute Difference in BST min diff bst
+def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
+    def dfs(node):
+        if node:  # in order traverse for diff between neighbours in sorted array.
+            dfs(node.left)
+            self.ans = min(self.ans, node.val - self.prev)
+            print(f'node={node.val}, prev={self.prev}, min={self.ans}')
+            self.prev = node.val
+            dfs(node.right)
+    self.prev = float('-inf')
+    self.ans = float('inf')
+    dfs(root)
+    return self.ans
 # LC938. Range Sum of BST - works for count, average as well  range sum bst range sum
 def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int: # O(n) time and space
     ret = 0
@@ -171,7 +184,7 @@ def kthSmallest(self, root, k):  # O(n)
         return inorder(r.left) + [r.val] + inorder(r.right) if r else []
     return inorder(root)[k - 1]
 
-# LC285. Inorder Successor in BST inorder
+# LC285. Inorder Successor in BST inorder  bst succ
 def inorderSuccessor(self, root: 'TreeNode', p: 'TreeNode') -> 'TreeNode':
     successor = None
     while root:

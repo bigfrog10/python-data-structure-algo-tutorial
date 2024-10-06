@@ -1,5 +1,5 @@
 
-# LC424. Longest Repeating Character Replacement  long repeat long replacement long char replacement
+# LC424. Longest Repeating Character Replacement  long repeat long replacement long char replacement  change char
 def characterReplacement(self, s: str, k: int) -> int:
     freqs = Counter()  # O(mn) time, O(m) space: m=len(unique chars), n=len(s)
     start = max_freq = res = 0
