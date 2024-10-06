@@ -1,28 +1,28 @@
 
 # LC772. Basic Calculator III - +-*/()
 def calculate(self, s: str) -> int:  # O(n) time and space
-    stack, sign, num = [], '+', 0  # stack for () and sign in front
+    stack, op, num = [], '+', 0  # stack for () and op in front
     for i, c in enumerate(s + '+'):
         if c.isdigit(): num = num * 10 + int(c)
         elif c == '(':
-            stack.append(sign)  # save history
+            stack.append(op)  # save history
             stack.append(c)
-            sign = '+'
+            op = '+'
         elif c in '+-*/)':
-            if sign == '+': stack.append(num)
-            elif sign == '-': stack.append(-num)
-            elif sign == '*': stack.append(stack.pop() * num)
-            elif sign == '/': stack.append(int(stack.pop() / num))
+            if op == '+': stack.append(num)
+            elif op == '-': stack.append(-num)
+            elif op == '*': stack.append(stack.pop() * num)
+            elif op == '/': stack.append(int(stack.pop() / num))
             if c == ')':
                 num, item = 0, stack.pop()  # num is used afterward
                 while item != '(':
                     num += item
                     item = stack.pop()
-                sign = stack.pop()
-            else: sign, num = c, 0 # this is for +-*/
+                op = stack.pop()
+            else: op, num = c, 0 # this is for +-*/
     return sum(stack)
 
-# LC282. Expression Add Operators  - return all results *** 4 cards to 24 game  exp add
+# LC282. Expression Add Operators  - return all results *** 4 cards to 24 game  exp add expr add
 def addOperators(self, num: str, target: int) -> List[str]:
     n, res = len(num), []  # O(4^n) (3 operators plus no-op)
     def dfs(idx, expr, cur, last):  # cur is the current value, last is last value
@@ -37,7 +37,7 @@ def addOperators(self, num: str, target: int) -> List[str]:
                 dfs(i, expr + "-" + s, cur - x, -x)
                 # This is to handle 1 + 2 * 3, we need to backout 2 and add 2 * 3.
                 dfs(i, expr + "*" + s, cur - last + last*x, last*x)
-            if num[idx] == '0': break  # after idx+1 we break out otherwise we have 05
+            if num[idx] == '0': break  # finished 0+-*n, skip 05 coming next
     dfs(0, '', 0, None)
     return res
 
@@ -100,7 +100,7 @@ def calculate(self, s):  # O(n) time and space
 
 
 
-# LC494. Target Sum - with plus minus +- operators - ints expression built for target  add + - sign
+# LC494. Target Sum - with plus minus +- operators - ints expressiontarget  add + - sign target expr oper
 def findTargetSumWays(self, nums: List[int], S: int) -> int:
     n = len(nums)
     @lru_cache(None)  # O(n * S)

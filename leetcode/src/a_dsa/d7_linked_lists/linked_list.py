@@ -84,7 +84,7 @@ def middleNode(self, head: ListNode) -> ListNode:
         fast = fast.next.next
     return slow
 
-# LC138. Copy List with Random Pointer
+# LC138. Copy List with Random Pointer random list
 def copyRandomList(self, head: 'Node') -> 'Node':
     if not head: return None
     walker = head  # weave in copies

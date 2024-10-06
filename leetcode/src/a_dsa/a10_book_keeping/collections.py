@@ -22,6 +22,28 @@ class BSTIterator:
 
 # LC1586. Binary Search Tree Iterator II  bst iterator 2
 class BSTIterator:
+    def __init__(self, root: TreeNode):
+        self.last = root
+        self.stack, self.arr = [], []
+        self.pointer = -1
+    def hasNext(self) -> bool:
+        return self.stack or self.last or self.pointer < len(self.arr) - 1
+    def next(self) -> int:  # O(h)
+        self.pointer += 1
+        if self.pointer == len(self.arr):
+            while self.last: # predecessors
+                self.stack.append(self.last)
+                self.last = self.last.left
+            curr = self.stack.pop()
+            self.last = curr.right
+            self.arr.append(curr.val)
+        return self.arr[self.pointer]
+    def hasPrev(self) -> bool:
+        return self.pointer > 0
+    def prev(self) -> int:
+        self.pointer -= 1
+        return self.arr[self.pointer]
+class BSTIterator:
     def __init__(self, root: Optional[TreeNode]):  # O(n) init, O(1) elsewhere. O(n) space
         self.nodes = []
         self.i = -1

@@ -698,7 +698,7 @@ def fizzBuzz(self, n: int) -> List[str]:
 
 
 
-# LC350. Intersection of Two Arrays II - same elems appear multiple times, use bag
+# LC350. Intersection of Two Arrays II - same elems appear multiple times, use bag  array intersection array
 def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:  # O(n + m)
     counts1 = collections.Counter(nums1)
     counts2 = collections.Counter(nums2)
@@ -752,6 +752,17 @@ def checkStraightLine(self, coordinates: List[List[int]]) -> bool:
     return True
 
 # LC135. Candy
+def candy(self, ratings: List[int]) -> int:
+    n = len(ratings)
+    candies = [1] * n
+    for i in range(1, n):
+        if ratings[i] > ratings[i-1]:
+            candies[i] = candies[i-1] + 1
+    for i in range(n-2, -1, -1):
+        if ratings[i] > ratings[i+1]:
+            candies[i] = max(candies[i], candies[i+1] + 1)
+    return sum(candies)
+# https://leetcode.com/problems/candy/solutions/4037646/99-20-greedy-two-one-pass/
 def candy(self, ratings: List[int]) -> int:
     ret, up, down, peak = 1, 0, 0, 0
     for prev, curr in zip(ratings[:-1], ratings[1:]):

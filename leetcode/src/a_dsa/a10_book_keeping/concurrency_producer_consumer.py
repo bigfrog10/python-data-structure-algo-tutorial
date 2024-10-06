@@ -71,6 +71,7 @@ class Solution:
             while True:
                 # use timeout to quit, or pass None here. in seconds
                 item = self.queue.get(block=True, timeout=0.05)
+                if not item: break
                 self.result.append(item)
                 for url in htmlParser.getUrls(item):
                     with self.lock:  # lock don't do anything due to GIL

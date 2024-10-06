@@ -9,17 +9,17 @@ class TreeNode:
 # 2265. Count Nodes Equal to Average of Subtree bt avg subtree avg
 def averageOfSubtree(self, root: TreeNode) -> int:
     res = 0
-    def dfs(node, total, num_nodes):
+    def dfs(node):
         if not node: return 0, 0
-        left_total, left_nn = dfs(node.left, total, num_nodes)
-        right_total, right_nn = dfs(node.right, total, num_nodes)
+        left_total, left_nn = dfs(node.left)
+        right_total, right_nn = dfs(node.right)
         this_total = left_total + right_total + node.val
         this_nn = left_nn + right_nn + 1
         if this_total // this_nn == node.val:
             nonlocal res
             res += 1
         return this_total, this_nn
-    dfs(root, 0, 0)
+    dfs(root)
     return res
 
 # LC814. Binary Tree Pruning
@@ -207,9 +207,9 @@ def validateBinaryTreeNodes(self, n: int, leftChild: List[int], rightChild: List
             if child == -1: continue  # no child
             indegree[child] -= 1
             if indegree[child] == 0: queue.append(child)
-    return sum(indegree) == 0  # all children are processed
+    return sum(indegree) == 0  # all children are processed left=[1,0]
 
-# LC572. Subtree of Another Tree  bt subroot bt subtree
+# LC572. Subtree of Another Tree  bt subroot bt subtree identical
 def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:  # O(mn)
     def is_same(node1, node2):
         if not node1 or not node2: return node1 == node2

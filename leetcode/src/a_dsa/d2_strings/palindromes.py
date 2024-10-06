@@ -158,7 +158,7 @@ def isValidPalindrome(self, s: str, k: int) -> bool:  # O(n^2) time and space
     @lru_cache(None)
     def drop(i, j):  # how many modifications we do for palindrome
         if i == j: return 0
-        if i == j-1: return 0 if s[i] == s[j] else 1
+        if i == j-1: return s[i] != s[j]
         if s[i] == s[j]: return drop(i+1, j-1)
         else: return 1 + min(drop(i+1, j), drop(i, j-1))
     return drop(0, len(s)-1) <= k

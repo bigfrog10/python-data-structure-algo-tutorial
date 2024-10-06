@@ -110,7 +110,7 @@ def isSymmetric(self, root: TreeNode) -> bool:
         return n1.val == n2.val and is_mirror(n1.left, n2.right) and is_mirror(n1.right, n2.left)
     return is_mirror(root, root)
 
-# LC1443. Minimum Time to Collect All Apples in a Tree collect apple  # not necessarily binary tree
+# LC1443. Minimum Time to Collect All Apples in a Tree collect apple  # not necessarily binary tree collect apple
 def minTime(self, n: int, edges: List[List[int]], hasApple: List[bool]) -> int:
     adj = [[] for _ in range(n)]  # graph DFS
     for u, v in edges:

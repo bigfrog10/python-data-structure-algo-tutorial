@@ -1,4 +1,22 @@
 
+# LC3043. Find the Length of the Longest Common Prefix length lcp
+def longestCommonPrefix(self, arr1: List[int], arr2: List[int]) -> int:
+    trie = {}  # O(m * log10m + n * log10n) time, O(m) space
+    for num in arr1:
+        node = trie
+        for d in str(num):
+            node = node.setdefault(d, {})
+    ans = 0
+    for num in arr2:
+        node, size = trie, 0
+        for c in str(num):
+            if c in node:
+                size += 1
+                node = node[c]
+            else: break
+        ans = max(ans, size)
+    return ans
+
 #LC256. Paint House
 def minCost(self, costs: List[List[int]]) -> int:
     costs = costs.copy()  # O(n) space and time

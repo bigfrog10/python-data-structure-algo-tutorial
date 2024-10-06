@@ -98,7 +98,8 @@ def findKthPositive(self, arr, k):  # O(logn)
         mid = (beg + end) // 2  # arr[mid] - mid - 1 is number of missings at mid.
         if arr[mid] - mid - 1 < k: beg = mid + 1
         else: end = mid
-    return end + k  # # end-1 is the largest index < k: arr[end-1] + k - (arr[end-1] - (end-1) - 1) = k + end
+    return end + k  # arr[end-1] + k - (arr[end-1] - (end-1) - 1)
+    # end-1 is the largest index < k: arr[end-1] + k - (arr[end-1] - (end-1) - 1) = k + end
 # l is the first index that gives at least k missing numbers. It may have more missing numbers than we need, so we are actually interested in index l - 1.
 # At index l - 1, we have A[l-1] - (l-1) - 1 missing numbers
 # so after index l - 1 , we need to find k - (A[l-1] - (l-1) - 1) missing numbers, i.e. k - A[l-1] + l missing numbers

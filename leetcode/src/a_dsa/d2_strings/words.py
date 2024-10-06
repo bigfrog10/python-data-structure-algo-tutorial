@@ -100,7 +100,6 @@ def wordBreak(self, s: str, wordDict):  #  we may have O(2^n) solutions, n=len(s
     word_set = set(wordDict)  # O(2^n) time and space, n = len(s), every char is a word
     @cache
     def dfs(s):
-        if s == '': return []
         output = []
         if s in word_set: output.append(s)  # one of solutions
         for i in range(len(s) - 1):

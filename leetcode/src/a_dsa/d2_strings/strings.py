@@ -65,7 +65,7 @@ def rotateString(self, A: str, B: str) -> bool:  # O(n^2)
     return len(A) == len(B) and B in A + A
     # find b in A+A can be done in O(n)
 
-# LC784. Letter Case Permutation
+# LC784. Letter Case Permutation letter Permutation
 def letterCasePermutation(self, s: str) -> List[str]:  # O(2^n), n is # of letters
     ans = [""]
     for c in s:  # for non letters, such as numbers, c.swapcase() is none

@@ -1,7 +1,7 @@
 from collections import Counter, defaultdict, deque
 import heapq
 
-# LC1976. Number of Ways to Arrive at Destination - intersections and roads   num ways arrive intersection bi-drection
+# LC1976. Number of Ways to Arrive at Destination - road intersections roads   num ways arrive intersection bi-drection
 def countPaths(self, n: int, roads: List[List[int]]) -> int:
     adj = [[] for _ in range(n)]  # O(ElogV) time, O(V + E) space
     for u, v, w in roads:  # Step 1️⃣: Build the adjacency list for the graph
@@ -24,8 +24,8 @@ def countPaths(self, n: int, roads: List[List[int]]) -> int:
                 # it's already explored, so skip this
             elif new_time < ctime[neighbor]:  # Case 2️⃣: found a shorter time to reach the neighbor
                 ctime[neighbor] = new_time
-                heapq.heappush(heap, (new_time, neighbor))
                 ways[neighbor] = ways[city]
+                heapq.heappush(heap, (new_time, neighbor))
     return ways[n-1]
 # https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
 

@@ -38,7 +38,7 @@ def numMovesStonesII(self, stones: List[int]) -> List[int]:
         # there is only 1 stone outside the sliding window, or stones are consecutive
         if j - i + 1 == n - 1 and stones[j] - stones[i] == n - 2: low = 2
         # j - i + 1 is already stored stones in the sliding window
-        else: low = min(low, n - (j - i + 1))
+        else: low = min(low, n - (j - i + 1))  # move = missing stones in window
     return [low, high]
 # https://leetcode.com/problems/moving-stones-until-consecutive-ii/solutions/1488487/python-sliding-window-with-detailed-expalanation/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
 # https://leetcode.com/problems/moving-stones-until-consecutive-ii/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
@@ -47,7 +47,7 @@ def numMovesStonesII(self, stones: List[int]) -> List[int]:
 
 
 # LC1043. Partition Array for Maximum Sum
-def maxSumAfterPartitioning(self, arr: List[int], k: int) -> int:
+def maxSumAfterPartitioning(self, arr: List[int], k: int) -> int:  # O(nk)
     n = len(arr)
     @cache
     def f(i):

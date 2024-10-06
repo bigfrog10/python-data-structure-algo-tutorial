@@ -49,9 +49,9 @@ def maxSubArrayLen(self, nums: List[int], k: int) -> int:  # O(n) time and space
         if cumu not in cache: cache[cumu] = i  # maintain earliest index
     return maxl
 
-# LC209. Minimum Size Subarray Sum - min size with sum target, all positives  min size with sub sum >= target
+# LC209. Minimum Size Subarray Sum - min size with sum target, all positives  min size with sub sum >= target min length
 def minSubArrayLen(self, s: int, nums: List[int]) -> int:  # 2 pointers , O(n) time and O(1) space
-    total = left = 0 # since all numbers are positive, this works.
+    total = left = 0 # since all numbers are positive, this works. minimal length of a subaary
     result = len(nums) + 1
     for right, n in enumerate(nums):
         total += n
@@ -189,15 +189,26 @@ def maxProduct(self, nums: List[int]) -> int:
 # LC689. Maximum Sum of 3 Non-Overlapping Subarrays    max sum of 3 non
 def maxSumOfThreeSubarrays(self, nums: List[int], k: int) -> List[int]:  # O(n)
     def maxSumOfThreeSubarrays(self, nums: List[int], k: int) -> List[int]:
-        acc = list(accumulate(nums, initial = 0))  # O(n) time and space
-        sm1 = sm2 = sm3 = 0  # sum/maximum of 1st subarray, 1st 2 subarray, 1st 3 subarrays
+        acc = list(accumulate(nums, initial=0))  # O(n) time and space
+        sm1 = sm2 = sm3 = 0  # cumu maximum of 1st subarray, 1st 2 subarray, 1st 3 subarrays
         for i, (a0,a1,a2,a3) in enumerate(zip(acc, acc[k:], acc[2*k:], acc[3*k:])):
             if a1 - a0 > sm1:
                 sm1, idx1 = a1 - a0, i
-            if a2 - a1 > sm2 - sm1:
+            if sm1 + a2 - a1 > sm2:
                 sm2, idx2 = sm1 + a2 - a1, (idx1, i+k)
-            if a3 - a2 > sm3 - sm2:
+            if sm2 + a3 - a2 > sm3:
                 sm3, idx3 = sm2 + a3 - a2, (*idx2, i+2*k)
         return idx3
 # https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/solutions/4041034/python-3-10-lines-prefix-sum-zip-t-s-100-98/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
+
+
+
+
+
+
+
+
+
+
+
 

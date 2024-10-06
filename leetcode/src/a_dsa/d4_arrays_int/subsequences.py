@@ -53,7 +53,7 @@ def maximumLength(self, nums: List[int], k: int) -> int:
         res = max(res, max(dp))
     return res
 
-# LC416. Partition Equal Subset Sum  - Knapsack  partition sub partition sum  subset equal sum
+# LC416. Partition Equal Subset Sum  - Knapsack  partition sub partition sum  subset equal sum partition half
 def canPartition(self, nums: List[int]) -> bool:  # sequence, not continuous subset
     n, total = len(nums), sum(nums)  # O(n * total)
     if total % 2 != 0: return False
@@ -72,7 +72,7 @@ def longestSubsequence(self, arr: List[int], diff: int) -> int:
         res[num] = res[num - diff] + 1 if (num - diff) in res else 1
     return max(res.values())
 
-# LC674. Longest Continuous Increasing Subsequence - max subarray increasing  max increasing subarray max incr sub
+# LC674. Longest Continuous Increasing Subsequence - long incr subarray
 def findLengthOfLCIS(self, nums: List[int]) -> int:
     ans = anchor = 0
     for i in range(len(nums)):

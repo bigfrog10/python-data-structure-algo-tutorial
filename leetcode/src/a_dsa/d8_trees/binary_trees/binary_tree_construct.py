@@ -133,14 +133,14 @@ def constructFromPrePost(self, pre: List[int], post: List[int]) -> TreeNode:
     return construct(pre, post)
 
 # LC1367. Linked List in Binary Tree  bt linked
-def isSubPath(self, head: ListNode, root: TreeNode) -> bool:
-    def dfs(head, root):
+def isSubPath(self, head: Optional[ListNode], root: Optional[TreeNode]) -> bool:
+    def same(head, root):
         if not head: return True
         if not root: return False
-        return root.val == head.val and (dfs(head.next, root.left) or dfs(head.next, root.right))
+        return root.val == head.val and (same(head.next, root.left) or same(head.next, root.right))
     if not head: return True
     if not root: return False
-    return dfs(head, root) or self.isSubPath(head, root.left) or self.isSubPath(head, root.right)
+    return same(head, root) or self.isSubPath(head, root.left) or self.isSubPath(head, root.right)
 
 # LC1485. Clone Binary Tree With Random Pointer
 def copyRandomBinaryTree(self, root: 'Node') -> 'NodeCopy':

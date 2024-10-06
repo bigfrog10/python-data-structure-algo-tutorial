@@ -37,7 +37,7 @@ def numDistinctIslands(self, grid: List[List[int]]) -> int:
             if shape: shapes.add(frozenset(shape))  # hash
     return len(shapes)
 
-# LC695. Max Area of Island
+# LC695. Max Area of Island max area
 def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
     if not grid: return 0  # O(rows * columns)
     n, m = len(grid), len(grid[0])

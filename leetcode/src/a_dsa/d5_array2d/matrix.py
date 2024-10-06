@@ -96,11 +96,11 @@ def isToeplitzMatrix(self, m):
     return all(r1[:-1] == r2[1:] for r1,r2 in zip(m, m[1:]))
 
 # LC1424. Diagonal Traverse II
-def findDiagonalOrder(self, A):
+def findDiagonalOrder(self, nums: List[List[int]]) -> List[int]:
     res = defaultdict(list)
-    for i, r in enumerate(A):
+    for i, r in enumerate(nums):
         for j, a in enumerate(r): res[i + j].append(a)
-    return [a for _, r in res.items() for a in reversed(r)]
+    return [a for r in res.values() for a in reversed(r)]
 
 # LC311. Sparse Matrix Multiplication
 def multiply(self, A: List[List[int]], B: List[List[int]]) -> List[List[int]]:
@@ -449,6 +449,16 @@ def spiralOrder(self, matrix):  # O(mn) time, O(1) space
     return result
 
 # LC59. Spiral Matrix II  generate
+def generateMatrix(self, n: int) -> List[List[int]]:
+    x, y, dx, dy = 0, 0, 1, 0
+    res = [[0 for _ in range(n)] for _ in range(n)]
+    for i in range(n * n):
+        res[y][x] = i + 1
+        if not 0 <= x + dx < n or not 0 <= y + dy < n or res[y+dy][x+dx] != 0:
+            dx, dy = -dy, dx
+        x += dx
+        y += dy
+    return res
 def generateMatrix(self, n): # this is python 3 version
     res, lo = [[n*n]], n*n
     while lo > 1:

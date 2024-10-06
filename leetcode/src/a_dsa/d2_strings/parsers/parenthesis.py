@@ -1,4 +1,6 @@
 
+# LC1021. Remove Outermost Parentheses
+
 # LC1111. Maximum Nesting Depth of Two Valid Parentheses Strings
 def maxDepthAfterSplit(self, seq: str) -> List[int]:
     A = B = 0 # max opens for 2 groups

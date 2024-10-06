@@ -101,7 +101,7 @@ def isMonotonic(self, A: List[int]) -> bool:
         if not increasing and not decreasing: return False
     return True
 
-# LC1213. Intersection of Three Sorted Arrays - 3 sorted array intersect 3 sorted
+# LC1213. Intersection of Three Sorted Arrays - 3 sorted array intersect 3 sorted intersection 3
 def arraysIntersection(self, arr1: List[int], arr2: List[int], arr3: List[int]) -> List[int]:
     ans = []
     p1 = p2 = p3 = 0
@@ -198,16 +198,16 @@ def getKth(self, lo: int, hi: int, k: int) -> int:
 def kthSmallest(self, mat: List[List[int]], k: int) -> int:  # O(nklogk) time
     def select(nums1,nums2):
         res, visited = [], set()
-        stack = [(nums1[0] + nums2[0], 0, 0)]
-        while stack:
-            total, i, j = heapq.heappop(stack)
+        heap = [(nums1[0] + nums2[0], 0, 0)]
+        while heap:
+            total, i, j = heapq.heappop(heap)
             res.append(total)
             if len(res) == k: break
             if i+1 < len(nums1) and (i+1, j) not in visited:
-                heapq.heappush(stack, (nums1[i+1] + nums2[j], i+1, j))
+                heapq.heappush(heap, (nums1[i+1] + nums2[j], i+1, j))
                 visited.add((i+1, j))
             if j+1 < len(nums2) and (i,j+1) not in visited:
-                heapq.heappush(stack, (nums1[i] + nums2[j+1], i, j+1))
+                heapq.heappush(heap, (nums1[i] + nums2[j+1], i, j+1))
                 visited.add((i, j+1))
         return res
     result = mat[0]
