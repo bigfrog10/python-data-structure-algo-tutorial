@@ -1,7 +1,7 @@
 from collections import Counter, defaultdict, deque
 import heapq
 
-# LC1976. Number of Ways to Arrive at Destination - road intersections roads   num ways arrive intersection bi-drection
+# LC1976. Number of Ways to Arrive at Destination - road intersections roads bi-directional  num ways arrive intersection bi-drection
 def countPaths(self, n: int, roads: List[List[int]]) -> int:
     adj = [[] for _ in range(n)]  # O(ElogV) time, O(V + E) space
     for u, v, w in roads:  # Step 1️⃣: Build the adjacency list for the graph

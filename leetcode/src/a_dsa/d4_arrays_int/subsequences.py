@@ -22,7 +22,7 @@ def longestSubsequenceRepeatedK(self, s: str, k: int) -> str:
     return res
 # https://leetcode.com/problems/longest-subsequence-repeated-k-times/solutions/1471930/python-answer-is-not-so-long-explained/?envType=company&envId=facebook&favoriteSlug=facebook-three-months
 
-# LC673. Number of Longest Increasing Subsequence  number LIS number
+# LC673. Number of Longest Increasing Subsequence  number LIS number long incr subseq return number of lis
 def findNumberOfLIS(self, nums: List[int]) -> int:
     if not nums: return 0  # O(n^2) time and O(n) space
     n = len(nums)
@@ -123,7 +123,7 @@ def increasingTriplet(self, nums: List[int]) -> bool:
         else: return True
     return False
 
-# LC300. Longest Increasing Subsequence  LIS length  lis seq  long incr seq
+# LC300. Longest Increasing Subsequence  LIS length  lis seq  long incr seq  return length
 def lengthOfLIS(self, nums: List[int]) -> int:  # O(nlogn) runtime, O(n) space
     hist = []  # hist[i] smallest ending element in strictly increasing sequence of length i
     for e in nums:

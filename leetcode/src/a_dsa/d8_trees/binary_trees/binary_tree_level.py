@@ -122,7 +122,7 @@ def connect(self, root: 'Node') -> 'Node':
         root = leftmost.next  # next level starting point
     return res
 
-# LC637. Average of Levels in Binary Tree bt level avg
+# LC637. Average of Levels in Binary Tree bt level avg average value  of the nodes
 def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
     level, averages = [root], []
     while level:
@@ -130,7 +130,7 @@ def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
         level = [kid for node in level for kid in (node.left, node.right) if kid]
     return averages
 
-# LC103. Binary Tree Zigzag Level Order Traversal
+# LC103. Binary Tree Zigzag Level Order Traversal  bt zigzag
 def zigzagLevelOrder(self, root):
     ans, row, drxn = [], [root], 1
     while any(row):

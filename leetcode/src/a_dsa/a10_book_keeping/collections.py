@@ -1,5 +1,5 @@
 
-# LC1773. Count Items Matching a Rule  item match rule  rulekey rulevalue
+# LC1773. Count Items Matching a Rule  item match rule  rulekey rulevalue rule repres
 def countMatches(self, items: List[List[str]], ruleKey: str, ruleValue: str) -> int:
     rule = {'type' : 0, 'color' : 1, 'name' : 2}
     return sum(1 for item in items if item[rule[ruleKey]] == ruleValue)

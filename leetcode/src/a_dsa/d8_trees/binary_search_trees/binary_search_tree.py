@@ -263,7 +263,7 @@ def inorderPredecessor(self, root, p):
             root = root.left
     return pred
 
-# LC653. Two Sum IV - Input is a BST 2sum iv
+# LC653. Two Sum IV - Input is a BST 2sum iv  2sum bst
 def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
     if not root: return False  # O(n), BST is not used
     bfs, s = [root], set()
@@ -274,7 +274,7 @@ def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
         if i.right: bfs.append(i.right)  # so we need to search both side.
     return False
 
-# LC700. Search in a Binary Search Tree
+# LC700. Search in a Binary Search Tree search bst
 def searchBST(self, root: TreeNode, val: int) -> TreeNode:
     walker = root
     while walker:  # O(H)

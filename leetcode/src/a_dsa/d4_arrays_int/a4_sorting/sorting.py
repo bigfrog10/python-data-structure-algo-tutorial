@@ -20,7 +20,7 @@ def bagOfTokensScore(self, tokens: List[int], power: int) -> int:
         else: return score
     return score
 
-# LC2824. Count Pairs Whose Sum is Less than Target  pair < target
+# LC2824. Count Pairs Whose Sum is Less than Target  pair < target pairs < target
 def countPairs(self, nums: List[int], target: int) -> int:
     ns = sorted(nums)  # O(nlogn)
     count = left = 0

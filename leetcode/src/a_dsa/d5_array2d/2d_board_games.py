@@ -68,7 +68,7 @@ def findShortestPath(self, master: 'GridMaster') -> int:  # O(cells) time and sp
     return -1
 
 
-# LC489. Robot Room Cleaner
+# LC489. Robot Room Cleaner robot clean robot move robot turnRight
 def cleanRoom(self, robot):  # O(open cells)
     def go_back():  # backout one step
         robot.turnRight()

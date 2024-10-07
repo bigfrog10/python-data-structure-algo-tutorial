@@ -85,7 +85,7 @@ def minRemoveToMakeValid(self, s: str) -> str:  # O(n) runtime and space
     ret += s[idx:]  # add leftover
     return ret
 
-# LC921. Minimum Add to Make Parentheses Valid - return num of operations   min add paren
+# LC921. Minimum Add to Make Parentheses Valid - return num of operations   min add paren min insert paren
 def minAddToMakeValid(self, S: str) -> int:  # O(n)
     left = bal = 0  # bal = # of '(' - # of ')'
     for s in S:
@@ -95,7 +95,7 @@ def minAddToMakeValid(self, S: str) -> int:  # O(n)
             bal += 1  # diff needs +1 too
     return left + bal  # "(((" -> left=0, bal=3
 
-# LC301. Remove Invalid Parentheses - with letters, return all results remove parenth
+# LC301. Remove Invalid Parentheses - with letters, return all results remove parenth make it valid
 def removeInvalidParentheses(self, s): # O(2^n) return all possible results
     def isvalid(s):  # worst case is all (, e.g., ((((( -> valid below is ''
         ctr = 0

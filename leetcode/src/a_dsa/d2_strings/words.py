@@ -96,7 +96,7 @@ def groupStrings(self, strings: List[str]) -> List[List[str]]:
     return groups.values()
 
 # LC140. Word Break II - return all possible answer
-def wordBreak(self, s: str, wordDict):  #  we may have O(2^n) solutions, n=len(s)
+def wordBreak(self, s: str, wordDict):  #  we may have O(n * 2^n) solutions, n=len(s)
     word_set = set(wordDict)  # O(2^n) time and space, n = len(s), every char is a word
     @cache
     def dfs(s):

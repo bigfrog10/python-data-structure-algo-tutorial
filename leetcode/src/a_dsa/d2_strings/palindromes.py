@@ -163,7 +163,7 @@ def isValidPalindrome(self, s: str, k: int) -> bool:  # O(n^2) time and space
         else: return 1 + min(drop(i+1, j), drop(i, j-1))
     return drop(0, len(s)-1) <= k
 
-# LC266. Palindrome Permutation - if any permuatation can be a palindrome  pali permu
+# LC266. Palindrome Permutation - if any permuatation can be a palindrome  pali permu  permu pali
 def canPermutePalindrome(self, s: str) -> bool:  # O(n) runtime, O(1) space
     counts = Counter(s)
     return 2 > sum(v % 2 for v in counts.values())

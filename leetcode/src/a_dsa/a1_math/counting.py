@@ -33,7 +33,7 @@ def mostVisitedPattern(self, username: List[str], timestamp: List[int], website:
     return counters[0][0]  # list of (3-seq, count), so [0] is (3-seq, count), next 0 is 3-seq
 
 
-# LC386. Lexicographical Numbers  lexico numbers
+# LC386. Lexicographical Numbers  lexico numbers sequence from 1,10,11,...
 def lexicalOrder(self, n: int) -> List[int]:
     num, res = 1, []
     for _ in range(n):  # Generate numbers from 1 to n

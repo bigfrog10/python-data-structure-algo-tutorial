@@ -61,7 +61,7 @@ def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]
     comb(0, [], target)
     return result
 
-# LC377. Combination Sum IV - return number of combinations
+# LC377. Combination Sum IV - return number of possible combinations
 def combinationSum4(self, nums: List[int], target: int) -> int:  # O(T * N)
     @functools.lru_cache(maxsize = None)
     def combs(remain):  # O(target)

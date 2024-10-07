@@ -57,7 +57,7 @@ def diameterOfBinaryTree(self, root: TreeNode) -> int:
     path_max(root)
     return diameter
 
-# LC1973. Count Nodes Equal to Sum of Descendants - sub nodes sum node = sum desc child sum child
+# LC1973. Count Nodes Equal to Sum of Descendants - sub nodes sum node = sum desc child sum child bt sum desc
 def equalToDescendants(self, root: Optional[TreeNode]) -> int:
     output = 0
     def traverse(node):  # return sum of this subtree
@@ -134,7 +134,7 @@ def flipEquiv(self, root1: TreeNode, root2: TreeNode) -> bool: # O(min(#nodes))
     return (self.flipEquiv(root1.left, root2.left) and self.flipEquiv(root1.right, root2.right) or
             self.flipEquiv(root1.left, root2.right) and self.flipEquiv(root1.right, root2.left))
 
-# LC257. Binary Tree Paths - return all root-leaf paths  bt paths bt tree paths
+# LC257. Binary Tree Paths - return all root-leaf paths  bt paths bt tree paths bt ->
 def binaryTreePaths(self, root: TreeNode) -> List[str]:
     ret = []
     def dfs(node, path):
@@ -179,7 +179,7 @@ def countUnivalSubtrees(self, root: TreeNode) -> int:
         return cnts, uni
     return dfs(root)[0]
 
-# LC968. Binary Tree Cameras
+# LC968. Binary Tree Cameras  bt camera
 def minCameraCover(self, root: TreeNode) -> int:
     # 0: not covered: 1: covered but not has a camera on it; 2: a camera on it.
     self.sum=0

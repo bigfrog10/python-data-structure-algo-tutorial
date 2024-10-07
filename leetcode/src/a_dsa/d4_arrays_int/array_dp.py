@@ -8,7 +8,7 @@ def stoneGameII(self, piles):  # O(n^3) time, O(n^2) space
         min_score = inf  # rival's score
         for x in range(1, 2 * m + 1):  # find which move can get maximum
             score = game(i + x, max(x, m))  # get rival's score
-            if score < min_score: min_score = score  # keep rival's minimal
+            min_score = min(min_score, score)  # keep rival's minimal
         return a[i] - min_score  # keep us maximal
     return game(0, 1)
 

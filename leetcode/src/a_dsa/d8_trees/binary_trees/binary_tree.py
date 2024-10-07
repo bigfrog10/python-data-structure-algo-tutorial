@@ -209,7 +209,7 @@ def validateBinaryTreeNodes(self, n: int, leftChild: List[int], rightChild: List
             if indegree[child] == 0: queue.append(child)
     return sum(indegree) == 0  # all children are processed left=[1,0]
 
-# LC572. Subtree of Another Tree  bt subroot bt subtree identical
+# LC572. Subtree of Another Tree  bt subroot bt subtree identical  subroot
 def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:  # O(mn)
     def is_same(node1, node2):
         if not node1 or not node2: return node1 == node2
