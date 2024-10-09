@@ -1,4 +1,27 @@
 
+# LC214. Shortest Palindrome
+def shortestPalindrome(self, s: str) -> str:
+    if not s or len(s) == 1: return s  # O(n^2)
+    j = 0
+    for i in reversed(range(len(s))):
+        if s[i] == s[j]: j += 1
+    return s[j:][::-1] + self.shortestPalindrome(s[:j-len(s)]) + s[j-len(s):]
+def shortestPalindrome(self, s: str) -> str:
+    def kmp(needle):
+        pie = [0]*len(needle)
+        i, j = 1, 0  # i start at 1
+        while i < len(needle):
+            if needle[i] == needle[j]:
+                pie[i] = j + 1
+                i, j = i+1, j+1
+            elif j > 0: j = pie[j-1]  # if not equal, if we can move j, then move it.
+            else: i += 1  # if we can't move j, then move i
+        return pie
+    rev = s[::-1]
+    prefix_table = kmp(s + "#" + rev)
+    pali_len = prefix_table[-1]
+    suffix = rev[:len(s) - pali_len]
+    return suffix + s
 # LC336. Palindrome Pairs - of a word list
 def palindromePairs(self, words: List[str]) -> List[List[int]]:  # O(nk^2)
     lookup = {w:i for i,w in enumerate(words)}

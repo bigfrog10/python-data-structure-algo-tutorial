@@ -1,4 +1,20 @@
 
+# LC1755. Closest Subsequence Sum
+def minAbsDifference(self, nums: List[int], goal: int) -> int:  # O(2^(N/2)) time and space
+    def fn(nums):  # knapshot changed to "meet in the middle"
+        ans = {0}  # O(2^(N / 2)) time in this func
+        for x in nums:
+            ans |= {x + y for y in ans}
+        return ans
+    nums0 = sorted(fn(nums[:len(nums)//2]))
+    ans = inf
+    for x in fn(nums[len(nums)//2:]):
+        k = bisect_left(nums0, goal - x)
+        # check candidates on both sides of k
+        if k < len(nums0): ans = min(ans, nums0[k] + x - goal)
+        if 0 < k: ans = min(ans, goal - x - nums0[k-1])
+    return ans
+# https://leetcode.com/problems/closest-subsequence-sum/solutions/1053790/python3-divide-in-half/
 # LC2014. Longest Subsequence Repeated k Times  sub repeat k times
 def longestSubsequenceRepeatedK(self, s: str, k: int) -> str:
     # ignore dupe chars, we have length roughly n/k. All sub seqs are 2^(n/k)

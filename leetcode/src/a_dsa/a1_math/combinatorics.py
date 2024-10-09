@@ -1,6 +1,18 @@
 from typing import List
 import math
 
+# LC3016. Minimum Number of Pushes to Type Word II
+def minimumPushes(self, word: str) -> int:
+    freq = [0] * 26
+    for c in word: freq[ord(c) - ord('a')] += 1
+    freq.sort(reverse=True)
+    # Find the size of the array without trailing zeroes
+    sz = next((i for i, x in enumerate(freq) if x == 0), 26)
+    total_pushes = 0  # Calculate the minimum pushes
+    for i in range(sz):
+        total_pushes += freq[i] * (i // 8 + 1)
+    return total_pushes
+
 # LC17. Letter Combinations of a Phone Number - phone letter combo Time & Space: O(4^n)
 def letterCombinations(self, digits):
     dict = {'2':"abc", '3':"def",  '4':"ghi", '5':"jkl",

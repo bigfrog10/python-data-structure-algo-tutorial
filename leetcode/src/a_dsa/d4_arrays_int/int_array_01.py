@@ -1,4 +1,43 @@
 
+# LC517. Super Washing Machines
+def findMinMoves(self, machines: List[int]) -> int:
+    n = len(machines)
+    dress_total = sum(machines)
+    if dress_total % n != 0: return -1
+
+    dress_per_machine = dress_total // n
+    for i in range(n):
+        # Change the number of dresses in the machines to
+        # the number of dresses to be removed from this machine
+        # (could be negative)
+        machines[i] -= dress_per_machine
+    # curr_sum is the number of dresses to move at this point,
+    # max_sum is the max number of dresses to move at this point or before,
+    # m is the number of dresses to move out from the current machine.
+    curr_sum = max_sum = res = 0
+    for m in machines:
+        curr_sum += m
+        max_sum = max(max_sum, abs(curr_sum))
+        res = max(res, max_sum, m)
+    return res
+
+# LC2340. Minimum adjacent swaps to make a valid array
+def minimumSwaps(self, nums: List[int]) -> int:
+    mx, mn = -inf, inf
+    midx = nidx = 0
+    for i, n in enumerate(nums):
+        if n >= mx:
+            mx = n
+            midx = i  # last index
+        if n < mn:
+            mn = n
+            nidx = i # 1st index
+    midx = len(nums) - midx - 1
+    if midx + nidx > len(nums) - 1:
+        return midx + nidx - 1
+    else:
+        return midx + nidx
+
 # LC629. K inverse Pairs Array
 def kInversePairs(self, n: int, k: int) -> int:
     # for k=0, dp=1, just 1..n    O(nk) time in loops, O(k) space
@@ -119,7 +158,7 @@ def minimumAddedCoins(self, coins: List[int], target: int) -> int:
             miss += coins[index]  # cover (1, miss) with new miss
             index += 1
         else:  # patch miss to the array
-            miss += miss  # cover (1, 2*miss)
+            miss += miss  # cover (1, 2*miss), add coin with value miss
             added += 1  # need new number, patch
     return added
 

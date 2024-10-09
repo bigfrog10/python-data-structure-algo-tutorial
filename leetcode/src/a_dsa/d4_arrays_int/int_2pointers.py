@@ -1,5 +1,14 @@
 from typing import List
 
+# LC2134. Minimum Swaps to Group All 1's Together II
+def minSwaps(self, nums: List[int]) -> int:
+    n, w = len(nums), sum(nums)
+    ones = max_ones = sum(nums[:w])
+    for i in range(n-1):
+        ones += nums[(i + w) % n] - nums[i]
+        max_ones = max(ones, max_ones)
+    return w - max_ones
+
 # LC992. Subarrays with K Different Integers - good subarrays  k diff   k-diff
 # https://leetcode.com/problems/subarrays-with-k-different-integers/discuss/523136/JavaC%2B%2BPython-Sliding-Window
 def subarraysWithKDistinct(self, A: List[int], K: int) -> int:  # O(n) time and O(k) space

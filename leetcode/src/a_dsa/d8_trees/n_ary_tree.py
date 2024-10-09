@@ -147,3 +147,14 @@ def findMinHeightTrees(self, n: int, edges: List[List[int]]) -> List[int]:
             if len(neighbors[nb]) == 1: new_leaves.append(nb)
         leaves = new_leaves
     return leaves  # last leaves, could be 1 or 2 leaves
+
+# LC590. N-ary Tree Postorder Traversal
+def postorder(self, root: 'Node') -> List[int]:
+    def traverse(node):
+        if not node: return
+        for child in node.children:
+            traverse(child)
+        res.append(node.val)
+    res = []
+    traverse(root)
+    return res

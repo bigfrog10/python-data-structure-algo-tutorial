@@ -1,6 +1,18 @@
 from typing import List
 from collections import Counter
 
+# LC2191. Sort the Jumbled Numbers
+def sortJumbled(self, mapping: List[int], nums: List[int]) -> List[int]:
+    def m(x):
+        if x == 0: return mapping[0]
+        res, mul = 0, 1
+        while x > 0:
+            res = res + mapping[x % 10] * mul
+            x = x // 10
+            mul *= 10
+        return res
+    return sorted(nums, key=m)
+
 # LC4. Median of Two Sorted Arrays, top100   median 2 sorted arrays  median of 2 sorted array
 def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
     m, n = len(nums1), len(nums2)  # O(log(min(m,n))) time and O(1) space

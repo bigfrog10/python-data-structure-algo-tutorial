@@ -89,6 +89,11 @@ def largestDivisibleSubset(self, nums: List[int]) -> List[int]:
                 ans[i] = ans[j] + [nums[i]]
     return max(ans, key=lambda x:len(x))
 
-
-
+# LC2028. Find Missing Observations
+def missingRolls(self, rolls: List[int], mean: int, n: int) -> List[int]:
+    sumr = sum(rolls)
+    rsum = mean * (n + len(rolls)) - sumr
+    if rsum > 6 * n or rsum < n: return []  # 6 sides
+    avg, rem = divmod(rsum, n)  # allocate evenly
+    return [avg + (i < rem) for i in range(n)]
 

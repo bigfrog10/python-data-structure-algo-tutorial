@@ -1,4 +1,53 @@
 
+# LC2977. Minimum Cost to Convert String II
+def minimumCost(self, source: str, target: str, original: List[str], changed: List[str], cost: List[int]) -> int:
+    g = defaultdict(list)  # O(target * original^2) time, O(original + target)
+    for old,new,cos in zip(original,changed,cost):
+        g[old].append([new,cos])
+    @cache
+    def dfs(node1, node2):  # cost from node1 to node2
+        pq = [(0,node1)]
+        degree={}
+        while pq:
+            cos, node = heappop(pq)
+            if node == node2: return cos
+            for nxt, co in g[node]:
+                if nxt not in degree or degree[nxt] > cos + co:
+                    heappush(pq, (cos + co, nxt))
+                    degree[nxt] = cos + co
+        return inf
+    poss_lengths = sorted(list(set(len(o) for o in original)))
+    dp = [0] + [inf] * len(target)
+    for i in range(len(target)):
+        if dp[i]==inf: continue
+        if target[i] == source[i]:
+            dp[i + 1] = min(dp[i + 1], dp[i])
+        for l in poss_lengths:
+            if i+l >= len(dp): break
+            sub_source=source[i:i+l]
+            sub_target=target[i:i+l]
+            cost = dfs(sub_source,sub_target)
+            if sub_source in g and cost < inf:
+                dp[i+l] = min(dp[i+l], dp[i] + cost)
+    return dp[-1] if dp[-1]!=inf else -1
+# https://leetcode.com/problems/minimum-cost-to-convert-string-ii/?envType=company&envId=amazon&favoriteSlug=amazon-three-months
+
+# LC2055. Plates Between Candles
+def platesBetweenCandles(self, s: str, queries: List[List[int]]) -> List[int]:
+    psum = [0] * (len(s) + 1)
+    nxt = [float("inf")] * (len(s) + 1)
+    prev = [0] * (len(s) + 1)
+    res = []
+    for i, ch in enumerate(s):
+        psum[i + 1] = psum[i] + (ch == '|')  # number of candles
+        prev[i + 1] = i if ch == '|' else prev[i] # candle position from left
+    for i, ch in reversed(list(enumerate(s))):
+        nxt[i] = i if ch == '|' else nxt[i + 1] # candle position from right
+    for q in queries:
+        l, r = nxt[q[0]], prev[q[1] + 1]
+        res.append(r - l - (psum[r] - psum[l]) if l < r else 0)
+    return res
+
 # LC1371. Find the Longest Substring Containing Vowels in Even Counts vowels even count vowel even count vowel count
 def findTheLongestSubstring(self, s: str) -> int:
     voules = {'a': 1, 'e': 2, 'i': 4, 'o': 8, 'u': 16,}

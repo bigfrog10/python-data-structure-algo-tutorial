@@ -188,20 +188,20 @@ def numDistinctIslands2(self, grid: List[List[int]]) -> int:
     return len(distinct_islands)
 
 # LC547. Number of Provinces
-def findCircleNum(self, A): # O(rows * columns)
-    N = len(A)
-    seen = set()
-    def dfs(node):
-        for nei, adj in enumerate(A[node]):
-            if adj and nei not in seen:
-                seen.add(nei)
-                dfs(nei)
-    ans = 0
-    for i in xrange(N):
-        if i not in seen:
+def findCircleNum(self, isConnected: List[List[int]]) -> int:  # O(n^2)
+    def dfs(i):
+        visited[i] = True
+        row = isConnected[i]
+        for j in range(len(isConnected)):
+            if row[j] == 1 and not visited[j]:
+                dfs(j)
+    provinces = 0
+    visited = [False] * len(isConnected)
+    for i in range(len(isConnected)):
+        if not visited[i]:
+            provinces += 1
             dfs(i)
-            ans += 1
-    return ans
+    return provinces
 
 # LC130. Surrounded Regions
 def solve(self, board):

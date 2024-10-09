@@ -42,16 +42,16 @@ def maxPoints(self, points: List[List[int]]) -> int:  # O(n^2)
     return res + 1  # plus the 1st point
 
 # LC632. Smallest Range Covering Elements from K Lists
-def smallestRange(self, A): # O(nlogk)
-    pq = [(row[0], i, 0) for i, row in enumerate(A)] # push 1st element from each list
-    heapq.heapify(pq) # (value, row, column)
-    ans = -1e9, 1e9
-    right = max(row[0] for row in A)
+def smallestRange(self, nums: List[List[int]]) -> List[int]:  # O(nlogn) time, O(n) space
+    pq = [(row[0], i, 0) for i, row in enumerate(nums)] # push 1st element from each list
+    heapq.heapify(pq) # (value, row, column)  n = len(nums)
+    ans = -inf, inf
+    right = max(row[0] for row in nums)
     while pq:
-        left, i, j = heapq.heappop(pq)
+        left, i, j = heapq.heappop(pq)  # min value
         if right - left < ans[1] - ans[0]: ans = left, right # track ans
-        if j + 1 == len(A[i]): return ans # the min row reached end
-        v = A[i][j+1] # replace minimal value with next one in same list
+        if j + 1 == len(nums[i]): return ans # the min row reached end
+        v = nums[i][j+1] # replace minimal value with next one in same list
         right = max(right, v)
         heapq.heappush(pq, (v, i, j+1))
 
