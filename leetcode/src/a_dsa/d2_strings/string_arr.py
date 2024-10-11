@@ -1,4 +1,5 @@
 
+
 # LC2977. Minimum Cost to Convert String II
 def minimumCost(self, source: str, target: str, original: List[str], changed: List[str], cost: List[int]) -> int:
     g = defaultdict(list)  # O(target * original^2) time, O(original + target)
@@ -294,3 +295,12 @@ import re
 pattern = re.compile("^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$")
 if re.findall(pattern, "120-345-6789"):
     print("120-345-6789")
+
+# LC2053. Kth Distinct String in an Array
+def kthDistinct(self, arr: List[str], k: int) -> str:
+    freqs = Counter(arr)
+    for s in arr:
+        if freqs[s] == 1:
+            k -= 1
+            if k == 0: return s
+    return ""

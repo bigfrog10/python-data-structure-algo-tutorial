@@ -129,8 +129,19 @@ def numRollsToTarget(self, d: int, f: int, target: int) -> int:
         if d <= 0 or t <= 0: return 0
         return sum(dfs(t-i, d-1) for i in range(1, f+1))
     return dfs(target, d) % int(1e9 + 7)
+def numRollsToTarget(self, n: int, k: int, target: int) -> int:
+    mod = 10**9 + 7  # space is O(t) only now
+    prev = [0] * (target + 1)
+    curr = [0] * (target + 1)
+    prev[0] = 1
+    for i in range(n):
+        for j in range(1, target + 1):
+            summ = sum(prev[j - x] for x in range(1, k + 1) if j >= x)
+            curr[j] = summ % mod
+        prev = curr[:]
+    return prev[target]
 
-# These 3 problems are same logic
+    # These 3 problems are same logic
 # LC1478. Allocate Mailboxes
 def minDistance(self, houses: List[int], k: int) -> int:
     houses.sort()  # O(n^2 * k)

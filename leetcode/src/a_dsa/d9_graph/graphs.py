@@ -1,6 +1,22 @@
 from typing import List
 from collections import defaultdict
 
+# LC1761. Minimum degree of a connected trio in a graph
+def minTrioDegree(self, n: int, edges: List[List[int]]) -> int:
+    graph = defaultdict(set) # must faster, but still
+    for u,v  in edges:  # O(E) space
+        graph[u].add(v)
+        graph[v].add(u)
+    ans = inf
+    node_degrees = sorted([[len(graph[k]), k] for k in graph])  # O(V) space
+    for a, b in edges:  # O(E)
+        w = len(graph[a]) + len(graph[b])
+        for w1, c in node_degrees:  # O(V)
+            if c in graph[a] and c in graph[b]:  # trio requirement
+                ans = min(ans, w1+w)
+                break # must have to shorten run time from 11 s to 0.66 s!!
+    return ans - 6 if ans < inf else -1
+
 # LC785. Is Graph Bipartite?
 def isBipartite(self, graph: List[List[int]]) -> bool:  # O(V + E)
     color = {}  # like seen in other cases
@@ -127,6 +143,26 @@ class UnionFind:  ## M union and find operations on N objects takes O(N + M lg* 
             self.value[pu] = w * vv / vu
             self.rank[pv] += self.rank[pu]
 
+# LC2307. Check for Contradictions in Equations
+def checkContradictions(self, equations: List[List[str]], values: List[float]) -> bool:
+    PRECISION = 10 ** -5  # O(n) time and space
+    def find(nmr):
+        root[nmr] = root.get(nmr, (nmr, 1))
+        if root[nmr][0] != nmr:
+            dnr1, q1 = root[nmr]
+            dnr2, q2 = find(dnr1)
+            root[nmr] = (dnr2, q1 * q2)
+        return root[nmr]
+    root = {}
+    for equation, q in zip(equations, values):
+        nmr1, nmr2 = equation
+        dnr1, q1 = find(nmr1)
+        dnr2, q2 = find(nmr2)
+        if dnr1 == dnr2:
+            if abs(q1 / q2 - q) >= PRECISION: return True
+        else: root[dnr2] = (dnr1, q1 / (q * q2))
+    return False
+# https://leetcode.com/problems/check-for-contradictions-in-equations/?envType=company&envId=amazon&favoriteSlug=amazon-three-months
 
 
 # LC1579. Remove Max Number of Edges to Keep Graph Fully Traversable
@@ -294,26 +330,22 @@ def findRedundantDirectedConnection(self, edges):  # [[2,3],[3,1],[3,4],[4,2]]
         p[u] = p[v]
 
 # LC1129. Shortest Path with Alternating Colors
-def shortestAlternatingPaths(self, n: int, red_edges: List[List[int]], blue_edges: List[List[int]]) -> List[int]:
-    graph = defaultdict(lambda : defaultdict(set))
-    red, blue = 0, 1
-    for st, end in red_edges: graph[st][red].add(end)
-    for st, end in blue_edges: graph[st][blue].add(end)
+def shortestAlternatingPaths(self, n: int, redEdges: List[List[int]], blueEdges: List[List[int]]) -> List[int]:
+    conns = defaultdict(list)
+    for a, b in redEdges: conns[a].append((b, 'red'))
+    for a, b in blueEdges: conns[a].append((b, 'blue'))
     res = [math.inf] * n
-    q = deque([(0,red), (0,blue)])
-    level = -1
-    while q:
-        level += 1
-        size = len(q)
-        for i in range(size):
-            node, color = q.popleft()
-            opp_color = color^1
-            res[node] = min(level, res[node])
-            neighbors = graph[node][opp_color]
-            for child in list(neighbors):
-                graph[node][opp_color].remove(child)
-                q.append((child, opp_color))
-    return [r if r != math.inf else -1 for r in res]
+    queue = deque([(0, 'red', 0), (0, 'blue', 0)])
+    visited = set()
+    while queue:
+        node, color, level = queue.popleft()
+        if (node, color) in visited: continue
+        visited.add((node, color))
+        res[node] = min(res[node], level)
+        for next_node, next_color in conns[node]:
+            if next_color != color:
+                queue.append((next_node, next_color, level + 1))
+    return [-1 if x == math.inf else x for x in res]
 
 # LC834. Sum of Distances in Tree
 def sumOfDistancesInTree(self, N: int, edges: List[List[int]]) -> List[int]:

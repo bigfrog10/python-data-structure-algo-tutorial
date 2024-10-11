@@ -133,3 +133,13 @@ def poorPigs(self, buckets: int, minutesToDie: int, minutesToTest: int) -> int:
 # LC461. Hamming Distance
 def hammingDistance(self, x: int, y: int) -> int:
     return bin(x^y)[2:].count("1")
+
+# LC89. Gray Code
+def grayCode(self, n: int) -> List[int]:
+    result = [0]
+    for i in range(n):
+        prev_size = len(result)
+        mask = 1 << i
+        for j in range(prev_size)[::-1]:
+            result.append(mask + result[j])
+    return result

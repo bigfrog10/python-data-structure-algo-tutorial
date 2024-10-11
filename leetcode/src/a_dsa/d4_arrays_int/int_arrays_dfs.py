@@ -42,7 +42,29 @@ def numSquarefulPerms(self, nums: List[int]) -> int:  # O(n!) time, O(n) space L
     dfs(sorted(nums), [])
     return self.count
 
-
+# LC2305. Fair Distribution of Cookies
+def distributeCookies(self, cookies: List[int], k: int) -> int:
+    def dfs(p):  # O(kn) time, O(k+n) space
+        nonlocal best
+        if p==len(cookies):
+            best = min(best, max(split))
+            return
+        # give to a new kid
+        if len(split)<k:
+            split.append(cookies[p])
+            dfs(p+1)
+            split.pop()
+        # give to a kid that already has cookies
+        for i in range(len(split)):
+            if split[i]+cookies[p] < best:
+                split[i] += cookies[p]
+                dfs(p+1)
+                split[i] -= cookies[p]
+    split = []
+    best = float("inf")
+    dfs(0)
+    return best
+# https://leetcode.com/problems/fair-distribution-of-cookies/solutions/3634043/python-efficient-backtracking-fully-explained/?envType=company&envId=amazon&favoriteSlug=amazon-three-months
 
 
 

@@ -247,14 +247,10 @@ def wiggleSort(self, nums):
 
 # LC937. Reorder Data in Log Files
 def reorderLogFiles(self, logs: List[str]) -> List[str]:
-    if not logs: return logs
-    la, na = [], []  # letter, number arrays
-    for s in logs:
-        sidx = s.index(' ') + 1 # first char after space
-        if s[sidx].isnumeric(): na.append(s)
-        else: la.append(s)
-    la.sort(key=lambda s: (s[s.index(' ')+1:], s[:s.index(' ')]))
-    return la + na
+    def get_key(log):
+        _id, rest = log.split(" ", maxsplit=1)
+        return (0, rest, _id) if rest[0].isalpha() else (1, )
+    return sorted(logs, key=get_key)
 
 # LC1481. Least Number of Unique Integers after K Removals
 def findLeastNumOfUniqueInts(self, arr: List[int], k: int) -> int:

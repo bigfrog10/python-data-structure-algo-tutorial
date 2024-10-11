@@ -1,4 +1,17 @@
 
+# LC2261. K Divisible Elements Subarrays
+def countDistinct(self, nums: List[int], k: int, p: int) -> int:
+    left = count = 0  # O(n^2) time and O(1) space
+    res = set()  # we have dupes
+    for right in range(len(nums)):
+        count += nums[right] % p == 0
+        while count > k:
+            count -= nums[left] % p == 0
+            left += 1
+        for i in range(left, right+1):
+            res.add(tuple(nums[i:right+1]))
+    return len(res)
+
 # LC2958. Length of Longest Subarray With at Most K Frequency
 def maxSubarrayLength(self, nums: List[int], k: int) -> int:
     n, left, result = len(nums), 0, 0

@@ -11,20 +11,20 @@ def minSwaps(self, nums: List[int]) -> int:
 
 # LC992. Subarrays with K Different Integers - good subarrays  k diff   k-diff
 # https://leetcode.com/problems/subarrays-with-k-different-integers/discuss/523136/JavaC%2B%2BPython-Sliding-Window
-def subarraysWithKDistinct(self, A: List[int], K: int) -> int:  # O(n) time and O(k) space
-    def atMostK(A, K): # we demand K diff ints
-        count = collections.Counter()
-        res = i = 0
-        for j in range(len(A)): # move right
-            if count[A[j]] == 0: K -= 1 # we don't have this char anymore
-            count[A[j]] += 1
-            while K < 0:
-                count[A[i]] -= 1
-                if count[A[i]] == 0: K += 1 # we need 1 more
-                i += 1  # left pointer move right
-            res += j - i + 1 # when k >= 0 # all substring starting j
+def subarraysWithKDistinct(self, nums: List[int], k: int) -> int:  # O(n) time and space
+    def at_most(distinctK: int) -> int:
+        freq_map = defaultdict(int)
+        res = left = 0
+        for right in range(len(nums)):
+            freq_map[nums[right]] += 1
+            while len(freq_map) > distinctK:
+                freq_map[nums[left]] -= 1
+                if freq_map[nums[left]] == 0:
+                    del freq_map[nums[left]]
+                left += 1
+            res += right - left + 1
         return res
-    return atMostK(A, K) - atMostK(A, K - 1)
+    return at_most(k) - at_most(k - 1)
 
 # LC11. Container With Most Water  container water
 def maxArea(self, height: List[int]) -> int:  # O(n) time and O(1) space

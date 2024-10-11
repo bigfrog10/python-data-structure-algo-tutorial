@@ -6,30 +6,25 @@
   <component name="ChangeListManager">
     <list default="true" id="29b13a08-5760-41f7-8cea-fc198b3bbcb2" name="Default Changelist" comment="re-org">
       <change afterPath="$PROJECT_DIR$/../../algorithms/src/dsa/arrays/test1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/strings_dp.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/a_dsa/a10_book_keeping/app_design.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/string_subarrays.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" beforeDir="false" afterPath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/a10_book_keeping/collections.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/a10_book_keeping/collections.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/a1_math/combinatorics.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/a1_math/combinatorics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/a1_math/counting.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/a1_math/counting.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/dupe_repeats.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/dupe_repeats.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/palindromes.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/palindromes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/parsers/expressions.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/parsers/expressions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/parsers/parenthesis.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/parsers/parenthesis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/words.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/words.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/array_rotated.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/array_rotated.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/sorting.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/sorting.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/array_dp.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/array_dp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/arrays.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/arrays.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d1_bits/bits.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d1_bits/bits.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/string_arr.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/string_arr.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/strings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/strings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/arrays.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/arrays.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/dp.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/dp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_2pointers.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_2pointers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_array_01.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_array_01.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_arrays.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_arrays.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_arrays_dfs.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_arrays_dfs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/subarrays_sums.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/subarrays_sums.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/subsequences.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/subsequences.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/sums.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/sums.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/2d_board_games.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/2d_board_games.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_search_trees/binary_search_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_search_trees/binary_search_tree.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree_dfs.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree_dfs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/matrix.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/topological_sort.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/topological_sort.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree_dfs_aggr.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree_dfs_aggr.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree_level.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_trees/binary_tree_level.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d9_graph/graph_heaps.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d9_graph/graph_heaps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d9_graph/graphs.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d9_graph/graphs.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,23 +84,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/code/python-data-structure-algo-tutorial/leetcode/src/a_dsa/d4_arrays_int/a4_partition",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/code/python-data-structure-algo-tutorial/leetcode/src/a_dsa/d4_arrays_int/a4_partition&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="PyCoverageOptionsProvider">
     <option name="myUseBundledCoveragePy" value="true" />
   </component>
@@ -439,6 +434,7 @@
       <workItem from="1724812784341" duration="410351000" />
       <workItem from="1726054658636" duration="61785000" />
       <workItem from="1726226850639" duration="571356000" />
+      <workItem from="1728475159133" duration="33094000" />
     </task>
     <task id="LOCAL-00001" summary="update 2 sites">
       <created>1639271849713</created>
@@ -530,14 +526,6 @@
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
       <updated>1654441307221</updated>
-    </task>
-    <task id="LOCAL-00020" summary="re-org">
-      <option name="closed" value="true" />
-      <created>1725277286098</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1725277286098</updated>
     </task>
     <task id="LOCAL-00021" summary="re-org">
       <option name="closed" value="true" />
@@ -819,7 +807,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728245387084</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="re-org">
+      <option name="closed" value="true" />
+      <created>1728475555709</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1728475555709</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

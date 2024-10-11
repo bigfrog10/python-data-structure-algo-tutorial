@@ -231,8 +231,7 @@ def coinChange(self, coins: List[int], amount: int) -> int:
     return -1
 
 # LC518. Coin Change 2 - return # of combinations
-def change(self, amount: int, coins: List[int]) -> int:  # O(amount) space
-    if not coins: return 1 if amount == 0 else 0  # time O(amount * len(coins))
+def change(self, amount: int, coins: List[int]) -> int:  # O(amount) space time O(amount * len(coins))
     dp = [1] + [0] * amount  # 1 is for 0 amount and no coins
     for c in coins:
         for i in range(c, amount+1): dp[i] += dp[i-c]
@@ -542,13 +541,14 @@ def replaceElements(self, arr: List[int]) -> List[int]:
 
 # LC414. Third Maximum Number
 def thirdMax(self, nums: List[int]) -> int:
-    v = [float('-inf'), float('-inf'), float('-inf')]
-    for num in nums:
-        if num not in v:
-            if num > v[0]:   v = [num, v[0], v[1]]
-            elif num > v[1]: v = [v[0], num, v[1]]
-            elif num > v[2]: v = [v[0], v[1], num]
-    return max(nums) if float('-inf') in v else v[2]
+    max1 = max2 = max3 = -inf
+    for n in nums:
+        if n > max1:
+            max1, max2, max3 = n, max1, max2
+        elif max1 > n > max2:  # exclude max1 = n dupe
+            max2, max3 = n, max2
+        elif max2 > n > max3: max3 = n
+    return max1 if max3 == -inf else max3
 
 # LC136. Single Number - single nodupe in array, others are 2
 def singleNumber(self, nums: List[int]) -> int:
@@ -585,6 +585,15 @@ def containsDuplicate(self, nums: List[int]) -> bool:
     return False
 def containsDuplicate(self, nums):
     return len(set(nums)) < len(nums)
+
+# LC645. Set Mismatch
+def findErrorNums(self, nums: List[int]) -> List[int]:
+    dupe = missing = -1
+    for n in nums:
+        if nums[abs(n)-1] < 0: dupe = abs(n)
+        else: nums[abs(n)-1] *= -1
+    missing = next((i+1 for i, n in enumerate(nums) if n > 0), -1)
+    return [dupe, missing]
 
 # LC485. Max Consecutive Ones   max count 1 max 1 count
 def findMaxConsecutiveOnes(self, nums: List[int]) -> int:

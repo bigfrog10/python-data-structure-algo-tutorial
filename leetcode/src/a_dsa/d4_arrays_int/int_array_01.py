@@ -1,4 +1,14 @@
 
+# LC1497. Check If Array Pairs Are Divisible by k
+def canArrange(self, arr: List[int], k: int) -> bool:
+    count = Counter()
+    for i in arr:
+        count[i % k] += 1
+    if count[0] % 2 == 1: return False
+    for key, v in count.items():
+        if key != 0 and count[key] != count[k - key]: return False
+    return True
+
 # LC517. Super Washing Machines
 def findMinMoves(self, machines: List[int]) -> int:
     n = len(machines)
@@ -218,7 +228,19 @@ def numberOfArithmeticSlices(self, nums: List[int]) -> int:
             count = 0
     return ans + count * (count + 1) // 2
 
-
+#LC2256. Minimum Average Difference
+def minimumAverageDifference(self, nums: List[int]) -> int:
+    n, total = len(nums), sum(nums)
+    ans, mind, presum = -1, inf, 0
+    for i in range(n):
+        presum += nums[i]
+        left_avg = presum // (i + 1)
+        right_avg = (total - presum) // (n - i - 1) if i != n-1 else 0
+        diff = abs(left_avg - right_avg)
+        if diff < mind:
+            mind = diff
+            ans = i
+    return ans
 
 
 

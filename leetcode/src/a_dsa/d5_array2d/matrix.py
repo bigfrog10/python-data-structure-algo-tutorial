@@ -1,6 +1,13 @@
 from typing import List
 import itertools
 
+# LC1886. Determine Whether Matrix Can Be Obtained By Rotation
+def findRotation(self, mat: List[List[int]], target: List[List[int]]) -> bool:
+    for _ in range(4): # 4 possible directions
+        if mat == target: return True
+        mat = [list(x) for x in zip(*mat[::-1])]
+    return False
+
 # LC48. Rotate Image
 def rotate(self, A):
     A[:] = zip(*A[::-1])

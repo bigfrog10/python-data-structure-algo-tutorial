@@ -536,7 +536,20 @@ def partitionLabels(self, s: str) -> List[int]: # O(n) time and space
             start = i+1
     return ret
 
-
+# LC2696. Minimum String Length After Removing Substrings
+def minLength(self, s: str) -> int:  # O(n) time and space
+    stack = []
+    for current_char in s:
+        # If the stack is empty, simply push the current character
+        if not stack:
+            stack.append(current_char)
+        elif current_char == "B" and stack[-1] == "A":
+            stack.pop()
+        elif current_char == "D" and stack[-1] == "C":
+            stack.pop()
+        else:
+            stack.append(current_char)
+    return len(stack)
 
 # LC1156. Swap For Longest Repeated Character Substring
 def maxRepOpt1(self, S):

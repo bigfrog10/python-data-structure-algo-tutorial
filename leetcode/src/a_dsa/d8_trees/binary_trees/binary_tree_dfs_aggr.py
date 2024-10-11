@@ -149,7 +149,7 @@ def smallestFromLeaf(self, root: TreeNode) -> str:
 # LC1026. Maximum Difference Between Node and Ancestor - max diff
 def maxAncestorDiff(self, root: TreeNode) -> int:
     md = 0  # along each treepath, we get min and max
-    def dfs(node, minv, maxv):
+    def dfs(node, minv, maxv):  # can't use global minv and maxv: a, b on same treepath
         nonlocal md
         if not node: return
         maxv = max(maxv, node.val)

@@ -1,4 +1,53 @@
 
+# LC2222 Number of Ways to Select Buildings
+def numberOfWays(self, s: str) -> int:  # O(n) time and O(1) space
+    ways = 0  # asked implies dp and 1/0 ending count
+    # number of 3 element seqs ending 1, 0, 01, 10
+    one = zero = zero_one = one_zero = 0
+    for c in s:
+        if c == '0':  # current is 0
+            zero += 1
+            one_zero += one  # how many 1's for 0x0
+            ways += zero_one  # how many 01's for xx0
+        else:
+            one += 1
+            zero_one += zero  # count x=0 for 1x1s
+            ways += one_zero  # count 10 for xx1 = 101
+    return ways
+# https://leetcode.com/problems/number-of-ways-to-select-buildings/solutions/1907179/java-python-3-one-pass-s-o-1-t-o-n-codes-and-follow-up-w-brief-explanation-and-analysis/?envType=company&envId=amazon&favoriteSlug=amazon-three-months
+def numberOfWays(self, s: str) -> int:  # O(n) time and O(1) space
+    k = 3
+    # ways[i][0] number of 0, 10, 010, 1010... ending 0
+    # ways[i][1] number of 1, 01, 101, 0101... ending 1
+    ways = [[0, 0] for _ in range(k)]
+    for c in s:
+        idx = ord(c) - ord('0')
+        ways[0][idx] += 1
+        for i in range(1, k):
+            ways[i][idx] += ways[i - 1][1 - idx]
+    return sum(ways[-1])
+
+# LC2035. Partition Array Into Two Arrays to Minimize Sum Difference
+def minimumDifference(self, nums: List[int]) -> int:
+    N = len(nums) // 2
+    ans = abs(sum(nums[:N]) - sum(nums[N:]))
+    total = sum(nums)
+    half = total // 2
+    for k in range(1, N):
+        left = [sum(comb) for comb in combinations(nums[:N], k)]
+        right = [sum(comb) for comb in combinations(nums[N:], N-k)]
+        right.sort()
+        for x in left:
+            r = half - x
+            p = bisect.bisect_left(right, r)
+            if 0 <= p < len(right):
+                left_ans_sum = x + right[p]
+                right_ans_sum = total - left_ans_sum
+                diff = abs(left_ans_sum - right_ans_sum)
+                ans = min(ans, diff)
+    return ans
+# https://leetcode.com/problems/partition-array-into-two-arrays-to-minimize-sum-difference/solutions/1513435/python-easy-explanation-meet-in-the-middle/?envType=company&envId=amazon&favoriteSlug=amazon-three-months
+
 # LC1755. Closest Subsequence Sum
 def minAbsDifference(self, nums: List[int], goal: int) -> int:  # O(2^(N/2)) time and space
     def fn(nums):  # knapshot changed to "meet in the middle"
@@ -15,6 +64,19 @@ def minAbsDifference(self, nums: List[int], goal: int) -> int:  # O(2^(N/2)) tim
         if 0 < k: ans = min(ans, goal - x - nums0[k-1])
     return ans
 # https://leetcode.com/problems/closest-subsequence-sum/solutions/1053790/python3-divide-in-half/
+
+# LC2915. Length of the Longest Subsequence That Sums to Target
+def lengthOfLongestSubsequence(self, nums: List[int], target: int) -> int:
+    # dp[i] length of longest seq with sum i
+    dp = [0] + [-math.inf] * target
+    for num in nums:  # O(n * target) time, O(target) space
+        for i in range(target, num - 1, -1):
+            # whether we take num or not.
+            dp[i] = max(dp[i], dp[i - num] + 1)
+    return dp[target] if dp[target] != -math.inf else -1
+# https://leetcode.com/problems/length-of-the-longest-subsequence-that-sums-to-target/solutions/4219300/simple-iterative-dp-1-d-explanation-python-6-lines-beats-100/?envType=company&envId=amazon&favoriteSlug=amazon-three-months
+
+
 # LC2014. Longest Subsequence Repeated k Times  sub repeat k times
 def longestSubsequenceRepeatedK(self, s: str, k: int) -> str:
     # ignore dupe chars, we have length roughly n/k. All sub seqs are 2^(n/k)
@@ -70,6 +132,15 @@ def maximumLength(self, nums: List[int], k: int) -> int:
     return res
 
 # LC416. Partition Equal Subset Sum  - Knapsack  partition sub partition sum  subset equal sum partition half
+def canPartition(self, nums: List[int]) -> bool:
+    total_sum = sum(nums)
+    if total_sum % 2 != 0: return False
+    subset_sum = total_sum // 2
+    dp = [True] + [False] * subset_sum
+    for curr in nums:
+        for j in range(subset_sum, curr - 1, -1):
+            dp[j] = dp[j] or dp[j - curr]
+    return dp[subset_sum]
 def canPartition(self, nums: List[int]) -> bool:  # sequence, not continuous subset
     n, total = len(nums), sum(nums)  # O(n * total)
     if total % 2 != 0: return False
