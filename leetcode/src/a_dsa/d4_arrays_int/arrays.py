@@ -1,4 +1,13 @@
 
+# LC1035. Uncrossed Lines
+def maxUncrossedLines(self, nums1: List[int], nums2: List[int]) -> int:
+    n1, n2 = len(nums1), len(nums2)
+    @cache
+    def connect(i, j):
+        if i <= 0 or j <= 0: return 0
+        if nums1[i-1] == nums2[j-1]: return 1 + connect(i-1, j-1)
+        else: return max(connect(i-1, j), connect(i, j-1))
+    return connect(n1, n2)
 
 # LC2022. Convert 1D Array Into 2D Array   1d to 2d
 def construct2DArray(self, original: List[int], m: int, n: int) -> List[List[int]]:

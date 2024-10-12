@@ -1,5 +1,17 @@
 import heapq
 
+# LC1942. The Number of the Smallest Unoccupied Chair
+def smallestChair(self, times: List[List[int]], targetFriend: int) -> int:
+    guest_arr = sorted(range(len(times)), key=lambda x: times[x][0])  # O(nlogn)
+    emptySeats, takenSeats = list(range(len(times))), []
+    for i in guest_arr:
+        ar, lv = times[i]
+        while takenSeats and takenSeats[0][0] <= ar:
+            heappush(emptySeats, heappop(takenSeats)[1])
+        seat = heappop(emptySeats)
+        if i == targetFriend: return seat
+        heappush(takenSeats,(lv, seat))
+
 # LC218. The Skyline Problem
 def getSkyline(self, buildings):  # O(nlogn)
     events = [(L, -H, R) for L, R, H in buildings] # -H for heap operations

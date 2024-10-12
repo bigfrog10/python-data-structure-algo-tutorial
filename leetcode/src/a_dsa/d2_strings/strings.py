@@ -160,6 +160,22 @@ def reorganizeString(self, s: str) -> str:
             i += 2
             if i >= n: i = 1  # revert back to index 1 to fill odd
     return ''.join(res)
+# LC1054. Distant Barcodes same as above
+def rearrangeBarcodes(self, barcodes: List[int]) -> List[int]:
+    n, counts = len(barcodes), Counter(barcodes)
+    maxk, maxc = None, -1
+    for k, c in counts.items(): # only max matters
+        if c > maxc: maxk, maxc = k, c
+    res = [0] * n
+    res[:maxc*2:2] = [maxk] * maxc
+    i = maxc*2 if maxc * 2 < n else 1
+    for k, c in counts.items():
+        if k == maxk: continue
+        for j in range(c):
+            res[i] = k
+            i += 2
+            if i >= n: i = 1  # revert back to index 1 to fill odd
+    return res
 
 # LC1055. Shortest Way to Form String
 def shortestWay(self, source, target):

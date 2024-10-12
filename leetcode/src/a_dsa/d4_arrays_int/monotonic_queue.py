@@ -1,4 +1,27 @@
 
+# LC2398. Maximum Number of Robots Within Budget
+def maximumRobots(self, chargeTimes: List[int], runningCosts: List[int], budget: int) -> int:
+    left = right = 0
+    n = len(chargeTimes)
+    unit_price = 0
+    cost = 0
+    mono_dec = deque()
+    while right < n:
+        while mono_dec and chargeTimes[right] >= chargeTimes[mono_dec[-1]]:
+            mono_dec.pop()
+        mono_dec.append(right)
+        k = right - left + 1
+        if right - mono_dec[0] == k:
+            mono_dec.popleft()
+        unit_price += runningCosts[right]
+        cost = unit_price * k
+        if cost + chargeTimes[mono_dec[0]] > budget:
+            unit_price -= runningCosts[left]
+            left += 1
+        right += 1
+    return right - left
+# https://leetcode.com/problems/maximum-number-of-robots-within-budget/solutions/5884539/sliding-window-monotonic-queue-beat-99-python-solution/?envType=company&envId=amazon&favoriteSlug=amazon-three-months
+
 # LC1696. Jump Game VI
 def maxResult(self, nums: List[int], k: int) -> int:  # O(n) time and O(k) space
     n, score = len(nums), nums[0]

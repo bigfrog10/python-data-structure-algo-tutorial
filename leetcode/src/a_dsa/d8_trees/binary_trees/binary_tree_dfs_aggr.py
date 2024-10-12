@@ -14,7 +14,21 @@ def sumNumbers(self, root: Optional[TreeNode]) -> int:  # O(n) runtime, O(h) spa
     dfs(root, 0)
     return total
 
-# LC298. Binary Tree Longest Consecutive Sequence - parent to child
+# LC1022. Sum of Root To Leaf Binary Numbers
+def sumRootToLeaf(self, root: Optional[TreeNode]) -> int:
+    def dfs(r, num):
+        nonlocal res
+        if not r: return
+        num = (num << 1) | r.val
+        if not r.left and not r.right:  # leaf
+            res += num
+        dfs(r.left, num)
+        dfs(r.right, num)
+    res = 0
+    dfs(root, 0)
+    return res
+
+    # LC298. Binary Tree Longest Consecutive Sequence - parent to child
 def longestConsecutive(self, root: Optional[TreeNode]) -> int:  # O(n) time and space
     def dfs(node: TreeNode, parent: TreeNode, length: int):
         if not node: return length

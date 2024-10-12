@@ -100,7 +100,7 @@ def dailyTemperatures(self, T: List[int]) -> List[int]:
     ans, hottest = [0] * n, 0  # O(n) runtime, O(1) space
     for currday in range(n)[::-1]:
         tempr = T[currday]
-        if tempr >= hottest:
+        if tempr >= hottest: # do nothing for increasing from right
             hottest = tempr
             continue  # the ans is 0, no need to go further.
         days = 1

@@ -1,4 +1,16 @@
 
+# LC2405. Optimal Partition of String
+def partitionString(self, s: str) -> int:
+    lastSeen = [-1]*26
+    count = 1
+    substringStarting = 0
+    for i in range(len(s)):
+        if lastSeen[ord(s[i]) - ord('a')] >= substringStarting:
+            count += 1
+            substringStarting = i
+        lastSeen[ord(s[i]) - ord('a')] = i
+    return count
+
 # LC2947. Count Beautiful Substrings I
 def beautifulSubstrings(self, s: str, k: int) -> int:  # O(n) time and space
     prefixSum = [0]

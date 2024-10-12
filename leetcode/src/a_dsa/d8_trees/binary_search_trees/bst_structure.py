@@ -74,7 +74,7 @@ def increasingBST(self, root: TreeNode) -> TreeNode:  # O(n) runtime, O(H) space
         return res
     return dfs(root, None)
 
-# LC1008. Construct Binary Search Tree from Preorder Traversal
+# LC1008. Construct Binary Search Tree from Preorder Traversal bst construct bst
 def bstFromPreorder(self, preorder: List[int]) -> Optional[TreeNode]:
     def buildTree(A, bound):
         if not A or A[-1] > bound: return None

@@ -12,7 +12,7 @@ def characterReplacement(self, s: str, k: int) -> int:
         res = max(res, end - start + 1)
     return res
 
-# LC1044. Longest Duplicate Substring
+# LC1044. Longest Duplicate Substring long dupe string long dupe substring
 def longestDupSubstring(self, S):  # O(nlogn) runtime, O(n) space, hard - Rabin-Karp
     A = [ord(c) - ord('a') for c in S]
     mod = 2**63 - 1
@@ -79,6 +79,22 @@ def lengthOfLongestSubstring(self, s: str) -> int:  # O(n) time, O(26) space for
         res = max(res, right - left + 1)  # step 3. update result
     return res
 # https://leetcode.com/problems/minimum-window-substring/
+
+# LC1100. Find k-length substrings with no repeated characters no repeat char no repeating char
+def numKLenSubstrNoRepeats(self, s: str, k: int) -> int:
+    chars = Counter()
+    res = left = 0
+    for right in range(len(s)):
+        r = s[right]
+        chars[r] += 1
+        while chars[r] > 1:
+            chars[s[left]] -= 1
+            left += 1
+        if right - left + 1 == k:
+            res += 1
+            chars[s[left]] -= 1
+            left += 1
+    return res
 
 # LC1081. Smallest Subsequence of Distinct Characters - same as above
 def removeDuplicateLetters(self, s: str) -> str:  # O(n)

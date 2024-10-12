@@ -101,26 +101,24 @@ def subarrayBitwiseORs(self, arr: List[int]) -> int:
 
 # LC957. Prison Cells After N Days
 def prisonAfterNDays(self, cells: List[int], N: int) -> List[int]:
-    if not cells: return []
-    n = len(cells)
-    arr = int(''.join(str(b) for b in cells), 2)
-    cache = {arr: 0} # state to day
-    start = end = 0 # Nones
-    for d in range(1, N+1):
-        arr = ~ ((arr << 1) ^ (arr >> 1))  # !XOR
-        arr &= 0x7e  # set head and tail to zero, 01111110
-        if arr in cache:
-            start = cache[arr]  # cycle start
-            end = d
-            break
-        else: cache[arr] = d
-    p = end - start
-    if p > 0:  # found a cycle
-        r = (N - start) % p # 0 .. start .. end .. r
-        for d in range(r):  # we reuse last arr here, which is end
-            arr = ~ (arr << 1) ^ (arr >> 1)
-            arr &= 0x7e
-    return bin(arr)[2:].zfill(n)  # remove leading 0b
+    def nextday(cells):
+        ncells = [0] *len(cells)
+        for i in range(1,len(cells)-1):
+            if cells[i-1] == cells[i+1]:
+                ncells[i] = 1
+            else:
+                ncells[i] = 0
+        return ncells
+    seen = {}
+    while N > 0:
+        c = tuple(cells)
+        if c in seen:
+            N = N % (seen[c]-N) # cycle
+        seen[c] = N
+        if N >= 1:
+            N -= 1
+            cells = nextday(cells)
+    return cells
 
 # LC458. Poor Pigs
 def poorPigs(self, buckets: int, minutesToDie: int, minutesToTest: int) -> int:

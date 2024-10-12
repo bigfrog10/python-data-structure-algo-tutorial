@@ -2,8 +2,8 @@
 # LC75. Sort Colors   Dutch National Flag
 def sortColors(self, nums: List[int]) -> None:
     p0 = 0  # for all idx < p0 : nums[idx < p0] = 0
-    curr = 0  # curr is an index of element under consideration
     p2 = len(nums) - 1  # for all idx > p2 : nums[idx > p2] = 2
+    curr = 0  # curr is an index of element under consideration
     while curr <= p2:
         if nums[curr] == 0:
             nums[p0], nums[curr] = nums[curr], nums[p0]

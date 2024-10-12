@@ -1,4 +1,22 @@
 
+# LC1065. Index Pairs of a String index text index words
+def indexPairs(self, text: str, words: List[str]) -> List[List[int]]:
+    trie = {}  # O(chars + n * longest word length)
+    for w in words:  # O(chars)
+        node = trie
+        for c in w: node = node.setdefault(c, {})
+        node['#'] = w
+    res = []
+    for i in range(len(text)):
+        node = trie
+        j = i
+        while j < len(text) and text[j] in node:
+            node = node[text[j]]
+            if '#' in node: res.append([i, j])
+            j += 1
+    return res
+# https://leetcode.com/problems/index-pairs-of-a-string/solutions/2023881/python-trie-easy-to-understand/?envType=company&envId=amazon&favoriteSlug=amazon-three-months
+
 # LC2416. Sum of Prefix Scores of Strings
 def sumPrefixScores(self, words: List[str]) -> List[int]:
     trie = {}

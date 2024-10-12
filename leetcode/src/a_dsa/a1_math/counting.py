@@ -24,7 +24,7 @@ def countPrimes(self, n: int) -> int: # Sieve of Eratosthenes
 def mostVisitedPattern(self, username: List[str], timestamp: List[int], website: List[str]) -> List[str]:
     # https://leetcode.com/problems/analyze-user-website-visit-pattern/discuss/957611/Python-Solution
     user_visits = defaultdict(list)
-    for u, t, w in sorted(zip(username, timestamp, website)):
+    for u, t, w in sorted(zip(username, timestamp, website)):  # timestamps used for sorting
         user_visits[u].append(w)
     count = []  # tuples of 3 elements
     for x in user_visits.values():  # x is list of web links
@@ -56,7 +56,20 @@ def countGoodNumbers(self, n: int) -> int:
     odd_combos = pow(4, odd_places, MOD)
     return (even_combos * odd_combos) % MOD
 
-
+# LC2979. Most Expensive Item That Can Not Be Bought
+def mostExpensiveItem(self, primeOne: int, primeTwo: int) -> int:
+    return primeOne * primeTwo - primeOne - primeTwo
+# https://en.wikipedia.org/wiki/Coin_problem
+def mostExpensiveItem(self, primeOne: int, primeTwo: int) -> int:
+    @cache
+    def dfs(num):
+        if num in [primeOne, primeTwo]: return True
+        if num < 0: return False
+        return dfs(num - primeOne) or dfs(num - primeTwo)
+    lcm = primeOne * primeTwo
+    for i in range(2, lcm)[::-1]:
+        if not dfs(i): return i
+    return 1
 
 
 

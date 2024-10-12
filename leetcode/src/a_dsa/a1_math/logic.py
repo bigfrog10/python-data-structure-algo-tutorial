@@ -28,7 +28,7 @@ def findJudge(self, n: int, trust: List[List[int]]) -> int:  # O(n) time and spa
         if count[i] == n - 1: return i
     return -1
 
-# LC1041. Robot Bounded In Circle
+# LC1041. Robot Bounded In Circle  robot circle
 def isRobotBounded(self, instructions: str) -> bool:
     # north = 0, east = 1, south = 2, west = 3
     dirs = [(0, 1), (1, 0), (0, -1), (-1, 0)]

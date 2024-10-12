@@ -92,7 +92,7 @@ def containsCycle(self, grid: List[List[str]]) -> bool:  # O(mn)
         return False
     return any((i,j) not in visited and dfs((i, j), (i, j)) for i, j in product(range(m), range(n)))
 
-# LC1102. Path With Maximum Minimum Value - minmax search
+# LC1102. Path With Maximum Minimum Value - minmax search Dijkstra
 def maximumMinimumPath(self, A: List[List[int]]) -> int:  # Time: O(MN log MN), space O(MN)
     R, C = len(A), len(A[0])  # Dijkstra
     maxHeap = [(-A[0][0], 0, 0)]

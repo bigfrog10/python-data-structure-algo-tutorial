@@ -42,7 +42,18 @@ def deleteNode(self, node):
     node.val = node.next.val
     node.next = node.next.next
 
-
+# LC2487. Remove Nodes From Linked List
+def removeNodes(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    if head is None or head.next is None:
+        return head
+    next_node = self.removeNodes(head.next)
+    # If the next node has greater value than head, delete the head
+    # Return next node, which removes the current head and
+    # makes next the new head
+    if head.val < next_node.val:
+        return next_node
+    head.next = next_node  # Keep the head
+    return head
 
 
 

@@ -149,8 +149,8 @@ def minSwaps(self, s: str) -> int:
         max_bal = max(max_bal, balance)
     return (max_bal + 1) // 2  # ceiling
 
-# LC856. Score of Parentheses
-def scoreOfParentheses(self, S: str) -> int:
+# LC856. Score of Parentheses  parenth score parenth
+def scoreOfParentheses(self, s: str) -> int:
     ans = bal = 0
     for i, x in enumerate(s):
         if x == '(': bal += 1
@@ -165,14 +165,14 @@ def diffWaysToCompute(self, expression: str) -> List[int]:
     # runtime is C_(n-1) = (select n-1 from 2(n-1)) / n, n = len(expr)
     # pn = sum(p_i * p_(n-i)) for i in 1 to n-1
     @lru_cache(None)
-    def diff_ways(expr: str):
+    def diff_ways(expr: str):  # O(n*2^n)
         res = []
         if expr.isdigit(): res.append(int(expr))  # base case
         for i, v in enumerate(expr):
             if v in '+-*':
                 pre = diff_ways(expr[0: i])
                 post = diff_ways(expr[i + 1:])
-                res.extend(a+b if v=='+' else a-b if v=='-' else a*b for a in pre for b in post)
+                res.extend(a+b if v == '+' else a-b if v == '-' else a*b for a in pre for b in post)
         return res
     return diff_ways(expression)
 

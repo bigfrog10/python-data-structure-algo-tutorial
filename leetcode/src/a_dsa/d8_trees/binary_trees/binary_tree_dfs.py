@@ -1,4 +1,34 @@
 
+# LC1214 Two Sum BSTs 2sum bst
+def twoSumBSTs(self, root1: Optional[TreeNode], root2: Optional[TreeNode], target: int) -> bool:
+    def collect(root):
+        if not root: return
+        cache.add(root.val)
+        collect(root.left)
+        collect(root.right)
+    def check(root):
+        if not root: return False
+        if target - root.val in cache: return True
+        return check(root.left) or check(root.right)
+    cache = set()
+    collect(root1)
+    return check(root2)
+
+# LC1080. Insufficient Nodes in Root to Leaf Paths
+def sufficientSubset(self, root: Optional[TreeNode], limit: int) -> Optional[TreeNode]:
+    def insufficient (node, path_sum):
+        if not node: return False
+        path_sum += node.val
+        if not node.left and not node.right:
+            return path_sum >= limit
+        left = insufficient(node.left, path_sum)
+        right = insufficient(node.right, path_sum)
+        if not left: node.left = None
+        if not right: node.right = None
+        return left or right
+    result = insufficient(root, 0)
+    return root if result else None
+
 # LC1379. Find a Corresponding Node of a Binary Tree in a Clone of That Tree  bt clone
 def getTargetCopy(self, original: TreeNode, cloned: TreeNode, target: TreeNode) -> TreeNode:
     self.ans = None
