@@ -4,25 +4,22 @@ from typing import List
 # LC802. Find Eventual Safe States
 def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
     n = len(graph)  # O(V + E) time and space
-    indegree = [0] * n
+    outdegree = [0] * n
     adj = [[] for _ in range(n)]
     for i in range(n):
         for node in graph[i]:
             adj[node].append(i)  # opposite, from node to i
-            indegree[i] += 1
-    q = deque([i for i in range(n) if indegree[i] == 0])
+            outdegree[i] += 1
+    q = deque([i for i in range(n) if outdegree[i] == 0])  # terminal nodes
     safe = [False] * n
     while q:
         node = q.popleft()
         safe[node] = True
         for neighbor in adj[node]:
-            indegree[neighbor] -= 1
-            if indegree[neighbor] == 0:
+            outdegree[neighbor] -= 1
+            if outdegree[neighbor] == 0:
                 q.append(neighbor)
-    safeNodes = []
-    for i in range(n):
-        if safe[i]: safeNodes.append(i)
-    return safeNodes
+    return [i for i in range(n) if safe[i]]
 
 # LC207. Course Schedule - true if can finish
 def canFinish(self, n, prerequisites):  # O(V + E)

@@ -235,3 +235,18 @@ class FirstUnique:
         if value not in self.count:
             self.deque.append(value)
         self.count[value] += 1  # we may have values inside queue.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -54,7 +54,20 @@ def maxProfit4(self, k: int, prices: List[int]) -> int:
                 txa[i][1] = max(txa[i][1], p - txa[i][0])  # profit
     return txa[-1][1]
 
+# There are 2 arrays which denote departing and returning flights with the respective indexes
+# being time and the values of the array being the cost it takes for the flight. Return the
+# minimum cost for a round trip provided the return flight can only be taken at a time post
+# departing flight time (i.e if departing at time i, one can catch a returning flight only
+# from time (i+1) onwards). For eg departing = [1,2,3,4] and returning = [4,3,2,1], the minimum
+# cost for round trip will be 2 i.e departing[0] + returning[3]. Solve this is O(n) time
+def findMinCost(departing, returning):
+    minDepartCost = math.inf
+    minTotalCost = math.inf
+    for i in range(len(departing) - 1):
+        minDepartCost = min(minDepartCost, departing[i])
+        minTotalCost = min(minTotalCost, returning[i+1] + minDepartCost)
 
+    return minTotalCost
 
 # return max sum of 2 elements in the array with indices apart from at least k.
 # trivial solution takes O(n^2), this takes O(n), one for loop

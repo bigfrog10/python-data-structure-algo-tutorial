@@ -153,7 +153,7 @@ def minDistance(self, houses: List[int], k: int) -> int:
             m = houses[(i+j)//2] # median
             return sum(abs(x-m) for x in houses[i:j+1])
         # try all possibilities for earch group
-        return min(dfs(i, x, 1) + dfs(x+1, j, k-1) for x in range(i, j) or [inf])
+        return min(dfs(i, x, 1) + dfs(x+1, j, k-1) for x in range(i, j))
     return dfs(0, len(houses)-1, k)
 
 # LC312. Burst Balloons - return max coins collected

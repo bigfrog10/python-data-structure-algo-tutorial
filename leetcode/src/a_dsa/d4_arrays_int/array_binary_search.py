@@ -129,11 +129,10 @@ def smallestDistancePair(self, nums: List[int], k: int) -> int:
 # LC1395. Count Number of Teams - team of 3 solders, increasing or descreasing ratings
 from sortedcontainers import SortedList
 def numTeams(self, rating: List[int]) -> int:  # nlogn
-    def count_low_high(sl, x):
+    def count_low_high(sl, x):  # counts of both sides of x, larger or smaller
         lo = sl.bisect_left(x)
         hi = len(sl) - lo
         return lo, hi
-
     result = 0
     left = SortedList()
     right = SortedList(rating)

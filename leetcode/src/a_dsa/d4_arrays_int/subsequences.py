@@ -24,11 +24,11 @@ def numberOfWays(self, s: str) -> int:  # O(n) time and O(1) space
         idx = ord(c) - ord('0')
         ways[0][idx] += 1
         for i in range(1, k):
-            ways[i][idx] += ways[i - 1][1 - idx]
+            ways[i][idx] += ways[i - 1][1 - idx]  # recursion
     return sum(ways[-1])
 
 # LC2035. Partition Array Into Two Arrays to Minimize Sum Difference
-def minimumDifference(self, nums: List[int]) -> int:
+def minimumDifference(self, nums: List[int]) -> int:  # O(n * 2^n)
     N = len(nums) // 2
     ans = abs(sum(nums[:N]) - sum(nums[N:]))
     total = sum(nums)
@@ -70,6 +70,7 @@ def lengthOfLongestSubsequence(self, nums: List[int], target: int) -> int:
     # dp[i] length of longest seq with sum i
     dp = [0] + [-math.inf] * target
     for num in nums:  # O(n * target) time, O(target) space
+        # recursion uses future values, so we start it backward
         for i in range(target, num - 1, -1):
             # whether we take num or not.
             dp[i] = max(dp[i], dp[i - num] + 1)

@@ -456,25 +456,25 @@ def spiralOrder(self, matrix):  # O(mn) time, O(1) space
     return result
 
 # LC59. Spiral Matrix II  generate
-def generateMatrix(self, n: int) -> List[List[int]]:
-    x, y, dx, dy = 0, 0, 1, 0
+def generateMatrix(self, n: int) -> List[List[int]]:  # same logic as spiral matrix
+    step = 1 # Start off going right/down vs left/up
+    i, j = 0, -1
+    k = 1
     res = [[0 for _ in range(n)] for _ in range(n)]
-    for i in range(n * n):
-        res[y][x] = i + 1
-        if not 0 <= x + dx < n or not 0 <= y + dy < n or res[y+dy][x+dx] != 0:
-            dx, dy = -dy, dx
-        x += dx
-        y += dy
+    m = n
+    while n > 0:
+        for _ in range(n): # move horizontally
+            j += step
+            res[i][j] = k
+            k += 1
+        m -= 1
+        for _ in range(m): # move vertically
+            i += step
+            res[i][j] = k
+            k += 1
+        n -= 1
+        step *= -1 # flip dir
     return res
-def generateMatrix(self, n): # this is python 3 version
-    res, lo = [[n*n]], n*n
-    while lo > 1:
-        lo, hi = lo - len(res), lo
-        print('res:', res)
-        res = [[i for i in range(lo, hi)]] + [list(j) for j in zip(*res[::-1])]
-    return res
-# [[9]] -> [[8], [9]] -> [[6, 7], [9, 8]] -> [[4, 5], [9, 6], [8, 7]]
-# -> [[1,2,3],[8,9,4],[7,6,5]]
 
 # LC885. Spiral Matrix III
 def spiralMatrixIII(self, R, C, r0, c0):

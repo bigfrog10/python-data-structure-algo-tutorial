@@ -105,7 +105,7 @@ def from_postorder(nodes: Sequence[int]) -> BinaryTree[int]:
 
 
 
-# LC1382. Balance a Binary Search Tree - balance bst
+# LC1382. Balance a Binary Search Tree - balance bst balance
 # http://www.smunlisted.com/day-stout-warren-dsw-algorithm.html
 # https://csactor.blogspot.com/2018/08/dsw-day-stout-warren-algorithm-dsw.html
 def balanceBST(self, root: TreeNode) -> TreeNode:  # O(n) runtime, O(1) space
@@ -144,7 +144,7 @@ def balanceBST(self, root: TreeNode) -> TreeNode:  # O(n) runtime and O(n) space
         inorder(node.right, li)
     def buildBst(li, start, end):  # O(N)
         if not li or start > end: return None
-        mid = start + (end - start) // 2
+        mid = (end + start) // 2
         root = li[mid]
         root.left = buildBst(li, start, mid - 1)
         root.right = buildBst(li, mid + 1, end)

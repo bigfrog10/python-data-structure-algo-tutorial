@@ -1,11 +1,11 @@
 from typing import List
 import math
 
-# LC3016. Minimum Number of Pushes to Type Word II
-def minimumPushes(self, word: str) -> int:
+# LC3016. Minimum Number of Pushes to Type Word II  phone pad min push
+def minimumPushes(self, word: str) -> int:  # O(n) time, O(1) space
     freq = [0] * 26
     for c in word: freq[ord(c) - ord('a')] += 1
-    freq.sort(reverse=True)
+    freq.sort(reverse=True)  # constant
     # Find the size of the array without trailing zeroes
     sz = next((i for i, x in enumerate(freq) if x == 0), 26)
     total_pushes = 0  # Calculate the minimum pushes
@@ -52,14 +52,14 @@ def subsets(self, nums: List[int]) -> List[List[int]]:  # samiliar to LC90
 def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:  # O(n * 2^n)
     nums.sort()
     ans = []
-    def backtrack(i, solution):  # O(n) space from solution
+    def generate(i, solution):  # O(n) space from solution
         ans.append(solution[:])  # copy
         for j in range(i, len(nums)):
             # We can re-use numbers, but not at this position and same previous premutation
             if j > i and nums[j] == nums[j-1]:
                 continue  # only when i==j, we take dupes
-            backtrack(j+1, solution + [nums[j]])  # go down 1 element and then backout to empty
-    backtrack(0, [])
+            generate(j+1, solution + [nums[j]])  # go down 1 element and then backout to empty
+    generate(0, [])
     return ans  # [[],[1],[1,2],[1,2,2],[2],[2,2]]
 
 # LC46. Permutations

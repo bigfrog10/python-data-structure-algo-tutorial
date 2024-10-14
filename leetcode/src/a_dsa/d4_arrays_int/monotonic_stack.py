@@ -179,12 +179,12 @@ def sumSubarrayMins(self, arr: List[int]) -> int:
     return res
 
 # LC962. Maximum Width Ramp
-def maxWidthRamp(self, A):
+def maxWidthRamp(self, nums: List[int]) -> int:
     res, st = 0, []
-    for i, a in enumerate(A):
-        if not st or a < A[st[-1]]: st.append(i) # decreasing stack
-    for j in range(len(A))[::-1]:
-        while st and A[j] >= A[st[-1]]: res = max(res, j - st.pop())
+    for i, a in enumerate(nums):
+        if not st or a < nums[st[-1]]: st.append(i) # decreasing stack
+    for j in range(len(nums))[::-1]:
+        while st and nums[j] >= nums[st[-1]]: res = max(res, j - st.pop())
     return res
 
 # LC496. Next Greater Element I - first greater on right, 2 arrays  1st greater

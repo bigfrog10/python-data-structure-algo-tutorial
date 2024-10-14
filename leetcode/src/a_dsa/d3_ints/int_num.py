@@ -53,17 +53,17 @@ def isPowerOfTwo(self, n: int) -> bool:
     return n != 0 and n & (n-1) == 0
 
 # LC279. Perfect Squares - min squares sum to n
-def numSquares(self, n):  # O(n * sqrt(n)
-    square_nums = [i * i for i in range(1, int(n**0.5)+1)]  # O(sqrt(n)) space
+def numSquares(self, n: int) -> int:  # O(n * sqrt(n)) time, O(sqrt(n)) space
+    squares = [i * i for i in range(1, int(n**0.5)+1)]
     queue, level = {n}, 0
     while queue:  # BFS
         level += 1
         next_queue = set()  # set cut branches
-        for remainder in queue:  # construct the queue for the next level
-            for square_num in square_nums:
-                if remainder == square_num: return level  # find the node!
-                elif remainder < square_num: break  # overed, no need to go further, cut branches
-                else: next_queue.add(remainder - square_num)
+        for rmn in queue:  # construct the queue for the next level
+            for sq in squares:
+                if rmn == sq: return level  # find the node!
+                elif rmn < sq: break  # overed, no need to go further, cut branches
+                else: next_queue.add(rmn - sq)
         queue = next_queue
     return level
 
@@ -223,16 +223,11 @@ def nthSuperUglyNumber(self, n: int, primes: List[int]) -> int:
 
 # LC1492. The kth Factor of n
 def kthFactor(self, n: int, k: int) -> int:
-    isqrt = math.isqrt(n)
-    for i in range(1, isqrt + 1):
+    count = 0
+    for i in range(1,n+1):
         if n % i == 0:
-            k -= 1
-            if k == 0: return i
-    for i in reversed(range(1, isqrt + 1)):
-        if i * i == n: continue
-        if n % i == 0:
-            k -= 1
-            if k == 0: return n // i
+            count += 1
+            if count == k: return i
     return -1
 
 # LC1842. Next Palindrome Using Same Digits
@@ -382,7 +377,7 @@ def isUgly(self, num: int) -> bool:
     return num == 1
 
 # LC264. Ugly Number II
-def nthUglyNumber(self, num: int) -> int:  # O(n) time and space
+def nthUglyNumber(self, num: int) -> int:  # O(n) time, O(1) space
     primes = [2, 3, 5]
     next_ugly = [2, 3, 5]
     increase = [1, 1, 1]

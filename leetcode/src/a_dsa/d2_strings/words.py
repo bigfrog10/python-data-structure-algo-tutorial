@@ -163,7 +163,7 @@ def wordBreak(self, s: str, wordDict: List[str]) -> bool:
 
 # LC472. Concatenated Words   concat words
 def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
-    word_set = set(words)  # O(N * M^2) time
+    word_set = set(words)  # O(N * M^3) time - M^2 nodes to search, another M for substring
     def check(word):  # could use cache here
         for i in range(1, len(word)):  # O(m^2), longest word
             if word[i:] not in word_set: continue
@@ -503,10 +503,10 @@ def countCharacters(self, words: List[str], chars: str) -> int:
 # LC1268. Search Suggestions System
 def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:  # O(nlog(n))+O(mlog(n))
     products.sort()  # O(nlogn)
-    res, prefix, i = [], '', 0
+    res, prefix = [], ''
     for c in searchWord:  # O(m)
         prefix += c
-        i = bisect.bisect_left(products, prefix)#, i)  # O(logm)
+        i = bisect.bisect_left(products, prefix)#, i)  # O(logn)
         res.append([w for w in products[i:i + 3] if w.startswith(prefix)])
     return res
 # Or Trie

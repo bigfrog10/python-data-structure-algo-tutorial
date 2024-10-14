@@ -33,6 +33,13 @@ def findMinMoves(self, machines: List[int]) -> int:
 
 # LC2340. Minimum adjacent swaps to make a valid array
 def minimumSwaps(self, nums: List[int]) -> int:
+    min_ind = nums.index(min(nums))  # first idx from left
+    max_ind = nums[::-1].index(max(nums))  # first idx from right
+    if min_ind + max_ind <= len(nums) - 1:  # [2, 1]
+        return min_ind + max_ind
+    else:
+        return min_ind + max_ind - 1  # 1 less because a dupe swap
+def minimumSwaps(self, nums: List[int]) -> int:
     mx, mn = -inf, inf
     midx = nidx = 0
     for i, n in enumerate(nums):
@@ -159,16 +166,16 @@ def minPatches(self, nums: List[int], n: int) -> int:  # O(m + logn), m = times 
     return added
 
 # same as above
-# LC2952. Minimum Number of Coins to be Added min coins
+# LC2952. Minimum Number of Coins to be Added min coins add min coins min number of coins min num coins
 def minimumAddedCoins(self, coins: List[int], target: int) -> int:
     coins = sorted(coins)
-    miss, added, index = 1, 0, 0
-    while miss <= target:  # O(logn) since we doulbe miss
-        if index < len(coins) and coins[index] <= miss:  # miss is covered
-            miss += coins[index]  # cover (1, miss) with new miss
+    covered, added, index = 1, 0, 0
+    while covered <= target:  # O(logn) since we doulbe covered
+        if index < len(coins) and covered >= coins[index]:  # covered is covered
+            covered += coins[index]  # cover (1, covered) with new covered
             index += 1
-        else:  # patch miss to the array
-            miss += miss  # cover (1, 2*miss), add coin with value miss
+        else:  # patch covered to the array
+            covered += covered  # cover (1, 2*covered), add coin with value covered
             added += 1  # need new number, patch
     return added
 

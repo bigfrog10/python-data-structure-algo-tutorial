@@ -3,7 +3,7 @@
 class MedianFinder:
     def __init__(self):
         self.heaps = [], []  # max heap from smalls, min heap from larges
-    def addNum(self, num: int) -> None:
+    def addNum(self, num: int) -> None:  # O(logn)
         small, large = self.heaps
         heappush(small, -heappushpop(large, num))
         if len(large) < len(small): heappush(large, -heappop(small))

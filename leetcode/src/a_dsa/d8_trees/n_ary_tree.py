@@ -14,7 +14,13 @@ def crawl(self, startUrl: str, htmlParser: 'HtmlParser') -> List[str]:
     dfs(startUrl, htmlParser)
     return visited
 
-# LC428. Serialize and Deserialize N-ary Tree serial nt serial
+# LC428. Serialize and Deserialize N-ary Tree serial nt serial n-ary serial nary serial
+class Codec:
+    def serialize(self, root: 'Node') -> str:
+        return [root.val] + [self.serialize(child) for child in root.children] if root else []
+    def deserialize(self, data: str) -> 'Node':
+        # O(nodes) time and O(h) space
+        return Node(data[0], [self.deserialize(child) for child in data[1:]]) if data else None
 class Codec:
     def serialize(self, root: 'Node') -> str:
         if not root: return ''

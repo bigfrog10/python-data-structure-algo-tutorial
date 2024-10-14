@@ -67,7 +67,7 @@ def isCompleteTree(self, root: Optional[TreeNode]) -> bool:  # O(N) time and spa
 def boundaryOfBinaryTree(self, root: Optional[TreeNode]) -> List[int]:  # O(n) runtime, O(n) space(stack recursion)
     def left_bound(root):
         if not root: return
-        if root.left or root.right: ans.append(root.val) # condition 1
+        if root.left or root.right: ans.append(root.val) # condition 3
         if root.left: left_bound(root.left) # condition 2
         else: left_bound(root.right) # condition 3
     def leaf(root):

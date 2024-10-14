@@ -1,12 +1,11 @@
 
 # LC214. Shortest Palindrome
 def shortestPalindrome(self, s: str) -> str:
-    if not s or len(s) == 1: return s  # O(n^2)
-    j = 0
-    for i in reversed(range(len(s))):
-        if s[i] == s[j]: j += 1
-    return s[j:][::-1] + self.shortestPalindrome(s[:j-len(s)]) + s[j-len(s):]
-def shortestPalindrome(self, s: str) -> str:
+    rs = s[::-1]
+    for i in range(len(s)):  # compare prefix with suffix
+        if rs[i:] == s[:len(s)-i]: return rs[:i] + s
+    return ""
+def shortestPalindrome1(self, s: str) -> str:
     def kmp(needle):
         pie = [0]*len(needle)
         i, j = 1, 0  # i start at 1
@@ -81,7 +80,7 @@ def longestPalindrome(self, s: str) -> str:  # O(n) time and space, Manacher's A
             Max_Len, Max_Str = dp[i], s[i-dp[i]:i+dp[i]+1].replace('#','')
     return Max_Str
 
-# LC516. Longest Palindromic Subsequence - return length
+# LC516. Longest Palindromic Subsequence - return length  long pali subseq
 def longestPalindromeSubseq(self, s: str) -> int: # O(n^2) time and space
     @lru_cache(None)
     def solve(b, e): # begin and end of the string, max len of pali seq
@@ -153,14 +152,16 @@ def canConstruct(self, s: str, k: int) -> bool:
 
 # LC564. Find the Closest Palindrome - close to given non palindrome
 def nearestPalindromic(self, n: str) -> str:
-    l = len(n)
+    ln = len(n)
     # with different digits width, it must be either 10...01 or 9...9
-    candidates = {str(10 ** l + 1), str(10 ** (l - 1) - 1)}
+    candidates = {str(10 ** ln + 1), str(10 ** (ln - 1) - 1)}  # "99" -> 101, "10" -> 9
     # the closest must be in middle digit +1, 0, -1, then flip left to right
-    prefix = int(n[:(l + 1)//2])
-    for i in map(str, (prefix - 1, prefix, prefix + 1)):
-        candidates.add(i + [i, i[:-1]][l & 1][::-1])
-    candidates.discard(n)
+    prefix = int(n[:(ln + 1)//2])
+    for i in map(str, (prefix - 1, prefix, prefix + 1,)):
+        # 123 -> 121(not 131), 2 -> 1, 123 -> 121(not 111),
+        if ln & 1: candidates.add(i + i[:-1][::-1])
+        else: candidates.add(i + i[::-1])
+    candidates.discard(n)  # "1" need this line -> 9
     return min(candidates, key=lambda x: (abs(int(x) - int(n)), int(x)))
 
 

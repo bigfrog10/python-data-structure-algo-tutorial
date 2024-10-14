@@ -1,6 +1,6 @@
 
 
-# LC2977. Minimum Cost to Convert String II
+# LC2977. Minimum Cost to Convert String II  min cost convert
 def minimumCost(self, source: str, target: str, original: List[str], changed: List[str], cost: List[int]) -> int:
     g = defaultdict(list)  # O(target * original^2) time, O(original + target)
     for old,new,cos in zip(original,changed,cost):
@@ -18,22 +18,23 @@ def minimumCost(self, source: str, target: str, original: List[str], changed: Li
                     degree[nxt] = cos + co
         return inf
     poss_lengths = sorted(list(set(len(o) for o in original)))
-    dp = [0] + [inf] * len(target)
+    dp = [0] + [inf] * len(target)  # cost to change src to target up to i prefix
     for i in range(len(target)):
-        if dp[i]==inf: continue
+        if dp[i] == inf: continue
         if target[i] == source[i]:
             dp[i + 1] = min(dp[i + 1], dp[i])
-        for l in poss_lengths:
-            if i+l >= len(dp): break
-            sub_source=source[i:i+l]
-            sub_target=target[i:i+l]
-            cost = dfs(sub_source,sub_target)
-            if sub_source in g and cost < inf:
-                dp[i+l] = min(dp[i+l], dp[i] + cost)
+        for ln in poss_lengths:
+            if i+ln >= len(dp): break
+            sub_source = source[i:i+ln]
+            sub_target = target[i:i+ln]
+            if sub_source in g:
+                cost = dfs(sub_source,sub_target)
+                if cost < inf:
+                    dp[i+ln] = min(dp[i+ln], dp[i] + cost)
     return dp[-1] if dp[-1]!=inf else -1
 # https://leetcode.com/problems/minimum-cost-to-convert-string-ii/?envType=company&envId=amazon&favoriteSlug=amazon-three-months
 
-# LC2055. Plates Between Candles
+# LC2055. Plates Between Candles  plate candle plate
 def platesBetweenCandles(self, s: str, queries: List[List[int]]) -> List[int]:
     psum = [0] * (len(s) + 1)
     nxt = [float("inf")] * (len(s) + 1)
@@ -304,3 +305,13 @@ def kthDistinct(self, arr: List[str], k: int) -> str:
             k -= 1
             if k == 0: return s
     return ""
+
+# LC187. Repeated DNA Sequences
+def findRepeatedDnaSequences(self, s: str) -> List[str]:
+    res, counter = [], Counter()
+    for i in range(len(s)-9):
+        sub = s[i:i + 10]
+        if counter[sub] == 1:
+            res.append(sub)
+        counter[sub] += 1
+    return res

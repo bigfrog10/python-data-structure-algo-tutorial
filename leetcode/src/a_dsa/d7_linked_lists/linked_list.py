@@ -200,7 +200,7 @@ def numComponents(self, head: ListNode, nums: List[int]) -> int:
         head = head.next
     return res
 
-# LC1721. Swapping Nodes in a Linked List - kth from front and end
+# LC1721. Swapping Nodes in a Linked List - kth from front and end swap kth front end
 def swapNodes(self, head: ListNode, k: int) -> ListNode:
     slow, fast = head, head
     for _ in range(k - 1): fast = fast.next  # fast is kth node

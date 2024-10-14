@@ -28,23 +28,29 @@ def beautifulSubstrings(self, s: str, k: int) -> int:  # O(n) time and space
     return ans
 
 # LC1520. Maximum Number of Non-Overlapping Substrings
-def maxNumOfSubstrings(self, s: str) -> List[str]:  # O(n)
-    c2intvs = {}
-    for i, c in enumerate(s):
-        if c in c2intvs: c2intvs[c][1] = i
-        else: c2intvs[c] = [i, i]
-    for k, v in c2intvs.items():
-        left, right = v
-        while True:
-            t = s[v[0]:v[1]+1]
-            for c in t:
-                v[0] = min(v[0], c2intvs[c][0])
-                v[1] = max(v[1], c2intvs[c][1])
-            if [left, right] == v: break
-            left, right = v
-        c2intvs[k] = (left, right)
-    intvs = sorted(list(set(c2intvs.values())), key=lambda x: x[1])
-    res = []
-    for v in intvs:
-        if not res or res[-1][1] < v[0]: res.append(v)
-    return [s[v[0]:v[1]+1] for v in res]
+def maxNumOfSubstrings(self, s: str) -> List[str]:
+    ranges = {}
+    for i, c in enumerate(s):  # O(n)
+        if c in ranges: ranges[c][0] = i
+        else: ranges[c] = [i, i]
+    for c in set(s):  # O(26)
+        r, l = ranges[c]
+        r_, l_ = -1, -1
+        while not (r_ == r and l_ == l):
+            r_, l_ = r, l
+            r = max(ranges[c][0] for c in set(s[l:r+1]))  # O(n)
+            l = min(ranges[c][1] for c in set(s[l:r+1]))
+        ranges[c] = (r, l)
+    ans, curr = [], 0
+    for r, l in sorted(ranges.values()):  # sort by ends
+        if l >= curr:  # new start >= previous end
+            ans.append(s[l:r+1])
+            curr = r
+    return ans
+# https://leetcode.com/problems/maximum-number-of-non-overlapping-substrings/solutions/744726/python-easy-to-read-solution-with-explanation/?envType=company&envId=amazon&favoriteSlug=amazon-three-months
+
+
+
+
+
+

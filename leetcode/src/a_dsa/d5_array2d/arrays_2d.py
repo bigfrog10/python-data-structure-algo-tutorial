@@ -1,4 +1,30 @@
 
+# LC1105. Filling Bookcase Shelves
+def minHeightShelves(self, books: List[List[int]], shelfWidth: int) -> int:
+    @cache
+    def place(book_idx, currw, currh):
+        if book_idx == len(books): return 0
+        bookw, bookh = books[book_idx]
+        ans = bookh + place(book_idx + 1, bookw, bookh)  # new shelf
+        if currw + bookw <= shelfWidth:   # same shelf
+            ans1 = place(book_idx + 1, currw + bookw, max(bookh, currh))
+            ans = min(ans, ans1)
+        return ans
+    return place(0, 0, 0)
+def minHeightShelves(self, books: List[List[int]], shelfWidth: int) -> int:
+    n = len(books)  # O(n*shelfWidth) time, O(n) space
+    f = [0] * (n + 1)  # f(i) shelf height up to book i
+    for i, (w, h) in enumerate(books, 1):
+        f[i] = f[i - 1] + h  # new row
+        for j in range(i - 1, 0, -1):
+            w += books[j - 1][0]  # minus 1 because i shift up by 1 in for loop
+            if w > shelfWidth: break
+            h = max(h, books[j - 1][1])
+            f[i] = min(f[i], f[j - 1] + h)
+    return f[n]
+    # https://leetcode.com/problems/filling-bookcase-shelves/solutions/5561109/pure-dp-code-98-margin-no-memoization-followed/?envType=company&envId=amazon&favoriteSlug=amazon-three-months
+
+
 # LC1947. Maximum Compatibility Score Sum  max compat score sum student compat
 def maxCompatibilitySum(self, students: List[List[int]], mentors: List[List[int]]) -> int:
     m, n = len(students), len(students[0])  # O(m^2 * 2^m * n) time, O(m * 2^m) space

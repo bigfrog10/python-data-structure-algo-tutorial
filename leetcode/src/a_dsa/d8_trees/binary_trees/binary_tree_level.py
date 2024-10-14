@@ -157,6 +157,15 @@ def levelOrder(self, root):
         level = [kid for n in level for kid in (n.left, n.right) if kid]
     return ans
 
+# LC107
+def levelOrderBottom(self, root: Optional[TreeNode]) -> List[List[int]]:
+    if not root: return []
+    ans, level = [], [root]
+    while level:
+        ans.append([node.val for node in level])
+        level = [kid for n in level for kid in (n.left, n.right) if kid]
+    return ans[::-1]
+
 # LC1609. Even Odd Tree  odd even tree bt even odd
 def isEvenOddTree(self, root: Optional[TreeNode]) -> bool:
     if not root: return True

@@ -451,8 +451,7 @@ def checkMove(self, board: List[List[str]], r: int, c: int, color: str) -> bool:
         while 8 > i >= 0 <= j < 8:
             if board[i][j] == '.'or size < 3 and board[i][j] == color:
                 break
-            if board[i][j] == color:
-                return True
+            if board[i][j] == color: return True
             i += dr
             j += dc
             size += 1

@@ -147,14 +147,7 @@ def largestNumber(self, num):  # O(nlogn)
 
 # LC904. Fruit Into Baskets - Find out the longest length of subarrays with at most 2 different numbers
 # https://leetcode.com/problems/fruit-into-baskets/discuss/170745/Problem%3A-Longest-Subarray-With-2-Elements
-def totalFruit(self, fruits: List[int]) -> int:  # O(n) time and O(1) space
-    res = cur = count_b = a = b = 0
-    for c in fruits:
-        cur = cur + 1 if c in (a, b) else count_b + 1
-        count_b = count_b + 1 if c == b else 1
-        if b != c: a, b = b, c
-        res = max(res, cur)
-    return res
+
 def totalFruit(self, fruits: List[int]) -> int:  # O(n) time, O(1) space
     res = left = 0
     counts = Counter()
@@ -166,6 +159,14 @@ def totalFruit(self, fruits: List[int]) -> int:  # O(n) time, O(1) space
             if counts[f] == 0: del counts[f]
             left += 1
         res = max(res, sum(counts.values()))
+    return res
+def totalFruit(self, fruits: List[int]) -> int:  # O(n) time and O(1) space
+    res = cur = count_b = a = b = 0
+    for c in fruits:
+        cur = cur + 1 if c in (a, b) else count_b + 1
+        count_b = count_b + 1 if c == b else 1
+        if b != c: a, b = b, c
+        res = max(res, cur)
     return res
 
 # LC755. Pour Water

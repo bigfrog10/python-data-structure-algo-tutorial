@@ -3,14 +3,14 @@
 def longestRepeatingSubstring(self, s: str) -> int:
     length = len(s)  # O(n^2)
     dp = [[0] * (length + 1) for _ in range(length + 1)]
-    max_length = 0
+    res = 0  # dp(i,j) longest substring ends (i, j)
     for i in range(1, length + 1):
         for j in range(i + 1, length + 1):
-            # Check if the characters match
+            # Check if the characters match and
             if s[i - 1] == s[j - 1]:
                 dp[i][j] = dp[i - 1][j - 1] + 1
-                max_length = max(max_length, dp[i][j])
-    return max_length
+                res = max(res, dp[i][j])
+    return res
 
 # LC3110. Score of a String score
 def scoreOfString(self, s: str) -> int:
