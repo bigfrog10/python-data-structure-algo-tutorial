@@ -2,7 +2,7 @@
 # LC2261. K Divisible Elements Subarrays
 def countDistinct(self, nums: List[int], k: int, p: int) -> int:
     left = count = 0  # O(n^2) time and O(1) space
-    res = set()  # we have dupes
+    res = set()  # we have dupes, [2,3,2] with k, p as 2, dupes are 2, (2, 2), etc
     for right in range(len(nums)):
         count += nums[right] % p == 0
         while count > k:

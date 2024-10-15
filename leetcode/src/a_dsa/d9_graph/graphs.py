@@ -87,6 +87,18 @@ def friendRequests(self, n: int, restrictions: List[List[int]], requests: List[L
 
 # LC399. Evaluate Division
 def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
+    graph = defaultdict(dict)
+    for (u, v), val in zip(equations, values):  # O(E)
+        graph[u][u] = graph[v][v] = 1
+        graph[u][v] = val
+        graph[v][u] = 1 / val
+    for k in graph:  # O(V*E)
+        for i in graph[k]:
+            for j in graph[k]:
+                graph[i][j] = graph[i][k] * graph[k][j] if i != j else 1
+    return [graph[u].get(v, -1) for u, v in queries]
+# https://leetcode.com/problems/evaluate-division/solutions/3544428/python-elegant-short-floyd-warshall
+def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
     graph = defaultdict(dict)  # O(mn)
     for (a, b), v in zip(equations, values):  # O(n)
         graph[a][b] = v

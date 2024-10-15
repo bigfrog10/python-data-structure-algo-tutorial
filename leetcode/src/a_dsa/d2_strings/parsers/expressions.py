@@ -69,7 +69,7 @@ def calculate(self, s: str) -> int:  # O(n) runtime and space
     for i, c in enumerate(s):
         if c.isdigit(): num = num * 10 + int(c)
         if c in "+-*/" or i == len(s) - 1:
-            if op == "+": stack.append(num) # previous operation, not current
+            if op == "+": stack.append(num)  # previous operation, not current
             elif op == "-": stack.append(-num)
             elif op == "*": stack.append(stack.pop() * num)
             else: stack.append(int(stack.pop() / num))  # use int for negative
@@ -93,9 +93,9 @@ def calculate(self, s):  # O(n) time and space
             sign, res = 1, 0
         elif ss == ")":
             res += sign * num   # expr inside ')'
+            num = 0
             res *= stack.pop()  # old sign before '(', -(3) shows we can't combine res and sign first
             res += stack.pop()  # old res before '('
-            num = 0
     return res + num * sign
 
 

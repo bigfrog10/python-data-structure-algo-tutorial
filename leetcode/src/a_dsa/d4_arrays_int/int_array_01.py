@@ -31,7 +31,7 @@ def findMinMoves(self, machines: List[int]) -> int:
         res = max(res, max_sum, m)
     return res
 
-# LC2340. Minimum adjacent swaps to make a valid array
+# LC2340. Minimum adjacent swaps to make a valid array adj swap adj
 def minimumSwaps(self, nums: List[int]) -> int:
     min_ind = nums.index(min(nums))  # first idx from left
     max_ind = nums[::-1].index(max(nums))  # first idx from right

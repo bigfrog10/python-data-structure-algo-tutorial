@@ -127,9 +127,9 @@ def smallestDistancePair(self, nums: List[int], k: int) -> int:
 
 
 # LC1395. Count Number of Teams - team of 3 solders, increasing or descreasing ratings
-from sortedcontainers import SortedList
-def numTeams(self, rating: List[int]) -> int:  # nlogn
-    def count_low_high(sl, x):  # counts of both sides of x, larger or smaller
+def numTeams(self, rating: List[int]) -> int:
+    from sortedcontainers import SortedList
+    def count_low_high(sl, x):
         lo = sl.bisect_left(x)
         hi = len(sl) - lo
         return lo, hi
@@ -138,8 +138,19 @@ def numTeams(self, rating: List[int]) -> int:  # nlogn
     right = SortedList(rating)
     for x in rating:  # O(n)
         right.remove(x)  # logn
-        loL, hiL = count_low_high(left ,x)
-        loR, hiR = count_low_high(right,x)
-        result += loL * hiR + hiL * loR
+        loL, hiL = count_low_high(left, x)  # x is the middle number
+        loR, hiR = count_low_high(right, x)
+        result += loL * hiR + hiL * loR  # increasing or decreasing
         left.add(x)
     return result
+    # https://leetcode.com/problems/count-number-of-teams/discuss/724711/Easiest-Code-Ever-Python-Top-97-Speed-O(-n-log-n-)-Combinatorial
+
+
+
+
+
+
+
+
+
+

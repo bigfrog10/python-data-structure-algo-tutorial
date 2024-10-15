@@ -3,11 +3,11 @@
 def partitionString(self, s: str) -> int:
     lastSeen = [-1]*26
     count = 1
-    substringStarting = 0
+    start = 0  # substringStarting
     for i in range(len(s)):
-        if lastSeen[ord(s[i]) - ord('a')] >= substringStarting:
+        if lastSeen[ord(s[i]) - ord('a')] >= start:
             count += 1
-            substringStarting = i
+            start = i
         lastSeen[ord(s[i]) - ord('a')] = i
     return count
 

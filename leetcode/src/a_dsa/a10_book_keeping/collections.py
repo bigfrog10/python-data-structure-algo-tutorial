@@ -515,13 +515,21 @@ class BrowserHistory:
 
 # LC251. Flatten 2D Vector
 class Vector2D:
-    def __init__(self, v: List[List[int]]):
-        self.nums = []
-        for inner_list in v:
-            self.nums.extend(inner_list)
-        self.position = -1
+    def __init__(self, vec: List[List[int]]):
+        self.vecs = vec[::-1]
+        self.row = None
     def next(self) -> int:
-        self.position += 1
-        return self.nums[self.position]
+        self.hasNext()
+        return self.row.pop()
     def hasNext(self) -> bool:
-        return self.position + 1 < len(self.nums)
+        while not self.row and self.vecs:
+            self.row = self.vecs.pop()[::-1]
+        return self.row is not None and len(self.row) > 0
+
+
+
+
+
+
+
+

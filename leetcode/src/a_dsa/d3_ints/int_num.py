@@ -62,8 +62,8 @@ def numSquares(self, n: int) -> int:  # O(n * sqrt(n)) time, O(sqrt(n)) space
         for rmn in queue:  # construct the queue for the next level
             for sq in squares:
                 if rmn == sq: return level  # find the node!
-                elif rmn < sq: break  # overed, no need to go further, cut branches
-                else: next_queue.add(rmn - sq)
+                if rmn < sq: break  # overed, no need to go further, cut branches
+                next_queue.add(rmn - sq)
         queue = next_queue
     return level
 

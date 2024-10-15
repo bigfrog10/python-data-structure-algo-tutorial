@@ -21,21 +21,20 @@ def shortestPalindrome1(self, s: str) -> str:
     pali_len = prefix_table[-1]
     suffix = rev[:len(s) - pali_len]
     return suffix + s
-# LC336. Palindrome Pairs - of a word list
-def palindromePairs(self, words: List[str]) -> List[List[int]]:  # O(nk^2)
-    lookup = {w:i for i,w in enumerate(words)}
-    res = []
-    for i, w in enumerate(words):  # O(n)
-        for j in range(len(w)+1):  # O(k), for case like "a", "ba"
-            pre, pos = w[:j], w[j:]
-            rev_pre, rev_pos = pre[::-1], pos[::-1]  # O(k)
-            # pre is palindrome, pos is another. != w is for distinct indices
-            if pre == rev_pre and rev_pos != w and rev_pos in lookup:
-                res.append([lookup[rev_pos], i])
-            # pos is palindrome, j != len(w) is to avoid double count for "", such as ["ab", "ba"]
-            if j != len(w) and pos == rev_pos and rev_pre != w and rev_pre in lookup:
-                res.append([i, lookup[rev_pre]])
-    return res
+# LC336. Palindrome Pairs - of a word list  pali pair
+def palindromePairs(self, words: List[str]) -> List[List[int]]:  # O(chars) time space
+    ans = []
+    dict = {word[::-1]: i for i, word in enumerate(words)}
+    for i, word in enumerate(words):
+        if "" in dict and dict[""] != i and word == word[::-1]:
+            ans.append([i, dict[""]])
+        for j in range(1, len(word) + 1):
+            left, right = word[:j], word[j:]
+            if left in dict and dict[left] != i and right == right[::-1]:
+                ans.append([i, dict[left]])
+            if right in dict and dict[right] != i and left == left[::-1]:
+                ans.append([dict[right], i])
+    return ans
 
 # LC125. Valid Palindrome - ignore non alphanumeric, check is or not
 def isPalindrome(self, s: str) -> bool:  # O(n)
