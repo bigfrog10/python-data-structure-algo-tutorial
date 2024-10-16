@@ -3,6 +3,28 @@ class ListNode:
         self.val = val
         self.next = next
 
+# LC2816. Double a Number Represented as a Linked List
+def doubleIt(self, head: ListNode) -> ListNode:
+    curr, prev = head, None  # O(n) time and O(1) space
+    while curr:
+        dv = curr.val * 2
+        if dv < 10: curr.val = dv
+        else:
+            curr.val = dv % 10
+            if prev: prev.val += 1
+            else: head = ListNode(1, curr)
+        curr, prev = curr.next, curr
+    return head
+def doubleIt(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    def double(node):  # O(n) time, O(n) space if not optimize tail recursion; O(1) if so.
+        if not node: return 0
+        dv = 2 * node.val + double(node.next)
+        node.val = dv % 10
+        return dv // 10
+    carry = double(head)
+    if carry: head = ListNode(carry, head)
+    return head
+
 # LC2807. Insert Greatest Common Divisors in Linked List    insert gcd linked list
 def insertGreatestCommonDivisors(self, head: Optional[ListNode]) -> Optional[ListNode]:
     cur = head

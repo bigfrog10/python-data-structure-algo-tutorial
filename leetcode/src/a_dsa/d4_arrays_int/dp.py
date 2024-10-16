@@ -1,4 +1,16 @@
 
+# LC2830. Maximize the Profit as the Salesman
+def maximizeTheProfit(self, n: int, offers: List[List[int]]) -> int:
+    groups = [[] for _ in range(n)]  # O(n+m) time and space
+    for start, end, gold in offers:
+        groups[end].append((start, gold))
+    f = [0] * (n+1) # earnings up to ith house
+    for end, x in enumerate(groups):
+        f[end+1] = f[end]  # not sell
+        for start, gold in x: # sell start-th house
+            f[end+1] = max(f[end+1], f[start] + gold)
+    return f[n]
+
 # LC3043. Find the Length of the Longest Common Prefix length lcp length of numbers
 def longestCommonPrefix(self, arr1: List[int], arr2: List[int]) -> int:
     trie = {}  # O(m * log10m + n * log10n) time, O(m) space
