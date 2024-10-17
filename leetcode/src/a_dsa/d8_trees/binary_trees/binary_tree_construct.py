@@ -1,5 +1,5 @@
 
-# LC894. All Possible Full Binary Trees
+# LC894. All Possible Full Binary Trees bt full bt
 def allPossibleFBT(self, n: int) -> List[Optional[TreeNode]]:
     @functools.cache
     def fbt(m):
@@ -94,7 +94,7 @@ class CBTInserter:
 
 
 
-# LC105. Construct Binary Tree from Preorder and Inorder Traversal
+# LC105. Construct Binary Tree from Preorder and Inorder Traversal preorder inorder preorder
 def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
     if not preorder: return None
     inorder_idxs = {v: i for i, v in enumerate(inorder)}

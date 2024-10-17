@@ -213,7 +213,7 @@ def minDifficulty(self, jobDifficulty: List[int], d: int) -> int:  # O(nd)
     r = dp(d-1, n-1, 0)  # we use d-1 is to accommodate jidx < days condition
     return -1 if r == float('inf') else r
 
-# LC446. Arithmetic Slices II - Subsequence
+# LC446. Arithmetic Slices II - Subsequence  arith seq
 def numberOfArithmeticSlices(self, nums: List[int]) -> int:
     n, ans = len(nums), 0
     # dic[i][d]: the number of arithmetic subsequences that ends with nums[i] and diff d

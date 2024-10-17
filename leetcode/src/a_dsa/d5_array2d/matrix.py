@@ -1,6 +1,16 @@
 from typing import List
 import itertools
 
+# LC1572. Matrix Diagonal Sum
+def diagonalSum(self, mat: List[List[int]]) -> int:
+    n = len(mat)
+    ans = idx = 0
+    for row in mat:
+        ans += row[idx] + row[~idx]
+        idx += 1
+    if n % 2 == 1: ans -= mat[n // 2][n // 2]
+    return ans
+
 # LC1886. Determine Whether Matrix Can Be Obtained By Rotation
 def findRotation(self, mat: List[List[int]], target: List[List[int]]) -> bool:
     for _ in range(4): # 4 possible directions
@@ -31,7 +41,7 @@ def reflect(self, matrix):  # flip from left to right
     return [matrix[i][::-1] for i in range(len(matrix))]
 
 # LC867. Transpose Matrix
-def transpose(self, matrix: List[List[int]]) -> List[List[int]]:
+def transpose(self, matrix: List[List[int]]) -> List[List[int]]:  # O(mn)
     return zip(*matrix)
 
 # LC149. Max Points on a Line

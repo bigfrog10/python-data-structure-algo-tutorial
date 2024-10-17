@@ -71,9 +71,25 @@ def mostExpensiveItem(self, primeOne: int, primeTwo: int) -> int:
         if not dfs(i): return i
     return 1
 
+# LC342. Power of Four
+def isPowerOfFour(self, n: int) -> bool:
+    return n > 0 and n & (n-1) == 0 and n % 3 == 1 # (n & 0x55555555) != 0
 
-
-
+# LC887. Super Egg Drop
+def superEggDrop(self, k: int, n: int) -> int:
+    drops = 0
+    # first zero means with zero eggs we can determine only 0 floors
+    floors = [0] * (k+1) # max num of floors that can be checked with i eggs(1-based)
+    while floors[k] < n:
+        for eggs in range(k, 0, -1):
+            # floors[eggs][k-1] is the case where the kth drop is not broken
+            # floors[eggs-1][k-1] is the case where the kth drop is broken
+            # They are exclusive, so we could add them together
+            # k = drops is implicit
+            floors[eggs] += 1 + floors[eggs-1]
+        drops += 1
+        print(floors)
+    return drops
 
 
 

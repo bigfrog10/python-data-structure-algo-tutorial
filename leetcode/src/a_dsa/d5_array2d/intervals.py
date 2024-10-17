@@ -447,7 +447,7 @@ def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[i
     jobs = sorted([v for v in zip(startTime, endTime, profit)], key=lambda x: x[0])
     start, end, profit = zip(*jobs) # unpack after sorting
     @lru_cache(None)
-    def dp(i):
+    def dp(i):  # profits from i and after
         if i == len(start): return 0
         j = bisect_left(start, end[i])
         return max(profit[i] + dp(j), dp(i + 1))

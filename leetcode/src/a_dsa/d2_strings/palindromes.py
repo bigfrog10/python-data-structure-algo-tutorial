@@ -1,5 +1,5 @@
 
-# LC214. Shortest Palindrome
+# LC214. Shortest Palindrome short pali shortest pali
 def shortestPalindrome(self, s: str) -> str:
     rs = s[::-1]
     for i in range(len(s)):  # compare prefix with suffix
@@ -228,12 +228,6 @@ def breakPalindrome(self, palindrome: str) -> str:
         return palindrome[:-1] + 'b'
     return palindrome[:i] + 'a' + palindrome[i+1:]
 
-
-
-
-
-
-
 # LC1312. Minimum Insertion Steps to Make a String Palindrome
 from functools import lru_cache
 def minInsertions(self, s: str) -> int:
@@ -260,3 +254,12 @@ def countPalindromicSubsequences(self, S: str) -> int:  # O(n^3)
             count += 1 if left == right else 2 + compute(left + 1, right)  # 2 for 'a', 'aa'. recursion for a*a
         return count % MOD
     return compute(0, len(S))
+
+# LC409. Longest Palindrome
+def longestPalindrome(self, s: str) -> int:
+    ans = 0
+    for v in collections.Counter(s).values():
+        ans += v // 2 * 2
+        if ans % 2 == 0 and v % 2 == 1:
+            ans += 1
+    return ans

@@ -1,5 +1,5 @@
 
-# LC2261. K Divisible Elements Subarrays
+# LC2261. K Divisible Elements Subarrays k elements k elem divisible
 def countDistinct(self, nums: List[int], k: int, p: int) -> int:
     left = count = 0  # O(n^2) time and O(1) space
     res = set()  # we have dupes, [2,3,2] with k, p as 2, dupes are 2, (2, 2), etc
@@ -109,7 +109,7 @@ def checkSubarraySum(self, nums: List[int], k: int) -> bool:  # O(n) time, space
         else: sd[summ] = i
     return False
 
-# LC974. Subarray Sums Divisible by K - return # of such sums
+# LC974. Subarray Sums Divisible by K - return # of such sums sum div by k
 def subarraysDivByK(self, A: List[int], K: int) -> int:
     if not A: return 0
     cumu = list(accumulate(A))
@@ -119,6 +119,15 @@ def subarraysDivByK(self, A: List[int], K: int) -> int:
     # once we subtract any of these 2, we have the subarray sum divided by K.
     # so selecting 2 elements has C(C-1) / 2 possibilities.
     return sum(c * (c - 1) // 2 for c in counts.values())
+def subarraysDivByK(self, nums: List[int], k: int) -> int:
+    counts = defaultdict(int)  # k residue counts
+    counts[0] = 1  # residue 0 doesn't need >1, so we compensate it
+    res = presum = 0
+    for i in range(len(nums)):
+        presum = (presum + nums[i]) % k
+        counts[presum] += 1
+        res += counts[presum] - 1
+    return res
 
 
 # LC862. Shortest Subarray with Sum at Least K - could be negative

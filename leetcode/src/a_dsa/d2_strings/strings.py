@@ -1,16 +1,20 @@
 
 # LC1062. Longest Repeating Substring
-def longestRepeatingSubstring(self, s: str) -> int:
-    length = len(s)  # O(n^2)
-    dp = [[0] * (length + 1) for _ in range(length + 1)]
-    res = 0  # dp(i,j) longest substring ends (i, j)
-    for i in range(1, length + 1):
-        for j in range(i + 1, length + 1):
-            # Check if the characters match and
-            if s[i - 1] == s[j - 1]:
-                dp[i][j] = dp[i - 1][j - 1] + 1
-                res = max(res, dp[i][j])
-    return res
+def longestRepeatingSubstring(self, s: str) -> int:  # O(nlogn)
+    def valid(n):
+        currStr = s[:n]  # search substring with length n, O(n)
+        seen = set([currStr])
+        for i in range(n, len(s)):
+            currStr = currStr[1:] + s[i]
+            if(currStr in seen): return True
+            seen.add(currStr)
+        return False
+    left, right = 1, len(s)
+    while left <= right:
+        mid = (left + right) // 2
+        if valid(mid): left = mid + 1
+        else: right = mid - 1
+    return right
 
 # LC3110. Score of a String score
 def scoreOfString(self, s: str) -> int:
@@ -641,3 +645,46 @@ def strongPasswordChecker(self, password: str) -> int:
         reps -= min(max(dels - one, 0), two * 2) // 2
         reps -= max(dels - one - 2 * two, 0) // 3
         return dels + max(missing, reps)
+
+# LC844. Backspace String Compare
+def backspaceCompare(self, s: str, t: str) -> bool:
+    def do(s):
+        st = []
+        for c in s:
+            if c == '#':
+                if st: st.pop()
+            else: st.append(c)
+        return st
+    return do(s) == do(t)
+
+# LC
+def gap(s: str):
+    counts = Counter("programmer")
+    cs1 = Counter()
+    ri = li = 0
+    for i, c in enumerate(s):
+        cs1[c] += 1
+        r = True
+        for k, v in counts.items():
+            if v - cs1[k] > 0:
+                r = False
+                break
+        if r:
+            ri = i
+            break
+    cs1 = Counter()
+    for i, c in enumerate(s)[::-1]:
+        cs1[c] += 1
+        r = True
+        for k, v in counts.items():
+            if v - cs1[k] > 0:
+                r = False
+                break
+        if r:
+            li = i
+            break
+    return len(s) - li - ri
+
+
+
+

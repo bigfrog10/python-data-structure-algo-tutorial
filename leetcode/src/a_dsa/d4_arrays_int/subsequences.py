@@ -27,7 +27,7 @@ def numberOfWays(self, s: str) -> int:  # O(n) time and O(1) space
             ways[i][idx] += ways[i - 1][1 - idx]  # recursion
     return sum(ways[-1])
 
-# LC2035. Partition Array Into Two Arrays to Minimize Sum Difference
+# LC2035. Partition Array Into Two Arrays to Minimize Sum Difference array min abs diff
 def minimumDifference(self, nums: List[int]) -> int:  # O(n * 2^n)
     N = len(nums) // 2
     ans = abs(sum(nums[:N]) - sum(nums[N:]))

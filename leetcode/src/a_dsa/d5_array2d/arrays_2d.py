@@ -11,7 +11,7 @@ def minHeightShelves(self, books: List[List[int]], shelfWidth: int) -> int:
             ans1 = place(book_idx + 1, currw + bookw, max(bookh, currh))
             ans = min(ans, delta + ans1)
         return ans
-    return place(0, 0, 0)
+    return place(0, 0, 0)  # height after placing ith book to nth book
 def minHeightShelves(self, books: List[List[int]], shelfWidth: int) -> int:
     n = len(books)  # O(n*shelfWidth) time, O(n) space
     f = [0] * (n + 1)  # f(i) shelf height up to book i
@@ -311,3 +311,14 @@ def isRectangleOverlap(self, rec1: List[int], rec2: List[int]) -> bool:
     x2 = min(C, G)
     y2 = min(D, H)
     return x1 < x2 and y1 < y2
+
+# LC853. Car Fleet
+def carFleet(self, target: int, pos: List[int], speed: List[int]) -> int:  # O(nlogn)
+    time = [float(target - p) / s for p, s in sorted(zip(pos, speed))]
+    res = slowest = 0  # fleets are counted by slowest cars
+    for t in time[::-1]:
+        if t > slowest:
+            res += 1
+            slowest = t  # in the same group, diff from prev slowest group
+    return res
+# https://leetcode.com/problems/car-fleet/solutions/139850/c-java-python-straight-forward

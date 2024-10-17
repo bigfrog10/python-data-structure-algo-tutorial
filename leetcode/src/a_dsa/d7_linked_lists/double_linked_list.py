@@ -1,5 +1,5 @@
 
-# LC430. Flatten a Multilevel Doubly Linked List
+# LC430. Flatten a Multilevel Doubly Linked List flatten doubly
 def flatten(self, head: 'Node') -> 'Node': # DFS
     if not head: return None
     prev = dummy = Node(0, None, head, None)

@@ -133,11 +133,23 @@ def hammingDistance(self, x: int, y: int) -> int:
     return bin(x^y)[2:].count("1")
 
 # LC89. Gray Code
-def grayCode(self, n: int) -> List[int]:
+def grayCode(self, n: int) -> List[int]:  # O(2^n)
     result = [0]
     for i in range(n):
-        prev_size = len(result)
         mask = 1 << i
+        prev_size = len(result)
         for j in range(prev_size)[::-1]:
             result.append(mask + result[j])
     return result
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,14 @@
 from typing import List
 from collections import Counter
 
+# LC1287. Element Appearing More Than 25% In Sorted Array
+def findSpecialInteger(self, arr: List[int]) -> int:
+    size = len(arr) // 4
+    for i in range(len(arr) - size):
+        if arr[i] == arr[i + size]:  # because arr is sorted
+            return arr[i]
+    return -1
+
 # LC2191. Sort the Jumbled Numbers
 def sortJumbled(self, mapping: List[int], nums: List[int]) -> List[int]:
     def m(x):

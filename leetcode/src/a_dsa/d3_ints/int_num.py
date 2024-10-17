@@ -14,8 +14,8 @@ def findNthDigit(self, n: int) -> int:  # O(logn) time since we go by digits
     for digit in range(1, 11):  # loop groups 10-99, 100-999, ...
         first = 10**(digit - 1)  # the first element in the groups, 1, 10, 100, 1000
         # 9 * first - the size of the group. 9, 90, 900, 9000
-        nums = 9 * first * digit  # total number of digits in this group, 1＊9, 2＊90, 3＊900, 4＊9000
-        # - each number in this group has "digit" digits, e.g., 11 has 2 digits
+        nums = digit * 9 * first  # total number of digits in this group, 1＊9, 2＊90, 3＊900, 4＊9000
+        # each number in this group has "digit" digits, e.g., 11 has 2 digits
         # first + n/digits is the number contains nth digit - "digits" is the width of each num in this group
         if n < nums: return int(str(first + n // digit)[n % digit])  # first + .. is the number where the digit is
         n -= nums
@@ -104,7 +104,7 @@ def reverse(self, x: int) -> int:
         if res > 2**31-1: return 0
     return res if x > 0 else -res
 
-# LC93. Restore IP Addresses - chart in solution is interesting
+# LC93. Restore IP Addresses - chart in solution is interesting  valid ip address
 def restoreIpAddresses(self, s: str) -> List[str]:
     res = []  # 3^3 possibilities, start or ., have only 3 possibility to put the next dot.
     def add_dot(segs, start):
@@ -394,15 +394,16 @@ def nthUglyNumber(self, num: int) -> int:  # O(n) time, O(1) space
 # https://leetcode.com/problems/ugly-number-ii/solutions/5652689/easy-heap-dp-solution-beats-100/
 
 # LC402. Remove K Digits - int remove digits to get min
-def removeKdigits(self, num: str, k: int) -> str:
-    numStack = []
-    for digit in num:  # monotone increasing
-        while k and numStack and numStack[-1] > digit:
-            numStack.pop()
+def removeKdigits(self, num: str, k: int) -> str:  # O(n) time and space
+    st = []  # monotone increasing
+    for digit in num:
+        while k and st and digit < st[-1]:
+            st.pop()
             k -= 1
-        numStack.append(digit)
-    finalStack = numStack[:-k] if k else numStack
-    return "".join(finalStack).lstrip('0') or "0"
+        st.append(digit)
+    # - Trunk the remaining K digits at the end
+    st = st[:-k] if k else st  # :-k smaller since st increasing
+    return "".join(st).lstrip('0') or "0"
 
 # LC299. Bulls and Cows
 def getHint(self, secret: str, guess: str) -> str:
@@ -467,7 +468,7 @@ def countNumbersWithUniqueDigits(self, n: int) -> int:
     # n=1, there are 10 nums. n > 9, first digit has 9 options, can't be 0 on leading.
     res, cnt = 10, 9
     for i in range(n-1):
-        cnt *= 9 - i
+        cnt *= 9 - i  # minus existing digits
         res += cnt
     return res
 

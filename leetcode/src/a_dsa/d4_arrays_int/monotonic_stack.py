@@ -31,7 +31,7 @@ def maxChunksToSorted(self, arr: List[int]) -> int:
         stack.append(_max)  # these can be sorted in 1 block
     return len(stack)
 
-# LC1642. Furthest Building You Can Reach - furthest jump furthest building  reach building tallest building
+# LC1642. Furthest Building You Can Reach - furthest jump furthest building  reach building tallest building tall building
 def furthestBuilding(self, heights: List[int], bricks: int, ladders: int) -> int:
     heap = []   ## O(NlogK) time and O(k) space, k=len(ladders)
     for i in range(len(heights) - 1):
