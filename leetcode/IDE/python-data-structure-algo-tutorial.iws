@@ -7,10 +7,10 @@
     <list default="true" id="29b13a08-5760-41f7-8cea-fc198b3bbcb2" name="Default Changelist" comment="re-org">
       <change afterPath="$PROJECT_DIR$/../../algorithms/src/dsa/arrays/test1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" beforeDir="false" afterPath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/dp.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/dp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/sums.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/sums.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d7_linked_lists/linked_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d7_linked_lists/linked_list.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_search_trees/binary_search_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d8_trees/binary_search_trees/binary_search_tree.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/dupe_repeats.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/dupe_repeats.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/parsers/parenthesis.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/parsers/parenthesis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/heap.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/a4_sorting/heap.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/monotonic_stack.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/monotonic_stack.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -421,7 +421,7 @@
       <workItem from="1726054658636" duration="61785000" />
       <workItem from="1726226850639" duration="571356000" />
       <workItem from="1728475159133" duration="110771000" />
-      <workItem from="1729080255947" duration="727000" />
+      <workItem from="1729080255947" duration="31147000" />
     </task>
     <task id="LOCAL-00001" summary="update 2 sites">
       <created>1639271849713</created>
@@ -513,22 +513,6 @@
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
       <updated>1654441307221</updated>
-    </task>
-    <task id="LOCAL-00024" summary="re-org">
-      <option name="closed" value="true" />
-      <created>1725537584440</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1725537584440</updated>
-    </task>
-    <task id="LOCAL-00025" summary="re-org">
-      <option name="closed" value="true" />
-      <created>1725624448817</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1725624448817</updated>
     </task>
     <task id="LOCAL-00026" summary="re-org">
       <option name="closed" value="true" />
@@ -802,7 +786,23 @@
       <option name="project" value="LOCAL" />
       <updated>1728905661008</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="re-org">
+      <option name="closed" value="true" />
+      <created>1729081420255</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1729081420255</updated>
+    </task>
+    <task id="LOCAL-00061" summary="re-org">
+      <option name="closed" value="true" />
+      <created>1729130892226</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1729130892226</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

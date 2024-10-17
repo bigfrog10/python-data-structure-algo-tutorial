@@ -139,7 +139,7 @@ def repeatedStringMatch(self, a: str, b: str) -> int:
 # LC395. Longest Substring with At Least K Repeating Characters - repeat k each char
 def longestSubstring(self, s: str, k: int) -> int: # O(n)
     counts = Counter(s)
-    for c in set(s):
+    for c in set(s):  # O(1)
         if counts[c] < k:
             return max(self.longestSubstring(t, k) for t in s.split(c))
     return len(s)
