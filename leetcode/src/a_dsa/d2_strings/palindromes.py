@@ -4,6 +4,7 @@ def shortestPalindrome(self, s: str) -> str:
     rs = s[::-1]
     for i in range(len(s)):  # compare prefix with suffix
         if rs[i:] == s[:len(s)-i]: return rs[:i] + s
+        # the rest is already mirrored
     return ""
 def shortestPalindrome1(self, s: str) -> str:
     def kmp(needle):
@@ -16,11 +17,12 @@ def shortestPalindrome1(self, s: str) -> str:
             elif j > 0: j = pie[j-1]  # if not equal, if we can move j, then move it.
             else: i += 1  # if we can't move j, then move i
         return pie
-    rev = s[::-1]
-    prefix_table = kmp(s + "#" + rev)
-    pali_len = prefix_table[-1]
-    suffix = rev[:len(s) - pali_len]
+    rev = s[::-1]  # compute longest palindromic prefix
+    prefix_table = kmp(rev + "#" + s)  # longest i s.t. s[:i]==r[len(s)-i:]
+    i = prefix_table[-1]
+    suffix = rev[:i]
     return suffix + s
+
 # LC336. Palindrome Pairs - of a word list  pali pair
 def palindromePairs(self, words: List[str]) -> List[List[int]]:  # O(chars) time space
     ans = []

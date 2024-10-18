@@ -159,7 +159,7 @@ def scoreOfParentheses(self, s: str) -> int:
             if s[i-1] == '(': ans += 1 << bal # only when seeing ()
     return ans
 
-# LC241. Different Ways to Add Parentheses expr group num diff add paren
+# LC241. Different Ways to Add Parentheses - return results expr group num diff
 def diffWaysToCompute(self, expression: str) -> List[int]:
     # runtime is: http://people.math.sc.edu/howard/Classes/554b/catalan.pdf
     # runtime is C_(n-1) = (select n-1 from 2(n-1)) / n, n = len(expr)

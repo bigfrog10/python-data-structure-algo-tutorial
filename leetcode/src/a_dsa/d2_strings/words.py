@@ -191,7 +191,7 @@ def ladderLength(self, beginWord, endWord, wordList):  # BFS, O(m^2 * n) time, O
                     queue.append([next_word, length + 1])
     return 0
 
-# LC126. Word Ladder II, top100 - Same for find all paths in DAG
+# LC126. Word Ladder II - Same for find all paths in DAG
 def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List[List[str]]:
     wordList = set(wordList)  # O(n * m^2)
     res, layer = [], {beginWord: [[beginWord]]}  # end word to history

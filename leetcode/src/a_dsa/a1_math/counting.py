@@ -112,7 +112,7 @@ class Solution:
         n, ch = heappop(heap)
         ans = []
         while n:
-            if n == -1 or heap[0][0] < n:
+            if n == -1 or heap[0][0] < n:  # n is negative, means -n < heap
                 ans.append(ch)  # if the number of this char is not the most
                 n += 1
             else:

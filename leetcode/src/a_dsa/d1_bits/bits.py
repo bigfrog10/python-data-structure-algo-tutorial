@@ -137,8 +137,7 @@ def grayCode(self, n: int) -> List[int]:  # O(2^n)
     result = [0]
     for i in range(n):
         mask = 1 << i
-        prev_size = len(result)
-        for j in range(prev_size)[::-1]:
+        for j in range(len(result))[::-1]:
             result.append(mask + result[j])
     return result
 
