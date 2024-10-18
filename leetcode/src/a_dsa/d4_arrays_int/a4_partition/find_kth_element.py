@@ -83,7 +83,7 @@ def findKthLargest(self, nums: List[int], k: int) -> int:  # long solution, O(n)
     n1 = [-x for x in nums]
     return -kth_smallest(n1, 0, len(n1), k)
 
-# LC973. K Closest Points to Origin
+# LC973. K Closest Points to Origin euclidean
 def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:  # O(NlogK)
     heap = []
     for x, y in points:
@@ -96,6 +96,12 @@ def kClosest1(self, points: List[List[int]], K: int) -> List[List[int]]:  # O(Nl
 # LC347. Top K Frequent Elements, top100
 import heapq
 import collections
+def topKFrequent(self, nums, k):
+    bucket = [[] for _ in range(len(nums) + 1)]
+    Count = Counter(nums).items()
+    for num, freq in Count: bucket[freq].append(num)
+    flat_list = [item for sublist in bucket for item in sublist]
+    return flat_list[::-1][:k]
 def topKFrequent(self, nums: List[int], k: int) -> List[int]:
     count = collections.Counter(nums)  # O(nlogk)
     heap = []

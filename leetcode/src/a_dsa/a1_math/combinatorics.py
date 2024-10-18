@@ -114,7 +114,8 @@ def prevPermOpt1(self, arr: List[int]) -> List[int]: # Time: O(n) Space: O(1)
     n = len(nums)
     idx = next((i-1 for i in range(n)[::-1] if nums[i-1] > nums[i]), -1)
     if idx == -1: return nums
-    idx1 = next((i-1 for i in range(idx+1, n) if nums[i] > nums[idx]), n-1 if nums[idx] > nums[n-1] else idx+1)
+    idx1 = next((i-1 for i in range(idx+1, n) if nums[i] > nums[idx]),
+                n-1 if nums[idx] > nums[n-1] else idx+1)
     # 2 cases for above: [1,9,4,6,7] -> [1,7,4,6,9],  [3,1,1,3] -> [1,3,1,3]
     nums[idx], nums[idx1] = nums[idx1], nums[idx]
     return nums

@@ -9,7 +9,7 @@ def buildArray(self, nums: List[int]) -> List[int]:  # O(1) space
         nums[i] //= q
     return nums
 
-# LC442. Find All Duplicates in an Array  dupes in array  dupe in array >1 dupes  all dupe twice array
+# LC442. Find All Duplicates in an Array  dupes in array  dupe in array >1 dupes at most twice
 def findDuplicates(self, nums: List[int]) -> List[int]:  # run it again to restore
     ans = []
     for num in nums:
@@ -51,7 +51,7 @@ def findDisappearedNumbers(self, nums: List[int]) -> List[int]:  # to restore or
             raise Exception(f'{n1[i]} {nums[i]}')
     return res
 
-# LC287. Find the Duplicate Number - only 1 dupe, could be >1 copy   dupe num >1  find dupe
+# LC287. Find the Duplicate Number - only 1 dupe, could be >1 copy   dupe num >1  find dupe one repeated no change
 def findDuplicate(self, nums: List[int]) -> int:  # O(1) space and O(n) time
     for num in nums:  # repeating number could repeat many times
         if nums[abs(num)] < 0:  # 1, 3, 4, 2, 2 -> 1, -3, -4, -2, -2

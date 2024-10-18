@@ -17,7 +17,7 @@ def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -
         return left or right  # carry the not None node
     return dfs(root)
 
-# LC1644. Lowest Common Ancestor of a Binary Tree II, normal node, might not be in tree  bt lca bt
+# LC1644. Lowest Common Ancestor of a Binary Tree II, might not be in tree  bt lca bt
 def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
     res = None
     def dfs(node):  # return how many matches

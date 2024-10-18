@@ -1,5 +1,5 @@
 
-# LC2222 Number of Ways to Select Buildings select building alter type
+# LC2222 Number of Ways to Select Buildings select building no two consec
 def numberOfWays(self, s: str) -> int:  # O(n) time and O(1) space
     ways = 0  # asked implies dp and 1/0 ending count
     # number of 3 element seqs ending 1, 0, 01, 10
@@ -66,6 +66,14 @@ def minAbsDifference(self, nums: List[int], goal: int) -> int:  # O(2^(N/2)) tim
 # https://leetcode.com/problems/closest-subsequence-sum/solutions/1053790/python3-divide-in-half/
 
 # LC2915. Length of the Longest Subsequence That Sums to Target long seq target
+def lengthOfLongestSubsequence1(self, nums: List[int], target: int) -> int:
+    @cache
+    def dp(idx, summ):
+        if summ == 0: return 0
+        if idx == len(nums) or summ < 0: return -math.inf
+        return max(dp(idx+1, summ), 1 + dp(idx+1, summ-nums[idx]))
+    res = dp(0, target)
+    return -1 if res == -inf else res
 def lengthOfLongestSubsequence(self, nums: List[int], target: int) -> int:
     # dp[i] length of longest seq with sum i
     dp = [0] + [-math.inf] * target

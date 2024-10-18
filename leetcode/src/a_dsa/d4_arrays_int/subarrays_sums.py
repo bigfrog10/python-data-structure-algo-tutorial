@@ -1,5 +1,5 @@
 
-# LC2261. K Divisible Elements Subarrays k elements k elem divisible
+# LC2261. K Divisible Elements Subarrays k elements k elem divisible by p k divisible by p
 def countDistinct(self, nums: List[int], k: int, p: int) -> int:
     left = count = 0  # O(n^2) time and O(1) space
     res = set()  # we have dupes, [2,3,2] with k, p as 2, dupes are 2, (2, 2), etc

@@ -1,12 +1,12 @@
 
-# LC1062. Longest Repeating Substring
+# LC1062. Longest Repeating Substring long repeat substr
 def longestRepeatingSubstring(self, s: str) -> int:  # O(nlogn)
     def valid(n):
         currStr = s[:n]  # search substring with length n, O(n)
-        seen = set([currStr])
+        seen = {currStr}
         for i in range(n, len(s)):
             currStr = currStr[1:] + s[i]
-            if(currStr in seen): return True
+            if currStr in seen: return True
             seen.add(currStr)
         return False
     left, right = 1, len(s)
@@ -89,7 +89,7 @@ def letterCasePermutation(self, s: str) -> List[str]:  # O(2^n), n is # of lette
         ans = [x + cc for x in ans for cc in {c, c.swapcase()}]
     return ans
 
-# LC567. Permutation in String - string permutation check - s1 is a permutation substring of s2  permutation string permutation
+# LC567. Permutation in String - string permu string
 def checkInclusion(self, s1, s2):  # O(|s1|) time and O(1) space (26 chars as keys) permutation string
     d1, d2 = Counter(s1), Counter(s2[:len(s1)])  # O(1) space, 26 chars
     for start in range(len(s1), len(s2)):  # O(len(s2) - len(s1)) time
@@ -556,7 +556,7 @@ def partitionLabels(self, s: str) -> List[int]: # O(n) time and space
             start = i+1
     return ret
 
-# LC2696. Minimum String Length After Removing Substrings
+# LC2696. Minimum String Length After Removing Substrings remove ab cd
 def minLength(self, s: str) -> int:  # O(n) time and space
     stack = []
     for current_char in s:

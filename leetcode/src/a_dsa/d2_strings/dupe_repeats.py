@@ -1,5 +1,5 @@
 
-# LC424. Longest Repeating Character Replacement  long repeat long replacement long char replacement char change char
+# LC424. Longest Repeating Character Replacement  change char
 def characterReplacement(self, s: str, k: int) -> int:
     freqs = Counter()  # O(mn) time, O(m) space: m=len(unique chars), n=len(s)
     start = max_freq = res = 0
@@ -136,7 +136,7 @@ def repeatedStringMatch(self, a: str, b: str) -> int:
     elif b in a * (times+1): return times + 1
     return -1
 
-# LC395. Longest Substring with At Least K Repeating Characters - repeat k each char
+# LC395. Longest Substring with At Least K Repeating Characters - repeat k each char k freq
 def longestSubstring(self, s: str, k: int) -> int: # O(n)
     counts = Counter(s)
     for c in set(s):  # O(1)

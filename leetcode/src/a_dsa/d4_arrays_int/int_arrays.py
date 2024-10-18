@@ -145,7 +145,7 @@ def largestNumber(self, num):  # O(nlogn)
     num.sort(key = functools.cmp_to_key(custcmp))
     return ''.join(num).lstrip('0') or '0'
 
-# LC904. Fruit Into Baskets - Find out the longest length of subarrays with at most 2 different numbers
+# LC904. Fruit Into Baskets - Find out the longest length of subarrays with at most 2 different numbers fruit tree
 # https://leetcode.com/problems/fruit-into-baskets/discuss/170745/Problem%3A-Longest-Subarray-With-2-Elements
 
 def totalFruit(self, fruits: List[int]) -> int:  # O(n) time, O(1) space
@@ -252,7 +252,7 @@ def kidsWithCandies(self, candies: List[int], extraCandies: int) -> List[bool]:
     gauge = max(candies) - extraCandies
     return [candy >= gauge for candy in candies]
 
-# LC746. Min Cost Climbing Stairs
+# LC746. Min Cost Climbing Stairs climb stairs
 def minCostClimbingStairs(self, cost: List[int]) -> int:  # O(n) time and O(1) space
     go1 = go2 = 0
     for i in range(2, len(cost) + 1):

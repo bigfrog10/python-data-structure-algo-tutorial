@@ -166,7 +166,7 @@ def minPatches(self, nums: List[int], n: int) -> int:  # O(m + logn), m = times 
     return added
 
 # same as above
-# LC2952. Minimum Number of Coins to be Added min coins add min coins min number of coins min num coins
+# LC2952. Minimum Number of Coins to be Added min coins add min coins obtainable
 def minimumAddedCoins(self, coins: List[int], target: int) -> int:
     coins = sorted(coins)
     covered, added, index = 1, 0, 0

@@ -26,8 +26,8 @@ def findMiddleIndex(self, nums: List[int]) -> int:
         leftsum += x
     return -1
 
-# LC39. Combination Sum  # O(n^(target/min)) - return combos, can use elems multiple times comb sum  combo sum
-def combinationSum(self, candidates, target):  # fastest
+# LC39. Combination Sum  # return combos, can use elems multiple times comb sum  combo sum
+def combinationSum(self, candidates, target):  # O(n * 2^n)
     candidates = sorted(candidates)  # small to large, cut branches
     result = []  # O(2^n * n) time, space is O(target * n), n = len(cand)
     def dfs(remain, stack): # stack is history

@@ -4,7 +4,7 @@ def findAnagrams(self, st: str, ana: str): # O(n) time
     d1, d2 = Counter(ana), Counter(st[:len(ana)])  # O(1) space, 26 chars
     res = []
     for start in range(len(ana), len(st)):
-        if d1 == d2:  res.append(start - len(ana))
+        if d1 == d2:  res.append(start - len(ana))  # start index
         d2[st[start]] += 1
         k = st[start-len(ana)]
         d2[k] -= 1

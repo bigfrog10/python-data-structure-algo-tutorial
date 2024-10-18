@@ -34,7 +34,7 @@ def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:  # O(n)
             ans = i+1
     return ans if total >= 0 else -1
 
-# LC1710. Maximum Units on a Truck
+# LC1710. Maximum Units on a Truck max unit truck
 def maximumUnits(self, boxTypes: List[List[int]], truckSize: int) -> int:
     boxes = sorted(boxTypes, key=lambda x: x[1], reverse=True)  # O(nlogn)
     total, counts = 0, 0 # greedy: box count 1 with max units
@@ -106,7 +106,7 @@ def canJump(self, nums: List[int]) -> bool:  # greedy, O(n)
         # don't check "else" because even this is not true, i-1 could be true
     return target == 0 # we can reach target from i, and repeat this process to 1st.
 
-# LC45. Jump Game II
+# LC45. Jump Game II min jump
 def jump(self, nums: List[int]) -> int:
     furthest = curr_end = jumps = 0
     for i in range(len(nums) - 1):

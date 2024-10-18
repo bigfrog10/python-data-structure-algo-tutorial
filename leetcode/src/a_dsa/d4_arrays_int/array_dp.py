@@ -1,5 +1,5 @@
 
-# LC1140. Stone Game II
+# LC1140. Stone Game II alice bob
 def stoneGameII(self, piles):  # O(n^3) time, O(n^2) space
     a = [*itertools.accumulate(piles[::-1])][::-1]  # tail sum
     @functools.cache

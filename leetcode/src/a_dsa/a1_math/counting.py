@@ -6,7 +6,7 @@ def angleClock(self, hour: int, minutes: int) -> float:
     diff = abs(hour_angle - minutes_angle)
     return min(diff, 360 - diff)
 
-# LC204. Count Primes  prime number of prime
+# LC204. Count Primes  prime number of prime numbers prime numbers of prime
 def countPrimes(self, n: int) -> int: # Sieve of Eratosthenes
     import math
     if n <= 2: return 0
@@ -20,7 +20,7 @@ def countPrimes(self, n: int) -> int: # Sieve of Eratosthenes
             flag[2*i::i] = [0] * m
     return sum(flag)
 
-# LC1152. Analyze User Website Visit Pattern
+# LC1152. Analyze User Website Visit Pattern user website user pattern
 def mostVisitedPattern(self, username: List[str], timestamp: List[int], website: List[str]) -> List[str]:
     # https://leetcode.com/problems/analyze-user-website-visit-pattern/discuss/957611/Python-Solution
     user_visits = defaultdict(list)
@@ -90,6 +90,37 @@ def superEggDrop(self, k: int, n: int) -> int:
         drops += 1
         print(floors)
     return drops
+
+# LC3317. Find the Number of Possible Ways for an Event
+mod = 10 ** 9 + 7
+@cache
+def s(n, k):  # number of ways to assign n performers to k events
+    if n < k: return 0  # each event at least one performer, stirling number
+    if k == 1: return 1
+    return (k * s(n - 1, k) + s(n - 1, k - 1)) % mod
+class Solution:
+    def numberOfWays(self, n: int, x: int, y: int) -> int:  # O(n^2) time, space
+        res = 0
+        for a in range(1, min(n, x) + 1):
+            # pow(y, a) each event can have 1 to y score
+            res += math.perm(x, a) * s(n, a) * pow(y, a, mod)
+        return res % mod
+
+# LC1405. Longest Happy String
+    def longestDiverseString(self, a: int, b: int, c: int) -> str:
+        heapify(heap:=[(-a, 'a'), (-b, 'b'), (-c, 'c')])
+        n, ch = heappop(heap)
+        ans = []
+        while n:
+            if n == -1 or heap[0][0] < n:
+                ans.append(ch)  # if the number of this char is not the most
+                n += 1
+            else:
+                ans.append(ch*2)
+                n += 2
+            n, ch = heapreplace(heap, (n, ch))  # pop first, then insert
+        return ''.join(ans)
+    # https://leetcode.com/problems/longest-happy-string/solutions/5922435/heap-simple-and-clear-solution-12-lines-runtime-100
 
 
 

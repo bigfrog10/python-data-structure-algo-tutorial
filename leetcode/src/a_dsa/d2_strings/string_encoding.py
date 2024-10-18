@@ -1,15 +1,5 @@
 
 # LC443. String Compression
-def compress(self, chars: List[str]) -> int:  # O(n) time and O(1) space, chars gets shrinked
-    st = i = 0
-    while i < len(chars):
-        while i < len(chars) and chars[i] == chars[st]: i += 1
-        if i - st == 1:  st = i # single diff char, leave it alone
-        else:
-            count = str(i - st)
-            chars[st + 1 : i] = count  # after char then add count
-            i = st = st + 1 + len(count)  # skip spaces used by count
-    return len(chars)
 def compress(self, chars: List[str]) -> int:
     i = res = 0  # i is the counter to mark current progress
     while i < len(chars):
@@ -24,6 +14,16 @@ def compress(self, chars: List[str]) -> int:
             res += len(str_repr)
         i += glen
     return res
+def compress(self, chars: List[str]) -> int:  # O(n) time and O(1) space, chars gets shrinked
+    st = i = 0
+    while i < len(chars):
+        while i < len(chars) and chars[i] == chars[st]: i += 1
+        if i - st == 1:  st = i # single diff char, leave it alone
+        else:
+            count = str(i - st)
+            chars[st + 1 : i] = count  # after char then add count
+            i = st = st + 1 + len(count)  # skip spaces used by count
+    return len(chars)
 
 # LC394. Decode String - expand copies
 def decodeString(self, s: str) -> str:  # O(n*k) time, k is max coeff; O(|s| - parenth)

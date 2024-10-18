@@ -154,7 +154,7 @@ def isValidBST(self, root: TreeNode) -> bool:
         return validate(node.right, node.val, high) and validate(node.left, low, node.val)
     return validate(root)
 
-# LC1038. Binary Search Tree to Greater Sum Tree
+# LC1038. Binary Search Tree to Greater Sum Tree bst greater
 def bstToGst(self, root: TreeNode) -> TreeNode:
     post_sum = 0
     def dfs(root):

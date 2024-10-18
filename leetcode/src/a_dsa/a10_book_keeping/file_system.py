@@ -17,7 +17,7 @@ class FileSystem:
         if path not in self.values: return -1
         return self.values[path]
 
-# LC588. Design In-Memory File System
+# LC588. Design In-Memory File System in memory file system
 from collections import defaultdict
 class Node:
     def __init__(self):

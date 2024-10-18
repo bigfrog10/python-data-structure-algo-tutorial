@@ -17,7 +17,7 @@ def indexPairs(self, text: str, words: List[str]) -> List[List[int]]:
     return res
 # https://leetcode.com/problems/index-pairs-of-a-string/solutions/2023881/python-trie-easy-to-understand/?envType=company&envId=amazon&favoriteSlug=amazon-three-months
 
-# LC2416. Sum of Prefix Scores of Strings
+# LC2416. Sum of Prefix Scores of Strings sum of scores
 def sumPrefixScores(self, words: List[str]) -> List[int]:
     trie = {}
     for w in words:

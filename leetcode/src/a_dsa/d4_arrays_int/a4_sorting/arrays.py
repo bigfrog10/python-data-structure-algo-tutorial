@@ -9,7 +9,7 @@ def findSpecialInteger(self, arr: List[int]) -> int:
             return arr[i]
     return -1
 
-# LC2191. Sort the Jumbled Numbers
+# LC2191. Sort the Jumbled Numbers mapped values
 def sortJumbled(self, mapping: List[int], nums: List[int]) -> List[int]:
     def m(x):
         if x == 0: return mapping[0]

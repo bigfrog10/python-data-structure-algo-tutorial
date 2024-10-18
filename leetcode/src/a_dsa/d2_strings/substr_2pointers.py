@@ -45,6 +45,38 @@ def isSubsequence(self, s: str, t: str) -> bool:
     it = iter(t)
     return all(c in it for c in s)
 
+# LC2938. Separate Black and White Balls
+def minimumSteps(self, s: str) -> int:
+    res = whitep = 0
+    for idx, char in enumerate(s):
+        if char == "0":
+            res += idx - whitep  # Calculate the number of swaps needed
+            whitep += 1  # position used for above 0, so move forward
+    return res
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

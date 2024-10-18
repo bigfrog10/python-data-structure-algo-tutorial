@@ -6,8 +6,8 @@ def minimumCost(self, source: str, target: str, original: List[str], changed: Li
     for old,new,cos in zip(original,changed,cost):
         g[old].append([new,cos])
     @cache
-    def dfs(node1, node2):  # cost from node1 to node2
-        pq = [(0,node1)]
+    def dijkstra(node1, node2):  # cost from node1 to node2
+        pq = [(0, node1)]
         degree={}
         while pq:
             cos, node = heappop(pq)
@@ -28,7 +28,7 @@ def minimumCost(self, source: str, target: str, original: List[str], changed: Li
             sub_source = source[i:i+ln]
             sub_target = target[i:i+ln]
             if sub_source in g:
-                cost = dfs(sub_source,sub_target)
+                cost = dijkstra(sub_source, sub_target)
                 if cost < inf:
                     dp[i+ln] = min(dp[i+ln], dp[i] + cost)
     return dp[-1] if dp[-1]!=inf else -1

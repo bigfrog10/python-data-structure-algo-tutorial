@@ -1,6 +1,6 @@
 from typing import List
 
-# LC2134. Minimum Swaps to Group All 1's Together II
+# LC2134. Minimum Swaps to Group All 1's Together II min swap binary circular
 def minSwaps(self, nums: List[int]) -> int:
     n, w = len(nums), sum(nums)
     ones = max_ones = sum(nums[:w])
