@@ -42,7 +42,7 @@ def numSquarefulPerms(self, nums: List[int]) -> int:  # O(n!) time, O(n) space L
     dfs(sorted(nums), [])
     return self.count
 
-# LC2305. Fair Distribution of Cookies
+# LC2305. Fair Distribution of Cookies dist cookie dist
 def distributeCookies(self, cookies: List[int], k: int) -> int:
     def dfs(p):  # O(kn) time, O(k+n) space
         nonlocal best

@@ -253,7 +253,7 @@ def wiggleSort(self, nums):
     half = len(nums[::2])
     nums[::2], nums[1::2] = nums[:half][::-1], nums[half:][::-1]
 
-# LC937. Reorder Data in Log Files
+# LC937. Reorder Data in Log Files logs letter-logs
 def reorderLogFiles(self, logs: List[str]) -> List[str]:
     def get_key(log):
         _id, rest = log.split(" ", maxsplit=1)

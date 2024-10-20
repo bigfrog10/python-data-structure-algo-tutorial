@@ -96,15 +96,15 @@ def numKLenSubstrNoRepeats(self, s: str, k: int) -> int:
             left += 1
     return res
 
-# LC1081. Smallest Subsequence of Distinct Characters - same as above
+# LC1081. Smallest Subsequence of Distinct Characters - lexico small subseq
 def removeDuplicateLetters(self, s: str) -> str:  # O(n)
-    last_occurrence = {c: i for i, c in enumerate(s)}
+    last_idx = {c: i for i, c in enumerate(s)}
     stack, seen = [], set()
     for i, c in enumerate(s):
         if c not in seen:  # keep only one inside
             # if stack's char is larger than current and it's not the last
             # we drop this char and wait for the last
-            while stack and c < stack[-1] and i < last_occurrence[stack[-1]]:
+            while stack and c < stack[-1] and i < last_idx[stack[-1]]:
                 seen.discard(stack.pop())  # increasing stack
             seen.add(c)
             stack.append(c)

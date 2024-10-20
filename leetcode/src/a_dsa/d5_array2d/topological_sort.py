@@ -1,7 +1,7 @@
 
 from typing import List
 
-# LC802. Find Eventual Safe States
+# LC802. Find Eventual Safe States safe node terminal node
 def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
     n = len(graph)  # O(V + E) time and space
     outdegree = [0] * n

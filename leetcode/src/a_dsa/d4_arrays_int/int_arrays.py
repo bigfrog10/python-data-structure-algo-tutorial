@@ -533,14 +533,14 @@ def maximumProduct(self, nums: List[int]) -> int:
         elif n < min2: min2 = n
     return max(max1 * max2 * max3, max1 * min1 * min2)
 
-# LC1299. Replace Elements with Greatest Element on Right Side - next greater
+# LC1299. Replace Elements with Greatest Element on Right Side - next greatest on right
 def replaceElements(self, arr: List[int]) -> List[int]:
     mx = -1
     for i in range(len(arr))[::-1]:
         arr[i], mx = mx, max(mx, arr[i])
     return arr
 
-# LC414. Third Maximum Number
+# LC414. Third Maximum Number 3rd max
 def thirdMax(self, nums: List[int]) -> int:
     max1 = max2 = max3 = -inf
     for n in nums:
@@ -587,7 +587,7 @@ def containsDuplicate(self, nums: List[int]) -> bool:
 def containsDuplicate(self, nums):
     return len(set(nums)) < len(nums)
 
-# LC645. Set Mismatch
+# LC645. Set Mismatch set int duped repetition of one number
 def findErrorNums(self, nums: List[int]) -> List[int]:
     dupe = missing = -1
     for n in nums:

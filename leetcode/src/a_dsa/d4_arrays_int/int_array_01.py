@@ -1,5 +1,5 @@
 
-# LC1497. Check If Array Pairs Are Divisible by k
+# LC1497. Check If Array Pairs Are Divisible by k  pair div k
 def canArrange(self, arr: List[int], k: int) -> bool:
     count = Counter()
     for i in arr:
@@ -248,6 +248,27 @@ def minimumAverageDifference(self, nums: List[int]) -> int:
             mind = diff
             ans = i
     return ans
+
+# LC1310. XOR Queries of a Subarray
+def xorQueries(self, arr: List[int], queries: List[List[int]]) -> List[int]:
+    prefix_xor = [0] * (len(arr) + 1)
+    for i in range(len(arr)):
+        prefix_xor[i + 1] = prefix_xor[i] ^ arr[i]
+    return [prefix_xor[r + 1] ^ prefix_xor[l] for l, r in queries]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

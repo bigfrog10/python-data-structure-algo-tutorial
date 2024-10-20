@@ -199,7 +199,7 @@ def pacificAtlantic(self, matrix: List[List[int]]) -> List[List[int]]:  # O(nm)
         traverse(rows - 1, col, a_visited)
     return list(p_visited & a_visited)
 
-# 1293. Shortest Path in a Grid with Obstacles Elimination
+# 1293. Shortest Path in a Grid with Obstacles Elimination at most k obstacles
 def shortestPath(self, grid: List[List[int]], k: int) -> int:  # O(Nk), N is # of cells
     rows, cols = len(grid), len(grid[0])
     if k >= rows + cols - 2: return rows + cols - 2

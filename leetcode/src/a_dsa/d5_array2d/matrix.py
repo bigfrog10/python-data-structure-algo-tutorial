@@ -11,7 +11,7 @@ def diagonalSum(self, mat: List[List[int]]) -> int:
     if n % 2 == 1: ans -= mat[n // 2][n // 2]
     return ans
 
-# LC1886. Determine Whether Matrix Can Be Obtained By Rotation
+# LC1886. Determine Whether Matrix Can Be Obtained By Rotation matrix rotation
 def findRotation(self, mat: List[List[int]], target: List[List[int]]) -> bool:
     for _ in range(4): # 4 possible directions
         if mat == target: return True

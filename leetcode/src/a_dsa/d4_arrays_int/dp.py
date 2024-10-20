@@ -133,7 +133,7 @@ def slowestKey(self, releaseTimes: List[int], keysPressed: str) -> str:
             k = keysPressed[i]
     return k
 
-# LC1155. Number of Dice Rolls With Target Sum
+# LC1155. Number of Dice Rolls With Target Sum - dice k
 def numRollsToTarget(self, d: int, f: int, target: int) -> int:
     @lru_cache(None)
     def dfs(t, d):

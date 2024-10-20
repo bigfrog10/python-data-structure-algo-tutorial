@@ -81,7 +81,7 @@ def longestPalindrome(self, s: str) -> str:  # O(n) time and space, Manacher's A
             Max_Len, Max_Str = dp[i], s[i-dp[i]:i+dp[i]+1].replace('#','')
     return Max_Str
 
-# LC516. Longest Palindromic Subsequence - return length  long pali subseq
+# LC516. Longest Palindromic Subsequence - return length  long pali subseq long pali seq
 def longestPalindromeSubseq(self, s: str) -> int: # O(n^2) time and space
     @lru_cache(None)
     def solve(b, e): # begin and end of the string, max len of pali seq

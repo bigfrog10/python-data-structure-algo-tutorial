@@ -9,7 +9,7 @@ def minSwaps(self, nums: List[int]) -> int:
         max_ones = max(ones, max_ones)
     return w - max_ones
 
-# LC992. Subarrays with K Different Integers - good subarrays  k diff   k-diff
+# LC992. Subarrays with K Different Integers - good subarrays  k diff integers
 # https://leetcode.com/problems/subarrays-with-k-different-integers/discuss/523136/JavaC%2B%2BPython-Sliding-Window
 def subarraysWithKDistinct(self, nums: List[int], k: int) -> int:  # O(n) time and space
     def at_most(distinctK: int) -> int:

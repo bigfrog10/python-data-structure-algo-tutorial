@@ -201,7 +201,7 @@ def maximalPathQuality(self, values: List[int], edges: List[List[int]], maxTime:
 
 
 
-# LC1135. Connecting Cities With Minimum Cost
+# LC1135. Connecting Cities With Minimum Cost min cost cities
 def minimumCost(self, N: int, connections: List[List[int]]) -> int:
     G = collections.defaultdict(list)
     for city1, city2, cost in connections:  # O(E)

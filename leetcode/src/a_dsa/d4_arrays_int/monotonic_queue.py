@@ -33,7 +33,7 @@ def maxResult(self, nums: List[int], k: int) -> int:  # O(n) time and O(k) space
         dq.append((i, score))
     return score
 
-# LC1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
+# LC1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit abs diff < limit
 # https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/discuss/609771/JavaC%2B%2BPython-Deques-O(N)
 def longestSubarray(self, nums: List[int], limit: int) -> int:  # O(n)
     maxd = collections.deque()
@@ -45,10 +45,10 @@ def longestSubarray(self, nums: List[int], limit: int) -> int:  # O(n)
         maxd.append(a)
         mind.append(a)
         if maxd[0] - mind[0] > limit:
-            if maxd[0] == nums[i]: maxd.popleft()
+            if maxd[0] == nums[i]: maxd.popleft()  # to keep i in sync with both deques
             if mind[0] == nums[i]: mind.popleft()
             i += 1
-    return len(nums) - i
+    return len(nums) - i  # last window size right - left + 1
 
 # LC239. Sliding Window Maximum  slide win max
 def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
@@ -61,7 +61,7 @@ def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
         if i >= k-1: res.append(nums[deq[0]])  # range is [0, k-1]
     return res
 
-# LC1425. Constrained Subsequence Sum
+# LC1425. Constrained Subsequence Sum subseq sum k
 def constrainedSubsetSum(self, nums: List[int], k: int) -> int:
     q = collections.deque() # O(n)
     for i in range(len(nums)): # nums are overwritten as max sum so far
@@ -70,5 +70,6 @@ def constrainedSubsetSum(self, nums: List[int], k: int) -> int:
         q.append(i)
         if i - q[0] == k: q.popleft() # keep deque size to k
     return max(nums)
+# https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/solutions/609771/java-c-python-deques-o-n/
 
 

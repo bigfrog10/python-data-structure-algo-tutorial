@@ -180,7 +180,7 @@ def updateBoard(self, board: List[List[str]], click: List[int]) -> List[List[str
             # neighbour mines
             nm = sum(board[i+dx][j+dy] == 'M' for dx, dy in dirs if 0 <= i+dx < n and 0 <= j+dy < m)
             board[i][j] = str(nm or 'B')
-            if not nm: # no mine nearby
+            if not nm:  # no mine nearby
                 for dx, dy in dirs:
                     if 0 <= i+dx < n and 0 <= j+dy < m: dfs(i + dx, j + dy)
             # the logic with mine nearby is complicated, with this logic missing

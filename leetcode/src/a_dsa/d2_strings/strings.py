@@ -544,7 +544,7 @@ def longestNiceSubstring(self, s: str) -> str:
             return max(s0, s1, key=len)
     return s
 
-# LC763. Partition Labels - substring no repeating chars
+# LC763. Partition Labels - substring no repeating chars partition the string
 def partitionLabels(self, s: str) -> List[int]: # O(n) time and space
     max_idx = {letter: i for i, letter in enumerate(s)}
     ret = []
@@ -685,6 +685,12 @@ def gap(s: str):
             break
     return len(s) - li - ri
 
-
+# LC1410. HTML Entity Parser
+def entityParser(self, text: str) -> str:
+    html_symbol = ['&quot;', '&apos;', '&gt;', '&lt;', '&frasl;', '&amp;']
+    formal_symbol = ['"', "'", '>', '<', '/', '&']
+    for html_sym, formal_sym in zip(html_symbol, formal_symbol):
+        text = text.replace( html_sym , formal_sym )
+    return text
 
 

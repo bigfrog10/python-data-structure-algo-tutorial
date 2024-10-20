@@ -2,13 +2,13 @@ from typing import List
 from collections import defaultdict
 
 # LC1761. Minimum degree of a connected trio in a graph
-def minTrioDegree(self, n: int, edges: List[List[int]]) -> int:
+def minTrioDegree(self, n: int, edges: List[List[int]]) -> int:  # O(EV) time, O(E+V) space
     graph = defaultdict(set) # must faster, but still
     for u,v  in edges:  # O(E) space
         graph[u].add(v)
         graph[v].add(u)
     ans = inf
-    node_degrees = sorted([[len(graph[k]), k] for k in graph])  # O(V) space
+    node_degrees = sorted([[len(graph[k]), k] for k in graph])  # sort for break below O(V) space
     for a, b in edges:  # O(E)
         w = len(graph[a]) + len(graph[b])
         for w1, c in node_degrees:  # O(V)
@@ -22,8 +22,8 @@ def isBipartite(self, graph: List[List[int]]) -> bool:  # O(V + E)
     color = {}  # like seen in other cases
     for node in range(len(graph)):  # go through each node
         if node in color: continue
-        stack = [node]  # DFS
         color[node] = 0  # paint color, component start
+        stack = [node]  # DFS
         while stack:
             node = stack.pop()
             for nei in graph[node]:
@@ -341,7 +341,7 @@ def findRedundantDirectedConnection(self, edges):  # [[2,3],[3,1],[3,4],[4,2]]
         if u == v: return edge
         p[u] = p[v]
 
-# LC1129. Shortest Path with Alternating Colors
+# LC1129. Shortest Path with Alternating Colors alter colors
 def shortestAlternatingPaths(self, n: int, redEdges: List[List[int]], blueEdges: List[List[int]]) -> List[int]:
     conns = defaultdict(list)
     for a, b in redEdges: conns[a].append((b, 'red'))
