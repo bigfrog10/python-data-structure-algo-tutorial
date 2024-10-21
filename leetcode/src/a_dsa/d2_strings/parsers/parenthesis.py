@@ -141,13 +141,14 @@ def minInsertions(self, s: str) -> int:
 
 
 
-# LC1963. Minimum Number of Swaps to Make the String Balanced - parenthesis '[] balance'
+# LC1963. Minimum Number of Swaps to Make the String Balanced - parenthesis '[] balance' min swap parenth
 def minSwaps(self, s: str) -> int:
-    balance = max_bal = 0
-    for c in s:
-        balance += -1 if c == '[' else 1
-        max_bal = max(max_bal, balance)
-    return (max_bal + 1) // 2  # ceiling
+    bal = 0
+    for ch in s:
+        if ch == '[': bal += 1
+        else:
+            if bal > 0: bal -= 1
+    return (bal + 1) // 2  # ceiling
 
 # LC856. Score of Parentheses  parenth score parenth
 def scoreOfParentheses(self, s: str) -> int:
@@ -159,7 +160,7 @@ def scoreOfParentheses(self, s: str) -> int:
             if s[i-1] == '(': ans += 1 << bal # only when seeing ()
     return ans
 
-# LC241. Different Ways to Add Parentheses - return results expr group num diff
+# LC241. Different Ways to Add Parentheses - return results expr group num diff expr add parenth
 def diffWaysToCompute(self, expression: str) -> List[int]:
     # runtime is: http://people.math.sc.edu/howard/Classes/554b/catalan.pdf
     # runtime is C_(n-1) = (select n-1 from 2(n-1)) / n, n = len(expr)

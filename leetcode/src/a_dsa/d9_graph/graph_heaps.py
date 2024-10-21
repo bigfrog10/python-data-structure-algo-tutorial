@@ -147,7 +147,7 @@ def findItinerary(self, tickets: List[List[str]]) -> List[str]:  # O(ElogE)
     dfs('JFK')
     return ret[::-1]
 
-# LC787. Cheapest Flights Within K Stops - weighted graph
+# LC787. Cheapest Flights Within K Stops - weighted graph cheapest price
 def findCheapestPrice(self, n, flights, src, dst, K):  # O(E) runtime, O(E + V) space
     #  O(E) runtime, O(E + V) space
     d = collections.defaultdict(list)  # d is graph

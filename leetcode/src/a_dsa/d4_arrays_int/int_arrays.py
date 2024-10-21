@@ -147,7 +147,6 @@ def largestNumber(self, num):  # O(nlogn)
 
 # LC904. Fruit Into Baskets - Find out the longest length of subarrays with at most 2 different numbers fruit tree
 # https://leetcode.com/problems/fruit-into-baskets/discuss/170745/Problem%3A-Longest-Subarray-With-2-Elements
-
 def totalFruit(self, fruits: List[int]) -> int:  # O(n) time, O(1) space
     res = left = 0
     counts = Counter()
@@ -247,7 +246,7 @@ def change1(self, amount: int, coins: List[int]) -> int:  # O(amount * len(coins
         return f(i, amount-coins[i]) + f(i+1, amount)
     return f(0, amount)
 
-# LC1431. Kids With the Greatest Number of Candies
+# LC1431. Kids With the Greatest Number of Candies extracandies
 def kidsWithCandies(self, candies: List[int], extraCandies: int) -> List[bool]:
     gauge = max(candies) - extraCandies
     return [candy >= gauge for candy in candies]
@@ -335,13 +334,9 @@ def rearrangeArray(self, nums: List[int]) -> List[int]:
             neg_index += 2
     return ans
 
-# LC2214. Minimum Health to Beat Game
+# LC2214. Minimum Health to Beat Game  min health game
 def minimumHealth(self, damage: List[int], armor: int) -> int:
-    cumu, maxd = 0, -float('Inf')
-    for loss_point in damage:
-        cumu += loss_point
-        maxd = max(maxd, loss_point)
-    return cumu - min(maxd, armor) + 1
+    return 1 + sum(damage) - min(max(damage), armor)
 
 # LC932. Beautiful Array
 # Given a beautiful array A: A*c, A + c, and delete elements from A are still beautiful.
@@ -773,7 +768,7 @@ def checkStraightLine(self, coordinates: List[List[int]]) -> bool:
         if dy * (x3 - x1) != (y3 - y1) * dx: return False
     return True
 
-# LC135. Candy alloc
+# LC135. Candy alloc candy assign
 def candy(self, ratings: List[int]) -> int:
     n = len(ratings)
     candies = [1] * n

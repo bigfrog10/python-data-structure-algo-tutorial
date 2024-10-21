@@ -1,6 +1,17 @@
 import heapq
 
-# LC1942. The Number of the Smallest Unoccupied Chair chair number
+# LC2530. Maximal Score After Applying K operations
+def maxKelements(self, nums: List[int], k: int) -> int:
+    heap = heapq.nsmallest(k, [-a for a in nums])  # O(nlogk)
+    res = 0
+    while k > 0:
+        k -= 1
+        v = -heappop(heap)
+        res += v
+        heappush(heap, -math.ceil(v / 3))
+    return res
+
+# LC1942. The Number of the Smallest Unoccupied Chair chair number small unoccu chair
 def smallestChair(self, times: List[List[int]], targetFriend: int) -> int:
     guests = sorted(range(len(times)), key=lambda x: times[x][0])  # O(nlogn)
     emptySeats, seatsTaken = list(range(len(times))), []

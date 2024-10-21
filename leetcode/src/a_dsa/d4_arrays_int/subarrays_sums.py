@@ -1,5 +1,34 @@
 
-# LC2261. K Divisible Elements Subarrays k elements k elem divisible by p k divisible by p
+# LC2281. Sum of Total Strength of Wizards
+def totalStrength(self, strength: List[int]) -> int:
+    mod = 10**9 + 7
+    A = [0] + strength + [0]  # Add 0 to the beginning and end for simplifying boundary checks
+    P = list(itertools.accumulate(itertools.accumulate(A), initial=0))
+    stack = [0]  # To keep track of indices
+    result = 0
+    for right in range(len(A)):
+        while A[stack[-1]] > A[right]:  # left and right are smaller than st[-1]
+            left, i = stack[-2], stack.pop()  # so A[i] is smallest between left, right
+            pos = (i - left) * (P[right] - P[i])
+            neg = (right - i) * (P[i] - P[left])
+            result += A[i] * (pos - neg)
+        stack.append(right)
+    return result % mod
+# https://leetcode.com/problems/sum-of-total-strength-of-wizards/solutions/4246099/python3-linear-explanation
+
+# LC2945. Find Maximum Non-decreasing Array Length
+def findMaximumLength(self, nums: List[int]) -> int:  # O(n) time space
+    # subarray sum is presum diff
+    res, acc, presum = 0, 0, 0
+    dq = deque()  #
+    for v in nums:
+        presum += v
+        while dq and dq[0][2] <= presum: res, acc, _ = dq.popleft()
+        while dq and dq[-1][2] >= 2*presum - acc: dq.pop()
+        dq.append((res+1, presum, 2*presum - acc))
+    return res+1
+
+# LC2261. K Divisible Elements Subarrays k elements k elem divisible by p k divisible by p k div p
 def countDistinct(self, nums: List[int], k: int, p: int) -> int:
     left = count = 0  # O(n^2) time and O(1) space
     res = set()  # we have dupes, [2,3,2] with k, p as 2, dupes are 2, (2, 2), etc
@@ -62,7 +91,7 @@ def maxSubArrayLen(self, nums: List[int], k: int) -> int:  # O(n) time and space
         if cumu not in cache: cache[cumu] = i  # maintain earliest index
     return maxl
 
-# LC209. Minimum Size Subarray Sum - min size with sum target, all positives  min size with sub sum >= target min length
+# LC209. Minimum Size Subarray Sum - min length sub min len sub
 def minSubArrayLen(self, s: int, nums: List[int]) -> int:  # 2 pointers , O(n) time and O(1) space
     total = left = 0 # since all numbers are positive, this works. minimal length of a subaary
     result = len(nums) + 1

@@ -178,7 +178,7 @@ def sumSubarrayMins(self, arr: List[int]) -> int:
         stack.append(i)
     return res
 
-# LC962. Maximum Width Ramp max width ramp
+# LC962. Maximum Width Ramp max width ramp max ramp
 def maxWidthRamp(self, nums: List[int]) -> int:
     res, st = 0, []
     for i, a in enumerate(nums):

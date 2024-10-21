@@ -31,7 +31,7 @@ def findMinMoves(self, machines: List[int]) -> int:
         res = max(res, max_sum, m)
     return res
 
-# LC2340. Minimum adjacent swaps to make a valid array adj swap adj
+# LC2340. Minimum adjacent swaps to make a valid array adj swap adj min adj swap
 def minimumSwaps(self, nums: List[int]) -> int:
     min_ind = nums.index(min(nums))  # first idx from left
     max_ind = nums[::-1].index(max(nums))  # first idx from right
@@ -235,7 +235,7 @@ def numberOfArithmeticSlices(self, nums: List[int]) -> int:
             count = 0
     return ans + count * (count + 1) // 2
 
-#LC2256. Minimum Average Difference
+#LC2256. Minimum Average Difference  min avg diff
 def minimumAverageDifference(self, nums: List[int]) -> int:
     n, total = len(nums), sum(nums)
     ans, mind, presum = -1, inf, 0

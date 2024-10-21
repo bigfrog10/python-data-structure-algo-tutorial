@@ -231,7 +231,7 @@ def shortestPath(self, grid: List[List[int]], k: int) -> int:  # best, A*, O(Nkl
                     seen.add(state)
     return -1
 
-# LC64. Minimum Path Sum - min path sum matrix
+# LC64. Minimum Path Sum - matrix min path sum  min sum path
 def minPathSum(self, grid: List[List[int]]) -> int:  # O(mn) time, O(n) space
     M, N = len(grid), len(grid[0])
     dp = [0] + [float('inf')] * (N-1)

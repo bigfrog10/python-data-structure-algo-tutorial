@@ -34,7 +34,7 @@ def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:  # O(n)
             ans = i+1
     return ans if total >= 0 else -1
 
-# LC1710. Maximum Units on a Truck max unit truck
+# LC1710. Maximum Units on a Truck max unit truck max box
 def maximumUnits(self, boxTypes: List[List[int]], truckSize: int) -> int:
     boxes = sorted(boxTypes, key=lambda x: x[1], reverse=True)  # O(nlogn)
     total, counts = 0, 0 # greedy: box count 1 with max units

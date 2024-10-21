@@ -488,7 +488,7 @@ def strStr(self, haystack: str, needle: str) -> int:  # KMP O(n+h)
 # https://blog.seancoughlin.me/find-the-index-of-the-first-occurrence-in-a-string-naive-and-kmp-solutions
 
 
-# LC1071. Greatest Common Divisor of Strings gcd string gcd string
+# LC1071. Greatest Common Divisor of Strings gcd string gcd string divide
 def gcdOfStrings(self, str1: str, str2: str) -> str:
     # make sure that str1 and str2 must have `Greatest Common Divisor`
     if str1 + str2 != str2 + str1: return ''  # "AB", "CD"
@@ -693,4 +693,11 @@ def entityParser(self, text: str) -> str:
         text = text.replace( html_sym , formal_sym )
     return text
 
-
+# LC2575. Find the Divisibility Array of a String div array
+def divisibilityArray(self, word: str, m: int) -> List[int]:
+    ans, x = [], 0
+    for i in word:
+        x = x * 10 + int(i)
+        x = x % m
+        ans += [int(x == 0)]
+    return ans

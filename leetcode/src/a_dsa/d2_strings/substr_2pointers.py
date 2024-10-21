@@ -45,7 +45,7 @@ def isSubsequence(self, s: str, t: str) -> bool:
     it = iter(t)
     return all(c in it for c in s)
 
-# LC2938. Separate Black and White Balls
+# LC2938. Separate Black and White Balls  black white black
 def minimumSteps(self, s: str) -> int:
     res = whitep = 0
     for idx, char in enumerate(s):

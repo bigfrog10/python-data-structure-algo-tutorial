@@ -63,7 +63,7 @@ def isCompleteTree(self, root: Optional[TreeNode]) -> bool:  # O(N) time and spa
         i += 1
     return not any(bfs[i:])  # we shouldn't have any non None after i
 
-# LC545. Boundary of Binary Tree
+# LC545. Boundary of Binary Tree bt boundary
 def boundaryOfBinaryTree(self, root: Optional[TreeNode]) -> List[int]:  # O(n) runtime, O(n) space(stack recursion)
     def left_bound(root):
         if not root: return

@@ -1,4 +1,11 @@
-# 633. Sum of Square Numbers
+
+# LC2578. Split With Minimum Sum  split min sum
+def splitNum(self, num: int) -> int:
+    s = sorted(str(num))
+    return int(''.join(s[::2])) + int(''.join(s[1::2]))
+    # min: sort small to large
+
+# LC633. Sum of Square Numbers
 def judgeSquareSum(self, c: int) -> bool:
     a = 0
     while a * a <= c:  # O(sqrt(c))
@@ -104,7 +111,8 @@ def reverse(self, x: int) -> int:
         if res > 2**31-1: return 0
     return res if x > 0 else -res
 
-# LC93. Restore IP Addresses - chart in solution is interesting  valid ip address
+# LC93. Restore IP Addresses break 25525511135 to valid ip
+# chart in solution is interesting
 def restoreIpAddresses(self, s: str) -> List[str]:
     res = []  # 3^3 possibilities, start or ., have only 3 possibility to put the next dot.
     def add_dot(segs, start):

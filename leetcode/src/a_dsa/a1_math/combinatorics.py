@@ -1,6 +1,11 @@
 from typing import List
 import math
 
+# LC3014. Minimum Number of Pushes to Type Word I phone pad min push distinct
+def minimumPushes(self, word: str) -> int:
+    p, m = divmod(len(word), 8)
+    return 8 * p * (p+1) // 2 + m * (p+1)
+
 # LC3016. Minimum Number of Pushes to Type Word II  phone pad min push
 def minimumPushes(self, word: str) -> int:  # O(n) time, O(1) space
     freq = [0] * 26

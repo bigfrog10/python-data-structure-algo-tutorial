@@ -450,9 +450,30 @@ def checkMove(self, board: List[List[str]], r: int, c: int, color: str) -> bool:
         size = 2
         while 8 > i >= 0 <= j < 8:
             if board[i][j] == '.'or size < 3 and board[i][j] == color:
-                break
+                break  # not a legal move, try other paths
             if board[i][j] == color: return True
             i += dr
             j += dc
             size += 1
     return False
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
