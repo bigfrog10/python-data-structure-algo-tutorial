@@ -1,4 +1,17 @@
 
+# LC327. Count of Range Sum boundary
+def countRangeSum(self, nums: List[int], lower: int, upper: int) -> int:
+    from sortedcontainers import SortedList  # O(nlogn)
+    ans = cur = 0
+    prefix = SortedList([0])  # prefix sums seen so far
+    for num in nums:
+        cur += num
+        # lower <= curr(j) - curr(j-1) <= upper rewrite to curr(j) - upper <= curr(j-1) <= curr(j) - lower
+        ans += prefix.bisect_right(cur - lower) - prefix.bisect_left(cur - upper)
+        prefix.add(cur)
+    return ans
+# https://leetcode.com/problems/count-of-range-sum/solutions/5536662/python-concise-solution-using-sortedlist/?envType=company&envId=amazon&favoriteSlug=amazon-thirty-days
+
 # LC1010. Pairs of Songs With Total Durations Divisible by 60
 def numPairsDivisibleBy60(self, time: List[int]) -> int:  # O(n) time and O(1) space
     counts = [0] * 60  # O(1) space

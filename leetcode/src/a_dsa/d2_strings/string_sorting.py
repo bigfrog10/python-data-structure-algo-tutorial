@@ -155,3 +155,31 @@ def kthLargestNumber(self, nums: List[str], k: int) -> str:
     nums = [int(x) for x in nums]  # handle 3 and 13
     klarger = heapq.nlargest(k, nums) # O(nlogk)
     return str(sorted(klarger)[0])
+
+# LC358. Rearrange String k Distance Apart dist k apart k dist apart
+def rearrangeString(self, s: str, k: int) -> str:
+    ans = []
+    pq = [(-count, char) for char, count in Counter(s).items()]
+    heapify(pq)
+    queue = deque()
+    while pq:
+        count, char = heappop(pq)
+        ans.append(char)
+        queue.append((count + 1, char))
+        if len(queue) >= k:
+            cnt, ch = queue.popleft()
+            if -cnt > 0:
+                heappush(pq, (cnt, ch))
+    return "".join(ans) if len(ans) == len(s) else ""
+
+# LC1942. The Number of the Smallest Unoccupied Chair chair number small unoccu chair  guest chair
+def smallestChair(self, times: List[List[int]], targetFriend: int) -> int:
+    guests = sorted(range(len(times)), key=lambda x: times[x][0])  # O(nlogn)
+    emptySeats, seatsTaken = list(range(len(times))), []
+    for i in guests:
+        ar, lv = times[i]
+        while seatsTaken and seatsTaken[0][0] <= ar:
+            heappush(emptySeats, heappop(seatsTaken)[1])
+        seat = heappop(emptySeats)
+        if i == targetFriend: return seat
+        heappush(seatsTaken,(lv, seat))

@@ -91,17 +91,17 @@ def superEggDrop(self, k: int, n: int) -> int:
         print(floors)
     return drops
 
-# LC3317. Find the Number of Possible Ways for an Event
+# LC3317. Find the Number of Possible Ways for an Event possible ways
 mod = 10 ** 9 + 7
 @cache
-def s(n, k):  # number of ways to assign n performers to k events
-    if n < k: return 0  # each event at least one performer, stirling number
+def s(n, k):  # number of ways to assign n performers to k stages
+    if n < k: return 0  # each stage at least one performer, stirling number
     if k == 1: return 1
     return (k * s(n - 1, k) + s(n - 1, k - 1)) % mod
 class Solution:
     def numberOfWays(self, n: int, x: int, y: int) -> int:  # O(n^2) time, space
         res = 0
-        for a in range(1, min(n, x) + 1):
+        for a in range(1, min(n, x) + 1):  # loop all stages
             # pow(y, a) each event can have 1 to y score
             res += math.perm(x, a) * s(n, a) * pow(y, a, mod)
         return res % mod

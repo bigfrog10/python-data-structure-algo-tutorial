@@ -315,3 +315,15 @@ def findRepeatedDnaSequences(self, s: str) -> List[str]:
             res.append(sub)
         counter[sub] += 1
     return res
+
+# LC1813. Sentence Similarity III
+def areSentencesSimilar(self, sentence1: str, sentence2: str) -> bool:
+    s1, s2 = sentence1.split(' '), sentence2.split(' ')
+    if len(s1) > len(s2): s1, s2 = s2, s1
+    i = 0  # match from front
+    while i < len(s1) and s1[i] == s2[i]:
+        i += 1
+    j = 0  # match from back
+    while j < len(s1) and s1[-(j+1)] == s2[-(j+1)]:
+        j += 1
+    return i + j >= len(s1)

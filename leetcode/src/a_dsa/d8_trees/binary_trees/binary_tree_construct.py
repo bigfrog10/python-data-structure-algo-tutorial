@@ -107,11 +107,11 @@ def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
         return root
     return rec(0, len(inorder)-1)
 
-# LC106. Construct Binary Tree from Inorder and Postorder Traversal  # BBG
+# LC106. Construct Binary Tree from Inorder and Postorder Traversal  bt inorder postorder
 def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:
     inorder_idxs={v: i for i, v in enumerate(inorder)}
     def rec(leftpt, rightpt):
-        if leftpt > rightpt: return
+        if leftpt > rightpt: return None
         root = TreeNode(postorder.pop()) # pre-order pop from front
         mid = inorder_idxs[root.val]
         root.right = rec(mid+1, rightpt) # flip these 2 lines for preorder

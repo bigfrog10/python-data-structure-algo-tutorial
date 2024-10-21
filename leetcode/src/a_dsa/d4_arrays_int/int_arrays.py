@@ -795,7 +795,7 @@ def candy(self, ratings: List[int]) -> int:
     return ret
 # https://leetcode.com/problems/candy/solutions/4037646/99-20-greedy-two-one-pass/
 
-# LC2491. Divide Players Into Teams of Equal Skill
+# LC2491. Divide Players Into Teams of Equal Skill  chemistry prod
 def dividePlayers(self, skill: List[int]) -> int:
     n = len(skill)
     total_skill = sum(skill)

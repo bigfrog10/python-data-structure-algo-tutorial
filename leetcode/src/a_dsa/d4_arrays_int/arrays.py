@@ -1,4 +1,16 @@
 
+# LC1679. Max Number of K-Sum Pairs
+def maxOperations(self, nums: List[int], k: int) -> int:
+    freq = defaultdict(int)  # O(n) time space
+    res = 0
+    for n in nums:
+        if n < k and freq[k-n] > 0:
+            res += 1
+            freq[k-n] -= 1
+        else:
+            freq[n] += 1
+    return res
+
 # LC1035. Uncrossed Lines
 def maxUncrossedLines(self, nums1: List[int], nums2: List[int]) -> int:
     n1, n2 = len(nums1), len(nums2)

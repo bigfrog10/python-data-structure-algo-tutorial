@@ -335,7 +335,7 @@ def findClosestLeaf(self, root: TreeNode, k: int) -> int:  # O(n)
                     seen.add(nei)
                     queue.append(nei)
 
-# LC863. All Nodes Distance K in Binary Tree bt dist k  bt graph k
+# LC863. All Nodes Distance K in Binary Tree bt dist k dist  bt graph k
 def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:  # O(n) time
     adj = collections.defaultdict(list)  # create graph, O(V) space
     def dfs(node):

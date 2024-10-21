@@ -222,7 +222,7 @@ class SnakeGame:
         else: self.snake.pop() # not eating food: append head and delete tail
         return len(self.snake)-1
 
-# LC1429. First Unique Number
+# LC1429. First Unique Number 1st unique number
 class FirstUnique:
     def __init__(self, nums: List[int]):
         self.deque = deque(nums)

@@ -11,7 +11,7 @@ def findMaximizedCapital(self, k: int, w: int, profits: List[int], capital: List
         if heap: w -= heapq.heappop(heap)
     return w
 
-# LC871. Minimum Number of Refueling Stops tank of gas
+# LC871. Minimum Number of Refueling Stops tank of gas min refuel
 def minRefuelStops(self, target: int, tank: int, stations: List[List[int]]) -> int:
     pq = []  # A maxheap is simulated using negative values
     stations.append((target, 0))

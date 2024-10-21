@@ -323,7 +323,7 @@ def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[Lis
 
 
 
-# LC1353. Maximum Number of Events That Can Be Attended
+# LC1353. Maximum Number of Events That Can Be Attended max event attend
 def maxEvents(self, events: List[List[int]]) -> int:  # O(nlogn)
     events.sort(reverse=1)  # should sort by start date, we do this for pop()
     hq = []  # store end time of open events
