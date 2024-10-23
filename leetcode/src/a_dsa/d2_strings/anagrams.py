@@ -1,5 +1,5 @@
 
-# LC438. Find All Anagrams in a String  all p anagrams in s
+# LC438. Find All Anagrams in a String  all p anagrams in s anagram start indices anagram
 def findAnagrams(self, st: str, ana: str): # O(n) time
     d1, d2 = Counter(ana), Counter(st[:len(ana)])  # O(1) space, 26 chars
     res = []

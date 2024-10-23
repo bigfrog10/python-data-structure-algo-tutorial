@@ -47,14 +47,13 @@ def validTicTacToe(self, board):
 
 # LC36. Valid Sudoku
 def isValidSudoku(self, board: List[List[str]]) -> bool:  # one pass, faster, cache encoded positions
-    digits = set('123456789')
     visited = defaultdict(set)  # 'row' + i, 'col' + j, 'sqr' + i-j as 3 keys to hold visited
     for i in range(9):
         row = board[i]
         for j in range(9):
             c = row[j]
             if c == '.': continue
-            if c not in digits: return False
+            if c not in '123456789': return False
             showed = visited['row' + str(i)]
             if c in showed: return False
             showed.add(c)

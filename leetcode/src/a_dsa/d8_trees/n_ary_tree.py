@@ -3,15 +3,15 @@
 def crawl(self, startUrl: str, htmlParser: 'HtmlParser') -> List[str]:
     def get_hostname(url):
         return url.split('/')[2]  # "http:", "", "example.org"
-    start_hostname = get_hostname(startUrl)
+    host = get_hostname(startUrl)
     visited = set()
-    def dfs(url, htmlParser):
+    def dfs(url):
         visited.add(url)
         for next_url in htmlParser.getUrls(url):
-            if get_hostname(next_url) == start_hostname and next_url not in visited:
-                # if start_hostname in next_url and next_url not in visited:  # faster
-                dfs(next_url, htmlParser)
-    dfs(startUrl, htmlParser)
+            if get_hostname(next_url) == host and next_url not in visited:
+                # if host in next_url and next_url not in visited:  # faster
+                dfs(next_url)
+    dfs(startUrl)
     return visited
 
 # LC428. Serialize and Deserialize N-ary Tree serial nt serial n-ary serial nary serial n ary serial

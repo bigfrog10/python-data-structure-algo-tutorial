@@ -84,6 +84,26 @@ class Solution:
     def hostname(self, url):
         return url.split('//')[1].split('/')[0]
 
+class Solution {
+    private Set<String> visited = ConcurrentHashMap.newKeySet();
+    private String hostName;
+    public List<String> crawl(String startUrl, HtmlParser htmlParser) {
+        hostName = getHostname(startUrl);
+        traverse(startUrl, htmlParser);
+        return new ArrayList(visited);
+    }
+    private static String getHostname(String url) {
+        return url.split("/")[2];
+    }
+    private void traverse(String startUrl, HtmlParser htmlParser) {
+        visited.add(startUrl);
+        htmlParser.getUrls(startUrl)
+        .parallelStream()
+        .filter(url -> getHostname(url).equals(hostName))
+        .filter(url -> !visited.contains(url))
+        .forEach(url -> traverse(url, htmlParser));
+    }
+}
 
 
 

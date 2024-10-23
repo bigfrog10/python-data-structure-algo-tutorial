@@ -21,7 +21,7 @@ def maxChunksToSorted(self, arr: List[int]) -> int:
     return count
 # https://leetcode.com/problems/max-chunks-to-make-sorted/solutions/1225805/python-easy-sol-28ms-with-detailed-explanation/
 
-# LC768. Max Chunks To Make Sorted II
+# LC768. Max Chunks To Make Sorted II sort chunk sort
 def maxChunksToSorted(self, arr: List[int]) -> int:
     stack = []
     for a in arr:  # O(n) time and space

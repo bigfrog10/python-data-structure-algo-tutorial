@@ -202,7 +202,7 @@ class MyHashMap:  # O(N / key_space) time and O(M + K), M: key size in map, K: #
         hash_key = key % self.key_space
         self.hash_table[hash_key].remove(key)
 
-# LC1146. Snapshot Array
+# LC1146. Snapshot Array snapshotarray
 class SnapshotArray(object):  # This copies only relevant changes
     def __init__(self, length):
         self.dic = defaultdict(dict)
