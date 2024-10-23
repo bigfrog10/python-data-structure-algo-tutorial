@@ -142,12 +142,13 @@ def wordBreak(s: str, wordDict: List[str]) -> List[str]:
 
 # LC139. Word Break, top100 - return breakable or not  segment
 def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-    wordset = set(wordDict)  ## O(n^3)  + O(mk), n = len(s), m is size of dict, k maxlen of word
+    wordset = set(wordDict)  ## O(nk^2), n = len(s), m is size of dict, k maxlen of word
+    k = max(len(w) for w in wordDict)
     @lru_cache  # O(n)
     def break_words(start: int):
         if start == len(s): return True
-        for end in range(start + 1, len(s)+1):  # O(n), need +1 for next line [start:end]
-            if s[start:end] in wordset and break_words(end): return True  # s[start:end] is O(n)
+        for end in range(start + 1, min(len(s)+1, start+1+k)):  # O(k), need +1 for next line [start:end]
+            if s[start:end] in wordset and break_words(end): return True  # s[start:end] is O(k), k = max len of all wordDict.
         return False
     return break_words(0)
 def wordBreak(self, s: str, wordDict: List[str]) -> bool:

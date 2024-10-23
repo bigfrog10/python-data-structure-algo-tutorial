@@ -120,17 +120,15 @@ def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:
     return rec(0, len(inorder)-1)
 
 # LC889. Construct Binary Tree from Preorder and Postorder Traversal
-def constructFromPrePost(self, pre: List[int], post: List[int]) -> TreeNode:
-    preIndex, posIndex = 0, 0
-    def construct(pre, post):  # O(n) since we loop preindex once
-        nonlocal preIndex, posIndex
-        root = TreeNode(pre[preIndex])
-        preIndex += 1
-        if (root.val != post[posIndex]): root.left = construct(pre, post)
-        if (root.val != post[posIndex]): root.right = construct(pre, post)
-        posIndex += 1
-        return root
-    return construct(pre, post)
+def constructFromPrePost(self, preorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
+    root = TreeNode(postorder.pop())
+    if root.val != preorder[-1]:
+        root.right = self.constructFromPrePost(preorder, postorder)
+    if root.val != preorder[-1]:
+        root.left = self.constructFromPrePost(preorder, postorder)
+    preorder.pop()
+    return root
+# https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/
 
 # LC1367. Linked List in Binary Tree  bt linked
 def isSubPath(self, head: Optional[ListNode], root: Optional[TreeNode]) -> bool:

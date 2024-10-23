@@ -78,7 +78,7 @@ def isPalindrome(self, head: ListNode) -> bool:
         current_node = current_node.next
     return vals == vals[::-1]
 
-# LC143. Reorder List - odd + <even reverse> odd even reverse
+# LC143. Reorder List - odd + <even reverse> odd even reverse singly
 def reorderList(self, head: ListNode) -> None:
     if not head: return
     slow = fast = head  # in 1->2->3->4->5->6 find 4

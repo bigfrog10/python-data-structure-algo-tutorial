@@ -14,7 +14,7 @@ def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -
         if node == p or node == q: return node
         left, right = dfs(node.left), dfs(node.right)
         if left and right: return node  # both are not null, then this is LCA
-        return left or right  # carry the not None node
+        return left or right  # carry the not None node, only one not non, or both non
     return dfs(root)
 
 # LC1644. Lowest Common Ancestor of a Binary Tree II, might not be in tree  bt lca bt

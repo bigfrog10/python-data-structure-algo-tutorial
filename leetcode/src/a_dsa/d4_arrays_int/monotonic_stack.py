@@ -31,7 +31,7 @@ def maxChunksToSorted(self, arr: List[int]) -> int:
         stack.append(_max)  # these can be sorted in 1 block
     return len(stack)
 
-# LC1642. Furthest Building You Can Reach - furthest jump furthest building  reach building tallest building tall building
+# LC1642. Furthest Building You Can Reach - furthest jump furthest building  reach building tallest building tall building high building
 def furthestBuilding(self, heights: List[int], bricks: int, ladders: int) -> int:
     heap = []   ## O(NlogK) time and O(k) space, k=len(ladders)
     for i in range(len(heights) - 1):
@@ -165,7 +165,7 @@ def subArrayRanges(self, nums: List[int]) -> int:  # O(n) time and space
         s.append(i)
     return res
 
-# LC907. Sum of Subarray Minimums    sum sub min sum min sum of min
+# LC907. Sum of Subarray Minimums    sum sub min sum min sum of min min(b)
 def sumSubarrayMins(self, arr: List[int]) -> int:
     res, stack = 0, []  # O(n) time and space
     arr = [float('-inf')] + arr + [float('-inf')]

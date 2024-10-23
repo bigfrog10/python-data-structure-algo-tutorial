@@ -8,11 +8,11 @@ def compress(self, chars: List[str]) -> int:
         glen = 1  # group length
         while i + glen < len(chars) and chars[i + glen] == chars[i]:
             glen += 1
+        i += glen
         if glen > 1:
             str_repr = str(glen)
             chars[res:res+len(str_repr)] = list(str_repr)
             res += len(str_repr)
-        i += glen
     return res
 def compress(self, chars: List[str]) -> int:  # O(n) time and O(1) space, chars gets shrinked
     st = i = 0
@@ -26,7 +26,7 @@ def compress(self, chars: List[str]) -> int:  # O(n) time and O(1) space, chars 
     return len(chars)
 
 # LC394. Decode String - expand copies
-def decodeString(self, s: str) -> str:  # O(n*k) time, k is max coeff; O(|s| - parenth)
+def decodeString(self, s: str) -> str:  # O(n*max(k)) time, k is max coeff; O(|s| - parenth)
     stack = []
     curr, k = "", 0
     for char in s:  # O(n)

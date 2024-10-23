@@ -115,7 +115,7 @@ def findContentChildren(self, g: List[int], s: List[int]) -> int:  # O(NlogN+Mlo
         j += 1
     return i
 
-# LC238. Product of Array Except Self, top100  prod array
+# LC238. Product of Array Except Self, top100  prod array prod except
 def productExceptSelf(self, nums: List[int]) -> List[int]:  # O(n) time and O(1) space
     length = len(nums)
     ret = [0] * length
@@ -320,7 +320,7 @@ def depthSumInverse(self, nestedList: List[NestedInteger]) -> int:
             queue, q1 = q1, []
     return res
 
-# LC2149. Rearrange Array Elements by Sign  rearr sign rearr array
+# LC2149. Rearrange Array Elements by Sign  rearr sign rearr array arrange sign
 def rearrangeArray(self, nums: List[int]) -> List[int]:
     n = len(nums)
     ans = [0] * n
