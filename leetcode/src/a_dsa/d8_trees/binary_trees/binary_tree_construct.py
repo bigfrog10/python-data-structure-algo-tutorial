@@ -98,9 +98,10 @@ class CBTInserter:
 def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
     if not preorder: return None
     inorder_idxs = {v: i for i, v in enumerate(inorder)}
+    pp = list(reversed(preorder))
     def rec(leftpt, rightpt):
         if leftpt > rightpt: return
-        root = TreeNode(preorder.pop(0))
+        root = TreeNode(pp.pop())
         mid = inorder_idxs[root.val]
         root.left = rec(leftpt, mid-1)
         root.right = rec(mid+1, rightpt)

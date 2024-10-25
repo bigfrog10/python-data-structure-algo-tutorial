@@ -2,9 +2,9 @@
 # LC772. Basic Calculator III - +-*/()
 def calculate(self, s: str) -> int:  # O(n) time and space
     stack, op, num = [], '+', 0  # stack for () and op in front
-    for i, c in enumerate(s + '+'):
+    for c in s + '+':
         if c.isdigit(): num = num * 10 + int(c)
-        elif c == '(':  # num is already 0, so no need to handle that
+        elif c == '(':
             stack.append(op)  # save history
             stack.append(c)
             op = '+'

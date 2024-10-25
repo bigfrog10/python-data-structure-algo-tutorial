@@ -91,7 +91,7 @@ def alienOrder(self, words: List[str]) -> str:  # O(total word lengths)
                 break
     output = []  # need to repeatedly pick off nodes with an indegree of 0.
     queue = deque([c for c in in_degree if in_degree[c] == 0])
-    while queue:
+    while queue:  # cyclic letters won't show up in queue
         c = queue.popleft()
         output.append(c)
         for d in adj_list[c]:
@@ -157,7 +157,7 @@ def kthLargestNumber(self, nums: List[str], k: int) -> str:
     return str(sorted(klarger)[0])
 
 # LC358. Rearrange String k Distance Apart dist k apart k dist apart
-def rearrangeString(self, s: str, k: int) -> str:
+def rearrangeString(self, s: str, k: int) -> str:  # O(nlogn). If we use bucket sort, can we do it in O(n)
     ans = []
     pq = [(-count, char) for char, count in Counter(s).items()]
     heapify(pq)

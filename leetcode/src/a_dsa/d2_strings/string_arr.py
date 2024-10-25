@@ -327,3 +327,36 @@ def areSentencesSimilar(self, sentence1: str, sentence2: str) -> bool:
     while j < len(s1) and s1[-(j+1)] == s2[-(j+1)]:
         j += 1
     return i + j >= len(s1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

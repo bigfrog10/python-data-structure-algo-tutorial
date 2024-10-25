@@ -1,6 +1,6 @@
 import heapq
 
-# LC2530. Maximal Score After Applying K operations
+# LC2530. Maximal Score After Applying K operations max score k oper
 def maxKelements(self, nums: List[int], k: int) -> int:
     heap = heapq.nsmallest(k, [-a for a in nums])  # O(nlogk)
     res = 0

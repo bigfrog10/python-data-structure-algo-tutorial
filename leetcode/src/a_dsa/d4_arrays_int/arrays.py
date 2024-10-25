@@ -1,5 +1,5 @@
 
-# LC1679. Max Number of K-Sum Pairs
+# LC1679. Max Number of K-Sum Pairs k sum pair k pair
 def maxOperations(self, nums: List[int], k: int) -> int:
     freq = defaultdict(int)  # O(n) time space
     res = 0
