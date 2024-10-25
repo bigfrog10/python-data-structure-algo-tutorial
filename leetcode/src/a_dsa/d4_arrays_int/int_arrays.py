@@ -812,5 +812,18 @@ def dividePlayers(self, skill: List[int]) -> int:
     # Return half of total chemistry (as each pair is counted twice)
     return total_chemistry // 2
 
-
-
+# LC3326. Minimum Division Operations to Make Array Non Decreasing
+def minOperations(self, nums: List[int]) -> int:  # O(n*sqrt(max(nums)) time
+    @cache
+    def least_prime(num: int) -> int:
+        if num % 2 == 0: return 2
+        for prime in range(3, isqrt(num)+1, 2):
+            if num % prime == 0: return prime
+        return num
+    ans = 0
+    for i in range(len(nums) - 2, -1, -1):
+        if nums[i] <= nums[i + 1]: continue
+        nums[i] = least_prime(nums[i])
+        if nums[i] > nums[i + 1]: return -1
+        ans += 1
+    return ans
