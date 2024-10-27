@@ -190,7 +190,7 @@ def flatten(arr: list, n):
         else: res.append(a)
     return res
 
-# LC565 Array Nesting   interloop array loop
+# LC565 Array Nesting   interloop array loop  permutation of the numbers
 def arrayNesting(self, nums: List[int]) -> int: # O(n) tinme and O(1) space
     res = 0
     for i in range(len(nums)):

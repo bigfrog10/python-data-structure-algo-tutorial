@@ -170,6 +170,7 @@ def rearrangeString(self, s: str, k: int) -> str:  # O(nlogn). If we use bucket 
             cnt, ch = queue.popleft()
             if -cnt > 0:
                 heappush(pq, (cnt, ch))
+    # "aaabc", k=3, ans = abca, not same length
     return "".join(ans) if len(ans) == len(s) else ""
 
 # LC1942. The Number of the Smallest Unoccupied Chair chair number small unoccu chair  guest chair

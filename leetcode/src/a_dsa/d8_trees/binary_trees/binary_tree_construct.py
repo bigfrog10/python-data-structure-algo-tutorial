@@ -55,7 +55,6 @@ class Codec:
             node.right = helper(it)
             return node
         node_vals = data.split(",")
-        print(data)
         it = iter(node_vals)
         return helper(it)
 
