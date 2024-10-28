@@ -32,3 +32,10 @@ print(int("0", 16))
 
 b = "1110"
 print(b.count('0') * b.count('1') )
+
+# print(b & (-b))
+
+a = [(1, 2), (3, 4)]
+import bisect
+i = bisect.bisect(a, (1,))
+print(i)
