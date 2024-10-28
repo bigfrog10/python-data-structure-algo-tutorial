@@ -401,6 +401,16 @@ class StockPrice:  # all O(logn)
     def minimum(self) -> int: return self.prices[0]
 
 # LC981. Time Based Key-Value Store
+from sortedcontainers import SortedDict
+class TimeMap:
+    def __init__(self):
+        self.data = collections.defaultdict(SortedDict)
+    def set(self, key: str, value: str, timestamp: int) -> None:
+        self.data[key][timestamp] = value
+    def get(self, key: str, timestamp: int) -> str:
+        val = self.data[key]
+        i = val.bisect_right(timestamp)
+        return val[val.keys()[i-1]] if i else ""
 class TimeMap:
     def __init__(self):
         self.M = collections.defaultdict(list)

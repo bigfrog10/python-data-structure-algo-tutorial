@@ -122,7 +122,9 @@ class Solution:
         return ''.join(ans)
     # https://leetcode.com/problems/longest-happy-string/solutions/5922435/heap-simple-and-clear-solution-12-lines-runtime-100
 
-
+# LC292. Nim Game
+def canWinNim(self, n: int) -> bool:
+    return n % 4 != 0
 
 
 

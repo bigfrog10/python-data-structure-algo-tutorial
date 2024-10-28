@@ -32,7 +32,7 @@ def treeToDoublyList(self, root: 'Node') -> 'Node':  # O(n) runtime and space
     dummy.right.left = prev
     return dummy.right
 
-# LC108. Convert Sorted Array to Binary Search Tree  sorted to bst
+# LC108. Convert Sorted Array to Binary Search Tree  sorted to bst sort to bst sort 2 bst
 def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:  # O(n)
     def to_bst(b, e) -> TreeNode:
         if b > e: return None

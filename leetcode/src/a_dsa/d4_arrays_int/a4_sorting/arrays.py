@@ -2,11 +2,13 @@ from typing import List
 from collections import Counter
 
 # LC1287. Element Appearing More Than 25% In Sorted Array
-def findSpecialInteger(self, arr: List[int]) -> int:
-    size = len(arr) // 4
-    for i in range(len(arr) - size):
-        if arr[i] == arr[i + size]:  # because arr is sorted
-            return arr[i]
+def findSpecialInteger(self, arr: List[int]) -> int:  # O(logn)
+    n = len(arr)
+    candidates = [arr[n // 4], arr[n // 2], arr[3 * n // 4]]
+    for c in candidates:
+        left = bisect_left(arr, c)
+        right = bisect_right(arr, c) - 1
+        if right - left + 1 > n / 4: return c
     return -1
 
 # LC2191. Sort the Jumbled Numbers mapped values
@@ -172,7 +174,7 @@ def relativeSortArray(self, arr1: List[int], arr2: List[int]) -> List[int]:
     arr1.sort(key=lambda x: aord.get(x, maxv+x))
     return arr1
 
-# LC905. Sort Array By Parity - move even to front, odd to back   sort even odd  sort odd even
+# LC905. Sort Array By Parity - move even to front, odd to back   sort even odd  sort odd even begin odd end
 def sortArrayByParity(self, nums: List[int]) -> List[int]:
     i = 0
     for j in range(len(nums)):

@@ -58,7 +58,7 @@ def removeDuplicateLetters(self, s: str) -> str:  # O(n) time and O(1) space
             stack.append(c)
     return ''.join(stack)
 
-# LC1047. Remove All Adjacent Duplicates In String - remove duplicates with 2 chars remove adjacent duplicate removal
+# LC1047. Remove All Adjacent Duplicates In String - remove duplicates with 2 chars remove adjacent duplicate removal dupe remov
 def removeDuplicates(self, S: str) -> str: # O(n)
     output = []
     for ch in S:

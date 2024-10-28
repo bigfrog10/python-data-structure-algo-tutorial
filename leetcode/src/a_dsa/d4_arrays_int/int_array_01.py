@@ -224,7 +224,7 @@ def minimizeArrayValue(self, nums: List[int]) -> int:
     return maxm
     # https://leetcode.com/problems/minimize-maximum-of-array/solutions/2706521/JavaC++Python-Prefix-Sum-Average-O(n)/
 
-# LC413. Arithmetic Slices  number of subarrays
+# LC413. Arithmetic Slices  number of subarrays arithmetic subarray
 def numberOfArithmeticSlices(self, nums: List[int]) -> int:
     ans = count = 0
     for i in range(2, len(nums)):

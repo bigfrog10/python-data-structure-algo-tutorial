@@ -72,7 +72,7 @@ def searchRange1(self, nums: List[int], target: int) -> List[int]:
     return [left, right - 1]
 
 # LC540. Single Element in a Sorted Array - of double elements, find it in log time single elem sorted single sorted
-def singleNonDuplicate(self, nums: List[int]) -> int:  # simplest and fast
+def singleNonDuplicate(self, nums: List[int]) -> int:  # simplest and fast  O(logn)
     lo, hi = 0, len(nums) - 1
     while lo < hi:
         mid = (hi + lo) // 2
