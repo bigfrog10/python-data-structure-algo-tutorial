@@ -211,6 +211,7 @@ def solve(self, board):
     while save:
         i, j = save.pop()
         if 0 <= i < m and 0 <= j < n and board[i][j] == 'O':
+            # mark all boundary linked O to S
             board[i][j] = 'S' # we explore from boundaries
             save += (i, j-1), (i, j+1), (i-1, j), (i+1, j)
     board[:] = [['XO'[c == 'S'] for c in row] for row in board]

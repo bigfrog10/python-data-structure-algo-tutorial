@@ -1,10 +1,10 @@
 
-# LC1679. Max Number of K-Sum Pairs k sum pair k pair
+# LC1679. Max Number of K-Sum Pairs k sum pair k pair sum k
 def maxOperations(self, nums: List[int], k: int) -> int:
     freq = defaultdict(int)  # O(n) time space
     res = 0
     for n in nums:
-        if n < k and freq[k-n] > 0:
+        if freq[k-n] > 0:
             res += 1
             freq[k-n] -= 1
         else:

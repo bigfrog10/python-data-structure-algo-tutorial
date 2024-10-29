@@ -100,7 +100,7 @@ def calculate(self, s):  # O(n) time and space
 
 
 
-# LC494. Target Sum - with plus minus +- operators - ints expression target  add + - sign target expr +-
+# LC494. Target Sum - with plus minus +- operators - ints expression target  add + - sign target expr +- diff expr
 def findTargetSumWays(self, nums: List[int], S: int) -> int:
     n = len(nums)
     @lru_cache(None)  # O(n * S)

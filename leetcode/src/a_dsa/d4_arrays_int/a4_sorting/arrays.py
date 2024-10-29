@@ -103,7 +103,7 @@ def removeDuplicates(self, nums: List[int]) -> int:
             nums[i] = nums[j]
     return i+1
 
-# LC80. Remove Duplicates from Sorted Array II - keep 2 same values, in place change  remove dupe 2
+# LC80. Remove Duplicates from Sorted Array II - keep 2 same values, in place change  remove dupe 2 in place
 def removeDuplicates(self, nums: List[int]) -> int:
     i = count = 1
     for j in range(1, len(nums)):

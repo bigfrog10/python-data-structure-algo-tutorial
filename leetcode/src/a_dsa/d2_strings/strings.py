@@ -702,7 +702,7 @@ def divisibilityArray(self, word: str, m: int) -> List[int]:
         ans += [int(x == 0)]
     return ans
 
-# LC3019. Number of Changing Keys
+# LC3019. Number of Changing Keys change keys
 def countKeyChanges(self, s: str) -> int:
     s = s.lower()
     return sum(s[i] != s[i+1] for i in range(len(s) - 1))

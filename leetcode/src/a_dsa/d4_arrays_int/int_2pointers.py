@@ -1,12 +1,12 @@
 from typing import List
 
-# LC2134. Minimum Swaps to Group All 1's Together II min swap binary circular
+# LC2134. Minimum Swaps to Group All 1's Together II min swap group binary circular
 def minSwaps(self, nums: List[int]) -> int:
-    n, w = len(nums), sum(nums)
+    n, w = len(nums), sum(nums)  # w window size
     ones = max_ones = sum(nums[:w])
     for i in range(n-1):
         ones += nums[(i + w) % n] - nums[i]
-        max_ones = max(ones, max_ones)
+        max_ones = max(ones, max_ones)  # max of 1's in window of size w
     return w - max_ones
 
 # LC992. Subarrays with K Different Integers - good subarrays  k diff integers

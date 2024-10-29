@@ -206,7 +206,7 @@ def containsNearbyAlmostDuplicate(self, nums: List[int], k: int, t: int) -> bool
         if i >= k: del d[nums[i - k] // w]  # O(min(n, k)) space
     return False
 
-# LC229. Majority Element II
+# LC229. Majority Element II      appear more than n/3
 def majorityElement(self, nums: List[int]) -> List[int]:  # O(n) time and O(1) space
     ctr = collections.Counter()
     for n in nums:
@@ -378,7 +378,7 @@ def firstMissingPositive(self, nums: List[int]) -> int:  # O(n) time O(1) space
     return n + 1
 # to restore original values, shift negatives by -2n, keep >= n as is
 
-# LC219. Contains Duplicate II - duplicates within index range k distinct indices
+# LC219. Contains Duplicate II - duplicates within index range k distinct indices dupe k
 def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:  # O(n) time and O(k) space
     if k == 0: return False
     showed = set()  # if we have 2 same elements with k frame, then we are done.
@@ -546,13 +546,13 @@ def thirdMax(self, nums: List[int]) -> int:
         elif max2 > n > max3: max3 = n
     return max1 if max3 == -inf else max3
 
-# LC136. Single Number - single nodupe in array, others are 2
+# LC136. Single Number - single nodupe in array, others are 2 single one
 def singleNumber(self, nums: List[int]) -> int:
     res = 0
     for i in nums: res ^= i
     return res
 
-# LC137. Single Number II  3 times except one
+# LC137. Single Number II  3 times except one three times
 def singleNumber(self, nums: List[int]) -> int:
     seen_once = seen_twice = 0  # add all bits on ith, module 3, that's the loner
     for num in nums:
@@ -812,12 +812,12 @@ def dividePlayers(self, skill: List[int]) -> int:
     # Return half of total chemistry (as each pair is counted twice)
     return total_chemistry // 2
 
-# LC3326. Minimum Division Operations to Make Array Non Decreasing
+# LC3326. Minimum Division Operations to Make Array Non Decreasing  min div ops
 def minOperations(self, nums: List[int]) -> int:  # O(n*sqrt(max(nums)) time
     @cache
     def least_prime(num: int) -> int:
         if num % 2 == 0: return 2
-        for prime in range(3, isqrt(num)+1, 2):
+        for prime in range(3, math.isqrt(num)+1, 2):
             if num % prime == 0: return prime
         return num
     ans = 0

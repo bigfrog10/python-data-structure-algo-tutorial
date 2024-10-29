@@ -98,40 +98,20 @@ def calcEquation(self, equations: List[List[str]], values: List[float], queries:
                 graph[i][j] = graph[i][k] * graph[k][j] if i != j else 1
     return [graph[u].get(v, -1) for u, v in queries]
 # https://leetcode.com/problems/evaluate-division/solutions/3544428/python-elegant-short-floyd-warshall
+
 def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
-    graph = defaultdict(dict)  # O(mn)
-    for (a, b), v in zip(equations, values):  # O(n)
-        graph[a][b] = v
-        graph[b][a] = 1.0 / v
-    def dfs(x, y, w, visited):  # use dfs to find query values.
-        visited.add(x)
-        ns = graph[x]
-        for var, weight in ns.items():
-            if var == y: return w * weight
-            if var not in visited:
-                s = dfs(var, y, w*weight, visited)
-                if s != 0: return s
-        return 0
-    ret = []
-    for a, b in queries:  # O(m)
-        r = dfs(a, b, 1, set())  # O(n)
-        if r == 0: ret.append(-1)
-        else: ret.append(r)
-    return ret
-def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
-        alphabet = set(sum(equations, []))  # start with []. return all diff chars in a set
-        uf = UnionFind(alphabet)  # O(N+M*lg∗N)
-        for (u, v), w in zip(equations, values): uf.union(u, v, w)
-        ans = []
-        for u, v in queries:
-            if u in alphabet and v in alphabet:
-                pu, vu = uf.find(u)
-                pv, vv = uf.find(v)
-                if pu == pv: ans.append(vu / vv)
-                else: ans.append(-1)
+    alphabet = set(sum(equations, []))  # start with []. return all diff chars in a set
+    uf = UnionFind(alphabet)  # O(N+M*lg∗N)
+    for (u, v), w in zip(equations, values): uf.union(u, v, w)
+    ans = []
+    for u, v in queries:
+        if u in alphabet and v in alphabet:
+            pu, vu = uf.find(u)
+            pv, vv = uf.find(v)
+            if pu == pv: ans.append(vu / vv)
             else: ans.append(-1)
-        return ans
-        return ans
+        else: ans.append(-1)
+    return ans
 class UnionFind:  ## M union and find operations on N objects takes O(N + M lg* N) time
     def __init__(self, alphabet):  ## weighted union + path compression
         self.parent = {c: c for c in alphabet}

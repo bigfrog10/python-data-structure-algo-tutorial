@@ -1,13 +1,13 @@
 
-# LC214. Shortest Palindrome short pali shortest pali
-def shortestPalindrome(self, s: str) -> str:
+# LC214. Shortest Palindrome short pali shortest pali add char front
+def shortestPalindrome(self, s: str) -> str:  # O(n^2)
     rs = s[::-1]
     for i in range(len(s)):  # compare prefix with suffix
         if rs[i:] == s[:len(s)-i]: return rs[:i] + s
         # the rest is already mirrored
     return ""
-def shortestPalindrome1(self, s: str) -> str:
-    def kmp(needle):
+def shortestPalindrome1(self, s: str) -> str:  # O(n) time space
+    def kmp(needle):  # ret[i]: longest length of prefix matching suffix
         pie = [0]*len(needle)
         i, j = 1, 0  # i start at 1
         while i < len(needle):
@@ -17,11 +17,11 @@ def shortestPalindrome1(self, s: str) -> str:
             elif j > 0: j = pie[j-1]  # if not equal, if we can move j, then move it.
             else: i += 1  # if we can't move j, then move i
         return pie
-    rev = s[::-1]  # compute longest palindromic prefix
-    prefix_table = kmp(rev + "#" + s)  # longest i s.t. s[:i]==r[len(s)-i:]
-    i = prefix_table[-1]
-    suffix = rev[:i]
-    return suffix + s
+    rev = s[::-1]  # rev = "cba"   s = "abc"
+    prefix_table = kmp(s + "#" + rev)  # abc#cba
+    pali_len = prefix_table[-1]  # [0,0,0,0,0,0,1]
+    suffix = rev[:len(s) - pali_len]  # cb  shortest
+    return suffix + s  # cbabc
 
 # LC336. Palindrome Pairs - of a word list  pali pair
 def palindromePairs(self, words: List[str]) -> List[List[int]]:  # O(chars) time space
@@ -160,8 +160,8 @@ def nearestPalindromic(self, n: str) -> str:
     prefix = int(n[:(ln + 1)//2])
     for i in map(str, (prefix - 1, prefix, prefix + 1,)):
         # 123 -> 121(not 131), 2 -> 1, 123 -> 121(not 111),
-        if ln & 1: candidates.add(i + i[:-1][::-1])
-        else: candidates.add(i + i[::-1])
+        prefix = i[:-1] if ln & 1 else i
+        candidates.add(i + prefix[::-1])
     candidates.discard(n)  # "1" need this line -> 9
     return min(candidates, key=lambda x: (abs(int(x) - int(n)), int(x)))
 

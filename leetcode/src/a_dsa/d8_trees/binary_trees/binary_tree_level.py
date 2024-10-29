@@ -114,10 +114,10 @@ def connect(self, root: 'Node') -> 'Node':
         while root:
             if root.left:  # level travel at child level
                 cur.next = root.left
-                cur = root.left  # level travel at child level
+                cur = cur.next  # level travel at child level
             if root.right:
                 cur.next = root.right  # connect to right at child level
-                cur = root.right
+                cur = cur.next
             root = root.next  # level travel at parent level
         root = leftmost.next  # next level starting point
     return res
@@ -139,7 +139,7 @@ def zigzagLevelOrder(self, root):
         drxn *= -1
     return ans
 
-# LC111. Minimum Depth of Binary Tree
+# LC111. Minimum Depth of Binary Tree min depth bt min depth
 def minDepth(self, root: Optional[TreeNode]) -> int:
     res, row = 0, [root]  # BFS for min
     while any(row):

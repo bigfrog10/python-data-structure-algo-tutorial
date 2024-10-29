@@ -1,4 +1,17 @@
 
+# LC559. Maximum Depth of N-ary Tree max depth
+def maxDepth(self, root: 'Node') -> int:
+    if not root: return 0
+    maxh = 0
+    queue = deque([root])
+    while queue:
+        maxh += 1
+        for i in range(len(queue)):
+            n = queue.popleft()
+            for nb in n.children:
+                queue.append(nb)
+    return maxh
+
 # LC1236. Web Crawler
 def crawl(self, startUrl: str, htmlParser: 'HtmlParser') -> List[str]:
     def get_hostname(url):

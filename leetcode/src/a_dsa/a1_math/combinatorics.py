@@ -53,7 +53,7 @@ def subsets(self, nums: List[int]) -> List[List[int]]:  # samiliar to LC90
     backTrack(0, [])
     return ans
 
-# LC90. Subsets II - dupe elem
+# LC90. Subsets II - dupe elem all possible subsets
 def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:  # O(n * 2^n)
     nums.sort()
     ans = []

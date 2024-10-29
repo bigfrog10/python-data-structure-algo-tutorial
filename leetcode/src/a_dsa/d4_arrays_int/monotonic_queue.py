@@ -41,8 +41,8 @@ def longestSubarray(self, nums: List[int], limit: int) -> int:  # O(n)
     i = 0
     for a in nums:
         while maxd and a > maxd[-1]: maxd.pop()
-        while mind and a < mind[-1]: mind.pop()
         maxd.append(a)
+        while mind and a < mind[-1]: mind.pop()
         mind.append(a)
         if maxd[0] - mind[0] > limit:
             if maxd[0] == nums[i]: maxd.popleft()  # to keep i in sync with both deques

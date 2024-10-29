@@ -280,7 +280,7 @@ def numSubmatrixSumTarget(self, A, target):
 
 
 
-# LC542. 01 Matrix - distance to near 0
+# LC542. 01 Matrix - distance to near 0  binary matrix
 def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:  # O(rc)
     m, n = len(mat), len(mat[0])
     for r in range(m):

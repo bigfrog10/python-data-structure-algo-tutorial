@@ -95,7 +95,7 @@ def superEggDrop(self, k: int, n: int) -> int:
 mod = 10 ** 9 + 7
 @cache
 def s(n, k):  # number of ways to assign n performers to k stages
-    if n < k: return 0  # each stage at least one performer, stirling number
+    if n < k: return 0  # each stage at least one performer, stirling number of 2nd kind
     if k == 1: return 1
     return (k * s(n - 1, k) + s(n - 1, k - 1)) % mod
 class Solution:
@@ -103,6 +103,8 @@ class Solution:
         res = 0
         for a in range(1, min(n, x) + 1):  # loop all stages
             # pow(y, a) each event can have 1 to y score
+            # select a stages in x stages, then assign n performers to a stages,
+            # and each of a stages have y possibilities
             res += math.perm(x, a) * s(n, a) * pow(y, a, mod)
         return res % mod
 

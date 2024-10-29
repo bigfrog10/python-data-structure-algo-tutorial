@@ -501,7 +501,7 @@ def countCharacters(self, words: List[str], chars: str) -> int:
 
 
 
-# LC1268. Search Suggestions System
+# LC1268. Search Suggestions System suggested products
 def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:  # O(nlog(n))+O(mlog(n))
     products.sort()  # O(nlogn)
     res, prefix = [], ''

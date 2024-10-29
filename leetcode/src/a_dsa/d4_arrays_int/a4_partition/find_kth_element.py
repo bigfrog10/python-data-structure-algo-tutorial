@@ -1,5 +1,18 @@
 
 # LC692. Top K Frequent Words    k freq word  kth freq
+class Pair:
+    def __init__(self, word, freq):
+        self.word = word
+        self.freq = freq
+    def __lt__(self, p):
+        return self.freq < p.freq or (self.freq == p.freq and self.word > p.word)
+def topKFrequent(self, words: List[str], k: int) -> List[str]:
+    cnt = Counter(words)
+    h = []
+    for word, freq in cnt.items():
+        heappush(h, Pair(word, freq))
+        if len(h) > k: heappop(h)
+    return [p.word for p in sorted(h, reverse=True)]
 def topKFrequent(self, words: List[str], k: int) -> List[str]:
     count = collections.Counter(words)
     return heapq.nlargest(k, count.keys(), key=count.get)

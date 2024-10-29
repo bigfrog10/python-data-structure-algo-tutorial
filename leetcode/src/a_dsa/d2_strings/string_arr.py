@@ -34,6 +34,15 @@ def minimumCost(self, source: str, target: str, original: List[str], changed: Li
     return dp[-1] if dp[-1]!=inf else -1
 # https://leetcode.com/problems/minimum-cost-to-convert-string-ii/?envType=company&envId=amazon&favoriteSlug=amazon-three-months
 
+# LC2027. Minimum Moves to Convert String min cost convert
+def minimumMoves(self, s: str) -> int:
+    ans = i = 0
+    while i < len(s):
+        if s[i] == "X":
+            ans += 1
+            i += 3
+        else: i += 1
+    return ans
 # LC2055. Plates Between Candles  plate candle plate
 def platesBetweenCandles(self, s: str, queries: List[List[int]]) -> List[int]:
     psum = [0] * (len(s) + 1)

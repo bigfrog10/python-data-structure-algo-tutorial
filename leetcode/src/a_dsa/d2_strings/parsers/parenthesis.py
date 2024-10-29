@@ -160,22 +160,25 @@ def scoreOfParentheses(self, s: str) -> int:
             if s[i-1] == '(': ans += 1 << bal # only when seeing ()
     return ans
 
-# LC241. Different Ways to Add Parentheses - return results expr group num diff expr add parenth
-def diffWaysToCompute(self, expression: str) -> List[int]:
+# LC241. Different Ways to Add Parentheses - return results expr group num diff expr add parenth diff add paren
+def diffWaysToCompute(self, s: str) -> List[int]:  # O(n*2^n) time, O(2^n) space
     # runtime is: http://people.math.sc.edu/howard/Classes/554b/catalan.pdf
     # runtime is C_(n-1) = (select n-1 from 2(n-1)) / n, n = len(expr)
     # pn = sum(p_i * p_(n-i)) for i in 1 to n-1
-    @lru_cache(None)
-    def diff_ways(expr: str):  # O(n*2^n)
+    @cache
+    def dfs(i, j):
+        if i == j: return [int(s[i])]
+        if i == j - 1 and s[j] not in '+-*':  # need 3 chars to form an expression
+            return [int(s[i: j + 1])]
         res = []
-        if expr.isdigit(): res.append(int(expr))  # base case
-        for i, v in enumerate(expr):
-            if v in '+-*':
-                pre = diff_ways(expr[0: i])
-                post = diff_ways(expr[i + 1:])
-                res.extend(a+b if v == '+' else a-b if v == '-' else a*b for a in pre for b in post)
+        for k in range(i, j + 1):
+            ch = s[k]
+            if ch in '+-*':
+                left = dfs(i, k - 1)
+                right = dfs(k + 1, j)
+                res.extend(a+b if ch == '+' else a-b if ch =='-' else a*b for a in left for b in right)
         return res
-    return diff_ways(expression)
+    return dfs(0, len(s) - 1)
 
 
 

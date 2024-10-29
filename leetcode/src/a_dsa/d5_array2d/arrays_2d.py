@@ -2,13 +2,13 @@
 # LC1105. Filling Bookcase Shelves  bookshelf
 def minHeightShelves(self, books: List[List[int]], shelfWidth: int) -> int:
     @cache
-    def place(book_idx, currw, currh):
+    def place(book_idx, currw, currh):  # return total height
         if book_idx == len(books): return 0
         bookw, bookh = books[book_idx]
         ans = bookh + place(book_idx + 1, bookw, bookh)  # new shelf
         if currw + bookw <= shelfWidth:   # same shelf
-            delta = max(0, bookh - currh)
             ans1 = place(book_idx + 1, currw + bookw, max(bookh, currh))
+            delta = max(0, bookh - currh)
             ans = min(ans, delta + ans1)
         return ans
     return place(0, 0, 0)  # height after placing ith book to nth book

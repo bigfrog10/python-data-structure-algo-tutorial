@@ -173,7 +173,7 @@ def rearrangeString(self, s: str, k: int) -> str:  # O(nlogn). If we use bucket 
     # "aaabc", k=3, ans = abca, not same length
     return "".join(ans) if len(ans) == len(s) else ""
 
-# LC1942. The Number of the Smallest Unoccupied Chair chair number small unoccu chair  guest chair
+# LC1942. The Number of the Smallest Unoccupied Chair chair number small unoccu chair  guest chair number
 def smallestChair(self, times: List[List[int]], targetFriend: int) -> int:
     guests = sorted(range(len(times)), key=lambda x: times[x][0])  # O(nlogn)
     emptySeats, seatsTaken = list(range(len(times))), []
@@ -184,3 +184,29 @@ def smallestChair(self, times: List[List[int]], targetFriend: int) -> int:
         seat = heappop(emptySeats)
         if i == targetFriend: return seat
         heappush(seatsTaken,(lv, seat))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

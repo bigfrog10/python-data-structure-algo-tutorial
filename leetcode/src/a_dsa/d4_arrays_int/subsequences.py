@@ -186,7 +186,7 @@ def longestArithSeqLength(self, A: List[int]) -> int:
             dp[j, diff] = dp.get((i, diff), 1) + 1  # A[i], A[j] have length 2
     return max(dp.values())
 
-# LC1143. Longest Common Subsequence - lcs
+# LC1143. Longest Common Subsequence - lcs long common subseq
 def longestCommonSubsequence(self, text1: str, text2: str) -> int: # cached recursion
     @lru_cache(None)
     def solve(i, j):

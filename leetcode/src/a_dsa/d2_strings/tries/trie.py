@@ -19,18 +19,18 @@ class Trie:
             t = t[c]
         return True
 
-# LC1233. Remove Sub-Folders from the Filesystem - remove subfolders
-def removeSubfolders(self, folder: List[str]) -> List[str]:
+# LC1233. Remove Sub-Folders from the Filesystem - remove subfolders sub folder
+def removeSubfolders(self, folder: List[str]) -> List[str]:  # O(n * w)
     trie = {}
     for path in folder: # build trie from input
         dirs = path[1:].split('/')
         node = trie
         for di in dirs: node = node.setdefault(di, {})
-        node['end'] = path # save path to end
-    ret = [] # collect top folders
+        node['end'] = path  # save path to end
+    ret = []  # collect top folders
     def dfs(node):
         if 'end' in node:
-            ret.append(node['end']) # earliest end is top folder
+            ret.append(node['end'])  # earliest end is top folder
             return
         for d in node: dfs(node[d])
     dfs(trie)
