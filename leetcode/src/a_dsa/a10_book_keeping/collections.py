@@ -5,7 +5,7 @@ def countMatches(self, items: List[List[str]], ruleKey: str, ruleValue: str) -> 
     return sum(1 for item in items if item[rule[ruleKey]] == ruleValue)
 
 # LC173. Binary Search Tree Iterator   bst iterator
-class BSTIterator:
+class BSTIterator:  # save space to O(h)
     def __init__(self, root: Optional[TreeNode]):
         self.stack = []  # stack has all elem once, so O(1) amortized
         self._leftmost(root)   # space is O(h)
@@ -13,11 +13,11 @@ class BSTIterator:
         while node:
             self.stack.append(node)
             node = node.left
-    def next(self) -> int:
+    def next(self) -> int:  # O(1) amortized
         node = self.stack.pop()
         self._leftmost(node.right)
         return node.val
-    def hasNext(self) -> bool:
+    def hasNext(self) -> bool:  # O(1)
         return len(self.stack) > 0
 
 # LC1586. Binary Search Tree Iterator II  bst iterator 2
@@ -255,7 +255,7 @@ class RandomizedCollection: # 93%, fast
     def getRandom(self) -> int:
         return random.choice(self.values)
 
-# LC211. Design Add and Search Words Data Structure  word data structure  trie dot
+# LC211. Design Add and Search Words Data Structure  word data structure  trie dot search dot
 class WordDictionary:  # much faster
     def __init__(self): self.trie = {}
     def addWord(self, word: str) -> None:
@@ -271,7 +271,7 @@ class WordDictionary:  # much faster
                         for x in node:
                             if x != '$' and find(word[i + 1:], node[x]):
                                 return True
-                    return False
+                    return False  # if not . or all checks failed
             return '$' in node
         return find(word, self.trie)
 

@@ -128,8 +128,29 @@ class Solution:
 def canWinNim(self, n: int) -> bool:
     return n % 4 != 0
 
+# LC365. Water and Jug Problem
+def canMeasureWater(self, x: int, y: int, target: int) -> bool:
+    if x + y < target: return False
+    return target % math.gcd(x, y) == 0
+def canMeasureWater(self, x: int, y: int, target: int) -> bool:
+    seen = set()  # O(x*y) time, O(x+y) space
+    def dfs(total):
+        if total in seen or total < 0 or total > x + y:
+            return False
+        if total == target: return True  # do this later than above, x=2, y=3, t=10 t > x + y
+        seen.add(total)
+        return dfs(total+x) or dfs(total-x) or dfs(total+y) or dfs(total-y)
+    return dfs(0)
 
-
+# LC650. 2 Keys Keyboard
+def minSteps(self, n: int) -> int:
+    ans, d = 0, 2
+    while n > 1:
+        while n % d == 0:
+            ans += d
+            n //= d
+        d += 1
+    return ans
 
 
 

@@ -147,7 +147,7 @@ class MaxStack:  # use a stack and sorted container: all ops are at most log(n)
 
 
 
-# LC225. Implement Stack using Queues
+# LC225. Implement Stack using Queues queue to stack
 import collections
 class Stack:
     def __init__(self):

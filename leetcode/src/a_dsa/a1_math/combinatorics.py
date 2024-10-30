@@ -196,11 +196,11 @@ def numMusicPlaylists(self, N, L, K):
         return ans % (10**9+7)
     return dp(L, N)
 
-# LC216. Combination Sum III 1 through 9
+# LC216. Combination Sum III 1 through 9 sum to target
 from itertools import combinations
 def combinationSum3(self, k: int, n: int) -> List[List[int]]:
     return [c for c in combinations(range(1, 10), k) if sum(c) == n]
-def combinationSum3(self, k: int, n: int) -> List[List[int]]: # O(9!*k/(9-k)!)
+def combinationSum3(self, k: int, n: int) -> List[List[int]]: # O(9!*k/(9-k)!), c(9, k)
     self.ans = []
     def dfs(start, sol, k, n):
         if k == 0 and n == 0:

@@ -2,6 +2,7 @@
 
 ## Test
 
+### PyTest
 ```python
 import pytest
 
@@ -15,6 +16,9 @@ if __name__ == '__main__':
     print(pytest.main(['-v', '-s']))
 ```
 https://docs.pytest.org/en/stable/how-to/fixtures.html
+
+### Unittest
+
 
 Use jupyter books:
 - can embed Latex

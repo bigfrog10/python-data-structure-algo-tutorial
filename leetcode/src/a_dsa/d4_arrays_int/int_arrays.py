@@ -506,7 +506,7 @@ def isNStraightHand(self, hand: List[int], groupSize: int) -> bool:
             if c[i + j] < 0: return False
     return True
 
-# LC228. Summary Ranges number range
+# LC228. Summary Ranges number range cover numbers cover range
 def summaryRanges(self, nums: List[int]) -> List[str]:
     left, ans = 0, []
     for i, n in enumerate(nums):

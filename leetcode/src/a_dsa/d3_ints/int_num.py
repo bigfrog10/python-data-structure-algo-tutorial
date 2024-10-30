@@ -27,17 +27,21 @@ def findNthDigit(self, n: int) -> int:  # O(logn) time since we go by digits
         if n < nums: return int(str(first + n // digit)[n % digit])  # first + .. is the number where the digit is
         n -= nums
 
-# LC233. Number of Digit One  # https://leetcode.com/problems/number-of-digit-one/
+# LC233. Number of Digit One  number of digit 1
 # https://leetcode.com/submissions/detail/725602255/
 def countDigitOne(self, n: int) -> int:  # O(logn), see leetcode submission
-    res = 0
+    count = 0
     k = 1
     while k <= n:
-        q, r = divmod(n, k)  # for kth digit from right
-        full = (q + 8) // 10 * k
-        partial = r + 1 if q % 10 == 1 else 0  # 0 because they are count as full above
-        res += full + partial
+        divider = k * 10
+        count += (n // divider) * k
+        count += min(max(n % divider - k + 1, 0), k)
         k *= 10
+    return count
+def countDigitOne(self, n: int) -> int:  # O(nlogn)
+    res = 0
+    for i in range(1, n+1):
+        res += str(i).count("1")
     return res
 
 # LC1689. Partitioning Into Minimum Number Of Deci-Binary Numbers

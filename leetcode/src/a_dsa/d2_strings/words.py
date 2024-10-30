@@ -64,22 +64,29 @@ def areNumbersAscending(self, s: str) -> bool:
     nums = [int(w) for w in s.split() if w.isdigit()]
     return all(nums[i-1] < nums[i] for i in range(1, len(nums)))
 
-# LC30. Substring with Concatenation of All Words
-def findSubstring(self, s: str, words: List[str]) -> List[int]:  # O(numWords * len(s))
-    wordBag = Counter(words)   # count the freq of each word
-    wordLen, numWords = len(words[0]), len(words)
-    totalLen, res = wordLen*numWords, []
-    for i in range(len(s)-totalLen+1):   # scan through s
-        # For each i, determine if s[i:i+totalLen] is valid
-        seen = defaultdict(int)   # reset for each i
-        for j in range(i, i+totalLen, wordLen):
-            currWord = s[j:j+wordLen]
-            if currWord in wordBag:
-                seen[currWord] += 1
-                if seen[currWord] > wordBag[currWord]: break
-            else: break  # if not in wordBag
-        if seen == wordBag: res.append(i)  # store result
-    return res
+# LC30. Substring with Concatenation of All Words  concat substring concat
+def findSubstring(self, s: str, words: List[str]) -> List[int]:
+    word_len = len(words[0])  # O(s) time, O(len(words)) space
+    word_cnt = Counter(words)  # sliding window
+    indexes = []
+    for i in range(word_len):  # O(size(word))
+        start = i  # left
+        window, word_used = defaultdict(int), 0
+        for j in range(i, len(s) - word_len + 1, word_len):  # O(s / size(word))
+            word = s[j:j + word_len]
+            if word not in word_cnt:
+                start = j + word_len
+                window, word_used = defaultdict(int), 0
+                continue
+            word_used += 1
+            window[word] += 1
+            while window[word] > word_cnt[word]:
+                window[s[start:start + word_len]] -= 1
+                word_used -= 1
+                start += word_len  # move left
+            if word_used == len(words):
+                indexes.append(start)
+    return indexes
 
 # LC151. Reverse Words in a String
 def reverseWords(self, s: str) -> str:
