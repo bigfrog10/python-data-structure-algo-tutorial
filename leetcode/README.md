@@ -1,5 +1,21 @@
 # Data Structures and Algorithms
 
+## Test
+
+```python
+import pytest
+
+def add(x, y):
+    return x + y
+
+def test_add():
+    assert add(2, 3) == 5
+    
+if __name__ == '__main__':
+    print(pytest.main(['-v', '-s']))
+```
+https://docs.pytest.org/en/stable/how-to/fixtures.html
+
 Use jupyter books:
 - can embed Latex
 - can embed pictures with MarkDown
