@@ -203,8 +203,8 @@ def findCircleNum(self, isConnected: List[List[int]]) -> int:  # O(n^2)
             dfs(i)
     return provinces
 
-# LC130. Surrounded Regions
-def solve(self, board):
+# LC130. Surrounded Regions game go game
+def solve(self, board):  # O(n)
     if not any(board): return
     m, n = len(board), len(board[0])
     save = [ij for k in range(max(m,n)) for ij in ((0, k), (m-1, k), (k, 0), (k, n-1))]

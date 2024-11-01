@@ -90,7 +90,7 @@ def longestSubarray(self, nums: List[int]) -> int:  # O(n) time, O(1) space
         res = max(res, i - j)
     return res
 
-# LC486. Predict the Winner  player 1 win  player array sides
+# LC486. Predict the Winner  player 1 win  player array sides player 1 2 either end
 def predictTheWinner(self, nums: List[int]) -> bool:  # O(n^2) time and O(n) space
     n = len(nums)  # O(n^2) time and space
     @cache
@@ -142,7 +142,7 @@ def minSwaps(self, data: List[int]) -> int:  # O(n) and O(1)
         max_one = max(max_one, cnt_one)
     return ones - max_one
 
-# LC525. Contiguous Array - longest subarray with equal # of 1 and 0, 01 array 01 equal
+# LC525. Contiguous Array - longest subarray with equal # of 1 and 0, 01 array 01 equal number of 0 and 1
 def findMaxLength(self, nums: List[int]) -> int:
     val2idx = {}  # O(n) time and space
     cumu = max_len = 0
@@ -201,7 +201,7 @@ def arrayNesting(self, nums: List[int]) -> int: # O(n) tinme and O(1) space
         if res > len(nums): return res # works without this too, optimization
     return res
 
-# LC1913. Maximum Product Difference Between Two Pairs  diff 2 pairs  prod diff
+# LC1913. Maximum Product Difference Between Two Pairs  diff 2 pairs  max prod diff
 def maxProductDifference(self, nums: List[int]) -> int:
     big1 = big2 = 0  # avoid sorting, so this is O(n)
     small1 = small2 = inf

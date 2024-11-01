@@ -642,14 +642,14 @@ def unhappyFriends(self, n: int, preferences: List[List[int]], pairs: List[List[
                 break
     return res
 
-# LC315. Count of Smaller Numbers After Self  smaller after me smaller element to right small to right smaller to right
+# LC315. Count of Smaller Numbers After Self  number of smaller to right small to right
 def countSmaller(self, nums: List[int]) -> List[int]:
     from sortedcontainers import SortedList  # AVL tree implementation or red black tree
     n = len(nums)  # O(nlogn) time, O(n) space
     ans = [0] * n
     x = SortedList()
     for i, val in enumerate(reversed(nums)):  # O(n)
-        ans[n-i-1] = x.bisect_left(val)  # O(logn)
+        ans[~i] = x.bisect_left(val)  # O(logn)  ~i = n-1-i
         x.add(val)  # O(logn), in sorted order
     return ans
 class BIT:  # Binary Indexed Tree (Fenwick Tree)
@@ -676,7 +676,7 @@ class Solution:
         return answer[::-1]
 # https://leetcode.com/problems/range-sum-query-mutable/solutions/75753/Java-using-Binary-Indexed-Tree-with-clear-explanation/
 def countSmaller(self, nums: List[int]) -> List[int]:
-    sorted_arr = [] # O(nlogn) time and O(n) space
+    sorted_arr = [] # O(nlogn) time and O(n) space (test shows this is much slower)
     rst = []
     for num in nums[::-1]:
         idx = bisect_left(sorted_arr, num)
@@ -715,7 +715,7 @@ def fizzBuzz(self, n: int) -> List[str]:
 
 
 
-# LC350. Intersection of Two Arrays II - same elems appear multiple times, use bag  array intersection array
+# LC350. Intersection of Two Arrays II - same elems appear multiple times, intersection 2 array
 def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:  # O(n + m)
     counts1 = collections.Counter(nums1)
     counts2 = collections.Counter(nums2)
@@ -735,7 +735,7 @@ def minCost(self, s: str, cost: List[int]) -> int:
         max_cost = max(max_cost, cost[i]) # this ensures max is not added
     return res
 
-# LC1802. Maximum Value at a Given Index in a Bounded Array
+# LC1802. Maximum Value at a Given Index in a Bounded Array constructed array
 def maxValue(self, n: int, index: int, maxSum: int) -> int:
     maxSum -= n  # this is the trick!!! get rid of 1s paddings
     l, r = 0, maxSum

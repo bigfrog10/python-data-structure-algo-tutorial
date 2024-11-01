@@ -213,7 +213,7 @@ def minDifficulty(self, jobDifficulty: List[int], d: int) -> int:  # O(nd)
     r = dp(d-1, n-1, 0)  # we use d-1 is to accommodate jidx < days condition
     return -1 if r == float('inf') else r
 
-# LC446. Arithmetic Slices II - Subsequence  arith seq   arithmetic subseq
+# LC446. Arithmetic Slices II - Subsequence  arith seq   arithmetic subseq arith subseq
 def numberOfArithmeticSlices(self, nums: List[int]) -> int:  # O(n^2)
     n, ans = len(nums), 0
     # dic[i][d]: the number of arithmetic subsequences that ends with nums[i] and diff d
@@ -222,7 +222,7 @@ def numberOfArithmeticSlices(self, nums: List[int]) -> int:  # O(n^2)
         for j in range(i):
             diff = nums[i] - nums[j]
             dp[i][diff] += 1
-            if diff in dp[j]:
+            if diff in dp[j]:  # another pair with same diff, so we have 3 nums now.
                 dp[i][diff] += dp[j][diff]  # extend j to i
                 ans += dp[j][diff]
     return ans
@@ -233,10 +233,35 @@ def numTilings(self, n: int) -> int:
     @cache
     def p(n):  # The number of ways to partially cover a board of width n
         if n == 2: return 1
+        # add a domino to a partial, or add a new tromino from full
         return (p(n - 1) + f(n - 2)) % MOD
     @cache
     def f(n):  #  The number of ways to fully cover a board of width n
         if n <= 2: return n
+        # 1 domino verticle, 2 domino, or 2 partials, verticle symmetric
         return (f(n - 1) + f(n - 2) + 2 * p(n - 1)) % MOD
     return f(n)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

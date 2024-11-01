@@ -56,7 +56,7 @@ class MovingAverage:
         else: self.mv = sum(queue) / len(queue)
         return self.mv
 
-# LC703. Kth Largest Element in a Stream  kth highest test score
+# LC703. Kth Largest Element in a Stream  kth highest test score kth large stream kth stream
 class KthLargest:
     def __init__(self, k: int, nums: List[int]):
         self.k = k
@@ -64,7 +64,7 @@ class KthLargest:
         heapq.heapify(self.nums)  # O(klogk)
     def add(self, val: int) -> int:  # logk
         if len(self.nums) < self.k: heapq.heappush(self.nums, val)
-        elif val > self.nums[0]: heapq.heapreplace(self.nums, val)
+        elif val > self.nums[0]: heapq.heapreplace(self.nums, val)  # pop/push
         return self.nums[0]  # min, which is the kth largest
 
 # LC1206. Design Skiplist - operations in O(logn)

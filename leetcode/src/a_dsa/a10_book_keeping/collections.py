@@ -226,7 +226,7 @@ class SnapshotArray:  # min space but extra log(snaps) for get
         self.snap_id += 1
         return self.snap_id - 1
     def get(self, index: int, snap_id: int) -> int:  # O(log(snaps))
-        # if modify several times, ids could be same ids, like 1, 2, 2, 2, 3. We want last2
+        # if modify several times, ids could be same ids, like 1, 2, 2, 2, 3. We want last 2
         i = bisect.bisect(self.A[index], [snap_id + 1]) - 1
         return self.A[index][i][1]
 
@@ -255,7 +255,7 @@ class RandomizedCollection: # 93%, fast
     def getRandom(self) -> int:
         return random.choice(self.values)
 
-# LC211. Design Add and Search Words Data Structure  word data structure  trie dot search dot
+# LC211. Design Add and Search Words Data Structure  word data structure  trie dot search dot search data struct
 class WordDictionary:  # much faster
     def __init__(self): self.trie = {}
     def addWord(self, word: str) -> None:

@@ -11,7 +11,7 @@ def minExtraChar(self, s: str, dictionary: List[str]) -> int:
         for end in range(start, n):
             if s[end] not in node: break
             node = node[s[end]]
-            if '$' in node: #node['$']:
+            if '$' in node:
                 ans = min(ans, dp(end + 1))
         return ans
     return dp(0)

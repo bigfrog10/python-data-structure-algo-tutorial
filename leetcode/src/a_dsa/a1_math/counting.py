@@ -86,6 +86,7 @@ def superEggDrop(self, k: int, n: int) -> int:
             # floors[eggs-1][k-1] is the case where the kth drop is broken
             # They are exclusive, so we could add them together
             # k = drops is implicit
+            # orig max floors + this floor + max floors with one less eggs
             floors[eggs] += 1 + floors[eggs-1]
         drops += 1
         print(floors)
@@ -128,7 +129,7 @@ class Solution:
 def canWinNim(self, n: int) -> bool:
     return n % 4 != 0
 
-# LC365. Water and Jug Problem
+# LC365. Water and Jug Problem water jug water
 def canMeasureWater(self, x: int, y: int, target: int) -> bool:
     if x + y < target: return False
     return target % math.gcd(x, y) == 0

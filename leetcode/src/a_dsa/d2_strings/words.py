@@ -241,7 +241,7 @@ def exist(self, board: List[List[str]], word: str) -> bool:  # O(h * w * 3^wl), 
 
 # LC212. Word Search II - return all words
 def findWords(self, board: List[List[str]], words: List[str]) -> List[str]: # This is fast
-    trie, WORD_KEY = {}, '$'  # O(M * N * 4 * 3^(L-1) + M*N), L=max(len(word) for words)
+    trie, WORD_KEY = {}, '$'  # O(M * 4 * 3^(L-1)), M=cells, L=max(len(word) for words)
     for word in words:  # space O(number of letters in trie)
         node = trie
         for letter in word: node = node.setdefault(letter, {})
@@ -251,17 +251,15 @@ def findWords(self, board: List[List[str]], words: List[str]) -> List[str]: # Th
     def dfs(row, col, parent):
         letter = board[row][col]
         currNode = parent[letter]
+        if not currNode: parent.pop(letter)
         word_match = currNode.pop(WORD_KEY, None)  # check end, cut branches
         if word_match: res.append(word_match)
-        board[row][col] = '#' # Before the EXPLORATION, mark the cell as visited, backtracking
-        # Explore the neighbors in 4 directions, i.e. up, right, down, left
+        board[row][col] = '#' # Before the EXPLORATION, mark the cell as visited
         for (dx, dy) in (-1, 0), (0, 1), (1, 0), (0, -1): # O(3^max(words))
             nx, ny = row + dx, col + dy
             if rowNum > nx >= 0 <= ny < colNum and board[nx][ny] in currNode:
                 dfs(nx, ny, currNode)
         board[row][col] = letter # End of EXPLORATION, we restore the cell
-        # Optimization: incrementally remove the matched leaf node in Trie.
-        if not currNode: parent.pop(letter) # we pop'd WORD_KEY before, so empty now
     for row in range(rowNum): # O(nm)
         for col in range(colNum):# starting from each of the cells
             if board[row][col] in trie: dfs(row, col, trie)
@@ -424,7 +422,7 @@ def toGoatLatin(self, sentence: str) -> str:
         ret.append(w)
     return ' '.join(ret)
 
-# LC2023. Number of Pairs of Strings With Concatenation Equal to Target num pair concat to target  pair concat equal string pair string
+# LC2023. Number of Pairs of Strings With Concatenation Equal to Target num pair concat to target  concat pair equal string pair string
 def numOfPairs(self, nums: List[str], target: str) -> int:  # O(n) time, space
     freq = Counter(nums)
     ans = 0

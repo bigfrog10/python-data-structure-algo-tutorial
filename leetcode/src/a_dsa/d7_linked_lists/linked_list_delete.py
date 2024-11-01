@@ -1,6 +1,6 @@
 
 
-# LC3217. Delete Nodes From Linked List Present in Array
+# LC3217. Delete Nodes From Linked List Present in Array set
 def modifiedList(self, nums: List[int], head: Optional[ListNode]) -> Optional[ListNode]:
     s = set(nums)
     dummy = curr = ListNode(0, head)
@@ -18,7 +18,7 @@ def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNod
     second.next = second.next.next
     return dummy.next
 
-# LC203. Remove Linked List Elements - by value remove node by value
+# LC203. Remove Linked List Elements - by value remove node by value delete node value
 def removeElements(self, head: ListNode, val: int) -> ListNode:
     dummy = curr = ListNode(0, head)
     while curr and curr.next:
@@ -27,7 +27,7 @@ def removeElements(self, head: ListNode, val: int) -> ListNode:
         else: curr = curr.next
     return dummy.next
 
-# LC83. Remove Duplicates from Sorted List - keep one dupe copy  remove dupe
+# LC83. Remove Duplicates from Sorted List - keep one dupe copy  remove dupe delete node dupe
 def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
     curr = head
     while curr and curr.next:
@@ -35,7 +35,7 @@ def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
         else: curr = curr.next
     return head
 
-# LC82. Remove Duplicates from Sorted List II - remove all dupes  remove dupe
+# LC82. Remove Duplicates from Sorted List II - remove all dupes  remove dupe delete node dupe
 def deleteDuplicates(self, head: ListNode) -> ListNode:  # O(n)
     prev = dummy = ListNode(-1, head)
     while head:

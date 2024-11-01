@@ -138,7 +138,7 @@ def checkSubarraySum(self, nums: List[int], k: int) -> bool:  # O(n) time, space
         else: sd[summ] = i
     return False
 
-# LC974. Subarray Sums Divisible by K - return # of such sums sum div k sub sum div k
+# LC974. Subarray Sums Divisible by K - return # of such sums sum div k sub sum div k sub sum k
 def subarraysDivByK(self, nums: List[int], k: int) -> int:  # O(n) time, O(k) space
     counts = defaultdict(int)  # k residue counts
     counts[0] = 1  # residue 0 doesn't need >1, so we compensate it

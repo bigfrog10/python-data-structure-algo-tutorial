@@ -88,7 +88,7 @@ def maximumRows(self, matrix: List[List[int]], numSelect: int) -> int:  # O(m) s
     check([0]*m, 0, 0)
     return ans
 
-# LC373. Find K Pairs with Smallest Sums - similar to 378
+# LC373. Find K Pairs with Smallest Sums - similar to 378 k-pair
 def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
     min_heap, res = [], []  # O(klogk)
     for i in range(min(len(nums1), k)): heapq.heappush(min_heap, (nums1[i] + nums2[0], i, 0))
@@ -322,3 +322,28 @@ def carFleet(self, target: int, pos: List[int], speed: List[int]) -> int:  # O(n
             slowest = t  # in the same group, diff from prev slowest group
     return res
 # https://leetcode.com/problems/car-fleet/solutions/139850/c-java-python-straight-forward
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

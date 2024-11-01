@@ -201,13 +201,35 @@ from itertools import combinations
 def combinationSum3(self, k: int, n: int) -> List[List[int]]:
     return [c for c in combinations(range(1, 10), k) if sum(c) == n]
 def combinationSum3(self, k: int, n: int) -> List[List[int]]: # O(9!*k/(9-k)!), c(9, k)
-    self.ans = []
-    def dfs(start, sol, k, n):
-        if k == 0 and n == 0:
-            self.ans.append(sol)
-        if start > 9 or start > n or k <= 0:
+    results = []  # space O(k)
+    def backtrack(remain, comb, next_start):
+        if remain == 0 and len(comb) == k:
+            results.append(list(comb))
             return
-        dfs(start+1, sol+[start], k-1, n-start)
-        dfs(start+1, sol, k, n)
-    dfs(1, [], k, n)
-    return self.ans
+        elif remain < 0 or len(comb) == k: return
+        for i in range(next_start, 9):
+            comb.append(i + 1)
+            backtrack(remain - i - 1, comb, i + 1)
+            comb.pop()  # backtrack the current choice
+    backtrack(n, [], 0)
+    return results
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

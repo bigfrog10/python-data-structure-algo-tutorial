@@ -54,7 +54,7 @@ class LFUCache:
         self.f2kv[1][key] = value
         self.minf = 1
 
-# LC432. All O`one Data Structure - all one allone  oone o one
+# LC432. All O`one Data Structure - all one allone  oone o one min max count
 class Node(object):
     def __init__(self, val, prev=None, next=None):
         self.val = val # counter

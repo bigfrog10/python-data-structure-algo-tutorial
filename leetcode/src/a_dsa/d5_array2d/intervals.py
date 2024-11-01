@@ -441,7 +441,7 @@ class Solution:
         for i in range(n): total += costs[i][0] + costs[i + n][1]
         return total
 
-# LC1235. Maximum Profit in Job Scheduling - backpack
+# LC1235. Maximum Profit in Job Scheduling - backpack  max profit
 def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:
     # sort rows by start time, total O(nlogn)
     jobs = sorted([v for v in zip(startTime, endTime, profit)], key=lambda x: x[0])

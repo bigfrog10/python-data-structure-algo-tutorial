@@ -1,6 +1,33 @@
 from typing import List
 import itertools
 
+# LC407. Trapping Rain Water II
+def trapRainWater(self, heights: List[List[int]]) -> int:
+    if not heights: return 0
+    n, m = len(heights), len(heights[0])  # O(nmlog(nm))
+    heap, visited = [], set()
+    for i in range(n): # put all boundary cells into heap
+        for j in [0, m-1]: # only 2 columns
+            heap.append((heights[i][j], i, j))
+            visited.add((i, j))
+    for j in range(1, m-1):
+        for i in [0, n-1]: # only 2 rows
+            heap.append((heights[i][j], i, j))
+            visited.add((i, j))
+    heapq.heapify(heap)
+    vmax = ret = 0
+    while heap:
+        h, i, j = heapq.heappop(heap)
+        vmax = max(vmax, h)
+        for dx, dy in [(-1, 0), (1, 0), (0, 1), (0, -1)]:
+            x, y = i + dx, j + dy
+            if 0 <= x < n and 0 <= y < m and (x, y) not in visited:
+                nh = heights[x][y]
+                ret += max(0, vmax - nh)
+                heapq.heappush(heap, (nh, x, y))
+                visited.add((x, y))
+    return ret
+
 # LC1572. Matrix Diagonal Sum
 def diagonalSum(self, mat: List[List[int]]) -> int:
     n = len(mat)

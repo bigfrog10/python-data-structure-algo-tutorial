@@ -120,7 +120,7 @@ def simplifyPath(self, path: str) -> str:  # O(n) runtime and space
         else: stack.append(folder)
     return '/' + '/'.join(stack)
 
-# LC389. Find the Difference    string add random char string diff
+# LC389. Find the Difference    string add random char string diff one more letter
 def findTheDifference(self, s: str, t: str) -> str:  # O(n) time and O(1) space
     c = 0
     for cs in s: c ^= ord(cs) #ord is ASCII value
@@ -145,7 +145,7 @@ def validWordAbbreviation(self, word: str, abbr: str) -> bool:
         else: i, j = i+1, j+1
     return i == m and j == n
 
-# LC767. Reorganize String - rearrange chars  reorg string reorg chars
+# LC767. Reorganize String - rearrange chars  reorg string reorg chars any two adjacent
 def reorganizeString(self, s: str) -> str:
     if not s: return ""  # O(n) there is no sort
     n, counts = len(s), Counter(s)
