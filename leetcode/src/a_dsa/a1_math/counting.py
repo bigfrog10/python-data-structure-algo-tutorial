@@ -23,12 +23,12 @@ def countPrimes(self, n: int) -> int: # Sieve of Eratosthenes
 # LC1152. Analyze User Website Visit Pattern user website user pattern
 def mostVisitedPattern(self, username: List[str], timestamp: List[int], website: List[str]) -> List[str]:
     # https://leetcode.com/problems/analyze-user-website-visit-pattern/discuss/957611/Python-Solution
-    user_visits = defaultdict(list)
+    user_visits = defaultdict(list)  # O(n^3)
     for u, t, w in sorted(zip(username, timestamp, website)):  # timestamps used for sorting
         user_visits[u].append(w)
     count = []  # tuples of 3 elements
     for x in user_visits.values():  # x is list of web links
-        count += list(set(itertools.combinations(x, 3)))
+        count += list(set(itertools.combinations(x, 3)))  # O(n^3)
     counters = sorted(Counter(count).items(), key=lambda x : (-x[1], x[0]))
     return counters[0][0]  # list of (3-seq, count), so [0] is (3-seq, count), next 0 is 3-seq
 

@@ -18,8 +18,8 @@ def minimumPushes(self, word: str) -> int:  # O(n) time, O(1) space
         total_pushes += freq[i] * (i // 8 + 1)
     return total_pushes
 
-# LC17. Letter Combinations of a Phone Number - phone letter combo Time & Space: O(4^n)
-def letterCombinations(self, digits):
+# LC17. Letter Combinations of a Phone Number - phone letter combo phone pad
+def letterCombinations(self, digits):  # Time & Space: O(4^n)
     dict = {'2':"abc", '3':"def",  '4':"ghi", '5':"jkl",
             '6':"mno", '7':"pqrs", '8':"tuv", '9':"wxyz"}
     cmb = [''] if digits else []

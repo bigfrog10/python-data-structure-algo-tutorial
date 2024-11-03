@@ -35,6 +35,22 @@ def maxResult(self, nums: List[int], k: int) -> int:  # O(n) time and O(k) space
 
 # LC1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit abs diff < limit
 # https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/discuss/609771/JavaC%2B%2BPython-Deques-O(N)
+def longestSubarray(self, nums: List[int], limit: int) -> int:
+    maxd = collections.deque()
+    mind = collections.deque()
+    left = maxl = 0
+    for right, a in enumerate(nums):
+        while maxd and a > maxd[-1]: maxd.pop()
+        maxd.append(a)
+        while mind and a < mind[-1]: mind.pop()
+        mind.append(a)
+        while maxd[0] - mind[0] > limit:
+            if maxd[0] == nums[left]: maxd.popleft()
+            if mind[0] == nums[left]: mind.popleft()
+            left += 1
+        maxl = max(maxl, right - left + 1)
+    return maxl
+# https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/solutions/609771/java-c-python-deques-o-n/
 def longestSubarray(self, nums: List[int], limit: int) -> int:  # O(n)
     maxd = collections.deque()
     mind = collections.deque()

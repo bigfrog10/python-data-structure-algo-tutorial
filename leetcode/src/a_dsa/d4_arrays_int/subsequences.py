@@ -219,7 +219,7 @@ def increasingTriplet(self, nums: List[int]) -> bool:
         else: return True
     return False
 
-# LC300. Longest Increasing Subsequence  LIS length  lis seq  long incr seq  return length
+# LC300. Longest Increasing Subsequence  LIS length  lis seq  long incr seq long incr subseq return length
 def lengthOfLIS(self, nums: List[int]) -> int:  # O(nlogn) runtime, O(n) space
     hist = []  # hist[i] smallest ending element in strictly increasing sequence of length i
     for e in nums:

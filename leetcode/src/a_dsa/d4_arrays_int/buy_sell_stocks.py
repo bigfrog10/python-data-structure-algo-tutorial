@@ -45,13 +45,11 @@ def maxProfit4(self, k: int, prices: List[int]) -> int:
     n = len(prices)
     txa = [[float('inf'), 0] for _ in range(k)]   # cost, profit
     for p in prices:  # O(nk)
-        for i in range(k):
-            if i == 0:
-                txa[i][0] = min(txa[i][0], p)  # cost
-                txa[i][1] = max(txa[i][1], p - txa[i][0])  # profit
-            else:
-                txa[i][0] = min(txa[i][0], p - txa[i-1][1])  # cost
-                txa[i][1] = max(txa[i][1], p - txa[i][0])  # profit
+        txa[0][0] = min(txa[0][0], p)  # cost
+        txa[0][1] = max(txa[0][1], p - txa[0][0])  # profit
+        for i in range(1, k):
+            txa[i][0] = min(txa[i][0], p - txa[i-1][1])  # cost
+            txa[i][1] = max(txa[i][1], p - txa[i][0])  # profit
     return txa[-1][1]
 
 # There are 2 arrays which denote departing and returning flights with the respective indexes

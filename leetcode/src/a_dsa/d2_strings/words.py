@@ -17,7 +17,7 @@ def indexPairs(self, text: str, words: List[str]) -> List[List[int]]:
     return res
 # https://leetcode.com/problems/index-pairs-of-a-string/solutions/2023881/python-trie-easy-to-understand/?envType=company&envId=amazon&favoriteSlug=amazon-three-months
 
-# LC2416. Sum of Prefix Scores of Strings sum of scores score of string sum of scores
+# LC2416. Sum of Prefix Scores of Strings sum of scores score of string sum of scores score prefix score
 def sumPrefixScores(self, words: List[str]) -> List[int]:
     trie = {}
     for w in words:
@@ -171,18 +171,16 @@ def wordBreak(self, s: str, wordDict: List[str]) -> bool:
 
 # LC472. Concatenated Words   concat words
 def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
-    word_set = set(words)  # O(N * M^3) time - M^2 nodes to search, another M for substring
-    def check(word):  # could use cache here
-        for i in range(1, len(word)):  # O(m^2), longest word
-            if word[i:] not in word_set: continue
-            # so now word[i:] in word_set
-            if word[:i] in word_set: return True # so both part are words
-            if check(word[:i]): return True # recursion check
+    word_set = set(words)   # O(n * m^3) time, n=len(words), m=max(len(w))
+    min_wl = min(map(len, words))  # O(nm) in word_set
+    @cache  # m recursive calls to m-for-loop with m substrings
+    def is_concat(word: str) -> bool:
+        for i in range(min_wl, len(word) - min_wl + 1):  # O(m)
+            if word[:i] not in word_set: continue  # substring O(m)
+            if word[i:] in word_set: return True
+            if is_concat(word[i:]): return True  # recursive could O(m)
         return False
-    res = []
-    for w in words:  # O(n) - number of words
-        if check(w): res.append(w)
-    return res
+    return [word for word in words if is_concat(word)]
 
 # LC127. Word Ladder, return min # of words to transform
 def ladderLength(self, beginWord, endWord, wordList):  # BFS, O(m^2 * n) time, O(mn) space
@@ -251,7 +249,9 @@ def findWords(self, board: List[List[str]], words: List[str]) -> List[str]: # Th
     def dfs(row, col, parent):
         letter = board[row][col]
         currNode = parent[letter]
-        if not currNode: parent.pop(letter)
+        if not currNode:
+            parent.pop(letter)
+            return
         word_match = currNode.pop(WORD_KEY, None)  # check end, cut branches
         if word_match: res.append(word_match)
         board[row][col] = '#' # Before the EXPLORATION, mark the cell as visited

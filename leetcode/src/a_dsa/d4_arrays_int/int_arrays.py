@@ -362,7 +362,7 @@ def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
             n -= 1
     return n <= 0
 
-# LC41. First Missing Positive, top100   1st missing positive
+# LC41. First Missing Positive, top100   1st missing positive smallest positive
 def firstMissingPositive(self, nums: List[int]) -> int:  # O(n) time O(1) space
     # https://leetcode.com/problems/first-missing-positive/solutions/4926146/unveiling-the-ultimate-strategy-100-user-beating-solution/?envType=company&envId=apple&favoriteSlug=apple-six-months
     n = len(nums)

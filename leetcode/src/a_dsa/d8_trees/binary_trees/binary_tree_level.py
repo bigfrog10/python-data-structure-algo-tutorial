@@ -6,7 +6,7 @@ def deepestLeavesSum(self, root: Optional[TreeNode]) -> int:
         pre, q = q, [child for p in q for child in [p.left, p.right] if child]
     return sum(node.val for node in pre)
 
-# LC199. Binary Tree Right Side View   bt right
+# LC199. Binary Tree Right Side View   bt right view
 def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
     ret = []  # O(n) time and O(H) space
     def dfs(node, depth):
@@ -206,3 +206,12 @@ def isCousins(self, root: TreeNode, x: int, y: int) -> bool:
         if x in p and y in p and p[x] != p[y]: return True
         stk = [child for node in stk for child in (node.left,node.right) if child]
     return False
+
+# LC107. Binary Tree Level Order Traversal II
+def levelOrderBottom(self, root: Optional[TreeNode]) -> List[List[int]]:
+    if not root: return []
+    ans, level = [], [root]
+    while level:
+        ans.append([node.val for node in level])
+        level = [kid for n in level for kid in (n.left, n.right) if kid]
+    return ans[::-1]

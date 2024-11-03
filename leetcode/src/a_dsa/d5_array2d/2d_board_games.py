@@ -115,7 +115,7 @@ def getFood(self, grid: List[List[str]]) -> int:  # O(mn)
         res += 1
     return -1
 
-# LC994. Rotting Oranges
+# LC994. Rotting Oranges rotten orange
 def orangesRotting(self, grid: List[List[int]]) -> int:  # O(rows * cols)
     rows, cols = len(grid), len(grid[0])
     rotten, fresh = set(), set()
