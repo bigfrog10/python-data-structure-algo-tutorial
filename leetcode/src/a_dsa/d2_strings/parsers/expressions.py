@@ -20,6 +20,7 @@ def calculate(self, s: str) -> int:  # O(n) time and space
                     item = stack.pop()
                 op = stack.pop()
             else: op, num = c, 0 # this is for +-*/
+        # else space skip
     return sum(stack)
 
 # LC282. Expression Add Operators  - return all results *** 4 cards to 24 game  exp add expr add
