@@ -340,7 +340,7 @@ class MagicDictionary:
         return find(self.trie, 0, True)
 
 # LC535. Encode and Decode TinyURL
-from random import choices
+from random import choices  # URLShortener
 chars = string.ascii_letters + string.digits  # upper, lower, digits
 class Codec:
     def __init__(self):
