@@ -19,6 +19,11 @@ https://docs.pytest.org/en/stable/how-to/fixtures.html
 
 ### Unittest
 
+### main
+```python
+if __name__ == "__main__":
+    pass
+```
 
 Use jupyter books:
 - can embed Latex
