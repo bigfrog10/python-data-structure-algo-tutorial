@@ -358,8 +358,23 @@ def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:  # O
     dfs2(target, 0)
     return res
 
-
-
+# Given an integer K and a binary tree with each node holding an integer,
+# find the shortest path from the root, on which all integers sum to K.
+def shortest_path_with_sum(root, k) -> int:
+    if not root: return math.inf
+    queue = deque([(root, [root.value], root.value)])
+    while queue:  # BFS
+        current_node, path, current_sum = queue.popleft()
+        if current_sum == k: return path
+        if current_node.left:
+            queue.append((current_node.left, path + [current_node.left.value],
+                          current_sum + current_node.left.value)
+                         )
+        if current_node.right:
+            queue.append((current_node.right, path + [current_node.right.value],
+                          current_sum + current_node.right.value)
+                         )
+    return math.inf
 
 
 

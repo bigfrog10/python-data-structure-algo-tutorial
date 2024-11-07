@@ -203,32 +203,23 @@ class MyHashMap:  # O(N / key_space) time and O(M + K), M: key size in map, K: #
         self.hash_table[hash_key].remove(key)
 
 # LC1146. Snapshot Array snapshotarray
-class SnapshotArray(object):  # This copies only relevant changes
-    def __init__(self, length):
-        self.dic = defaultdict(dict)
-        self.snap_id = 0
-    def set(self, index, val):  # O(1)
-        self.dic[self.snap_id][index] = val
-    def snap(self):
-        self.snap_id += 1
-        self.dic[self.snap_id] = self.dic[self.snap_id - 1].copy()  # copy only set values
-        return self.snap_id -1
-    def get(self, index, snap_id): # O(1)
-        if index in self.dic[snap_id]: return self.dic[snap_id][index]
-        else: return 0
 class SnapshotArray:  # min space but extra log(snaps) for get
     def __init__(self, n: int):  # O(n)
-        self.A = [[[-1, 0]] for _ in range(n)]
+        # self.vals = [[[-1, 0]] for _ in range(n)]  # works too
+        self.vals = defaultdict(lambda: [[-1, 0]])  # snap_id -> list
         self.snap_id = 0
     def set(self, index: int, val: int) -> None:  # O(1)
-        self.A[index].append([self.snap_id, val])
+        vs = self.vals[index]
+        if vs and self.snap_id == vs[-1][0]: vs.pop()  # remove old value
+        vs.append([self.snap_id, val])
     def snap(self) -> int:  # O(1)
         self.snap_id += 1
         return self.snap_id - 1
     def get(self, index: int, snap_id: int) -> int:  # O(log(snaps))
-        # if modify several times, ids could be same ids, like 1, 2, 2, 2, 3. We want last 2
-        i = bisect.bisect(self.A[index], [snap_id + 1]) - 1
-        return self.A[index][i][1]
+        vs = self.vals[index]
+        if not vs: return 0
+        idx = bisect.bisect(vs, [snap_id + 1])
+        return vs[idx-1][1]
 
 # LC381. Insert Delete GetRandom O(1) - Duplicates allowed
 class RandomizedCollection: # 93%, fast
