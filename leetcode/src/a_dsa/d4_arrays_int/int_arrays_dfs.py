@@ -67,7 +67,7 @@ def distributeCookies(self, cookies: List[int], k: int) -> int:
 # https://leetcode.com/problems/fair-distribution-of-cookies/solutions/3634043/python-efficient-backtracking-fully-explained/?envType=company&envId=amazon&favoriteSlug=amazon-three-months
 
 # LC403. Frog Jump
-def canCross(self, stones: List[int]) -> bool:  # O(n^2)
+def canCross(self, stones: List[int]) -> bool:  # O(n^2) time and space
     @cache
     def dfs(i, k):
         if i == len(stones) - 1: return True

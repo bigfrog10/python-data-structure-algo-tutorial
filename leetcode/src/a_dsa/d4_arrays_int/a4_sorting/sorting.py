@@ -1,5 +1,5 @@
 
-# LC948. Bag of Tokens score token score
+# LC948. Bag of Tokens score token score power score
 def bagOfTokensScore(self, tokens: List[int], power: int) -> int:
     score = 0
     tokens.sort()  # O(nlogn) time

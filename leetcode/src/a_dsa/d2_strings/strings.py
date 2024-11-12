@@ -127,7 +127,7 @@ def findTheDifference(self, s: str, t: str) -> str:  # O(n) time and O(1) space
     for ct in t: c ^= ord(ct)
     return chr(c) #chr = convert ASCII into character
 
-# # LC408. Valid Word Abbreviation
+# # LC408. Valid Word Abbreviation abbr substring
 def validWordAbbreviation(self, word, abbr):
     # turn "i12iz4n" to "i.{12}iz.{4}n$"
     pattern = '^' + re.sub('([1-9]\d*)', r'.{\1}', abbr) + '$'

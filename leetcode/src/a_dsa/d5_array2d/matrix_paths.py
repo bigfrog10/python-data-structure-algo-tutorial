@@ -54,12 +54,12 @@ def shortestDistance(self, grid):
     res = [dist[i][j] for i in range(m) for j in range(n) if grid[i][j]+totalB==0]
     return min(res) if res else -1
 
-# LC778. Swim in Rising Water
-def swimInWater(self, grid: List[List[int]]) -> int:  # O(N^2log(N^2)) time, O(N^2) space
+# LC778. Swim in Rising Water rain fall
+def swimInWater(self, grid: List[List[int]]) -> int:  # O(N^2 * log(N^2)) time, O(N^2) space
     N = len(grid)
     pq, seen = [(grid[0][0], 0, 0)], {(0, 0)}
     ans = 0
-    while pq: # DFS, O(N^2)
+    while pq: # BFS, O(N^2)
         d, r, c = heapq.heappop(pq)
         ans = max(ans, d)
         if r == c == N-1: return ans

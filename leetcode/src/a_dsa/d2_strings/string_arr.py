@@ -337,7 +337,7 @@ def areSentencesSimilar(self, sentence1: str, sentence2: str) -> bool:
         j += 1
     return i + j >= len(s1)
 
-# LC186 Reverse Words in a String II  reverse string reverse the order of words
+# LC186 Reverse Words in a String II  reverse string reverse the order of words in-place
 def reverseWords(self, s: List[str]) -> None:
     # s.reverse()
     def rev_str(left, right):

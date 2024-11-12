@@ -2,6 +2,17 @@
 ### 2's compliment:
 ```-x = ~x + 1```
 
+```python
+# LC476. Number Complement
+def bitwiseComplement(self, N: int) -> int:
+    if N == 0: return 1
+    todo, bit = N, 1
+    while todo:
+        N = N ^ bit  # flip current bit
+        bit = bit << 1  # prepare for the next run
+        todo = todo >> 1
+    return N
+```
 ### XOR
 ```a ^ b = 0 if a == b else 1 ```
 
@@ -16,6 +27,11 @@ n ^ 1 = n-1 if n is odd or n+1 if n is even (operates on last bit)
 Given x, (x-1) will have all the bits same as x, except for the rightmost 1 in x 
 and all the bits to the right of the rightmost 1.  
 ```110 & 101 = 100 for 6 & (6-1) = 4```
+
+```RMB = x & -x```
+
+To erase RMB
+```x = x & (x-1)```
 
 To check whether x is a power of 2:
 ```x & (x-1) == 0```

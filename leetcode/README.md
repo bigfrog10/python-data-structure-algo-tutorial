@@ -1,5 +1,11 @@
 # Data Structures and Algorithms
 
+## General
+- assumptions need to be explicit upfront
+- corner cases
+- validate code with step-by-step result
+
+
 ## Test
 
 ### PyTest
@@ -43,6 +49,7 @@ Solutions:
 
 https://www.techinterviewhandbook.org/software-engineering-interview-guide/
 
+counting
 Recursion
 recursion and tail recursion
 
@@ -81,7 +88,7 @@ Visualization:
 
 https://github.com/JuliaCollections/DataStructures.jl
 https://www.cs.auckland.ac.nz/software/AlgAnim/ds_ToC.html
-
+Exhibitor
 https://web.stanford.edu/class/cs97si/
 https://opendsa-server.cs.vt.edu/ODSA/Books/Everything/html/index.html
 

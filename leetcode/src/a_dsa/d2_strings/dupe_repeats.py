@@ -137,12 +137,33 @@ def repeatedStringMatch(self, a: str, b: str) -> int:
     return -1
 
 # LC395. Longest Substring with At Least K Repeating Characters - repeat k each char k freq long substring k
-def longestSubstring(self, s: str, k: int) -> int:
+def longestSubstring(self, s: str, k: int) -> int:  # O(n^2)
     counts = Counter(s)
-    for c in set(s):
+    for c in set(s):  # O(26)
         if counts[c] < k:
             return max(self.longestSubstring(t, k) for t in s.split(c))
     return len(s)
+def longestSubstring(self, s: str, k: int) -> int:
+    count = 0  # O(26n) time and O(128) space
+    for i in range(1, 27):
+        count = max(count, self.count(s, k, i))
+    return count
+def count(self, s, k, numUniqueTarget):
+    start = end = numUnique = numNoLessThanK = count = 0
+    chMap = [0]*128
+    while end < len(s):
+        if chMap[ord(s[end])] == 0: numUnique += 1
+        chMap[ord(s[end])] += 1
+        if chMap[ord(s[end])] == k: numNoLessThanK += 1
+        end += 1
+        while numUnique > numUniqueTarget:
+            if chMap[ord(s[start])] == k: numNoLessThanK -= 1
+            chMap[ord(s[start])] -= 1
+            if chMap[ord(s[start])] == 0: numUnique -= 1
+            start += 1
+        if numUnique == numNoLessThanK: count = max(count, end-start)
+    return count
+# https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/solutions/719383/python-o-n-sliding-window-solution-based-on-template/
 
 # https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/solutions/719383/python-o-n-sliding-window-solution-based-on-template/
 def longestSubstring(self, s: str, k: int) -> int:

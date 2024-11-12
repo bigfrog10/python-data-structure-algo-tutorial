@@ -95,7 +95,7 @@ class CBTInserter:
 
 # LC105. Construct Binary Tree from Preorder and Inorder Traversal preorder inorder preorder
 def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
-    if not preorder: return None
+    if not preorder: return None  # O(n) time and space
     inorder_idxs = {v: i for i, v in enumerate(inorder)}
     pp = list(reversed(preorder))
     def rec(leftpt, rightpt):

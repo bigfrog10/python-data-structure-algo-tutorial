@@ -363,7 +363,7 @@ def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:  # O
 def shortest_path_with_sum(root, k) -> int:
     if not root: return math.inf
     queue = deque([(root, [root.value], root.value)])
-    while queue:  # BFS
+    while queue:  # BFS, stop as soon as we have k
         current_node, path, current_sum = queue.popleft()
         if current_sum == k: return path
         if current_node.left:
@@ -375,10 +375,18 @@ def shortest_path_with_sum(root, k) -> int:
                           current_sum + current_node.right.value)
                          )
     return math.inf
-
-
-
-
+def shortest_path_with_sum(root, k) -> int:
+    def dfs(node, curr_sum, lnth):  # slower than above since it traverse all nodes
+        nonlocal res
+        if not root: return
+        curr_sum += node.value
+        lnth += 1
+        if current_sum == k: res = min(res, lnth)
+        dfs(node.left, curr_sum, lnth)
+        dfs(node.right, curr_sum, lnth)
+    res = 0
+    dfs(root, k, 0)
+    return res
 
 
 

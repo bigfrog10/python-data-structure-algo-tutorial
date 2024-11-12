@@ -168,6 +168,7 @@ def subArrayRanges(self, nums: List[int]) -> int:  # O(n) time and space
 # LC907. Sum of Subarray Minimums    sum sub min sum min sum of min min(b)
 def sumSubarrayMins(self, arr: List[int]) -> int:
     res, stack = 0, []  # O(n) time and space
+    # -inf for 1st index and last pop()
     arr = [float('-inf')] + arr + [float('-inf')]
     for i, n in enumerate(arr):
         while stack and n < arr[stack[-1]]:  #  non-decreasing stack

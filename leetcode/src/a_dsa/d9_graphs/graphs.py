@@ -19,19 +19,20 @@ def minTrioDegree(self, n: int, edges: List[List[int]]) -> int:  # O(EV) time, O
 
 # LC785. Is Graph Bipartite?
 def isBipartite(self, graph: List[List[int]]) -> bool:  # O(V + E)
-    color = {}  # like seen in other cases
-    for node in range(len(graph)):  # go through each node
-        if node in color: continue
-        color[node] = 0  # paint color, component start
-        stack = [node]  # DFS
-        while stack:
-            node = stack.pop()
-            for nei in graph[node]:
-                if nei not in color:
-                    stack.append(nei)
-                    color[nei] = color[node] ^ 1
-                # if child and parent have same color,
-                elif color[nei] == color[node]: return False
+    n = len(graph)  # O(V + E)
+    color = [0] * n
+    for node in range(n):
+        if color[node] != 0: continue
+        q = deque([node])
+        color[node] = 1  # paint color
+        while q:  # DFS
+            cur = q.popleft()
+            for ne in graph[cur]:
+                if color[ne] == 0:
+                    color[ne] = -color[cur]
+                    q.append(ne)
+                elif color[ne] == color[cur]:
+                    return False  # if child and parent have same color
     return True
 
 # LC133. Clone Graph

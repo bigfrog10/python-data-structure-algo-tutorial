@@ -274,14 +274,11 @@ def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
         if i.right: bfs.append(i.right)  # so we need to search both side.
     return False
 
-# LC700. Search in a Binary Search Tree search bst
+# LC700. Search in a Binary Search Tree bst search bst
 def searchBST(self, root: TreeNode, val: int) -> TreeNode:
-    walker = root
-    while walker:  # O(H)
-        if walker.val == val: return walker
-        elif walker.val > val: walker = walker.left
-        else: walker = walker.right # <
-    return walker  # None
+    while root and root.val != val:  # O(H)
+        root = root.left if val < root.val else root.right
+    return root
 
 # LC776. Split BST
 def splitBST(self, root: TreeNode, V: int) -> List[TreeNode]:

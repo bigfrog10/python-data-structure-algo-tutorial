@@ -116,7 +116,7 @@ def findMinDifference(self, timePoints: List[str]) -> int:
     ans = min(ans, day - (prev - first))  # to deal with circular, last - first
     return ans
 
-# LC682. Baseball Game
+# LC682. Baseball Game x + D C
 def calPoints(self, ops: List[str]) -> int:
     if not ops: return 0
     stack = []

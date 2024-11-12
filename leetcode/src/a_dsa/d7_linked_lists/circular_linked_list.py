@@ -32,6 +32,7 @@ def detectCycle(self, head: ListNode) -> ListNode:
         if turtle == hare: break
     if not hare or not hare.next: return None # reach end, no cycle
     hare = head # leave turtle there and restart hare with speed 1
-    while True:
-        if hare == turtle: return hare
+    while hare != turtle:
+        # if hare == turtle: return hare
         turtle, hare = turtle.next, hare.next
+    return hare
