@@ -1,8 +1,8 @@
 
 # LC947. Most Stones Removed with Same Row or Column
 def removeStones(self, stones: List[List[int]]) -> int:
-    f = {}  # O(n)
-    OFFSET = 10001  # or max(x) + 1
+    f = {}  # O(n* a(n))
+    OFFSET = max(x for x, y in stones) + 1 # 10001  # or max(x) + 1
     def find(x):
         fx = f.get(x)
         if fx is None:

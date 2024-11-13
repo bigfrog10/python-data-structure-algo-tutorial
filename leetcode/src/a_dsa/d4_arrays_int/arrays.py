@@ -69,12 +69,12 @@ def numMovesStonesII(self, stones: List[int]) -> List[int]:
 
 # LC1043. Partition Array for Maximum Sum partition max sum
 def maxSumAfterPartitioning(self, arr: List[int], k: int) -> int:  # O(nk)
-    n = len(arr)
+    n = len(arr)  # O(nk) time O(n) space in cache
     @cache
-    def f(i):
+    def f(i):  # O(n)
         if i == n: return 0
         maxSum = mx = -inf
-        for j in range(i, min(i+k, n)):
+        for j in range(i, min(i+k, n)):  # O(k)
             mx = max(mx, arr[j])  # much faster than max(arr[i:j+1])
             summ = f(j+1) + mx * (j-i+1)
             maxSum = max(maxSum, summ)

@@ -9,7 +9,7 @@ class FooBar:
         self.bar_lock.acquire()  # block bar print first
     def foo(self, printFoo: 'Callable[[], None]') -> None:
         for i in range(self.n):
-            self.foo_lock.acquire()
+            self.foo_lock.acquire()  # not re-entrant
             # printFoo() outputs "foo". Do not change or remove this line.
             printFoo()
             self.bar_lock.release()

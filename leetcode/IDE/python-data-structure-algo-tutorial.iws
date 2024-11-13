@@ -5,19 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29b13a08-5760-41f7-8cea-fc198b3bbcb2" name="Default Changelist" comment="re-org">
-      <change beforePath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" beforeDir="false" afterPath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sql/aggregation.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sql/case.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sql/examples.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sql/group_by.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sql/joins.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sql/limit_offset.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sql/over_budget.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sql/rank.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sql/sql.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sql/sql_functions.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sql/zz_questions.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_arrray_1_n.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/int_arrray_1_n.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../algorithms/src/dsa/arrays/binary_search.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../algorithms/src/dsa/arrays/binary_search.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/a1_math/counting.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/a1_math/counting.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/a2_threading/threading_problems.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/a2_threading/threading_problems.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/string_subseq.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/string_subseq.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/arrays.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/arrays.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/subsequences.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d4_arrays_int/subsequences.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/da_disjoint_sets/disjoint_sets.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/da_disjoint_sets/disjoint_sets.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -378,7 +372,7 @@
       <workItem from="1729080255947" duration="99740000" />
       <workItem from="1729546653152" duration="64690000" />
       <workItem from="1730206431280" duration="91131000" />
-      <workItem from="1731338521598" duration="31707000" />
+      <workItem from="1731338521598" duration="42574000" />
     </task>
     <task id="LOCAL-00001" summary="update 2 sites">
       <created>1639271849713</created>
@@ -470,14 +464,6 @@
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
       <updated>1654441307221</updated>
-    </task>
-    <task id="LOCAL-00049" summary="re-org">
-      <option name="closed" value="true" />
-      <created>1727719589264</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1727719589264</updated>
     </task>
     <task id="LOCAL-00050" summary="re-org">
       <option name="closed" value="true" />
@@ -759,7 +745,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731463963080</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="re-org">
+      <option name="closed" value="true" />
+      <created>1731505498598</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1731505498598</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

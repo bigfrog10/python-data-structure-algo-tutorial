@@ -91,6 +91,16 @@ def superEggDrop(self, k: int, n: int) -> int:
         drops += 1
         print(floors)
     return drops
+def superEggDrop(self, k: int, n: int) -> int:  # O(kn) time and space
+    dp = [[0] * (k+1) for _ in range(n+1)]  # max floors can be checked with moves and eggs
+    m = 0  # m moves
+    while dp[m][k] < n:
+        m += 1
+        for i in range(1, k+1):
+            # dp(m-1)(i-1) -> ith egg broke, dp(m-1)(i) -> ith egg not broken
+            dp[m][i] = dp[m-1][i-1] + dp[m-1][i] + 1
+    print(dp)
+    return m
 
 # LC3317. Find the Number of Possible Ways for an Event possible ways
 mod = 10 ** 9 + 7

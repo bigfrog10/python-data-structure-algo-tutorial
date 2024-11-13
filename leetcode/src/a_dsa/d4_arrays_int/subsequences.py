@@ -186,15 +186,7 @@ def longestArithSeqLength(self, A: List[int]) -> int:
             dp[j, diff] = dp.get((i, diff), 1) + 1  # A[i], A[j] have length 2
     return max(dp.values())
 
-# LC1143. Longest Common Subsequence - lcs long common subseq
-def longestCommonSubsequence(self, text1: str, text2: str) -> int: # cached recursion
-    @lru_cache(None)
-    def solve(i, j):
-        if i == len(text1) or j == len(text2): return 0
-        if text1[i] == text2[j]: return 1 + solve(i+1, j+1)
-        else: return max(solve(i+1, j), solve(i, j+1))
-    print(solve.cache_info())
-    return solve(0, 0)
+
 
 # LC1498. Number of Subsequences That Satisfy the Given Sum Condition - max + min <= target
 def numSubseq(self, nums: List[int], target: int) -> int:
