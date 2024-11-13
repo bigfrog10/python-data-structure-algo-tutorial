@@ -1,3 +1,0 @@
--- https://leetcode.com/discuss/interview-question/system-design/663037/Amazon-SystemDesign-Flipkart-Suggestions-Design-Warehouse-Portal
--- use features as columns, then sql where to select features
--- with proper index, it's fast

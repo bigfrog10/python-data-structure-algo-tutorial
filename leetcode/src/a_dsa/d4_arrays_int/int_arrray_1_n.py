@@ -97,7 +97,16 @@ def missingRolls(self, rolls: List[int], mean: int, n: int) -> List[int]:
     avg, rem = divmod(rsum, n)  # allocate evenly
     return [avg + (i < rem) for i in range(n)]
 
-
+# LC1282. Group the People Given the Group Size They Belong To
+def groupThePeople(self, groupSizes: List[int]) -> List[List[int]]:
+    d = defaultdict(list)
+    for i, s in enumerate(groupSizes):
+        d[s].append(i)
+    res = []
+    for size, group in d.items():
+        for i in range(0, len(group), size):
+            res.append(group[i:i+size])
+    return res
 
 
 
