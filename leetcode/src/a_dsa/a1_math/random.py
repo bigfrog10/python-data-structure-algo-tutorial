@@ -49,3 +49,6 @@ class Solution:
             self.n[i], self.n[rand_idx] = self.n[rand_idx], self.n[i]
             # be careful here: https://blog.codinghorror.com/the-danger-of-naivete/
         return self.n
+
+# Stick Broken Into 3 Pieces
+# http://www.cut-the-knot.org/Curriculum/Probability/TriProbability.shtml

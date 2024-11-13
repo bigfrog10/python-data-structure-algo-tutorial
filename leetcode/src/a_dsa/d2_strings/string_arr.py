@@ -211,9 +211,7 @@ def openLock(self, deadends: List[str], target: str) -> int:  # O(n^2 * 10^n + D
 def reverseString(self, s: List[str]) -> None:
     t = len(s)
     for i in range(t // 2): s[i], s[~i] = s[~i], s[i]
-    # t = len(s)
-    # for i in range(t // 2):
-    #     s[i], s[t-1-i] = s[t-1-i], s[i]
+
 
 # LC205. Isomorphic Strings
 def isIsomorphic(self, s: str, t: str) -> bool:
