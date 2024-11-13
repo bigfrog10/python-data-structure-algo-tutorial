@@ -88,3 +88,18 @@ def findClosestElements(self, A, k, x): # O(logn + k)
         if x - A[mid] > A[mid + k] - x: left = mid + 1  # if A[mid + k] is closer to x than A[mid]
         else: right = mid  # smaller element always wins when there is a tie
     return A[left:left + k]  # left = right
+
+# LC1011. Capacity To Ship Packages Within D Days   ship capacity conveyor
+def shipWithinDays(self, weights: List[int], D: int) -> int: # O(nlog(sum - max))
+    left, right = max(weights), sum(weights)
+    while left < right:  # O(log(right - left)
+        midw = (left + right) // 2
+        days, currw = 1, 0
+        for w in weights:  # O(n)
+            if currw + w > midw:
+                days += 1
+                currw = 0
+            currw += w
+        if days > D: left = midw + 1
+        else: right = midw
+    return left
