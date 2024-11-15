@@ -103,3 +103,41 @@ def shipWithinDays(self, weights: List[int], D: int) -> int: # O(nlog(sum - max)
         if days > D: left = midw + 1
         else: right = midw
     return left
+
+# LC162. Find Peak Element - return peak index, array peak element
+def findPeakElement(self, nums: List[int]) -> int: # logn
+    left, right = 0, len(nums)-1  # need -1 to ensure below +1 inbound
+    while left < right:
+        mid = (left + right) // 2
+        if nums[mid] > nums[mid+1]: right = mid  # decreasing, so peak is on the other side
+        else: left = mid + 1
+    return left
+
+# LC852. Peak Index in a Mountain Array  peak mount
+def peakIndexInMountainArray(self, arr: List[int]) -> int:
+    lo, hi = 0, len(arr) - 1
+    while lo < hi:
+        mi = (lo + hi) // 2
+        if arr[mi] < arr[mi + 1]: lo = mi + 1
+        else: hi = mi
+    return lo
+
+# LC540. Single Element in a Sorted Array - of double elements, find it in log time single elem sorted single sorted
+def singleNonDuplicate(self, nums: List[int]) -> int:  # simplest and fast  O(logn)
+    lo, hi = 0, len(nums) - 1
+    while lo < hi:
+        mid = (hi + lo) // 2
+        if mid % 2 == 1: mid -= 1  # move to even case
+        if nums[mid] == nums[mid + 1]:  # means we have even numbers of left
+            lo = mid + 2  # so go to right to find the odd/single
+        else: hi = mid  # otherwise move to left.
+    return nums[lo]  # because hi is not equal
+
+# LC278. First Bad Version
+def firstBadVersion(self, n):
+    start, end = 1, n
+    while start < end:  # start == end after loop
+        mid = (end + start) // 2
+        if isBadVersion(mid): end = mid  # keep end side is bad
+        else: start = mid + 1  # start side is after good
+    return start

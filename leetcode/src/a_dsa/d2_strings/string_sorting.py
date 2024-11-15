@@ -32,7 +32,7 @@ def smallestEquivalentString(self, s1: str, s2: str, baseStr: str) -> str:
         res += find(char)
     return res
 
-# LC451. Sort Characters By Frequency - sort by freq  sort char by freq  sort freq
+# LC451. Sort Characters By Frequency - sort by freq  sort char by freq  sort freq  sort str by freq
 def frequencySort(self, s: str) -> str:  # O(n), not nlogn, using bucket sort
     if not s: return s
     counts = collections.Counter(s)  # Determine the frequency of each character.
@@ -119,10 +119,6 @@ def alienOrder(self, words: List[str]) -> str:  # O(total word lengths)
             degrees[n] -= 1
             if degrees[n] == 0: queue.append(n)
     return ans if len(ans) == len(degrees) else ""  # cyclic ordering
-
-
-
-
 
 # LC1985. Find the Kth Largest Integer in the Array - find kth largest
 def kthLargestNumber(self, nums: List[str], k: int) -> str:  # O(nlogk)

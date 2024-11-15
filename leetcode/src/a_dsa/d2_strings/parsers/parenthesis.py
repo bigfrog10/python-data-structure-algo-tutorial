@@ -182,7 +182,7 @@ def diffWaysToCompute(self, s: str) -> List[int]:  # O(n*2^n) time, O(2^n) space
 
 
 
-# LC678. Valid Parenthesis String - paretnh with *, par with *, par *  valid paren *
+# LC678. Valid Parenthesis String - parenth with *, par with *, par *  valid paren *
 def checkValidString(self, s):
     n = len(s)  # O(n) time and O(1) space
     open_count = close_count = 0
