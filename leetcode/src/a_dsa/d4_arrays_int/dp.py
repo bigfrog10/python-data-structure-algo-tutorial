@@ -215,17 +215,20 @@ def minDifficulty(self, jobDifficulty: List[int], d: int) -> int:  # O(nd)
 
 # LC446. Arithmetic Slices II - Subsequence  arith seq   arithmetic subseq arith subseq
 def numberOfArithmeticSlices(self, nums: List[int]) -> int:  # O(n^2)
-    n, ans = len(nums), 0
-    # dic[i][d]: the number of arithmetic subsequences that ends with nums[i] and diff d
-    dp = [defaultdict(int) for _ in range(n)]
-    for i in range(1, n):  # O(n^2) time and space
-        for j in range(i):
-            diff = nums[i] - nums[j]
-            dp[i][diff] += 1
-            if diff in dp[j]:  # another pair with same diff, so we have 3 nums now.
-                dp[i][diff] += dp[j][diff]  # extend j to i
-                ans += dp[j][diff]
-    return ans
+    graph = defaultdict(list)
+    for i, n in enumerate(nums):
+        graph[n].append(i)
+    @cache
+    def dp(i: int, delta: int) -> int:
+        res = 0
+        for j in graph.get(nums[i] + delta, []):
+            if j > i:
+                res += 1 + dp(j, delta)
+        return res
+    res = 0
+    for i, j in combinations(range(len(nums)), 2):
+        res += dp(j, nums[j] - nums[i])
+    return res
 
 # LC790. Domino and Tromino Tiling
 def numTilings(self, n: int) -> int:

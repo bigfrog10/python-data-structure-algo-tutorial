@@ -735,7 +735,7 @@ def minCost(self, s: str, cost: List[int]) -> int:
         max_cost = max(max_cost, cost[i]) # this ensures max is not added
     return res
 
-# LC1802. Maximum Value at a Given Index in a Bounded Array constructed array
+# LC1802. Maximum Value at a Given Index in a Bounded Array constructed array construct array
 def maxValue(self, n: int, index: int, maxSum: int) -> int:
     maxSum -= n  # this is the trick!!! get rid of 1s paddings
     l, r = 0, maxSum

@@ -488,7 +488,7 @@ def countNumbersWithUniqueDigits(self, n: int) -> int:
 
 
 
-# LC343. Integer Break - 2 ** 3 < 3 ** 2, use derivative to know max x = e, break integer to factors
+# LC343. Integer Break - 2 ** 3 < 3 ** 2, use derivative to know max x = e, break integer to factors  break max prod
 def integerBreak(self, n: int) -> int:
     if n == 2 or n == 3: return n - 1
     if n % 3 == 0: return 3**(n//3)

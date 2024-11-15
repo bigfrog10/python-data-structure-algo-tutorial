@@ -1,7 +1,7 @@
 from typing import List
 import heapq
 
-# LC646. Maximum Length of Pair Chain of pairs
+# LC646. Maximum Length of Pair Chain of pairs  long chain pair long pair chain
 def findLongestChain(self, pairs: List[List[int]]) -> int:
     # greedy on finish time so we could squeeze more intervals to get max number of intervals
     pairs.sort(key=lambda x: x[1]) #
