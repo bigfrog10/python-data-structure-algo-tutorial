@@ -546,7 +546,7 @@ def thirdMax(self, nums: List[int]) -> int:
         elif max2 > n > max3: max3 = n
     return max1 if max3 == -inf else max3
 
-# LC136. Single Number - single nodupe in array, others are 2 single one
+# LC136. Single Number - single nodupe in array, others are 2 single one  appear twice except one
 def singleNumber(self, nums: List[int]) -> int:
     res = 0
     for i in nums: res ^= i

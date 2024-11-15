@@ -18,7 +18,7 @@ def trapRainWater(self, heights: List[List[int]]) -> int:
     vmax = ret = 0
     while heap:
         h, i, j = heapq.heappop(heap)
-        vmax = max(vmax, h)
+        vmax = max(vmax, h)  # later cells are bigger than this
         for dx, dy in [(-1, 0), (1, 0), (0, 1), (0, -1)]:
             x, y = i + dx, j + dy
             if 0 <= x < n and 0 <= y < m and (x, y) not in visited:

@@ -1,6 +1,6 @@
 
 # LC443. String Compression
-def compress(self, chars: List[str]) -> int:
+def compress(self, chars: List[str]) -> int:  # O(n) time and O(1) space
     i = res = 0  # i is the counter to mark current progress
     while i < len(chars):
         chars[res] = chars[i]  # group char
