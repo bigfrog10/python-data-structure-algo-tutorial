@@ -1,3 +1,5 @@
+import bisect
+from typing import List
 
 # 2 types of search
 
@@ -141,3 +143,18 @@ def firstBadVersion(self, n):
         if isBadVersion(mid): end = mid  # keep end side is bad
         else: start = mid + 1  # start side is after good
     return start
+
+# LC410. Split Array Largest Sum
+def splitArray(self, nums: List[int], k: int) -> int:
+    l, r = max(nums), sum(nums)  # O(len(nums) * log(sum(nums))) time, O(1) space
+    while l < r:  # bisect on count of subarrays, which sum < mid
+        mid = (l + r) // 2
+        count, cur = 1, 0
+        for n in nums:  # O(len(nums))
+            cur += n
+            if cur > mid:
+                count += 1
+                cur = n
+        if count > k: l = mid + 1
+        else: r = mid
+    return l

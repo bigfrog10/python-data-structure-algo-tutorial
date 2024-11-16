@@ -39,3 +39,6 @@ a = [(1, 2), (3, 4)]
 import bisect
 i = bisect.bisect(a, (1,))
 print(i)
+
+for i in range(5, 3, -1):
+    print(f'i={i}')
