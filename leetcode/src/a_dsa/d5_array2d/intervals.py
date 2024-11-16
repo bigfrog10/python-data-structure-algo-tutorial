@@ -452,6 +452,12 @@ def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[i
         j = bisect_left(start, end[i])
         return max(profit[i] + dp(j), dp(i + 1))
     return dp(0)
+    # wwhat if you can have 2 intervals?
+    # This is a calssical dp problem. I want to give a useful tip for interval problems as there is a lot of confusion regarding when to sort on the basis of start time and when to sort on the bsis of finish time.
+    #
+    # Sorting based on finish time: This Greedy approach works best for problems involving maximum number of non overlapping intervals or minimum number of overlapping intervals.
+    #
+    # Sorting based on start time: This Greedy approach will work best when we want to process all the intervals or to generate a dp solution.
 
 # LC1229. Meeting Scheduler
 def minAvailableDuration(self, slots1: List[List[int]], slots2: List[List[int]], duration: int) -> List[int]:

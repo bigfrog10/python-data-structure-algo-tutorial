@@ -115,7 +115,7 @@ def removeDuplicateLetters(self, s: str) -> str:  # O(n)
 # LC459. Repeated Substring Pattern - repeat string repeat substring multiple copies
 def repeatedSubstringPattern(self, s: str) -> bool:  # O(n^2)
     idx = (s + s).find(s, 1)
-    return len(s) > idx > -1
+    return len(s) > idx > 0
 def repeatedSubstringPattern(self, s: str) -> bool:  # O(n)
     i, j, n = 1, 0, len(s)  # KMP prefix array
     # 1st zero no use.

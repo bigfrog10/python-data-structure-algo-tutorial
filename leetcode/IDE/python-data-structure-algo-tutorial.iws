@@ -5,9 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29b13a08-5760-41f7-8cea-fc198b3bbcb2" name="Default Changelist" comment="re-org">
+      <change afterPath="$PROJECT_DIR$/../../algorithms/src/dsa/probabilities/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../algorithms/src/dsa/probabilities/readme.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../algorithms/src/dsa/arrays/binary_search.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../algorithms/src/dsa/arrays/binary_search.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/parsers/parenthesis.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/parsers/parenthesis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/string_sorting.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/string_sorting.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../algorithms/src/dsa/arrays/test1.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../algorithms/src/dsa/arrays/test1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" beforeDir="false" afterPath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/a1_math/counting.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/a1_math/counting.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/dupe_repeats.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/dupe_repeats.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/intervals.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/intervals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/intervals_sorted.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/intervals_sorted.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -369,7 +375,7 @@
       <workItem from="1729546653152" duration="64690000" />
       <workItem from="1730206431280" duration="91131000" />
       <workItem from="1731338521598" duration="42574000" />
-      <workItem from="1731588909724" duration="16765000" />
+      <workItem from="1731588909724" duration="25294000" />
     </task>
     <task id="LOCAL-00001" summary="update 2 sites">
       <created>1639271849713</created>
@@ -461,22 +467,6 @@
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
       <updated>1654441307221</updated>
-    </task>
-    <task id="LOCAL-00051" summary="re-org">
-      <option name="closed" value="true" />
-      <created>1727873313848</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1727873313848</updated>
-    </task>
-    <task id="LOCAL-00052" summary="re-org">
-      <option name="closed" value="true" />
-      <created>1727966513147</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1727966513147</updated>
     </task>
     <task id="LOCAL-00053" summary="re-org">
       <option name="closed" value="true" />
@@ -750,7 +740,23 @@
       <option name="project" value="LOCAL" />
       <updated>1731633271686</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="re-org">
+      <option name="closed" value="true" />
+      <created>1731677403433</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1731677403433</updated>
+    </task>
+    <task id="LOCAL-00088" summary="re-org">
+      <option name="closed" value="true" />
+      <created>1731688114795</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1731688114799</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

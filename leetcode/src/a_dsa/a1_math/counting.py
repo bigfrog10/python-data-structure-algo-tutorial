@@ -45,7 +45,7 @@ def lexicalOrder(self, n: int) -> List[int]:
             num += 1  # Increment the number
     return res
 
-# LC1922. Count Good Numbers
+# LC1922. Count Good Numbers  odd 2357 even even
 def countGoodNumbers(self, n: int) -> int:
     # even places have 5 options(0, 2, 4, 6, 8)
     # odd places have 4 options(2, 3, 5, or 7)
