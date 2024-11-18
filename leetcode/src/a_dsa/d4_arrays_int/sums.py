@@ -39,7 +39,7 @@ def findMiddleIndex(self, nums: List[int]) -> int:
         leftsum += x
     return -1
 
-# LC39. Combination Sum  # return combos, can use elems multiple times comb sum  combo sum unique combo
+# LC39. Combination Sum  # return combos, can use elems multiple times comb sum  combo sum unique comb
 def combinationSum(self, candidates, target):  # O(n * 2^n)
     candidates = sorted(candidates)  # small to large, cut branches
     result = []  # O(2^n * n) time, space is O(target * n), n = len(cand)

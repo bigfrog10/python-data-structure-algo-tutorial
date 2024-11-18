@@ -17,7 +17,7 @@ def bitwiseComplement(self, N: int) -> int:
 ```a ^ b = 0 if a == b else 1 ```
 
 Properties:  
-```
+```python
 n ^ n = 0
 n ^ 0 = n
 n ^ 1 = n-1 if n is odd or n+1 if n is even (operates on last bit)
@@ -37,7 +37,7 @@ To check whether x is a power of 2:
 ```x & (x-1) == 0```
 
 To count number of 1's in x: (O(k), worst is O(logn))
-```
+```python
 def ones(n):
     cnt = 0
     while n:
@@ -49,7 +49,7 @@ Both ```x & (-x)``` and ```x ^ ( x & (x-1) )``` gives the right most bit
 
 ### Most Significant Bit
 For given x, to get MSB we fill 1's to x by n | (n >> 2 ** i) for i in 0 ... 6
-```
+```python
 def msb(n):
     if n == 0: return 0
     for i in range(6): # for 64 bits

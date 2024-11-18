@@ -17,7 +17,7 @@ def quick_sort_rec(arr: list): # not in place
 # ary = [4, 2, 7, 3, 1, 6]
 # print(quick_sort_rec(ary))
 
-def quick_sort_rec(arr: list): # in place sorting
+def quick_sort_rec(arr: list): # in place sorting  quicksort
     def partition(nums, left, right):  # bisect right
         target = nums[right]  # we may randomize this target
         i = left

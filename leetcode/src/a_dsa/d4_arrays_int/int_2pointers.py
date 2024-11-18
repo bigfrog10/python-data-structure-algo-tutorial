@@ -160,7 +160,16 @@ def maxFrequency(self, nums: List[int], k: int) -> int:
             left += 1  # this window never decrease, best
     return len(nums) - left  # so we return best window size
 
-
+# LC1493. Longest Subarray of 1's After Deleting One Element
+def longestSubarray(self, nums: List[int]) -> int:
+    res = left = zeros = 0   # O(n) time, O(1) space
+    for right in range(len(nums)):
+        if nums[right] == 0: zeros += 1
+        while zeros > 1:
+            if nums[left] == 0: zeros -= 1
+            left += 1
+        res = max(res, right - left)
+    return res
 
 
 
