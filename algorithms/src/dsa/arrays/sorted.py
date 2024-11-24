@@ -1,5 +1,4 @@
 # merge 3 sorted arrays without dupe
-
 def merge(arr1, arr2, arr3):
     import math
     res = []
@@ -18,3 +17,4 @@ def merge(arr1, arr2, arr3):
 
 print(merge([1, 3], [2, 4], [1, 5]))
 print(merge([1, 3], [2, 3, 4], [1, 2, 3, 4, 5]))
+
