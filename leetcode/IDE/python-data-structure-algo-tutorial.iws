@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29b13a08-5760-41f7-8cea-fc198b3bbcb2" name="Default Changelist" comment="re-org">
-      <change afterPath="$PROJECT_DIR$/../../algorithms/src/dsa/probabilities/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../algorithms/src/dsa/probabilities/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../algorithms/src/dsa/arrays/binary_search.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../algorithms/src/dsa/arrays/binary_search.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../algorithms/src/dsa/arrays/test1.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../algorithms/src/dsa/arrays/test1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" beforeDir="false" afterPath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/a1_math/counting.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/a1_math/counting.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d2_strings/dupe_repeats.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d2_strings/dupe_repeats.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/intervals.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/intervals.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/intervals_sorted.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/a_dsa/d5_array2d/intervals_sorted.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -375,7 +367,7 @@
       <workItem from="1729546653152" duration="64690000" />
       <workItem from="1730206431280" duration="91131000" />
       <workItem from="1731338521598" duration="42574000" />
-      <workItem from="1731588909724" duration="25294000" />
+      <workItem from="1731588909724" duration="41010000" />
     </task>
     <task id="LOCAL-00001" summary="update 2 sites">
       <created>1639271849713</created>
@@ -467,38 +459,6 @@
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
       <updated>1654441307221</updated>
-    </task>
-    <task id="LOCAL-00053" summary="re-org">
-      <option name="closed" value="true" />
-      <created>1728043400465</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1728043400465</updated>
-    </task>
-    <task id="LOCAL-00054" summary="re-org">
-      <option name="closed" value="true" />
-      <created>1728178521060</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1728178521060</updated>
-    </task>
-    <task id="LOCAL-00055" summary="re-org">
-      <option name="closed" value="true" />
-      <created>1728245387084</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1728245387084</updated>
-    </task>
-    <task id="LOCAL-00056" summary="re-org">
-      <option name="closed" value="true" />
-      <created>1728475555709</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1728475555709</updated>
     </task>
     <task id="LOCAL-00057" summary="re-org">
       <option name="closed" value="true" />
@@ -756,7 +716,39 @@
       <option name="project" value="LOCAL" />
       <updated>1731688114799</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="re-org">
+      <option name="closed" value="true" />
+      <created>1731767109636</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1731767109636</updated>
+    </task>
+    <task id="LOCAL-00090" summary="re-org">
+      <option name="closed" value="true" />
+      <created>1731767123481</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1731767123481</updated>
+    </task>
+    <task id="LOCAL-00091" summary="re-org">
+      <option name="closed" value="true" />
+      <created>1731767129003</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1731767129003</updated>
+    </task>
+    <task id="LOCAL-00092" summary="re-org">
+      <option name="closed" value="true" />
+      <created>1731963300577</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1731963300577</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
