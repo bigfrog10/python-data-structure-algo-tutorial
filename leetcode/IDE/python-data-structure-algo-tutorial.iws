@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29b13a08-5760-41f7-8cea-fc198b3bbcb2" name="Default Changelist" comment="re-org">
+      <change beforePath="$PROJECT_DIR$/../../algorithms/docs/~$LeetCode_Summary.xlsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" beforeDir="false" afterPath="$PROJECT_DIR$/python-data-structure-algo-tutorial.iws" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -367,7 +368,8 @@
       <workItem from="1729546653152" duration="64690000" />
       <workItem from="1730206431280" duration="91131000" />
       <workItem from="1731338521598" duration="42574000" />
-      <workItem from="1731588909724" duration="41010000" />
+      <workItem from="1731588909724" duration="41668000" />
+      <workItem from="1732629056110" duration="11000" />
     </task>
     <task id="LOCAL-00001" summary="update 2 sites">
       <created>1639271849713</created>
@@ -459,14 +461,6 @@
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
       <updated>1654441307221</updated>
-    </task>
-    <task id="LOCAL-00057" summary="re-org">
-      <option name="closed" value="true" />
-      <created>1728646798143</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1728646798143</updated>
     </task>
     <task id="LOCAL-00058" summary="re-org">
       <option name="closed" value="true" />
@@ -748,7 +742,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731963300577</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="re-org">
+      <option name="closed" value="true" />
+      <created>1732490894723</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1732490894724</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
